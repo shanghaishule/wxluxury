@@ -192,6 +192,37 @@ class itemAction extends backendAction {
         }
     }
 
+    public function data_excel() {
+    	$mod = D($this->_name);
+    	if (IS_POST) {
+    		if (false === $data = $mod->create()) {
+    			IS_AJAX && $this->ajaxReturn(0, $mod->getError());
+    			$this->error($mod->getError());
+    		}
+    		if (method_exists($this, '_before_insert')) {
+    			$data = $this->_before_insert($data);
+    		}
+    		if( $mod->add($data) ){
+    			if( method_exists($this, '_after_insert')){
+    				$id = $mod->getLastInsID();
+    				$this->_after_insert($id);
+    			}
+    			IS_AJAX && $this->ajaxReturn(1, L('operation_success'), '', 'add');
+    			$this->success(L('operation_success'));
+    		} else {
+    			IS_AJAX && $this->ajaxReturn(0, L('operation_failure'));
+    			$this->error(L('operation_failure'));
+    		}
+    	} else {
+    		$this->assign('open_validator', true);
+    		if (IS_AJAX) {
+    			$response = $this->fetch();
+    			$this->ajaxReturn(1, '', $response);
+    		} else {
+    			$this->display();
+    		}
+    	}
+    }
     public function edit() {
         if (IS_POST) {
             //获取数据
