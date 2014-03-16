@@ -73,7 +73,7 @@
     <table width="100%" cellspacing="0">
         <thead>
             <tr>
-                <!--th><span data-tdtype="order_by" data-field="id">ID</span></th-->
+                <th><span data-tdtype="order_by" data-field="id">商品ID</span></th>
                 <th><span data-tdtype="order_by" data-field="shop">商家</span></th>
                 <th><span data-tdtype="order_by" data-field="billnum">账单单号</span></th>
                 <th><span data-tdtype="order_by" data-field="status">状态</span></th>
@@ -88,7 +88,7 @@
     	<tbody>
             <volist name="list" id="val" >
             <tr>
-                <!--td align="center">{Lanrain:$val.id}</td-->
+                <td align="center">{Lanrain:$val.id}</td>
                 <td align="center"><?php foreach($shopinfo as $item){ if($val['tokenTall']==$item['tokenTall']) echo $item['name']; } ?></td>
                 <td align="center"><span data-tdtype="view" data-field="billnum" data-id="{Lanrain:$val.billnum}" class="tdview" >{Lanrain:$val.billnum}</span></td>
                 <td align="center"><b><?php foreach($account_status as $key=>$item){ if($val['status']==$key){echo $item; }}?></b></td>

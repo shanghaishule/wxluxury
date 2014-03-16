@@ -199,7 +199,7 @@ class itemAction extends backendAction {
     			IS_AJAX && $this->ajaxReturn(0, $mod->getError());
     			$this->error($mod->getError());
     		}
-    		if (method_exists($this, '_before_insert')) {
+    		/*if (method_exists($this, '_before_insert')) {
     			$data = $this->_before_insert($data);
     		}
     		if( $mod->add($data) ){
@@ -212,7 +212,51 @@ class itemAction extends backendAction {
     		} else {
     			IS_AJAX && $this->ajaxReturn(0, L('operation_failure'));
     			$this->error(L('operation_failure'));
-    		}
+    		}*/
+
+    		
+    		if (isset($_POST['url'])):
+	    		$url = $_POST['url'];
+    			$text=file_get_contents($url);
+    			//获取商品图片
+    			preg_match('/<img[^>]*id="J_ImgBooth"[^r]*rc=\"([^"]*)\"[^>]*>/', $text, $img);
+    			//获取商品名称
+    			preg_match('/<title>([^<>]*)<\/title>/', $text, $title);
+    			//$title=iconv('GBK','UTF-8',$title);
+    			//获取商品价格
+    			preg_match('/<([a-z]+)[^i]*id=\"J_StrPrice\"[^>]*>([^<]*)<\/\\1>/is', $text, $price);
+    			$price=floatval($price);
+    			
+    			//获取商品属性
+    			preg_match('/<(div)[^c]*class=\"attributes\"[^>]*>.*<\/\\1>/is', $text, $text0);
+    			$text1=preg_replace("/<\/div>[^<]*<(div)[^c]*id=\"description\"[^>]*>.*<\/\\1>/is","",$text0);
+    			$attributes=preg_replace("/<\/div>[^<]*<(div)[^c]*class=\"box J_TBox\"[^>]*>.*<\/\\1>/is","",$text1);
+    			
+    			//获取商品描述
+    			preg_match_all('/<script[^>]*>[^<]*<\/script>/is', $text, $content);//页面js脚本
+    			$content=$content[0];
+    			$description='<div id="detail" class="box"> </div>
+		        <div id="description" class="J_DetailSection">
+		          <div class="content" id="J_DivItemDesc">描述加载中</div>
+		        </div>';
+    			$i = 0;
+    			foreach ($content as &$v){
+    				$description.=iconv('GBK','UTF-8',$v);
+    			    $file="/weTall/data/upload/item/".$title[1]."/".$i.".jpg";
+    			    
+    			    file_put_contents ($file, $v);
+    			    $i = $i + 1;
+    			};
+    			
+    			
+    			
+    			var_dump($img[0]);echo "<br>";
+    			var_dump($title[1]);echo "<br>Price:";
+    			var_dump($price);echo "<br>";
+    			var_dump($attributes[0]);echo "<br>";
+    			var_dump($description);die();
+    			
+    		endif;
     	} else {
     		$this->assign('open_validator', true);
     		if (IS_AJAX) {
