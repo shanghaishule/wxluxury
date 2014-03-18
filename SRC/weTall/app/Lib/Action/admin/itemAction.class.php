@@ -226,17 +226,17 @@ class itemAction extends backendAction {
     			$current_url = $tianmao_urls; //初始url
     			$fp_puts = fopen("url.txt", "ab");//array(); //记录url列表
     			$fp_gets = fopen("url.txt", "r"); //保存url列表
-    			$url_array = array();
+    			//$url_array = array();
     			do {
     				$result_url_arr = $this->crawler($current_url);
     				if ($result_url_arr) {
     					foreach ($result_url_arr as $url) {
     						fputs($fp_puts, $url . "\r\n");
-    						$url_array[] = $url;
+    						//$url_array[] = $url;
     					}
     				}
     			} while ($current_url = fgets($fp_gets, 1024)); //不断获得url
-    			var_dump($url_array);
+    			var_dump($fp_gets);
     		die();
     		/*
     			$text=file_get_contents($url);
