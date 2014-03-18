@@ -217,26 +217,38 @@ class itemAction extends backendAction {
     		
     		if (isset($_POST['url'])):
 	    		$tianmao_urls = $_POST['url'];
+    			
+                $item_search = $tianmao_urls."&search=y";
+                if (strstr($tianmao_urls,"tmall") == true) {
+                	$content_page = file_get_contents($item_search);
+                	preg_match('/class=\"ui-page-s-len\".*b>/',$content_page,$total_page);
+                	
+                }elseif(strstr($tianmao_urls,"taobao") == true){
+                	$content_page = file_get_contents($item_search);
+                	preg_match('/class=\"page-info\".*span>/',$content_page,$total_page);
+                }else{
+                	$total_page1 = 0;
+                }
+                $total_page1 = explode("/",$total_page[0]);
 
-    		
     		/**
     		 * 测试用主程序
     		 */
-    		
-    			$current_url = $tianmao_urls; //初始url
-    			$fp_puts = fopen("url.txt", "ab");//array(); //记录url列表
-    			$fp_gets = fopen("url.txt", "r"); //保存url列表
-    			//$url_array = array();
-    			do {
+                $pageNo = 1;
+    			$current_url = $item_search; //初始url
+    			$url_array = array();
+    			do{  
+    				$current_url = $item_search."&pageNo=".$pageNo;
     				$result_url_arr = $this->crawler($current_url);
     				if ($result_url_arr) {
     					foreach ($result_url_arr as $url) {
-    						fputs($fp_puts, $url . "\r\n");
-    						//$url_array[] = $url;
+    						$url_array[] = $url;
     					}
-    				}
-    			} while ($current_url = fgets($fp_gets, 1024)); //不断获得url
-    			var_dump($fp_gets);
+    				}	    			
+	    			$pageNo = $pageNo + 1;
+    			}while ($pageNo - 1 < $total_page1[1]);
+    			var_dump($url_array);
+    			
     		die();
     		/*
     			$text=file_get_contents($url);
@@ -319,7 +331,7 @@ class itemAction extends backendAction {
 	 * @return array
 	 */
 	public function _filterUrl($web_content) {
-		$reg_tag_a = '/<[a|A].*?href=[\'\"]{0,1}([^>\'\"\ ]*).*?>/';
+		$reg_tag_a = '/<[a|A].*?href=[\'\"]{0,1}([^>\'\"\ ]*[\?|&]id=.*).*?>/';
 		$result = preg_match_all($reg_tag_a, $web_content, $match_result);
 		if ($result) {
 			return $match_result[1];
@@ -332,33 +344,21 @@ class itemAction extends backendAction {
 	 * @param array $url_list
 	 * @return array
 	 */
-	public function _reviseUrl($base_url, $url_list) {
-		$url_info = parse_url($base_url);
-		$base_url = $url_info["scheme"] . '://';
-		if ($url_info["user"] && $url_info["pass"]) {
-			$base_url .= $url_info["user"] . ":" . $url_info["pass"] . "@";
-		}
-		$base_url .= $url_info["host"];
-		if ($url_info["port"]) {
-			$base_url .= ":" . $url_info["port"];
-		}
-		$base_url .= $url_info["path"];
-		print_r($base_url);
-		if (is_array($url_list)) {
-			foreach ($url_list as $url_item) {
-				if (preg_match('/^http/', $url_item)) {
-					// 已经是完整的url
-					$result[] = $url_item;
-				} else {
-					// 不完整的url
-					$real_url = $base_url . '/' . $url_item;
-					$result[] = $real_url;
+	public function _reviseUrl( $url_list) {
+		$flag = "X";$i = 0;
+		foreach ($url_list as $url){$i = $i + 1;
+			$result_url = explode("\"",$url);
+			foreach ($result as $haveid){
+				$flag = "X";
+				if(strstr($result_url[0],$haveid ) == true or strstr($haveid,$result_url[0] ) == true){
+					$flag = "Y";
+					break;
 				}
 			}
-			return $result;
-		} else {
-			return;
+			//if($i == 2) echo $flag;
+			if($flag == "X") $result[] = $result_url[0];
 		}
+		return $result;
 	}
 	/**
 	 * 爬虫
@@ -367,9 +367,9 @@ class itemAction extends backendAction {
 	 * @return array
 	 */
 	public function crawler($url) {
-		$content = $this->getUrlContent($url);
+		$content = $this->getUrlContent($url);//echo $content;
 		if ($content) {
-			$url_list = $this->_reviseUrl($url, $this->_filterUrl($content));
+			$url_list = $this->_reviseUrl($this->_filterUrl($content));
 			if ($url_list) {
 				return $url_list;
 			} else {
