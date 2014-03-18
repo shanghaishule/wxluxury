@@ -74,14 +74,12 @@
         <thead>
             <tr>
                 <th><span data-tdtype="order_by" data-field="id">商品ID</span></th>
-                <th><span data-tdtype="order_by" data-field="shop">商家</span></th>
-                <th><span data-tdtype="order_by" data-field="billnum">账单单号</span></th>
-                <th><span data-tdtype="order_by" data-field="status">状态</span></th>
-                <th><span data-tdtype="order_by" data-field="gen_time">生成时间</span></th>
-                <th><span data-tdtype="order_by" data-field="start_time">账单统计时间段</span></th>
-                <th><span data-tdtype="order_by" data-field="totalamt">账单总金额(元)</span></th>
-                <th><span data-tdtype="order_by" data-field="rate">扣率</span></th>
-                <th><span data-tdtype="order_by" data-field="yingjie">应结金额(元)</span></th>
+                <th><span data-tdtype="order_by" data-field="shop">商品名称</span></th>
+                <th><span data-tdtype="order_by" data-field="billnum">商品价格</span></th>
+                <th><span data-tdtype="order_by" data-field="status">商品图片</span></th>
+                <th><span data-tdtype="order_by" data-field="gen_time">商品描述</span></th>
+                <th><span data-tdtype="order_by" data-field="start_time">商品详图</span></th>
+                
                 <th width="80">管理操作</th>
             </tr>
         </thead>
@@ -89,14 +87,12 @@
             <volist name="list" id="val" >
             <tr>
                 <td align="center">{Lanrain:$val.id}</td>
-                <td align="center"><?php foreach($shopinfo as $item){ if($val['tokenTall']==$item['tokenTall']) echo $item['name']; } ?></td>
-                <td align="center"><span data-tdtype="view" data-field="billnum" data-id="{Lanrain:$val.billnum}" class="tdview" >{Lanrain:$val.billnum}</span></td>
-                <td align="center"><b><?php foreach($account_status as $key=>$item){ if($val['status']==$key){echo $item; }}?></b></td>
-                <td align="center"><?php if($val['gen_time']){ echo date('Y-m-d H:i:s',$val['gen_time']); }?></td>
-                <td align="center"><b><?php if($val['start_time']){ echo date('Y-m-d H:i:s',$val['start_time']); }?> -- <?php if($val['end_time']){ echo date('Y-m-d H:i:s',$val['end_time']); }?></b></td>
-                <td align="center" class="red">{Lanrain:$val.totalamt}</td>
-                <td align="center">{Lanrain:$val.rate}</td>
-                <td align="center" class="red">{Lanrain:$val.yingjie}</td>
+                <td align="center">{Lanrain:$val.title}</td>
+                <td align="center">{Lanrain:$val.price}</td>
+                <td align="center">{Lanrain:$val.img}</td><style>img{width:100px;height:100px;}</style>
+                <td align="center">{Lanrain:$val.intro}</td>
+                <td align="center" style="text-overflow:ellipsis; white-space:nowrap; width:150px;">...</td>
+                
                 <td align="center">
                 <a href="{Lanrain::U('Statistics/edit',array('id'=>$val['id']))}">编辑</a>
                 <if condition = "$val['status'] eq '0' ">

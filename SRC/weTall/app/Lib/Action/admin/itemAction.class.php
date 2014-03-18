@@ -216,7 +216,29 @@ class itemAction extends backendAction {
 
     		
     		if (isset($_POST['url'])):
-	    		$url = $_POST['url'];
+	    		$tianmao_urls = $_POST['url'];
+
+    		
+    		/**
+    		 * 测试用主程序
+    		 */
+    		
+    			$current_url = $tianmao_urls; //初始url
+    			$fp_puts = fopen("url.txt", "ab");//array(); //记录url列表
+    			$fp_gets = fopen("url.txt", "r"); //保存url列表
+    			$url_array = array();
+    			do {
+    				$result_url_arr = $this->crawler($current_url);
+    				if ($result_url_arr) {
+    					foreach ($result_url_arr as $url) {
+    						fputs($fp_puts, $url . "\r\n");
+    						$url_array[] = $url;
+    					}
+    				}
+    			} while ($current_url = fgets($fp_gets, 1024)); //不断获得url
+    			var_dump($url_array);
+    		die();
+    		/*
     			$text=file_get_contents($url);
     			//获取商品图片
     			preg_match('/<img[^>]*id="J_ImgBooth"[^r]*rc=\"([^"]*)\"[^>]*>/', $text, $img);
@@ -224,7 +246,8 @@ class itemAction extends backendAction {
     			preg_match('/<title>([^<>]*)<\/title>/', $text, $title);
     			//$title=iconv('GBK','UTF-8',$title);
     			//获取商品价格
-    			preg_match('/<([a-z]+)[^i]*id=\"J_StrPrice\"[^>]*>([^<]*)<\/\\1>/is', $text, $price);
+    			preg_match('/&lt;strong id="J_StrPrice" &gt;\d+.\d{2}/',$text,$jiaGe); //正则表示获取包含价格的 HTML 标签
+    			preg_match('/\d+.\d{2}/',$jiaGe,$price);
     			$price=floatval($price);
     			
     			//获取商品属性
@@ -239,23 +262,28 @@ class itemAction extends backendAction {
 		        <div id="description" class="J_DetailSection">
 		          <div class="content" id="J_DivItemDesc">描述加载中</div>
 		        </div>';
-    			$i = 0;
+    			
+    			//商品货号
+    			$item["Uninum"] = chr(mt_rand(33, 126));
     			foreach ($content as &$v){
     				$description.=iconv('GBK','UTF-8',$v);
-    			    $file="/weTall/data/upload/item/".$title[1]."/".$i.".jpg";
     			    
-    			    file_put_contents ($file, $v);
-    			    $i = $i + 1;
     			};
     			
+    			$item["img"] = $img[0];
+    			$item["title"] = $title[1];
+    			$item["price"] = $price;
+    			$item["intro"] = $attributes[0];
+    			$item["imagesDetail"] = $description;echo $price;var_dump($jiaGe);die();
     			
-    			
-    			var_dump($img[0]);echo "<br>";
-    			var_dump($title[1]);echo "<br>Price:";
-    			var_dump($price);echo "<br>";
-    			var_dump($attributes[0]);echo "<br>";
-    			var_dump($description);die();
-    			
+    			if( $mod->add($item) ){
+	    			IS_AJAX && $this->ajaxReturn(1, L('operation_success'), '', 'add');
+	    			$this->success(L('operation_success'));
+	    		} else {
+	    			IS_AJAX && $this->ajaxReturn(0, L('operation_failure'));
+	    			$this->error(L('operation_failure'));
+	    		}
+    			*/
     		endif;
     	} else {
     		$this->assign('open_validator', true);
@@ -267,6 +295,91 @@ class itemAction extends backendAction {
     		}
     	}
     }
+    /**
+	 * 爬虫程序 -- 原型
+	*
+	* 从给定的url获取html内容
+	*
+	* @param string $url
+	* @return string
+	*/
+	public function getUrlContent($url) {
+		$handle = fopen($url, "r");
+		if ($handle) {
+			$content = stream_get_contents($handle, 1024 * 1024);
+			return $content;
+		} else {
+			return false;
+		}
+	}
+	/**
+	 * 从html内容中筛选链接
+	 *
+	 * @param string $web_content
+	 * @return array
+	 */
+	public function _filterUrl($web_content) {
+		$reg_tag_a = '/<[a|A].*?href=[\'\"]{0,1}([^>\'\"\ ]*).*?>/';
+		$result = preg_match_all($reg_tag_a, $web_content, $match_result);
+		if ($result) {
+			return $match_result[1];
+		}
+	}
+	/**
+	 * 修正相对路径
+	 *
+	 * @param string $base_url
+	 * @param array $url_list
+	 * @return array
+	 */
+	public function _reviseUrl($base_url, $url_list) {
+		$url_info = parse_url($base_url);
+		$base_url = $url_info["scheme"] . '://';
+		if ($url_info["user"] && $url_info["pass"]) {
+			$base_url .= $url_info["user"] . ":" . $url_info["pass"] . "@";
+		}
+		$base_url .= $url_info["host"];
+		if ($url_info["port"]) {
+			$base_url .= ":" . $url_info["port"];
+		}
+		$base_url .= $url_info["path"];
+		print_r($base_url);
+		if (is_array($url_list)) {
+			foreach ($url_list as $url_item) {
+				if (preg_match('/^http/', $url_item)) {
+					// 已经是完整的url
+					$result[] = $url_item;
+				} else {
+					// 不完整的url
+					$real_url = $base_url . '/' . $url_item;
+					$result[] = $real_url;
+				}
+			}
+			return $result;
+		} else {
+			return;
+		}
+	}
+	/**
+	 * 爬虫
+	 *
+	 * @param string $url
+	 * @return array
+	 */
+	public function crawler($url) {
+		$content = $this->getUrlContent($url);
+		if ($content) {
+			$url_list = $this->_reviseUrl($url, $this->_filterUrl($content));
+			if ($url_list) {
+				return $url_list;
+			} else {
+				return ;
+			}
+		} else {
+			return ;
+		}
+	}
+	
     public function edit() {
         if (IS_POST) {
             //获取数据

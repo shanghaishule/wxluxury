@@ -5,7 +5,7 @@ class DatafromTbAction extends BackAction
 
     public function index() {
         $map = array();
-		$UserDB = D('brandlist');
+		$UserDB = D('item');
 		$count = $UserDB->where($map)->count();
 		$Page       = new Page($count,8);// 实例化分页类 传入总记录数
 		// 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
@@ -50,7 +50,7 @@ class DatafromTbAction extends BackAction
         	$count=M('item')->where("brand in (".$ids.")")->count();
         	if($count>0)
         	{
-          IS_AJAX && $this->ajaxReturn(0,'品牌被引用，不能删除');exit;
+          		IS_AJAX && $this->ajaxReturn(0,'品牌被引用，不能删除');exit;
         	}
         	
             if (false !== $mod->delete($ids)) {

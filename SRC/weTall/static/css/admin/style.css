@@ -216,7 +216,7 @@ select{ vertical-align:middle;background:none repeat scroll 0 0 #F9F9F9;border-c
 .left_menu h3 span{background-position: left -78px; display:block; float:right; height:14px; width:14px; margin-top:5px}
 .left_menu h3 span.on{background-position: -33px -78px;}
 
-.right_main{overflow:hidden;_zoom:1;_float:left;width:800px;}
+.right_main{overflow:hidden;_zoom:1;_float:left;width:900px;}
 
 /*页面tab*/
 .crumbs{height:26px;position:relative;}
