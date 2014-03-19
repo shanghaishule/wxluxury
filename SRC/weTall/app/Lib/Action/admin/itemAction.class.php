@@ -220,7 +220,7 @@ class itemAction extends backendAction {
     		/**
     		 * 取得店铺所有商品的ID
     		 */
-    			$this->get_good_attr($tianmao_urls);/*
+    			//$this->get_good_attr($tianmao_urls);/*
                 $item_search = $tianmao_urls."&search=y";
                 if (strstr($tianmao_urls,"tmall") == true) {
                 	$content_page = file_get_contents($item_search);
@@ -249,10 +249,28 @@ class itemAction extends backendAction {
 	    			$pageNo = $pageNo + 1;
     			}while ($pageNo - 1 < $total_page1[1]);
     			//var_dump($url_array);die();
+    			$failed_num = 0;
+    			$success_num = 0;
     			foreach ($url_array as $good_url){
-    				$this->get_good_attr($good_url);
+    				if ($success_num > 5) {
+    					break;
+    				}
+    				if ($this->get_good_attr($good_url)) {
+    					$success_num = $success_num + 1;
+    				}else{
+    					$failed_num = $failed_num + 1;
+    				}
     			}
-    			  	*/	
+    			die();
+    			$msg_su = "<br>成功导入".$success_num."个，有".$failed_num."个失败了！";
+    			//  	*/
+    			if ($success_num > 0) {
+    				IS_AJAX && $this->ajaxReturn(1, L('operation_success').$msg_su, '', 'add');
+    				$this->success(L('operation_success'));
+    			}else{
+    				IS_AJAX && $this->ajaxReturn(0, L('operation_failure'));
+    				$this->error(L('operation_failure'));
+    			}
     		endif;
     	} else {
     		$this->assign('open_validator', true);
@@ -305,8 +323,22 @@ class itemAction extends backendAction {
     	//var_dump($result_size);die();
     	
     	//商品颜色
-    	preg_match_all('/<a href=\"\#\" style=\".*>.*<\/a>/', $text, $color);
-    	var_dump($color);die();
+    	preg_match_all('/<li.* title=.*>.*&#33394;.*<\/li>/', $text, $color);
+    	if (count($color[0] >1)) { //图案有可能符合上表达式
+    		$arr = 1;
+    	}else{
+    		$arr = 0;
+    	}
+    	$colorarr = $color[0];
+    	$color0 = explode(":",$colorarr[$arr]);
+    	$real_color = preg_replace('/&nbsp;/',"",$color0[1]);
+    	$color1 = explode("&#33394;",$real_color);
+    	foreach ($color1 as $var_color){
+    		//if (strstr($var_color,"色") == true) {
+    			$colorresult = $colorresult."|".$var_color."&#33394;";
+    		//}
+    	}
+    	
     	
     	//获取商品名称
     	preg_match('/<title>([^<>]*)<\/title>/', $text, $title);
@@ -342,17 +374,16 @@ class itemAction extends backendAction {
     	$item["price"] = $price;
     	$item["intro"] = $attributes[0];
     	$item["size"] = $result_size;
+    	$item["color"] = $colorresult;
     	//$item["imagesDetail"] = $description;
     	var_dump($item);
-    	echo $price;var_dump($jiaGe);die();
-    	 
+    	
+    /* 
     	if( $this->_mod->add($item) ){
-    		IS_AJAX && $this->ajaxReturn(1, L('operation_success'), '', 'add');
-    		$this->success(L('operation_success'));
+    		return true;
     	} else {
-    		IS_AJAX && $this->ajaxReturn(0, L('operation_failure'));
-    		$this->error(L('operation_failure'));
-    	}
+    		return false;
+    	}*/
     }
     /**
 	 * 爬虫程序 -- 原型
