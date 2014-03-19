@@ -302,7 +302,12 @@ class itemAction extends backendAction {
 	    	$real_size = preg_replace('/<\/span><\/a><\/li>/',"",$sizeurl[1]);  //去掉regular expression匹配出来的多余的东西
 	    	$result_size = $result_size."|".$real_size;
     	}
-    	var_dump($result_size);die();
+    	//var_dump($result_size);die();
+    	
+    	//商品颜色
+    	preg_match_all('/<a href=\"\#\" style=\".*>.*<\/a>/', $text, $color);
+    	var_dump($color);die();
+    	
     	//获取商品名称
     	preg_match('/<title>([^<>]*)<\/title>/', $text, $title);
     	//$title=iconv('GBK','UTF-8',$title);
@@ -336,6 +341,7 @@ class itemAction extends backendAction {
     	$item["title"] = $title_real[0];
     	$item["price"] = $price;
     	$item["intro"] = $attributes[0];
+    	$item["size"] = $result_size;
     	//$item["imagesDetail"] = $description;
     	var_dump($item);
     	echo $price;var_dump($jiaGe);die();
