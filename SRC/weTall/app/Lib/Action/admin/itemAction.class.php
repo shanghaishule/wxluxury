@@ -217,7 +217,10 @@ class itemAction extends backendAction {
     		
     		if (isset($_POST['url'])):
 	    		$tianmao_urls = $_POST['url'];
-    			
+    		/**
+    		 * 取得店铺所有商品的ID
+    		 */
+    			$this->get_good_attr($tianmao_urls);/*
                 $item_search = $tianmao_urls."&search=y";
                 if (strstr($tianmao_urls,"tmall") == true) {
                 	$content_page = file_get_contents($item_search);
@@ -231,9 +234,7 @@ class itemAction extends backendAction {
                 }
                 $total_page1 = explode("/",$total_page[0]);
 
-    		/**
-    		 * 测试用主程序
-    		 */
+    		
                 $pageNo = 1;
     			$current_url = $item_search; //初始url
     			$url_array = array();
@@ -247,55 +248,11 @@ class itemAction extends backendAction {
     				}	    			
 	    			$pageNo = $pageNo + 1;
     			}while ($pageNo - 1 < $total_page1[1]);
-    			var_dump($url_array);
-    			
-    		die();
-    		/*
-    			$text=file_get_contents($url);
-    			//获取商品图片
-    			preg_match('/<img[^>]*id="J_ImgBooth"[^r]*rc=\"([^"]*)\"[^>]*>/', $text, $img);
-    			//获取商品名称
-    			preg_match('/<title>([^<>]*)<\/title>/', $text, $title);
-    			//$title=iconv('GBK','UTF-8',$title);
-    			//获取商品价格
-    			preg_match('/&lt;strong id="J_StrPrice" &gt;\d+.\d{2}/',$text,$jiaGe); //正则表示获取包含价格的 HTML 标签
-    			preg_match('/\d+.\d{2}/',$jiaGe,$price);
-    			$price=floatval($price);
-    			
-    			//获取商品属性
-    			preg_match('/<(div)[^c]*class=\"attributes\"[^>]*>.*<\/\\1>/is', $text, $text0);
-    			$text1=preg_replace("/<\/div>[^<]*<(div)[^c]*id=\"description\"[^>]*>.*<\/\\1>/is","",$text0);
-    			$attributes=preg_replace("/<\/div>[^<]*<(div)[^c]*class=\"box J_TBox\"[^>]*>.*<\/\\1>/is","",$text1);
-    			
-    			//获取商品描述
-    			preg_match_all('/<script[^>]*>[^<]*<\/script>/is', $text, $content);//页面js脚本
-    			$content=$content[0];
-    			$description='<div id="detail" class="box"> </div>
-		        <div id="description" class="J_DetailSection">
-		          <div class="content" id="J_DivItemDesc">描述加载中</div>
-		        </div>';
-    			
-    			//商品货号
-    			$item["Uninum"] = chr(mt_rand(33, 126));
-    			foreach ($content as &$v){
-    				$description.=iconv('GBK','UTF-8',$v);
-    			    
-    			};
-    			
-    			$item["img"] = $img[0];
-    			$item["title"] = $title[1];
-    			$item["price"] = $price;
-    			$item["intro"] = $attributes[0];
-    			$item["imagesDetail"] = $description;echo $price;var_dump($jiaGe);die();
-    			
-    			if( $mod->add($item) ){
-	    			IS_AJAX && $this->ajaxReturn(1, L('operation_success'), '', 'add');
-	    			$this->success(L('operation_success'));
-	    		} else {
-	    			IS_AJAX && $this->ajaxReturn(0, L('operation_failure'));
-	    			$this->error(L('operation_failure'));
-	    		}
-    			*/
+    			//var_dump($url_array);die();
+    			foreach ($url_array as $good_url){
+    				$this->get_good_attr($good_url);
+    			}
+    			  	*/	
     		endif;
     	} else {
     		$this->assign('open_validator', true);
@@ -305,6 +262,90 @@ class itemAction extends backendAction {
     		} else {
     			$this->display();
     		}
+    	}
+    }
+    
+    /**
+     * *获取商品数据
+     */
+    public function get_good_attr($url){
+    	$text=file_get_contents($url);
+    	//商品货号
+    	$url_id = explode("id=",$url);
+    	$url_id_real = explode("&",$url_id[1]);
+    	//preg_match('/<li title=货号.*<\/li>/', $text, $huohao);
+
+    	$item["Uninum"] = $url_id_real[0];
+    	//获取商品图片
+    	preg_match('/<img[^>]*id="J_ImgBooth"[^r]*rc=\"([^"]*)\"[^>]*>/', $text, $img);
+    	$result_imgs = preg_match_all('/<a href=\"#\"><img.*\/>/', $text,$imgs60);
+    	$i = 0;
+    	foreach ($imgs60 as $imgurl){
+    		$i = $i + 1;
+    		//str_replace("60x60","460x460",$imgurl);
+    		$imgreal_url0=preg_replace('/<a.*><img/',"",$imgurl);  //去掉regular expression匹配出来的多余的东西 
+    		$imgreal_url1=preg_replace('/.*src=\"/',"",$imgreal_url0);
+    		$imgreal_url2=preg_replace('/\" \/>/',"",$imgreal_url1);
+    		$imgreal_url=preg_replace('60x60',"460x460",$imgreal_url2);
+    		//Http::curlDownload($imgreal_url,"./Uploads/image/20140311"."/".$i.".jpg");
+    		$newfile = "C:/Greyson/Weixin/".$i."hehe.jpg";
+    		//$this->ycimg($imgreal_url, $newfile);
+    		Http::curlDownload($imgreal_url,$newfile);  // 远程图片保存至本地
+    		$imgsurl = $imgreal_url;
+    	}
+    	//var_dump($imgsurl);die();
+    	
+    	//商品尺码
+    	preg_match_all('/<li data-value=\".*>.*<\/span><\/a><\/li>/', $text, $size);
+    	foreach ($size[0] as $size1){
+	    	$sizeurl = explode("<span>", $size1);
+	    	$real_size = preg_replace('/<\/span><\/a><\/li>/',"",$sizeurl[1]);  //去掉regular expression匹配出来的多余的东西
+	    	$result_size = $result_size."|".$real_size;
+    	}
+    	var_dump($result_size);die();
+    	//获取商品名称
+    	preg_match('/<title>([^<>]*)<\/title>/', $text, $title);
+    	//$title=iconv('GBK','UTF-8',$title);
+    	//获取商品价格
+    	preg_match('/<strong id=\"J_StrPrice\">.*<\/strong>/',$text,$jiaGe); //正则表示获取包含价格的 HTML 标签
+    	preg_match('/\d+\.\d{2}/',$jiaGe,$price);
+    	$price=floatval($price);
+    	 
+    	//获取商品属性
+    	preg_match('/<(div)[^c]*class=\"attributes\"[^>]*>.*<\/\\1>/is', $text, $text0);
+    	$text1=preg_replace("/<\/div>[^<]*<(div)[^c]*id=\"description\"[^>]*>.*<\/\\1>/is","",$text0);
+    	$attributes=preg_replace("/<\/div>[^<]*<(div)[^c]*class=\"box J_TBox\"[^>]*>.*<\/\\1>/is","",$text1);
+    	 
+    	//获取商品描述
+    	preg_match_all('/<script[^>]*>[^<]*<\/script>/is', $text, $content);//页面js脚本
+    	$content=$content[0];
+    	$description='<div id="detail" class="box"> </div>
+		        <div id="description" class="J_DetailSection">
+		          <div class="content" id="J_DivItemDesc">描述加载中</div>
+		        </div>';
+    	 
+    	
+    	foreach ($content as &$v){
+    		$description.=iconv('GBK','UTF-8',$v);
+    			
+    	};
+    	$img_real_url0=preg_replace('/<a.*><img/',"",$img[0]);  //去掉regular expression匹配出来的多余的东西
+    	$img_real_url1=preg_replace('/.*src=\"/',"",$img_real_url0);   	
+    	$item["img"] =preg_replace('/\".* \/>/',"",$img_real_url1);
+    	$title_real = explode("-",$title[1]);
+    	$item["title"] = $title_real[0];
+    	$item["price"] = $price;
+    	$item["intro"] = $attributes[0];
+    	//$item["imagesDetail"] = $description;
+    	var_dump($item);
+    	echo $price;var_dump($jiaGe);die();
+    	 
+    	if( $this->_mod->add($item) ){
+    		IS_AJAX && $this->ajaxReturn(1, L('operation_success'), '', 'add');
+    		$this->success(L('operation_success'));
+    	} else {
+    		IS_AJAX && $this->ajaxReturn(0, L('operation_failure'));
+    		$this->error(L('operation_failure'));
     	}
     }
     /**
