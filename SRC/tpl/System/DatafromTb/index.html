@@ -40,6 +40,7 @@
 <div class="subnav">
     <div class="content_menu ib_a blue line_x">
     	<a class="add fb J_showdialog" href="javascript:void(0);" data-uri="/weTall/index.php?g=admin&m=item&a=data_excel" data-title="导入淘宝商品" data-id="genbill" data-width="520" data-height="100"><em>同步淘宝商品</em></a>
+    	<a class="add fb J_showdialog" href="javascript:void(0);" data-uri="/weTall/index.php?g=admin&m=item&a=data_update" data-title="查看数据更新" data-id="genbill" data-width="520" data-height="100"><em>查看数据更新</em></a>
     </div>
 </div>
 <div class="pad_lr_10">
@@ -73,7 +74,7 @@
     <table width="100%" cellspacing="0">
         <thead>
             <tr>
-                <th><span data-tdtype="order_by" data-field="id">商品ID</span></th>
+                <th><span data-tdtype="order_by" data-field="id">商品品牌</span></th>
                 <th><span data-tdtype="order_by" data-field="shop">商品名称</span></th>
                 <th><span data-tdtype="order_by" data-field="billnum">商品价格</span></th>
                 <th><span data-tdtype="order_by" data-field="status">商品图片</span></th>
@@ -86,11 +87,15 @@
     	<tbody>
             <volist name="list" id="val" >
             <tr>
-                <td align="center">{Lanrain:$val.id}</td>
+                <td align="center">
+                    <volist name="brandlist" id="brandlist" >
+	                    <if condition="$brandlist['id'] eq $val['brand']">{Lanrain:$brandlist.name}
+	                    </if>
+	                </volist></td>
                 <td align="center">{Lanrain:$val.title}</td>
                 <td align="center">{Lanrain:$val.price}</td>
                 <td align="center"><img alt="" src="{Lanrain:$val.img}"></td><style>img{width:60px;height:60px;}</style>
-                <td align="center">{Lanrain:$val.intro}</td>
+                <td align="center" style="white-space:nowrap; width:200px; height:20px; line-height:20px; text-overflow:ellipsis;-moz-text-overflow: ellipsis; overflow:hidden">{Lanrain:$val.info}</td>
                 <td align="center" style="text-overflow:ellipsis; white-space:nowrap; width:150px;">{Lanrain:$val.color}</td>
                 
                 <td align="center">
@@ -106,6 +111,16 @@
     	</tbody>
     </table>
     </div>
+    <div id="attributes" class="attributes">
+
+        <div class="attributes-list" id="J_AttrList">
+                    <div class="tm-clear tb-hidden tm_brandAttr" id="J_BrandAttr"></div>
+                            <p class="attr-list-hd tm-clear"><em>
+                            </em>
+                            </p>
+                            </div>
+                            </div>
+                            
     <div class="btn_wrap_fixed">
     	<div id="pages">{Lanrain:$page}</div>
     </div>

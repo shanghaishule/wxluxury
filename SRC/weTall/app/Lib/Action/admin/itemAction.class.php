@@ -192,6 +192,80 @@ class itemAction extends backendAction {
         }
     }
 
+    public function data_update() {
+    	$mod = D($this->_name);
+    	if (IS_POST) {
+    		if (false === $data = $mod->create()) {
+    			IS_AJAX && $this->ajaxReturn(0, $mod->getError());
+    			$this->error($mod->getError());
+    		}    
+
+    		if (isset($_POST['url'])):
+    		$tianmao_urls = $_POST['url'];
+    		/**
+    		 * 取得店铺所有商品的ID
+    		 */
+    		//$this->get_good_attr($tianmao_urls);/*
+    		$item_search = $tianmao_urls."&search=y";
+    		if (strstr($tianmao_urls,"tmall") == true) {
+    		$content_page = file_get_contents($item_search);
+    		preg_match('/class=\"ui-page-s-len\".*b>/',$content_page,$total_page);
+    		 
+    		}elseif(strstr($tianmao_urls,"taobao") == true){
+    		$content_page = file_get_contents($item_search);
+    		preg_match('/class=\"page-info\".*span>/',$content_page,$total_page);
+    		}else{
+    		$total_page1 = 0;
+    		}
+    		$total_page1 = explode("/",$total_page[0]);
+    
+    
+    		$pageNo = 1;
+    		$current_url = $item_search; //初始url
+    		$url_array = array();
+    		do{
+    		$current_url = $item_search."&pageNo=".$pageNo;
+    		$result_url_arr = $this->crawler($current_url);
+    		if ($result_url_arr) {
+    		foreach ($result_url_arr as $url) {
+    		$url_array[] = $url;
+    		}
+    		}
+    		$pageNo = $pageNo + 1;
+    		}while ($pageNo - 1 < $total_page1[1]);
+    		//var_dump($url_array);die();
+    		$failed_num = 0;
+    		$success_num = 0;
+    		foreach ($url_array as $good_url){
+    		
+	    		if ($this->check_good_attr($good_url)) {
+	    		    $failed_num = $failed_num + 1;
+	    		}else{
+	    		    $success_num = $success_num + 1;
+	    		}
+    		}
+    		// echo $success_num.$failed_num;die();
+    		$msg_su = "没有数据可以更新";
+    		$haveupdate = "你有".$success_num."个商品可以同步下来";
+    		//  	*/
+    		if ($success_num == 0) {
+    			IS_AJAX && $this->ajaxReturn(1, $msg_su, '', 'add');
+    			$this->success($msg_su);
+    		}else{
+    			IS_AJAX && $this->ajaxReturn(0, $haveupdate,'','add');
+    			$this->success($haveupdate);
+    		}
+    		endif;
+    	} else {
+    		$this->assign('open_validator', true);
+    		if (IS_AJAX) {
+    			$response = $this->fetch();
+    			$this->ajaxReturn(1, '', $response);
+    		} else {
+    			$this->display();
+    		}
+    	}
+    }
     public function data_excel() {
     	$mod = D($this->_name);
     	if (IS_POST) {
@@ -199,24 +273,22 @@ class itemAction extends backendAction {
     			IS_AJAX && $this->ajaxReturn(0, $mod->getError());
     			$this->error($mod->getError());
     		}
-    		/*if (method_exists($this, '_before_insert')) {
-    			$data = $this->_before_insert($data);
-    		}
-    		if( $mod->add($data) ){
-    			if( method_exists($this, '_after_insert')){
-    				$id = $mod->getLastInsID();
-    				$this->_after_insert($id);
-    			}
-    			IS_AJAX && $this->ajaxReturn(1, L('operation_success'), '', 'add');
-    			$this->success(L('operation_success'));
-    		} else {
-    			IS_AJAX && $this->ajaxReturn(0, L('operation_failure'));
-    			$this->error(L('operation_failure'));
-    		}*/
-
     		
     		if (isset($_POST['url'])):
 	    		$tianmao_urls = $_POST['url'];
+    			$brandid["name"] = $_POST['brandid'];
+    			$brandid_arr = M("brandlist");
+    			$bid = $brandid_arr->where($brandid)->field("id")->find();
+    			if(empty($brandid["name"])){
+    				echo "请输入品牌！";die();
+    			}elseif(!empty($bid["id"])){
+    				$item["brand"] = $bid["id"];
+    			}else {
+    				$brandid_arr->add($brandid);
+    				 $bid2 = $brandid_arr->where($brandid)->field("id")->find();
+    				 $item["brand"] = $bid2["id"];
+    			}
+    			
     		/**
     		 * 取得店铺所有商品的ID
     		 */
@@ -252,21 +324,21 @@ class itemAction extends backendAction {
     			$failed_num = 0;
     			$success_num = 0;
     			foreach ($url_array as $good_url){
-    				if ($success_num > 5) {
+    				if ($success_num > 1) {
     					break;
     				}
-    				if ($this->get_good_attr($good_url)) {
+    				if ($this->get_good_attr($good_url,$item["brand"])) {
     					$success_num = $success_num + 1;
     				}else{
     					$failed_num = $failed_num + 1;
     				}
     			}
-    			die();
-    			$msg_su = "<br>成功导入".$success_num."个，有".$failed_num."个失败了！";
+    			
+    			$msg_su = "成功导入".$success_num."个，有".$failed_num."个失败了！";
     			//  	*/
     			if ($success_num > 0) {
-    				IS_AJAX && $this->ajaxReturn(1, L('operation_success').$msg_su, '', 'add');
-    				$this->success(L('operation_success'));
+    				IS_AJAX && $this->ajaxReturn(1, $msg_su, '', 'add');
+    				$this->success($msg_su);
     			}else{
     				IS_AJAX && $this->ajaxReturn(0, L('operation_failure'));
     				$this->error(L('operation_failure'));
@@ -282,16 +354,32 @@ class itemAction extends backendAction {
     		}
     	}
     }
-    
+    /**
+     * *验证数据是否可以更新
+     */
+    public function check_good_attr($url){
+    	$text=file_get_contents($url);
+    	//商品货号
+    	$url_id = explode("id=",$url);
+    	$url_id_real = explode("&",$url_id[1]);   
+    	$item["Uninum"] = $url_id_real[0];
+    	 
+    	if (!empty($item["Uninum"])) {
+    		if( $this->_mod->where($item)->find() ){
+    		    return true;
+    		} else {
+    			return false;
+    		}
+    	}
+    }
     /**
      * *获取商品数据
      */
-    public function get_good_attr($url){
+    public function get_good_attr($url,$brand){
     	$text=file_get_contents($url);
     	//商品货号
     	$url_id = explode("id=",$url);
     	$url_id_real = explode("&",$url_id[1]);
-    	//preg_match('/<li title=货号.*<\/li>/', $text, $huohao);
 
     	$item["Uninum"] = $url_id_real[0];
     	//获取商品图片
@@ -305,9 +393,8 @@ class itemAction extends backendAction {
     		$imgreal_url1=preg_replace('/.*src=\"/',"",$imgreal_url0);
     		$imgreal_url2=preg_replace('/\" \/>/',"",$imgreal_url1);
     		$imgreal_url=preg_replace('60x60',"460x460",$imgreal_url2);
-    		//Http::curlDownload($imgreal_url,"./Uploads/image/20140311"."/".$i.".jpg");
+    		
     		$newfile = "C:/Greyson/Weixin/".$i."hehe.jpg";
-    		//$this->ycimg($imgreal_url, $newfile);
     		Http::curlDownload($imgreal_url,$newfile);  // 远程图片保存至本地
     		$imgsurl = $imgreal_url;
     	}
@@ -324,7 +411,7 @@ class itemAction extends backendAction {
     	
     	//商品颜色
     	preg_match_all('/<li.* title=.*>.*&#33394;.*<\/li>/', $text, $color);
-    	if (count($color[0] >1)) { //图案有可能符合上表达式
+    	if (count($color[0]) >1) { //图案有可能符合上表达式
     		$arr = 1;
     	}else{
     		$arr = 0;
@@ -334,24 +421,27 @@ class itemAction extends backendAction {
     	$real_color = preg_replace('/&nbsp;/',"",$color0[1]);
     	$color1 = explode("&#33394;",$real_color);
     	foreach ($color1 as $var_color){
-    		//if (strstr($var_color,"色") == true) {
+    		if (!empty($var_color) and strlen($var_color) > 7) {
     			$colorresult = $colorresult."|".$var_color."&#33394;";
-    		//}
+    		}
     	}
-    	
+
+    	//var_dump($colorresult);die();
     	
     	//获取商品名称
     	preg_match('/<title>([^<>]*)<\/title>/', $text, $title);
-    	//$title=iconv('GBK','UTF-8',$title);
+    	//$title=iconv('GBK','UTF-8',$title);var_dump($title);
     	//获取商品价格
-    	preg_match('/<strong id=\"J_StrPrice\">.*<\/strong>/',$text,$jiaGe); //正则表示获取包含价格的 HTML 标签
-    	preg_match('/\d+\.\d{2}/',$jiaGe,$price);
-    	$price=floatval($price);
-    	 
+    	preg_match('/<strong class=\"J_originalPrice\">.*<\/strong>/',$text,$price); //正则表示获取包含价格的 HTML 标签
+    	$price1 = preg_replace('/<strong class=\"J_originalPrice\">/',"",$price[0]);
+    	$price2 = preg_replace('/<\/strong>/',"",$price1);
+    	
     	//获取商品属性
     	preg_match('/<(div)[^c]*class=\"attributes\"[^>]*>.*<\/\\1>/is', $text, $text0);
     	$text1=preg_replace("/<\/div>[^<]*<(div)[^c]*id=\"description\"[^>]*>.*<\/\\1>/is","",$text0);
     	$attributes=preg_replace("/<\/div>[^<]*<(div)[^c]*class=\"box J_TBox\"[^>]*>.*<\/\\1>/is","",$text1);
+    	$attributes1 = iconv('GB2312', 'UTF-8', $attributes[0]);
+    	$attributes2 = preg_replace("/\\r\\n/","",$attributes1);
     	 
     	//获取商品描述
     	preg_match_all('/<script[^>]*>[^<]*<\/script>/is', $text, $content);//页面js脚本
@@ -370,20 +460,24 @@ class itemAction extends backendAction {
     	$img_real_url1=preg_replace('/.*src=\"/',"",$img_real_url0);   	
     	$item["img"] =preg_replace('/\".* \/>/',"",$img_real_url1);
     	$title_real = explode("-",$title[1]);
-    	$item["title"] = $title_real[0];
-    	$item["price"] = $price;
-    	$item["intro"] = $attributes[0];
-    	$item["size"] = $result_size;
+    	$item["title"] = iconv('GB2312', 'UTF-8', $title_real[0]);
+    	$item["price"] = (float)$price2;
+    	$item["info"] = $attributes2;
+    	$item["size"] = iconv('GB2312', 'UTF-8', $result_size);
     	$item["color"] = $colorresult;
+    	$item["brand"] = $brand;
     	//$item["imagesDetail"] = $description;
-    	var_dump($item);
+    	//var_dump($item);die();
     	
-    /* 
-    	if( $this->_mod->add($item) ){
-    		return true;
-    	} else {
-    		return false;
-    	}*/
+        if (!empty($item["Uninum"])) { 
+        	if( !($this->_mod->where($item)->find()) ){      	
+		    	if( $this->_mod->add($item) ){
+		    		return true;
+		    	} else {
+		    		return false;
+		    	}
+        	}
+    	}
     }
     /**
 	 * 爬虫程序 -- 原型
