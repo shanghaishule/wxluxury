@@ -411,18 +411,20 @@ class itemAction extends backendAction {
     	
     	//商品颜色
     	preg_match_all('/<li.* title=.*>.*&#33394;.*<\/li>/', $text, $color);
-    	if (count($color[0]) >1) { //图案有可能符合上表达式
-    		$arr = 1;
-    	}else{
-    		$arr = 0;
+    	foreach ($color[0] as $var_co) { 
+    		$var_color = iconv('GB2312', 'UTF-8', $var_co);
+    		if (strpos($var_color,"颜色")) {
+    			$colorarr = $var_co;
+    		}
     	}
-    	$colorarr = $color[0];
-    	$color0 = explode(":",$colorarr[$arr]);
-    	$real_color = preg_replace('/&nbsp;/',"",$color0[1]);
-    	$color1 = explode("&#33394;",$real_color);
+    	//$colorarr = $color[0];
+    	$color0 = explode(":",$colorarr);
+    	//$real_color = preg_replace('/&nbsp;/',"",$color0[1]);
+    	$color1 = explode("&nbsp;",$color0[1]);
     	foreach ($color1 as $var_color){
+    		
     		if (!empty($var_color) and strlen($var_color) > 7) {
-    			$colorresult = $colorresult."|".$var_color."&#33394;";
+    			$colorresult = $colorresult."|".$var_color;
     		}
     	}
 
