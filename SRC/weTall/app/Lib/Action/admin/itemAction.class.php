@@ -179,7 +179,7 @@ class itemAction extends backendAction {
                 }
             }
             $data['imgs'] = $item_imgs;
-            $data['tokenTall'] = $tokenTall;
+            $data['tokenTall'] = $tokenTall; 
             //加入颜色和尺码
             $data["size"]=$sizestr;
             $data["color"]=$colorstr;
