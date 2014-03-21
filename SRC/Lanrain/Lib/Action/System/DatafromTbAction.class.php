@@ -13,7 +13,8 @@ class DatafromTbAction extends BackAction
 		$nowPage = isset($_GET['p'])?$_GET['p']:1;
 		$show       = $Page->show();// 分页显示输出
 		$list = $UserDB->where($map)->order('id ASC')->limit($Page->firstRow.','.$Page->listRows)->select();
-
+		
+		$this->assign("im_message",M("message_check")->field("text")->find());
 		$this->assign("brandlist",$brandlist->select());
 		$this->assign('list',$list);
 		$this->assign('page',$show);// 赋值分页输出
@@ -39,7 +40,14 @@ class DatafromTbAction extends BackAction
             $this->ajaxReturn(1);
         }
     }
-    
+    public function deletemessage()
+    {
+    	$datamessage["text"]="";
+    	$message = M("message_check");
+    	if($message->where("1 = 1")->save($datamessage)){
+    		$this->success("message被清空！");
+    	}
+    }
       public function deletebrand()
     {
     	 
