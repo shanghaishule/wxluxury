@@ -207,7 +207,7 @@ class itemAction extends backendAction {
     		 * 取得店铺所有商品的ID
     		 */
     		//$this->get_good_attr($tianmao_urls);/*
-    		$item_search = $tianmao_urls."&search=y";
+    		$item_search = $tianmao_urls."/search.htm?spm=a1z10.5.0.0.RbNzaQ&search=y";
     		if (strstr($tianmao_urls,"tmall") == true) {
     		$content_page = file_get_contents($item_search);
     		preg_match('/class=\"ui-page-s-len\".*b>/',$content_page,$total_page);
@@ -229,7 +229,8 @@ class itemAction extends backendAction {
 	    		$result_url_arr = $this->crawler($current_url);
 	    		if ($result_url_arr) {
 		    		foreach ($result_url_arr as $url) {
-		    			$url_array[] = $url;
+		    			$url10 = explode("\"",$url);
+		    			$url_array[] = $url10[0];
 		    		}
 	    		}
 	    		
@@ -245,7 +246,7 @@ class itemAction extends backendAction {
 	    		    $success_num = $success_num + 1;
 	    		}
     		}
-    		echo $failed_num."===".$success_num; die();
+    		//echo $failed_num."===".$success_num; die();
     		$msg_su = "没有数据可以更新";
     		$haveupdate = "已有".$failed_num."个商品，你有".$success_num."个商品可以同步下来";
     		//  	*/
@@ -295,6 +296,7 @@ class itemAction extends backendAction {
     		if (isset($_POST['url'])):
 	    		$tianmao_urls = $_POST['url'];
     			$brandid["name"] = $_POST['brandid'];
+    			$num_count = $_POST['num_count'];
     			$brandid_arr = M("brandlist");
     			$bid = $brandid_arr->where($brandid)->field("id")->find();
     			if(empty($brandid["name"])){
@@ -311,7 +313,7 @@ class itemAction extends backendAction {
     		 * 取得店铺所有商品的ID
     		 */
     			//$this->get_good_attr($tianmao_urls);/*
-                $item_search = $tianmao_urls."&search=y";
+                $item_search = $tianmao_urls."/search.htm?spm=a1z10.5.0.0.RbNzaQ&search=y";
                 if (strstr($tianmao_urls,"tmall") == true) {
                 	$content_page = file_get_contents($item_search);
                 	preg_match('/class=\"ui-page-s-len\".*b>/',$content_page,$total_page);
@@ -334,7 +336,8 @@ class itemAction extends backendAction {
                 	$result_url_arr = $this->crawler($current_url);
                 	if ($result_url_arr) {
                 		foreach ($result_url_arr as $url) {
-                			$url_array[] = $url;
+                			$url10 = explode("\"",$url);
+                			$url_array[] = $url10[0];
                 		}
                 	}
                 	 
@@ -342,19 +345,22 @@ class itemAction extends backendAction {
     			//var_dump($url_array);die();
     			$failed_num = 0;
     			$success_num = 0;
+    			$have = 0;
     			foreach ($url_array as $good_url){
-    				if ($success_num > 1) {
+    				if($num_count != "" & $success_num >= $num_count) {
     					break;
     				}
     				
-    				if ($this->get_good_attr($good_url,$item["brand"])) {
+    				if($this->get_good_attr($good_url,$item["brand"]) == "H"){
+    					$have = $have + 1;
+    				}elseif ($this->get_good_attr($good_url,$item["brand"])) {
     					$success_num = $success_num + 1;
     				}else{
     					$failed_num = $failed_num + 1;
     				}
     			}
     			
-    			$msg_su = "成功导入".$success_num."个，有".$failed_num."个失败了！";
+    			$msg_su = "此店铺有".$have."个商品已经村子此次成功导入".$success_num."个，有".$failed_num."个失败了！";
     			//  	*/
     			if ($success_num > 0) {
     				$messge = $message->find();
@@ -501,6 +507,7 @@ class itemAction extends backendAction {
 	    	$item["size"] = iconv('GB2312', 'UTF-8', $result_size);
 	    	$item["color"] = $colorresult;
 	    	$item["brand"] = $brand;
+	    	$item["add_time"] = time();
 	    	//$item["imagesDetail"] = $description;
 	    	//var_dump($item);die();
 	    	
@@ -511,6 +518,8 @@ class itemAction extends backendAction {
 			    		return false;
 			    	}
 	    	}
+    	}else{
+    		return "H";
     	}
     }
     /**
@@ -542,7 +551,6 @@ class itemAction extends backendAction {
 		if ($result) {
 			return $match_result[1];
 		}
-		var_dump($match_result[1]);die();
 	}
 	/**
 	 * 修正相对路径
@@ -552,7 +560,7 @@ class itemAction extends backendAction {
 	 * @return array
 	 */
 	public function _reviseUrl( $url_list) {
-		$flag = "X";
+
 		$result = array();
 		foreach ($url_list as $url){
 			$url_id = explode("id=",$url);
@@ -562,9 +570,10 @@ class itemAction extends backendAction {
 			}else{
 				$item_id = $url_id[1];
 			}
-
+	
+			$flag = "X";
 			foreach ($result as $haveid){
-				$flag = "X";
+				
 				if(strpos($haveid,$item_id ) == true ){
 					$flag = "Y";
 					break;

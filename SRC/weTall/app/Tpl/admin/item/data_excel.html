@@ -1,7 +1,16 @@
 <!--生成账单-->
+<!DOCTYPE HTML>
 <div class="dialog_content">
 <form id="info_form" action="{:U('item/data_excel')}" method="post" enctype="multipart/form-data">
 <table width="100%" cellpadding="2" cellspacing="1" class="table_form">
+<tr>
+       <td>
+         	下载记录条数：
+      </td>
+       <td>
+        <input type="number" name="num_count" id="num_count" class="text" size="80">（空表示全部）
+      </td>
+    </tr>
     <tr>
        <td>
          	品牌：

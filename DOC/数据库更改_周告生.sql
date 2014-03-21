@@ -13,5 +13,6 @@ ALTER TABLE  `tp_item` ADD `imagesDetail` BLOB NULL AFTER `Uninum` ;
 
 CREATE TABLE IF NOT EXISTS `tp_message_check` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `text` varchar(255) NOT NULL
+  `text` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
