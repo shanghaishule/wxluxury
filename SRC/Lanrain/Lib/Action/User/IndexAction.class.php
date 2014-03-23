@@ -9,6 +9,7 @@ class IndexAction extends UserAction{
 			$groups[$val['id']]['cid']=$val['connectnum'];
 		}
 		unset($group);
+		
 		$db=M('Wxuser');
 		$count=$db->where($where)->count();
 		$page=new Page($count,25);
@@ -31,6 +32,12 @@ class IndexAction extends UserAction{
 		$tokenvalue=$randStr.time();
 		$this->assign('tokenvalue',$tokenvalue);
 		$this->assign('email',time().'@yourdomain.com');
+		
+		//品牌
+
+		$brand = M("brandlist")->select();
+		$this->assign("brand",$brand);
+		
 		//地理信息
 		if (C('baidu_map_api')){
 			//$locationInfo=json_decode(file_get_contents('http://api.map.baidu.com/location/ip?ip='.$_SERVER['REMOTE_ADDR'].'&coor=bd09ll&ak='.C('baidu_map_api')),1);
@@ -45,6 +52,15 @@ class IndexAction extends UserAction{
 	public function edit(){
 		$id=$this->_get('id','intval');
 		$where['uid']=session('uid');
+		
+		//店铺品牌
+		$wecha_shop=M('wecha_shop');
+		$brand_shop=M('brandlist');
+		$data["tokenTall"] = $_SESSION["token"];
+		$wedata = $wecha_shop->where($data)->find();
+		$brand["id"]=$wedata["BelongBrand"];
+		$this->assign("brand_shop",$brand_shop->where($brand)->find());
+				
 		$res=M('Wxuser')->where($where)->find($id);
 		$this->assign('info',$res);
 		$this->display();
@@ -98,6 +114,7 @@ class IndexAction extends UserAction{
 					$data1["weName"] = $_POST["wxname"];
 					$data1["HaveReal"] = 0;
 					$data1["credit"] = 0;
+					$data1["BelongBrand"] = $this->_POST("brandchoose","trim");
 					$where_shop['weName']=$_POST["wxname"];					
 					$Have_token = $wecha_shop->where($where_shop)->find();
 					
@@ -152,7 +169,44 @@ class IndexAction extends UserAction{
 		$open['queryname']=rtrim($queryname,',');
 		$token_open->data($open)->add();
 	}
-	
+	public function get_goods(){
+		$token = $this->_get("token","trim");
+		
+		//实体店信息
+		$wecha_shop = M("wecha_shop");
+	    //实体商品
+		$items = M("item");
+		//店铺从天猫拿下来的商品
+		$items_taobao = M("item_taobao");
+
+		$wecha_shop_data["tokenTall"] = $token;
+		$items_having["tokenTall"] = $token;
+		$get_num = 0; //领取成功计数器
+		$failed_num = 0;//领取失败计数器
+		$having_num = 0; //已经领取计数器
+		
+		$brand = $wecha_shop->where($wecha_shop_data)->find();
+		$items_taobao_data["brand"] = $brand["BelongBrand"];
+		$item_goods = $items_taobao->where($items_taobao_data)->select();
+		foreach ($item_goods as $item_good){
+			$item_good["tokenTall"] = $token;
+			$items_having["Uninum"] = $item_good["Uninum"];
+			if ($items->where($items_having)->find()) {
+				$having_num ++;
+			}
+			elseif ($items->add($item_good)) {
+				$get_num ++;
+			}else{
+				$failed_num ++;
+			}
+		}
+		if ($get_num > 0) {
+			$message = "您本次成功领取".$get_num."商品，有".$failed_num ++."商品没有成功";
+		}else{
+			$message = "没有数据可以领取";
+		}
+		$this->success($message);
+	}
 	public function usersave(){
 		$pwd=$this->_post('password');
 		if($pwd!=false){

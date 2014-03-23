@@ -193,12 +193,12 @@ class itemAction extends backendAction {
     }
 
     public function data_update() {
-    	$mod = D($this->_name);
+    	$mod_taobao = D("item_taobao");
     	$message = M("message_check");
     	if (IS_POST) {
-    		if (false === $data = $mod->create()) {
-    			IS_AJAX && $this->ajaxReturn(0, $mod->getError());
-    			$this->error($mod->getError());
+    		if (false === $data = $mod_taobao->create()) {
+    			IS_AJAX && $this->ajaxReturn(0, $mod_taobao->getError());
+    			$this->error($mod_taobao->getError());
     		}    
 
     		if (isset($_POST['url'])):
@@ -240,11 +240,15 @@ class itemAction extends backendAction {
     		$success_num = 0;
     		foreach ($url_array as $good_url){
     			
-	    		if ($this->check_good_attr($good_url)) {
-	    		    $failed_num = $failed_num + 1;
-	    		}else{
-	    		    $success_num = $success_num + 1;
-	    		}
+    		if($this->check_good_attr($good_url,$item["brand"]) == "M"){//已经存在
+    					$fake_id ++;//导入失败
+    				}elseif ($this->check_good_attr($good_url,$item["brand"])) { //已经存在
+    					$failed_num = $failed_num + 1;
+    				}elseif($this->check_good_attr($good_url,$item["brand"]) == false){//商品id不正确
+    					$success_num ++;
+    				}else{
+    					
+    				}
     		}
     		//echo $failed_num."===".$success_num; die();
     		$msg_su = "没有数据可以更新";
@@ -285,12 +289,12 @@ class itemAction extends backendAction {
     	}
     }
     public function data_excel() {
-    	$mod = D($this->_name);
+    	$mod_taobao = D("item_taobao");
     	$message = M("message_check");
     	if (IS_POST) {
-    		if (false === $data = $mod->create()) {
-    			IS_AJAX && $this->ajaxReturn(0, $mod->getError());
-    			$this->error($mod->getError());
+    		if (false === $data = $mod_taobao->create()) {
+    			IS_AJAX && $this->ajaxReturn(0, $mod_taobao->getError());
+    			$this->error($mod_taobao->getError());
     		}
     		
     		if (isset($_POST['url'])):
@@ -346,17 +350,20 @@ class itemAction extends backendAction {
     			$failed_num = 0;
     			$success_num = 0;
     			$have = 0;
+    			$fake_id = 0;
     			foreach ($url_array as $good_url){
-    				if($num_count != "" & $success_num >= $num_count) {
+    				if($success_num >= 1) {
     					break;
     				}
     				
-    				if($this->get_good_attr($good_url,$item["brand"]) == "H"){
+    				if($this->get_good_attr($good_url,$item["brand"]) == "H"){//已经存在
     					$have = $have + 1;
-    				}elseif ($this->get_good_attr($good_url,$item["brand"])) {
+    				}elseif ($this->get_good_attr($good_url,$item["brand"])) { //成功导入
     					$success_num = $success_num + 1;
+    				}elseif($this->get_good_attr($good_url,$item["brand"]) == "N"){//商品id不正确
+    					$fake_id ++;
     				}else{
-    					$failed_num = $failed_num + 1;
+    					$failed_num = $failed_num + 1; //导入失败
     				}
     			}
     			
@@ -375,8 +382,18 @@ class itemAction extends backendAction {
     				IS_AJAX && $this->ajaxReturn(1, $msg_su, '', 'add');
     				$this->success($msg_su);
     			}else{
+    				$msg_su = "没有数据可更新！";
+    				$messge = $message->find();
+    				if(!empty($messge["id"])){
+    					$datamessage["text"]=$msg_su;
+    					$message->where("1 = 1")->save($datamessage);
+    				}else{
+    					$datamessage["text"]=$msg_su;
+    					$message->add($datamessage);
+    				}
+    				
     				IS_AJAX && $this->ajaxReturn(0, L('operation_failure'));
-    				$this->error(L('operation_failure'));
+    				$this->error("没有数据可更新！");
     			}
     		endif;
     	} else {
@@ -403,19 +420,22 @@ class itemAction extends backendAction {
     	}
     	
     	if (!empty($item["Uninum"])) {
-    		if( M("item")->where($item)->find() ){
-    		    return true;
+    		if( M("item_taobao")->where($item)->find() ){
+    		    return "Y";
     		} else {
-    			return false;
+    			return "M";
     		}
+    	}else{
+    		return "N";
     	}
     }
     /**
      * *获取商品数据
      */
     public function get_good_attr($url,$brand){
-    	if(!($this->check_good_attr($url))){
-	    	$text=file_get_contents($url);
+    	$mod_taobao = M("item_taobao");
+    	if($this->check_good_attr($url) == "M"){//正常商品未同步至数据库
+	    	$text=file_get_contents($url); 
 	    	//商品货号
 	    	$url_id = explode("id=",$url);
 	    	$url_id_real = explode("&",$url_id[1]);
@@ -425,17 +445,32 @@ class itemAction extends backendAction {
 	    	preg_match('/<img[^>]*id="J_ImgBooth"[^r]*rc=\"([^"]*)\"[^>]*>/', $text, $img);
 	    	$result_imgs = preg_match_all('/<a href=\"#\"><img.*\/>/', $text,$imgs60);
 	    	$i = 0;
-	    	foreach ($imgs60 as $imgurl){
+	    	foreach ($imgs60[0] as $imgurl){
 	    		$i = $i + 1;
 	    		//str_replace("60x60","460x460",$imgurl);
 	    		$imgreal_url0=preg_replace('/<a.*><img/',"",$imgurl);  //去掉regular expression匹配出来的多余的东西 
 	    		$imgreal_url1=preg_replace('/.*src=\"/',"",$imgreal_url0);
 	    		$imgreal_url2=preg_replace('/\" \/>/',"",$imgreal_url1);
-	    		$imgreal_url=preg_replace('60x60',"460x460",$imgreal_url2);
+	    		$imgreal_url=preg_replace('/60x60/',"460x460",$imgreal_url2);
 	    		
-	    		$newfile = "C:/Greyson/Weixin/".$i."hehe.jpg";
-	    		Http::curlDownload($imgreal_url,$newfile);  // 远程图片保存至本地
-	    		$imgsurl = $imgreal_url;
+	    		$data = file_get_contents($imgreal_url); // 读文件内容
+	    		$data = iconv('GB2312', 'UTF-8', $data);
+	    		$filetime = $item["Uninum"]; //得到时间戳
+	    		$filepath = $_SERVER['DOCUMENT_ROOT']."/Uploads/items/images/".$filetime."/";//图片保存的路径目录
+	    		if(!is_dir($filepath)){
+	    			mkdir($filepath,0777, true);
+	    		}
+	    		$filename = "100".$i.'.jpg'; //生成文件名，
+	    		ob_start(); //打开浏览器的缓冲区
+	    		readfile($imgreal_url); //将图片读入缓冲区
+	    		$data = ob_get_contents(); //获取缓冲区的内容复制给变量$img
+	    		ob_end_clean(); //关闭并清空缓冲
+	    		$fp = @fopen($filepath.$filename,"w"); //以写方式打开文件
+	    		@fwrite($fp,$data); //
+	    		fclose($fp);
+	    		
+	    		//Http::curlDownload($imgreal_url,$newfile);  // 远程图片保存至本地
+	    		//$imgsurl = $imgreal_url;
 	    	}
 	    	//var_dump($imgsurl);die();
 	    	
@@ -447,27 +482,6 @@ class itemAction extends backendAction {
 		    	$result_size = $result_size."|".$real_size;
 	    	}
 	    	//var_dump($result_size);die();
-	    	
-	    	//商品颜色
-	    	preg_match_all('/<li.* title=.*>.*&#33394;.*<\/li>/', $text, $color);
-	    	foreach ($color[0] as $var_co) { 
-	    		$var_color = iconv('GB2312', 'UTF-8', $var_co);
-	    		if (strpos($var_color,"颜色")) {
-	    			$colorarr = $var_co;
-	    		}
-	    	}
-	    	//$colorarr = $color[0];
-	    	$color0 = explode(":",$colorarr);
-	    	//$real_color = preg_replace('/&nbsp;/',"",$color0[1]);
-	    	$color1 = explode("&nbsp;",$color0[1]);
-	    	foreach ($color1 as $var_color){
-	    		
-	    		if (!empty($var_color) and strlen($var_color) > 7) {
-	    			$colorresult = $colorresult."|".$var_color;
-	    		}
-	    	}
-	
-	    	//var_dump($colorresult);die();
 	    	
 	    	//获取商品名称
 	    	preg_match('/<title>([^<>]*)<\/title>/', $text, $title);
@@ -483,6 +497,41 @@ class itemAction extends backendAction {
 	    	$attributes=preg_replace("/<\/div>[^<]*<(div)[^c]*class=\"box J_TBox\"[^>]*>.*<\/\\1>/is","",$text1);
 	    	$attributes1 = iconv('GB2312', 'UTF-8', $attributes[0]);
 	    	$attributes2 = preg_replace("/\\r\\n/","",$attributes1);
+	    	
+	    	//货号
+	    	preg_match_all('/<li title=.*>.*&nbsp;.*<\/li>/', $text, $huohao);
+	    	foreach ($huohao[0] as $var_co) {
+	    		$var_huohao = iconv('GB2312', 'UTF-8', $var_co);
+	    		if (strpos($var_huohao,"货号")) {
+	    			$huohaoarr = $var_co;
+	    		}
+	    	}
+	    	$huohao0 = explode(":",$huohaoarr);
+	    	$huohao1 = explode("&nbsp;",$huohao0[1]);
+	    	foreach ($huohao1 as $var_huohao){
+	    	
+	    		if (!empty($var_huohao) and strlen($var_huohao) > 7) {
+	    			$huohaoresult = $var_huohao;
+	    		}
+	    	}
+	    	
+	    	//商品颜色
+	    	preg_match_all('/<li title=.*>.*&nbsp;.*<\/li>/', $text, $color);
+	    	foreach ($color[0] as $var_co) {
+	    		$var_color = iconv('GB2312', 'UTF-8', $var_co);
+	    		if (strpos($var_color,"颜色")) {
+	    			$colorarr = $var_co;
+	    		}
+	    	}
+	    	$color0 = explode(":",$colorarr);
+	    	$color1 = explode("&nbsp;",$color0[1]);
+	    	foreach ($color1 as $var_color){
+	    		 
+	    		if (!empty($var_color) and strlen($var_color) > 7) {
+	    			$colorresult = $colorresult."|".$var_color;
+	    		}
+	    	}
+	    		    	
 	    	 
 	    	//获取商品描述
 	    	preg_match_all('/<script[^>]*>[^<]*<\/script>/is', $text, $content);//页面js脚本
@@ -499,27 +548,50 @@ class itemAction extends backendAction {
 	    	};
 	    	$img_real_url0=preg_replace('/<a.*><img/',"",$img[0]);  //去掉regular expression匹配出来的多余的东西
 	    	$img_real_url1=preg_replace('/.*src=\"/',"",$img_real_url0);   	
-	    	$item["img"] =preg_replace('/\".* \/>/',"",$img_real_url1);
+	    	$imgurlzhu =preg_replace('/\".* \/>/',"",$img_real_url1);
+	    	
+	    	//主图下载
+	    	$data = file_get_contents($imgurlzhu); // 读文件内容
+	    	$data = iconv('GB2312', 'UTF-8', $data);
+	    	$filetime = $item["Uninum"]; //得到时间戳
+	    	$filepath = $_SERVER['DOCUMENT_ROOT']."/Uploads/items/images/";//图片保存的路径目录
+	    	if(!is_dir($filepath)){
+	    		mkdir($filepath,0777, true);
+	    	}
+	    	$filename = $filetime.'.jpg'; //生成文件名，
+	    	ob_start(); //打开浏览器的缓冲区
+	    	readfile($imgurlzhu); //将图片读入缓冲区
+	    	$data = ob_get_contents(); //获取缓冲区的内容复制给变量$img
+	    	ob_end_clean(); //关闭并清空缓冲
+	    	$fp = @fopen($filepath.$filename,"w"); //以写方式打开文件
+	    	@fwrite($fp,$data); //
+	    	fclose($fp);
+	    	
+	    	$item["img"] = "/Uploads/items/images/".$filetime.".jpg";
+	    	
 	    	$title_real = explode("-",$title[1]);
 	    	$item["title"] = iconv('GB2312', 'UTF-8', $title_real[0]);
 	    	$item["price"] = (float)$price2;
 	    	$item["info"] = $attributes2;
 	    	$item["size"] = iconv('GB2312', 'UTF-8', $result_size);
-	    	$item["color"] = $colorresult;
+	    	$item["color"] = preg_replace('/<\/li>/',"",$colorresult);
+	    	$item["Huohao"] = preg_replace('/<\/li>/',"",$huohaoresult);
 	    	$item["brand"] = $brand;
 	    	$item["add_time"] = time();
 	    	//$item["imagesDetail"] = $description;
 	    	//var_dump($item);die();
 	    	
 	        if (!empty($item["Uninum"])) { 	        	  	
-			    	if( $this->_mod->add($item) ){
+			    	if( $mod_taobao->add($item) ){
 			    		return true;
 			    	} else {
 			    		return false;
 			    	}
 	    	}
+    	}elseif($this->check_good_attr($url) == "Y"){
+    		return "H"; //商品已经存在
     	}else{
-    		return "H";
+    		return "N"; //id不正确
     	}
     }
     /**
@@ -610,9 +682,9 @@ class itemAction extends backendAction {
             if (false === $data = $this->_mod->create()) {
                 $this->error($this->_mod->getError());
             }
-            if( !$data['cate_id']||!trim($data['cate_id']) ){
-                $this->error('请选择商品分类');
-            }
+            //if( !$data['cate_id']||!trim($data['cate_id']) ){
+            //    $this->error('请选择商品分类');
+            //}
             
              if($_POST['brand']==''){
             	
@@ -635,26 +707,13 @@ class itemAction extends backendAction {
             
             
             $item_id = $data['id'];
-            $date_dir = date('ym/d/'); //上传目录
+            $goods_id = $this->_POST("goods_id","intval");
+            $tokenTall = $_SESSION["tokenTall"];
             $item_imgs = array(); //相册
             //修改图片
-            if (!empty($_FILES['img']['name'])) {
-                $result = $this->_upload($_FILES['img'], 'item/'.$date_dir, array(
-                    'width'=>C('pin_item_bimg.width').','.C('pin_item_img.width').','.C('pin_item_simg.width'), 
-                    'height'=>C('pin_item_bimg.height').','.C('pin_item_img.height').','.C('pin_item_simg.height'),
-                    'suffix' => '_b,_m,_s',
-                ));
-                if ($result['error']) {
-                    $this->error($result['info']);
-                } else {
-                    $data['img'] = $date_dir . $result['info'][0]['savename'];
-                    //保存一份到相册
-                    $item_imgs[] = array(
-                        'item_id' => $item_id,
-                        'url'     => $data['img'],
-                    );
-                }
-            }
+            if (!empty($_FILES['imgs']['name'])) {
+               var_dump($_FILES['imgs']);die();
+            }var_dump($_FILES['imgs']);die();
          
             if(isset($_POST['news']))
             {
@@ -758,6 +817,10 @@ class itemAction extends backendAction {
             $this->success(L('operation_success'));
         } else {
             $id = $this->_get('id','intval');
+            $edit_m = $this->_get("edit_m","trim");
+            if ($edit_m == "total") {
+            	$this->_mod = M("item_taobao");
+            }
             $item = $this->_mod->where(array('id'=>$id))->find();
             //分类
             $spid = $this->_cate_mod->where(array('id'=>$item['cate_id']))->getField('spid');
@@ -776,11 +839,15 @@ class itemAction extends backendAction {
             
             $colorstr = $item["color"];
             $colorarr = explode("|",$colorstr);
-        	foreach ($colorarr as $color){
-               $this->assign("colorarr".$color,$color);
-            }
+        	 $this->assign("colorarr",$colorarr);
+            
+        	//商品详情图
+            $imagesstr = $item["images"];
+            $imagesarr = explode("|",$imagesstr);
+            $this->assign("imagesarr",$imagesarr);
             
             $this->assign('info', $item);
+            $this->assign("edit_m",$edit_m);
            
             //相册
             $img_list = M('item_img')->where(array('item_id'=>$id))->select();
@@ -791,16 +858,16 @@ class itemAction extends backendAction {
     }
 
     function delete_album() {
-        $album_mod = M('item_img');
-        $album_id = $this->_get('album_id','intval');
-        $album_img = $album_mod->where('id='.$album_id)->getField('url');
-        if( $album_img ){
-            $ext = array_pop(explode('.', $album_img));
-            $album_min_img = C('pin_attach_path') . 'item/' . str_replace('.' . $ext, '_s.' . $ext, $album_img);
-            is_file($album_min_img) && @unlink($album_min_img);
-            $album_img = C('pin_attach_path') . 'item/' . $album_img;
-            is_file($album_img) && @unlink($album_img);
-            $album_mod->delete($album_id);
+        $album_mod = M('item');
+        $album_id = $this->_get('album_id','trim');
+        $item_id = $this->_get('item_id','trim');//echo $item_id."hi";die();
+        $where["id"] = $item_id;
+        
+        $album_img = $album_mod->where($where)->find();
+        if($album_img ){
+           $data["images"] = preg_replace('/|'.$album_id.'/',"",$album_img["images"]);
+           
+           $album_mod->where($where)->save($data);
         }
         echo '1';
         exit;

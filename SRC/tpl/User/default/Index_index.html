@@ -32,10 +32,18 @@
 					  <TD class="norightborder">　<a href="{lanrain::U('Index/edit',array('id'=>$vo['id']))}">编辑</a>　<a  href="{lanrain::U('Index/del',array('id'=>$vo['id']))};">删除</a>　
 					  <a href="{lanrain::U('Function/index',array('id'=>$vo['id'],'token'=>$vo['token']))}" class="btnGreens" >功能管理</a>
 					  <a href="{lanrain::U('Home/Index/help',array('id'=>$vo['id'],'token'=>$vo['token']))}" class="btnGreens" >API接口</a>
+					  
 					  </TD>
 					</TR>
+					<TR><td colspan="6" style="text-align:center;"><a href="{lanrain::U('User/Index/get_goods',array('id'=>$vo['id'],'token'=>$vo['token']))}" class="btnGreens" >领取品牌商品</a></td>
+					
+					</TR>
+					<TR><td colspan="6" style="text-align:center;height:47px;line-height:47px;color:red;padding:10px;">
+					领取成功后，请点击 "功能管理 -> 商务 -> 微商城 -> 商品管理"  查看
+					</td>
+					</TR>
                   </volist>
-
+                  
               </TBODY>
             </TABLE>
             

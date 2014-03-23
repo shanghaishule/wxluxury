@@ -26,6 +26,14 @@
 			});
 		});
 	});
+	$(function(){
+	   $("#saveSetting").click(function(){
+		   if($("#brandvalue").val() == "") {
+			   alert("请填写实体店品牌");
+			   return false;
+		   }
+	   })
+	});
 </script>
 
 <div class="content" style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;" >
@@ -41,6 +49,16 @@
                 </tr>
               </thead>
               <tbody>
+                <tr>
+                  <th><span class="red">*</span>实体店品牌：</th>
+                  <td>
+                    <select id="brandvalue" name="brandchoose" autofocus>
+                    <option value="" selected>请选择品牌</option>
+                    <volist name="brand" id="bname">
+                    <option value="{Lanrain:$bname.id}">{Lanrain:$bname.name}</option>
+                    </volist></select><span class="red">*</span>选择之后不能更改，请正确选择
+                  </td>
+                </tr>
                 <tr>
                   <th><span class="red">*</span>公众号原始id：</th>
                   <td><input type="text" required="" name="wxid" value="" onmouseup="this.value=this.value.replace('_430','')" class="px" tabindex="1" size="25">　<span class="red">请认真填写，错了不能修改。</span>比如：gh_423dwjkeww3</td>

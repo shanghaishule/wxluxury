@@ -40,7 +40,7 @@
 <div class="subnav">
     <div class="content_menu ib_a blue line_x">
     	<a class="add fb J_showdialog" href="javascript:void(0);" data-uri="/weTall/index.php?g=admin&m=item&a=data_excel" data-title="导入淘宝商品" data-id="genbill" data-width="620" data-height="100"><em>同步淘宝商品</em></a>
-    	<a class="add fb J_showdialog" href="javascript:void(0);" data-uri="/weTall/index.php?g=admin&m=item&a=data_update" data-title="查看数据更新" data-id="genbill" data-width="520" data-height="100"><em>查看数据更新</em></a>
+    	<a class="add fb J_showdialog" href="javascript:void(0);" data-uri="/weTall/index.php?g=admin&m=item&a=data_update" data-title="查看数据更新" data-id="genbill" data-width="620" data-height="50"><em>查看数据更新</em></a>
     <if condition="$im_message['text'] neq ''">{Lanrain:$im_message.text}<a href="{lanrain::U('DatafromTb/deletemessage')}"><img height="15" width="15" src="/tpl/User/default/common/images/icons/delete.png" /></a></if>
     </div>
 </div>
@@ -55,7 +55,9 @@
                 <input type="hidden" name="m" value="DatafromTb" />
                 <input type="hidden" name="a" value="index" />
                 <input type="hidden" name="menuid" value="{Lanrain:$menuid}" />
-                                     品牌：
+                                                       货号：
+                <input type="text" name="huohao" class="text" id="huohao"> &nbsp;
+                                                       品牌：
                 <input type="text" name="brand" class="text" id="brand"> &nbsp; 
             	导入时间 :
                 <input type="text" name="time_start" id="J_time_start" class="date" size="12" value="{Lanrain:$search.time_start}">
@@ -109,7 +111,7 @@
                 <td align="center" style="text-overflow:ellipsis;overflow:hidden; white-space:nowrap; width:150px;">{Lanrain:$val.color}</td>
                 
                 <td align="center">
-                <a href="/weTall/index.php?g=admin&m=item&a=edit&id={Lanrain:$val.id}&tokenTall={Lanrain:$val.tokenTall}">编辑</a>
+                <a href="/weTall/index.php?g=admin&m=item&a=edit&id={Lanrain:$val.id}&tokenTall={Lanrain:$val.tokenTall}&edit_m=total">编辑</a>
                 | <a href="javascript:void(0);" class="J_confirmurl" data-uri="/weTall/index.php?g=admin&m=item&a=delete&id={Lanrain:$val.id}&tokenTall={Lanrain:$val.tokenTall}"
                  data-acttype="ajax" data-msg="'删除'{Lanrain:$val.title}吗">删除</a>
                 <if condition = "$val['status'] eq '0' ">

@@ -65,12 +65,12 @@
         <thead>
             <tr>
                 <th width=25><input type="checkbox" id="checkall_t" class="J_checkall"></th>
-                 <th><span data-tdtype="order_by" data-field="id">商品ID</span></th> 
+                 <th width=45><span data-tdtype="order_by" data-field="id">商品ID</span></th> 
                 <th width="40">&nbsp;</th>
                 <th align="left"><span data-tdtype="order_by" data-field="title">商品名称</span></th>
                 <th width="70"><span data-tdtype="order_by" data-field="goods_stock">当前库存</span></th>
                 <th width="70"><span data-tdtype="order_by" data-field="buy_num">卖出数量</span></th>
-                <th width="60"><span data-tdtype="order_by" data-field="cate_id">分类</span></th>
+                <!-- <th width="60"><span data-tdtype="order_by" data-field="cate_id">分类</span></th> -->
                
                 <th width="70"><span data-tdtype="order_by" data-field="price">价格(元)</span></th>
 				
@@ -86,12 +86,12 @@
                 <td align="center"><input type="checkbox" class="J_checkitem" value="{$val.id}"></td>
                 <td align="center">{$val.id}</td>
                 <td align="right">
-                    <notempty name="val['img']"><div class="img_border"><img src="{:attach(get_thumb($val['img'], '_s'), 'item')}" width="32" width="32" class="J_preview" data-bimg="{:attach($val['img'], 'item')}"></div></notempty>
+                    <notempty name="val['img']"><div class="img_border"><img src="{$val.img}" width="60" width="60" class="J_preview" data-bimg="{:attach($val['img'], 'item')}"></div></notempty>
                 </td>
                 <td align="left"><span data-tdtype="edit" data-field="title" data-id="{$val.id}" class="tdedit" style="color:{$val.colors};">{$val.title}</span></td>
                 <td align="center"><b>{$val.goods_stock}</b></td>
                 <td align="center"><b>{$val.buy_num}</b></td>
-                <td align="center"><b>{$cate_list[$val['cate_id']]}</b></td>
+                <!-- <td align="center"><b>{$cate_list[$val['cate_id']]}</b></td> -->
                 <td align="center" class="red">{$val.price}</td> 
                 <td align="center"><span data-tdtype="edit" data-field="ordid" data-id="{$val.id}" class="tdedit">{$val.ordid}</span></td>
                 <td align="center"><img data-tdtype="toggle" data-id="{$val.id}" data-field="status" data-value="{$val.status}" src="__STATIC__/images/admin/toggle_<if condition="$val.status eq 0">disabled<else/>enabled</if>.gif" /></td>

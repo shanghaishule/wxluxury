@@ -5,24 +5,28 @@ class DatafromTbAction extends BackAction
 
     public function index() {
         $map = array();
-		$UserDB = D('item');
+		$UserDB = D('item_taobao');
 		$brandlist = M("brandlist");
 		//if (IS_POST){
-			$brand = $this->_request("brand","trim");
-			if ($brand) {
-				$where["name"]=$brand;
-				$brandid=M("brandlist")->where($where)->find();
-				$map["brand"] = $brandid["id"];
-			}
-			$time_start = $this->_request('time_start', 'trim');
-	    	$time_end = $this->_request('time_end', 'trim');
-	    	if($time_start && $time_end){
-	    	    $map['add_time'] = array('between', array(strtotime($time_start), strtotime($time_end)+(24*60*60-1)));
-	    	} else if($time_start) {
-	    	    $map['add_time'] = array('egt', strtotime($time_start));
-	    	} else if($time_end) {
-	    	    $map['add_time'] = array('elt', strtotime($time_end)+(24*60*60-1));
-	    	}
+		$huohao = $this->_request("huohao","trim");
+		if ($huohao) {
+			$map["Huohao"] = $huohao;
+		}
+		$brand = $this->_request("brand","trim");
+		if ($brand) {
+			$where["name"]=$brand;
+			$brandid=M("brandlist")->where($where)->find();
+			$map["brand"] = $brandid["id"];
+		}
+		$time_start = $this->_request('time_start', 'trim');
+    	$time_end = $this->_request('time_end', 'trim');
+    	if($time_start && $time_end){
+    	    $map['add_time'] = array('between', array(strtotime($time_start), strtotime($time_end)+(24*60*60-1)));
+    	} else if($time_start) {
+    	    $map['add_time'] = array('egt', strtotime($time_start));
+    	} else if($time_end) {
+    	    $map['add_time'] = array('elt', strtotime($time_end)+(24*60*60-1));
+    	}
 		//}
 		$count = $UserDB->where($map)->count();
 		$Page       = new Page($count,8);// 实例化分页类 传入总记录数
