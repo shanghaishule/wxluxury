@@ -7,7 +7,7 @@ return array(
 	
 'DB_PORT'=>'3306',
 	
-'DB_NAME'=>'hzwxshop',
+'DB_NAME'=>'wxluxury',
 	
 'DB_USER'=>'hzwxshop',
 	
