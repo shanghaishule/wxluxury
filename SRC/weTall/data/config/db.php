@@ -5,5 +5,5 @@ return $arr= array (
   'DB_USER' => 'hzwxshop',
   'DB_PWD' => 'hzwxshop',
   'DB_PORT' => '3306',
-  'DB_PREFIX' => 'tp_',
+  'DB_PREFIX' => 'tp_', 
 );
