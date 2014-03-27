@@ -62,6 +62,7 @@ class IndexAction extends UserAction{
 		$this->assign("brand_shop",$brand_shop->where($brand)->find());
 				
 		$res=M('Wxuser')->where($where)->find($id);
+		$this->assign("wedata",$wedata);
 		$this->assign('info',$res);
 		$this->display();
 	}
@@ -77,6 +78,14 @@ class IndexAction extends UserAction{
 	}
 	
 	public function upsave(){
+		$weChaShop = M("wecha_shop");
+		$data1["address"] = $_POST["address"];
+		$longitude = $this->_POST("longitude","trim");
+		$longitudes = explode(",", $longitude);
+		$data1["longitude"] = preg_replace('/\(/',"",$longitudes[0]);
+		$data1["latitude"] = preg_replace('/\)/',"",$longitudes[1]);
+		$where_shop['weName']=$_POST["wxname"];
+		$weChaShop->where($where_shop)->save($data1);
 		$this->all_save('Wxuser');
 	}
 	
@@ -112,6 +121,11 @@ class IndexAction extends UserAction{
 					$headurl = $_POST["headerpic"];
 					$data1["headurl"] = substr($headurl, 0,strlen($headurl));
 					$data1["weName"] = $_POST["wxname"];
+					$data1["address"] = $_POST["address"];
+					$longitude = $this->_POST("longitude","trim");
+					$longitudes = explode(",", $longitude);
+					$data1["longitude"] = preg_replace('/\(/',"",$longitudes[0]);
+					$data1["latitude"] = preg_replace('/\)/',"",$longitudes[1]);
 					$data1["HaveReal"] = 0;
 					$data1["credit"] = 0;
 					$data1["BelongBrand"] = $this->_POST("brandchoose","trim");
