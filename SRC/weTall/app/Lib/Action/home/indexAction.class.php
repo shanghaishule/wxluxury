@@ -70,6 +70,90 @@ class indexAction extends frontendAction {
         $this->_config_seo();
         $this->display();
     }
+    
+    public function navigate(){
+    	$start_point_lat = $this->_get("start_point_lat","trim");
+    	$start_point_lng = $this->_get("start_point_lng","trim");
+    	$end_point_lat = $this->_get("end_point_lat","trim");
+    	$end_point_lng = $this->_get("end_point_lng","trim");
+    	
+    	$this->assign("start_point_lat",$start_point_lat);
+    	$this->assign("start_point_lng",$start_point_lng);
+    	$this->assign("end_point_lat",$end_point_lat);
+    	$this->assign("end_point_lng",$end_point_lng);
+    	$this->display();
+    }
+    
+    public function test(){  	
+    	if (IS_POST) {
+    		$wecha_shop = M("wecha_shop");
+    		$longitude = $this->_POST("longitude","trim");
+    		$latitude = $this->_POST("latitude","trim");
+    		$endPoint = $wecha_shop->select();
+    		$nearShop=array();
+    		foreach ($endPoint as $end){    			
+    			if ($end["latitude"] != "" & $end["longitude"] != "" ) {
+    				
+    				$end["nearJuli"] = $this->GetDistance($latitude,$longitude,$end["latitude"],$end["longitude"]);
+    				
+    				$nearShop[] = $end;
+    			}    			
+    		}
+    		
+    		$start_point_lat = $latitude;
+    		$start_point_lng = $longitude;
+    		
+    		//排序
+    		$nearShop = $this->array_sort($nearShop,"nearJuli", "asc");
+    		
+    		$this->assign("countShop",count($nearShop));
+    		$this->assign("start_point_lat",$start_point_lat);
+    		$this->assign("start_point_lng",$start_point_lng);
+    		$this->assign("searchNear","Y");
+    		$this->assign("nearShop",$nearShop); 
+    	}
+    	
+    	$this->display();
+    }
+    /*
+     * 排序
+     */
+    public function array_sort($arr,$keys,$type='asc'){
+    	$keysvalue = $new_array = array();
+    	foreach ($arr as $k=>$v){
+    		$keysvalue[$k] = $v[$keys];
+    	}
+    	if($type == 'asc'){
+    		asort($keysvalue);
+    	}else{
+    		arsort($keysvalue);
+    	}
+    	reset($keysvalue);
+    	foreach ($keysvalue as $k=>$v){
+    		$new_array[$k] = $arr[$k];
+    	}
+    	return $new_array;
+    }
+    /* 用来计算任意两点经纬度的距离
+     * $len_type=1代表计算结果单位是米  $len_type>1代表是公里
+     * $decimal代表计算结果的小数点位数
+     */
+    public function GetDistance($latitude1, $longitude1, $latitude2, $longitude2)
+    {
+    		$theta = $longitude1 - $longitude2;
+    		$miles = (sin(deg2rad($latitude1)) * sin(deg2rad($latitude2))) + (cos(deg2rad($latitude1)) * cos(deg2rad($latitude2)) * cos(deg2rad($theta)));
+    		$miles = acos($miles);
+    		$miles = rad2deg($miles);
+    		$miles = $miles * 60 * 1.1515;
+    		$feet = $miles * 5280;
+    		$yards = $feet / 3;
+    		$kilometers = $miles * 1.609344;
+    		$meters = $kilometers * 1000;
+    		$kilometers = round($kilometers*1.1,3);
+    		return $kilometers;
+    		//return compact('miles','feet','yards','kilometers','meters');
+
+	}
     public function getItem_cate($where = array())
     {
     	$where_init = array('status'=>'1');

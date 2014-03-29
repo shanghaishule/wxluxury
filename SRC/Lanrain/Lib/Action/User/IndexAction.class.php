@@ -53,15 +53,17 @@ class IndexAction extends UserAction{
 		$id=$this->_get('id','intval');
 		$where['uid']=session('uid');
 		
+		$res=M('Wxuser')->where($where)->find($id);
+		
 		//店铺品牌
 		$wecha_shop=M('wecha_shop');
 		$brand_shop=M('brandlist');
-		$data["tokenTall"] = $_SESSION["token"];
+		$data["tokenTall"] = $res["token"];
 		$wedata = $wecha_shop->where($data)->find();
 		$brand["id"]=$wedata["BelongBrand"];
 		$this->assign("brand_shop",$brand_shop->where($brand)->find());
 				
-		$res=M('Wxuser')->where($where)->find($id);
+		
 		$this->assign("wedata",$wedata);
 		$this->assign('info',$res);
 		$this->display();
@@ -82,8 +84,9 @@ class IndexAction extends UserAction{
 		$data1["address"] = $_POST["address"];
 		$longitude = $this->_POST("longitude","trim");
 		$longitudes = explode(",", $longitude);
-		$data1["longitude"] = preg_replace('/\(/',"",$longitudes[0]);
-		$data1["latitude"] = preg_replace('/\)/',"",$longitudes[1]);
+		$data1["latitude"] = preg_replace('/\(/',"",$longitudes[0]);
+		$data1["longitude"] = preg_replace('/\)/',"",$longitudes[1]);
+		$data1["shop_city"] = $this->_post("province","trim");
 		$where_shop['weName']=$_POST["wxname"];
 		$weChaShop->where($where_shop)->save($data1);
 		$this->all_save('Wxuser');
@@ -124,10 +127,11 @@ class IndexAction extends UserAction{
 					$data1["address"] = $_POST["address"];
 					$longitude = $this->_POST("longitude","trim");
 					$longitudes = explode(",", $longitude);
-					$data1["longitude"] = preg_replace('/\(/',"",$longitudes[0]);
-					$data1["latitude"] = preg_replace('/\)/',"",$longitudes[1]);
+					$data1["longitude"] = preg_replace('/\(/',"",$longitudes[1]);
+					$data1["latitude"] = preg_replace('/\)/',"",$longitudes[0]);
 					$data1["HaveReal"] = 0;
 					$data1["credit"] = 0;
+					$data1["shop_city"] = $this->_post("province","trim");
 					$data1["BelongBrand"] = $this->_POST("brandchoose","trim");
 					$where_shop['weName']=$_POST["wxname"];					
 					$Have_token = $wecha_shop->where($where_shop)->find();
