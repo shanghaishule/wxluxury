@@ -7,20 +7,34 @@
         <script type="text/javascript" src="__STATIC__/css/convertor.js">
         </script>
     </head>
+    <include file="public:headtop" />
+    <include file="public:head" />
     <body>
-        <div id="map" style="width:600px; height:400px">
+        <div id="map" style="width:600px; height:400px;display:none;">
           
         </div>
-        <form action="" method="post">
-		        经度：<input type="text" name="longitude" value="" id="longitude">
-		         纬度：   <input type="text" name="latitude" value="" id="latitude">
+        
+         <div class="brandimg">
+         <img id="brandimg" alt="Dior" src="__STATIC__/weixin/images/luxury/images/brand/post_06.png">
+         </div>
+         <form action="" method="post">
+		        <input type="hidden" name="longitude" value="" id="longitude">
+		        <input type="hidden" name="latitude" value="" id="latitude">
 		         <input type="submit" value="查找附近的店铺">
          </form>
          <if condition="$searchNear eq 'Y'">
-        	 查找到附近<span style="red">{$countShop}</span>家店铺
+        	<span class="haveSearch"> 查找到附近<span style="red">{$countShop}</span>家店铺</span>
          <div>         
          <volist name="nearShop" id="Shop">
-           {$Shop.name} 距离约{$Shop.nearJuli}公里     <a href="{:U('index/navigate',array('start_point_lat'=>$start_point_lat,'start_point_lng'=>$start_point_lng,'end_point_lat'=>$Shop['latitude'],'end_point_lng'=>$Shop['longitude']))}">带我去！</a><br>
+          <div class="shopSearch">
+           <table>
+           <tr><td width="85%">{$Shop.name}</td><td width="13%"> <a href="{:U('index/navigate',array('start_point_lat'=>$start_point_lat,'start_point_lng'=>$start_point_lng,'end_point_lat'=>$Shop['latitude'],'end_point_lng'=>$Shop['longitude']))}">
+           <img height="27" width="58" src="__STATIC__/weixin/images/luxury/images/brand/tell_09.png" /></a><br></td></tr>
+           <tr><td><span class="shop_address">{$Shop.address}</span></td>
+           <td><img height="18" width="12" src="__STATIC__/weixin/images/luxury/images/brand/here_13.png"><span class="shop_address">{$Shop.nearJuli} KM</span></td></tr>
+           </table>
+
+          </div>
          </volist>
          </div>
          </if>
