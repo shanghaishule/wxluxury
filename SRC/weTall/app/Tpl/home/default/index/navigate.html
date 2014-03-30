@@ -24,13 +24,14 @@ var driving =new BMap.DrivingRoute(map, {
         }
     }
 });
+var st_lng = {$start_point_lng};
+var st_lat = {$start_point_lat};
+var en_lng = {$end_point_lng};
+var en_lat = {$end_point_lat};
 
-newMap.a.lng = parseFloat({$start_point_lng});
-newMap.a.lat = parseFloat({$start_point_lat});
-newMap.a.name = "起点";alert("f"+newMap.a.lng);
 //parseFloat({$end_point_lng}),parseFloat({$end_point_lat})
-driving.search(  {title: '你的位置', point: new BMap.Point(newMap.a.lng,newMap.a.lat)}, 
-		         {title: '终点', point: new BMap.Point(121.595329,31.256644)}
+driving.search(  {title: '你的位置', point: new BMap.Point(st_lng,st_lat)}, 
+		         {title: '终点', point: new BMap.Point(en_lng,en_lat)}
 		         );
 function addOverlays(results) {
     // 自行添加起点和终点
@@ -75,7 +76,7 @@ function addStart(point, title){
     map.addOverlay(new BMap.Marker(point, {
         title: title,
         icon: new BMap.Icon('__STATIC__/weixin/images/blue.png', new BMap.Size(40, 48), {
-            anchor: new BMap.Size(16, 46)
+            anchor: new BMap.Size(0, 0)
         })}));
 }
 
@@ -84,7 +85,7 @@ function addEnd(point, title){
     map.addOverlay(new BMap.Marker(point, {
         title: title,
         icon: new BMap.Icon('__STATIC__/weixin/images/red.png', new BMap.Size(38, 41), {
-            anchor: new BMap.Size(0, 16)
+            anchor: new BMap.Size(0, 0)
         })}));
 }
 

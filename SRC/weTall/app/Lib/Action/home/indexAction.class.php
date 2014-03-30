@@ -152,7 +152,7 @@ class indexAction extends frontendAction {
     		$yards = $feet / 3;
     		$kilometers = $miles * 1.609344;
     		$meters = $kilometers * 1000;
-    		$kilometers = round($kilometers*1.1,3);
+    		$kilometers = round($kilometers*1.1,6);
     		return $kilometers;
     		//return compact('miles','feet','yards','kilometers','meters');
 
