@@ -21,7 +21,7 @@ class indexAction extends frontendAction {
         /*****首页广告end******/
    
         /****最新商品*****/
-        $where = array('pid'=>0,'tokenTall'=>$tokenTall);
+        $where = array('tokenTall'=>$tokenTall);
         $news = $this->getItem_cate($where);
         /****最新商品 END*****/
          
@@ -29,6 +29,9 @@ class indexAction extends frontendAction {
         $where = array('tuijian'=>1, 'tokenTall'=>$tokenTall);
         $tuijian = $this->getItem($where);
         /****推荐商品 END*****/
+        
+        $brand = M("brandlist")->select();
+        $this->assign("brand",$brand);
         
         /*店铺信息*/
         $weChaShop = M("wecha_shop");
@@ -159,7 +162,7 @@ class indexAction extends frontendAction {
     	$where_init = array('status'=>'1');
     	$where =array_merge($where_init, $where);
     
-    	return $item=M('item_cate')->where($where)->select();
+    	return $item=M('item')->where($where)->select();
     }
     public function search() {
     	//排序字段和方式的获得
