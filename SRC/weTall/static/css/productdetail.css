@@ -1,0 +1,32 @@
+@CHARSET "UTF-8";
+body
+{ 
+	 background-image:url('../images/productdetail/海报背景_07.png');
+	background-repeat:repeat;
+	max-width:360px;
+	padding:   0px;border:   0px; 
+
+}
+.img{
+	width: 170px;
+	height: 270px;
+	overflow: hidden;
+	float: left;
+	position: relative;
+	text-align:center;
+	color:white;
+
+}
+
+.head{
+	background-image:url('../images/productdetail/ic_03.png');
+	background-repeat:repeat;
+	padding:   0px;border:   0px; 
+    vertical-align:middle;
+}
+
+.backgroundimg{
+			-moz-box-shadow: 3px 3px 4px #000;    
+ -webkit-box-shadow: 3px 3px 4px #000;     
+box-shadow: 3px 3px 4px #000;  
+}

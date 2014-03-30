@@ -160,7 +160,7 @@ class indexAction extends frontendAction {
     public function getItem_cate($where = array())
     {
     	$where_init = array('status'=>'1');
-    	$where =array_merge($where_init, $where);
+    	$where =array_merge($where_init, $where); 
     
     	return $item=M('item')->where($where)->select();
     }
