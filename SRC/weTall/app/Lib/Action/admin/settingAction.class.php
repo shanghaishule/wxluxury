@@ -18,6 +18,48 @@ class settingAction extends backendAction {
         $this->display();
     }
 
+    public function discount(){
+    	$discount_shop = M("discount_shop");
+    	$wecha_shop = M("wecha_shop");
+    	$where["tokenTall"]=$_SESSION["tokenTall"];
+    	$data = $discount_shop->where($where)->find();
+    	$this->assign("discount_shop",$data);
+    	if (IS_POST) {
+    		$wecha_shop_data = $wecha_shop->where($where)->find();
+    		$discount_shop_data["shop_name"] = $wecha_shop_data["name"];
+    		$discount_shop_data["theme"] = $this->_post("theme","trim");
+    		$discount_shop_data["start_time"] = strtotime($this->_post("start_time","trim"));
+    		$discount_shop_data["end_time"] = strtotime($this->_post("end_time","trim"));
+    		
+    		
+    	if (!empty($_FILES['dimg']['name'])) {
+		        //上传图片
+		        $date_dir = date('ym/d/'); //上传目录
+		        $item_headurls = array(); //相册
+		        $result = $this->_upload($_FILES['dimg'], 'item/'.$date_dir, array(
+		        		'width'=>C('pin_item_bimg.width').','.C('pin_item_img.width').','.C('pin_item_simg.width'),
+		        		'height'=>C('pin_item_bimg.height').','.C('pin_item_img.height').','.C('pin_item_simg.height')
+		        		//'suffix' => '_b',
+		        		//'remove_origin'=>true
+		        ));
+		        if ($result['error']) {
+		        	$this->error($result['info']);
+		        } 
+		        $discount_shop_data['dimg'] = "/weTall/data/upload/item/".$date_dir . $result['info'][0]['savename'];
+	        }
+	       
+    		if ($data["id"] == "") {   			
+    			$discount_shop->add($discount_shop_data);
+    			$this->success("店铺打折活动已经设置");
+    		}else{
+    			$where2["id"] = $data["id"];
+    			$discount_shop->where($where2)->save($discount_shop_data);
+    			$this->success("店铺打折活动已经更改");
+    		}   		
+    	}
+    	$this->assign("wecha_shop",$wecha_shop->where($where)->find());
+    	$this->display();
+    }
     public function realShop(){
     	$where["tokenTall"]=$_SESSION["tokenTall"];
     	$wecha_shop = $this->_mod->where($where)->find();
@@ -88,7 +130,7 @@ class settingAction extends backendAction {
 		        $result = $this->_upload($_FILES['twodcode'], 'item/'.$date_dir, array(
 		        		'width'=>C('pin_item_bimg.width').','.C('pin_item_img.width').','.C('pin_item_simg.width'),
 		        		'height'=>C('pin_item_bimg.height').','.C('pin_item_img.height').','.C('pin_item_simg.height'),
-		        		'suffix' => '_b,_m,_s',
+		        		'suffix' => '_b',
 		        		//'remove_origin'=>true
 		        ));
 		        if ($result['error']) {

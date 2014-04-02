@@ -1,0 +1,61 @@
+<include file="public:header" />
+<!--网站设置-->
+<div class="pad_lr_10">
+	<form id="info_form" action="{:u('setting/discount')}" method="post" enctype="multipart/form-data">
+	<table width="100%" class="table_form">
+		<tr>
+            <th>店铺名称 :</th>
+            <td><input type="text" disabled name="title" class="input-text" size="50" value="{$wecha_shop.name}"></td>
+        </tr>
+        <tr>
+            <th width="150">设置广告词 :</th>
+            <td><input type="text" name="theme" class="input-text" size="50" value="{$discount_shop.theme}"></td>
+        </tr>       
+        
+        <tr>
+            <th>宣传图片 :</th>
+            <td>
+  	               <input type="file" name="dimg" />宽高比例建议:60 * 60     
+  	               <img width="60" height="60" alt="店铺logo" src="{$discount_shop.dimg}"/>
+  	        </td>
+        </tr>
+         <tr>
+            <th>开始时间 :</th>
+            <td>
+            <input type="text" name="start_time" id="start_time_min" class="date" size="12" value="{$discount_shop.start_time|date='Y-m-d',###}">
+  			</td>
+        </tr>
+        <tr>
+            <th>结束时间:</th>
+            <td>
+            <input type="text" name="end_time" id="end_time_min" class="date" size="12" value="{$discount_shop.end_time|date='Y-m-d',###}">
+  			</td>
+        </tr>
+        	
+       
+        <tr>
+        	<th></th>
+        	<td><input type="hidden" name="menuid"  value="{$menuid}"/><input type="submit" class="btn btn_submit" value="{:L('submit')}"/></td>
+    	</tr>
+	</table>
+	</form>
+</div>
+<include file="public:footer" />
+<script type="text/javascript">
+Calendar.setup({
+	inputField : "start_time_min",
+	ifFormat   : "%Y-%m-%d",
+	showsTime  : false,
+	timeFormat : "24"
+});
+
+Calendar.setup({
+	inputField : "end_time_min",
+	ifFormat   : "%Y-%m-%d",
+	showsTime  : false,
+	timeFormat : "24"
+});
+
+</script>
+</body>
+</html>

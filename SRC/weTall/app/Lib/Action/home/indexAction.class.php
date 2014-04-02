@@ -74,6 +74,14 @@ class indexAction extends frontendAction {
         $this->display();
     }
     
+    public function discount(){
+    	$discount_shop = M("discount_shop");
+    	$data = $discount_shop->select();
+    	
+    	$this->assign("discount_shop",$data);
+    	$this->assign("City","找品牌");
+    	$this->display();
+    }
     public function Oneyuan(){
     	$tokenTall = $this->getTokenTall();
     	$_SESSION["tokenTall"]=$tokenTall;
@@ -187,6 +195,7 @@ class indexAction extends frontendAction {
     		$this->assign("nearShop",$nearShop); 
     	}
     	
+    	$this->assign("City","北京");
     	$this->assign("title",$this->_post("keywords","trim"));
     	$this->display();
     }

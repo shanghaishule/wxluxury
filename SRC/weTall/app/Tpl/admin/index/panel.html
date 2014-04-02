@@ -76,11 +76,9 @@
                         <elseif condition="$weshopData['credit'] lt 200000" /><img width="40" height="40" src="__STATIC__/images/Level/3_3.png"/>
                         <else/><img width="40" height="40" src="__STATIC__/images/Level/3_4.png"/>
                         </if></td></tr>
-                     <tr><td>
-                     <!-- &nbsp;&nbsp;&nbsp;&nbsp;有无实体店： -->
-                     </td><!-- <td height="35" width="80">
-                     <if condition="$weshopData['HaveReal'] eq '0'">无实体店<elseif condition="$weshopData['HaveReal'] eq '2'"/>认证中<elseif condition="$weshopData['HaveReal'] eq '3'"/>审核不通过<else/><img src="__STATIC__/images/shiti3.png" width="25" height="25"/></if>  
-                     </td>--></tr>
+                     <tr><td colspan="2" height="35" width="80">
+                     <a href="{:U('setting/discount')}">设置打折信息</a> 
+                     </td></tr>
                      <tr><td >
                      <a href="{:U('setting/index')}">[设置]</a>
                        <a class="group1" title="微商城二维码" id="aDownLoadShopQRcode" href="{$weshopData.twodcode}">[预览]</a>

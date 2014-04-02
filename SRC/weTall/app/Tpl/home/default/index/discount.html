@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>促销打折</title> 
+    </head>
+    <include file="public:headtop" />
+    <include file="public:head" />
+    <body>
+        <div id="map" style="width:600px; height:400px;display:none;">
+          
+        </div>
+        
+         <div class="brandimg">
+         <img id="brandimg" alt="Dior" src="__STATIC__/weixin/images/luxury/images/brand/post_06.png">
+         </div>
+         
+         <div>         
+         <volist name="discount_shop" id="Shop">
+          <div class="shopDiscount">
+           <table>
+           <tr><td rowspan="4"><img width=95 height=95 alt="{$Shop.shop_name}" src="{$Shop.dimg}"></td></tr>
+           <tr><td width="85%" style="padding-left:8px;color:#575757;font-weight:900;">{$Shop.shop_name}
+           <br><span class="shop_theme">{$Shop.theme}</span>
+           </td><td width="15%"> <a href="{:U('index/navigate',array('start_point_lat'=>$start_point_lat,'start_point_lng'=>$start_point_lng,'end_point_lat'=>$Shop['latitude'],'end_point_lng'=>$Shop['longitude']))}">
+           <img height="27" width="58" src="__STATIC__/weixin/images/luxury/images/brand/tell_09.png" /></a><br></td></tr>
+           <tr><td width="85%" style="padding-left:8px;"></td>
+           <td width="15%"></td></tr>
+           <tr><td colspan="2" style="padding-left:8px;"><span style="color:#8C8C8C;font-size:12px;">活动时间：{$Shop.start_time|date='Y/m/d',###} - {$Shop.end_time|date='Y/m/d',###}</span></td></tr>
+           </table>
+
+          </div><br>
+         </volist>
+         </div>
+    </body>
+</html>
