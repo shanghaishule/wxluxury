@@ -74,6 +74,77 @@ class indexAction extends frontendAction {
         $this->display();
     }
     
+    public function Oneyuan(){
+    	$tokenTall = $this->getTokenTall();
+    	$_SESSION["tokenTall"]=$tokenTall;
+    	 
+    	//判断是微信的环境
+    	$systemBrowse="X";
+    	$agent = $_SERVER['HTTP_USER_AGENT'];
+    	if(!strpos($agent,"icroMessenger")) {
+    		$systemBrowse="Y";
+    	}
+    	 
+    	/*****首页广告***/
+    	$ad= M('ad');
+    	$where = array('board_id'=>1, 'status'=>1, 'tokenTall'=>$tokenTall);
+    	$ads = $ad->field('url,content,desc')->where($where)->limit(5)->order('ordid asc')->select();
+    	$this->assign('ad',$ads);
+    	/*****首页广告end******/
+    	  
+    	/****最新商品*****/
+    	$where = array('tokenTall'=>$tokenTall,"Oneyuan"=>1);
+    	$news = $this->getItem_cate($where);
+    	/****最新商品 END*****/
+    	  
+    	/****推荐商品*****
+    	 $where = array('tuijian'=>1, 'tokenTall'=>$tokenTall);
+    	$tuijian = $this->getItem($where);
+    	/****推荐商品 END*****/
+    	
+    	$brand = M("brandlist")->select();
+    	$this->assign("brand",$brand);
+    	
+    	/*店铺信息*/
+    	$weChaShop = M("wecha_shop");
+    	if($tokenTall == ""){
+    		$weshopData["tokenTall"] = $_SESSION["tokenTall"];
+    	}else{
+    		$weshopData["tokenTall"] = $tokenTall;
+    	}
+    	$weChaShopDetail = $weChaShop->where($weshopData)->find();//var_dump($weshopData);die();
+    	$this->assign("weshopData",$weChaShopDetail);
+    	
+    	/*收藏*/
+    	if ($_SESSION['user_info']) {
+    		$userid = $_SESSION['user_info']['id'];
+    		$shopfav_mod = M('shop_favi');
+    		$wheredata = array('userid'=>$userid, 'tokenTall'=>$tokenTall);
+    		if ($shopfav_mod->where($wheredata)->find()) {
+    			$favi = "yes";
+    		}else{
+    			$favi = "no";
+    		}
+    	}else{
+    		$favi = "no";
+    	}
+    	
+    	//首次进入首页
+    	$index_num2 = $_SESSION["index_num2"];
+    	if ($index_num2 == "") {
+    		$index_num2 = 0;
+    	}
+    	$index_num2 = $index_num2 + 1;
+    	$_SESSION["index_num2"] = $index_num2;
+    	
+    	$this->assign('favi',$favi);
+    	$this->assign("systemBrowse",$systemBrowse);
+    	$this->assign("index_num2",$_SESSION["index_num2"]);
+    	$this->assign('news',$news);
+    	$this->assign('tuijian',$tuijian);
+    	$this->_config_seo();
+    	$this->display();
+    }
     public function navigate(){
     	$start_point_lat = $this->_get("start_point_lat","trim");
     	$start_point_lng = $this->_get("start_point_lng","trim");
@@ -95,10 +166,10 @@ class indexAction extends frontendAction {
     		$endPoint = $wecha_shop->select();
     		$nearShop=array();
     		foreach ($endPoint as $end){    			
-    			if ($end["latitude"] != "" & $end["longitude"] != "" ) {
+    			if ($end["latitude"] != "" & $end["longitude"] != "" &$latitude != "" & $longitude !="" ) {
     				
     				$end["nearJuli"] = $this->GetDistance($latitude,$longitude,$end["latitude"],$end["longitude"]);
-    				
+    				//echo $latitude,$longitude,$end["latitude"],$end["longitude"];die();
     				$nearShop[] = $end;
     			}    			
     		}
@@ -116,6 +187,7 @@ class indexAction extends frontendAction {
     		$this->assign("nearShop",$nearShop); 
     	}
     	
+    	$this->assign("title",$this->_post("keywords","trim"));
     	$this->display();
     }
     /*

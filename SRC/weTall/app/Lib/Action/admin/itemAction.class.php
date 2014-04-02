@@ -94,9 +94,7 @@ class itemAction extends backendAction {
             if (false === $data = $this->_mod->create()) {
                 $this->error($this->_mod->getError());
             }
-            if( !$data['cate_id']||!trim($data['cate_id']) ){
-                $this->error('请选择商品分类');
-            }
+            
            
             if($_POST['brand']==''){
             	
@@ -711,9 +709,7 @@ class itemAction extends backendAction {
             $tokenTall = $_SESSION["tokenTall"];
             $item_imgs = array(); //相册
             //修改图片
-            if (!empty($_FILES['imgs']['name'])) {
-               var_dump($_FILES['imgs']);die();
-            }var_dump($_FILES['imgs']);die();
+            
          
             if(isset($_POST['news']))
             {
@@ -873,6 +869,33 @@ class itemAction extends backendAction {
         exit;
     }
 
+    function yiyuan(){
+    	$item = M("item");    	
+    	$id = $this->_get("id","trim");
+    	$where["id"] = $id;
+    	$item_data = $item->where($where)->find();
+    	$Oneyuan = $this->_get("Oneyuan","trim");
+    	if ($Oneyuan == "Y") { 
+    		$data["price"] = 1.00;
+    		$data["old_price"] = $item_data["price"];
+    		$data["Oneyuan"] = 1;
+    		if ($item->where($where)->save($data)) {
+    			$message = "成功参加一元购";
+    			$this->success($message);
+    		}
+    	}elseif($Oneyuan == "N"){
+    		$data["price"] =  $item_data["old_price"];
+    		$data["old_price"] =0;
+    		$data["Oneyuan"] = 0;
+    		if ($item->where($where)->save($data)) {
+    			$message = "已经取消一元购";
+    			$this->success($message);
+    		}
+    	}else{
+    		$message = "错误";
+    		$this->error($message);
+    	}
+    }
     function delete_attr() {
         $attr_mod = M('item_attr');
         $attr_id = $this->_get('attr_id','intval');

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Product Detail</title>
+<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="format-detection" content="telephone=no">
+<meta charset="utf-8">
+<link href="__STATIC__/css/productdetail.css" rel="stylesheet" type="text/css">
+<link type="text/css" rel="stylesheet" href="__STATIC__/weixin/css/shop.css">
+</head>
+<body>
+<div class="wrap">
+<div style="height:45px;"></div>
+<div id="nav">
+	<ul class="navlist">
+		<li class="r" id="n_0"><a href="{:U('home/index/index', array('tokenTall'=>$tokenTall))}"><div class="home_page_logo"></div></a></li>
+    	<li class="r" id="n_3">
+    		<span >一元购</span>
+        </li>
+        <li class="r" id="n_1"><div class="find_04"></div><div class="find_05"></div></li>
+        
+    </ul>
+    <script type="text/javascript">
+    	$(".navlist > li#n_0").click(function(){
+			$(this).toggleClass("active");
+		});
+		$(".navlist > li.r a").each(function() {
+            href="index.php-app=member&act=login&ret_url=-index.php-app=member.htm"+$(this).attr("href");
+			whref=window.location.href;
+			if(whref.indexOf(href)!='-1'){
+				$(this).parent("li").addClass("active");
+			}
+        });
+    </script>
+</div>
+  
+   <volist name="news" id="product" >
+    <div   class="imgProduct">
+      <img src="{$product.img}" width="160" ></img>
+      <br>
+      <label class="pro_title">{$product.title}</label>       
+      <br>
+      <label class="pro_jifen">价格：{$product.price}元  品牌积分：1000分</label>
+      <div class="purchase"><a href="{:U('Item/index',array('id'=>$product['id'],'tokenTall'=>$product['tokenTall']))}"><img width="75" height="30" src="__STATIC__/weixin/images/luxury/images/danpin/1_03.png" /></a></div>
+    </div> 
+    </volist>
+  </div>
+<script type="text/javascript">
+
+</script>
+</body>
+</html>
