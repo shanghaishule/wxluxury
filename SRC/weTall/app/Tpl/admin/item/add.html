@@ -105,9 +105,12 @@
 				<th>商品图片 :</th>
 				<td><input type="file" name="img" /></td>
  			</tr>
-		
+			<tr>
+				<th>原价 :</th>
+				<td><input id='J_old_price' onkeyup="this.value=this.value.replace(/[^0-9.]/g,'')" onafterpaste="this.value=this.value.replace(/[^0-9.]/g,'')"  type="text" name="old_price" size="10" class="input-text" value="{$info.old_price}"> 元</td>
+			</tr>
             <tr>
-				<th>商品价格 :</th>
+				<th>打折价格 :</th>
 				<td><input id='J_price' onkeyup="this.value=this.value.replace(/[^0-9.]/g,'')" onafterpaste="this.value=this.value.replace(/[^0-9.]/g,'')" type="text" name="price" class="input-text" size="10"> 元</td>
 			</tr>
 		    <tr>

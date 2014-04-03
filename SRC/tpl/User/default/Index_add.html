@@ -108,8 +108,12 @@ color: #999;
 color: #c2c2c2; 
 -webkit-transition: color.5s; 
 } </style>
-                    <input id="address" name="address" type="text" required="" class="px" tabindex="1" size="50" value="" placeholder="实体店详细地址" />
-    				<span class="ke-button-common" id="getMap" style="margin-top: 3px;margin-left: 5px;">
+                    <input id="address" name="address" type="text" required="" class="px" tabindex="1" style="width:200px;POSITION: absolute" value="" placeholder="实体店详细地址" />
+					<select id="ddlTest" onchange="document.getElementById('address').value=this.options[this.selectedIndex].text" style="width:217px;height:30px;CLIP: rect(auto auto auto 200px); POSITION: absolute">
+					<option>tt</option>
+					<option>dd</option> 
+					</select>
+    				<span class="ke-button-common" id="getMap" style="margin-top: 5px;margin-left: 225px;">
     				<input type="button"  class="ke-button-common ke-button" value="获取坐标" onclick="javascript:codeAddress();"></span>
     				<input type="text" name="longitude" id="result" style="width:300px;" />
     				<div id="map_canvas" style="width:100%;height:300px;top:30px;border:1px solid #333;"></div><br>

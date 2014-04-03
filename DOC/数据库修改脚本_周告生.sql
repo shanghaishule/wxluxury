@@ -24,3 +24,32 @@ ALTER TABLE `tp_wecha_shop` ADD `longitude` VARCHAR( 80) NOT NULL AFTER `BelongB
   `theme` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+/*设置促销活动*/
+INSERT INTO `wxluxury`.`tp_menu` (
+ `id` ,
+ `name` ,
+ `pid` ,
+ `module_name` ,
+ `action_name` ,
+ `data` ,
+ `remark` ,
+ `often` ,
+ `ordid` ,
+ `display` 
+)
+VALUES (
+ NULL ,'设置促销活动','148','set_discount','index','','','99','1','1'
+);
+CREATE TABLE IF NOT EXISTS `tp_set_discount` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `brand_id` int(11) NOT NULL,
+  `theme` text,
+  `date` int(10) NOT NULL,
+  `status` int(1) NOT NULL DEFAULT '0' COMMENT '0-未开始 1-已经开始 2-已经结束',
+  `img` varchar(180) NOT NULL,
+  `start_time` time NOT NULL,
+  `end_time` time NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
