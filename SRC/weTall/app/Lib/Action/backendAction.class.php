@@ -49,10 +49,14 @@ class backendAction extends baseAction
         $this->display();
     }
 
+    public function _add(){
+    	
+    }
     /**
      * 添加
      */
     public function add() {
+    	$this->_add();
         $mod = D($this->_name);
         if (IS_POST) {
             if (false === $data = $mod->create()) {
@@ -60,14 +64,22 @@ class backendAction extends baseAction
                 $this->error($mod->getError());
             }
             if (method_exists($this, '_before_insert')) {
-                $data = $this->_before_insert($data);
+                $data = $this->_before_insert($data);                
             }
+            $date_data = $this->_post("date","trim");
+            if (!empty($date_data)) {
+            	$data["date"]=strtotime($date_data);
+            }
+            if (!empty($_SESSION["img_name"])) {
+            	$data["img"] = "/weTall/data/upload/item/".date('ym/d/').$_SESSION["img_name"];
+            }
+            
             if( $mod->add($data) ){
                 if( method_exists($this, '_after_insert')){
                     $id = $mod->getLastInsID();
                     $this->_after_insert($id);
                 }
-                IS_AJAX && $this->ajaxReturn(1, L('operation_success'), '', 'add');
+                IS_AJAX && $this->ajaxReturn(1, $data["date"], '', 'add');
                 $this->success(L('operation_success'));
             } else {
                 IS_AJAX && $this->ajaxReturn(0, L('operation_failure'));
@@ -99,6 +111,13 @@ class backendAction extends baseAction
             if (method_exists($this, '_before_update')) {
                 $data = $this->_before_update($data);
             }//var_dump($data);die();
+            $date_data = $this->_post("date","trim");
+            if (!empty($date_data)) {
+            	$data["date"]=strtotime($date_data);
+            }
+            if (!empty($_SESSION["img_name"])) {
+            	$data["img"] = "/weTall/data/upload/item/".date('ym/d/').$_SESSION["img_name"];
+            }
             if (false !== $mod->save($data)) {
                 if( method_exists($this, '_after_update')){
                     $id = $data['id'];

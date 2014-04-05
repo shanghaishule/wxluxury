@@ -24,7 +24,7 @@
  * -------------------------------------------------------
  */
 
-body {font-family: "ff-tisa-web-pro-1","ff-tisa-web-pro-2","Lucida Grande","Hiragino Sans GB","Hiragino Sans GB W3"; line-height:1.6; background:#f6f6f6; }
+body {font-family: 'Microsoft YaHei'; line-height:1.6; background:#f6f6f6; }
 html,body { min-width:320px;max-width:640px; margin:0 auto;background:url(../images/luxury/images/home/bg.png) repeat;}
 h1, h2, h3, h4, h5, h6, p, ul, ol, dl, dt, dd, li, body, form, input, button, img, cite, strong, em, table, td, th { padding:0; margin:0; }
 h1, h2, h3, h4, h5, h6 { font-size: 16px;}
@@ -48,7 +48,7 @@ a:visited{ color:#666;}
 .home_page_logo{background:url(../images/luxury/images/home/cate_white.png) no-repeat 0 0;background-size: 30px 24px;background-position:5px 10px; height:40px;width:140px;}
 #brandimg{width:100%;}
 .imgProduct{background:url(../images/luxury/images/brand/bg_17.png);width:46%;float:left;margin-left:2%;text-align:center;padding-top:10px;}
-.pro_title{color:white;font-size:12px;font-weight:700;}
+.pro_title{color:white;font-size:12px;font-weight:500;}
 .pro_jifen{color:red;font-size:11px;}
 .purchase{width:89%;padding:10px 0px 5px 0;text-align:right;background:none;}
 #shopname{border-bottom:1px solid #d9d9d9;border-left:1px solid #d9d9d9;}

@@ -167,7 +167,7 @@
          <div class="banner">
 			<ul id="BanCont">
 			  <volist name="imgarr" id="bolist" key="lidaid">			     
-			     <li class="imagesDetail" id="{$lidaid}"><img src="__PARENTURL__/Uploads/items/images/{$item['Uninum']}/{$bolist}.jpg" width="90%" alt="{$item.title}" /></li> 
+			     <li class="imagesDetail" id="{$lidaid}"><img src="__PARENTURL__/Uploads/items/images/{$item['Uninum']}/{$bolist}.jpg" width="320px" alt="{$item.title}" /></li> 
 			  </volist>
 			</ul>
 			<div class="banner_link"><ul class="imgmiddle">
@@ -198,7 +198,7 @@
          <input type="hidden" value="{$item.id}" id="goodId" >
          <div class="ware_text">
              <div style="color:white;font-size:14px;width:100%">
-                <h2 style="color:white;font-size:15px;font-weight:700;"><span style="color:red;">{$item.brand}</span>{$item.title}</h2>       	
+                <h2 style="color:white;font-size:15px;font-weight:500;"><span style="color:red;">{$item.brand}</span>{$item.title}</h2>       	
                 <div style="margin:10px 0; width:100%;height:30px;">
                 <div style="margin-right:20px;float:left;">现价: <span style="color:red">¥{$item.price}</span></div>                                
                 <div style="margin-right:20px;float:left;text-decoration:line-through;">吊牌价:¥{$item.old_price} </div>                   

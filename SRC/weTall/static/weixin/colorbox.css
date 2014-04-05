@@ -68,12 +68,8 @@
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#00FFFFFF,endColorstr=#00FFFFFF);
 }
 
-.banner{ width:100%; overflow-y:no-display;display:;height:auto !important;
-height:200px; /*假定最低高度是200px*/
-min-height:200px; }
-.banner ul#BanCont { width:100%; overflow-y:no-display;margin:0 auto;position:relative;height:auto !important;
-height:200px; /*假定最低高度是200px*/
-min-height:200px; }
+.banner{ width:100%; display:; }
+.banner ul#BanCont { width:100%; margin:0 auto;height:320px;}
 
 .banner ul#BanCont li { position:absolute; top:0; left:0; width:100%; overflow:hidden;}
 

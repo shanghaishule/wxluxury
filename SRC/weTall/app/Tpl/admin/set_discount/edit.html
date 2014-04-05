@@ -1,98 +1,54 @@
-<!--编辑广告-->
+<include file="public:header" />
+<!--添加广告-->
 <div class="dialog_content">
-<form id="info_form" action="{:U('ad/edit')}" method="post">
+<form id="info_form" action="{:U('set_discount/edit',array('tokenTall'=>$tokenTall))}" method="post" enctype="multipart/form-data">
 <table width="100%" cellpadding="2" cellspacing="1" class="table_form">
     <tr>
-        <th width="80">{:L('ad_name')} :</th>
-        <td><input type="text" name="name" id="name" class="input-text" size="40" value="{$info.name}"></td>
+      <th width="80">活动名称 :</th>
+      <td><input type="text" name="theme" id="name" value="{$info.theme}" class="input-text" size="40"></td>
     </tr>
     <tr>
-        <th>{:L('ad_url')} :</th>
-        <td><input type="text" name="url" class="input-text" size="40" value="{$info.url}"></td>
+      <th>活动品牌 :</th>
+      <td><select name="brand_id" >
+      <volist name="brand" id="brandname">
+      <if condition="$brandname['id'] eq $info['brand_id']"><option value="{$brandname.id}" selected>{$brandname.name}<else/>
+      <option value="{$brandname.id}">{$brandname.name}</if></option>
+      </volist>
+      </select><br>
+      </td>
     </tr>
     <tr>
-        <th>{:L('adboard')} :</th>
-        <td class="blue">
-            {$board_info.name} ({$board_info.width}*{$board_info.height})
-        </td>
+      <th>活动日期 :</th>
+      <td>
+        <input type="text" name="date" id="ptime" class="date" size="12" value="{$info.date|date='Y-m-d',###}">
+      </td>
     </tr>
     <tr>
-        <th>{:L('ad_type')} :</th>
-        <td>
-            <select name="type" id="type">
-            <volist name="ad_type_arr" id="val" >
-                <option value="{$key}" <if condition="$info['type'] eq $key">selected="selected"</if>>{$val}</option>
-            </volist>
-            </select>
-        </td>
+      <th>开始时间 :</th>
+      <td>
+        <input type="time" name="start_time" id="start_time" class="date" size="12"  value="{$info.start_time}">
+      </td>
+    </tr>
+    <tr>
+      <th>结束时间  :</th>
+      <td><input type="time" name="end_time" id="end_time" class="date" size="12" value="{$info.end_time}"></td>
     </tr>
     <tr id="ad_image" class="bill_media">
-        <th>{:L('ad_image')} :</th>
-        <td><input type="text" name="img" id="J_img" class="input-text fl mr10" size="30" value="{$info.content}">
-          <div id="J_upload_img" class="upload_btn"><span>{:L('upload')}</span></div>
-		<if condition="$info.type eq 'image'"><notempty name="info['content']"><span class="attachment_icon J_attachment_icon" file-type="image" file-rel="{$img_dir}{$info.content}"><img src="__STATIC__/images/filetype/image_s.gif" /></span></notempty></if>
-		</td>
-    </tr>
-    <tr id="ad_code" class="bill_media" style="display:none;">
-        <th>{:L('ad_code')} :</th>
-        <td><textarea rows="3" cols="50" name="code" id="code">{$info.content}</textarea></td>
-    </tr>
-    <tr id="ad_flash" class="bill_media" style="display:none;">
-        <th>{:L('ad_flash')} :</th>
-        <td>
-            <input type="text" name="flash" id="J_flash" class="input-text fl mr10" size="30" value="{$info.content}">
-            <div id="J_upload_flash" class="upload_btn"><span>{:L('upload')}</span></div>
-        </td>
-    </tr>
-    <tr id="ad_text" class="bill_media" style="display:none;">
-        <th>{:L('ad_text')} :</th>
-        <td><textarea rows="3" cols="50" name="text" id="text">{$info.content}</textarea></td>
-    </tr>
-    <tr>
-      <th>{:L('ad_ext_image')} :</th>
+      <th>图片:</th>
       <td>
-          <input type="text" name="extimg" id="J_extimg" class="input-text fl mr10" size="30" value="{$info.extimg}">
-          <div id="J_upload_extimg" class="upload_btn"><span>{:L('upload')}</span></div>
+          <input type="file" name="img" id="J_img" class="input-text fl mr10" size="30">         
+          <img src="{$info.img}">
       </td>
     </tr>
-    <tr>
-      <th>{:L('ad_ext_val')} :</th>
-      <td>
-          <input type="text" name="extval" class="input-text fl mr10" value="{$info.extval}">
-      </td>
-    </tr>
-    <tr>
-      <th>{:L('ad_desc')} :</th>
-      <td><input type="text" name="desc" class="input-text fl mr10" size="30" value="{$info.desc}"></td>
-    </tr>
-    <tr>
-        <th>{:L('ad_time')} :</th>
-        <td>
-            <input type="text" name="start_time" id="start_time" class="date" size="12" value="{$info.start_time|date='Y-m-d',###}">
-            <input type="text" name="end_time" id="end_time" class="date" size="12" value="{$info.end_time|date='Y-m-d',###}">
-        </td>
-    </tr>
-    <tr>
-        <th>{:L('enabled')} :</th>
-        <td>
-            <label><input type="radio" <if condition="$info['status'] eq '1'">checked="checked"</if> value="1" name="status"> {:L('yes')}</label>&nbsp;&nbsp;
-            <label><input type="radio" <if condition="$info['status'] eq '0'">checked="checked"</if> value="0" name="status"> {:L('no')}</label>
-        </td>
-    </tr>
+    
+    
 </table>
-<input type="hidden" name="id" id="id" value="{$info.id}" />
 </form>
 </div>
 <script src="__STATIC__/js/fileuploader.js"></script>
-<script type="text/javascript">
+<script>
 Calendar.setup({
-    inputField : "start_time",
-    ifFormat   : "%Y-%m-%d",
-    showsTime  : false,
-    timeFormat : "24"
-});
-Calendar.setup({
-    inputField : "end_time",
+    inputField : "ptime",
     ifFormat   : "%Y-%m-%d",
     showsTime  : false,
     timeFormat : "24"
@@ -104,9 +60,25 @@ $(function(){
         $("#ad_"+$(this).val()).show();
     });
     $("#type").change();
+    //获取版块允许的广告类型
+    $("#board_id").change(function(){
+        var allowtype = $("#board_id option:selected").attr('allowtype');
+        var allowtype_arr = allowtype.split("|");
+        $("#type option").attr('selected', false).hide();
+        $("#type option").each(function(){
+            for(i=0; i<allowtype_arr.length; i++) {
+                if($(this).val() == allowtype_arr[i]){
+                    $(this).show();
+                }
+            }
+        });
+        $('#type option:visible:first').attr('selected', true);
+        $("#type").change();
+    });
+    $("#board_id").change();
 
     $.formValidator.initConfig({formid:"info_form",autotip:true});
-    $("#name").formValidator({onshow:"请填写广告名称",onfocus:"请填写广告名称"}).inputValidator({min:1,onerror:"请填写广告名称"}).defaultPassed();
+    $("#name").formValidator({onshow:"请填写活动名称",onfocus:"请填写活动名称"}).inputValidator({min:1,onerror:"请填写活动名称"});
     $('#info_form').ajaxForm({success:complate,dataType:'json'});
     function complate(result){
         if(result.status == 1){
@@ -114,11 +86,11 @@ $(function(){
             $.pinphp.tip({content:result.msg});
             window.location.reload();
         } else {
-			$.pinphp.tip({content:result.msg, icon:'alert'});
+            $.pinphp.tip({content:result.msg, icon:'alert'});
         }
     }
-	
-	//上传图片
+    
+    //上传图片
     var img_uploader = new qq.FileUploaderBasic({
         allowedExtensions: ['jpg','gif','jpeg','png','bmp','pdg'],
         button: document.getElementById('J_upload_img'),
@@ -180,7 +152,6 @@ $(function(){
             }
         }
     });
-
     var flash_uploader = new qq.FileUploaderBasic({
         allowedExtensions: ['swf'],
         button: document.getElementById('J_upload_flash'),
