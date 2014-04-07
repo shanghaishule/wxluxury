@@ -1,0 +1,119 @@
+<include file="public:header" />
+<!--广告列表-->
+<div class="pad_lr_10">
+    <form name="searchform" method="get" >
+    <table width="100%" cellspacing="0" class="search_form">
+        <tbody>
+            <tr>
+            <td>
+            <div class="explain_col">
+            	<input type="hidden" name="g" value="admin" />
+                <input type="hidden" name="m" value="ad" />
+                <input type="hidden" name="a" value="index" />
+                <input type="hidden" name="tokenTall" value="{$search.tokenTall}" />
+                <input type="hidden" name="menuid" value="{$menuid}" />
+            	{:L('ad_start_time')}：
+            	<input type="text" name="start_time_min" id="start_time_min" class="date" size="12" value="{$search.start_time_min}">
+                -
+                <input type="text" name="start_time_max" id="start_time_max" class="date mr10" size="12" value="{$search.start_time_max}">
+                {:L('ad_end_time')}：
+                <input type="text" name="end_time_min" id="end_time_min" class="date" size="12" value="{$search.end_time_min}">
+                -
+                <input type="text" name="end_time_max" id="end_time_max" class="date" size="12" value="{$search.end_time_max}">
+            	<div class="bk3"></div>
+                                    活动状态：
+                <select name="status" class="mr10">
+                    <option value="">--{:L('all')}--</option>                   
+                    <option value="0">未开始</option>
+                    <option value="1">已开始</option>
+                    <option value="2">已结束</option>
+                </select>
+                
+                {:L('keyword')}：
+                <input name="keyword" type="text" class="input-text mr10" size="25" value="{$search.keyword}" />
+                <input type="submit" name="search" class="btn" value="搜索" />
+        	</div>
+            </td>
+            </tr>
+        </tbody>
+    </table>
+    </form>
+    
+    <div class="J_tablelist table_list" data-acturi="{:U('ad/ajax_edit')}">
+		<table width="100%" cellspacing="0">
+        <thead>
+          <tr>
+            <th width="25"><input type="checkbox" name="checkall" class="J_checkall"></th>
+            <!-- <th>ID</th> -->
+            <th width="90" align="left"><span data-tdtype="order_by" data-field="name">活动名称</span></th>
+            <th align="left" width="400"><span data-tdtype="order_by" data-field="url">图片</span></th>
+            <th width="90"><span data-tdtype="order_by" data-field="type">活动日期</span></th>
+            <th width="60"><span data-tdtype="order_by" data-field="board_id">开始时间</span></th>
+            <th width="150">结束时间</th>
+            <th width="60"><span data-tdtype="order_by" data-field="ordid">活动品牌</span></th>
+            <th width="60"><span data-tdtype="order_by" data-field="status">{:L('status')}</span></th>
+            <th width="140">{:L('operations_manage')}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <volist name="list" id="val" >
+          <tr>
+            <td align="center"><input type="checkbox" class="J_checkitem" value="{$val.id}"></td>
+            <!-- <td align="center">{$val.id}</td> -->
+            <td><span data-tdtype="edit" data-field="name" data-id="{$val.id}" class="tdedit">{$val.theme}</span></td>
+            <td><span data-tdtype="edit" data-field="url" data-id="{$val.id}" class="tdedit">{$val.img}</span></td>
+            <td align="center">{$val.date|date='Y-m-d',###}</td>
+            <td align="center">{$val.start_time|time="H:m:s",###}</td>
+            <td align="center">{$val.end_time|time="H:m:s",###} </td>
+            <td align="center"><span data-tdtype="edit" data-field="ordid" data-id="{$val.id}" class="tdedit">{$val.brand_id}</span></td>
+            <td align="center"><img data-tdtype="toggle" data-id="{$val.id}" data-field="status" data-value="{$val.status}" src="__STATIC__/images/admin/toggle_<if condition="$val.status eq 0">disabled<else/>enabled</if>.gif" /></td>
+            <td width="140" align="center">
+            	<a href="javascript:void(0);" class="J_showdialog" data-uri="{:U('ad/edit', array('id'=>$val['id']))}" data-title="{:L('edit')} - {$val.name}" data-id="edit" data-width="520" data-height="410">{:L('edit')}</a> | 
+                <a href="javascript:void(0);" class="J_confirmurl" data-acttype="ajax" data-uri="{:U('ad/delete', array('id'=>$val['id']))}" data-msg="{:sprintf(L('confirm_delete_one'),$val['name'])}">{:L('delete')}</a> | 
+                <!-- if condition="$val.checkstatus eq 0" -->
+                <!-- a href="javascript:void(0);" class="J_confirmurl" data-acttype="ajax" data-uri="{:U('adforhome/appliyhome', array('id'=>$val['id'],'tokenTall'=>$val['tokenTall']))}" data-msg="申请“{$val.name}”到微服客首页吗？">申请商城首页</a -->
+                <!-- else />
+                	已申请
+                </if -->
+            </td>
+          </tr>
+          </volist>
+        </tbody>
+      	</table>
+		<div class="btn_wrap_fixed">
+    		<label class="select_all"><input type="checkbox" name="checkall" class="J_checkall">{:L('select_all')}/{:L('cancel')}</label>
+            <input type="button" class="btn" data-tdtype="batch_action" data-acttype="ajax" data-uri="{:U('ad/delete',array('tokenTall'=>$search.tokenTall))}" data-name="id" data-msg="{:L('confirm_delete')}" value="{:L('delete')}" />
+    		<div id="pages">{$page}</div>
+    	</div>
+    </div>
+</div>
+<include file="public:footer" />
+
+<script type="text/javascript">
+Calendar.setup({
+	inputField : "start_time_min",
+	ifFormat   : "%Y-%m-%d",
+	showsTime  : false,
+	timeFormat : "24"
+});
+Calendar.setup({
+	inputField : "start_time_max",
+	ifFormat   : "%Y-%m-%d",
+	showsTime  : false,
+	timeFormat : "24"
+});
+Calendar.setup({
+	inputField : "end_time_min",
+	ifFormat   : "%Y-%m-%d",
+	showsTime  : false,
+	timeFormat : "24"
+});
+Calendar.setup({
+	inputField : "end_time_max",
+	ifFormat   : "%Y-%m-%d",
+	showsTime  : false,
+	timeFormat : "24"
+});
+</script>
+</body>
+</html>

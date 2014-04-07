@@ -24,8 +24,8 @@
  * -------------------------------------------------------
  */
 
-body {font-family: "ff-tisa-web-pro-1","ff-tisa-web-pro-2","Lucida Grande","Hiragino Sans GB","Hiragino Sans GB W3"; line-height:1.6; background:#f6f6f6; }
-html,body { max-width:320px; margin:0 auto;background:url(../images/luxury/images/home/bg.png) repeat;}
+body {font-family: 'Microsoft YaHei'; line-height:1.6; background:#f6f6f6; }
+html,body { min-width:320px;max-width:640px; margin:0 auto;background:url(../images/luxury/images/home/bg.png) repeat;}
 h1, h2, h3, h4, h5, h6, p, ul, ol, dl, dt, dd, li, body, form, input, button, img, cite, strong, em, table, td, th { padding:0; margin:0; }
 h1, h2, h3, h4, h5, h6 { font-size: 16px;}
 hr{border:1px solid #D9D9D9;}
@@ -40,10 +40,17 @@ a:visited{ color:#666;}
  * -------------------------------------------------------
  */
 
-.find_03{background:url(../images/luxury/images/home/bg_button.png) no-repeat 0 0;background-size: 90px 40px;background-position:0px 0px; height:40px;width:90px;padding-top:8px;}
+.find_03{background:url(../images/luxury/images/home/bg_button.png) no-repeat 0 0;background-size: 80px 40px;background-position:0px 0px; height:40px;width:80px;padding-top:8px;float:left;}
+.find_04{background:url(../images/luxury/images/share/ic_03.png) no-repeat 0 0;background-size: 50px 35px;background-position:0px 0px; height:40px;width:60px;margin-top:5px;float:left;}
+.find_05{background:url(../images/luxury/images/share/ic2_03.png) no-repeat 0 0;background-size: 50px 35px;background-position:0px 0px; height:40px;width:60px;margin-top:5px;float:left;}
+.find_06{background:url(../images/luxury/images/purchase/ic1_03.png) no-repeat 0 0;background-size: 30px 27px;background-position:0px 0px; height:30px;width:30px;margin-top:5px;float:left;}
+
 .home_page_logo{background:url(../images/luxury/images/home/cate_white.png) no-repeat 0 0;background-size: 30px 24px;background-position:5px 10px; height:40px;width:140px;}
-.brandimg{width:100%;}
-.brandimg #brandimg{width:100%;}
+#brandimg{width:100%;}
+.imgProduct{background:url(../images/luxury/images/brand/bg_17.png);width:46%;float:left;margin-left:2%;text-align:center;padding-top:10px;}
+.pro_title{color:white;font-size:12px;font-weight:500;}
+.pro_jifen{color:red;font-size:11px;}
+.purchase{width:89%;padding:10px 0px 5px 0;text-align:right;background:none;}
 #shopname{border-bottom:1px solid #d9d9d9;border-left:1px solid #d9d9d9;}
 .dail{
 	margin-left:50px;
@@ -77,8 +84,10 @@ a:visited{ color:#666;}
 #content .mid_banner .ibox{ border:1px solid #ddd; border-radius:10px; max-width:600px;background:#fff; text-align:center;}
 
 #content .module_special{margin-top:10px;}
-.shopSearch{width:98%;margin:5px 3px 0 3px;background:black;color:white;padding:2px;font-weight:700;font-size:0.9em;}
+.shopSearch{width:90%;margin:0 auto;background:black;color:white;padding:8px 10px;font-weight:700;font-size:0.9em;}
+.shopDiscount{width:98%;margin:0 auto;background:url(../images/luxury/images/discount/bj_03.png) no-repeat 0 0;background-size: 100% 105px;color:white;padding:0px 0px;font-weight:700;font-size:1em;}
 .shop_address{font-size:0.8em;color:rgb(178,177,177);}
+.shop_theme{font-size:0.8em;color:#5E5E5E;}
 .haveSearch{color:white}
 
 /*购物车*/
@@ -339,17 +348,18 @@ div.order_cancel_box p span {color: #f34; font-weight: bold;}
  * -------------------------------------------------------
  */
 
-#nav {width:100%; left:0px;position:fixed; top:0px; z-index: 100; margin: 0 auto;display:block;background:url(../images/luxury/images/home/bg_02.png);box-shadow:0 2px 3px #d9d9d9;}
-#nav ul.navlist { position: relative; z-index:9999; height:45px; margin:0 auto; background:url(../images/luxury/images/home/bg_02.png); border-bottom:1px solid #ccc;box-shadow:0 2px 3px #d9d9d9;}
+#nav {width:100%; left:0px;position:fixed; top:0px; z-index: 100; margin: 0 auto;display:block;background:url(../images/luxury/images/home/bg_02.png);}
+#nav ul.navlist { position: relative; z-index:9999; height:45px; margin:0 auto; background:url(../images/luxury/images/home/bg_02.png); }
 #nav .navlist li { float: left;height:45px;  position:relative;}
 #nav .navlist li#n_3 i{ position:absolute; height:14px; width:14px;background:#C00; color:#fff; left:55%; top:10px; border-radius:50%; font-style:normal; text-align:center; font-size:12px; display:none;}
 #nav .navlist li span{ display:inline-block; width:100%; height:45px; cursor:pointer;}
-#nav .navlist li a{ display:block; height:45px;}
 
-#nav .navlist li#n_4{width:60%;}
+#nav .navlist li#n_4{width:50%;}
+#nav .navlist li#n_3{width:50%;}
 #nav .navlist li#n_0{width:40px;}
 #nav .navlist li#n_4 span{ text-align:center;padding-top:1px;font-size:1.5em; color:white;font-weight:900;}
-#nav .navlist li#n_1{float:right;text-align:center;color:white;font-weight:700;}
+#nav .navlist li#n_3 span{ text-align:center;padding-top:1px;font-size:1.5em; color:white;font-weight:900;}
+#nav .navlist li#n_1{text-align:center;color:white;font-weight:700;background:none;}
 
 .banner{position: relative;}
 .banner .slider {z-index: 1; display:block; margin:0 auto; max-width:600px;overflow:hidden;position:relative;}

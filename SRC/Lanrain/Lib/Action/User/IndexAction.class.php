@@ -127,8 +127,8 @@ class IndexAction extends UserAction{
 					$data1["address"] = $_POST["address"];
 					$longitude = $this->_POST("longitude","trim");
 					$longitudes = explode(",", $longitude);
-					$data1["longitude"] = preg_replace('/\(/',"",$longitudes[1]);
-					$data1["latitude"] = preg_replace('/\)/',"",$longitudes[0]);
+					$data1["longitude"] = preg_replace('/\)/',"",$longitudes[1]);
+					$data1["latitude"] = preg_replace('/\(/',"",$longitudes[0]);
 					$data1["HaveReal"] = 0;
 					$data1["credit"] = 0;
 					$data1["shop_city"] = $this->_post("province","trim");
@@ -208,7 +208,10 @@ class IndexAction extends UserAction{
 		$item_goods = $items_taobao->where($items_taobao_data)->select();
 		foreach ($item_goods as $item_good){
 			$item_good["tokenTall"] = $token;
+			$item_good["id"]="";
 			$items_having["Uninum"] = $item_good["Uninum"];
+			$items_having["tokenTall"] = $token;
+			
 			if ($items->where($items_having)->find()) {
 				$having_num ++;
 			}
@@ -223,7 +226,7 @@ class IndexAction extends UserAction{
 		}else{
 			$message = "没有数据可以领取";
 		}
-		$this->success($message);
+		$this->success($message,U('Index/index'));
 	}
 	public function usersave(){
 		$pwd=$this->_post('password');

@@ -5,9 +5,9 @@
 <title>驾车导航</title>
 <script src="http://api.map.baidu.com/api?v=1.2"></script>
 </head>
-<body>
+<body><!-- 
 <input type="text" name="start_point" id="start_point" value="{$start_point_lat},{$start_point_lng}">
-<input type="text" name="end_point" id="end_point" value="{$end_point_lat},{$end_point_lng}">
+<input type="text" name="end_point" id="end_point" value="{$end_point_lat},{$end_point_lng}"> -->
 <div id="container" style="width:400px;height:548px"></div>
 <div id="panel" style="position:relative;margin-top:10px"></div>
 <script>
@@ -75,8 +75,8 @@ var htmls = [];
 function addStart(point, title){
     map.addOverlay(new BMap.Marker(point, {
         title: title,
-        icon: new BMap.Icon('__STATIC__/weixin/images/blue.png', new BMap.Size(40, 48), {
-            anchor: new BMap.Size(0, 0)
+        icon: new BMap.Icon('__STATIC__/weixin/images/start.png', new BMap.Size(40, 40), {
+            anchor: new BMap.Size(20, 40)
         })}));
 }
 
@@ -84,8 +84,8 @@ function addStart(point, title){
 function addEnd(point, title){
     map.addOverlay(new BMap.Marker(point, {
         title: title,
-        icon: new BMap.Icon('__STATIC__/weixin/images/red.png', new BMap.Size(38, 41), {
-            anchor: new BMap.Size(0, 0)
+        icon: new BMap.Icon('__STATIC__/weixin/images/end.png', new BMap.Size(40, 40), {
+            anchor: new BMap.Size(20, 40)
         })}));
 }
 

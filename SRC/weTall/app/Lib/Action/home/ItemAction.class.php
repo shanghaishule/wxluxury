@@ -19,7 +19,7 @@ class itemAction extends frontendAction {
         !$id && $this->_404();
         $tokenTall = $this->getTokenTall();
         $item_mod = M('item');
-        $item = $item_mod->field('id,title,intro,price,info,comments,add_time,goods_stock,buy_num,brand,size,color')->where(array('id' => $id, 'status' => 1))->find();
+        $item = $item_mod->field('id,title,Uninum,old_price,goods_stock,intro,price,info,comments,add_time,goods_stock,buy_num,brand,size,color,images')->where(array('id' => $id, 'status' => 1))->find();
         !$item && $this->_404();
     
         //大小
@@ -28,53 +28,14 @@ class itemAction extends frontendAction {
         //颜色
         $color_tmp = substr(trim($item['color']),0,1) == '|' ? explode('|', substr(trim($item['color']),1)) : explode('|', $item['color']);
         $color = array();
-        foreach ($color_tmp as $key => $value){
-        	switch ($value)
-        	{
-        		case "white":
-        			$color[] = '白色';
-        			break;
-        		case "blue":
-        			$color[] = '蓝色';
-        			break;
-        		case "yellow":
-        			$color[] = '黄色';
-        			break;
-        		case "red":
-        			$color[] = '红色';
-        			break;
-        		case "black":
-        			$color[] = '黑色';
-        			break;
-        		case "orange":
-        			$color[] = '橙色';
-        			break;
-        		case "coffee":
-        			$color[] = '咖啡色';
-        			break;
-        		case "gold":
-        			$color[] = '金色';
-        			break;
-        		case "piller":
-        			$color[] = '紫色';
-        			break;
-        		case "green":
-        			$color[] = '绿色';
-        			break;
-        		case "indigo":
-        			$color[] = '靛色';
-        			break;
-        		case "mix":
-        			$color[] = '杂色';
-        			break;
-        		default:
-        			$color[] = '其他';
-        			break;
-        			
+        foreach ($color_tmp as $value2){
+        	if ($value2 != "") {
+        		$color[] = $value2;
         	}
         }
 
-        
+        //图片
+        $imgarr = substr(trim($item['images']),0,1) == '|' ? explode('|', substr(trim($item['images']),1)) : explode('|', $item['images']);
         //品牌 
         $brand = M('brandlist')->field('name')->find($item['brand']);
         $item['brand'] = $brand['name'];
@@ -113,6 +74,7 @@ class itemAction extends frontendAction {
         $this->assign('tokenTall', $tokenTall);
         $this->assign('size', $size);
         $this->assign('color', $color);
+        $this->assign("imgarr",$imgarr);
 
         $this->_config_seo(C('pin_seo_config.item'), array(
             'item_title' => $item['title'],

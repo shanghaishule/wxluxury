@@ -67,3 +67,12 @@
 .cboxIE #cboxMiddleRight {
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#00FFFFFF,endColorstr=#00FFFFFF);
 }
+
+.banner{ width:100%; display:; }
+.banner ul#BanCont { width:100%; margin:0 auto;height:320px;}
+
+.banner ul#BanCont li { position:absolute; top:0; left:0; width:100%; overflow:hidden;}
+
+.banner_link { width:100%;}
+.imgmiddle{margin:0 auto;width:320px;height:60px;}
+.imgnav{float:left;padding:5px;margin:0 auto;}

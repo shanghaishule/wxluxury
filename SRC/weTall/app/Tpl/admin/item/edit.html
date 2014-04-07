@@ -133,20 +133,12 @@
 		      快递:<input value="{$info.kuaidi}" onkeyup="value=value.replace(/[^\d\.]/g,'')" type="text" name="kuaidi" />
 		      EMS:<input value="{$info.ems}" onkeyup="value=value.replace(/[^\d\.]/g,'')" type="text" name="ems" /></td>
 		    </tr>
-		    
-			<!--<tr>
-				<th>链接地址 :</th>
-				<td><input type="text" name="url" class="input-text" size="50" value="{$info.url}"></td>
+		    <tr>
+				<th>原价 :</th>
+				<td><input id='J_old_price' onkeyup="this.value=this.value.replace(/[^0-9.]/g,'')" onafterpaste="this.value=this.value.replace(/[^0-9.]/g,'')"  type="text" name="old_price" size="10" class="input-text" value="{$info.old_price}"> 元</td>
 			</tr>
             <tr>
-				<th>商品标签 :</th>
-				<td>
-                	<input type="text" name="tags" id="J_tags" class="input-text" size="50" value="{$info.tags}">
-                    <input type="button" value="{:L('auto_get')}" id="J_gettags" name="tags_btn" class="btn">
-                </td>
-			</tr>-->
-            <tr>
-				<th>商品价格 :</th>
+				<th>打折价格 :</th>
 				<td><input id='J_price' onkeyup="this.value=this.value.replace(/[^0-9.]/g,'')" onafterpaste="this.value=this.value.replace(/[^0-9.]/g,'')"  type="text" name="price" size="10" class="input-text" value="{$info.price}"> 元</td>
 			</tr>
 			<tr>
