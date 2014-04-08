@@ -101,6 +101,7 @@ class backendAction extends baseAction
      */
     public function edit()
     {
+    	// $this->_name = $this->getActionName();
         $mod = D($this->_name);
         $pk = $mod->getPk();
         if (IS_POST) {
@@ -110,13 +111,18 @@ class backendAction extends baseAction
             }
             if (method_exists($this, '_before_update')) {
                 $data = $this->_before_update($data);
-            }//var_dump($data);die();
-            $date_data = $this->_post("date","trim");
-            if (!empty($date_data)) {
-            	$data["date"]=strtotime($date_data);
             }
-            if (!empty($_SESSION["img_name"])) {
-            	$data["img"] = "/weTall/data/upload/item/".date('ym/d/').$_SESSION["img_name"];
+            
+            $eidt_id = $this->_post("id","trim");
+            if ($eidt_id != "") {
+            	 $date_data["id"] = $eidt_id;
+            }
+           
+           
+            if (!empty($_SESSION["img_edit_name"]) and $_SESSION["img_edit_name"] != "") {
+            	$data["img"] = "/weTall/data/upload/item/".date('ym/d/').$_SESSION["img_edit_name"];
+            }else{
+            	$data["img"] = $this->_post("old_img","trim");
             }
             if (false !== $mod->save($data)) {
                 if( method_exists($this, '_after_update')){

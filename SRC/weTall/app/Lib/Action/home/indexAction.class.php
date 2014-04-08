@@ -73,7 +73,15 @@ class indexAction extends frontendAction {
         $this->_config_seo();
         $this->display();
     }
-    
+    public function intime() {
+    	$discount_shop = M("set_discount");
+    	$brand = M("brandlist");
+    	$discount_data = $discount_shop->order("date asc")->group("status")->select();
+    	
+    	$this->assign("brand",$brand->select());
+    	$this->assign("ontime",$discount_data);
+    	$this->display();
+    }
     public function discount(){
     	$discount_shop = M("discount_shop");
     	$data = $discount_shop->select();
