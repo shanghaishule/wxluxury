@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<script src="/weTall/static/js/jquery/jquery.js"></script>
+	<script src="/weTall/static/js/jquery/plugins/jquery.tools.min.js"></script>
+	<script src="/weTall/static/js/jquery/plugins/formvalidator.js"></script>
+	<script src="/weTall/static/js/pinphp.js"></script>
+	<script src="/weTall/static/js/admin.js"></script>
+	<!--link rel="stylesheet" type="text/css" href="/weTall/static/css/admin/upd_style.css" /-->
+	<link href="/weTall/static/css/admin/style.css" rel="stylesheet"/>
+	<link rel="stylesheet" type="text/css" href="/weTall/static/js/calendar/calendar-blue.css"/>
+	<script type="text/javascript" src="/weTall/static/js/calendar/calendar.js"></script>	
+	<title>管理中心</title>
+
+</head>
+
+<body>
+<script type="text/javascript">
+function shopSearch(){
+	shop_name = $("#shop_name").val();	
+	location.href='/index.php?g=System&m=DatafromShop&a=index&pid=98&level=3&shop_name='+shop_name;
+} 
+</script>
+
+
+<div class="pad_lr_10">
+
+
+    <form id="uploadShop" method="post" enctype="multipart/form-data">    
+	    <table width="100%" cellspacing="0" class="search_form">
+	        <tbody>
+	            <tr>
+		            <td>
+			            <div class="explain_col">
+			                                                       品牌：
+			                <input type="text" name="brand" class="text" id="brand" value="{Lanrain:$brand}"> &nbsp;
+							<input type="file" name="upd_shop" id="upd_shop" > 		                    
+							<input type="submit" name="search" class="btn" value="添加实体店" />
+							
+							&nbsp;&nbsp;
+			                                                       店名：
+			                <input type="text" name="shop_name" class="text" id="shop_name" value="{Lanrain:$shop_name}"> &nbsp;							
+							<a class="btn" style="height:18px; padding-top:1px" href="javascript:void(0)" onClick="shopSearch();" >检索</a>							
+			        	</div>
+			        	
+			        	
+		            </td>
+	            </tr>
+	        </tbody>
+	    </table>
+    
+    </form>    
+    
+    
+    
+    <div class="J_tablelist table_list">
+    <style>
+	.attributes {
+	    height : 60px;
+	    line-height : 20px;
+		text-overflow: ellipsis;
+	}
+    </style>
+        
+    <table  width="100%" cellspacing="0" style="table-layout:fixed;border-collapse:collapse;font-size:12px;">
+        <thead>
+            <tr>
+                <th width=60px align="left"><span data-tdtype="order_by" data-field="id" >品牌</span></th>
+                <th width=80px align="left"><span data-tdtype="order_by" data-field="id" >店名</span></th>
+                <th width=100px align="left"><span data-tdtype="order_by" data-field="id" >LBS地址</span></th>
+                <th width=80px  align="left"><span data-tdtype="order_by" data-field="status">显示地址</span></th>
+                <th width=60px  align="left"><span data-tdtype="order_by" data-field="status">电话</span></th>
+            </tr>
+        </thead>
+    	<tbody>
+            <volist name="list" id="val" >
+            <tr>
+                <td align="left">{Lanrain:$val.brand_name}</td>
+                <td align="left">{Lanrain:$val.shop_name}</td>
+                <td align="left">{Lanrain:$val.lbs_addr}</td>            
+                <td align="left">{Lanrain:$val.show_addr}</td>
+                <td align="left">{Lanrain:$val.phone}</td>                
+            </tr>
+            </volist>
+    	</tbody>
+    </table>
+
+    </div>
+    
+    
+    
+    <div id="attributes" class="attributes">
+
+        <div class="attributes-list" id="J_AttrList">
+                    <div class="tm-clear tb-hidden tm_brandAttr" id="J_BrandAttr"></div>
+                            <p class="attr-list-hd tm-clear"><em>
+                            </em>
+                            </p>
+                            </div>
+                            </div>
+                            
+    <div class="btn_wrap_fixed">
+    	<div id="pages">{Lanrain:$page}</div>
+    </div>
+</div>
+
+</body>
+</html>
