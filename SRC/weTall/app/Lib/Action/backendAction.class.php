@@ -49,14 +49,11 @@ class backendAction extends baseAction
         $this->display();
     }
 
-    public function _add(){
-    	
-    }
+    
     /**
      * 添加
      */
     public function add() {
-    	$this->_add();
         $mod = D($this->_name);
         if (IS_POST) {
             if (false === $data = $mod->create()) {
@@ -72,6 +69,9 @@ class backendAction extends baseAction
             }
             if (!empty($_SESSION["img_name"])) {
             	$data["img"] = "/weTall/data/upload/item/".date('ym/d/').$_SESSION["img_name"];
+            }
+            if (!empty($_SESSION["img_name2"])) {
+            	$data["imgurl"] = "/weTall/data/upload/item/".date('ym/d/').$_SESSION["img_name2"];
             }
             
             if( $mod->add($data) ){
@@ -123,6 +123,12 @@ class backendAction extends baseAction
             	$data["img"] = "/weTall/data/upload/item/".date('ym/d/').$_SESSION["img_edit_name"];
             }else{
             	$data["img"] = $this->_post("old_img","trim");
+            }
+            
+            if (!empty($_SESSION["img_edit_name2"]) and $_SESSION["img_edit_name2"] != "") {
+            	$data["imgurl"] = "/weTall/data/upload/item/".date('ym/d/').$_SESSION["img_edit_name2"];
+            }else{
+            	$data["imgurl"] = $this->_post("old_imgurl","trim");
             }
             if (false !== $mod->save($data)) {
                 if( method_exists($this, '_after_update')){

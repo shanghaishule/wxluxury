@@ -1,15 +1,31 @@
 <!--添加禁止IP-->
 <div class="dialog_content">
-	<form id="info_form" name="info_form" action="{:u('brandlist/add')}" method="post">
+	<form id="info_form" name="info_form" action="{:u('brandlist/add')}" method="post" enctype="multipart/form-data">
 	<table width="100%" cellpadding="2" cellspacing="1" class="table_form">
 		<tr>
-			<th width="80">分类名称 :</th>
-			<td><input type="text" name="name" id="name" class="input-text"></td>
+			<th width="80">品牌名称 :</th>
+			<td><input type="text" name="name" id="name2" class="input-text"></td>
 		</tr>
         <tr>
 			<th width="100">排序值 :</th>
 			<td><input type="text" name="ordid" id="ordid" class="input-text" size="10"></td>
 		</tr>
+		<tr>
+			<th width="100">品牌图片 :</th>
+			<td><input type="file" name="img" id="img" class="input-text" size="10">建议：340*370</td>
+		</tr>
+		<tr>
+			<th width="100">品牌图片2 :</th>
+			<td><input type="file" name="imgurl" id="imgurl" class="input-text" size="10">建议：320*128</td>
+		</tr>
+		<tr>
+			<th width="100">品牌区域 :</th>
+			<td><select name="domain">
+			<option value="0">国内大牌</option>
+			<option value="1">奢侈品牌</option>
+			</select></td>
+		</tr>
+		
 		<tr>
 			<th width="100">首页显示:</th>
 			<td><label><input type="radio" name="display" class="input-text" checked="checked" value="1">显示</label>

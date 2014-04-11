@@ -52,4 +52,9 @@ CREATE TABLE IF NOT EXISTS `tp_set_discount` (
   `end_time` time NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
+/*浏览量*/
+ALTER TABLE `tp_brandlist` CHANGE `tokenTall` `volume` INT( 11) NOT NULL DEFAULT'0';
+/*图片*/
+ALTER TABLE `tp_brandlist` ADD `imgurl` VARCHAR( 190) NULL ;
+/*品牌区域*/
+ALTER TABLE `tp_brandlist` ADD `domain` INT( 1) NOT NULL DEFAULT'1' COMMENT'0-国内 1-国外';

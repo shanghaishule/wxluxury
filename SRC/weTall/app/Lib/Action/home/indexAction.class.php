@@ -109,7 +109,7 @@ class indexAction extends frontendAction {
     	/*****首页广告end******/
     	  
     	/****最新商品*****/
-    	$where = array('tokenTall'=>$tokenTall,"Oneyuan"=>1);
+    	$where = array("Oneyuan"=>1);
     	$news = $this->getItem_cate($where);
     	/****最新商品 END*****/
     	  
@@ -179,7 +179,10 @@ class indexAction extends frontendAction {
     		$wecha_shop = M("wecha_shop");
     		$longitude = $this->_POST("longitude","trim");
     		$latitude = $this->_POST("latitude","trim");
-    		$endPoint = $wecha_shop->select();
+    		$brand_id = $this->_POST("brand_id","trim");
+    		$where["BelongBrand"] = $brand_id;
+    		$data["id"]=$brand_id;
+    		$endPoint = $wecha_shop->where($where)->select();
     		$nearShop=array();
     		foreach ($endPoint as $end){    			
     			if ($end["latitude"] != "" & $end["longitude"] != "" &$latitude != "" & $longitude !="" ) {
@@ -196,6 +199,7 @@ class indexAction extends frontendAction {
     		//排序
     		$nearShop = $this->array_sort($nearShop,"nearJuli", "asc");
     		
+    		$this->assign("brand",M("brandlist")->where($data)->find());
     		$this->assign("countShop",count($nearShop));
     		$this->assign("start_point_lat",$start_point_lat);
     		$this->assign("start_point_lng",$start_point_lng);
@@ -454,7 +458,17 @@ class indexAction extends frontendAction {
 	    	if($token != ""){
 	    	   $condition["tokenTall"]=$token;
 	    	}
-	    	$condition["title"] = array("like", "%".$keyword."%");
+	    	$first["title"]=array("like", "%".$keyword."%");
+	    	$count = $item->where($first)->count();
+	    	if ($count == 0) {
+	    		$condition["Huohao"] = array("like", "%".$keyword."%");
+	    	}else{
+	    		$condition["title"] = array("like", "%".$keyword."%");
+	    	}
+	    	
+	    	$brand = M("brandlist")->select();
+	    	$this->assign("brand",$brand);
+	    	
 	    	$count = $item->where($condition)->count();
 	    	$Page       = new Page($count,10);// 实例化分页类 传入总记录数
 	    	// 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
@@ -477,7 +491,18 @@ class indexAction extends frontendAction {
     	return $item=M('item')->where($where)->select();
     }
     
-    
+    public function brandshop(){
+    	$brand = M("brandlist")->order("id asc")->select();
+    	$this->assign("brand",$brand);
+    	$this->display();
+    }
+    public function setlat(){
+    	$lat=$this->_get("lat","trim");
+    	$lng=$this->_get("lng","trim");
+    	$_SESSION["lat"]=$lat;
+    	$_SESSION["lng"]=$lng;
+    	$this->ajaxReturn("1",'成功','状态');
+    }
     public function ajaxLogin()
     {
     	
@@ -599,7 +624,12 @@ class indexAction extends frontendAction {
     	}else{
     		$weshopData["tokenTall"] = $tokenTall;
     	}
+    	$shop_id=$this->_get("id","trim");
     	$weChaShopDetail = $weChaShop->where($weshopData)->find();//var_dump($weshopData);die();
+    	if (empty($weChaShopDetail)) {
+    		$data['id']=$shop_id;
+    		$weChaShopDetail=$weChaShop->where($data)->find();
+    	}
     	$this->assign("weshopData",$weChaShopDetail);
 
 //dump($weChaShopDetail["name"]);

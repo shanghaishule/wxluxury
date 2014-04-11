@@ -2,41 +2,73 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Product Detail</title>
-<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+<title>首页</title>
+<link type="text/css" rel="stylesheet" href="__STATIC__/weixin/css/shop.css">
+<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="format-detection" content="telephone=no">
 <meta charset="utf-8">
 <link href="__STATIC__/css/productdetail.css" rel="stylesheet" type="text/css">
+<script>
+function gosearch(){
+	document.getElementById('searchForm').submit();
+}
+</script>
 </head>
 <body>
 <div class="wrap">
-  <div class="head">
-    <a href="javascript:void(0)"  onclick="javascript:history.go(-1);"><img src="__STATIC__/images/productdetail/ic2_03.png" style="width:80px;height:40px;vertical-align:middle;"/></a>
-    <input type="search" style="width:150px;height:40px;vertical-align:middle;"  placeholder="请输入商品关键词或货号">
-   <img src="__STATIC__/images/productdetail/找宝贝_03.png" style="width:100px;height:40px;vertical-align:middle;"  onclick="searchGoods();">
-   </div>
-  
+  <div id="nav">
+    <form id="searchForm" action="/weTall/index.php?g=home&m=index&a=search&tokenTall=eolvhz1392992775" method="post">
+	<ul class="navlist">
+		<li class="r" id="n_0"><a href="{:U('home/index/index', array('tokenTall'=>$tokenTall))}"><div class="home_page_logo"></div></a></li>
+    	<li class="r" id="n_5">
+    		<span style="margin-top:4px;"><input style="height:35px;width:100%;" type="search" name="txtkeyword" id="keyword"  placeholder="请输入关键词或者货号" autofocus x-webkit-speech> </span>
+        </li>
+        <li class="r" id="n_1"><a href="javascript:void(0)" onclick="gosearch();"><div class="find_07"></div></a></li>
+        
+    </ul>
+    </form>
+    <script type="text/javascript">   
+        $(function(){
+        	var panelWidth = $(".img").width();
+        	$(".img").css("height",panelWidth);
+        	
+        });        
+    	$(".navlist > li#n_0").click(function(){
+			$(this).toggleClass("active");
+		});
+		$(".navlist > li.r a").each(function() {
+            href="index.php-app=member&act=login&ret_url=-index.php-app=member.htm"+$(this).attr("href");
+			whref=window.location.href;
+			if(whref.indexOf(href)!='-1'){
+				$(this).parent("li").addClass("active");
+			}
+        });
+    </script>
+</div>
+<div class="clear_kongge"></div>
    <volist name="news" id="product" >
-    <div   class="img">
-      <img src="{$product.img}" width="160" ></img>
-      <br>
-      <label class="label">{$product.title}</label>
-      <br>
+    <div class="img">
+      <div class="img_detail">
+      <a href="{:U('Item/index',array('id'=>$product['id'],'tokenTall'=>$product['tokenTall']))}"><img src="{$product.img}" width="100%" ></img></a>
+      </div>
+      <div class="pro_detail">
        <volist name="brand" id="brandname">
        <if condition="$product['brand'] eq $brandname['id']">
-      <label class="label">{$brandname.name}</label>
+      <label class="label" style="font-weight:700;"> {$brandname.name}</label>
       </if>
       </volist>
       <br>
-      <label class="label">{$product.price}+'元'</label>
-      <br>
+      <label class="label2"><a href="{:U('Item/index',array('id'=>$product['id'],'tokenTall'=>$product['tokenTall']))}">{$product.title}</a></label>
+      <label class="label" style="color:rgb(198,198,198);">￥{$product.price}元<span style="margin-left:20px;">{$product.item_model}款</span></label>
+      </div>   
     </div> 
     </volist>
+    
   </div>
-<script type="text/javascript">
-
-</script>
+  <div class="foot_float">
+  <span style="margin-top:10px;display:block">{$weshopData.name}</span>
+  </div>
 </body>
 </html>

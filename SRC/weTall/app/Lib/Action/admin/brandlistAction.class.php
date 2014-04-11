@@ -23,8 +23,100 @@ class brandlistAction extends backendAction
         $this->order = 'ASC';
     }
 
+    public function _before_add(){
+    	if (IS_POST) {
+    		//上传图片
+    		if (empty($_FILES['img']['name'])) {
+    			$_SESSION["img_name"] = "";
+    			$this->error('请上传品牌图片');
+    		}
+    		else{
+    			$date_dir = date('ym/d/'); //上传目录
+    			$item_imgs = array(); //相册
+    			$result = $this->_upload($_FILES['img'], 'item/'.$date_dir, array(
+    					'width'=>C('pin_item_bimg.width').','.C('pin_item_img.width').','.C('pin_item_simg.width'),
+    					'height'=>C('pin_item_bimg.height').','.C('pin_item_img.height').','.C('pin_item_simg.height'),
+    					'suffix' => '_b',
+    					//'remove_origin'=>true
+    			));
+    			$_SESSION["im_name"] = $result['info'][0]['savename'];
+    			if ($result['error']) {
+    				$this->error($result['info']);
+    			} else {
+    				$_SESSION["img_name"] = $result['info'][0]['savename'];
+    			}
+    		}
+    		
+    		//图片2
+    		if (empty($_FILES['imgurl']['name'])) {
+    			$_SESSION["img_name2"] = "";
+    			$this->error('请上传品牌图片2');
+    		}
+    		else{
+    			$date_dir = date('ym/d/'); //上传目录
+    			$item_imgs = array(); //相册
+    			$result2 = $this->_upload($_FILES['imgurl'], 'item/'.$date_dir, array(
+    					'width'=>C('pin_item_bimg.width').','.C('pin_item_img.width').','.C('pin_item_simg.width'),
+    					'height'=>C('pin_item_bimg.height').','.C('pin_item_img.height').','.C('pin_item_simg.height'),
+    					'suffix' => '_b',
+    					//'remove_origin'=>true
+    			));
+    			$_SESSION["im_name2"] = $result2['info'][0]['savename'];
+    			if ($result2['error']) {
+    				$this->error($result2['info']);
+    			} else {
+    				$_SESSION["img_name2"] = $result2['info'][0]['savename'];
+    			}
+    		}
+    	}
+    }
+    public function _before_edit(){
+    	if (IS_POST) {
+    		//上传图片
+    		if (empty($_FILES['img']['name'])) {
+    			$_SESSION["img_name"] = "";
+    		}
+    		else{
+    			$date_dir = date('ym/d/'); //上传目录
+    			$item_imgs = array(); //相册
+    			$result = $this->_upload($_FILES['img'], 'item/'.$date_dir, array(
+    					'width'=>C('pin_item_bimg.width').','.C('pin_item_img.width').','.C('pin_item_simg.width'),
+    					'height'=>C('pin_item_bimg.height').','.C('pin_item_img.height').','.C('pin_item_simg.height'),
+    					'suffix' => '_b',
+    					//'remove_origin'=>true
+    			));
+    			$_SESSION["img_edit_name"] = $result['info'][0]['savename'];
+    			if ($result['error']) {
+    				$this->error($result['info']);
+    			} else {
+    				$_SESSION["img_edit_name"] = $result['info'][0]['savename'];
+    			}
+    		}
+    		
+    		//图片2
+    		if (empty($_FILES['imgurl']['name'])) {
+    			$_SESSION["img_edit_name2"] = "";
+    		}
+    		else{
+    			$date_dir = date('ym/d/'); //上传目录
+    			$item_imgs = array(); //相册
+    			$result2 = $this->_upload($_FILES['imgurl'], 'item/'.$date_dir, array(
+    					'width'=>C('pin_item_bimg.width').','.C('pin_item_img.width').','.C('pin_item_simg.width'),
+    					'height'=>C('pin_item_bimg.height').','.C('pin_item_img.height').','.C('pin_item_simg.height'),
+    					'suffix' => '_b',
+    					//'remove_origin'=>true
+    			));
+    			$_SESSION["img_edit_name2"] = $result2['info'][0]['savename'];
+    			if ($result2['error']) {
+    				$this->error($result2['info']);
+    			} else {
+    				$_SESSION["img_edit_name2"] = $result2['info'][0]['savename'];
+    			}
+    		}
+    	}
+    }
     public function _before_insert($data) {
-    	$data['tokenTall'] = $this->getTokenTall();
+    	$data['tokenTall'] = $this->getTokenTall();    	
     	return $data;
     }
     

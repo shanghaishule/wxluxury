@@ -5,7 +5,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	
 	<link href="__ROOT__/weTall/static/css/admin/style.css" rel="stylesheet"/>
-	<title>商品分类</title>
+	<title>商品品牌</title>
 	<script>
 	var URL = '/weTall/index.php/admin-index';
 	var SELF = '/weTall/index.php?g=admin&m=index&a=index';
@@ -53,7 +53,7 @@ $(function(){
 <div id="J_ajax_loading" class="ajax_loading">提交请求中，请稍候...</div>
 <div class="subnav">
     <div class="content_menu ib_a blue line_x">
-    	<a class="add fb J_showdialog" href="javascript:void(0);" data-uri="/weTall/index.php?g=Admin&m=brandlist&a=add" data-title="添加分类" data-id="add" data-width="520" data-height="360"><em>添加分类</em></a>　            </div>
+    	<a class="add fb J_showdialog" href="javascript:void(0);" data-uri="/weTall/index.php?g=Admin&m=brandlist&a=add" data-title="添加品牌" data-id="add" data-width="520" data-height="360"><em>添加品牌</em></a>　            </div>
 </div><!--鏍忕洰鍒楄〃-->
 
 <!--标签-->
@@ -85,10 +85,12 @@ $(function(){
             <tr>
                 <th width="40"><input type="checkbox" name="checkall" class="J_checkall"></th>
 				<th width="50"><span tdtype="order_by" fieldname="id">ID</span></th>
-                <th align="left"><span data-tdtype="order_by" data-field="name">分类名称</span></th>
+                <th align="left"><span data-tdtype="order_by" data-field="name">品牌名称</span></th>
+                <th align="left"><span data-tdtype="order_by" data-field="name">品牌区域</span></th>
+                <th align="left"><span data-tdtype="order_by" data-field="name">品牌图片</span></th>
+                <th align="left"><span data-tdtype="order_by" data-field="name">品牌图片2</span></th>
                 <th width="50" align="left"><span data-tdtype="order_by" data-field="ordid">排序</span></th>
                 <th width="40"><span data-tdtype="order_by" data-field="status">状态</span></th>
-                <th width="90"><span data-tdtype="order_by" data-field="status">首页显示</span></th>
                 <th width="120">管理操作</th>
             </tr>
         </thead>
@@ -98,11 +100,14 @@ $(function(){
                 <td align="center"><input type="checkbox" class="J_checkitem" value="{Lanrain:$val.id}"></td>
 				<td align="center">{Lanrain:$val.id}</td>
                 <td align="left"><span data-tdtype="edit" data-field="name" data-id="{$val.id}" class="tdedit">{Lanrain:$val.name}</span></td>
+                <td align="left"><span data-tdtype="edit" data-field="name" data-id="{$val.id}" class="tdedit"><if condition="$val['domain'] eq 0">国内大牌<else/>奢侈品牌</if></span></td>
+                <td align="left"><span data-tdtype="edit" data-field="name" data-id="{$val.id}" class="tdedit"><img width="33" height="30" src="{Lanrain:$val.img}"></span></td>
+                <td align="left"><span data-tdtype="edit" data-field="name" data-id="{$val.id}" class="tdedit"><img width="75" height="30" src="{Lanrain:$val.imgurl}"></span></td> 
                 <td align="left"><span data-tdtype="edit" data-field="ordid" data-id="{Lanrain:$val.id}" class="tdedit" style="color:{Lanrain:$val.colors};">{Lanrain:$val.ordid}</span></td>
                 <td align="center"><img data-tdtype="toggle" data-id="{$val.id}" data-field="status" data-value="{Lanrain:$val.status}" src="__ROOT__/weTall/static/images/admin/toggle_<if condition="$val.status eq 0">disabled<else/>enabled</if>.gif" /></td>
-                <td align="center"><img data-tdtype="toggle" data-id="{$val.id}" data-field="status" data-value="{Lanrain:$val.display}" src="__ROOT__/weTall/static/images/admin/toggle_<if condition="$val.display eq 0">disabled<else/>enabled</if>.gif" /></td>
+                
                 <td align="center">
-                	<a href="javascript:;" class="J_showdialog" data-uri="/weTall/index.php?g=admin&m=brandlist&a=edit&id={Lanrain:$val.id}" data-title="编辑 - {Lanrain:$val.name}"  data-id="edit" data-acttype="ajax" data-width="400" data-height="130">编辑</a> | 
+                	<a href="javascript:;" class="J_showdialog" data-uri="/weTall/index.php?g=admin&m=brandlist&a=edit&id={Lanrain:$val.id}" data-title="编辑 - {Lanrain:$val.name}"  data-id="edit" data-acttype="ajax" data-width="520" data-height="360">编辑</a> | 
                     <a href="javascript:;" class="J_confirmurl" data-acttype="ajax" data-uri="/weTall/index.php?g=admin&m=brandlist&a=delete&id={Lanrain:$val.id}" data-msg="确定删除{Lanrain:$val.name}吗?">删除</a>
                 </td>
             </tr>

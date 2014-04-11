@@ -10,6 +10,7 @@
 <meta charset="utf-8">
 <link href="__STATIC__/css/productdetail.css" rel="stylesheet" type="text/css">
 <link type="text/css" rel="stylesheet" href="__STATIC__/weixin/css/shop.css">
+
 </head>
 <body>
 <div class="wrap">
@@ -18,12 +19,12 @@
 	<ul class="navlist">
 		<li class="r" id="n_0"><a href="{:U('home/index/index', array('tokenTall'=>$tokenTall))}"><div class="home_page_logo"></div></a></li>
     	<li class="r" id="n_3">
-    		<span >一元购</span>
+    		<span >整点扫货</span>
         </li>
         <li class="r" id="n_1"><div class="find_04"></div><div class="find_05"></div></li>
         
     </ul>
-    <script type="text/javascript">  
+    <script type="text/javascript">
     	$(".navlist > li#n_0").click(function(){
 			$(this).toggleClass("active");
 		});
@@ -35,24 +36,27 @@
 			}
         });
     </script>
+    
+	
 </div>
-   <volist name="news" id="product" >
-    <div class="img">
-      <div class="img_detail">
-      <a href="{:U('Item/index',array('id'=>$product['id'],'tokenTall'=>$product['tokenTall']))}"><img src="{$product.img}" width="100%" ></img></a>
-      </div>
-      <div class="pro_detail">
-       
-      <label class="label2"><a href="{:U('Item/index',array('id'=>$product['id'],'tokenTall'=>$product['tokenTall']))}">{$product.title}</a></label>
-      <label class="pro_jifen">价格:{$product.price}元&nbsp;&nbsp;品牌积分:1000分</label>
-      <div class="purchase"><a href="{:U('Item/index',array('id'=>$product['id'],'tokenTall'=>$product['tokenTall']))}"><img width="75" height="30" src="__STATIC__/weixin/images/luxury/images/danpin/1_03.png" /></a></div>
-      </div>   
-    </div> 
-    </volist>
   
+   <volist name="ontime" id="product" key="k">
+    <div  class="imgIntime"><div class="status_img"><if condition="$product['status'] eq 0">
+    <img style="margin-right:5px;" width="66px" height="25px" src="/weTall/static/weixin/images/luxury/images/Ontime/1_04.png"></if>
+      <if condition="$product['status'] eq 1"><img style="margin-right:5px;" width="66px" height="25px" src="/weTall/static/weixin/images/luxury/images/Ontime/4_03.png"></if>
+      <if condition="$product['status'] eq 2"><img style="margin-right:5px;" width="66px" height="25px" src="/weTall/static/weixin/images/luxury/images/Ontime/5_03.png"></if></div>
+      <div class="intime_img">
+      <img src="{$product.img}" width="100%"></img>
+      </div> 
+      <div class="Intime_detail"><div style="float:left;margin-left:8%;">
+      <volist name="brand" id="vo">
+      <if condition="$product['brand_id'] eq $vo['id']">
+      {$vo.name}</if></volist>      
+      	活动时间：{$product.date} </div><div style="width:36px;margin-left:10px;float:left;overflow:hidden;">{$product.start_time}</div><div style="width:41px;float:left;overflow:hidden;">-{$product.end_time}</div>
+      </div><div id="timer{$k}" style="float:left;"></div>
+      </div> 
+    </volist>
   </div>
-<script type="text/javascript">
 
-</script>
 </body>
 </html>

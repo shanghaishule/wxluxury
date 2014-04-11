@@ -1,14 +1,29 @@
 <!--编辑禁止IP-->
 <div class="dialog_content">
-	<form id="info_form" name="info_form" action="{:u('brandlist/edit')}" method="post">
+	<form id="info_form" name="info_form" action="{:u('brandlist/edit')}" method="post" enctype="multipart/form-data">
 	<table width="100%" cellpadding="2" cellspacing="1" class="table_form">
 		<tr>
-			<th width="80">名称 :</th>
+			<th width="80">品牌名称 :</th>
 			<td><input type="text" name="name" id="name" value="{$info.name}" class="input-text"></td>
 		</tr>
         <tr>
 			<th width="100">排序值 :</th>
 			<td><input type="text" name="ordid" id="ordid" class="input-text" size="10" value="{$info.ordid}"></td>
+		</tr>
+		<tr>
+			<th width="100">品牌图片 :</th>
+			<td><input type="file" name="img" id="img" class="input-text" size="10">建议：340*370</td>
+		</tr>
+		<tr>
+			<th width="100">品牌图片2 :</th>
+			<td><input type="file" name="imgurl" id="imgurl" class="input-text" size="10">建议：320*128</td>
+		</tr>
+		<tr>
+			<th width="100">品牌区域 :</th>
+			<td><select name="domain">
+			<option value="0" <if condition="$info['domain'] eq 0">selected</if>>国内大牌</option>
+			<option value="1" <if condition="$info['domain'] eq 1">selected</if>>奢侈品牌</option>
+			</select></td>
 		</tr>
 		<tr>
 			<th width="100">首页显示:</th>
@@ -25,6 +40,8 @@
 		</tr>
 	</table>
 	<input type="hidden" name="id" value="{$info.id}" />
+	<input type="hidden" name="old_img" value="{$info.img}">
+	<input type="hidden" name="old_imgurl" value="{$info.imgurl}">
 	</form>
 </div>
 <script>

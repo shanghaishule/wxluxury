@@ -59,3 +59,7 @@ ALTER TABLE  `tp_item_taobao` ADD  `images` VARCHAR( 255 ) NULL DEFAULT  '|1001|
 ALTER TABLE  `tp_item` ADD  `images` VARCHAR( 255 ) NULL DEFAULT  '|1001|1002|1003|1004|1005' AFTER  `Huohao`;
 
 ALTER TABLE  `tp_wecha_shop` CHANGE  `BelongBrand`  `BelongBrand` INT( 11 ) NOT NULL DEFAULT  '-1';
+
+ALTER TABLE `tp_item `ADD` item_model` INT( 4) NOT NULL DEFAULT'2014' COMMENT'哪一个款' AFTER`Huohao` ;
+
+ALTER TABLE `tp_brandlist` ADD `imgurl` VARCHAR( 190) NULL DEFAULT NULL COMMENT'320*128';
