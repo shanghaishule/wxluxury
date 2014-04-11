@@ -7,7 +7,42 @@
 }
 td{text-align: -webkit-left;}
 </style>
-
+<script>
+					  function menuurl(){
+						  var outurl = document.getElementById("outurl2").value;
+						  document.getElementById("menutypeval2").value = outurl;
+						  if(outurl == ""){
+							  document.getElementById("menutype1").checked = "checked";							  
+						  }else{
+							  document.getElementById("menutype2").checked = "checked";							
+						  }
+					  }
+					  function menuurl2(){
+						  var outurl = document.getElementById("outurl").value;
+						  document.getElementById("menutypeval").value = outurl;
+						  if(outurl == ""){
+							  document.getElementById("menutype1").checked = "checked";
+						  }else{
+							  document.getElementById("menutype3").checked = "checked";
+						  }
+					  }
+					  function clickurl(){						  
+						   document.getElementById("menutypeval").disabled = "";
+						   document.getElementById("outurl").disabled = "";
+					  }
+					  function clickurl2(){		
+						  document.getElementById("menutypeval").value = "";
+						  document.getElementById("outurl").disabled = "true";
+					  }
+					  function clickurl4(){						  
+						   document.getElementById("menutypeval2").disabled = "";
+						   document.getElementById("outurl2").disabled = "";
+					  }
+					  function clickurl3(){		
+						  document.getElementById("menutypeval2").value = "";
+						  document.getElementById("outurl2").disabled = "true";
+					  }
+				</script>
 	<form action="" method="post" id="realinfo_form">
 	<table border="0" cellpadding="0" cellspacing="0" width="100%">
 		<tbody>
@@ -32,13 +67,25 @@ td{text-align: -webkit-left;}
 				<div class="system l"></div>
 			</td>
 		</tr>
-		<eq name="show.url" value="">
+		<eq name="show.keyword" value="">
+		
 		<tr bgcolor="#F1F1F1">
 			<td align="right" height="42">类型：　</td>
 			<td>
 				<div class="mr15 l">
-				<input type="radio" name="menutype" id="menutype1" value="keyword" checked="checked">关联关键词
-				<input type="radio" name="menutype" id="menutype2" value="url">外链接url
+				
+				<input type="radio" name="menutype" onclick="clickurl3()" id="menutype1" value="keyword">关联关键词
+				<input type="radio" name="menutype" onclick="clickurl4()" id="menutype2" value="url" checked="checked">外链接url <select name="outurl" id="outurl2" onchange="menuurl()">
+				<option value="{lanrain::C('site_url')}/weTall/index.php?g=home&m=index&a=intime">整点扫货</option>
+				<option value="{lanrain::C('site_url')}/weTall/index.php?g=home&m=index&a=Oneyuan">一元购</option>
+				<option value="{lanrain::C('site_url')}/weTall/index.php?g=home&m=index&a=brandshop">名店导航</option>
+				<option value="">每日快讯</option>
+				<option>品牌靓品</option>
+				<option>店内促销</option>
+				<option>搭配分享</option>
+				<option value="{lanrain::C('site_url')}/weTall/index.php?g=home&m=application&a=index">实体店入口</option>
+				<option>我的资料</option>
+				</select>
 				</div>
 				<div class="system l"></div>
 			</td>
@@ -46,17 +93,26 @@ td{text-align: -webkit-left;}
 		<tr bgcolor="#F1F1F1">
 			<td align="right" height="42" width=""></td>
 			<td>
-				<div class="mr15 l"><input class="txt" name="menutypeval" value="{lanrain:$show.keyword}" type="text"></div>
+				<div class="mr15 l"><input class="txt" name="menutypeval" id="menutypeval2" value="{lanrain:$show.url}" type="text" size="55"></div>
 				<div class="system l"></div>
 			</td>
 		</tr>
-		<else />
-		<tr bgcolor="#F1F1F1">
+		<else /><tr bgcolor="#F1F1F1">
 			<td align="right" height="42">类型：　</td>
 			<td>
 				<div class="mr15 l">
-				<input type="radio" name="menutype" id="menutype1" value="keyword">关联关键词
-				<input type="radio" name="menutype" id="menutype2" value="url" checked="checked">外链接url
+				<input type="radio" name="menutype" onclick="clickurl2()" id="menutype1" value="keyword" checked="checked">关联关键词
+				<input type="radio" name="menutype" onclick="clickurl()" id="menutype3" value="url">外链接url<select name="outurl" id="outurl" onchange="menuurl2()">
+				<option value="{lanrain::C('site_url')}/weTall/index.php?g=home&m=index&a=intime">整点扫货</option>
+				<option value="{lanrain::C('site_url')}/weTall/index.php?g=home&m=index&a=Oneyuan">一元购</option>
+				<option value="{lanrain::C('site_url')}/weTall/index.php?g=home&m=index&a=brandshop">名店导航</option>
+				<option value="">每日快讯</option>
+				<option>品牌靓品</option>
+				<option>店内促销</option>
+				<option>搭配分享</option>
+				<option value="{lanrain::C('site_url')}/weTall/index.php?g=home&m=application&a=index">实体店入口</option>
+				<option>我的资料</option>
+				</select>
 				</div>
 				<div class="system l"></div>
 			</td>
@@ -64,7 +120,8 @@ td{text-align: -webkit-left;}
 		<tr bgcolor="#F1F1F1">
 			<td align="right" height="42" width=""></td>
 			<td>
-				<div class="mr15 l"><input class="txt" name="menutypeval" value="{lanrain:$show.url}" type="text"></div>
+			    
+				<div class="mr15 l"><input class="txt" size="55" id="menutypeval" name="menutypeval" value="{lanrain:$show.keyword}" type="text"></div>
 				<div class="system l"></div>
 			</td>
 		</tr>

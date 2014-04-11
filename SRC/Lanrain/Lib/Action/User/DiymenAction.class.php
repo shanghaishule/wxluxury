@@ -92,12 +92,12 @@ class DiymenAction extends UserAction{
 			else
 				$data0['url'] = $data0['menutypeval'];
 				
-			//dump($data0);exit;
+			
 			$db = M('Diymen_class');
 			if ($db->create($data0) === false) {
 				$this->error('创建数据对象失败！');
 			} else {
-				$id = $db->save();
+				$id = $db->save();//dump($db->getLastSql());exit;
 				if ($id) {
 					if ($data0['menutype'] == 'keyword') {
 						$data['pid']     = $id;

@@ -7,7 +7,26 @@
 }
 td{text-align: -webkit-left;}
 </style>
-
+<script>
+			    function menuurl(){
+					  var outurl = document.getElementById("outurl").value;
+					  document.getElementById("menutypeval").value = outurl;
+					  if(outurl == ""){
+						  document.getElementById("menutype1").checked = "checked";
+					  }else{
+						  document.getElementById("menutype").checked = "checked";
+						  document.getElementById("menutypeval").disabled = "";
+					  }
+				  }
+				  function clickurl(){						  
+					   document.getElementById("menutypeval").disabled = "";
+					   document.getElementById("outurl").disabled = "";
+				  }
+				  function clickurl2(){		
+					  document.getElementById("menutypeval").value = "";
+					  document.getElementById("outurl").disabled = "true";
+				  }
+			    </script>
 	<form action="" method="post" id="realinfo_form">
 	<table border="0" cellpadding="0" cellspacing="0" width="100%">
 		<tbody>
@@ -36,8 +55,18 @@ td{text-align: -webkit-left;}
 			<td align="right" height="42">类型：　</td>
 			<td>
 				<div class="mr15 l">
-				<input type="radio" name="menutype" checked="checked" id="menutype1" value="keyword">关联关键词
-				<input type="radio" name="menutype" id="menutype2" value="url">外链接url
+				<input type="radio" name="menutype" onclick="clickurl2()"  checked="checked" id="menutype1" value="keyword">关联关键词
+				<input type="radio" name="menutype" onclick="clickurl()" id="menutype2" value="url">外链接url <select name="outurl" id="outurl" onchange="menuurl()">
+				<option value="{lanrain::C('site_url')}/weTall/index.php?g=home&m=index&a=intime">整点扫货</option>
+				<option value="{lanrain::C('site_url')}/weTall/index.php?g=home&m=index&a=Oneyuan">一元购</option>
+				<option value="{lanrain::C('site_url')}/weTall/index.php?g=home&m=index&a=brandshop">名店导航</option>
+				<option vaule="">每日快讯</option>
+				<option>品牌靓品</option>
+				<option>店内促销</option>
+				<option>搭配分享</option>
+				<option value="{lanrain::C('site_url')}/weTall/index.php?g=home&m=application&a=index">实体店入口</option>
+				<option>我的资料</option>
+				</select>
 				</div>
 				<div class="system l"></div>
 			</td>
@@ -45,7 +74,8 @@ td{text-align: -webkit-left;}
 		<tr bgcolor="#F1F1F1">
 			<td align="right" height="42" width=""></td>
 			<td>
-				<div class="mr15 l"><input class="txt" name="menutypeval" value="" type="text"></div>
+			    
+				<div class="mr15 l"><input class="txt" name="menutypeval" size="55" id="menutypeval" value="" type="text"></div>
 				<div class="system l"></div>
 			</td>
 		</tr>
