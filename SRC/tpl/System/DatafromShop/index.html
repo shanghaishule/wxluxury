@@ -37,12 +37,10 @@ function shopSearch(){
 			                                                       品牌：
 			                <input type="text" name="brand" class="text" id="brand" value="{Lanrain:$brand}"> &nbsp;			                
 							<select id ="brandlist"  class="text" onchange="document.getElementById('brand').value=this.options[this.selectedIndex].text" 
-									style="width:150px;height:19px;CLIP: rect(auto auto auto 131px); POSITION: absolute ;margin-left:-140px;margin-top:3px;">
-															
+									style="width:150px;height:19px;CLIP: rect(auto auto auto 131px); POSITION: absolute ;margin-left:-140px;margin-top:3px;">															
 					            <volist name="brndlist" id="val" >
 									<option>{Lanrain:$val.name}</option>
-					            </volist>								
-								 
+					            </volist>																 
 							<select>			                
 			                &nbsp;&nbsp;&nbsp;&nbsp;
 							<input type="file" name="upd_shop" id="upd_shop" > 		                    
