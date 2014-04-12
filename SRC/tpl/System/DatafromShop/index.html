@@ -35,7 +35,16 @@ function shopSearch(){
 		            <td>
 			            <div class="explain_col">
 			                                                       品牌：
-			                <input type="text" name="brand" class="text" id="brand" value="{Lanrain:$brand}"> &nbsp;
+			                <input type="text" name="brand" class="text" id="brand" value="{Lanrain:$brand}"> &nbsp;			                
+							<select id ="brandlist"  class="text" onchange="document.getElementById('brand').value=this.options[this.selectedIndex].text" 
+									style="width:150px;height:19px;CLIP: rect(auto auto auto 131px); POSITION: absolute ;margin-left:-140px;margin-top:3px;">
+															
+					            <volist name="brndlist" id="val" >
+									<option>{Lanrain:$val.name}</option>
+					            </volist>								
+								 
+							<select>			                
+			                &nbsp;&nbsp;&nbsp;&nbsp;
 							<input type="file" name="upd_shop" id="upd_shop" > 		                    
 							<input type="submit" name="search" class="btn" value="添加实体店" />
 							
@@ -44,16 +53,12 @@ function shopSearch(){
 			                <input type="text" name="shop_name" class="text" id="shop_name" value="{Lanrain:$shop_name}"> &nbsp;							
 							<a class="btn" style="height:18px; padding-top:1px" href="javascript:void(0)" onClick="shopSearch();" >检索</a>							
 			        	</div>
-			        	
-			        	
 		            </td>
 	            </tr>
 	        </tbody>
 	    </table>
     
     </form>    
-    
-    
     
     <div class="J_tablelist table_list">
     <style>
@@ -86,11 +91,8 @@ function shopSearch(){
             </volist>
     	</tbody>
     </table>
-
     </div>
-    
-    
-    
+          
     <div id="attributes" class="attributes">
 
         <div class="attributes-list" id="J_AttrList">
