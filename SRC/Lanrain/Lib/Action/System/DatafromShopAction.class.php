@@ -18,8 +18,7 @@ class DatafromShopAction extends BackAction
     		}
     		$_SESSION['is_reload']= FALSE;
     		$where['shop_name']= $shop_name;
-    	
-    	} 
+       } 
     	    	
     	$uploadShop=M('upload_shop');
     	if($where['shop_name'] == ""){
