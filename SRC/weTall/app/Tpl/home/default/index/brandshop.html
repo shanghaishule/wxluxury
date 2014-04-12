@@ -54,6 +54,13 @@ function searchshop(id){
     </script>
 </div>
 <div class="clear_kongge"></div>
+<div class="naviga">
+   <div class="shechipin">
+	   <a href="{:U('index/test',array('order'=>'hot'))}"><img width="30%" height="45" src="__STATIC__/weixin/images/luxury/images/home/reimen.png"></a>
+	   <a href="{:U('index/test',array('filter'=>'guonei'))}"><img width="30%" height="45" src="__STATIC__/weixin/images/luxury/images/home/guonei.png"></a>
+	   <a href="{:U('index/test',array('filter'=>'luxury'))}"><img width="30%" height="45" src="__STATIC__/weixin/images/luxury/images/home/shechipin.png"></a>
+   </div>
+</div>
    <volist name="brand" id="product" >
     <div class="img">
       <div class="img_detail">
@@ -72,8 +79,7 @@ function searchshop(id){
   <form id="searchShop" action="{:U('index/test')}" method="post">
      <input type="hidden" name="longitude" value="" id="longitude">
      <input type="hidden" name="latitude" value="" id="latitude">
-     <input type="hidden" name="brand_id" id="txtHint">
-    
+     <input type="hidden" name="brand_id" id="txtHint">   
    </form>
    <script type="text/javascript">
    (function() { // 闭包
