@@ -180,6 +180,11 @@ class indexAction extends frontendAction {
     		$longitude = $this->_POST("longitude","trim");
     		$latitude = $this->_POST("latitude","trim");
     		$brand_id = $this->_POST("brand_id","trim");
+    		$brand_data['id'] = $brand_id;
+    		$brandval = M("brandlist");
+    		$volumn = $brandval->where($brand_data)->find();
+    		$brand_data_new["volume"] = $volumn["volume"] + 1;
+    		$brandval->where($brand_data)->save($brand_data_new);
     		$where["BelongBrand"] = $brand_id;
     		$data["id"]=$brand_id;
     		$endPoint = $wecha_shop->where($where)->select();
