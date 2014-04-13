@@ -35,11 +35,28 @@
 					  
 					  </TD>
 					</TR>
-					<TR><td colspan="6" style="text-align:center;"><a href="{lanrain::U('User/Index/get_goods',array('id'=>$vo['id'],'token'=>$vo['token']))}" class="btnGreens" >领取品牌商品</a></td>
+					<TR>
+					<td colspan="2" style="text-align:center;">请填写商品的货号：</td>
+					<td colspan="3" style="text-align:center;">
+					<script>
+					 function go_fetch(){
+						 var shop_id = $("#Huohao").val();
+						 if(shop_id == ""){
+							 alert("请填写货号");return false;
+						 }else{
+							 $("#shopid").submit();
+						 }
+					 }
+					</script>
+					<form id="shopid" action="{lanrain::U('User/Index/get_goods',array('id'=>$vo['id'],'token'=>$vo['token']))}" method="post">
+					<input type="text" name="Huohao" id="Huohao" class="px" placeholder="请填写货号">
+					</form></td>
+					<td colspan="1" style="text-align:center;">
+					<a href="javascript:void(0)" onclick="go_fetch()" class="btnGreens" >品牌商品入库</a></td>
 					
 					</TR>
 					<TR><td colspan="6" style="text-align:center;height:47px;line-height:47px;color:red;padding:10px;">
-					领取成功后，请点击 "功能管理 -> 商务 -> 微商城 -> 商品管理"  查看
+					领取成功后，请点击 "功能管理 -> 商务 -> 微商城 -> <a href="/weTall/index.php?g=admin&m=index&a=index&tokenTall={Lanrain:$vo.token}">商品管理</a>"  查看
 					</td>
 					</TR>
                   </volist>

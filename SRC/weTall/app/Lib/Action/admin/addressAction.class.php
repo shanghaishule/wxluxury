@@ -19,7 +19,7 @@ class addressAction extends backendAction
     	$tokenTall = $this->getTokenTall();
     	$this->assign('tokenTall',$tokenTall);
         $big_menu = array(
-            'title' => L('添加发货地址'),
+            'title' => '添加发货地址',
             'iframe' => U('address/add',array('tokenTall'=>$tokenTall)),
             'id' => 'add',
             'width' => '550',

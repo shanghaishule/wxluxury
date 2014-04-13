@@ -63,6 +63,7 @@ class backendAction extends baseAction
             if (method_exists($this, '_before_insert')) {
                 $data = $this->_before_insert($data);                
             }
+
             if (!empty($_SESSION["img_name"])) {
             	$data["img"] = "/weTall/data/upload/item/".date('ym/d/').$_SESSION["img_name"];
             }

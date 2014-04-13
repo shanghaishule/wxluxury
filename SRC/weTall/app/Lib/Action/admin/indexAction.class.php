@@ -8,7 +8,7 @@ class indexAction extends backendAction {
         
     }
 
-    public function index() {
+    public function index() {    	
            
         $top_menus = $this->_mod->admin_menu(0);
         $this->assign('top_menus', $top_menus);

@@ -497,7 +497,14 @@ class indexAction extends frontendAction {
     }
     
     public function brandshop(){
-    	$brand = M("brandlist")->order("id asc")->select();
+    	$filter = $this->_get("filter","trim");
+    	if ($filter == "guonei") {
+    		$where["domain"] = 0;
+    	}elseif ($filter == "luxury"){
+    		$where["domain"] = 1;
+    	}
+    	
+    	$brand = M("brandlist")->where($where)->order("volume desc")->select();
     	$this->assign("brand",$brand);
     	$this->display();
     }

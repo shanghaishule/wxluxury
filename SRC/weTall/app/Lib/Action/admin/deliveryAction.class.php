@@ -12,7 +12,7 @@ class deliveryAction extends backendAction
     	$tokenTall = $this->getTokenTall();
     	$this->assign('tokenTall',$tokenTall);
         $big_menu = array(
-            'title' => L('添加快递'),
+            'title' => '添加快递',
             'iframe' => U('delivery/add',array('tokenTall'=>$tokenTall)),
             'id' => 'add',
             'width' => '400',
