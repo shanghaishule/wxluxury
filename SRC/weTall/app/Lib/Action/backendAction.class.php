@@ -63,17 +63,12 @@ class backendAction extends baseAction
             if (method_exists($this, '_before_insert')) {
                 $data = $this->_before_insert($data);                
             }
-            $date_data = $this->_post("date","trim");
-            if (!empty($date_data)) {
-            	$data["date"]=strtotime($date_data);
-            }
             if (!empty($_SESSION["img_name"])) {
             	$data["img"] = "/weTall/data/upload/item/".date('ym/d/').$_SESSION["img_name"];
             }
             if (!empty($_SESSION["img_name2"])) {
             	$data["imgurl"] = "/weTall/data/upload/item/".date('ym/d/').$_SESSION["img_name2"];
-            }
-            
+            }            
             if( $mod->add($data) ){
                 if( method_exists($this, '_after_insert')){
                     $id = $mod->getLastInsID();
