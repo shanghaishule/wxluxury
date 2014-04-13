@@ -24,7 +24,7 @@ class userAction extends backendAction
 
     public function _before_index() {
         $big_menu = array(
-            'title' => L('添加会员'),
+            'title' => '添加会员',
             'iframe' => U('user/add'),
             'id' => 'add',
             'width' => '500',

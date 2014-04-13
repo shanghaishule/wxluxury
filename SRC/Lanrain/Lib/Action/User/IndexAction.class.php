@@ -19,6 +19,18 @@ class IndexAction extends UserAction{
 		$this->assign('page',$page->show());
 		$this->display();
 	}
+	public function addressselect(){
+		$upload_shop = M("upload_shop");
+		$where["brand_name"] = $this->_get("name","trim");
+		$result = $upload_shop->where($where)->select();
+		if ($result){
+			// 成功后返回客户端新增的用户ID，并返回提示信息和操作状态
+			$this->ajaxReturn($result,"新增成功！",1);
+		}else{
+			// 错误后返回错误的操作状态和提示信息
+			$this->ajaxReturn(0,"新增错误！",0);
+		}
+	}
 	//添加公众帐号
 	public function add(){
 		$randLength=6;
@@ -36,7 +48,7 @@ class IndexAction extends UserAction{
 		//品牌
 
 		$brand = M("brandlist")->select();
-		$this->assign("brand",$brand);
+		$this->assign("brand",$brand);		
 		
 		//地理信息
 		if (C('baidu_map_api')){
@@ -120,11 +132,16 @@ class IndexAction extends UserAction{
 					M('Users')->field('wechat_card_num')->where(array('id'=>session('uid')))->setInc('wechat_card_num');
 					$this->addfc();
 					$weChaShop = M("wecha_shop");
-					$data1["name"] = $_POST["wxname"];
+					
 					$headurl = $_POST["headerpic"];
 					$data1["headurl"] = substr($headurl, 0,strlen($headurl));
 					$data1["weName"] = $_POST["wxname"];
 					$data1["address"] = $_POST["address"];
+					$up_shop['id'] = $this->_post("up_shop_id","trim");
+					$select_shop = M("upload_shop")->where($up_shop)->find();
+					
+					$data1["name"] = $select_shop["shop_name"];
+					$data1["phone"] = $select_shop["phone"];
 					$longitude = $this->_POST("longitude","trim");
 					$longitudes = explode(",", $longitude);
 					$data1["longitude"] = preg_replace('/\)/',"",$longitudes[1]);
@@ -205,6 +222,7 @@ class IndexAction extends UserAction{
 		
 		$brand = $wecha_shop->where($wecha_shop_data)->find();
 		$items_taobao_data["brand"] = $brand["BelongBrand"];
+		$items_taobao_data["Huohao"] = $this->_post("Huohao","trim");
 		$item_goods = $items_taobao->where($items_taobao_data)->select();
 		foreach ($item_goods as $item_good){
 			$item_good["tokenTall"] = $token;
@@ -224,7 +242,7 @@ class IndexAction extends UserAction{
 		if ($get_num > 0) {
 			$message = "您本次成功领取".$get_num."商品，有".$failed_num ++."商品没有成功";
 		}else{
-			$message = "没有数据可以领取";
+			$message = "你填写的货号不存在！";
 		}
 		$this->success($message,U('Index/index'));
 	}

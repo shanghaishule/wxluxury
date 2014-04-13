@@ -12,6 +12,10 @@
   var geocoder;
   var map;
   function initialize() {
+	  var address = document.getElementById("address").value;
+	  if(address == ""){
+		  alert("请选择或者填写地址");return;
+	  }
     geocoder = new google.maps.Geocoder();
     var latlng = new google.maps.LatLng(31.2009294, 121.40162899999996);
     var myOptions = {
@@ -24,7 +28,7 @@
   function codeAddress() {
 	  initialize();
 
-	  var address = document.getElementById("address").value;
+	  var address = document.getElementById("address").value;	  
     geocoder.geocode( { 'address': address}, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
 		  document.getElementById('result').value=results[0].geometry.location;
@@ -90,7 +94,41 @@
                 <tr>
                   <th><span class="red">*</span>实体店品牌：</th>
                   <td>
-                    <select id="brandvalue" name="brandchoose" autofocus>
+                    <script>
+                    function change_brand(brand_name){
+                    	$.get('./index.php?g=User&m=Index&a=addressselect&name='+brand_name,function(data,status){
+                    		var obj = eval('('+  data +')');
+                    		var dataobj = obj.data;
+                    		var x=document.getElementById("ddlTest");
+                    		x.length = 0;
+                    		//appendsele("","请选择实体店地址");
+                    		for(i=0;i<dataobj.length;i++){
+                    			x.length = i-1;
+                    			appendsele(dataobj[i].id,dataobj[i].lbs_addr);
+		                    }
+                    	  });
+                    }
+                    function appendsele(value,text){
+                    	var x=document.getElementById("ddlTest");
+                    	if (x.selectedIndex>=0){
+                    	    var y=document.createElement('option');
+                    	    y.value=value;
+                    	    y.text=text;
+                    	    y.selected=true;
+                    	    var sel=x.options[x.selectedIndex]; 
+                    	    try
+                    	      {
+                    	      x.add(y,sel); // standards compliant
+                    	      }
+                    	    catch(ex)
+                    	      {
+                    	      x.add(y,x.selectedIndex); // IE only
+                    	      }
+                    	    }
+                    }
+                    
+                    </script> 
+                    <select onchange="change_brand(this.options[this.selectedIndex].text)" id="brandvalue" name="brandchoose" autofocus>
                     <option value="" selected>请选择品牌</option>
                     <volist name="brand" id="bname">
                     <option value="{Lanrain:$bname.id}">{Lanrain:$bname.name}</option>
@@ -101,17 +139,16 @@
                   <th><span class="red">*</span>实体店地址：</th>
                   <td>
                     <style>#address:-webkit-input-placeholder { 
-color: #999; 
--webkit-transition: color.5s; 
-} 
-#address:-webkit-input-placeholder, input:hover::-webkit-input-placeholder { 
-color: #c2c2c2; 
--webkit-transition: color.5s; 
-} </style>
+					color: #999; 
+					-webkit-transition: color.5s; 
+					} 
+					#address:-webkit-input-placeholder, input:hover::-webkit-input-placeholder { 
+					color: #c2c2c2; 
+					-webkit-transition: color.5s; 
+					} </style>  
                     <input id="address" name="address" type="text" required="" class="px" tabindex="1" style="width:200px;POSITION: absolute" value="" placeholder="实体店详细地址" />
-					<select id="ddlTest" onchange="document.getElementById('address').value=this.options[this.selectedIndex].text" style="width:217px;height:30px;CLIP: rect(auto auto auto 200px); POSITION: absolute">
-					<option>tt</option>
-					<option>dd</option> 
+					<select id="ddlTest" name="up_shop_id"  onchange="document.getElementById('address').value=this.options[this.selectedIndex].text" style="width:217px;height:30px;CLIP: rect(auto auto auto 200px); POSITION: absolute">					
+					<option value="">请选择实体店地址</option>					
 					</select>
     				<span class="ke-button-common" id="getMap" style="margin-top: 5px;margin-left: 225px;">
     				<input type="button"  class="ke-button-common ke-button" value="获取坐标" onclick="javascript:codeAddress();"></span>
