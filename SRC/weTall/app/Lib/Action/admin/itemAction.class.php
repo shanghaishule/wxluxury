@@ -1079,6 +1079,51 @@ class itemAction extends backendAction {
             }
             //$this->assign('cate_list', $cate_list);
             $this->display();
-        }
+        }        
+        
+    }
+      	 
+     /**
+     * 修改
+     */
+    public function add_promotion(){
+    {
+	    	// $this->_name = $this->getActionName();
+	        $mod = D("item");
+	        
+	        if (IS_POST) {
+	            if (false === $data = $mod->create()) {
+	                IS_AJAX && $this->ajaxReturn(0, $mod->getError());
+	                $this->error($mod->getError());
+	            }
+           
+	            $eidt_id = $this->_post("id","trim");
+	            if ($eidt_id != "") {
+	            	 $date_data["id"] = $eidt_id;
+	            }
+	           
+	            if (false !== $mod->save($data)) {
+	            	
+	                IS_AJAX && $this->ajaxReturn(1, L('operation_success'), '', 'add_promotion');
+	                $this->success(L('operation_success'));
+	            } else {
+	                IS_AJAX && $this->ajaxReturn(0, L('operation_failure'));
+	                $this->error(L('operation_failure'));
+	            }
+	        } else {
+	        	$brand = $this->_get('brand', 'intval');
+	        	$where['brand']=$brand;
+	        	$prompt = $mod->where($where)->select();
+
+	        	$this->assign('prompt', $prompt);
+	            if (IS_AJAX) {
+	                $response = $this->fetch();
+	                $this->ajaxReturn(1, '', $response);
+	            } else {
+	                $this->display();
+	            }
+	        }
+	    }
+    	 
     }
 }
