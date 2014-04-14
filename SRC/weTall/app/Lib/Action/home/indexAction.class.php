@@ -43,7 +43,7 @@ class indexAction extends frontendAction {
         $weChaShopDetail = $weChaShop->where($weshopData)->find();//var_dump($weshopData);die();
         $this->assign("weshopData",$weChaShopDetail);
         
-        /*收藏*/
+        /*收藏
         if ($_SESSION['user_info']) {
         	$userid = $_SESSION['user_info']['id'];
         	$shopfav_mod = M('shop_favi');
@@ -56,7 +56,7 @@ class indexAction extends frontendAction {
         }else{
         	$favi = "no";
         }
-        
+        */
         //首次进入首页
         $index_num2 = $_SESSION["index_num2"];
         if ($index_num2 == "") {
@@ -211,8 +211,13 @@ class indexAction extends frontendAction {
     		$this->assign("searchNear","Y");
     		$this->assign("nearShop",$nearShop); 
     	}
-    	
-    	$this->assign("City","北京");
+    	$url = "http://api.map.baidu.com/geocoder?location=".$latitude.",".$longitude."&output=xml&key=28bcdd84fae25699606ffad27f8da77b";
+    	//$url = "http://api.map.baidu.com/geocoder?location=31.256748,121.595578&output=xml&key=28bcdd84fae25699606ffad27f8da77b";
+    	$city_data = file_get_contents($url);
+    	preg_match('/<city>.*<\/city>/',$city_data,$total_page);
+    	//$city_info = iconv('GBK', 'UTF-8',$total_page[0]);echo $city_info;die();
+    	$currentcity = preg_replace('/市/',"",$total_page[0]);
+    	$this->assign("City",$currentcity);
     	$this->assign("title",$this->_post("keywords","trim"));
     	$this->display();
     }
@@ -575,42 +580,32 @@ class indexAction extends frontendAction {
     	$tokenTall = $this->getTokenTall();
     	if($_POST['act']){
     		$act = $_POST['act'];
+    		$item_id = $act;
     		if ($_SESSION['user_info']) {
 	    		$userid = $_SESSION['user_info']['id'];
 	    		$shopfav_mod = M('shop_favi');
-	    		$insdata = array('userid'=>$userid, 'tokenTall'=>$tokenTall);
+	    		$insdata = array('userid'=>$userid, 'item_id'=>$item_id);
 	    		if ($shopfav_mod->where($insdata)->find()) {
 	    			//已经有记录的情况下
-	    			if ($act == "add") {
-	    				//收藏
+	    			
 	    				$data = array('status'=>2);
-	    			}else{
-	    				//取消收藏
-	    				if($shopfav_mod->where($insdata)->delete()){
-	    					//成功
-	    					$data = array('status'=>1);
-	    				}else{
-	    					//失败
-	    					$data = array('status'=>2);
-	    				}
-	    			}
+	    			
 	    			
 	    		}else{
-	    			//没有记录的情况下
-	    			if ($act == "add") {
+	    			
 	    				//收藏
 		    			if ($shopfav_mod->add($insdata)) {
 		    				//成功
 		    				$data = array('status'=>1);
+		    				$item["id"] = $item_id;
+		    				$item_data = M("item")->where($item)->find();
+		    				$item_data_new["favi"]=$item_data["favi"]+1;
+		    				M("item")->where($item)->save($item_data_new);
 		    			}else{
 		    				//失败
 		    				$data = array('status'=>2);
 		    			}
-	    			}else{
-	    				//取消收藏
-	    				//成功
-	    				$data = array('status'=>1);
-	    			}
+	    			
 	    		}
 	    	}else{
 	    		//当前未登录

@@ -355,12 +355,12 @@ div.order_cancel_box p span {color: #f34; font-weight: bold;}
 #nav .navlist li#n_3 i{ position:absolute; height:14px; width:14px;background:#C00; color:#fff; left:55%; top:10px; border-radius:50%; font-style:normal; text-align:center; font-size:12px; display:none;}
 #nav .navlist li span{ display:inline-block; width:100%; height:45px; cursor:pointer;}
 
-#nav .navlist li#n_4{width:50%;padding-top:1px;}
+#nav .navlist li#n_4{width:62%;padding-top:1px;}
 #nav .navlist li#n_5{width:55%;margin-left:10px;}
-#nav .navlist li#n_3{width:50%;}
+#nav .navlist li#n_3{width:69%;}
 #nav .navlist li#n_0{width:40px;}
 #nav .navlist li#n_4 span{ text-align:center;padding-top:1px;font-size:1.5em; color:white;font-weight:700;}
-#nav .navlist li#n_3 span{ text-align:center;padding-top:7px;font-size:1.3em; color:white;font-weight:700;}
+#nav .navlist li#n_3 span{ text-align:center;padding-top:7px;font-size:1.2em; color:white;font-weight:700;}
 #nav .navlist li#n_1{text-align:center;color:white;font-weight:700;background:none;}
 
 .banner{position: relative;}
@@ -378,7 +378,7 @@ div.order_cancel_box p span {color: #f34; font-weight: bold;}
 
 .shoplogo{width:320px;position: relative;z-index:1;}
 .shoplogourl{width:20%;float:left;}
-.favi{width:80%;float:left;border-top: 1px solid #EAEAEA;}
+.favi{width:80%;float:left;border-top: 1px solid #EAEAEA;color:#9F79EE;}
 .favi #operdetail li{display:inline-block;font-size:10px;width:30%;text-align:center;}
 .favi #operdetail #m_1,.favi #operdetail #m_2,.favi #operdetail #m_3{border-left: 1px solid #EAEAEA;}
 
@@ -997,3 +997,4 @@ div.order_cancel_box p span {color: #f34; font-weight: bold;}
 .Intime_detail{margin:0 auto;width:100%;color:rgb(198,198,198);font-size:13px;text-align:center;height:20px;}
 .intime_img{background:url(../images/luxury/images/Ontime/bg_02.png) no-repeat;background-size:100% 100%;padding:5px;}
 .status_img{z-index:1000;position:absolute;width:100%;height:25px;text-align:right;float:right;margin-top:5px;padding-right:5px;}
+

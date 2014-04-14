@@ -19,7 +19,7 @@ class itemAction extends frontendAction {
         !$id && $this->_404();
         $tokenTall = $this->getTokenTall();
         $item_mod = M('item');
-        $item = $item_mod->field('id,title,Uninum,old_price,goods_stock,intro,price,info,comments,add_time,goods_stock,buy_num,brand,size,color,images')->where(array('id' => $id, 'status' => 1))->find();
+        $item = $item_mod->field('id,title,Uninum,favi,old_price,goods_stock,intro,price,info,comments,add_time,goods_stock,buy_num,brand,size,color,images')->where(array('id' => $id, 'status' => 1))->find();
         !$item && $this->_404();
     
         //大小
@@ -34,7 +34,7 @@ class itemAction extends frontendAction {
         	}
         }
 
-        //图片
+	    //图片
         $imgarr = substr(trim($item['images']),0,1) == '|' ? explode('|', substr(trim($item['images']),1)) : explode('|', $item['images']);
         //品牌 
         $brand = M('brandlist')->field('name')->find($item['brand']);
@@ -65,10 +65,18 @@ class itemAction extends frontendAction {
         	}
         }
         
+        //收藏
+        $favi['userid'] = $_SESSION['user_info']['id'];
+        $favi['item_id'] = $item['id'];
+        if (M("shop_favi")->where($favi)->find()) {
+        	$this->assign("favi_suc","Y");
+        }
+        
+        
         $this->assign('countSize', $countSize);
         $this->assign('countColor', $countColor);
 
-//>>>>>>> branch 'master' of https://github.com/shanghaishule/weixinshop.git
+
         $this->assign('item', $item);
         $this->assign('img_list', $img_list);
         $this->assign('tokenTall', $tokenTall);

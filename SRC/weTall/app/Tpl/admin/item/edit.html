@@ -29,14 +29,21 @@
 </if>
   value="{$vo.id}" >{$vo.name}</option>
                 </volist>
-                </select><input type="text" name="item_model" value="2014" size=4 maxlength=4> 款</td>
+                </select><input type="text" name="item_model" value="{$vo.item_model}" placeholder="年度款" size=4 maxlength=4> 款</td>
+			</tr>
+			<tr>
+				<th>商品名称 :</th>
+				<td><input  type="text" name="title" id="J_title" class="input-text" size="60" value="{$info.title}">
+				<input type="hidden" name="goods_id" id="J_goods_id" value="{$info.id}">
+				</td>
+			    
 			</tr>
 			<tr>
 				<th width="120">型号 :</th>
                 <td> <div id="size"><input type="button" value="  添加    " onclick="addSize()">
-                     <volist name="sizearr" id="sizearr">
-                      <if condition="$sizearr neq ''">
-                      <input type="text" name="size[]" value="{$sizearr}" size='12'>
+                     <volist name="sizearr" id="sizear">
+                      <if condition="$sizear neq ''">
+                        <input type="text" name="size[]" value="{$sizear}" size='12'>
                       </if>
                      </volist>
                      </div>
@@ -52,21 +59,30 @@
                      </volist>
                      </div></td>
 			</tr>
-            <tr>
-				<th>商品名称 :</th>
-				<td><input  type="text" name="title" id="J_title" class="input-text" size="60" value="{$info.title}">
-				<input type="hidden" name="goods_id" id="J_goods_id" value="{$info.id}">
-				</td>
-			    
+			<tr>
+			    <th width="120">库存细则：</th>
+			    <td>
+			    <table>
+			    <volist name="colorarr" id="color2">
+			        <if condition="$color2 neq ''">
+			        <volist name="sizearr" id="size2">
+			          <if condition="$size2 neq ''">
+				          <tr>
+				            <td>{$color2}</td>
+				            <td>{$size2}</td>
+				            <td><input type="number" placeholder="库存"></td>
+				          </tr>
+			          </if>
+			        </volist>
+			        </if>
+			    </volist>
+			    </table>
+			    </td>			
+			</tr>         
+		    <tr>
+				<th>商品库存 :</th>
+				<td><input id='J_goods_stock' onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" type="text" name="goods_stock" class="input-text" size="10" value="{$info.goods_stock}"> </td>
 			</tr>
-		<!--	 <tr>
-				<th>颜色 :</th>
-				<td><input type="text" name="color" id="J_color" class="input-text" size="30" value="{$info.color}" ><font color="#FD5873">（不需要可不填, 格式：多个用竖杆“|”隔开，如：蓝色|红色|白色）</font></td>
-			</tr>
-			   <tr>
-				<th>尺寸 :</th>
-				<td><input type="text" name="size" id="J_size" class="input-text" size="30" value="{$info.size}"><font color="#FD5873">（不需要可不填, 格式：多个用竖杆“|”隔开，如：蓝色|红色|白色）</font></td>
-			</tr>-->
 			<tr>
                 <th>商品简介 :</th>
                 <td><textarea name="intro" cols="80" rows="2">{$info.intro}</textarea></td>
@@ -78,11 +94,11 @@
 					<input type="file" name="img" />
 				</td>
  			</tr>
- 			<tr>
+ 			<!-- <tr>
 		      <th>是否推荐:</th>
 		      <td><input value="1" <if condition='$info.news eq 1'>checked=''</if> type="checkbox" name="news" >新品&nbsp; <input value="1" <if condition='$info.tuijian eq 1'>checked=''</if> type="checkbox" name="tuijian" >推荐</td>
 		    </tr>
-		   
+		    -->
 		    
 		     <tr>
 		      <th>运费:</th>
@@ -141,10 +157,7 @@
 				<th>打折价格 :</th>
 				<td><input id='J_price' onkeyup="this.value=this.value.replace(/[^0-9.]/g,'')" onafterpaste="this.value=this.value.replace(/[^0-9.]/g,'')"  type="text" name="price" size="10" class="input-text" value="{$info.price}"> 元</td>
 			</tr>
-			<tr>
-				<th>商品库存 :</th>
-				<td><input id='J_goods_stock' onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" type="text" name="goods_stock" class="input-text" size="10" value="{$info.goods_stock}"> </td>
-			</tr>
+			
 			<!--<tr>
 				<th width="120">商品来源 :</th>
                 <td>

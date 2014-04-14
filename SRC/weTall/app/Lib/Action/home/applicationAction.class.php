@@ -37,11 +37,27 @@ class applicationAction extends frontendAction{
 		}else{
 			$this->assign('apply_again','0');
 		}
+		//品牌
 		
+		$brand = M("brandlist")->select();
+		$this->assign("brand",$brand);
 		//dump($_SESSION);exit;
 		$this->display();
 	}
 
+	public function addressselect(){
+		$upload_shop = M("upload_shop");
+		$where["brand_name"] = $this->_get("name","trim");
+		$result = $upload_shop->where($where)->select();
+		if ($result){
+			// 成功后返回客户端新增的用户ID，并返回提示信息和操作状态
+			$this->ajaxReturn($result,"新增成功！",1);
+		}else{
+			// 错误后返回错误的操作状态和提示信息
+			$this->ajaxReturn(0,"新增错误！",0);
+		}
+	}
+	
 	public function add(){
 		if($_POST){
 			if ($this->application_mod->create()) {

@@ -51,12 +51,12 @@ class IndexAction extends UserAction{
 		$this->assign("brand",$brand);		
 		
 		//地理信息
-		if (C('baidu_map_api')){
+		//if (C('baidu_map_api')){
 			//$locationInfo=json_decode(file_get_contents('http://api.map.baidu.com/location/ip?ip='.$_SERVER['REMOTE_ADDR'].'&coor=bd09ll&ak='.C('baidu_map_api')),1);
-			///$this->assign('province',$locationInfo['content']['address_detail']['province']);
+			//$this->assign('province',$locationInfo['content']['address_detail']['province']);
 			//$this->assign('city',$locationInfo['content']['address_detail']['city']);
-			//var_export($locationInfo);
-		}
+			//echo $_SERVER['REMOTE_ADDR'];var_dump($locationInfo);die();
+		//}
 	
 		
 		$this->display();

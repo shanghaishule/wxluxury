@@ -107,11 +107,40 @@
 		        } 	
 		
 		}
-		//xxl
-  </script>
-
 		
-	</script> 
+        function change_brand(brand_name){
+        	$.get('./weTall/index.php?g=home&m=application&a=addressselect&name='+brand_name,function(data,status){
+        		var obj = eval('('+  data +')');
+        		var dataobj = obj.status;
+        		var x=document.getElementById("ddlTest");
+        		x.length = 0;
+        		//appendsele("","请选择实体店地址");
+        		for(i=0;i<dataobj.length;i++){
+        			x.length = i-1;
+        			appendsele(dataobj[i].id,dataobj[i].lbs_addr);
+                }
+        	  });
+        }
+        function appendsele(value,text){
+        	var x=document.getElementById("ddlTest");
+        	if (x.selectedIndex>=0){
+        	    var y=document.createElement('option');
+        	    y.value=value;
+        	    y.text=text;
+        	    y.selected=true;
+        	    var sel=x.options[x.selectedIndex]; 
+        	    try
+        	      {
+        	      x.add(y,sel); // standards compliant
+        	      }
+        	    catch(ex)
+        	      {
+        	      x.add(y,x.selectedIndex); // IE only
+        	      }
+        	    }
+        }
+        
+        </script> 
 </head>
 
 <body id="message">
@@ -134,48 +163,49 @@
 				<div class="history-date">
 					<ul class="history-ul">
 						<if condition="($apply_again eq '0')">
-						<h2 class="first" style="position: relative;">请填写您的申请信息</h2>
+						<h2 class="first" style="position: relative;">请填写实体店注册信息</h2>
 						<li class="green ly1" >
 						<dl>
 							<table style = "width:100%;">
+							    <tr>
+							       <td><label class="pxlabel" for="brand">品牌：</label></td>
+							       <td><select class="px" onchange="change_brand(this.options[this.selectedIndex].text)" id="brandvalue" name="brandchoose" autofocus>
+					                    <option value="" selected>请选择品牌</option>
+					                    <volist name="brand" id="bname">
+					                    <option value="{$bname.id}">{$bname.name}</option>
+					                    </volist></select>
+					                </td>
+							    </tr>
 								<tr>
-									<td><label class="pxlabel" for="applicant">姓名：</label></td>
-									<td><input name="applicant" class="px" id="applicant" placeholder="请输入申请人姓名" type="text"></td>
+								    <td><label class="pxlabel" for="addr">城市：</label></td>
+									<td><select name="province" >
+					                    <option value="" selected>省份</option>
+					                    </select><select name="city" >
+					                    <option value="" selected>城市</option>
+					                    </select> </td>
 								</tr>
 								<tr>
 									<td><label class="pxlabel" for="addr">地址：</label></td>
-									<td><input name="addr" class="px" id="addr" placeholder="请输入申请人地址" type="text"></td>
+									<td><input id="address" name="address" type="text" required="" class="px" tabindex="1" style="top:108px;width:180px;POSITION: absolute" value="" placeholder="实体店详细地址" />
+									<select id="ddlTest" name="up_shop_id"  onchange="document.getElementById('address').value=this.options[this.selectedIndex].text" style="top:108px;width:199px;height:41px;CLIP: rect(auto auto auto 180px); POSITION: absolute">					
+									<option value="">请选择实体店地址</option>					
+									</select></td>
 								</tr>
 								<tr>
-									<td><label class="pxlabel" for="phone">电话：</label></td>
+									<td><label class="pxlabel" for="applicant">联系人：</label></td>
+									<td><input name="applicant" class="px" id="applicant" placeholder="请输入联系人" type="text"></td>
+								</tr>
+								<tr>
+									<td><label class="pxlabel" for="phone">手机：</label></td>
 									<td><input name="phone" class="px" id="phone" placeholder="请输入申请人电话" type="text"></td>
 								</tr>
 								<tr>
-									<td><label class="pxlabel" for="trueshop">是否有实体店：</label></td>
-									
-									<!--xxl start-->
-									<td>
-									<input name="trueshop" type="radio" value="1" onchange = "change();" checked><span class="pxlabel">有</span>
-									<input name="trueshop" type="radio" value="0" onchange = "change();"><span class="pxlabel">没有</span>
+									<td><label class="pxlabel" for="QQ">QQ：</label></td>
+									<td><input type="text" name="qq" class="px" id="qq" placeholder="请输入QQ">
 									</td>
 									<!--xxl end-->
 								</tr>
-								<tr>
-								        <!--xxl start-->
-									<!--<td><label class="pxlabel" for="licence" name="worknum" id="worknum" >营业执照注册号：</label></td>-->
-									<td><span class="pxlabel" for="licence" name="worknum" id="worknum" >营业执照注册号：</span></td>
-									<td><input name="licence" class="px" id="licence" placeholder="营业执照注册号" type="text"></td>
-									<!--xxl end-->
-									
-								</tr>
-								<tr id="workname">
-									<td><label class="pxlabel" for="shopname" name="workname" id="workname" >实体店铺名称：</label></td>
-									<td><input name="shopname" class="px" id="shopname" placeholder="实体店名称" type="text"></td>
-								</tr>
-								<tr>
-									<td style="vertical-align:top;"><label class="pxlabeltextarea" for="info">其他补充信息：</label></td>
-									<td><textarea name="info" class="pxtextarea" style="height:150px;" id="info" placeholder="补充信息……"></textarea></td>
-								</tr>
+								
 								<tr><td colspan="2"><a id="showcard1" class="submit" href="javascript:void(0)">提交申请</a></td></tr>
 							</table>
 						</dl>

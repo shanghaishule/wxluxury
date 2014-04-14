@@ -737,6 +737,7 @@ class itemAction extends backendAction {
             //加入颜色和尺码
             $data["size"]=$sizestr;
             $data["color"]=$colorstr;
+            $data["item_model"]=$this->_post("item_model","trim");
             
             //上传相册
             $file_imgs = array();
