@@ -43,7 +43,7 @@
                 <td> <div id="size"><input type="button" value="  添加    " onclick="addSize()">
                      <volist name="sizearr" id="sizear">
                       <if condition="$sizear neq ''">
-                        <input type="text" name="size[]" value="{$sizear}" size='12'>
+                        <input type="text" class="sizes" name="size[]" value="{$sizear}" size='12'>
                       </if>
                      </volist>
                      </div>
@@ -54,7 +54,7 @@
                 <td><div id="color"><input type="button" value="  添加    " onclick="addColor()">
                      <volist name="colorarr" id="color">
                       <if condition="$color neq ''">
-                      <input type="text" name="color[]" value="{$color}" size='12'>
+                      <input type="text" class="colors" name="color[]" value="{$color}" size='12'>
                       </if>
                      </volist>
                      </div></td>
@@ -62,7 +62,7 @@
 			<tr>
 			    <th width="120">库存细则：</th>
 			    <td>
-			    <table>
+			    <table id="addTr">
 			    <volist name="colorarr" id="color2">
 			        <if condition="$color2 neq ''">
 			        <volist name="sizearr" id="size2">
@@ -352,6 +352,17 @@ function addSize()
 function addColor()
 {
     var sizeid=$("#color");
+    var sizes = $(".sizes");alert(sizes);
+    for(i=0;i<sizes.length;i++){
+    	$str='';
+        $str+="<tr align='center'>";
+        $str+="<td><span class='color'></span></td>";
+        $str+="<td>"+size[i].val()+"</td>";
+        $str+="<td><input type='number' name='stock' /></td>";
+        $str+="</tr>";
+        $("#addTr").append($str);   
+
+    }
     sizeid.append("<input name='color[]' type='text' size='12'>&nbsp;");
 }
 $(function() {
