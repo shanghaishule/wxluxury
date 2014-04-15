@@ -1,7 +1,7 @@
 <include file="public:header" />
 <script charset="utf-8" src="__STATIC__/weixin/js/jquery.js" type="text/javascript"></script>
 <!--编辑商品-->
-<form id="info_form" action="{:u('item/edit')}" method="post" enctype="multipart/form-data">
+<form name="info_form" id="info_form" action="{:u('item/edit')}" method="post" enctype="multipart/form-data" >
 <div class="pad_lr_10">
 	<div class="col_tab">
 		<ul class="J_tabs tab_but cu_li">
@@ -70,7 +70,7 @@
 				          <tr>
 				            <td>{$color2}</td>
 				            <td>{$size2}</td>
-				            <td><input type="number" placeholder="库存"></td>
+				            <td><input type="number"  name='stock' onchange='sum_stock()' placeholder="库存"></td>
 				          </tr>
 			          </if>
 			        </volist>
@@ -344,26 +344,61 @@ function del_attr(id,obj)
 <script src="__STATIC__/js/jquery/plugins/colorpicker.js"></script>
 <script src="__STATIC__/js/kindeditor/kindeditor.js"></script>
 <script>
+var colorAdd = 0;
+var sizeAdd = 0;
 function addSize()
 {
-    var sizeid=$("#size");
-    sizeid.append("<input name='size[]' type='text' size='12'>&nbsp;");
-}
-function addColor()
-{
-    var sizeid=$("#color");
-    var sizes = $(".sizes");alert(sizes);
-    for(i=0;i<sizes.length;i++){
+	sizeAdd = sizeAdd + 1;
+    var colors = document.getElementsByName("color[]");
+    for(i=0;i<colors.length;i++){
     	$str='';
-        $str+="<tr align='center'>";
-        $str+="<td><span class='color'></span></td>";
-        $str+="<td>"+size[i].val()+"</td>";
-        $str+="<td><input type='number' name='stock' /></td>";
+        $str+="<tr align='center' style='border-left:5px solid #8B4513;'>";
+        
+        $str+="<td>"+colors[i].value+"</td>";
+        $str+="<td><div name='ouptsize"+sizeAdd+"' class='ouptsize"+sizeAdd+"'></div></td>";
+        $str+="<td><input type='number' placeholder='库存' name='stock' /></td>";
         $str+="</tr>";
         $("#addTr").append($str);   
 
     }
-    sizeid.append("<input name='color[]' type='text' size='12'>&nbsp;");
+    var sizeid=$("#size");
+    sizeid.append("<input onchange='sum_stock()' onkeyup='keydown_size()' name='size[]' type='text' id='mysize" + sizeAdd + "' size='12'>&nbsp;");
+}
+function addColor()
+{
+	colorAdd = colorAdd + 1;
+    var sizeid=$("#color");
+    var sizes = document.getElementsByName("size[]");
+    for(i=0;i<sizes.length;i++){
+    	$str='';
+        $str+="<tr align='center' style='border-left:5px solid #8968CD;'>";
+        $str+="<td><div name='oupt"+colorAdd+"' class='oupt"+colorAdd+"'></div></td>";
+        $str+="<td>"+sizes[i].value+"</td>";
+        $str+="<td><input onchange='sum_stock()' type='number' placeholder='库存' name='stock' /></td>";
+        $str+="</tr>";
+        $("#addTr").append($str);   
+
+    }
+    
+    sizeid.append("<input onkeyup='keydown()' name='color[]' id='mycolor" + colorAdd + "' type='text' size='12'>&nbsp;");
+}
+function keydown(){
+	//alert($("#mycolor"+colorAdd).val());
+	$(".oupt"+colorAdd).html($("#mycolor"+colorAdd).val());
+	}
+function keydown_size(){
+	//alert($("#mycolor"+colorAdd).val());
+	$(".ouptsize"+sizeAdd).html($("#mysize"+sizeAdd).val());
+	}
+function sum_stock(){
+	 var sum_num = 0;
+	 var sizes = document.getElementsByName("stock");
+	 for(i=0;i<sizes.length;i++){
+		 if(sizes[i].value !=""){
+		     sum_num = sum_num + parseInt(sizes[i].value);
+		 }
+	 }
+	$("#J_goods_stock").val(sum_num);
 }
 $(function() {
 	KindEditor.create('#info', {
