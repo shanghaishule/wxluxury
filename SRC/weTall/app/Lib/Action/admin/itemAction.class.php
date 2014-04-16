@@ -682,7 +682,7 @@ class itemAction extends backendAction {
             }
             //if( !$data['cate_id']||!trim($data['cate_id']) ){
             //    $this->error('请选择商品分类');
-            //}
+            //}            
             
              if($_POST['brand']==''){
             	
@@ -737,6 +737,13 @@ class itemAction extends backendAction {
             //加入颜色和尺码
             $data["size"]=$sizestr;
             $data["color"]=$colorstr;
+            
+            //库存细则
+            $detail_stock = $_POST['detail_stock'];
+            if ($detail_stock != "") {
+            	$data["detail_stock"] = $detail_stock;
+            }
+            
             $data["item_model"]=$this->_post("item_model","trim");
             
             //上传相册
@@ -837,6 +844,17 @@ class itemAction extends backendAction {
             $colorstr = $item["color"];
             $colorarr = explode("|",$colorstr);
         	 $this->assign("colorarr",$colorarr);
+        	 
+        	 // 库存细则
+        	 $detail_stock_arr = array();
+        	 $detail_stock1 = $item["detail_stock"];
+        	 if ($detail_stock1 != null) {
+        	 	$stockarr= explode(",",$detail_stock1);
+        	 	foreach ($stockarr as $varstock){
+        	 		$detail_stock_arr[] = explode("|",$varstock);
+        	 	}
+        	 }     	 
+        	 
             
         	//商品详情图
             $imagesstr = $item["images"];
@@ -849,6 +867,7 @@ class itemAction extends backendAction {
             //相册
             $img_list = M('item_img')->where(array('item_id'=>$id))->select();
             $this->assign('img_list', $img_list);
+            $this->assign("detail_stock_arr",$detail_stock_arr);
            
             $this->display();
         }

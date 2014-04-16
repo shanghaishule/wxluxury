@@ -63,6 +63,7 @@
 			    <th width="120">库存细则：</th>
 			    <td>
 			    <table id="addTr">
+			    <if condition="count($detail_stock_arr) eq 0">
 			    <volist name="colorarr" id="color2">
 			        <if condition="$color2 neq ''">
 			        <volist name="sizearr" id="size2">
@@ -70,13 +71,27 @@
 				          <tr>
 				            <td>{$color2}</td>
 				            <td>{$size2}</td>
-				            <td><input type="number"  name='stock' onchange='sum_stock()' placeholder="库存"></td>
+				            <td><input type="number" title="{$color2}|{$size2}" value="0" name='stock' onchange='sum_stock()' placeholder="库存"></td>
 				          </tr>
 			          </if>
 			        </volist>
 			        </if>
 			    </volist>
+			     <else/>
+			        <volist name="detail_stock_arr" id="stock">
+			           <if condition="$stock[0] neq '' and $stock[1] neq ''">
+			              <tr>
+				            <td>{$stock[0]}</td>
+				            <td>{$stock[1]}</td>
+				            <td><input type="number" title="{$color2}|{$size2}" value="{$stock[2]}" name='stock' onchange='sum_stock()' placeholder="库存"></td>
+				          </tr>
+				          </if>
+			          
+			        </volist>
+			    </if>
+			        
 			    </table>
+			    <input type="hidden" id="detail_stock" name="detail_stock">
 			    </td>			
 			</tr>         
 		    <tr>
@@ -244,7 +259,7 @@
 		</table>
 		</div>
         </div>
-		<div class="mt10"><input type="submit" value="{:L('submit')}" id="dosubmit" name="dosubmit" class="btn btn_submit" style="margin:0 0 10px 100px;"></div>
+		<div class="mt10"><input type="button" onclick="deal_stock()" value="{:L('submit')}" id="dosubmit" name="dosubmit" class="btn btn_submit" style="margin:0 0 10px 100px;"></div>
 	</div>
 </div>
 <input type="hidden" name="menuid"  value="{$menuid}"/>
@@ -356,7 +371,7 @@ function addSize()
         
         $str+="<td>"+colors[i].value+"</td>";
         $str+="<td><div name='ouptsize"+sizeAdd+"' class='ouptsize"+sizeAdd+"'></div></td>";
-        $str+="<td><input type='number' placeholder='库存' name='stock' /></td>";
+        $str+="<td><input type='number' placeholder='库存' title='"+colors[i].value+"|' name='stockcolor' /></td>";
         $str+="</tr>";
         $("#addTr").append($str);   
 
@@ -374,7 +389,7 @@ function addColor()
         $str+="<tr align='center' style='border-left:5px solid #8968CD;'>";
         $str+="<td><div name='oupt"+colorAdd+"' class='oupt"+colorAdd+"'></div></td>";
         $str+="<td>"+sizes[i].value+"</td>";
-        $str+="<td><input onchange='sum_stock()' type='number' placeholder='库存' name='stock' /></td>";
+        $str+="<td><input onchange='sum_stock()' type='number' title='|"+sizes[i].value+"' placeholder='库存' name='stocksize' /></td>";
         $str+="</tr>";
         $("#addTr").append($str);   
 
@@ -384,18 +399,62 @@ function addColor()
 }
 function keydown(){
 	//alert($("#mycolor"+colorAdd).val());
+	var sizessize = document.getElementsByName("stocksize");
+	 for(i=0;i<sizessize.length;i++){
+		 if(sizessize[i].value !=""){
+			 document.getElementsByName("stocksize").title = $("#mycolor"+colorAdd).val() + sizessize[i].title;
+		 }
+	 }
 	$(".oupt"+colorAdd).html($("#mycolor"+colorAdd).val());
 	}
 function keydown_size(){
 	//alert($("#mycolor"+colorAdd).val());
+	var sizessize = document.getElementsByName("stockcolor");
+	
+	 alert(sizessize.length);
 	$(".ouptsize"+sizeAdd).html($("#mysize"+sizeAdd).val());
 	}
+function deal_stock(){
+	var sizes = document.getElementsByName("stock");
+	var stock_detail = "";
+	 for(i=0;i<sizes.length;i++){
+		 if(sizes[i].value !=""){
+			 stock_detail = stock_detail + sizes[i].title + "|" + sizes[i].value + ",";
+		 }
+	 }
+	 var sizescolor = document.getElementsByName("stockcolor");
+	 for(i=0;i<sizescolor.length;i++){
+		 if(sizescolor[i].value !=""){
+			 stock_detail = stock_detail + sizescolor[i].title + "|" + sizescolor[i].value + ",";
+		 }
+	 }
+	 var sizessize = document.getElementsByName("stocksize");
+	 for(i=0;i<sizessize.length;i++){
+		 if(sizessize[i].value !=""){
+			 stock_detail = stock_detail + sizessize[i].title + "|" + sizessize[i].value + ",";
+		 }
+	 }
+	 $("#detail_stock").val(stock_detail);
+	 $("#info_form").submit();
+}
 function sum_stock(){
 	 var sum_num = 0;
 	 var sizes = document.getElementsByName("stock");
 	 for(i=0;i<sizes.length;i++){
 		 if(sizes[i].value !=""){
 		     sum_num = sum_num + parseInt(sizes[i].value);
+		 }
+	 }
+	 var sizescolor = document.getElementsByName("stockcolor");
+	 for(i=0;i<sizescolor.length;i++){
+		 if(sizescolor[i].value !=""){
+		     sum_num = sum_num + parseInt(sizescolor[i].value);
+		 }
+	 }
+	 var sizessize = document.getElementsByName("stocksize");
+	 for(i=0;i<sizessize.length;i++){
+		 if(sizessize[i].value !=""){
+		     sum_num = sum_num + parseInt(sizessize[i].value);
 		 }
 	 }
 	$("#J_goods_stock").val(sum_num);
