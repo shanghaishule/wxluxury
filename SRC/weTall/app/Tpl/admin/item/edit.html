@@ -43,7 +43,7 @@
                 <td> <div id="size"><input type="button" value="  添加    " onclick="addSize()">
                      <volist name="sizearr" id="sizear">
                       <if condition="$sizear neq ''">
-                        <input type="text" class="sizes" name="size[]" value="{$sizear}" size='12' readOnly><img onclick="delete_sizetr({$sizear})" height="15" width="15" src="/tpl/User/default/common/images/icons/delete.png" />
+                        <input type="text" class="sizes" name="size[]" id="inpu{$sizear}" value="{$sizear}" size='12' readOnly><img id="inpu_img{$sizear}" onclick="delete_sizetr({$sizear})" height="15" width="15" src="/tpl/User/default/common/images/icons/delete.png" />
                       </if>
                      </volist>
                      </div>
@@ -389,7 +389,7 @@ function addSize()
 
     }
     var sizeid=$("#size");
-    sizeid.append("<input  onchange='keydown_size()' name='size[]' type='text' id='mysize" + sizeAdd + "' size='12'>&nbsp;");
+    sizeid.append("<input  onchange='keydown_size()' name='size[]' type='text' id='mysize" + sizeAdd + "' size='12'><img id='inpu_img{$sizear}' onclick='delete_sizetr({$sizear})' height='15' width='15' src='/tpl/User/default/common/images/icons/delete.png' />&nbsp;");
 }
 function addColor()
 {
@@ -413,7 +413,15 @@ function addColor()
 }
 function delete_sizetr(sizename){
 	var stocktr=$(".stock_tr");
-	alert(stocktr.length);
+	var sizestr="";
+	for(i=0;i<stocktr.length;i++){
+		sizestr=stocktr[i].title.split("|");
+		if(sizestr[1] == sizename){
+			stocktr[i].remove();
+		}
+	}
+	$("#inpu"+sizename).remove();
+	$("#inpu_img"+sizename).remove();
 }
 function keydown(){
 	//输入新颜色的时候改变新增库存行的 title
