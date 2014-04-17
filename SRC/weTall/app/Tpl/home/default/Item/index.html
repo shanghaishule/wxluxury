@@ -239,12 +239,30 @@
             <div class="handle">
 
            <script type="text/javascript">
+           var colorchoose = "";
+           var sizechoose = "";
 	            function sizetitle(size_title){
+	            	sizechoose = size_title;
+	            	if(colorchoose != ""){
+			    		item_id=$("#goodId").val();
+			    		$.get('./index.php?g=home&m=index&a=addressselect&item_id='+item_id+'&color='+colorchoose+"&size="+size_title,function(data,status){
+			    			var obj = eval('('+  data +')');               		
+			    			$("#detail_stock").text(obj.status);
+	                	  });
+			    	}
 	             $(".size_title").css('background','none');
 			     $("#size" + size_title).css('background','url(/weTall/static/images/xiaokuang.png)');
 			     $("#sizeChoose").val(size_title);
 		    }
 		    function colortitle(color_title){
+		    	colorchoose = color_title;
+		    	if(sizechoose != ""){
+		    		item_id=$("#goodId").val();
+		    		$.get('./index.php?g=home&m=index&a=addressselect&item_id='+item_id+'&color='+color_title+"&size="+sizechoose,function(data,status){
+		    			var obj = eval('('+  data +')');               		
+		    			$("#detail_stock").text(obj.status);
+                	  });
+		    	}
 	             $(".color_title").css('background','none');
 			     $("#color" + color_title).css('background','url(/weTall/static/images/xiaokuang.png)');
 			     $("#colorChoose").val(color_title);
@@ -287,7 +305,7 @@
                 <ul>
                     <li class="handle_title">购买数量:</li>
                     <li>
-                        <input type="text" value="1" id="quantity" name="" class="text width1" onafterpaste="this.value=this.value.replace(/\D/g,'')" onkeyup="this.value=this.value.replace(/\D/g,'')" />件（库存<span ectype="goods_stock" class="stock">{$item.goods_stock}</span>件）
+                        <input type="text" value="1" id="quantity" name="" class="text width1" onafterpaste="this.value=this.value.replace(/\D/g,'')" onkeyup="this.value=this.value.replace(/\D/g,'')" />件（库存<span id="detail_stock" ectype="goods_stock" style="color:red;" class="stock">{$item.goods_stock}</span>件）
                     </li>
                 </ul>
             </div>
