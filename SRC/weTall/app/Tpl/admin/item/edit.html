@@ -43,7 +43,7 @@
                 <td> <div id="size"><input type="button" value="  添加    " onclick="addSize()">
                      <volist name="sizearr" id="sizear">
                       <if condition="$sizear neq ''">
-                        <input type="text" class="sizes" name="size[]" value="{$sizear}" size='12'>
+                        <input type="text" class="sizes" name="size[]" value="{$sizear}" size='12' readOnly><img onclick="delete_sizetr({$sizear})" height="15" width="15" src="/tpl/User/default/common/images/icons/delete.png" />
                       </if>
                      </volist>
                      </div>
@@ -54,7 +54,7 @@
                 <td><div id="color"><input type="button" value="  添加    " onclick="addColor()">
                      <volist name="colorarr" id="color">
                       <if condition="$color neq ''">
-                      <input type="text" class="colors" name="color[]" value="{$color}" size='12'>
+                      <input type="text" class="colors" name="color[]" value="{$color}" size='12' readOnly>
                       </if>
                      </volist>
                      </div></td>
@@ -68,7 +68,7 @@
 			        <if condition="$color2 neq ''">
 			        <volist name="sizearr" id="size2">
 			          <if condition="$size2 neq ''">
-				          <tr>
+				          <tr title="{$color2}|{$size2}" class="stock_tr">
 				            <td>{$color2}</td>
 				            <td>{$size2}</td>
 				            <td><input type="number" title="{$color2}|{$size2}" value="0" name='stock' onchange='sum_stock()' placeholder="库存"></td>
@@ -80,10 +80,10 @@
 			     <else/>
 			        <volist name="detail_stock_arr" id="stock">
 			           <if condition="$stock[0] neq '' and $stock[1] neq ''">
-			              <tr>
+			              <tr title="{$stock[0]}|{$stock[1]}" class="stock_tr">
 				            <td>{$stock[0]}</td>
 				            <td>{$stock[1]}</td>
-				            <td><input type="number" title="{$color2}|{$size2}" value="{$stock[2]}" name='stock' onchange='sum_stock()' placeholder="库存"></td>
+				            <td><input type="number" title="{$stock[0]}|{$stock[1]}" value="{$stock[2]}" name='stock' onchange='sum_stock()' placeholder="库存"></td>
 				          </tr>
 				          </if>
 			          
@@ -359,61 +359,92 @@ function del_attr(id,obj)
 <script src="__STATIC__/js/jquery/plugins/colorpicker.js"></script>
 <script src="__STATIC__/js/kindeditor/kindeditor.js"></script>
 <script>
+//增加的颜色
 var colorAdd = 0;
+//增加的型号
 var sizeAdd = 0;
+//增加一个型号时颜色的个数
+var colorlength = 0;
+//增加一个颜色时型号的个数
+var sizelength = 0;
+//增加颜色时细则库存对应的型号计数器
+var size_stock=0;
+//增加型号时细则库存对应的颜色计数器
+var color_stock=0;
 function addSize()
 {
 	sizeAdd = sizeAdd + 1;
     var colors = document.getElementsByName("color[]");
+    colorlength=colors.length;
     for(i=0;i<colors.length;i++){
+    	color_stock=color_stock+1;
     	$str='';
-        $str+="<tr align='center' style='border-left:5px solid #8B4513;'>";
+        $str+="<tr align='center' style='border-left:5px solid #8B4513;' id='trcolor"+color_stock+"' class='stock_tr' title='"+colors[i].value+"|'>";
         
         $str+="<td>"+colors[i].value+"</td>";
         $str+="<td><div name='ouptsize"+sizeAdd+"' class='ouptsize"+sizeAdd+"'></div></td>";
-        $str+="<td><input type='number' placeholder='库存' title='"+colors[i].value+"|' name='stockcolor' /></td>";
+        $str+="<td><input type='number' onchange='sum_stock()' placeholder='库存' id='stockcolor"+color_stock+"' title='"+colors[i].value+"|' name='stockcolor' /></td>";
         $str+="</tr>";
         $("#addTr").append($str);   
 
     }
     var sizeid=$("#size");
-    sizeid.append("<input onchange='sum_stock()' onkeyup='keydown_size()' name='size[]' type='text' id='mysize" + sizeAdd + "' size='12'>&nbsp;");
+    sizeid.append("<input  onchange='keydown_size()' name='size[]' type='text' id='mysize" + sizeAdd + "' size='12'>&nbsp;");
 }
 function addColor()
 {
 	colorAdd = colorAdd + 1;
     var sizeid=$("#color");
     var sizes = document.getElementsByName("size[]");
+    sizelength = sizes.length;
     for(i=0;i<sizes.length;i++){
+    	size_stock = size_stock + 1;
     	$str='';
-        $str+="<tr align='center' style='border-left:5px solid #8968CD;'>";
+        $str+="<tr align='center' style='border-left:5px solid #8968CD;' id='trsize"+color_stock+"' title='|"+sizes[i].value+"' class='stock_tr'>";
         $str+="<td><div name='oupt"+colorAdd+"' class='oupt"+colorAdd+"'></div></td>";
         $str+="<td>"+sizes[i].value+"</td>";
-        $str+="<td><input onchange='sum_stock()' type='number' title='|"+sizes[i].value+"' placeholder='库存' name='stocksize' /></td>";
+        $str+="<td><input onchange='sum_stock()' type='number' id='stock"+size_stock+"' title='|"+sizes[i].value+"' placeholder='库存' name='stocksize' /></td>";
         $str+="</tr>";
         $("#addTr").append($str);   
 
     }
     
-    sizeid.append("<input onkeyup='keydown()' name='color[]' id='mycolor" + colorAdd + "' type='text' size='12'>&nbsp;");
+    sizeid.append("<input onchange='keydown()' name='color[]' id='mycolor" + colorAdd + "' type='text' size='12'>&nbsp;");
+}
+function delete_sizetr(sizename){
+	var stocktr=$(".stock_tr");
+	alert(stocktr.length);
 }
 function keydown(){
-	//alert($("#mycolor"+colorAdd).val());
-	var sizessize = document.getElementsByName("stocksize");
-	 for(i=0;i<sizessize.length;i++){
-		 if(sizessize[i].value !=""){
-			 document.getElementsByName("stocksize").title = $("#mycolor"+colorAdd).val() + sizessize[i].title;
-		 }
+	//输入新颜色的时候改变新增库存行的 title
+	var min_stock = size_stock - sizelength;
+	var new_title = "";
+	for(i=size_stock;i>min_stock;i--){
+		new_title=$("#mycolor"+colorAdd).val() + document.getElementById("stock"+i).title;
+		$("#trsize"+i).attr("title",new_title);
+		 $("#stock"+i).attr("title",new_title);
+		// alert(new_title);
 	 }
 	$(".oupt"+colorAdd).html($("#mycolor"+colorAdd).val());
 	}
 function keydown_size(){
-	//alert($("#mycolor"+colorAdd).val());
-	var sizessize = document.getElementsByName("stockcolor");
-	
-	 alert(sizessize.length);
+	//输入新型号的时候改变新增库存行的 title
+	var min_stock = color_stock - colorlength;
+	var new_title = "";
+	for(i=color_stock;i>min_stock;i--){
+		new_title=document.getElementById("stockcolor"+i).title + $("#mysize"+colorAdd).val();
+		 $("#stockcolor"+i).attr("title",new_title); 
+		 $("#trcolor"+i).attr("title",new_title);
+		 //alert(new_title);
+	 }
 	$(".ouptsize"+sizeAdd).html($("#mysize"+sizeAdd).val());
 	}
+	
+	
+/*
+**下面的方法主要是把细则库存通过拼接字符串传入数据库
+**字符串的格式是  ‘颜色|型号|库存’
+**/
 function deal_stock(){
 	var sizes = document.getElementsByName("stock");
 	var stock_detail = "";
@@ -437,6 +468,10 @@ function deal_stock(){
 	 $("#detail_stock").val(stock_detail);
 	 $("#info_form").submit();
 }
+
+/*
+**下面的方法当细则库存任意一个改变时 总库存重新计算一下
+**/
 function sum_stock(){
 	 var sum_num = 0;
 	 var sizes = document.getElementsByName("stock");
