@@ -43,7 +43,7 @@
                 <td> <div id="size"><input type="button" id="addsize_action" value="  添加    " onclick="addSize()">
                      <volist name="sizearr" id="sizear">
                       <if condition="$sizear neq ''">
-                        <input type="text" class="sizes" name="size[]" id="mysize{$sizear}" value="{$sizear}" size='12' readOnly><img id="inpu_img{$sizear}" onclick="delete_sizetr({$sizear})" style='margin-right:3px;' height="15" width="15" src="/tpl/User/default/common/images/icons/delete.png" />
+                        <input type="text" class="sizes" name="size[]" id="mysize{$sizear}" value="{$sizear}" size='12' readOnly><img id="inpu_img{$sizear}" onclick="delete_sizetr('{$sizear}')" style='margin-right:3px;' height="15" width="15" src="/tpl/User/default/common/images/icons/delete.png" />
                       </if>
                      </volist>
                      </div>
