@@ -43,7 +43,7 @@
                 <td> <div id="size"><input type="button" value="  添加    " onclick="addSize()">
                      <volist name="sizearr" id="sizear">
                       <if condition="$sizear neq ''">
-                        <input type="text" class="sizes" name="size[]" id="inpu{$sizear}" value="{$sizear}" size='12' readOnly><img id="inpu_img{$sizear}" onclick="delete_sizetr({$sizear})" height="15" width="15" src="/tpl/User/default/common/images/icons/delete.png" />
+                        <input type="text" class="sizes" name="size[]" id="mysize{$sizear}" value="{$sizear}" size='12' readOnly><img id="inpu_img{$sizear}" onclick="delete_sizetr({$sizear})" height="15" width="15" src="/tpl/User/default/common/images/icons/delete.png" />
                       </if>
                      </volist>
                      </div>
@@ -389,7 +389,7 @@ function addSize()
 
     }
     var sizeid=$("#size");
-    sizeid.append("<input  onchange='keydown_size()' name='size[]' type='text' id='mysize" + sizeAdd + "' size='12'><img id='inpu_img{$sizear}' onclick='delete_sizetr({$sizear})' height='15' width='15' src='/tpl/User/default/common/images/icons/delete.png' />&nbsp;");
+    sizeid.append("<input  onchange='keydown_size()' name='size[]' type='text' id='mysize" + sizeAdd + "' size='12'><img id='inpu_img" + sizeAdd + "' onclick='delete_sizetr(" + sizeAdd + ")' height='15' width='15' src='/tpl/User/default/common/images/icons/delete.png' />&nbsp;");
 }
 function addColor()
 {
@@ -420,7 +420,7 @@ function delete_sizetr(sizename){
 			stocktr[i].remove();
 		}
 	}
-	$("#inpu"+sizename).remove();
+	$("#mysize"+sizename).remove();
 	$("#inpu_img"+sizename).remove();
 }
 function keydown(){
