@@ -16,7 +16,9 @@
 			<tr>
 				<th width="120">所属分类 :</th>
                 <td><select class="J_cate_select mr10" data-pid="0" data-uri="{:U('item_cate/ajax_getchilds', array('type'=>0))}" data-selected="{$selected_ids}"></select>
-                <input type="hidden" name="cate_id" id="J_cate_id" value="{$info.cate_id}" /></td>
+                <input type="hidden" name="cate_id" id="J_cate_id" value="{$info.cate_id}" />
+                <input type="hidden" name="Uninum" id="J_uninum" value="{$info.Uninum}" />
+                <input type="hidden" name="images" id="J_images" value="{$info.images}" /></td>
 			</tr>
 			
 			<tr>
@@ -35,6 +37,13 @@
 				<th>商品名称 :</th>
 				<td><input  type="text" name="title" id="J_title" class="input-text" size="60" value="{$info.title}">
 				<input type="hidden" name="goods_id" id="J_goods_id" value="{$info.id}">
+				</td>
+			    
+			</tr>
+			<tr>
+				<th>商品货号 :</th>
+				<td><input  type="text" name="Huohao" id="J_Huohao" class="input-text" size="60" value="{$info.Huohao}">
+			
 				</td>
 			    
 			</tr>
