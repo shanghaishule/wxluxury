@@ -43,7 +43,7 @@
                 <td> <div id="size"><input type="button" value="  添加    " onclick="addSize()">
                      <volist name="sizearr" id="sizear">
                       <if condition="$sizear neq ''">
-                        <input type="text" class="sizes" name="size[]" id="mysize{$sizear}" value="{$sizear}" size='12' readOnly><img id="inpu_img{$sizear}" onclick="delete_sizetr({$sizear})" height="15" width="15" src="/tpl/User/default/common/images/icons/delete.png" />
+                        <input type="text" class="sizes" name="size[]" id="mysize{$sizear}" value="{$sizear}" size='12' readOnly><img id="inpu_img{$sizear}" onclick="delete_sizetr({$sizear})" height="15" width="15" src="/tpl/User/default/common/images/icons/delete.png" />&nbsp;
                       </if>
                      </volist>
                      </div>
@@ -54,7 +54,7 @@
                 <td><div id="color"><input type="button" value="  添加    " onclick="addColor()">
                      <volist name="colorarr" id="color">
                       <if condition="$color neq ''">
-                      <input type="text" class="colors" name="color[]" value="{$color}" size='12' readOnly>
+                      <input type="text" class="colors" name="color[]" id="mycolor{$color}" value="{$color}" size='12' readOnly><img id="color_img{$color}" onclick="delete_colortr('{$color}')" height="15" width="15" src="/tpl/User/default/common/images/icons/delete.png" />&nbsp;
                       </if>
                      </volist>
                      </div></td>
@@ -71,7 +71,7 @@
 				          <tr title="{$color2}|{$size2}" class="stock_tr">
 				            <td>{$color2}</td>
 				            <td>{$size2}</td>
-				            <td><input type="number" title="{$color2}|{$size2}" value="0" name='stock' onchange='sum_stock()' placeholder="库存"></td>
+				            <td><input type="number" title="{$color2}|{$size2}" value="0" name='stock' onchange='sum_stock()' value="0"></td>
 				          </tr>
 			          </if>
 			        </volist>
@@ -83,7 +83,7 @@
 			              <tr title="{$stock[0]}|{$stock[1]}" class="stock_tr">
 				            <td>{$stock[0]}</td>
 				            <td>{$stock[1]}</td>
-				            <td><input type="number" title="{$stock[0]}|{$stock[1]}" value="{$stock[2]}" name='stock' onchange='sum_stock()' placeholder="库存"></td>
+				            <td><input type="number" title="{$stock[0]}|{$stock[1]}" value="{$stock[2]}" name='stock' onchange='sum_stock()'></td>
 				          </tr>
 				          </if>
 			          
@@ -383,7 +383,7 @@ function addSize()
         
         $str+="<td>"+colors[i].value+"</td>";
         $str+="<td><div name='ouptsize"+sizeAdd+"' class='ouptsize"+sizeAdd+"'></div></td>";
-        $str+="<td><input type='number' onchange='sum_stock()' placeholder='库存' id='stockcolor"+color_stock+"' title='"+colors[i].value+"|' name='stockcolor' /></td>";
+        $str+="<td><input type='number' onchange='sum_stock()' value="0" id='stockcolor"+color_stock+"' title='"+colors[i].value+"|' name='stockcolor' /></td>";
         $str+="</tr>";
         $("#addTr").append($str);   
 
@@ -400,17 +400,20 @@ function addColor()
     for(i=0;i<sizes.length;i++){
     	size_stock = size_stock + 1;
     	$str='';
-        $str+="<tr align='center' style='border-left:5px solid #8968CD;' id='trsize"+color_stock+"' title='|"+sizes[i].value+"' class='stock_tr'>";
+        $str+="<tr align='center' style='border-left:5px solid #8968CD;' id='trsize"+size_stock+"' title='|"+sizes[i].value+"' class='stock_tr'>";
         $str+="<td><div name='oupt"+colorAdd+"' class='oupt"+colorAdd+"'></div></td>";
         $str+="<td>"+sizes[i].value+"</td>";
-        $str+="<td><input onchange='sum_stock()' type='number' id='stock"+size_stock+"' title='|"+sizes[i].value+"' placeholder='库存' name='stocksize' /></td>";
+        $str+="<td><input onchange='sum_stock()' type='number' id='stock"+size_stock+"' title='|"+sizes[i].value+"' value="0" name='stocksize' /></td>";
         $str+="</tr>";
         $("#addTr").append($str);   
 
     }
     
-    sizeid.append("<input onchange='keydown()' name='color[]' id='mycolor" + colorAdd + "' type='text' size='12'>&nbsp;");
+    sizeid.append("<input onchange='keydown()' name='color[]' id='mycolor" + colorAdd + "' type='text' size='12'><img id='color_img" + colorAdd + "' onclick='delete_colortr(" + colorAdd + ")' height='15' width='15' src='/tpl/User/default/common/images/icons/delete.png' />&nbsp;");
 }
+/**
+ * 删除型号，删除相应的其他相关的
+ */
 function delete_sizetr(sizename){
 	var stocktr=$(".stock_tr");
 	var sizestr="";
@@ -418,18 +421,41 @@ function delete_sizetr(sizename){
 		sizestr=stocktr[i].title.split("|");
 		if(sizestr[1] == sizename){
 			stocktr[i].remove();
+		}else if(sizestr[1] == ""){
+			stocktr[i].remove();
 		}
 	}
+	
 	$("#mysize"+sizename).remove();
 	$("#inpu_img"+sizename).remove();
+}
+/**
+ * 删除颜色，删除相应的其他相关的
+ */
+function delete_colortr(colorname){
+	var stocktr=$(".stock_tr");
+	var sizestr="";
+	for(i=0;i<stocktr.length;i++){
+		sizestr=stocktr[i].title.split("|");
+		if(sizestr[0] == colorname){
+			stocktr[i].remove();
+		}else if(sizestr[0] == ""){
+			stocktr[i].remove();
+		}
+	}
+	
+	$("#mycolor"+colorname).remove();
+	$("#color_img"+colorname).remove();
 }
 function keydown(){
 	//输入新颜色的时候改变新增库存行的 title
 	var min_stock = size_stock - sizelength;
 	var new_title = "";
+	var new_title_color = "";
 	for(i=size_stock;i>min_stock;i--){
 		new_title=$("#mycolor"+colorAdd).val() + document.getElementById("stock"+i).title;
-		$("#trsize"+i).attr("title",new_title);
+		new_title_color=colorAdd + document.getElementById("stock"+i).title;
+		$("#trsize"+i).attr("title",new_title_color);
 		 $("#stock"+i).attr("title",new_title);
 		// alert(new_title);
 	 }
@@ -439,10 +465,12 @@ function keydown_size(){
 	//输入新型号的时候改变新增库存行的 title
 	var min_stock = color_stock - colorlength;
 	var new_title = "";
+	var new_title_size="";
 	for(i=color_stock;i>min_stock;i--){
-		new_title=document.getElementById("stockcolor"+i).title + $("#mysize"+colorAdd).val();
+		new_title=document.getElementById("stockcolor"+i).title + $("#mysize"+sizeAdd).val();
+		new_title_size=document.getElementById("stockcolor"+i).title + sizeAdd;
 		 $("#stockcolor"+i).attr("title",new_title); 
-		 $("#trcolor"+i).attr("title",new_title);
+		 $("#trcolor"+i).attr("title",new_title_size);
 		 //alert(new_title);
 	 }
 	$(".ouptsize"+sizeAdd).html($("#mysize"+sizeAdd).val());
