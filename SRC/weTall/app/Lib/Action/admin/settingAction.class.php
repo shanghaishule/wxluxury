@@ -66,11 +66,44 @@ class settingAction extends backendAction {
     	if (IS_POST) {
     		$licence = $this->_post("licence","trim");
     		$address = $this->_post("address","trim");
+    		$email=$this->_post("email","trim");
+    		$phone=$this->_post("phone","trim");
+    		$IDno=$this->_post("IDno","trim");
+    		$owner=$this->_post("owner","trim");
+    		
+    		//资质文件
+    		if (!empty($_FILES['licence_img']['name'])) {
+    			 
+    			//上传图片
+    			$date_dir = date('ym/d/'); //上传目录
+    			$item_headurls = array(); //相册
+    			$result = $this->_upload($_FILES['licence_img'], 'item/'.$date_dir, array(
+    					'width'=>C('pin_item_bimg.width').','.C('pin_item_img.width').','.C('pin_item_simg.width'),
+    					'height'=>C('pin_item_bimg.height').','.C('pin_item_img.height').','.C('pin_item_simg.height'),
+    					'suffix' => '_b',
+    					//'remove_origin'=>true
+    			));
+    			if ($result['error']) {
+    				$this->error($result['info']);
+    			} else {
+    				$data['licence_img'] = $date_dir . $result['info'][0]['savename'];
+    				//保存一份到相册
+    				$item_imgs[] = array(
+    						'licence_img'     => $data['licence_img'],
+    				);
+    			}
+    			$data['licence_img'] = "/weTall/data/upload/item/".$data['licence_img'];
+    		}
+    		
     		if($licence == ""){
     			$this->error("请填写营业执照号码");
     		}else if($address == ""){
     			$this->error("请填写营业执照号码");
     		}else{
+    			$data["email"]=$email;
+    			$data["owner"]=$owner;
+    			$data["IDno"]=$IDno;
+    			$data["phone"]=$phone;
     			$data["licence"]=$licence;
     			$data["address"]=$address;
     			$data["HaveReal"]="2";

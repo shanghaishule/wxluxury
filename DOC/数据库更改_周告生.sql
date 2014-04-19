@@ -7,3 +7,8 @@ ALTER TABLE  `tp_order_detail` CHANGE  `size`  `size` VARCHAR( 255 ) CHARACTER S
 
 /*店铺的冻结状态*/
 ALTER TABLE  `tp_wecha_shop` ADD  `frozen` INT( 1 ) NOT NULL DEFAULT  '0' COMMENT  '0-冻结 1-正常 2-审核中' AFTER  `latitude` ;
+
+ALTER TABLE  `tp_wecha_shop` ADD  `owner` VARCHAR( 100 ) NOT NULL AFTER  `shop_city` ,
+ADD  `IDno` VARCHAR( 18 ) NOT NULL AFTER  `owner` ,
+ADD  `email` VARCHAR( 180 ) NOT NULL AFTER  `IDno` ,
+ADD  `licence_img` VARCHAR( 200 ) NOT NULL AFTER  `email` ;
