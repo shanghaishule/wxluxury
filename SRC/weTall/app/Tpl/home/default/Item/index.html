@@ -12,18 +12,26 @@
 	<include file="public:head" />
 	<div class="s_bottom"></div>
 	<script type="text/javascript">
+		var currentPic = 1;
+		var length = 5;
 	    function imgdetail(id){
 	    	$(".imagesDetail").css('display','none');
-	    	$("#"+id).css('display','');
-	    	$(".imglittle").css('border','0 solid black');
-	    	$("#little"+id).css('border','2px solid red');
+	    	$("#"+id).fadeIn(0);
+	    	$(".imglittle").css('background','#d9d8d9');
+	    	$("#little"+id).css('background','red');
+	    	currentPic = currentPic + 1;
+	    	if(currentPic > length) currentPic = 1;
+	    	setTimeout("imgdetail("+currentPic+")",3000);
 	    }
 
 		$(function(){
 			$(".imagesDetail").css('display','none');
 	    	$("#1").css('display','');
-	    	$(".imglittle").css('border','0 solid black');
-	    	$("#little1").css('border','2px solid red');
+	    	$(".imglittle").css('background','#d9d8d9');
+	    	$("#little1").css('background','red');
+	    	length = $(".imagesDetail").length;	
+	    	currentPic = currentPic + 1;
+	    	setTimeout("imgdetail("+currentPic+")",3000);
 			$("div.module_special .wrap .major ul.list li:last-child").addClass("remove_bottom_line");
 		});
 		var active=0,
@@ -160,6 +168,25 @@
 			$("#item_comments").hide();
 			
 		});
+		
+		function favi_action(act){
+			
+				//收藏
+				$.post("{:U('index/favi')}", {act: act}, function(data){
+					//alert("Data Loaded: "+data.status);
+					if(data.status == '0'){
+						alert("您还没有登录，请登录！")
+						window.location.href=data.url;
+					}else if(data.status == '2'){
+						alert("该店铺您已收藏！")
+					}else{
+						alert("收藏成功！")
+						window.location.reload();
+					}
+				},"json");
+
+			
+		}
 	</script>
     <div class="ware_info">
          
@@ -167,13 +194,17 @@
          <div class="banner">
 			<ul id="BanCont">
 			  <volist name="imgarr" id="bolist" key="lidaid">			     
-			     <li class="imagesDetail" id="{$lidaid}"><img src="__PARENTURL__/Uploads/items/images/{$item['Uninum']}/{$bolist}.jpg" width="320px" alt="{$item.title}" /></li> 
+			     <li class="imagesDetail" id="{$lidaid}"><a href="__PARENTURL__/Uploads/items/images/{$item['Uninum']}/{$bolist}.jpg"><img src="__PARENTURL__/Uploads/items/images/{$item['Uninum']}/{$bolist}.jpg" width="320px" alt="{$item.title}" /></a></li> 
 			  </volist>
 			</ul>
 			<div class="banner_link"><ul class="imgmiddle">
 			<volist name="imgarr" id="bolist" key="liid">
-			<li class="imgnav"><img class="imglittle" id="little{$liid}" onclick="javascript:imgdetail({$liid})" src="__PARENTURL__/Uploads/items/images/{$item['Uninum']}/{$bolist}.jpg" width="53" height="54" alt="{$item.title}" /></li>
+			<li class="imgnav"><a href="javascript:void(0)" onclick="javascript:imgdetail({$liid})"><div class="imglittle" id="little{$liid}" ></div></a></li>
 			</volist></ul></div>
+			<div class="favi2">
+			<if condition="$favi_suc eq 'Y'"><img width="30px" height="30px" src="__STATIC__/weixin/images/favi2.png"></a><span style="color:red;">{$item.favi}</span><else/>
+			<a href="javascript:void(0)" onclick="favi_action({$item.id})"><img width="30px" height="30px" src="__STATIC__/weixin/images/favi.png"></a>{$item.favi}</div>
+		    </if>
 		</div>
          <script type="text/javascript">
          var active=0,
@@ -191,7 +222,7 @@
          var t2=new TouchSlider({id:'sliderlist', speed:600, timeout:6000, before:function(index){
                  as[active].className='';
                  active=index;
-                 as[active].className='active';b
+                 as[active].className='active';
              }});
 		         
          </script>
@@ -202,21 +233,39 @@
                 <div style="margin:10px 0; width:100%;height:30px;">
                 <div style="margin-right:20px;float:left;">现价: <span style="color:red">¥{$item.price}</span></div>                                
                 <div style="margin-right:20px;float:left;text-decoration:line-through;">吊牌价:¥{$item.old_price} </div>                   
-                <div style="margin-right:20px;float:left;">仅剩:<span style="color:red;">{$item.goods_stock}</span>件</div>
+                <div style="margin-right:20px;float:left;">折扣:<span style="color:red;">{$item.goods_stock}</span>折</div>
                 </div>
 			</div>
             <div class="handle">
 
            <script type="text/javascript">
+           var colorchoose = "";
+           var sizechoose = "";
 	            function sizetitle(size_title){
+	            	sizechoose = size_title;
+	            	if(colorchoose != ""){
+			    		item_id=$("#goodId").val();
+			    		$.get('./index.php?g=home&m=index&a=addressselect&item_id='+item_id+'&color='+colorchoose+"&size="+size_title,function(data,status){
+			    			var obj = eval('('+  data +')');               		
+			    			$("#detail_stock").text(obj.status);
+	                	  });
+			    	}
 	             $(".size_title").css('background','none');
-		     $("#size" + size_title).css('background','url(/weTall/static/images/xiaokuang.png)');
-		     $("#sizeChoose").val(size_title);
+			     $("#size" + size_title).css('background','url(/weTall/static/images/xiaokuang.png)');
+			     $("#sizeChoose").val(size_title);
 		    }
 		    function colortitle(color_title){
+		    	colorchoose = color_title;
+		    	if(sizechoose != ""){
+		    		item_id=$("#goodId").val();
+		    		$.get('./index.php?g=home&m=index&a=addressselect&item_id='+item_id+'&color='+color_title+"&size="+sizechoose,function(data,status){
+		    			var obj = eval('('+  data +')');               		
+		    			$("#detail_stock").text(obj.status);
+                	  });
+		    	}
 	             $(".color_title").css('background','none');
-		     $("#color" + color_title).css('background','url(/weTall/static/images/xiaokuang.png)');
-		     $("#colorChoose").val(color_title);
+			     $("#color" + color_title).css('background','url(/weTall/static/images/xiaokuang.png)');
+			     $("#colorChoose").val(color_title);
 		    }
 		  </script>
 		  <style>
@@ -256,7 +305,7 @@
                 <ul>
                     <li class="handle_title">购买数量:</li>
                     <li>
-                        <input type="text" value="1" id="quantity" name="" class="text width1" onafterpaste="this.value=this.value.replace(/\D/g,'')" onkeyup="this.value=this.value.replace(/\D/g,'')" />件（库存<span ectype="goods_stock" class="stock">{$item.goods_stock}</span>件）
+                        <input type="text" value="1" id="quantity" name="" class="text width1" onafterpaste="this.value=this.value.replace(/\D/g,'')" onkeyup="this.value=this.value.replace(/\D/g,'')" />件（库存<span id="detail_stock" ectype="goods_stock" style="color:red;" class="stock">{$item.goods_stock}</span>件）
                     </li>
                 </ul>
             </div>
@@ -277,17 +326,18 @@
                     </div>
                     <div class="ware_cen_bottom"></div>
                 </div>
-                <li onclick="javascript:buys();" title="立刻购买" class="enter">立刻购买</li>
             </ul>
+            
         </div>
         <div class="clear"></div>
     </div>
+    <div onclick="javascript:buys();" title="立刻购买" id="buy_float"></div>
     <a name="module"></a>
     <ul class="user_menu">
         <div class="ornament1"></div>
         <div class="ornament2"></div>
 	<!--xxl start-->
-        <li class="btn_1 active" id = "sheet1" style="color:white;"><a href="javascript:showinfo(1);"><span>商品详情</span></a></li>
+        <li class="btn_1 active" id = "sheet1" style="color:red;"><a href="javascript:showinfo(1);"><span>商品详情</span></a></li>
         <li class="btn_2" id = "sheet2"><a href="javascript:showinfo(2);"><span>商品评论</span></a></li>
 	<!--xxl end-->
     </ul>

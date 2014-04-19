@@ -77,117 +77,115 @@ class itemAction extends backendAction {
     	
     	$tokenTall = $this->getTokenTall();
     	$this->assign('tokenTall',$tokenTall);
-        if (IS_POST) {
-        	//得到商品的尺码和颜色
-        	$colors = $_POST['color'];
-        	$colorstr = "";
-        	foreach($colors as $val){
-        		$colorstr = $colorstr."|".$val;
-        	}
-            $sizes = $_POST['size'];
-        	$sizestr = "";
-        	foreach($sizes as $val2){
-        		$sizestr = $sizestr."|".$val2;
-        	}
-        	
-            //获取数据
-            if (false === $data = $this->_mod->create()) {
-                $this->error($this->_mod->getError());
-            }
-            
-           
-            if($_POST['brand']==''){
-            	
-                $this->error('请选择品牌');
-            }
-         
-            
-            //必须上传图片
-            if (empty($_FILES['img']['name'])) {
-                $this->error('请上传商品图片');
-            }
-           if(isset($_POST['news']))
-            {
-            	$data['news']=1;
-            }else {
-            	$data['news']=0;
-            }
-             if(isset($_POST['tuijian']))
-            {
-            	$data['tuijian']=1;
-            }else {
-            	$data['tuijian']=0;
-            }
+    	if (IS_POST) {
+    		//得到商品的尺码和颜色
+    		$colors = $_POST['color'];
+    		$colorstr = "";
+    		foreach($colors as $val){
+    			$colorstr = $colorstr."|".$val;
+    		}
+    		$sizes = $_POST['size'];
+    		$sizestr = "";
+    		foreach($sizes as $val2){
+    			$sizestr = $sizestr."|".$val2;
+    		}
+    		 
+    		//获取数据
+    		if (false === $data = $this->_mod->create()) {
+    			$this->error($this->_mod->getError());
+    		}
+    	
+    		 
+    		if($_POST['brand']==''){
+    			 
+    			$this->error('请选择品牌');
+    		}
+    		 
+    	
+    		//必须上传图片
+    		if (empty($_FILES['img']['name'])) {
+    			$this->error('请上传商品图片');
+    		}
+    		if(isset($_POST['news']))
+    		{
+    			$data['news']=1;
+    		}else {
+    			$data['news']=0;
+    		}
+    		if(isset($_POST['tuijian']))
+    		{
+    			$data['tuijian']=1;
+    		}else {
+    			$data['tuijian']=0;
+    		}
+    	
+    		if($_POST['free']==1)
+    		{
+    			$data['free']=1;
+    		}else if($_POST['free']==2)
+    		{
+    			$data['free']=2;
+    			$data['pingyou']=$this->_post('pingyou');
+    			$data['kuaidi']=$this->_post('kuaidi');
+    			$data['ems']=$this->_post('ems');
+    		}
+    		//货号
+    		$Huohao = $this->_post("Huohao","trim");
+    		$data["Huohao"]=$Huohao;
+    	
+    		$Uninum = time();
+    		$data["Uninum"]=$Uninum;
+    	
+    		//上传图片
+    		$date_dir = date('ym/d/'); //上传目录
+    		$item_imgs = array(); //相册
+    		$filepath = $_SERVER['DOCUMENT_ROOT']."/Uploads/items/images/";//图片保存的路径目录
+    		if(!is_dir($filepath)){
+    			mkdir($filepath,0777, true);
+    		}
+    		$filename = $Uninum.'.jpg'; //生成文件名，
+    		move_uploaded_file($_FILES["img"]["tmp_name"],$filepath.$filename);
+    	
+    		$data['img'] = '/Uploads/items/images/'.$filename;
+    	
+    		//上传相册
+    		$file_imgs = array();
+    		$filepath_imgs=$filepath.$Uninum."/";
+    		if(!is_dir($filepath_imgs)){
+    			mkdir($filepath_imgs,0777, true);
+    		}
+    		$imgstr="";
+    		foreach( $_FILES['imgs']['name'] as $key=>$val ){
+    			if( $val ){
+    				$filename2=rand(10000, 100000000);
+    				move_uploaded_file($_FILES['imgs']['tmp_name'][$key],$filepath.$filename2."jpg");
+    				$imgstr=$filename2."|".$imgstr;
+    			}
+    		}
+    		
+    		$data['images'] = $imgstr;
+    		$data['tokenTall'] = $tokenTall;
+    		//加入颜色和尺码
+    		$data["size"]=$sizestr;
+    		$data["color"]=$colorstr;
+    	
+    		//库存细则
+    		$detail_stock = $_POST['detail_stock'];
+    		if ($detail_stock != "") {
+    			$data["detail_stock"] = $detail_stock;
+    		}
+    		$Huohao = $this->_post("Huohao","trim");
+    		$data["Huohao"]=$Huohao;
 
-            if($_POST['free']==1)
-            {
-            	$data['free']=1;
-            }else if($_POST['free']==2)
-            {
-            $data['free']=2;
-            $data['pingyou']=$this->_post('pingyou');
-            $data['kuaidi']=$this->_post('kuaidi');
-            $data['ems']=$this->_post('ems');
-            }
-
-            //上传图片
-            $date_dir = date('ym/d/'); //上传目录
-            $item_imgs = array(); //相册
-            $result = $this->_upload($_FILES['img'], 'item/'.$date_dir, array(
-                'width'=>C('pin_item_bimg.width').','.C('pin_item_img.width').','.C('pin_item_simg.width'), 
-                'height'=>C('pin_item_bimg.height').','.C('pin_item_img.height').','.C('pin_item_simg.height'),
-                'suffix' => '_b,_m,_s',
-                //'remove_origin'=>true 
-            ));
-            if ($result['error']) {
-                $this->error($result['info']);
-            } else {
-                $data['img'] = $date_dir . $result['info'][0]['savename'];
-                //保存一份到相册
-                $item_imgs[] = array(
-                    'url'     => $data['img'],
-                );
-            }
-            //上传相册
-            $file_imgs = array();
-            foreach( $_FILES['imgs']['name'] as $key=>$val ){
-                if( $val ){
-                    $file_imgs['name'][] = $val;
-                    $file_imgs['type'][] = $_FILES['imgs']['type'][$key];
-                    $file_imgs['tmp_name'][] = $_FILES['imgs']['tmp_name'][$key];
-                    $file_imgs['error'][] = $_FILES['imgs']['error'][$key];
-                    $file_imgs['size'][] = $_FILES['imgs']['size'][$key];
-                }
-            }
-            if( $file_imgs ){
-                $result = $this->_upload($file_imgs, 'item/'.$date_dir, array(
-                    'width'=>C('pin_item_bimg.width').','.C('pin_item_simg.width'),
-                    'height'=>C('pin_item_bimg.height').','.C('pin_item_simg.height'),
-                    'suffix' => '_b,_s',
-                ));
-                if ($result['error']) {
-                    $this->error($result['info']);
-                } else {
-                    foreach( $result['info'] as $key=>$val ){
-                        $item_imgs[] = array(
-                            'url'    => $date_dir . $val['savename'],
-                            'order'  => $key + 1,
-                        );
-                    }
-                }
-            }
-            $data['imgs'] = $item_imgs;
-            $data['tokenTall'] = $tokenTall; 
-            //加入颜色和尺码
-            $data["size"]=$sizestr;
-            $data["color"]=$colorstr;
-            
-            $item_id = $this->_mod->publish($data);
-            !$item_id && $this->error(L('operation_failure'));
-            $this->success(L('operation_success'));
-        } else {
-            $this->display();
-        }
+    		$data["Uninum"]=$Uninum;
+    		$data["title"]=$_POST["title"];
+    	
+    		$item_id = $this->_mod->publish($data);//echo $this->_mod->getLastSql();die();
+    		!$item_id && $this->error(L('operation_failure'));
+    		$this->success(L('operation_success'));
+    	} else {
+    		$this->display();
+    	}
     }
 
     public function data_update() {
@@ -682,7 +680,7 @@ class itemAction extends backendAction {
             }
             //if( !$data['cate_id']||!trim($data['cate_id']) ){
             //    $this->error('请选择商品分类');
-            //}
+            //}            
             
              if($_POST['brand']==''){
             	
@@ -738,35 +736,47 @@ class itemAction extends backendAction {
             $data["size"]=$sizestr;
             $data["color"]=$colorstr;
             
+            //库存细则
+            $detail_stock = $_POST['detail_stock'];
+            if ($detail_stock != "") {
+            	$data["detail_stock"] = $detail_stock;
+            }
+            
+            $data["Huohao"]=$_POST["Huohao"];
+            //echo $_POST["Huohao"];die();
+            $data["item_model"]=$this->_post("item_model","trim");
+            
+            //上传图片
+            $Uninum = $_POST["Uninum"];
+    		if (!empty($_FILES["img"])){
+	    		$item_imgs = array(); //相册
+	    		$filepath = $_SERVER['DOCUMENT_ROOT']."/Uploads/items/images/";//图片保存的路径目录
+	    		if(!is_dir($filepath)){
+	    			mkdir($filepath,0777, true);
+	    		}
+	    		$filename = $Uninum.'.jpg'; //生成文件名，
+	    		move_uploaded_file($_FILES["img"]["tmp_name"],$filepath.$filename);
+	    	
+	    		$data['img'] = '/Uploads/items/images/'.$filename;
+    		}
             //上传相册
-            $file_imgs = array();
-            foreach( $_FILES['imgs']['name'] as $key=>$val ){
-                if( $val ){
-                    $file_imgs['name'][] = $val;
-                    $file_imgs['type'][] = $_FILES['imgs']['type'][$key];
-                    $file_imgs['tmp_name'][] = $_FILES['imgs']['tmp_name'][$key];
-                    $file_imgs['error'][] = $_FILES['imgs']['error'][$key];
-                    $file_imgs['size'][] = $_FILES['imgs']['size'][$key];
-                }
-            }
-            if( $file_imgs ){
-                $result = $this->_upload($file_imgs, 'item/'.$date_dir, array(
-                    'width'=>C('pin_item_bimg.width').','.C('pin_item_simg.width'),
-                    'height'=>C('pin_item_bimg.height').','.C('pin_item_simg.height'),
-                    'suffix' => '_b,_s',
-                ));
-                if ($result['error']) {
-                    $this->error($result['info']);
-                } else {
-                    foreach( $result['info'] as $key=>$val ){
-                        $item_imgs[] = array(
-                            'item_id' => $item_id,
-                            'url'    => $date_dir . $val['savename'],
-                            'order'   => $key + 1,
-                        );
-                    }
-                }
-            }
+    		$file_imgs = array();
+    		$filepath_imgs=$filepath.$Uninum."/";
+    		if(!is_dir($filepath_imgs)){
+    			mkdir($filepath_imgs,0777, true);
+    		}
+    		$imgstr="";
+    		if (!empty($_FILES['imgs'])) {		
+	    		foreach( $_FILES['imgs']['name'] as $key=>$val ){
+	    			if( $val ){
+	    				$filename2=rand(10000, 100000000);
+	    				move_uploaded_file($_FILES['imgs']['tmp_name'][$key],$filepath_imgs.$filename2.".jpg");
+	    				$imgstr=$filename2."|".$imgstr;
+	    			}
+	    		}
+	    		
+	    		$data['images'] = $imgstr.$_POST["images"];
+    		}
             //标签
             $tags = $this->_post('tags', 'trim');
             if (!isset($tags) || empty($tags)) {
@@ -836,6 +846,17 @@ class itemAction extends backendAction {
             $colorstr = $item["color"];
             $colorarr = explode("|",$colorstr);
         	 $this->assign("colorarr",$colorarr);
+        	 
+        	 // 库存细则
+        	 $detail_stock_arr = array();
+        	 $detail_stock1 = $item["detail_stock"];
+        	 if ($detail_stock1 != null) {
+        	 	$stockarr= explode(",",$detail_stock1);
+        	 	foreach ($stockarr as $varstock){
+        	 		$detail_stock_arr[] = explode("|",$varstock);
+        	 	}
+        	 }     	 
+        	 
             
         	//商品详情图
             $imagesstr = $item["images"];
@@ -848,6 +869,7 @@ class itemAction extends backendAction {
             //相册
             $img_list = M('item_img')->where(array('item_id'=>$id))->select();
             $this->assign('img_list', $img_list);
+            $this->assign("detail_stock_arr",$detail_stock_arr);
            
             $this->display();
         }
@@ -1146,3 +1168,5 @@ class itemAction extends backendAction {
     }    
     
 }
+
+

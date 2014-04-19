@@ -1,7 +1,7 @@
 <include file="public:header" />
 <script charset="utf-8" src="__STATIC__/weixin/js/jquery.js" type="text/javascript"></script>
 <!--编辑商品-->
-<form id="info_form" action="{:u('item/edit')}" method="post" enctype="multipart/form-data">
+<form name="info_form" id="info_form" action="{:u('item/edit')}" method="post" enctype="multipart/form-data" >
 <div class="pad_lr_10">
 	<div class="col_tab">
 		<ul class="J_tabs tab_but cu_li">
@@ -16,7 +16,9 @@
 			<tr>
 				<th width="120">所属分类 :</th>
                 <td><select class="J_cate_select mr10" data-pid="0" data-uri="{:U('item_cate/ajax_getchilds', array('type'=>0))}" data-selected="{$selected_ids}"></select>
-                <input type="hidden" name="cate_id" id="J_cate_id" value="{$info.cate_id}" /></td>
+                <input type="hidden" name="cate_id" id="J_cate_id" value="{$info.cate_id}" />
+                <input type="hidden" name="Uninum" id="J_uninum" value="{$info.Uninum}" />
+                <input type="hidden" name="images" id="J_images" value="{$info.images}" /></td>
 			</tr>
 			
 			<tr>
@@ -29,14 +31,28 @@
 </if>
   value="{$vo.id}" >{$vo.name}</option>
                 </volist>
-                </select><input type="text" name="item_model" value="2014" size=4 maxlength=4> 款</td>
+                </select><input type="text" name="item_model" value="{$vo.item_model}" placeholder="年度款" size=4 maxlength=4> 款</td>
+			</tr>
+			<tr>
+				<th>商品名称 :</th>
+				<td><input  type="text" name="title" id="J_title" class="input-text" size="60" value="{$info.title}">
+				<input type="hidden" name="goods_id" id="J_goods_id" value="{$info.id}">
+				</td>
+			    
+			</tr>
+			<tr>
+				<th>商品货号 :</th>
+				<td><input  type="text" name="Huohao" id="J_Huohao" class="input-text" size="60" value="{$info.Huohao}">
+			
+				</td>
+			    
 			</tr>
 			<tr>
 				<th width="120">型号 :</th>
-                <td> <div id="size"><input type="button" value="  添加    " onclick="addSize()">
-                     <volist name="sizearr" id="sizearr">
-                      <if condition="$sizearr neq ''">
-                      <input type="text" name="size[]" value="{$sizearr}" size='12'>
+                <td> <div id="size"><input type="button" id="addsize_action" value="  添加    " onclick="addSize()">
+                     <volist name="sizearr" id="sizear">
+                      <if condition="$sizear neq ''">
+                        <input type="text" class="sizes" name="size[]" id="mysize{$sizear}" value="{$sizear}" size='12' readOnly><img id="inpu_img{$sizear}" onclick="delete_sizetr('{$sizear}')" style='margin-right:3px;' height="15" width="15" src="/tpl/User/default/common/images/icons/delete.png" />
                       </if>
                      </volist>
                      </div>
@@ -44,29 +60,53 @@
 			</tr>
 			<tr>
 				<th width="120">颜色 :</th>
-                <td><div id="color"><input type="button" value="  添加    " onclick="addColor()">
+                <td><div id="color"><input type="button" id="addcolor_action" value="  添加    " onclick="addColor()">
                      <volist name="colorarr" id="color">
                       <if condition="$color neq ''">
-                      <input type="text" name="color[]" value="{$color}" size='12'>
+                      <input type="text" class="colors" name="color[]" id="mycolor{$color}" value="{$color}" size='12' readOnly><img id="color_img{$color}" onclick="delete_colortr('{$color}')"  style='margin-right:3px;' height="15" width="15" src="/tpl/User/default/common/images/icons/delete.png" />
                       </if>
                      </volist>
                      </div></td>
 			</tr>
-            <tr>
-				<th>商品名称 :</th>
-				<td><input  type="text" name="title" id="J_title" class="input-text" size="60" value="{$info.title}">
-				<input type="hidden" name="goods_id" id="J_goods_id" value="{$info.id}">
-				</td>
-			    
+			<tr>
+			    <th width="120">库存细则：</th>
+			    <td>
+			    <table id="addTr">
+			    <if condition="count($detail_stock_arr) eq 0">
+			    <volist name="colorarr" id="color2">
+			        <if condition="$color2 neq ''">
+			        <volist name="sizearr" id="size2">
+			          <if condition="$size2 neq ''">
+				          <tr title="{$color2}|{$size2}" class="stock_tr">
+				            <td>{$color2}</td>
+				            <td>{$size2}</td>
+				            <td><input type="number" title="{$color2}|{$size2}" value="0" name='stock' onchange='sum_stock()' value="0"></td>
+				          </tr>
+			          </if>
+			        </volist>
+			        </if>
+			    </volist>
+			     <else/>
+			        <volist name="detail_stock_arr" id="stock">
+			           <if condition="$stock[0] neq '' and $stock[1] neq ''">
+			              <tr title="{$stock[0]}|{$stock[1]}" class="stock_tr">
+				            <td>{$stock[0]}</td>
+				            <td>{$stock[1]}</td>
+				            <td><input type="number" title="{$stock[0]}|{$stock[1]}" value="{$stock[2]}" name='stock' onchange='sum_stock()' ></td>
+				          </tr>
+				          </if>
+			          
+			        </volist>
+			    </if>
+			        
+			    </table>
+			    <input type="hidden" id="detail_stock" name="detail_stock">
+			    </td>			
+			</tr>         
+		    <tr>
+				<th>商品库存 :</th>
+				<td><input id='J_goods_stock' onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" type="text" name="goods_stock" class="input-text" size="10" value="{$info.goods_stock}"> </td>
 			</tr>
-		<!--	 <tr>
-				<th>颜色 :</th>
-				<td><input type="text" name="color" id="J_color" class="input-text" size="30" value="{$info.color}" ><font color="#FD5873">（不需要可不填, 格式：多个用竖杆“|”隔开，如：蓝色|红色|白色）</font></td>
-			</tr>
-			   <tr>
-				<th>尺寸 :</th>
-				<td><input type="text" name="size" id="J_size" class="input-text" size="30" value="{$info.size}"><font color="#FD5873">（不需要可不填, 格式：多个用竖杆“|”隔开，如：蓝色|红色|白色）</font></td>
-			</tr>-->
 			<tr>
                 <th>商品简介 :</th>
                 <td><textarea name="intro" cols="80" rows="2">{$info.intro}</textarea></td>
@@ -78,11 +118,11 @@
 					<input type="file" name="img" />
 				</td>
  			</tr>
- 			<tr>
+ 			<!-- <tr>
 		      <th>是否推荐:</th>
 		      <td><input value="1" <if condition='$info.news eq 1'>checked=''</if> type="checkbox" name="news" >新品&nbsp; <input value="1" <if condition='$info.tuijian eq 1'>checked=''</if> type="checkbox" name="tuijian" >推荐</td>
 		    </tr>
-		   
+		    -->
 		    
 		     <tr>
 		      <th>运费:</th>
@@ -141,10 +181,7 @@
 				<th>打折价格 :</th>
 				<td><input id='J_price' onkeyup="this.value=this.value.replace(/[^0-9.]/g,'')" onafterpaste="this.value=this.value.replace(/[^0-9.]/g,'')"  type="text" name="price" size="10" class="input-text" value="{$info.price}"> 元</td>
 			</tr>
-			<tr>
-				<th>商品库存 :</th>
-				<td><input id='J_goods_stock' onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" type="text" name="goods_stock" class="input-text" size="10" value="{$info.goods_stock}"> </td>
-			</tr>
+			
 			<!--<tr>
 				<th width="120">商品来源 :</th>
                 <td>
@@ -231,7 +268,7 @@
 		</table>
 		</div>
         </div>
-		<div class="mt10"><input type="submit" value="{:L('submit')}" id="dosubmit" name="dosubmit" class="btn btn_submit" style="margin:0 0 10px 100px;"></div>
+		<div class="mt10"><input type="button" onclick="deal_stock()" value="{:L('submit')}" id="dosubmit" name="dosubmit" class="btn btn_submit" style="margin:0 0 10px 100px;"></div>
 	</div>
 </div>
 <input type="hidden" name="menuid"  value="{$menuid}"/>
@@ -331,15 +368,201 @@ function del_attr(id,obj)
 <script src="__STATIC__/js/jquery/plugins/colorpicker.js"></script>
 <script src="__STATIC__/js/kindeditor/kindeditor.js"></script>
 <script>
+//增加的颜色
+var colorAdd = 0;
+//增加的型号
+var sizeAdd = 0;
+//增加一个型号时颜色的个数
+var colorlength = 0;
+//增加一个颜色时型号的个数
+var sizelength = 0;
+//增加颜色时细则库存对应的型号计数器
+var size_stock=0;
+//增加型号时细则库存对应的颜色计数器
+var color_stock=0;
 function addSize()
 {
+	sizeAdd = sizeAdd + 1;
+    var colors = document.getElementsByName("color[]");
+    colorlength=colors.length;
+    for(i=0;i<colors.length;i++){
+    	color_stock=color_stock+1;
+    	$str='';
+        $str+="<tr align='center' style='border-left:5px solid #8B4513;' id='trcolor"+color_stock+"' class='stock_tr' title='"+colors[i].value+"|'>";
+        
+        $str+="<td>"+colors[i].value+"</td>";
+        $str+="<td><div name='ouptsize"+sizeAdd+"' class='ouptsize"+sizeAdd+"'></div></td>";
+        $str+="<td><input type='number' onchange='sum_stock()' value='0' id='stockcolor"+color_stock+"' title='"+colors[i].value+"|' name='stockcolor' /></td>";
+        $str+="</tr>";
+        $("#addTr").append($str);   
+
+    }
+    $("#addsize_action").attr("disabled",true);
+    $("#addcolor_action").attr("disabled",true);
     var sizeid=$("#size");
-    sizeid.append("<input name='size[]' type='text' size='12'>&nbsp;");
+    sizeid.append("<input  onchange='keydown_size()' name='size[]' type='text' id='mysize" + sizeAdd + "' size='12'><img id='inpu_img" + sizeAdd + "' onclick='delete_sizetr(" + sizeAdd + ")' height='15' width='15' style='margin-right:3px;' src='/tpl/User/default/common/images/icons/delete.png' />");
 }
 function addColor()
 {
+	colorAdd = colorAdd + 1;
     var sizeid=$("#color");
-    sizeid.append("<input name='color[]' type='text' size='12'>&nbsp;");
+    var sizes = document.getElementsByName("size[]");
+    sizelength = sizes.length;
+    for(i=0;i<sizes.length;i++){
+    	size_stock = size_stock + 1;
+    	$str='';
+        $str+="<tr align='center' style='border-left:5px solid #8968CD;' id='trsize"+size_stock+"' title='|"+sizes[i].value+"' class='stock_tr'>";
+        $str+="<td><div name='oupt"+colorAdd+"' class='oupt"+colorAdd+"'></div></td>";
+        $str+="<td>"+sizes[i].value+"</td>";
+        $str+="<td><input onchange='sum_stock()' type='number' id='stock"+size_stock+"' title='|"+sizes[i].value+"' value='0' name='stocksize' /></td>";
+        $str+="</tr>";
+        $("#addTr").append($str);   
+
+    }
+    $("#addsize_action").attr("disabled",true);
+    $("#addcolor_action").attr("disabled",true);
+    sizeid.append("<input onchange='keydown()' name='color[]' id='mycolor" + colorAdd + "' type='text' size='12'><img id='color_img" + colorAdd + "' onclick='delete_colortr(" + colorAdd + ")' height='15' width='15'  style='margin-right:3px;' src='/tpl/User/default/common/images/icons/delete.png' />");
+}
+/**
+ * 删除型号，删除相应的其他相关的
+ */
+function delete_sizetr(sizename){
+	var stocktr=$(".stock_tr");
+	var sizestr="";
+	for(i=0;i<stocktr.length;i++){
+		sizestr=stocktr[i].title.split("|");
+		if(sizestr[1] == sizename){
+			stocktr[i].remove();
+		}else if(sizestr[1] == ""){
+			stocktr[i].remove();
+		}
+	}
+	if($("#mysize"+sizename).val() == ""){
+		$("#addsize_action").attr("disabled",false);
+	    $("#addcolor_action").attr("disabled",false);
+	}
+
+	$("#mysize"+sizename).remove();
+	$("#inpu_img"+sizename).remove();
+}
+/**
+ * 删除颜色，删除相应的其他相关的
+ */
+function delete_colortr(colorname){
+	var stocktr=$(".stock_tr");
+	var sizestr="";
+	for(i=0;i<stocktr.length;i++){
+		sizestr=stocktr[i].title.split("|");
+		if(sizestr[0] == colorname){
+			stocktr[i].remove();
+		}else if(sizestr[0] == ""){
+			stocktr[i].remove();
+		}
+	}
+	
+	$("#mycolor"+colorname).remove();
+	if($("#mycolor"+colorname).val() == ""){
+		$("#addsize_action").attr("disabled",false);
+	    $("#addcolor_action").attr("disabled",false);
+	}
+	$("#color_img"+colorname).remove();
+}
+function keydown(){
+	//输入新颜色的时候改变新增库存行的 title
+	var min_stock = size_stock - sizelength;
+	var new_title = "";
+	var new_title_color = "";
+	for(i=size_stock;i>min_stock;i--){
+		new_title=$("#mycolor"+colorAdd).val() + document.getElementById("stock"+i).title;
+		new_title_color=colorAdd + document.getElementById("stock"+i).title;
+		$("#trsize"+i).attr("title",new_title_color);
+		 $("#stock"+i).attr("title",new_title);
+		// alert(new_title);
+	 }
+	if($("#mycolor"+colorAdd).val() == ""){
+		$("#addsize_action").attr("disabled",true);
+	    $("#addcolor_action").attr("disabled",true);
+	}else{
+		$("#addsize_action").attr("disabled",false);
+	    $("#addcolor_action").attr("disabled",false);
+	}
+	$(".oupt"+colorAdd).html($("#mycolor"+colorAdd).val());
+	}
+function keydown_size(){
+	//输入新型号的时候改变新增库存行的 title
+	var min_stock = color_stock - colorlength;
+	var new_title = "";
+	var new_title_size="";
+	for(i=color_stock;i>min_stock;i--){
+		new_title=document.getElementById("stockcolor"+i).title + $("#mysize"+sizeAdd).val();
+		new_title_size=document.getElementById("stockcolor"+i).title + sizeAdd;
+		 $("#stockcolor"+i).attr("title",new_title); 
+		 $("#trcolor"+i).attr("title",new_title_size);
+		 //alert(new_title);
+	 }
+	if($("#mysize"+sizeAdd).val() == ""){
+		$("#addsize_action").attr("disabled",true);
+	    $("#addcolor_action").attr("disabled",true);
+	}else{
+		$("#addsize_action").attr("disabled",false);
+	    $("#addcolor_action").attr("disabled",false);
+	}
+	$(".ouptsize"+sizeAdd).html($("#mysize"+sizeAdd).val());
+	}
+	
+	
+/*
+**下面的方法主要是把细则库存通过拼接字符串传入数据库
+**字符串的格式是  ‘颜色|型号|库存’
+**/
+function deal_stock(){
+	var sizes = document.getElementsByName("stock");
+	var stock_detail = "";
+	 for(i=0;i<sizes.length;i++){
+		 if(sizes[i].value !=""){
+			 stock_detail = stock_detail + sizes[i].title + "|" + sizes[i].value + ",";
+		 }
+	 }
+	 var sizescolor = document.getElementsByName("stockcolor");
+	 for(i=0;i<sizescolor.length;i++){
+		 if(sizescolor[i].value !=""){
+			 stock_detail = stock_detail + sizescolor[i].title + "|" + sizescolor[i].value + ",";
+		 }
+	 }
+	 var sizessize = document.getElementsByName("stocksize");
+	 for(i=0;i<sizessize.length;i++){
+		 if(sizessize[i].value !=""){
+			 stock_detail = stock_detail + sizessize[i].title + "|" + sizessize[i].value + ",";
+		 }
+	 }
+	 $("#detail_stock").val(stock_detail);
+	 $("#info_form").submit();
+}
+
+/*
+**下面的方法当细则库存任意一个改变时 总库存重新计算一下
+**/
+function sum_stock(){
+	 var sum_num = 0;
+	 var sizes = document.getElementsByName("stock");
+	 for(i=0;i<sizes.length;i++){
+		 if(sizes[i].value !=""){
+		     sum_num = sum_num + parseInt(sizes[i].value);
+		 }
+	 }
+	 var sizescolor = document.getElementsByName("stockcolor");
+	 for(i=0;i<sizescolor.length;i++){
+		 if(sizescolor[i].value !=""){
+		     sum_num = sum_num + parseInt(sizescolor[i].value);
+		 }
+	 }
+	 var sizessize = document.getElementsByName("stocksize");
+	 for(i=0;i<sizessize.length;i++){
+		 if(sizessize[i].value !=""){
+		     sum_num = sum_num + parseInt(sizessize[i].value);
+		 }
+	 }
+	$("#J_goods_stock").val(sum_num);
 }
 $(function() {
 	KindEditor.create('#info', {

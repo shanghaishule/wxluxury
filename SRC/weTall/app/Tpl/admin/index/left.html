@@ -1,5 +1,14 @@
 <div id="sidebar">
-				
+				<script type="text/javascript">
+				function frezze(){
+					alert("您的店铺处于冻结状态，请提交资料通过审核");
+					return false;
+				}
+				function checkpass(){
+					alert("您的店铺正在审核中，请稍等");
+					return false;
+				}
+				</script>
 				<!-- Box -->
 				
 					<volist name="left_menu" id="val" >
@@ -12,7 +21,17 @@
 					</div>
 					<ul>
 						<volist name="val['sub']" id="sval" >
-					    	<li class="sub_menu"><a href="javascript:;" data-uri="{:U($sval['module_name'].'/'.$sval['action_name'], array('menuid'=>$sval['id'],'tokenTall'=>$tokenTall))}{$sval.data}" data-id="{$sval.id}" hidefocus="true">{$sval.name}</a></li>
+					    	<li class="sub_menu">
+					    	<if condition="$shop_status eq 0">
+					    	<a href="javascript:;" onclick="frezze()">{$sval.name}</a>
+					    	</if>
+					    	<if condition="$shop_status eq 2">
+					    	<a href="javascript:;" onclick="checkpass()">{$sval.name}</a>
+					    	</if>
+					    	<if condition="$shop_status eq 1">
+					    	<a href="javascript:;" data-uri="{:U($sval['module_name'].'/'.$sval['action_name'], array('menuid'=>$sval['id'],'tokenTall'=>$tokenTall))}{$sval.data}" data-id="{$sval.id}" hidefocus="true">{$sval.name}</a>
+					    	</if>
+					    	</li>
 						</volist>
 					</ul>
 					

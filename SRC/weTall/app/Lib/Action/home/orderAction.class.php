@@ -46,6 +46,22 @@ class orderAction extends userbaseAction {
 			foreach ($order_details as $val)
 			{
 				$item->where("id='".$val['itemId']."'")->setInc('buy_num',$val['quantity']);
+				
+				//设置细则库存
+				$stock_detail="";
+				$result2 = $item->where("id='".$val['itemId']."'")->find();
+				$detail_stock=explode(",", $result2["detail_stock"]);var_dump($detail_stock);
+				foreach ($detail_stock as $stock){
+					$stock_real=explode("|", $stock);
+					if ($stock_real[0] == $val['color'] and $stock_real[1] == $val['size']) {
+						$item_stcok = $stock_real[2] - $val['quantity'];
+						$stock_detail=$stock_detail.$stock_real[0]."|".$stock_real[1]."|".$item_stcok.",";
+					}else{
+						$stock_detail=$stock_detail.$stock_real[0]."|".$stock_real[1]."|".$stock_real[2].",";
+					}
+				}
+				$stock_data["detail_stock"]=$stock_detail;
+				$item->where("id='".$val['itemId']."'")->save($stock_data);
 			}
 			$this->redirect('user/index',array('status'=>$status,'tokenTall'=>$tokenTall));
 		}else

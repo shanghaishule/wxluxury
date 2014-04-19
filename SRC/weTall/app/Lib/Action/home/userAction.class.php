@@ -595,9 +595,9 @@ class userAction extends userbaseAction {
     	$userid = $this->visitor->info['id'];
     	/*店铺信息*/
     	$model=new Model();
-    	$weChaShop = $model->table('tp_shop_favi a, tp_wecha_shop b')
-    	->where("a.tokenTall = b.tokenTall and a.userid='".$userid."'")
-    	->field("b.*, '/weTall/index.php?g=home&m=index&a=index&tokenTall=".$tokenTall."' url")
+    	$weChaShop = $model->table('tp_shop_favi a, tp_item b')
+    	->where("a.item_id = b.id and a.userid='".$userid."'")
+    	->field("b.*, '".$tokenTall."' url")
     	->select();
     	//dump($weChaShop);exit;
     	$this->assign("weshopData",$weChaShop);

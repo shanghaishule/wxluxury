@@ -23,7 +23,7 @@
          <volist name="nearShop" id="Shop">
           <div class="shopSearch">
            <table>
-           <tr><td width="85%"><a href="{:U('index/shopinfo',array('id'=>$Shop['id']))}">{$Shop.name}</a></td>
+           <tr><td width="85%"><a href="{:U('index/index',array('tokenTall'=>$Shop['tokenTall']))}">{$Shop.name}</a></td>
            <td width="15%"> <a href="{:U('index/navigate',array('start_point_lat'=>$start_point_lat,'start_point_lng'=>$start_point_lng,'end_point_lat'=>$Shop['latitude'],'end_point_lng'=>$Shop['longitude']))}">
            <img height="27" width="58" src="__STATIC__/weixin/images/luxury/images/brand/tell_09.png" /></a><br></td></tr>
            <tr><td width="85%"><span class="shop_address">{$Shop.address}</span></td>

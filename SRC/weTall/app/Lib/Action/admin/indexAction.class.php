@@ -126,6 +126,7 @@ class indexAction extends backendAction {
     	$tokenTall = $this->getTokenTall();
     	$weshopData["tokenTall"] = $tokenTall;
     	$weChaShopDetail = $weChaShop->where($weshopData)->find();//商城基本信息var_dump($weChaShopDetail);die();
+    	
     	$this->assign("weshopData",$weChaShopDetail);
     	$this->assign('tokenTall', $tokenTall);
 
@@ -297,8 +298,12 @@ class indexAction extends backendAction {
             array_unshift($left_menu[0]['sub'], array('id'=>0,'name'=>'后台首页','module_name'=>'index','action_name'=>'panel'));
         }
         $this->assign('left_menu', $left_menu);
+        $tokenTall = $this->getTokenTall();
+        $weshopData["tokenTall"] = $tokenTall;
+        $weChaShopDetail = M("wecha_shop")->where($weshopData)->find();
        
         $this->assign('tokenTall', $this->getTokenTall());
+        $this->assign("shop_status",$weChaShopDetail["HaveReal"]);
         $this->display();
     }
 
