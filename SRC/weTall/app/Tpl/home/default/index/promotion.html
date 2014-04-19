@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>查找附近的店铺</title>        
+    </head>    
+    <include file="public:headtop" />
+    <include file="public:promotionhead" />
+        
+    <body>
+        <div id="map" style="width:600px; height:400px;display:none;">          
+        </div>        
+
+         <div class="brandimg">
+         <img id="brandimg" alt="" src="__ROOT__/data/upload/advert/{$ad[0].content}">
+         </div>
+	         
+         <if condition="$countPromotion eq 0">
+           <span class="haveSearch">你处在的位置 附近没有促销活动</span>
+         <else/>
+        	<span class="haveSearch"> 查找到附近<span style="red">{$countPromotion}</span>家店铺,有促销活动</span>
+	         <div>		              
+		         <volist name="nearPromotion" id="Promotion">
+			          <div class="shopSearch">
+			           <table>
+			           <tr><td width="85%"><a href="{:U('index/promotioninfo',array('id'=>$Promotion['id']))}">{$Promotion.name}</a></td>
+			           <td width="15%"> <a href="{:U('index/navigate',array('start_point_lat'=>$start_point_lat,'start_point_lng'=>$start_point_lng,'end_point_lat'=>$Shop['latitude'],'end_point_lng'=>$Shop['longitude']))}">
+			           <img height="27" width="58" src="__STATIC__/weixin/images/luxury/images/brand/tell_09.png" /></a><br></td></tr>
+			           <tr><td width="85%"><span class="shop_address">{$Promotion.theme}</span></td>
+			           <tr><td width="85%"><span class="shop_address">活动期间: {$Promotion.start_date}--{$Promotion.end_date}</span></td>
+			           <td width="15%"><img height="18" width="11" src="__STATIC__/weixin/images/luxury/images/brand/here_13.png"><span class="shop_address">{$Shop.nearJuli}KM</span></td></tr>
+			           </table>				
+			          </div><br>
+		         </volist>
+	         </div>
+         </if>
+
+	         
+	         
+    </body>
+    
+</html>

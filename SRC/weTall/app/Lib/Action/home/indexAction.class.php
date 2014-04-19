@@ -101,11 +101,11 @@ class indexAction extends frontendAction {
     		$systemBrowse="Y";
     	}
     	 
-    	/*****首页广告***/
-    	$ad= M('ad');
-    	$where = array('board_id'=>1, 'status'=>1, 'tokenTall'=>$tokenTall);
-    	$ads = $ad->field('url,content,desc')->where($where)->limit(5)->order('ordid asc')->select();
-    	$this->assign('ad',$ads);
+	    	/*****首页广告***/
+	    	$ad= M('ad');
+	    	$where = array('board_id'=>1, 'status'=>1, 'tokenTall'=>$tokenTall);
+	    	$ads = $ad->field('url,content,desc')->where($where)->limit(5)->order('ordid asc')->select();
+	    	$this->assign('ad',$ads);
     	/*****首页广告end******/
     	  
     	/****最新商品*****/
@@ -685,5 +685,61 @@ class indexAction extends frontendAction {
     	
     }    
     	 
+    public function promotion(){
+    	//if (IS_POST) {					
+    		//map 功能需要post ?
+    	    $longitude = $this->_POST("longitude","trim");
+	        $latitude = $this->_POST("latitude","trim");
+    	    //
+	        //xxl
+	        //$brand_id = $this->_POST("brand_id","trim");
+	        //$brand_data['id'] = $brand_id;
+
+	        //取商家token值，取不到则默认为空
+	        $tokenTall = $this->getTokenTall();
+	        $_SESSION["tokenTall"]=$tokenTall;	        
+	        /*****首页广告***/
+	        $ad= M('ad');
+	        $where = array('board_id'=>1, 'status'=>1, 'tokenTall'=>$tokenTall);
+	        $ads = $ad->field('url,content,desc')->where($where)->limit(5)->order('ordid asc')->select();	       
+	        $this->assign('ad',$ads);
+	        /*****首页广告end******/	        
+	        
+	        //promotion event
+			$Sel_sql = "SELECT s.id,s.theme, s.start_date, s.end_date, w.name FROM tp_set_promotion s, tp_wecha_shop w ";
+		    $Where_sql = "WHERE s.tokentall = w.tokentall AND w.shop_city =  '上海' " ;
+		    					
+	        
+	        $m=M();	        
+	        $result=$m->query($Sel_sql.$Where_sql);
+
+	        
+	        $this->assign("nearPromotion",$result);
+	        $this->assign("countPromotion",count($result));
+			
+	        
+	        
+    	//}
+    	 
+    	$this->assign("City","北京");
+    	$this->assign("title","店内促销");
+    	$this->display();
+    }    
+    
+    public function promotioninfo(){
+    	
+    	//promotion event
+    	$id = $this->_get("id","trim");
+    	$Sel_sql = "SELECT b.name AS brand_name, i.title AS title, s.discount_rate * i.price /100 AS price, i.item_model, i.img ";
+    	$From_sql ="FROM tp_set_promotion s, tp_item i, tp_brandlist b ";
+    	$Where_sql = "WHERE s.id = i.promotion_id AND i.brand = b.id AND s.tokentall = i.tokentall AND s.id =".$id;
+    	     	 
+    	$m=M();
+    	$result=$m->query($Sel_sql.$From_sql.$Where_sql);
+    	$this->assign("promotioninfo",$result);
+
+    	$this->display();
+    }    
+    
 
 }
