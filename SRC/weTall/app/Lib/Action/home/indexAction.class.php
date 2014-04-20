@@ -73,6 +73,26 @@ class indexAction extends frontendAction {
         $this->_config_seo();
         $this->display();
     }
+    public function saohuo(){
+    	$brand_id=$this->_get("brand_id","trim");
+    	$id=$this->_get("id","intval");
+    	$set_discount=M("set_discount");
+    	$discount["id"]=$id;
+    	$data_act=$set_discount->where($discount)->find();
+    	$nowDate = time();
+    	if ($data_act["status"] == 1) {
+    		if ($data_act["date"] == $nowDate) {
+    			$where["goods_stock"] = array("neq",0);    			
+    			$item_data=M("item")->where($where)->order("price desc")->distinct("Uninum")->limit(400)->select();
+    			$this->assign("item",$item_data);
+    			$this->display();
+    		}elseif($data_act["date"]){
+    			echo "还未开始";die();
+    		}else{
+    			echo "活动已经结束";die();
+    		}
+    	}
+    }
     public function addressselect(){
     	$upload_shop = M("item");
     	$color = $_GET["color"];
