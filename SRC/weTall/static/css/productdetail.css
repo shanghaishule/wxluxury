@@ -53,8 +53,29 @@ body
 	overflow:hidden;
 	text-overflow:ellipsis;
 }
-
-
+.label3{
+	color:white;
+	margin:0 auto;
+	height:20px;
+	width:70%;
+	float:left;
+	padding-left:8px;
+    display:block;
+	word-break:keep-all;
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis;
+}
+.label4{
+	color:rgb(198,198,198);
+	margin:0 auto;
+	height:60px;
+	width:70%;
+	font-size:13px;
+	float:left;
+	padding-left:8px;
+    display:block;
+}
 .head{
 	background-image:url('../images/productdetail/ic_03.png');
 	background-repeat:repeat;

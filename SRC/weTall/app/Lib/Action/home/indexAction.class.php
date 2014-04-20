@@ -79,14 +79,44 @@ class indexAction extends frontendAction {
     	$set_discount=M("set_discount");
     	$discount["id"]=$id;
     	$data_act=$set_discount->where($discount)->find();
-    	$nowDate = time();
+    	$start_time=strtotime($data_act["date"]. $data_act["start_time"]);
+    	$end_time=strtotime($data_act["date"]. $data_act["end_time"]);
+    	
+    	$start_time=strtotime(date("2014-04-20 20:54:00",time()));
+    	$nowTime = time();
+    	
     	if ($data_act["status"] == 1) {
-    		if ($data_act["date"] == $nowDate) {
-    			$where["goods_stock"] = array("neq",0);    			
-    			$item_data=M("item")->where($where)->order("price desc")->distinct("Uninum")->limit(400)->select();
-    			$this->assign("item",$item_data);
+    		if ($nowTime < $end_time and $nowTime > $start_time) {
+    			$where["goods_stock"] = array("neq",0);   
+    			$where["price"] = array(array("neq",0),array("neq",1));
+    			if ($_SESSION["item_data"] == "") {   			
+	    			$item_data=M("item")->query("select * from tp_item T1,
+					(select `goods_stock`,`Uninum`, Min(`price`) as mprice, Min(`id`) as mid  from `tp_item`
+					group by `Uninum`
+					having 
+					`goods_stock` <> 0
+					) T2
+					where T1.`id` = T2.`mid` order by `buy_num` limit 400");
+	    			$_SESSION["item_data"]=$item_data;
+    			}else{
+    				$item_data = $_SESSION["item_data"];
+    			}
+    			$item_goods=array();
+    			$i=0;
+    			$num_now = $nowTime-$start_time;
+    			foreach ($item_data as $var_item){   				
+    				$item_goods[] = $var_item;
+    				$where["Uninum"] = $var_item["Uninum"];
+    				$item_tao = M("item_taobao")->where($where)->find();
+    				$item_goods[$i]["zhekou"]=round($var_item["price"]*10/$item_tao["price"],1);
+    				$i++;
+    				if ($num_now <= $i){break;}
+    			}
+    			
+    			$reverse_goods=array_reverse($item_goods);
+    			$this->assign("item",$reverse_goods);
     			$this->display();
-    		}elseif($data_act["date"]){
+    		}elseif($nowTime < $start_time){
     			echo "还未开始";die();
     		}else{
     			echo "活动已经结束";die();
@@ -121,8 +151,8 @@ class indexAction extends frontendAction {
     public function intime() {
     	$discount_shop = M("set_discount");
     	$brand = M("brandlist");
-    	$discount_data = $discount_shop->order("date asc")->group("status")->select();
-    	
+    	$discount_data = $discount_shop->order("date asc")->select();
+    	//var_dump($discount_data);die();
     	$this->assign("brand",$brand->select());
     	$this->assign("ontime",$discount_data);
     	$this->display();

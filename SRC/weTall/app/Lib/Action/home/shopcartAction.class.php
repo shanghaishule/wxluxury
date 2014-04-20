@@ -49,6 +49,7 @@ class shopcartAction extends frontendAction {
     	
     	import('Think.ORG.Cart');// 导入分页类
     	$cart=new Cart();
+    	$_SESSION['cart'] = "";
     	
     	$goodId= $this->_post('goodId', 'intval');//商品ID
     	$quantity=$this->_post('quantity', 'intval');//购买数量
