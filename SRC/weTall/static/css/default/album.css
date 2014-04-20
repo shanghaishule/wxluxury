@@ -15,7 +15,7 @@
 .album_top .album_add .reco_album_link{height:37px;width:130px;margin:22px auto 26px;color:#fff;font-size:16px;display:block;background:#8fc63b;line-height:37px;text-align:center;font-weight:bold;}
 .album_top .album_add .mgmg{padding:18px 0 0;color:#777;border-top:1px dashed #ececec;}
 .album_top .album_add .mgmg a{color:#6b9e00;font-weight:bold;text-decoration:underline;}
-
+ 
 /*专辑页面焦点广告开始*/
 #album_slide { height: 283px; overflow: hidden; position: relative; width: 470px;}
 #album_slide .album_slide_items { position: absolute; width: 9999em;}
