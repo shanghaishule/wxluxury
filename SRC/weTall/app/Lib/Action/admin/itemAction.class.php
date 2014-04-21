@@ -1105,25 +1105,24 @@ class itemAction extends backendAction {
     }
       	 
      /**
-     * 修改
+     * 
      */
     public function add_promotion(){
     {
 	    	// $this->_name = $this->getActionName();
-	        $mod = D("item");
+	        
 	        
 	        if (IS_POST) {
+	        	$mod = D("item");
 	            if (false === $data = $mod->create()) {
 	                IS_AJAX && $this->ajaxReturn(0, $mod->getError());
 	                $this->error($mod->getError());
 	            }
            
-	            $eidt_id = $this->_post("id","trim");
-	            if ($eidt_id != "") {
-	            	 $date_data["id"] = $eidt_id;
-	            }
-	           
-	            if (false !== $mod->save($data)) {
+	            $where['id'] = $this->_post("id","trim");	 
+	            $data['promotion_id']= $this->_post("promotion_id","trim");
+	            	
+	            if (false !== $mod->where($where)->save($data)) {
 	            	
 	                IS_AJAX && $this->ajaxReturn(1, L('operation_success'), '', 'add_promotion');
 	                $this->success(L('operation_success'));
@@ -1132,11 +1131,16 @@ class itemAction extends backendAction {
 	                $this->error(L('operation_failure'));
 	            }
 	        } else {
+	        	$set_promotion = M("set_promotion");
 	        	$brand = $this->_get('brand', 'intval');
-	        	$where['brand']=$brand;
-	        	$prompt = $mod->where($where)->select();
+	        	$id = $this->_get('id', 'intval');
+	        	
+	        	$where['brand_id']=$brand;
+	        	$promptions = $set_promotion->where($where)->select();
 
-	        	$this->assign('prompt', $prompt);
+	        	$this->assign('promotions', $promptions);
+	        	$this->assign('id', $id);
+	        	
 	            if (IS_AJAX) {
 	                $response = $this->fetch();
 	                $this->ajaxReturn(1, '', $response);
@@ -1147,4 +1151,22 @@ class itemAction extends backendAction {
 	    }
     	 
     }
+
+    function cancel_promotion(){
+    	$item = M("item");
+    	$id = $this->_get("id","trim");
+    	$where["id"] = $id;
+    	$data["promotion_id"] =  NULL;
+    	if ($item->where($where)->save($data)) {
+    			$message = "已经取消促销";
+    			$this->success($message);
+    		
+    	}else{
+    		$message = "错误";
+    		$this->error($message);
+    	}
+    }    
+    
 }
+
+

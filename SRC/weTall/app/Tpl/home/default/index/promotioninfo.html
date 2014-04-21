@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>首页</title>
+<link type="text/css" rel="stylesheet" href="__STATIC__/weixin/css/shop.css">
+<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="format-detection" content="telephone=no">
+<meta charset="utf-8">
+<link href="__STATIC__/css/productdetail.css" rel="stylesheet" type="text/css">
+<script src="http://api.map.baidu.com/api?v=1.3" type="text/javascript"></script>
+
+<script>
+function gosearch(){
+	document.getElementById('searchForm').submit();
+}
+function searchshop(id){
+	document.getElementById("txtHint").value=id;
+	document.getElementById('searchShop').submit();
+}
+</script>
+</head>
+<body>
+<div class="wrap">
+  <div id="nav">
+    <form id="searchForm" action="/weTall/index.php?g=home&m=index&a=search&tokenTall=eolvhz1392992775" method="post">
+	<ul class="navlist">
+		<li class="r" id="n_0"><a href="{:U('home/index/index', array('tokenTall'=>$tokenTall))}"><div class="home_page_logo"></div></a></li>
+    	<li class="r" id="n_5">
+    		<span style="margin-top:4px;"><input style="height:35px;width:100%;" type="search" name="txtkeyword" id="keyword"  placeholder="请输入品牌关键词" autofocus x-webkit-speech> </span>
+        </li>
+        <li class="r" id="n_1"><a href="javascript:void(0)" onclick="gosearch();"><div class="find_07"></div></a></li>
+        
+    </ul>
+    </form>
+    
+    <script type="text/javascript">   
+        $(function(){
+        	var panelWidth = $(".img").width();
+        	$(".img").css("height",panelWidth);
+        	
+        });        
+    	$(".navlist > li#n_0").click(function(){
+			$(this).toggleClass("active");
+		});
+		$(".navlist > li.r a").each(function() {
+            href="index.php-app=member&act=login&ret_url=-index.php-app=member.htm"+$(this).attr("href");
+			whref=window.location.href;
+			if(whref.indexOf(href)!='-1'){
+				$(this).parent("li").addClass("active");
+			}
+        });
+    </script>
+</div>
+<div class="clear_kongge"></div>
+
+<div>
+   <volist name="promotioninfo" id="product" >
+    <div class="img">
+      <div class="img_detail">
+      <a href="javascript:void(0)" onclick="searchshop({$product.id});" ><img src="{$product.img}" width="100%"></img></a>
+      </div>
+      <div class="pro_detail">
+ 
+      <label class="label" style="font-weight:700;opacity:0.8"><a href="javascript:void(0)" onclick="searchshop({$product.id});" > 
+      {$product.brand_name}</br>
+      {$product.title}</br>
+      促销价：¥{$product.price}  {$product.item_model}款</br>
+      </label>
+      
+      
+      </div>   
+    </div> 
+    </volist>
+    
+ </div>
+
+
+<div class="naviga">
+   <div class="shechipin">
+	   <a href="{:U('index/brandshop',array('order'=>'hot'))}"><img width="30%" height="45" src="__STATIC__/weixin/images/luxury/images/home/reimen.png"></a>
+	   <a href="{:U('index/brandshop',array('filter'=>'guonei'))}"><img width="30%" height="45" src="__STATIC__/weixin/images/luxury/images/home/guonei.png"></a>
+	   <a href="{:U('index/brandshop',array('filter'=>'luxury'))}"><img width="30%" height="45" src="__STATIC__/weixin/images/luxury/images/home/shechipin.png"></a>
+   </div>
+</div>  
+  
+
+<form id="searchShop" action="{:U('index/test')}" method="post">
+   <input type="hidden" name="longitude" value="" id="longitude">
+   <input type="hidden" name="latitude" value="" id="latitude">
+   <input type="hidden" name="brand_id" id="txtHint">   
+ </form>
+   <script type="text/javascript">
+   (function() { // 闭包
+	    function load_script(xyUrl, callback) {
+	        var head = document.getElementsByTagName('head')[0];
+	        var script = document.createElement('script');
+	        script.type = 'text/javascript';
+	        script.src = xyUrl;
+	        // 借鉴了jQuery的script跨域方法
+	        script.onload = script.onreadystatechange = function() {
+	            if ((!this.readyState || this.readyState === "loaded" || this.readyState === "complete")) {
+	                callback && callback();
+	                // Handle memory leak in IE
+	                script.onload = script.onreadystatechange = null;
+	                if (head && script.parentNode) {
+	                    head.removeChild(script);
+	                }
+	            }
+	        };
+	        // Use insertBefore instead of appendChild to circumvent an IE6 bug.
+	        head.insertBefore(script, head.firstChild);
+	    }
+	    function translate(point, type, callback) {
+	        var callbackName = 'cbk_' + Math.round(Math.random() * 10000); // 随机函数名
+	        var xyUrl = "http://api.map.baidu.com/ag/coord/convert?from=" + type
+	                + "&to=4&x=" + point.lng + "&y=" + point.lat
+	                + "&callback=BMap.Convertor." + callbackName;
+	        // 动态创建script标签
+	        load_script(xyUrl);
+	        BMap.Convertor[callbackName] = function(xyResult) {
+	            delete BMap.Convertor[callbackName]; // 调用完需要删除改函数
+	            var point = new BMap.Point(xyResult.x, xyResult.y);
+	            callback && callback(point);
+	        }
+	    }
+
+	    window.BMap = window.BMap || {};
+	    BMap.Convertor = {};
+	    BMap.Convertor.translate = translate;
+	})();
+        if (window.navigator.geolocation) {
+            var options = {
+                enableHighAccuracy: true,
+            };
+            window.navigator.geolocation.getCurrentPosition(handleSuccess, handleError, options);
+        } else {
+            alert("浏览器不支持html5来获取地理位置信息");
+        }
+        
+        function handleSuccess(position){
+            // 获取到当前位置经纬度  本例中是chrome浏览器取到的是google地图中的经纬度
+            var lng = position.coords.longitude;
+            var lat = position.coords.latitude;
+            
+            document.getElementById("longitude").value=lng;
+            document.getElementById("latitude").value=lat;
+            
+           
+        }
+        
+        function handleError(error){
+        
+        }
+ 
+       
+    </script>
+</body>
+</html>

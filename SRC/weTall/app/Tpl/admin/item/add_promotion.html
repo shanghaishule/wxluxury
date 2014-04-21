@@ -1,0 +1,23 @@
+<include file="public:header" />
+<!--添加广告-->
+<div class="dialog_content">
+<form id="info_form" action="{:U('item/add_promotion',array('tokenTall'=>$tokenTall))}" method="post" enctype="multipart/form-data">
+<table width="100%" cellpadding="2" cellspacing="1" class="table_form">
+    <tr>
+      <th width="80">活动名称 :</th>
+      <td>
+      <select name="promotion_id"><option value="">--请选择活动--</option>
+      <volist name="promotions" id="promotion">
+      		<option value="{$promotion.id}">{$promotion.theme}</option>
+      </volist>
+      </select>
+      <br>
+      </td>      
+      </td>
+    </tr>
+    
+</table>
+<input type="hidden" name="id" value="{$id}">
+</form>
+</div>
+
