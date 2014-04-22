@@ -27,3 +27,4 @@ CREATE TABLE IF NOT EXISTS `tp_set_promotion` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 alter table tp_item add promotion_id varchar(100);
+
