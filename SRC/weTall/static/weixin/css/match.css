@@ -1,0 +1,26 @@
+.info {
+font-size: 15px;
+background: #f6f6f6;
+border: 1px solid #ddd;
+overflow: hidden;
+width: 100%;
+min-width: 340px;
+max-width: 640px;	
+
+}
+
+.common_btn {
+width: 100%;
+display: block;
+text-align: center;
+margin: 5px 0;
+height: 40px;
+line-height: 40px;
+border: 1px solid #ddd;
+background-color: #ff8700;
+background-image: linear-gradient(to bottom,#ffbf00,#ff8700);
+border-radius: 5px;
+color: #fff;
+font-size: 16px;
+cursor: pointer;
+}

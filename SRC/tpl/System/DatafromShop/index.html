@@ -70,6 +70,8 @@ function shopSearch(){
     <table  width="100%" cellspacing="0" style="table-layout:fixed;border-collapse:collapse;font-size:12px;">
         <thead>
             <tr>
+               <th width=60px align="left"><span data-tdtype="order_by" data-field="id" >省份</span></th>
+               <th width=60px align="left"><span data-tdtype="order_by" data-field="id" >城市</span></th>
                 <th width=60px align="left"><span data-tdtype="order_by" data-field="id" >品牌</span></th>
                 <th width=80px align="left"><span data-tdtype="order_by" data-field="id" >店名</span></th>
                 <th width=100px align="left"><span data-tdtype="order_by" data-field="id" >LBS地址</span></th>
@@ -80,6 +82,8 @@ function shopSearch(){
     	<tbody>
             <volist name="list" id="val" >
             <tr>
+               <td align="left">{Lanrain:$val.provice}</td>
+               <td align="left">{Lanrain:$val.city}</td>
                 <td align="left">{Lanrain:$val.brand_name}</td>
                 <td align="left">{Lanrain:$val.shop_name}</td>
                 <td align="left">{Lanrain:$val.lbs_addr}</td>            

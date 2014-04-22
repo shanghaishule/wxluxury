@@ -18,6 +18,7 @@ class indexAction extends frontendAction {
     	$where = array('board_id'=>1, 'status'=>1, 'tokenTall'=>$tokenTall);
     	$ads = $ad->field('url,content,desc')->where($where)->limit(5)->order('ordid asc')->select();
         $this->assign('ad',$ads);
+        
         /*****首页广告end******/
    
         /****最新商品*****/
@@ -718,16 +719,18 @@ class indexAction extends frontendAction {
 	        //取商家token值，取不到则默认为空
 	        $tokenTall = $this->getTokenTall();
 	        $_SESSION["tokenTall"]=$tokenTall;	        
-	        /*****首页广告***/
-	        $ad= M('ad');
-	        $where = array('board_id'=>1, 'status'=>1, 'tokenTall'=>$tokenTall);
-	        $ads = $ad->field('url,content,desc')->where($where)->limit(5)->order('ordid asc')->select();	       
-	        $this->assign('ad',$ads);
+	        //广告位
+	        $weTallad = M("adforhome");
+	        $data["status"]=1;
+	        $data["checkstatus"]=1;
+	        $data["boadid"]=array(array('eq',1),array('eq',2),array('eq',3),'or');
+	        $weTallboard = $weTallad->where($data)->order("id asc")->select();
+	        $this->assign("weTallboard",$weTallboard);	        
 	        /*****首页广告end******/	        
 	        
 	        //promotion event
 			$Sel_sql = "SELECT s.id,s.theme, s.start_date, s.end_date, w.name FROM tp_set_promotion s, tp_wecha_shop w ";
-		    $Where_sql = "WHERE s.tokentall = w.tokentall AND w.shop_city =  '上海' " ;
+		    $Where_sql = "WHERE s.tokentall = w.tokentall  AND s.status = 1 AND w.shop_city =  '上海' " ;
 		    					
 	        
 	        $m=M();	        
@@ -748,18 +751,48 @@ class indexAction extends frontendAction {
     
     public function promotioninfo(){
     	
+    	$keyword = NULL;
+    	if (IS_POST) {
+    		$keyword = $this->_POST("keyword","trim");	
+    	}
     	//promotion event
     	$id = $this->_get("id","trim");
-    	$Sel_sql = "SELECT b.name AS brand_name, i.title AS title, s.discount_rate * i.price /100 AS price, i.item_model, i.img ";
+    	$Sel_sql = "SELECT i.id,b.name AS brand_name, i.title AS title, s.discount_rate * i.price /100 AS price, i.item_model, i.img ";
     	$From_sql ="FROM tp_set_promotion s, tp_item i, tp_brandlist b ";
-    	$Where_sql = "WHERE s.id = i.promotion_id AND i.brand = b.id AND s.tokentall = i.tokentall AND s.id =".$id;
+    	$Where_sql = "WHERE s.id = i.promotion_id AND i.brand = b.id AND s.tokentall = i.tokentall AND s.id =".$id." ";
+    	if($keyword != NULL){
+    		$like = "And i.title like '%".$keyword."%' "; 
+    		$Where_sql = $Where_sql.$like;      		
+    	}
     	     	 
     	$m=M();
+	
     	$result=$m->query($Sel_sql.$From_sql.$Where_sql);
     	$this->assign("promotioninfo",$result);
+    	
+    	//promotion event
+    	$Sel_sql = "SELECT w.name FROM tp_set_promotion s, tp_wecha_shop w ";
+    	$Where_sql = "WHERE s.tokentall = w.tokentall AND w.shop_city =  '上海' AND s.id =".$id;  	
+    	$result=$m->query($Sel_sql.$Where_sql);    	 	
+    	$this->assign("name",$result[0]['name']);
+    	$this->assign("id",$id);
+    	$this->assign("keyword",$keyword);
+    	
+    	$this->display();
+    }   
 
+    public function match() {
+    	$discount_shop = M("set_discount");
+    	$brand = M("brandlist");
+    	$discount_data = $discount_shop->order("date asc")->group("status")->select();
+    	 
+    	$this->assign("brand",$brand->select());
+    	$this->assign("ontime",$discount_data);
+    	$this->display();
+    }
+    
+    public function addMatch() {
     	$this->display();
     }    
-    
 
 }

@@ -19,9 +19,20 @@ class itemAction extends frontendAction {
         !$id && $this->_404();
         $tokenTall = $this->getTokenTall();
         $item_mod = M('item');
-        $item = $item_mod->field('id,title,Uninum,favi,old_price,goods_stock,intro,price,info,comments,add_time,goods_stock,buy_num,brand,size,color,images')->where(array('id' => $id, 'status' => 1))->find();
+        $item = $item_mod->field('id,title,Uninum,favi,old_price,goods_stock,intro,price,info,comments,add_time,goods_stock,buy_num,brand,size,color,images,promotion_id')->where(array('id' => $id, 'status' => 1))->find();
         !$item && $this->_404();
     
+        //xxl start
+        //折扣设定      
+        if($item['promotion_id'] != NULL){
+        	$where['id']= $item['promotion_id']; 
+        	$set_promotion = M('set_promotion')->field('discount_rate')->where($where)->find();
+        	$item['discount_rate'] = $set_promotion['discount_rate'];
+        	$item['new_price'] = $item['price'] * $set_promotion['discount_rate']/100;
+        	
+        }   
+        //xxl end
+        
         //大小
         $size = substr(trim($item['size']),0,1) == '|' ? explode('|', substr(trim($item['size']),1)) : explode('|', $item['size']);
         

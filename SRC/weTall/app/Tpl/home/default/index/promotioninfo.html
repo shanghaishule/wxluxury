@@ -16,20 +16,51 @@
 function gosearch(){
 	document.getElementById('searchForm').submit();
 }
-function searchshop(id){
-	document.getElementById("txtHint").value=id;
-	document.getElementById('searchShop').submit();
+function searchitem(id){	
+	location.href='/weTall/index.php?m=Item&a=index&id=' +id;
 }
 </script>
+<style type="text/css"> 
+.fixed_line{
+position:fixed; 
+left:0px;
+bottom:40px;
+width:100%;
+background-color:red;
+min-width: 340px;
+max-width: 640px;
+z-index: 100;
+margin: 0 auto;
+opacity:0.8; 
+height: 5px;
+} 
+ 
+.fixed_foot{
+position:fixed; 
+left:0px;
+bottom:0px;
+width:100%;
+background-color:black;
+min-width: 340px;
+max-width: 640px;
+z-index: 100;
+margin: 0 auto;
+opacity:0.8; 
+text-align: center;
+height: 40px;
+font-size:25px;
+} 
+</style> 
+
 </head>
 <body>
 <div class="wrap">
   <div id="nav">
-    <form id="searchForm" action="/weTall/index.php?g=home&m=index&a=search&tokenTall=eolvhz1392992775" method="post">
+    <form id="searchForm" action="/weTall/index.php?g=home&m=index&a=promotioninfo&id={$id}" method="post">
 	<ul class="navlist">
 		<li class="r" id="n_0"><a href="{:U('home/index/index', array('tokenTall'=>$tokenTall))}"><div class="home_page_logo"></div></a></li>
     	<li class="r" id="n_5">
-    		<span style="margin-top:4px;"><input style="height:35px;width:100%;" type="search" name="txtkeyword" id="keyword"  placeholder="请输入品牌关键词" autofocus x-webkit-speech> </span>
+    		<span style="margin-top:4px;"><input style="height:35px;width:100%;" type="search" name="keyword" id="keyword"  value="{$keyword}" placeholder="请输入商品关键词" autofocus x-webkit-speech> </span>
         </li>
         <li class="r" id="n_1"><a href="javascript:void(0)" onclick="gosearch();"><div class="find_07"></div></a></li>
         
@@ -60,11 +91,11 @@ function searchshop(id){
    <volist name="promotioninfo" id="product" >
     <div class="img">
       <div class="img_detail">
-      <a href="javascript:void(0)" onclick="searchshop({$product.id});" ><img src="{$product.img}" width="100%"></img></a>
+      <a href="javascript:void(0)" onclick="searchitem({$product.id});" ><img src="{$product.img}" width="100%"></img></a>
       </div>
       <div class="pro_detail">
  
-      <label class="label" style="font-weight:700;opacity:0.8"><a href="javascript:void(0)" onclick="searchshop({$product.id});" > 
+      <label class="label" style="font-weight:700;opacity:0.8"><a href="javascript:void(0)" onclick="searchitem({$product.id});" > 
       {$product.brand_name}</br>
       {$product.title}</br>
       促销价：¥{$product.price}  {$product.item_model}款</br>
@@ -75,23 +106,16 @@ function searchshop(id){
     </div> 
     </volist>
     
- </div>
+</div>
+
+<div class="fixed_line">
+<div class="fixed_foot">
+<label class="label">
+{$name}
+</label>
+</div>
 
 
-<div class="naviga">
-   <div class="shechipin">
-	   <a href="{:U('index/brandshop',array('order'=>'hot'))}"><img width="30%" height="45" src="__STATIC__/weixin/images/luxury/images/home/reimen.png"></a>
-	   <a href="{:U('index/brandshop',array('filter'=>'guonei'))}"><img width="30%" height="45" src="__STATIC__/weixin/images/luxury/images/home/guonei.png"></a>
-	   <a href="{:U('index/brandshop',array('filter'=>'luxury'))}"><img width="30%" height="45" src="__STATIC__/weixin/images/luxury/images/home/shechipin.png"></a>
-   </div>
-</div>  
-  
-
-<form id="searchShop" action="{:U('index/test')}" method="post">
-   <input type="hidden" name="longitude" value="" id="longitude">
-   <input type="hidden" name="latitude" value="" id="latitude">
-   <input type="hidden" name="brand_id" id="txtHint">   
- </form>
    <script type="text/javascript">
    (function() { // 闭包
 	    function load_script(xyUrl, callback) {
