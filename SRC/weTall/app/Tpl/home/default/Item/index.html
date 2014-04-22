@@ -105,11 +105,7 @@
 	     		//alert(data.msg);
 	     		if(data.status==1)
 	     		{
-	     			$('.dialog_title').html(data.msg);
-	     			$('.bold_num').text(data.count);
-	     			$('.bold_mly').html(data.sumPrice);
-	     			$('.ware_cen').slideDown('slow');
-	     			setTimeout(slideUp_fn, 5000);
+	     			window.location.href="/weTall/index.php?g=home&m=shopcart&a=index&tokenTall={$tokenTall}";
 	     		}else
 	     		{
 	     			$('.dialog_title').html("<font color='red'>"+data.msg+"</font>");

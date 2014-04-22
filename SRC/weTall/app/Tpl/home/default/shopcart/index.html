@@ -23,11 +23,13 @@ $(function(){
         $("#float_layer").hide();
     });
 });
-
+function go_jiesuan(){
+	window.location.href="/weTall/index.php?g=home&m=order&a=jiesuan&tokenTall={$tokenTall}";
+}
 </script>
 </head>
 
-<body>
+<body onload="go_jiesuan()">
 <include file="public:head" />
 <script type="text/javascript" src="__STATIC__/weixin/js/cart.js" charset="utf-8"></script>
 

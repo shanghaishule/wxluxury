@@ -59,6 +59,13 @@ class orderAction extends userbaseAction {
 					}else{
 						$stock_detail=$stock_detail.$stock_real[0]."|".$stock_real[1]."|".$stock_real[2].",";
 					}
+					//购买成功的加入收藏中
+					$userid = $_SESSION['user_info']['id'];
+		    		$shopfav_mod = M('shop_favi');
+		    		$insdata = array('userid'=>$userid, 'item_id'=>$val['itemId']);
+		    		if (false == $shopfav_mod->where($insdata)->find()) {
+		    			$shopfav_mod->add($insdata);
+		    		}
 				}
 				$stock_data["detail_stock"]=$stock_detail;
 				$item->where("id='".$val['itemId']."'")->save($stock_data);
