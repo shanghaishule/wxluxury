@@ -590,6 +590,13 @@ class indexAction extends frontendAction {
     		$where["domain"] = 1;
     	}
     	
+    	if (IS_POST) {
+    		$brandname = $this->_post("txtkeyword","trim");
+    		$method = $this->_post("method","trim");
+    		$where["name"] = array("like","%".$brandname."%");
+    		$this->assign("gowhere",$method);
+    	}
+    	
     	$brand = M("brandlist")->where($where)->order("volume desc")->select();
     	$this->assign("brand",$brand);
     	$this->display();

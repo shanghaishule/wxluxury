@@ -375,6 +375,7 @@ div.order_cancel_box p span {color: #f34; font-weight: bold;}
 #nav .navlist li#n_4 span{ text-align:center;padding-top:1px;font-size:1.5em; color:white;font-weight:700;}
 #nav .navlist li#n_3 span{ text-align:center;padding-top:7px;font-size:1.2em; color:white;font-weight:700;}
 #nav .navlist li#n_1{text-align:center;color:white;font-weight:700;background:none;}
+#nav .navlist li#n_8{padding-top:8px;padding-left:24px;margin-top:2px;margin-left:10px;text-align:left;color:white;font-weight:500;background:url(../images/luxury/images/shoping/bg_button.png);background-size:100% 100%;width:100px;height:31px;}
 
 .banner{position: relative;}
 .banner .slider {z-index: 1; display:block; margin:0 auto; max-width:600px;overflow:hidden;position:relative;}
