@@ -38,8 +38,7 @@ class set_promotionAction extends backendAction {
 		$this->assign('cate_list', $cate_list);
 	
 		//默认排序
-		$this->sort = 'id ASC,';
-		$this->order ='start_time DESC';
+		$this->sort = 'id ASC';
 	}
 	
 	public function _before_add(){
