@@ -19,7 +19,7 @@
 	<ul class="navlist">
 		<li class="r" id="n_0"><a href="{:U('home/index/index', array('tokenTall'=>$tokenTall))}"><div class="home_page_logo"></div></a></li>
     	<li class="r" id="n_3">
-    		<span >整点扫货</span>
+    		<span >搭配分享</span>
         </li>
         <li class="r" id="n_1"><a href="{:U('home/user/index', array('tokenTall'=>$tokenTall))}"><div class="find_04"></div></a></li>
         
@@ -40,23 +40,26 @@
 	
 </div>
   
+<div>
+
    <volist name="ontime" id="product" key="k">
     <div  class="imgIntime"><div class="status_img"><if condition="$product['status'] eq 0">
     <img style="margin-right:5px;" width="66px" height="25px" src="/weTall/static/weixin/images/luxury/images/Ontime/1_04.png"></if>
       <if condition="$product['status'] eq 1"><img style="margin-right:5px;" width="66px" height="25px" src="/weTall/static/weixin/images/luxury/images/Ontime/4_03.png"></if>
       <if condition="$product['status'] eq 2"><img style="margin-right:5px;" width="66px" height="25px" src="/weTall/static/weixin/images/luxury/images/Ontime/5_03.png"></if></div>
       <div class="intime_img">
-      <a href="{:U('home/index/saohuo', array('brand_id'=>$product['brand_id'],'id'=>$product['id']))}"><img src="{$product.img}" width="100%"></a></img>
+      <img src="{$product.img}" width="100%"></img>
       </div> 
       <div class="Intime_detail"><div style="float:left;margin-left:8%;">
       <volist name="brand" id="vo">
       <if condition="$product['brand_id'] eq $vo['id']">
       {$vo.name}</if></volist>      
       	活动时间：{$product.date} </div><div style="width:36px;margin-left:10px;float:left;overflow:hidden;">{$product.start_time}</div><div style="width:41px;float:left;overflow:hidden;">-{$product.end_time}</div>
-      </div><div id="timer{$k}" style="float:left;"></div>
+      </div>
+      <div id="timer{$k}" style="float:left;"></div>
       </div> 
-    </volist>
-  </div>
+    </volist>    
+</div>
 
 </body>
 </html>

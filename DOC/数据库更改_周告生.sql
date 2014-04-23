@@ -12,3 +12,5 @@ ALTER TABLE  `tp_wecha_shop` ADD  `owner` VARCHAR( 100 ) NOT NULL AFTER  `shop_c
 ADD  `IDno` VARCHAR( 18 ) NOT NULL AFTER  `owner` ,
 ADD  `email` VARCHAR( 180 ) NOT NULL AFTER  `IDno` ,
 ADD  `licence_img` VARCHAR( 200 ) NOT NULL AFTER  `email` ;
+
+ALTER TABLE  `tp_shop_favi` CHANGE  `tokenTall`  `item_id` VARCHAR( 10 ) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT  '商品的id';

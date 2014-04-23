@@ -43,30 +43,7 @@
 	    $("#J_cate_tree").treeTable({indent:20,treeColumn:2});
 	    $(".J_preview").preview();
 	});  
-	$(function () {
-        var x = 10;
-        var y = 20;
-        $("#licence_img").mouseover(function (e) {
-            this.myTitle = this.title;
-            this.title = "";
-            var imgTitle = this.myTitle ? "<br/>" + this.myTitle : "";
-            var tooltip = "<div id='tooltip'><img width='200' src='." + imgTitle + "' alt='产品预览图'/></div>  "; //创建 div 元素
-            $("body").append(tooltip); //把它追加到文档中
-            $("#tooltip").css(
-              {
-                  "top": (e.pageY + y) + "px",
-                  "left": (e.pageX + x) + "px"
-              }).show("fast");    //设置x坐标和y坐标，并且显示
-        }).mouseout(function () {
-            this.title = this.myTitle;
-            $("#tooltip").remove();   //移除
-        }).mousemove(function (e) {
-            $("#tooltip").css({
-                "top": (e.pageY + y) + "px",
-                "left": (e.pageX + x) + "px"
-            });
-        });
-    });
+	
 	
 	</script> 
 
@@ -82,13 +59,14 @@
             <tr>
                 <th width="10"><input type="checkbox" name="checkall" class="J_checkall"></th>
                 <th width="100">店铺名称</th>
+                <th width="60">资质文件</th>
                 <th width="45">店主姓名</th>
                 <th width="55">联系电话</th>
                 <th width="58">身份证</th>
                 <th width="100">邮箱</th>
                 <th width="45">状态</th>
 				<th width="80" align="center">营业执照</th>
-				<th width="60">资质文件</th>
+				
                 <th width="150" align="left">实体店地址</th>           
                 <th width="90">管理操作</th>
             </tr>
@@ -98,13 +76,13 @@
             <tr>
                 <td align="center"><input type="checkbox" class="J_checkitem" value="{Lanrain:$val.id}"></td>
                 <td align="center">{Lanrain:$val.name}</td>
+                <td align="center"><img id="licence_img" class="J_preview" data-bimg="{Lanrain:$val.licence_img}" src="{Lanrain:$val.licence_img}" width="60"></td>
 				<td align="center">{Lanrain:$val.owner}</td>
 				<td align="center">{Lanrain:$val.phone}</td>
 				<td align="center">{Lanrain:$val.IDno}</td>
 				<td align="center">{Lanrain:$val.email}</td>
 				<td align="center"><if condition="$val['HaveReal'] eq '0'">无实体店<elseif condition="$val['HaveReal'] eq '2'"/>认证中<elseif condition="$val['HaveReal'] eq '3'"/>审核不通过<else/>已认证</if></td>
 				<td align="center">{Lanrain:$val.licence}</td>
-				<td align="center"><img id="licence_img" title="{Lanrain:$val.licence_img}" src="{Lanrain:$val.licence_img}" width="60"></td>
 				<td align="left">{Lanrain:$val.address}</td>
 				
                 <td align="center">

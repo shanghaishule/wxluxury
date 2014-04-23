@@ -104,16 +104,15 @@
                  </if>
                  
                  <!--xxl start-->
-	             | <if condition="$val.Oneyuan eq 0"><a href="{:U('item/yiyuan', array('id'=>$val['id'], 'Oneyuan'=>'Y','menuid'=>$menuid, 'tokenTall'=>$val['tokenTall']))}">参加促销</a>
-	             <else/>
-	             <a href="{:U('item/yiyuan', array('id'=>$val['id'], 'Oneyuan'=>'N','menuid'=>$menuid, 'tokenTall'=>$val['tokenTall']))}">取消促销</a>
-	             </if>               
-	             
+| <if condition="$val.promotion_id eq NULL ">
 <a href="javascript:;" class="J_showdialog" 
-data-uri="/weTall/index.php?g=admin&m=item&a=add_promotion&brand={$val['brand']}" 
+data-uri="/weTall/index.php?g=admin&m=item&a=add_promotion&brand={$val['brand']}&id={$val['id']}" 
 data-title="参加促销"  
-data-id="edit" data-acttype="ajax" data-width="520" data-height="360">编辑
-</a>                           
+data-id="edit" data-acttype="ajax" data-width="300" data-height="150">参加促销
+<else/>
+<a href="{:U('item/cancel_promotion', array('id'=>$val['id'],'tokenTall'=>$val['tokenTall']))}">取消促销</a>	             
+</a>
+</if>  
                  <!--xxl end-->
                  
                  </td>             

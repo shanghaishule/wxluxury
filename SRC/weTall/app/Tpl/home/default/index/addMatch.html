@@ -9,6 +9,8 @@
 <meta name="format-detection" content="telephone=no">
 <meta charset="utf-8">
 <link href="__STATIC__/css/productdetail.css" rel="stylesheet" type="text/css">
+
+<link type="text/css" rel="stylesheet" href="__STATIC__/weixin/css/match.css">
 <link type="text/css" rel="stylesheet" href="__STATIC__/weixin/css/shop.css">
 
 </head>
@@ -19,7 +21,7 @@
 	<ul class="navlist">
 		<li class="r" id="n_0"><a href="{:U('home/index/index', array('tokenTall'=>$tokenTall))}"><div class="home_page_logo"></div></a></li>
     	<li class="r" id="n_3">
-    		<span >整点扫货</span>
+    		<span >添加我的搭配</span>
         </li>
         <li class="r" id="n_1"><a href="{:U('home/user/index', array('tokenTall'=>$tokenTall))}"><div class="find_04"></div></a></li>
         
@@ -40,23 +42,32 @@
 	
 </div>
   
-   <volist name="ontime" id="product" key="k">
-    <div  class="imgIntime"><div class="status_img"><if condition="$product['status'] eq 0">
-    <img style="margin-right:5px;" width="66px" height="25px" src="/weTall/static/weixin/images/luxury/images/Ontime/1_04.png"></if>
-      <if condition="$product['status'] eq 1"><img style="margin-right:5px;" width="66px" height="25px" src="/weTall/static/weixin/images/luxury/images/Ontime/4_03.png"></if>
-      <if condition="$product['status'] eq 2"><img style="margin-right:5px;" width="66px" height="25px" src="/weTall/static/weixin/images/luxury/images/Ontime/5_03.png"></if></div>
-      <div class="intime_img">
-      <a href="{:U('home/index/saohuo', array('brand_id'=>$product['brand_id'],'id'=>$product['id']))}"><img src="{$product.img}" width="100%"></a></img>
-      </div> 
-      <div class="Intime_detail"><div style="float:left;margin-left:8%;">
-      <volist name="brand" id="vo">
-      <if condition="$product['brand_id'] eq $vo['id']">
-      {$vo.name}</if></volist>      
-      	活动时间：{$product.date} </div><div style="width:36px;margin-left:10px;float:left;overflow:hidden;">{$product.start_time}</div><div style="width:41px;float:left;overflow:hidden;">-{$product.end_time}</div>
-      </div><div id="timer{$k}" style="float:left;"></div>
-      </div> 
-    </volist>
-  </div>
+<table class = "info">
+<tr>
+	<td  width="25pxx`" >上传我的图片</td>
+	<td><input type="file" name="pic" id="pic" onchange="changImg('./upload_image', './')" /></td>
+</tr>
 
+<tr>
+<td>简述</td>
+<td><input name="user_name" id="user_name" type="text"></td>
+</tr>
+
+<tr>
+<td>我的收藏</td>
+<td></td>
+</tr>
+<tr>
+	<td><img width="75" height="30" src="/weTall/data/upload/item/1404/13/534a962c2dc6c.png"></td>
+	<td>Girdear 哥弟哥弟正品 新款多色高跟鞋防水台鱼嘴鞋GD9002 原价450元</td>
+</tr>
+
+</table>
+
+
+	
+<input name="preview" value="预览" class="common_btn" type="button">
+<input name="save" value="保存" class="common_btn" type="button">
+<input name="submit" value="发稿" class="common_btn" type="button">
 </body>
 </html>

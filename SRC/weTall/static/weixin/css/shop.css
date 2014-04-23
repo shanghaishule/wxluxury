@@ -1031,3 +1031,7 @@ background:#ffffff;
 #nav .navlist ul{
 padding:10px 0 10px 0;	
 }
+/*扫货详情*/
+.intime_img_detail{width:100%;}
+.item_detail{color:white;font-size:13px;}
+#discount_detail{background:url(../images/luxury/images/danpin/2_06.png) no-repeat;background-size:100% 100%;height:90px;padding:5px;font-size:11px;color:white;margin-left:10px}

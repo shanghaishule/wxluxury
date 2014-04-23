@@ -18,6 +18,7 @@ class indexAction extends frontendAction {
     	$where = array('board_id'=>1, 'status'=>1, 'tokenTall'=>$tokenTall);
     	$ads = $ad->field('url,content,desc')->where($where)->limit(5)->order('ordid asc')->select();
         $this->assign('ad',$ads);
+        
         /*****首页广告end******/
         
         /***商品分类**/
@@ -78,6 +79,56 @@ class indexAction extends frontendAction {
         $this->_config_seo();
         $this->display();
     }
+    public function saohuo(){
+    	$brand_id=$this->_get("brand_id","trim");
+    	$id=$this->_get("id","intval");
+    	$set_discount=M("set_discount");
+    	$discount["id"]=$id;
+    	$data_act=$set_discount->where($discount)->find();
+    	$start_time=strtotime($data_act["date"]. $data_act["start_time"]);
+    	$end_time=strtotime($data_act["date"]. $data_act["end_time"]);
+    	
+    	$start_time=strtotime(date("2014-04-20 20:54:00",time()));
+    	$nowTime = time();
+    	
+    	if ($data_act["status"] == 1) {
+    		if ($nowTime < $end_time and $nowTime > $start_time) {
+    			$where["goods_stock"] = array("neq",0);   
+    			$where["price"] = array(array("neq",0),array("neq",1));
+    			if ($_SESSION["item_data"] == "") {   			
+	    			$item_data=M("item")->query("select * from tp_item T1,
+					(select `goods_stock`,`Uninum`, Min(`price`) as mprice, Min(`id`) as mid  from `tp_item`
+					group by `Uninum`
+					having 
+					`goods_stock` <> 0
+					) T2
+					where T1.`id` = T2.`mid` order by `buy_num` limit 400");
+	    			$_SESSION["item_data"]=$item_data;
+    			}else{
+    				$item_data = $_SESSION["item_data"];
+    			}
+    			$item_goods=array();
+    			$i=0;
+    			$num_now = $nowTime-$start_time;
+    			foreach ($item_data as $var_item){   				
+    				$item_goods[] = $var_item;
+    				$where["Uninum"] = $var_item["Uninum"];
+    				$item_tao = M("item_taobao")->where($where)->find();
+    				$item_goods[$i]["zhekou"]=round($var_item["price"]*10/$item_tao["price"],1);
+    				$i++;
+    				if ($num_now <= $i){break;}
+    			}
+    			
+    			$reverse_goods=array_reverse($item_goods);
+    			$this->assign("item",$reverse_goods);
+    			$this->display();
+    		}elseif($nowTime < $start_time){
+    			echo "还未开始";die();
+    		}else{
+    			echo "活动已经结束";die();
+    		}
+    	}
+    }
     public function addressselect(){
     	$upload_shop = M("item");
     	$color = $_GET["color"];
@@ -106,8 +157,8 @@ class indexAction extends frontendAction {
     public function intime() {
     	$discount_shop = M("set_discount");
     	$brand = M("brandlist");
-    	$discount_data = $discount_shop->order("date asc")->group("status")->select();
-    	
+    	$discount_data = $discount_shop->order("date asc")->select();
+    	//var_dump($discount_data);die();
     	$this->assign("brand",$brand->select());
     	$this->assign("ontime",$discount_data);
     	$this->display();
@@ -131,11 +182,11 @@ class indexAction extends frontendAction {
     		$systemBrowse="Y";
     	}
     	 
-    	/*****首页广告***/
-    	$ad= M('ad');
-    	$where = array('board_id'=>1, 'status'=>1, 'tokenTall'=>$tokenTall);
-    	$ads = $ad->field('url,content,desc')->where($where)->limit(5)->order('ordid asc')->select();
-    	$this->assign('ad',$ads);
+	    	/*****首页广告***/
+	    	$ad= M('ad');
+	    	$where = array('board_id'=>1, 'status'=>1, 'tokenTall'=>$tokenTall);
+	    	$ads = $ad->field('url,content,desc')->where($where)->limit(5)->order('ordid asc')->select();
+	    	$this->assign('ad',$ads);
     	/*****首页广告end******/
     	  
     	/****最新商品*****/
@@ -710,5 +761,93 @@ class indexAction extends frontendAction {
     	
     }    
     	 
+    public function promotion(){
+    	//if (IS_POST) {					
+    		//map 功能需要post ?
+    	    $longitude = $this->_POST("longitude","trim");
+	        $latitude = $this->_POST("latitude","trim");
+    	    //
+	        //xxl
+	        //$brand_id = $this->_POST("brand_id","trim");
+	        //$brand_data['id'] = $brand_id;
+
+	        //取商家token值，取不到则默认为空
+	        $tokenTall = $this->getTokenTall();
+	        $_SESSION["tokenTall"]=$tokenTall;	        
+	        //广告位
+	        $weTallad = M("adforhome");
+	        $data["status"]=1;
+	        $data["checkstatus"]=1;
+	        $data["boadid"]=array(array('eq',1),array('eq',2),array('eq',3),'or');
+	        $weTallboard = $weTallad->where($data)->order("id asc")->select();
+	        $this->assign("weTallboard",$weTallboard);	        
+	        /*****首页广告end******/	        
+	        
+	        //promotion event
+			$Sel_sql = "SELECT s.id,s.theme, s.start_date, s.end_date, w.name FROM tp_set_promotion s, tp_wecha_shop w ";
+		    $Where_sql = "WHERE s.tokentall = w.tokentall  AND s.status = 1 AND w.shop_city =  '上海' " ;
+		    					
+	        
+	        $m=M();	        
+	        $result=$m->query($Sel_sql.$Where_sql);
+
+	        
+	        $this->assign("nearPromotion",$result);
+	        $this->assign("countPromotion",count($result));
+			
+	        
+	        
+    	//}
+    	 
+    	$this->assign("City","北京");
+    	$this->assign("title","店内促销");
+    	$this->display();
+    }    
+    
+    public function promotioninfo(){
+    	
+    	$keyword = NULL;
+    	if (IS_POST) {
+    		$keyword = $this->_POST("keyword","trim");	
+    	}
+    	//promotion event
+    	$id = $this->_get("id","trim");
+    	$Sel_sql = "SELECT i.id,b.name AS brand_name, i.title AS title, s.discount_rate * i.price /100 AS price, i.item_model, i.img ";
+    	$From_sql ="FROM tp_set_promotion s, tp_item i, tp_brandlist b ";
+    	$Where_sql = "WHERE s.id = i.promotion_id AND i.brand = b.id AND s.tokentall = i.tokentall AND s.id =".$id." ";
+    	if($keyword != NULL){
+    		$like = "And i.title like '%".$keyword."%' "; 
+    		$Where_sql = $Where_sql.$like;      		
+    	}
+    	     	 
+    	$m=M();
+	
+    	$result=$m->query($Sel_sql.$From_sql.$Where_sql);
+    	$this->assign("promotioninfo",$result);
+    	
+    	//promotion event
+    	$Sel_sql = "SELECT w.name FROM tp_set_promotion s, tp_wecha_shop w ";
+    	$Where_sql = "WHERE s.tokentall = w.tokentall AND w.shop_city =  '上海' AND s.id =".$id;  	
+    	$result=$m->query($Sel_sql.$Where_sql);    	 	
+    	$this->assign("name",$result[0]['name']);
+    	$this->assign("id",$id);
+    	$this->assign("keyword",$keyword);
+    	
+    	$this->display();
+    }   
+
+    public function match() {
+    	$discount_shop = M("set_discount");
+    	$brand = M("brandlist");
+    	$discount_data = $discount_shop->order("date asc")->group("status")->select();
+    	 
+    	$this->assign("brand",$brand->select());
+    	$this->assign("ontime",$discount_data);
+    	$this->display();
+    }
+    
+    public function addMatch() {
+    	$this->display();
+    }    
 
 }

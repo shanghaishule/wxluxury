@@ -73,11 +73,13 @@ class DatafromShopAction extends BackAction
     	    	
     	//数据导入
     	$colInfo = array();
-    	//读入Excel 
-    	$colInfo['shop_name'] = "0"; 
-    	$colInfo['show_addr'] = "1";
-    	$colInfo['lbs_addr'] = "2";
-    	$colInfo['phone'] = "3";
+    	//读入Excel
+    	$colInfo['provice'] = "0";
+    	$colInfo['city'] = "1";
+    	$colInfo['shop_name'] = "2"; 
+    	$colInfo['show_addr'] = "3";
+    	$colInfo['lbs_addr'] = "4";
+    	$colInfo['phone'] = "5";
     	    	
     	$add_info['brand_name']= $bl_data['name'];    		
     	
