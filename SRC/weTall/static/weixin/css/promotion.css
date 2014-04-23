@@ -1,0 +1,8 @@
+.banner{ width:100%; overflow:hidden; height:163px;}
+.banner ul#BanCont { width:100%; overflow:hidden; height:161px; position:relative;}
+.banner ul#BanCont li { position:absolute; top:0; left:0; width:100%; overflow:hidden; height:161px;}
+
+.banner_link { width:100%; overflow:hidden;}
+.banner_link li{ float:left; width:20%; height:2px; background-color:#d3d3d3; font-size:0;}
+.banner_link .banner_link_red1 { background-color:#c00f18;}
+.banner_link .banner_link_red2 { background-color:#c00f18;}

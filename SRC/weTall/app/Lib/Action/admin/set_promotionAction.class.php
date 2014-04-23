@@ -11,7 +11,7 @@ class set_promotionAction extends backendAction {
 	}
 	
 	public function _before_index() {
-		
+
 		$tokenTall = $this->getTokenTall();		
 		$this->assign('tokenTall',$tokenTall);
 		//显示模式
@@ -38,7 +38,8 @@ class set_promotionAction extends backendAction {
 		$this->assign('cate_list', $cate_list);
 	
 		//默认排序
-		$this->sort = 'id ASC';
+		$this->sort = 'id ASC,';
+		$this->order ='start_time DESC';
 	}
 	
 	public function _before_add(){
