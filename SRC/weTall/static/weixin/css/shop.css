@@ -1010,3 +1010,24 @@ div.order_cancel_box p span {color: #f34; font-weight: bold;}
 .intime_img{background:url(../images/luxury/images/Ontime/bg_02.png) no-repeat;background-size:100% 100%;padding:5px;}
 .status_img{z-index:1000;position:absolute;width:100%;height:25px;text-align:right;float:right;margin-top:5px;padding-right:5px;}
 
+/**2014-4-20 顶部菜单下拉区域**/
+.dis{width:80px;
+border:1px solid #ccc;
+top:45px;
+left:0;
+background:rgba(25,25,25,0.5);
+position:absolute;}
+.dis{display:none}
+body .pos .none{display:block}
+.pos{cursor:pointer;}
+#nav .navlist .dis li {
+float:none;
+height:26px;   
+padding-left:10px;
+}
+#nav .navlist .dis li:hover{
+background:#ffffff;	
+}
+#nav .navlist ul{
+padding:10px 0 10px 0;	
+}

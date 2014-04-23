@@ -19,7 +19,12 @@ class indexAction extends frontendAction {
     	$ads = $ad->field('url,content,desc')->where($where)->limit(5)->order('ordid asc')->select();
         $this->assign('ad',$ads);
         /*****首页广告end******/
-   
+        
+        /***商品分类**/
+        $item_cate=M("item_cate")->select();
+        $this->assign('item_cate',$item_cate);
+        /***商品分类end***/
+        
         /****最新商品*****/
         $where = array('tokenTall'=>$tokenTall);
         $news = $this->getItem_cate($where);

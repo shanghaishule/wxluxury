@@ -10,10 +10,21 @@
 <meta name="format-detection" content="telephone=no">
 <meta charset="utf-8">
 <link href="__STATIC__/css/productdetail.css" rel="stylesheet" type="text/css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script>
 function gosearch(){
 	document.getElementById('searchForm').submit();
 }
+</script>
+<script type="text/javascript">
+$(function(){
+$(".pos").click(function(event){
+	event.stopPropagation();
+	$(".dis").toggleClass("none");
+	});
+$(document).click(function(event) { $(".dis").removeClass("none"); });
+//单击弹出层则自身隐藏
+});
 </script>
 </head>
 <body>
@@ -21,7 +32,19 @@ function gosearch(){
   <div id="nav">
     <form id="searchForm" action="{:U('home/index/search', array('tokenTall'=>$tokenTall))}" method="post">
 	<ul class="navlist">
-		<li class="r" id="n_0"><a href="{:U('home/index/index', array('tokenTall'=>$tokenTall))}"><div class="home_page_logo"></div></a></li>
+		<li class="r pos" id="n_0">
+		<!-- <a href="{:U('home/index/index', array('tokenTall'=>$tokenTall))}">--><div class="home_page_logo"></div><!-- </a> -->
+		<div class="dis" id="dis">
+			 <ul>
+				  <volist name="item_cate" id="cate">
+				  	<li>
+				     {$cate.name}
+				    </li>
+				  </volist>
+			 </ul> 
+		</div>
+
+		</li>
     	<li class="r" id="n_5">
     		<span style="margin-top:4px;"><input style="height:35px;width:100%;" type="search" name="txtkeyword" id="keyword"  placeholder="请输入关键词或者货号" autofocus x-webkit-speech> </span>
         </li>
