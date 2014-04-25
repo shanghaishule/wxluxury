@@ -29,6 +29,7 @@
                 <th width="40"><input type="checkbox" name="checkall" class="J_checkall"></th>
 				<th width="50"><span tdtype="order_by" fieldname="id">ID</span></th>
                 <th align="left"><span data-tdtype="order_by" data-field="name">品牌名称</span></th>
+                <th align="left"><span data-tdtype="order_by" data-field="jifen">品牌积分</span></th>
                 <th width="50" align="left"><span data-tdtype="order_by" data-field="ordid">排序</span></th>
                 <th width="40"><span data-tdtype="order_by" data-field="status">{:L('status')}</span></th>
                 <th width="120">{:L('operations_manage')}</th>
@@ -40,6 +41,7 @@
                 <td align="center"><input type="checkbox" class="J_checkitem" value="{$val.id}"></td>
 				<td align="center">{$val.id}</td>
                 <td align="left"><span data-tdtype="view" data-field="name" data-id="{$val.id}" class="tdview">{$val.name}</span></td>
+                <td align="left"><span data-tdtype="view" data-field="jifen" data-id="{$val.id}" class="tdview">{$val.jifen}</span></td>
                 <td align="left"><span data-tdtype="view" data-field="ordid" data-id="{$val.id}" class="tdview" style="color:{$val.colors};">{$val.ordid}</span></td>
                 <td align="center"><img data-tdtype="view" data-id="{$val.id}" data-field="status" data-value="{$val.status}" src="__STATIC__/images/admin/toggle_<if condition="$val.status eq 0">disabled<else/>enabled</if>.gif" /></td>
                 <td align="center">

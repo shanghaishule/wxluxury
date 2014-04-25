@@ -50,7 +50,7 @@ class orderAction extends userbaseAction {
 				//设置细则库存
 				$stock_detail="";
 				$result2 = $item->where("id='".$val['itemId']."'")->find();
-				$detail_stock=explode(",", $result2["detail_stock"]);var_dump($detail_stock);
+				$detail_stock=explode(",", $result2["detail_stock"]);
 				foreach ($detail_stock as $stock){
 					$stock_real=explode("|", $stock);
 					if ($stock_real[0] == $val['color'] and $stock_real[1] == $val['size']) {
@@ -59,14 +59,46 @@ class orderAction extends userbaseAction {
 					}else{
 						$stock_detail=$stock_detail.$stock_real[0]."|".$stock_real[1]."|".$stock_real[2].",";
 					}
-					//购买成功的加入收藏中
-					$userid = $_SESSION['user_info']['id'];
-		    		$shopfav_mod = M('shop_favi');
-		    		$insdata = array('userid'=>$userid, 'item_id'=>$val['itemId']);
-		    		if (false == $shopfav_mod->where($insdata)->find()) {
-		    			$shopfav_mod->add($insdata);
-		    		}
 				}
+				//购买成功的加入收藏中
+				$userid = $_SESSION['user_info']['id'];
+				$shopfav_mod = M('shop_favi');
+				$insdata = array('userid'=>$userid, 'item_id'=>$val['itemId']);
+				if (false == $shopfav_mod->where($insdata)->find()) {
+					$shopfav_mod->add($insdata);
+				}
+				
+				//个人品牌积分
+				$user_jifen = M("user");
+				$user["id"]=$_SESSION['user_info']['id'];
+				$userinfo=$user_jifen->where($user)->find();
+				$detail_user=explode(",", $userinfo["brand_jifen"]);
+				$flag = true;
+				$item_data = $item->where("id='".$val['itemId']."'")->find();
+				$return_jifen = "";
+				foreach ($detail_user as $valbr){
+					$valbrand = explode("|",$valbr);
+					if ($valbrand[1] != "") {						
+						if ($item_data["brand"] == $valbrand[0]){
+							$brand_data["id"] = $valbrand[0];
+							$brand_fenzhi = M("brandlist")->where($brand_data)->find();
+							$string_jifen = $valbrand[1] + $brand_fenzhi["jifen"];
+							$flag = false;
+							$return_jifen = $return_jifen.$valbrand[0]."|".$string_jifen.",";
+						}else{
+							$return_jifen = $return_jifen.$valbrand[0]."|".$valbrand[1].",";
+						}						
+					}
+				}
+				if ($flag == true) {
+					$brand_data1["id"] = $item_data["brand"];
+					$brand_fenzhi1 = M("brandlist")->where($brand_data1)->find();
+					$return_jifen = $return_jifen.$item_data["brand"]."|".$brand_fenzhi1["jifen"].",";
+				}
+				$user_jifen_data["brand_jifen"]=$return_jifen;
+				$user["id"]=$_SESSION['user_info']['id'];
+				$user_jifen->where($user)->save($user_jifen_data);
+				
 				$stock_data["detail_stock"]=$stock_detail;
 				$item->where("id='".$val['itemId']."'")->save($stock_data);
 			}

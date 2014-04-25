@@ -242,7 +242,7 @@ class IndexAction extends UserAction{
 		if ($get_num > 0) {
 			$message = "您本次成功领取".$get_num."商品，有".$failed_num ++."商品没有成功";
 		}else{
-			$message = "你填写的货号不存在！";
+			$message = "无法入库，你填写的货号不存在或者该商品已经存在您的库中！";
 		}
 		$this->success($message,U('Index/index'));
 	}

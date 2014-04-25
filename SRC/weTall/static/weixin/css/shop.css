@@ -24,7 +24,7 @@
  * -------------------------------------------------------
  */
 
-body {font-family: 'MingLiU'; line-height:1.6; background:#f6f6f6; background-attachment:fixed;}
+body {font-family: 'STHupo'; line-height:1.6; background:#f6f6f6; background-attachment:fixed;}
 html,body { min-width:320px;max-width:640px; margin:0 auto;background:url(../images/luxury/images/home/home_bg.png) repeat;background-attachment:fixed;}
 h1, h2, h3, h4, h5, h6, p, ul, ol, dl, dt, dd, li, body, form, input, button, img, cite, strong, em, table, td, th { padding:0; margin:0; }
 h1, h2, h3, h4, h5, h6 { font-size: 16px;}
@@ -204,8 +204,8 @@ div.order_cancel_box p span {color: #f34; font-weight: bold;}
 .membertop .my_address{ display:inline-block;background:-webkit-gradient(linear,left top,left bottom,from(#dbe4c8),to(#dbe4c8));background: -moz-linear-gradient(top,#dbe4c8,#dbe4c8); padding:10px 20px 10px 25px; border-radius:30px; border:1px solid #b0d5f9;box-shadow:2px 1px 1px 2px #dbe4c8 inset;}
 .membertop .my_address a{ color:#fff; display:block; padding-left:20px; background:url(../images/address_ico.png) no-repeat left top;}
 .membertop .my_name a{float:left; width:40%; color:#fff; font-size:24px; display:block; padding:0 0 5px 15px; text-shadow:1px 1px 1px #888;}
-.membertop .logout a { font-size:16px; text-shadow:1px 1px 1px #888;}
-.membertop .logout {float:right; width:140px; color:#FFC0CB; font-size:20px; display:block; text-shadow:1px 1px 1px #888;}
+.membertop .logout a { font-size:16px; text-shadow:1px 1px 1px #888;Line-height:10px;}
+.membertop .logout {float:right; width:140px; color:#FFC0CB; font-size:15px; display:block; text-shadow:1px 1px 1px #888;}
 .buyer_stat{ overflow:hidden;}
 .buyer_stat li{background: #f2f2f2; float:left; width:25%; height:44px; line-height:24px;text-align:center; border-bottom:1px solid #ccc;font-size:15px;}
 .buyer_stat li a{ height:44px; display:block; color:#333333;}
@@ -372,7 +372,7 @@ div.order_cancel_box p span {color: #f34; font-weight: bold;}
 #nav .navlist li#n_5{width:55%;margin-left:10px;}
 #nav .navlist li#n_3{width:69%;}
 #nav .navlist li#n_0{width:40px;}
-#nav .navlist li#n_4 span{ text-align:center;padding-top:1px;font-size:1.5em; color:white;font-weight:700;}
+#nav .navlist li#n_4 span{ text-align:center;padding-top:7px;font-size:1.2em; color:white;font-weight:700;}
 #nav .navlist li#n_3 span{ text-align:center;padding-top:7px;font-size:1.2em; color:white;font-weight:700;}
 #nav .navlist li#n_1{text-align:center;color:white;font-weight:700;background:none;}
 #nav .navlist li#n_8{padding-top:8px;padding-left:24px;margin-top:2px;margin-left:10px;text-align:left;color:white;font-weight:500;background:url(../images/luxury/images/shoping/bg_button.png);background-size:100% 100%;width:100px;height:31px;}

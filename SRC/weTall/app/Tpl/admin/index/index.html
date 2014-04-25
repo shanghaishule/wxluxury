@@ -8,17 +8,21 @@
 <link href="__PARENTURL__/tpl/User/default/common/css/stylet.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="__PARENTURL__/tpl/User/default/common/js/jquery.min.js"></script>
 <script type="text/javascript" src="__PARENTURL__/tpl/User/default/common/js/main.js"></script>
-   
+   <script>
+   function iframe_load(){
+	   parent.document.all("J_rframe").style.height=document.body.scrollHeight; 
+	   parent.document.all("J_rframe").style.width=document.body.scrollWidth; 
+   }
+   </script>
 
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 	<title>商家后台管理</title>
 	<link rel="stylesheet" href="__STATIC__/css/admin/css/style.css" type="text/css" media="all" />
 </head>
-<body>
+<body onload="iframe_load()">
 <!-- Header -->
 <div id="header2">
 	<div class="shell">
-		<!-- Logo + Top Nav -->
 		<div id="top">
 		    <img src="__STATIC__/images/logo1.png" height="33" />
 			<h1>微信商城后台管理</h1>
@@ -28,19 +32,6 @@
 				
 			</div>
 		</div>
-		<!-- End Logo + Top Nav -->
-		
-		<!-- Main Nav --><!-- 
-		<div id="navigation">
-			<ul>
-			    <li><a href="javascript:;" data-uri="{:U(index/index, array('menuid'=>0,'tokenTall'=>$tokenTall))}{$sval.data}" data-id="{$sval.id}" hidefocus="true" class="active"><span>商品管理</span></a></li>
-			    <li><a href="{:U('index/index',array('tokenTall'=>$tokenTall,'current_id'=>1))}"><span>交易管理</span></a></li>
-			    <li><a href="{:U('index/index',array('tokenTall'=>$tokenTall,'current_id'=>2))}"><span>广告管理</span></a></li>
-			    <li><a href="{:U('index/index',array('tokenTall'=>$tokenTall,'current_id'=>4))}"><span>会员管理</span></a></li>
-			    <li><a href="{:U('index/index',array('tokenTall'=>$tokenTall,'current_id'=>99))}"><span>店铺管理</span></a></li>
-			</ul>
-		</div> -->
-		<!-- End Main Nav -->
 	</div>
 	
 </div><div class="small-nav">
@@ -48,6 +39,7 @@
 			<span>&gt;</span>
 			商品管理
 		</div>
+		
 <div id="content">
 	<div class="left_menu fl">
     	<div id="J_lmenu" class="J_lmenu" data-uri="{:U('index/left',array('tokenTall'=>$tokenTall))}"></div>
@@ -73,10 +65,10 @@
         </div>
         
     	<div id="J_rframe" class="box">
-        	<iframe id="rframe_0" src="{:U('index/panel',array('tokenTall'=>$tokenTall))}" frameborder="0" scrolling="auto" style="height:100%;width:900px;"></iframe>
+        	<iframe SCROLLING="yes"  id="rframe_0" src="{:U('index/panel',array('tokenTall'=>$tokenTall))}" frameborder="0" style="height:100%;width:100%;"></iframe>
         </div>
     </div>
-</div>
+	</div>
 <script src="__STATIC__/js/jquery/jquery.js"></script>
 <script src="__STATIC__/js/pinphp.js"></script>
 <script>

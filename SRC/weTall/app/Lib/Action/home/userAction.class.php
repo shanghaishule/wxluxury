@@ -256,6 +256,7 @@ class userAction extends userbaseAction {
         }
       
        $this->assign('item_orders',$item_orders);
+       $this->assign("title","我的资料");
        $this->assign('status',$status);
        $this->assign('tokenTall',$tokenTall);
        $this->_config_seo();
@@ -606,6 +607,40 @@ class userAction extends userbaseAction {
     	$this->display();
     }
     
+    /**
+     * 我的品牌积分
+     */
+    public function jifen() {
+    	//取商家token值，取不到则默认为空
+    	$tokenTall = $this->getTokenTall();
+    	 
+    	//$favi_mod = M('shop_favi');
+    	//$favi_list = $favi_mod->where(array('userid'=>$this->visitor->info['id']))->select();
+    	$where["id"] = $this->visitor->info['id'];
+    	/*店铺信息*/
+    	$model=M("user")->where($where)->find();
+    	$weChaShop=explode(",",$model["brand_jifen"]);
+    	$jifen_array=array();
+    	foreach ($weChaShop as $detail_jifen){
+    		$jifen=explode("|",$detail_jifen);
+    		if ($jifen[0] != "") {  			
+	    		$brand_data1["id"] = $jifen[0];
+	    		$brand_fenzhi1 = M("brandlist")->where($brand_data1)->find();
+	    		$brand_data[0] = $brand_fenzhi1["name"];
+	    		$brand_data[1] = $jifen[1];
+	    		$jifen_array[]=$brand_data;
+    		}
+    	}
+    	
+    	if (count($jifen_array) != 0) {
+    		$this->assign("jifen_array",$jifen_array);
+    	}
+    	//dump($weChaShop);exit;
+    	
+        $this->assign("title","我的积分");
+    	$this->assign('tokenTall',$tokenTall);
+    	$this->display();
+    }
      /**
      *	追加评论
      */
