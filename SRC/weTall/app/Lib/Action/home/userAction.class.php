@@ -603,6 +603,7 @@ class userAction extends userbaseAction {
     	//dump($weChaShop);exit;
     	$this->assign("weshopData",$weChaShop);
 
+    	$this->assign("title","我的收藏");
     	$this->assign('tokenTall',$tokenTall);
     	$this->display();
     }

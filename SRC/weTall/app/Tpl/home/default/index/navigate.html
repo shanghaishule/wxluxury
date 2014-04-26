@@ -3,13 +3,110 @@
 <head>
 <meta charset="utf-8"/>
 <title>驾车导航</title>
+<link type="text/css" rel="stylesheet" href="__STATIC__/weixin/css/shop.css">
 <script src="http://api.map.baidu.com/api?v=1.2"></script>
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<style>
+.bottom_guding{
+	position:fixed;
+	bottom:0px;
+	left:0px;
+	width:100%;
+	height:40px;
+	color:#F7EED6;
+	background:#8B8878;
+}
+.bottom_guding li{
+	float:left;
+	width:49%;	
+	padding-top:10px;
+	display:inline-block;
+	text-align:center;
+	
+}
+.bottom_guding li a{
+	text-decoration:none;color:white;
+}
+.bottom_guding li#na_1{
+	height:100%;
+	border-right:1px solid white;
+}
+.img_start{
+	padding-left:9px;
+	padding-right:19px;
+}
+table{
+        border-collapse: collapse;
+    }
+tr{
+	border-bottom:1px solid rgba(144,144,144,0.4);
+	height:50px;
+}
+</style>
+<script>
+function go_nav(){
+	$("#navigate").css("display","");
+	$("#shop_detail").css("display","none");
+}
+function go_detail(){
+	$("#navigate").css("display","none");
+	$("#shop_detail").css("display","");
+}
+</script>
 </head>
-<body><!-- 
-<input type="text" name="start_point" id="start_point" value="{$start_point_lat},{$start_point_lng}">
-<input type="text" name="end_point" id="end_point" value="{$end_point_lat},{$end_point_lng}"> -->
+<body>
+<div id="navigate" <if condition="$dmodel eq 'D'">style="display:none;" </if>>
 <div id="container" style="width:400px;height:548px"></div>
-<div id="panel" style="position:relative;margin-top:10px"></div>
+<div id="panel" style="position:relative;margin-top:10px;color:white;"></div>
+</div>
+
+<div id="shop_detail" <if condition="$dmodel eq 'N'">style="display:none;" </if>>
+<div id="nav">
+	<ul class="navlist">
+		<li class="r pos" id="n_9">
+		{$shopinfo.name}
+		</li></ul></div><br><div style="height:7px;width:100%;"></div>
+		<div style="height:500px;background:rgba(25,25,25,0.6);width:94%;margin:0 auto;color:white;">
+<table>
+  <tr> 
+    <td><img src="__STATIC__/weixin/images/luxury/images/purchase/ic1_03.png" width="20px" class="img_start" height="20px"/></td>
+    <td>逛店： 逛店赢积分</td>
+    <td><a href="">
+    <img src="__STATIC__/weixin/images/luxury/images/Card/1_04.png" width="20px" class="img_start" height="20px"/>
+    </a></td>
+  </tr>
+  <tr> 
+    <td width="10%"><img src="__STATIC__/weixin/images/luxury/images/Card/4_07.png" width="20px" class="img_start" height="20px"/></td>
+    <td width="80%">QQ客服: {$shopinfo.qq} </td>
+    <td width="8%"></td>
+  </tr>
+  <tr> 
+    <td width="10%"><img src="__STATIC__/weixin/images/luxury/images/Card/5_07.png" width="20px" class="img_start" height="20px"/></td>
+    <td width="80%">电话: {$shopinfo.phone} </td>
+    <td width="8%"></td>
+  </tr>
+  <tr> 
+    <td width="10%"><img src="__STATIC__/weixin/images/luxury/images/Card/6_07.png" width="20px" class="img_start" height="20px"/></td>
+    <td width="80%">{$shopinfo.address} </td>
+    <td width="8%"><a href="">
+    <img src="__STATIC__/weixin/images/luxury/images/Card/1_04.png" width="20px" class="img_start" height="20px"/>
+    </a></td>
+  </tr>
+  <tr> 
+    <td width="10%"><img src="__STATIC__/weixin/images/luxury/images/Card/9_07.png" width="20px" class="img_start" height="20px"/></td>
+    <td width="80%">纠错: 纠错有奖！ </td>
+    <td width="8%"><a href="">
+    <img src="__STATIC__/weixin/images/luxury/images/Card/1_04.png" width="20px" class="img_start" height="20px"/>
+    </a></td>
+  </tr>
+
+</table></div>
+</div>
+<ul class="bottom_guding">
+   <li id="na_1"><a href="javascript:void(0);" onclick="go_nav()">导        航</a></li>
+   <li><a href="javascript:void(0);" onclick="go_detail()">店铺详情</a></li>
+</ul>
+
 <script>
 var map =new BMap.Map('container');
 map.centerAndZoom(new BMap.Point(121.595329,31.256644), 11);

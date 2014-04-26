@@ -88,11 +88,10 @@ class indexAction extends frontendAction {
     	$start_time=strtotime($data_act["date"]. $data_act["start_time"]);
     	$end_time=strtotime($data_act["date"]. $data_act["end_time"]);
     	
-    	$start_time=strtotime(date("2014-04-20 20:54:00",time()));
+    	//$start_time=strtotime(date("2014-04-20 20:54:00",time()));
     	$nowTime = time();
     	
-    	if ($data_act["status"] == 1) {
-    		if ($nowTime < $end_time and $nowTime > $start_time) {
+    	if ($nowTime < $end_time and $nowTime > $start_time) {
     			$where["goods_stock"] = array("neq",0);   
     			$where["price"] = array(array("neq",0),array("neq",1));
     			if ($_SESSION["item_data"] == "") {   			
@@ -107,6 +106,7 @@ class indexAction extends frontendAction {
     			}else{
     				$item_data = $_SESSION["item_data"];
     			}
+    			//var_dump($item_data);die();
     			$item_goods=array();
     			$i=0;
     			$num_now = $nowTime-$start_time;
@@ -122,12 +122,12 @@ class indexAction extends frontendAction {
     			$reverse_goods=array_reverse($item_goods);
     			$this->assign("item",$reverse_goods);
     			$this->display();
-    		}elseif($nowTime < $start_time){
+    	}elseif($nowTime < $start_time){
     			echo "还未开始";die();
-    		}else{
+    	}else{
     			echo "活动已经结束";die();
-    		}
     	}
+    	
     }
     public function addressselect(){
     	$upload_shop = M("item");
@@ -157,7 +157,26 @@ class indexAction extends frontendAction {
     public function intime() {
     	$discount_shop = M("set_discount");
     	$brand = M("brandlist");
-    	$discount_data = $discount_shop->order("date asc")->select();
+    	$set_discount=M("set_discount");
+    	$discount_data = $discount_shop->order("status desc,date asc,start_time asc")->select();
+    	
+    	$nowTime = time();
+    	foreach ($discount_data as $val_data){
+    		$start_time=strtotime($val_data["date"]. $val_data["start_time"]);
+    		$end_time=strtotime($val_data["date"]. $val_data["end_time"]);
+    		$discount[id]=$val_data["id"];
+
+    		if($nowTime < $start_time){
+	    		$update_status3["status"] = "1";
+	    		$set_discount->where($discount)->save($update_status3);
+    		}elseif($nowTime > $end_time){
+    			$update_status2["status"] = "0";
+    			$set_discount->where($discount)->save($update_status2);
+    		}else{
+    			$update_status["status"] = "2";
+    			$set_discount->where($discount)->save($update_status);
+    		}
+    	}
     	//var_dump($discount_data);die();
     	$this->assign("brand",$brand->select());
     	$this->assign("ontime",$discount_data);
@@ -247,7 +266,18 @@ class indexAction extends frontendAction {
     	$start_point_lng = $this->_get("start_point_lng","trim");
     	$end_point_lat = $this->_get("end_point_lat","trim");
     	$end_point_lng = $this->_get("end_point_lng","trim");
+    	$shop_id["id"] = $this->_get("shop","trim");
+    	$display_mode = $this->_get("dmodel","trim");
+    	$token = $this->_get("tokenTall","trim");
+    	if ($token != "") {
+    		$shop_id2["tokenTall"] = $token;
+    		$shop_data = M("wecha_shop")->where($shop_id2)->find();
+    	}else{
+    		$shop_data = M("wecha_shop")->where($shop_id)->find();
+    	}
     	
+    	$this->assign("dmodel",$display_mode);
+    	$this->assign("shopinfo",$shop_data);
     	$this->assign("start_point_lat",$start_point_lat);
     	$this->assign("start_point_lng",$start_point_lng);
     	$this->assign("end_point_lat",$end_point_lat);
@@ -284,8 +314,10 @@ class indexAction extends frontendAction {
     		
     		//排序
     		$nearShop = $this->array_sort($nearShop,"nearJuli", "asc");
+    	    $brand_ar = M("brandlist")->where($data)->find();
     		
-    		$this->assign("brand",M("brandlist")->where($data)->find());
+    		$this->assign("brand",$brand_ar);
+    		$this->assign("title",$brand_ar["name"]);
     		$this->assign("countShop",count($nearShop));
     		$this->assign("start_point_lat",$start_point_lat);
     		$this->assign("start_point_lng",$start_point_lng);
@@ -299,7 +331,7 @@ class indexAction extends frontendAction {
     	//$city_info = iconv('GBK', 'UTF-8',$total_page[0]);echo $city_info;die();
     	$currentcity = preg_replace('/市/',"",$total_page[0]);
     	$this->assign("City",$currentcity);
-    	$this->assign("title",$this->_post("keywords","trim"));
+    	
     	$this->display();
     }
     /*

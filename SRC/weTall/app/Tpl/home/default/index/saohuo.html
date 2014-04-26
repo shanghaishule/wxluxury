@@ -43,8 +43,8 @@
    <volist name="item" id="product" key="k">
     <div  class="imgIntime2">
       <div class="intime_img_detail">
-      <img style="margin-left:2%;margin-top:9px;" src="{$product.img}" width="96%">
-      </div> 
+      <a href="{:U('Item/index',array('id'=>$product['id'],'tokenTall'=>$product['tokenTall']))}"><img style="margin-left:2%;margin-top:9px;" src="{$product.img}" width="96%">
+      </a></div> 
       <div class="item_detail"><div class="label3">     
       {$product.title} </div><div style="width:20%;margin-left:10px;float:left;overflow:hidden;">仅剩{$product.goods_stock}件</div>
       </div><div class="label4"><if condition="$product.intro neq ''">{$product.info}<else/>胸前优美摺皱设计 梦幻印花<br>
