@@ -362,7 +362,7 @@ div.order_cancel_box p span {color: #f34; font-weight: bold;}
  * -------------------------------------------------------
  */
 
-#nav {width:100%; min-width:340px;max-width:640px;left:0px;position:fixed; top:0px; z-index: 200000; margin: 0 auto;display:block;background:url(../images/luxury/images/home/bg_02.png);}
+#nav {width:100%; min-width:340px;max-width:640px;left:0px;position:fixed; top:0px; z-index: 400000; margin: 0 auto;display:block;background:url(../images/luxury/images/home/bg_02.png);}
 #nav ul.navlist { position: relative; z-index:9999; height:45px; width:100%;margin:0 auto; background:url(../images/luxury/images/home/bg_02.png); }
 #nav .navlist li { float: left;height:45px;  position:relative;}
 #nav .navlist li#n_3 i{ position:absolute; height:14px; width:14px;background:#C00; color:#fff; left:55%; top:10px; border-radius:50%; font-style:normal; text-align:center; font-size:12px; display:none;}
@@ -375,7 +375,7 @@ div.order_cancel_box p span {color: #f34; font-weight: bold;}
 #nav .navlist li#n_4 span{ text-align:center;padding-top:7px;font-size:1.2em; color:white;font-weight:700;}
 #nav .navlist li#n_3 span{ text-align:center;padding-top:7px;font-size:1.2em; padding-left:15px;color:white;font-weight:700;}
 #nav .navlist li#n_1{text-align:center;color:white;font-weight:700;}
-#nav .navlist li#n_8{padding-top:5px;padding-left:9px;margin-top:5px;margin-left:8px;text-align:left;color:white;font-weight:500;background:url(../images/luxury/images/shoping/bg1.png);background-size:100% 100%;width:80px;height:31px;}
+#nav .navlist li#n_8{padding-top:5px;padding-left:4px;margin-top:5px;margin-left:8px;text-align:left;color:white;font-weight:500;background:url(../images/luxury/images/shoping/bg1.png);background-size:100% 100%;width:59px;height:31px;}
 #nav .navlist li#n_9{width:100%;text-align:center;padding-top:8px;font-size:18px;color:white;font-weight:700;}
 
 .banner{position: relative;}
@@ -1035,6 +1035,10 @@ padding-left:10px;
 }
 #nav .navlist .dis li:hover{
 background:#d9d9d9;	
+}
+#nav .navlist .dis li a:hover{
+    color:red;
+	text-decoration:underline;	
 }
 #nav .navlist ul{
 padding:10px 0 10px 0;	

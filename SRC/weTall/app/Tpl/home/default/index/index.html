@@ -20,7 +20,6 @@ function gosearch(){
 $(function(){
 $(".pos").click(function(event){
 	event.stopPropagation();
-	$(".dis").css("z-index","300000000");
 	$(".dis").toggleClass("none");
 	});
 $(document).click(function(event) { $(".dis").removeClass("none"); });
@@ -55,7 +54,7 @@ $(document).click(function(event) { $(".dis").removeClass("none"); });
     </form>
     <script type="text/javascript">   
         $(function(){
-        	var panelWidth = $(".img").width();
+        	var panelWidth = $(".img").width() + 65;
         	$(".img").css("height",panelWidth);
         });        
     	$(".navlist > li#n_0").click(function(){
