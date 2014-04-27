@@ -21,7 +21,7 @@
 	    	$("#little"+id).css('background','red');
 	    	currentPic = currentPic + 1;
 	    	if(currentPic > length) currentPic = 1;
-	    	setTimeout("imgdetail("+currentPic+")",5000);
+	    	setTimeout("imgdetail("+currentPic+")",3000);
 	    }
 
 	    function nextPic(){
@@ -282,9 +282,9 @@
                 <volist name="imgarr" id="img" key='k'>
                     <a href="javascript:void(0);" <if condition='$k eq 1'>class="active"</if>>{$k}</a>
                 </volist>
-            </div>
+            </div><!-- 
 		    <input type="button" onclick="nextPic();" name="next" value="next">
-            <input type="button" onclick="previousPic();" name="Previous" value="Previous">
+            <input type="button" onclick="previousPic();" name="Previous" value="Previous"> -->
 		</div>
          <script type="text/javascript">
          var active=0,
