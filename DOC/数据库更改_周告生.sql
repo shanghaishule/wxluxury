@@ -18,3 +18,7 @@ ALTER TABLE  `tp_shop_favi` CHANGE  `tokenTall`  `item_id` VARCHAR( 10 ) CHARACT
 ALTER TABLE  `tp_user` ADD  `brand_jifen` TEXT NULL AFTER  `email` ;
 ALTER TABLE  `tp_brandlist` ADD  `jifen` INT( 5 ) NOT NULL DEFAULT  '0' AFTER  `imgurl` ;
 ALTER TABLE  `tp_wecha_shop` ADD  `qq` VARCHAR( 13 ) NULL AFTER  `licence_img` ;
+
+/*04-26*/
+ALTER TABLE  `tp_item_taobao` ADD  `detail_stock` TEXT NOT NULL ,
+ADD  `old_price` FLOAT( 7 ) NOT NULL DEFAULT  '0';

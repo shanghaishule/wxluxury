@@ -88,6 +88,10 @@ class indexAction extends frontendAction {
     	$start_time=strtotime($data_act["date"]. $data_act["start_time"]);
     	$end_time=strtotime($data_act["date"]. $data_act["end_time"]);
     	
+    	/***商品分类**/
+    	$item_cate=M("item_cate")->select();
+    	$this->assign('item_cate',$item_cate);
+    	
     	//$start_time=strtotime(date("2014-04-20 20:54:00",time()));
     	$nowTime = time();
     	
@@ -155,6 +159,10 @@ class indexAction extends frontendAction {
     	}
     }
     public function intime() {
+    	/***商品分类**/
+    	$item_cate=M("item_cate")->select();
+    	$this->assign('item_cate',$item_cate);
+    	
     	$discount_shop = M("set_discount");
     	$brand = M("brandlist");
     	$set_discount=M("set_discount");
@@ -183,6 +191,10 @@ class indexAction extends frontendAction {
     	$this->display();
     }
     public function discount(){
+    	/***商品分类**/
+    	$item_cate=M("item_cate")->select();
+    	$this->assign('item_cate',$item_cate);
+    	
     	$discount_shop = M("discount_shop");
     	$data = $discount_shop->select();
     	
@@ -193,6 +205,10 @@ class indexAction extends frontendAction {
     public function Oneyuan(){
     	$tokenTall = $this->getTokenTall();
     	$_SESSION["tokenTall"]=$tokenTall;
+    	
+    	/***商品分类**/
+    	$item_cate=M("item_cate")->select();
+    	$this->assign('item_cate',$item_cate);
     	 
     	//判断是微信的环境
     	$systemBrowse="X";
@@ -262,6 +278,10 @@ class indexAction extends frontendAction {
     	$this->display();
     }
     public function navigate(){
+    	/***商品分类**/
+    	$item_cate=M("item_cate")->select();
+    	$this->assign('item_cate',$item_cate);
+    	
     	$start_point_lat = $this->_get("start_point_lat","trim");
     	$start_point_lng = $this->_get("start_point_lng","trim");
     	$end_point_lat = $this->_get("end_point_lat","trim");
@@ -286,6 +306,10 @@ class indexAction extends frontendAction {
     }
     
     public function test(){  	
+    	/***商品分类**/
+    	$item_cate=M("item_cate")->select();
+    	$this->assign('item_cate',$item_cate);
+    	
     	if (IS_POST) {
     		$wecha_shop = M("wecha_shop");
     		$longitude = $this->_POST("longitude","trim");
@@ -381,6 +405,10 @@ class indexAction extends frontendAction {
     	return $item=M('item')->where($where)->select();
     }
     public function search() {
+    	/***商品分类**/
+    	$item_cate=M("item_cate")->select();
+    	$this->assign('item_cate',$item_cate);
+    	
     	//排序字段和方式的获得
     	$sortByStr=$this->_get("sortid","trim");
     	$sortmethod=$this->_get("sortmethod","trim");
@@ -449,6 +477,7 @@ class indexAction extends frontendAction {
     		}else if ($itemid != "") {//新品上市  服装鞋帽等
     			//$this->assign("method",$itemid);
     			$this->assign("itemid",$itemid);
+    			$this->assign("title",$this->_get("itemname","trim"));
     			$this->nextPageCate($_SESSION['token'],$itemid,$sortBy);
     		}else if($_SESSION['method'] == "local"){//本店搜索
     			$this->assign("method",$_SESSION['method']); 
@@ -615,6 +644,10 @@ class indexAction extends frontendAction {
     }
     
     public function brandshop(){
+    	/***商品分类**/
+    	$item_cate=M("item_cate")->select();
+    	$this->assign('item_cate',$item_cate);
+    	
     	$filter = $this->_get("filter","trim");
     	if ($filter == "guonei") {
     		$where["domain"] = 0;
@@ -694,6 +727,10 @@ class indexAction extends frontendAction {
     //收藏
     public function favi()
     {
+    	/***商品分类**/
+    	$item_cate=M("item_cate")->select();
+    	$this->assign('item_cate',$item_cate);
+    	
     	//dump($_SESSION);exit;
     	//0-未登录 1-保存成功 2-保存失败 3-无动作类型
     	header("content-Type: text/html; charset=Utf-8");
@@ -746,6 +783,10 @@ class indexAction extends frontendAction {
     	
     	/*店铺信息*/
     	$weChaShop = M("wecha_shop");
+    	/***商品分类**/
+    	$item_cate=M("item_cate")->select();
+    	$this->assign('item_cate',$item_cate);
+    	
     	if($tokenTall == ""){
     		$weshopData["tokenTall"] = $_SESSION["tokenTall"];
     	}else{
@@ -805,6 +846,10 @@ class indexAction extends frontendAction {
     		//map 功能需要post ?
     	    $longitude = $this->_POST("longitude","trim");
 	        $latitude = $this->_POST("latitude","trim");
+	        
+	        /***商品分类**/
+	        $item_cate=M("item_cate")->select();
+	        $this->assign('item_cate',$item_cate);
     	    //
 	        //xxl
 	        //$brand_id = $this->_POST("brand_id","trim");
@@ -846,6 +891,9 @@ class indexAction extends frontendAction {
     public function promotioninfo(){
     	
     	$keyword = NULL;
+    	/***商品分类**/
+    	$item_cate=M("item_cate")->select();
+    	$this->assign('item_cate',$item_cate);
     	if (IS_POST) {
     		$keyword = $this->_POST("keyword","trim");	
     	}

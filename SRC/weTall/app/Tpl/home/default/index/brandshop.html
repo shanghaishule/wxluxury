@@ -27,9 +27,15 @@ function searchshop(id){
 }
 </script>
 <script>
- function display_dis(){
-	$("#search_area").css("display","");
-	}
+$(function(){
+	$("#n_8").click(function(event){
+		event.stopPropagation();
+		$("#search_area").css("display","");
+		});
+	$(document).click(function(event) { $("#search_area").css("display","none"); });
+	//单击弹出层则自身隐藏
+	});
+ 
 </script>
 </head>
 <body>
@@ -42,8 +48,8 @@ function searchshop(id){
     		<span style="margin-top:4px;"><input style="height:35px;width:100%;" type="search" name="txtkeyword" id="keyword"  placeholder="请输入品牌关键词" autofocus x-webkit-speech> </span>
             <input type="hidden" name="method" id="method">
         </li>
-        <li class="r" onclick="display_dis()" id="n_8"><if condition="$gowhere eq 'item'">找商品<else/>找店铺</if>
-        <div id="search_area" style="display:none;padding-left:4px;margin-top:4px;background:url(__STATIC__/weixin/images/luxury/images/home/bg_02.png);width:58px;">
+        <li class="r" id="n_8"><if condition="$gowhere eq 'item'">找商品<else/>找店铺</if>
+        <div id="search_area" style="display:none;padding-left:4px;margin-top:6px;background:url(__STATIC__/weixin/images/luxury/images/home/bg_02.png);width:72px;">
         <a href="javascript:void(0)" onclick="gosearch();">找店铺</a><br>
         <a href="javascript:void(0)" onclick="shangpin();">找商品</a>
         </div>

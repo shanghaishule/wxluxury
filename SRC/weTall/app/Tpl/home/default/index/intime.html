@@ -52,7 +52,7 @@
       <volist name="brand" id="vo">
       <if condition="$product['brand_id'] eq $vo['id']">
       {$vo.name}</if></volist>  <span style="margin-left:30px;color:#FF7F24;">{$product.theme}</span></div> <div style="width:100%;float:left;overflow:hidden;text-align:center;"><div style="margin:0 auto;height:20px;width:230px;">
-      	<div style="float:left;">活动时间：{$product.date}</div><div style="width:36px;margin-left:10px;float:left;overflow:hidden;">{$product.start_time}</div><div style="width:41px;float:left;overflow:hidden;">-{$product.end_time}</div>
+      	<div style="float:left;">活动时间：{$product.date}</div><div style="width:34px;margin-left:10px;float:left;overflow:hidden;">{$product.start_time}</div><div style="float:left">-</div><div style="width:34px;float:left;overflow:hidden;">{$product.end_time}</div>
       </div></div><div id="timer{$k}" style="float:left;"></div></div>
       </div> 
     </volist>
