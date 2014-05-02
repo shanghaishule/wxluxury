@@ -286,6 +286,8 @@ class itemAction extends backendAction {
     }
     public function data_excel() {
     	$mod_taobao = D("item_taobao");
+    	$brand_ar = M("brandlist")->select();
+    	$this->assign("brand_ar",$brand_ar);
     	$message = M("message_check");
     	if (IS_POST) {
     		if (false === $data = $mod_taobao->create()) {
@@ -674,6 +676,10 @@ class itemAction extends backendAction {
 	
     public function edit() {
         if (IS_POST) {
+        	$edit_m = $this->_post("edit_m","trim");
+        	if ($edit_m == "total") {
+        		$this->_mod = M("item_taobao");
+        	}
             //获取数据
             if (false === $data = $this->_mod->create()) {
                 $this->error($this->_mod->getError());

@@ -10,13 +10,13 @@
 <meta name="format-detection" content="telephone=no">
 <meta charset="utf-8">
 <link href="__STATIC__/css/productdetail.css" rel="stylesheet" type="text/css">
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script>
+<script src="__STATIC__/js/jquery/jquery10.js"></script>
+ <script>
 function gosearch(){
 	document.getElementById('searchForm').submit();
 }
 </script>
-<script type="text/javascript">
+<script>
 $(function(){
 $(".pos").click(function(event){
 	event.stopPropagation();
@@ -24,8 +24,7 @@ $(".pos").click(function(event){
 	});
 $(document).click(function(event) { $(".dis").removeClass("none"); });
 //单击弹出层则自身隐藏
-});
-}	
+});	
 </script>
 </head>
 <body>
@@ -39,7 +38,7 @@ $(document).click(function(event) { $(".dis").removeClass("none"); });
 			 <ul>
 				  <volist name="item_cate" id="cate">
 				  	<li>
-				     {$cate.name}
+				     <a href="{:U('home/index/search', array('itemid'=>$cate['id'],'itemname'=>$cate['name'],'tokenTall'=>$tokenTall))}">{$cate.name}</a>
 				    </li>
 				  </volist>
 			 </ul> 
@@ -55,7 +54,7 @@ $(document).click(function(event) { $(".dis").removeClass("none"); });
     </form>
     <script type="text/javascript">   
         $(function(){
-        	var panelWidth = $(".img").width();
+        	var panelWidth = $(".img").width() + 65;
         	$(".img").css("height",panelWidth);
         });        
     	$(".navlist > li#n_0").click(function(){

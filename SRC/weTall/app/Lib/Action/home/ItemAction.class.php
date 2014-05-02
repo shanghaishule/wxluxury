@@ -99,6 +99,9 @@ class itemAction extends frontendAction {
             'item_title' => $item['title'],
             'item_intro' => $item['intro'],
         ));
+        
+        $this->assign("yemian","Item");
+        $this->assign("title","商品详情");
 
         $this->display();
     }

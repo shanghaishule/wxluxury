@@ -11,7 +11,7 @@ class set_promotionAction extends backendAction {
 	}
 	
 	public function _before_index() {
-		
+
 		$tokenTall = $this->getTokenTall();		
 		$this->assign('tokenTall',$tokenTall);
 		//显示模式

@@ -4,18 +4,7 @@
  * @url http://www.pinphp.com
  */
 $(function(){
-    var set_h = function(){
-        var heights = document.documentElement.clientHeight-80;
-        $("#J_rframe").height(heights);
-        var openClose = $("#J_rframe").height()+9;
-        $('#center_frame').height(openClose+9);
-        $("#J_lmoc").height(openClose+20);
-        $('body').css('overflow','hidden');
-    }
-    $(window).resize(function(){
-        set_h();
-    });
-    set_h();
+	$("#content").css("width","1400px");
     
     //默认载入左侧菜单
     $('#J_lmenu').load($('#J_lmenu').attr('data-uri'));
@@ -125,7 +114,7 @@ $(function(){
                 id                  : 'rframe_' + data_id,
                 allowtransparency : true,
                 frameborder       : 0,
-                scrolling          : 'auto',
+                scrolling          : 'yes',
                 width              : '100%',
                 height        : '100%'
             }).appendTo('#J_rframe');
@@ -194,6 +183,7 @@ $(function(){
         return false;
     });
 });
+
 //保持当前TAB可见
 (function($){
     //调整TAB到可视区域

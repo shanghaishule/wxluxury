@@ -14,3 +14,11 @@ ADD  `email` VARCHAR( 180 ) NOT NULL AFTER  `IDno` ,
 ADD  `licence_img` VARCHAR( 200 ) NOT NULL AFTER  `email` ;
 
 ALTER TABLE  `tp_shop_favi` CHANGE  `tokenTall`  `item_id` VARCHAR( 10 ) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT  '商品的id';
+
+ALTER TABLE  `tp_user` ADD  `brand_jifen` TEXT NULL AFTER  `email` ;
+ALTER TABLE  `tp_brandlist` ADD  `jifen` INT( 5 ) NOT NULL DEFAULT  '0' AFTER  `imgurl` ;
+ALTER TABLE  `tp_wecha_shop` ADD  `qq` VARCHAR( 13 ) NULL AFTER  `licence_img` ;
+
+/*04-26*/
+ALTER TABLE  `tp_item_taobao` ADD  `detail_stock` TEXT NOT NULL ,
+ADD  `old_price` FLOAT( 7 ) NOT NULL DEFAULT  '0';

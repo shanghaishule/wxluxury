@@ -16,7 +16,12 @@
          	品牌：
       </td>
        <td>
-        <input type="text" name="brandid" id="brandid" class="text" size="80">
+       
+        <select name="brandid" id="brandid">
+        <volist name="brand_ar" id="vo">
+        <option value="{$vo.name}">{$vo.name}</option>
+        </volist>
+        </select>
       </td>
     </tr>
 	<tr>
