@@ -1,7 +1,7 @@
 <div id="head"></div>
 
 <style>
-	#logo{ 
+	#logo{
 		height:50px;
 		width:116px;
 	}
@@ -37,15 +37,44 @@
 		margin: 4px 4px 0 0;
 	}
 </style>
-
+<script src="__STATIC__/js/jquery/jquery10.js"></script>
+<script>
+$(function(){
+$(".pos").click(function(event){
+	event.stopPropagation();
+	$(".dis").css("z-index","300000000");
+	$(".dis").toggleClass("none");
+	});
+$(document).click(function(event) { $(".dis").removeClass("none"); });
+//单击弹出层则自身隐藏
+});	
+</script>
 
 <div id="nav">
 	<ul class="navlist">
-		<li class="r" id="n_0"><a href="{:U('home/index/index', array('tokenTall'=>$tokenTall))}"><div class="home_page_logo"></div></a></li>
+		<li class="r pos" id="n_0"><div class="home_page_logo"></div>
+		<div class="dis" id="dis">
+			 <ul>
+				  <volist name="item_cate" id="cate">
+				  	<li>
+				     <a href="{:U('home/index/search', array('itemid'=>$cate['id'],'itemname'=>$cate['name'],'tokenTall'=>$tokenTall))}">{$cate.name}</a>
+				    </li>
+				  </volist>
+			 </ul> 
+		</div>
+		</li>
     	<li class="r" id="n_4"> 
     		<span >{$title}</span>
+    	<li class="r" id="n_4">
+    		<span >{$title}</span>
         </li>
-        <li class="r" id="n_1"><div class="find_03">{$City}</div></li>
+        <li class="r" id="n_1">
+        <if condition="$yemian eq 'Item'">
+        <a href="{:U('home/user/index', array('tokenTall'=>$tokenTall))}"><div class="find_04"></div></a>
+        <else/>
+        <div class="find_03">{$City}</div>
+        </if>
+        </li>
         
     </ul>
     <script type="text/javascript">
