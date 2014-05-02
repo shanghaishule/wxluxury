@@ -41,6 +41,7 @@ class applicationAction extends frontendAction{
 		
 		$brand = M("brandlist")->select();
 		$this->assign("brand",$brand);
+		$this->assign("title","实体店入驻");
 		//dump($_SESSION);exit;
 		$this->display();
 	}
