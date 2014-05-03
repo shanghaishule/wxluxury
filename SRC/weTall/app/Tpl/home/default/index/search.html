@@ -119,8 +119,8 @@ var t2=new TouchSlider({id:'sliderlist', speed:600, timeout:6000, before:functio
         </div><else/>
         <volist name="item" id="product" >
     <div class="img">
-      <div class="img_detail">
-      <a href="{:U('Item/index',array('id'=>$product['id'],'tokenTall'=>$product['tokenTall']))}"><img src="{$product.img}" width="100%" ></img></a>
+      <div class="img_detail"><if condition="$compare eq 'Y'"> <a href="{:U('index/compare',array('id'=>$product['id'],'Huohao'=>$product['Huohao']))}"><else/>
+      <a href="{:U('Item/index',array('id'=>$product['id'],'tokenTall'=>$product['tokenTall']))}"></if><img src="{$product.img}" width="100%" ></img></a>
       </div>
       <div class="pro_detail">
        <volist name="brand" id="brandname">
@@ -129,7 +129,10 @@ var t2=new TouchSlider({id:'sliderlist', speed:600, timeout:6000, before:functio
       </if>
       </volist>
       <br>
-      <label class="label2"><a href="{:U('Item/index',array('id'=>$product['id'],'tokenTall'=>$product['tokenTall']))}">{$product.title}</a></label>
+      <label class="label2">
+      <if condition="$compare eq 'Y'"> <a href="{:U('index/compare',array('id'=>$product['id'],'Huohao'=>$product['Huohao']))}"><else/>
+      <a href="{:U('Item/index',array('id'=>$product['id'],'tokenTall'=>$product['tokenTall']))}"></if>
+      {$product.title}</a></label>
       <label class="label" style="color:rgb(198,198,198);">￥{$product.price}元<span style="margin-left:20px;">{$product.item_model}款</span></label>
       </div>   
     </div> 

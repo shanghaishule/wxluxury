@@ -22,6 +22,7 @@ class IndexAction extends UserAction{
 	public function addressselect(){
 		$upload_shop = M("upload_shop");
 		$where["brand_name"] = $this->_get("name","trim");
+		$where["status"] = array("eq","0");
 		$result = $upload_shop->where($where)->select();
 		if ($result){
 			// 成功后返回客户端新增的用户ID，并返回提示信息和操作状态
@@ -140,29 +141,50 @@ class IndexAction extends UserAction{
 					$up_shop['id'] = $this->_post("up_shop_id","trim");
 					$select_shop = M("upload_shop")->where($up_shop)->find();
 					
+					
 					$data1["name"] = $select_shop["shop_name"];
 					$data1["phone"] = $select_shop["phone"];
 					$longitude = $this->_POST("longitude","trim");
 					$longitudes = explode(",", $longitude);
 					$data1["longitude"] = preg_replace('/\)/',"",$longitudes[1]);
+					if ($data1["longitude"] == "") {
+						$data1["longitude"] = $select_shop["longtitude"];
+					}
 					$data1["latitude"] = preg_replace('/\(/',"",$longitudes[0]);
+					if ($data1["latitude"] == "") {
+						$data1["latitude"] = $select_shop["lat"];
+					}
 					$data1["HaveReal"] = 0;
 					$data1["credit"] = 0;
 					$data1["shop_city"] = $this->_post("province","trim");
 					$data1["BelongBrand"] = $this->_POST("brandchoose","trim");
-					$where_shop['weName']=$_POST["wxname"];					
+					$where_shop['weName']=$_POST["wxname"];	
+					//将QQ号码传给用户店铺信息中
+					$uid_1["id"] = $_SESSION['uid'];
+					$user_in = M("users")->where($uid_1)->find();
+					$data_M["uname"] = $user_in["username"];
+					$application = M("application")->where($data_M)->find();
+					if ($application) {
+						$data1["qq"] = $data1["QQ"];
+					}
 					$Have_token = $wecha_shop->where($where_shop)->find();
 					
 					if ($Have_token['tokenTall'] != "") {
 						$data1["tokenTall"] = $Have_token['tokenTall'];
 						$tokenData["token"] = $Have_token['tokenTall'];
+						$update_upload["tokenTall"] = $Have_token['tokenTall'];
 						$flag = true;
 						$where_shopw['wxname']=$_POST["wxname"];
 						$db->where($where_shopw)->save($tokenData);
 					}else{
 						$data1["tokenTall"] = $_POST['token'];
+						$update_upload["tokenTall"] = $_POST['token'];
 						$weChaShop->add($data1);
 					}
+					
+					//将上传的店铺状态设为已领取
+					$update_upload["status"] = 1;
+					M("upload_shop")->where($up_shop)->save($update_upload);
 					
 					if($flag){
 						$this->success('欢迎回来',U('Index/index'));

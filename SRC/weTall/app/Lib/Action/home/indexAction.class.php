@@ -286,7 +286,7 @@ class indexAction extends frontendAction {
     	$start_point_lng = $this->_get("start_point_lng","trim");
     	$end_point_lat = $this->_get("end_point_lat","trim");
     	$end_point_lng = $this->_get("end_point_lng","trim");
-    	$shop_id["id"] = $this->_get("shop","trim");
+    	$shop_id["tokenTall"] = $this->_get("shop","trim");
     	$display_mode = $this->_get("dmodel","trim");
     	$token = $this->_get("tokenTall","trim");
     	if ($token != "") {
@@ -339,24 +339,21 @@ class indexAction extends frontendAction {
     		$start_point_lng = $longitude;
     		
     		//排序
-    		$nearShop = $this->array_sort($nearShop,"nearJuli", "asc");
+    		$new_nearShop = $this->array_sort($nearShop,"nearJuli", "asc");
     		$length = count($nearShop);
     		if ($length > 10) {
     			$length = 10;
     		}
-    		$end_shop = array();
-    		for($i=0;$i<$length;$i++){
-    			$end_shop[] = $nearShop[$i];
-    		}
+    		
     	    $brand_ar = M("brandlist")->where($data)->find();
     		
     		$this->assign("brand",$brand_ar);
     		$this->assign("title",$brand_ar["name"]);
-    		$this->assign("countShop",count($end_shop));
+    		$this->assign("countShop",$length);
     		$this->assign("start_point_lat",$start_point_lat);
     		$this->assign("start_point_lng",$start_point_lng);
     		$this->assign("searchNear","Y");
-    		$this->assign("nearShop",$end_shop); 
+    		$this->assign("nearShop",$new_nearShop); 
     	}
     	$url = "http://api.map.baidu.com/geocoder?location=".$latitude.",".$longitude."&output=xml&key=28bcdd84fae25699606ffad27f8da77b";
     	//$url = "http://api.map.baidu.com/geocoder?location=31.256748,121.595578&output=xml&key=28bcdd84fae25699606ffad27f8da77b";
@@ -550,11 +547,23 @@ class indexAction extends frontendAction {
     	$this->assign("count",$count);
     	$this->display();
     }
+    public function compare(){
+    	$Huohao["Huohao"] = $this->_get("Huohao","trim");
+    	$item_huohao = M("item")->where($Huohao)->select();
+    	$item_taobao = M("item_taobao")->where($Huohao)->find();
+    	$brand["id"] = $item_taobao["brand"];
+    	$brand_data = M("brandlist")->where($brand)->find();
+    	
+    	$this->assign("item",$item_huohao);
+    	$this->assign("item_taobao",$item_taobao);
+    	$this->assign("brand",$brand_data);
+    	$this->display();
+    }
     public function nextPageBrand($token,$itemid,$sortBy){
     	$tokenTall = $token;
     	$this->assign('tokenTall',$tokenTall);
     	 
-    	$item = M("item");
+    	$item = M("item_taobao");
     	$condition["brand"] = $itemid;
     	$count = $item->where($condition)->count();
     	$Page       = new Page($count,10);// 实例化分页类 传入总记录数
@@ -564,6 +573,7 @@ class indexAction extends frontendAction {
     	$carryrecord  = $item->where($condition)->order($sortBy)->limit($Page->firstRow.','.$Page->listRows)->select();
     
     	$this->assign("item",$carryrecord);
+    	$this->assign("compare","Y");
     	$this->assign("itemcate","Y");
     	$this->assign('page',$show);// 赋值分页输出pti
     	$this->assign("count",$count);

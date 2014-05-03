@@ -53,8 +53,14 @@ function go_nav(){
 	$("#shop_detail").css("display","none");
 }
 function go_detail(){
-	$("#navigate").css("display","none");
-	$("#shop_detail").css("display","");
+	var shop_ext = $("#shop_exist").val();
+	if(shop_ext == ""){
+		alert("网上店铺还未开通，请点带我去去实体店直接购买");
+		return;
+	}else{
+		$("#navigate").css("display","none");
+		$("#shop_detail").css("display","");
+	}
 }
 </script>
 </head>
@@ -64,7 +70,7 @@ function go_detail(){
 <div id="panel" style="position:relative;margin-top:10px;color:white;"></div>
 </div>
 
-<div id="shop_detail" <if condition="$dmodel eq 'N'">style="display:none;" </if>>
+<div id="shop_detail" <if condition="$dmodel eq 'N'">style="display:none;margin-top:23px;" </if>>
 <div id="nav">
 	<ul class="navlist">
 		<li class="r pos" id="n_9">
@@ -86,7 +92,9 @@ function go_detail(){
   </tr>
   <tr> 
     <td width="10%"><img src="__STATIC__/weixin/images/luxury/images/Card/5_07.png" width="20px" class="img_start" height="20px"/></td>
-    <td width="80%">电话: {$shopinfo.phone} </td>
+    <td width="80%">电话: {$shopinfo.phone} 
+    <input type="hidden" value="{$shopinfo.name}" id="shop_exist">
+    </td>
     <td width="8%"></td>
   </tr>
   <tr> 

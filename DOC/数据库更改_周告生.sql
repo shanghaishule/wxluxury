@@ -48,3 +48,7 @@ CREATE TABLE IF NOT EXISTS `tp_application` (
 
 ALTER TABLE  `tp_upload_shop` ADD  `lat` VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_general_ci NULL AFTER  `phone` ,
 ADD  `longtitude` VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_general_ci NULL AFTER  `lat` ;
+
+ALTER TABLE  `tp_upload_shop` ADD  `status` INT( 3 ) NOT NULL DEFAULT  '0' COMMENT  '被领取数目' AFTER  `longtitude` ;
+ALTER TABLE  `tp_upload_shop` ADD  `tokenTall` VARCHAR( 30 ) NULL DEFAULT NULL AFTER  `status` ;
+ALTER TABLE  `tp_wecha_shop` ADD  `qq` INT( 15 ) NULL AFTER  `licence_img` ;

@@ -86,10 +86,12 @@ a:visited{ color:white;}
 
 #content .module_special{margin-top:10px;}
 .shopSearch{width:90%;margin:0 auto;background:black;color:white;padding:8px 10px;font-weight:700;font-size:0.9em;}
+.shopSearch2{width:96%;margin:0 auto;background:none;color:white;padding:8px 10px;font-weight:700;font-size:0.9em;}
 .shopDiscount{width:98%;margin:0 auto;background:url(../images/luxury/images/discount/bj_03.png) no-repeat 0 0;background-size: 100% 105px;color:white;padding:0px 0px;font-weight:700;font-size:1em;}
 .shop_address{font-size:0.8em;color:rgb(178,177,177);}
 .shop_theme{font-size:0.8em;color:#5E5E5E;}
-.haveSearch{color:white}
+#haveSearch{color:white;background:rgba(82,120,126,0.4);-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;width:88%;height:25px;padding:10px 8px 8px 8%;margin:0 auto;}
+.haveSearch{color:white;}
 
 /*购物车*/
 #content #chose_all{ font-size:20px; text-indent:20px; color:#888; font-weight:normal;line-height:35px; border-bottom:1px solid #fdfdfd; margin:0 10px;}

@@ -20,17 +20,33 @@
          <else/>
         	<span class="haveSearch"> 查找到附近<span style="red">{$countShop}</span>家店铺</span>
          <div>     
-         <volist name="nearShop" id="Shop">
+         <volist name="nearShop" id="Shop" key="numer">
+         <if condition="$numer lt 11">
           <div class="shopSearch">
            <table>
-           <tr><td width="85%"><a href="{:U('index/index',array('tokenTall'=>$Shop['tokenTall']))}">{$Shop.name}</a></td>
-           <td width="15%"> <a href="{:U('index/navigate',array('start_point_lat'=>$start_point_lat,'shop'=>$Shop['id'],'dmodel'=>'N','start_point_lng'=>$start_point_lng,'end_point_lat'=>$Shop['latitude'],'end_point_lng'=>$Shop['longitude']))}">
+           <tr><td width="85%">
+           <if condition="$Shop['status'] eq 0">
+            <script>
+            function prompt_m(){
+            	alert("网上店铺还未开通，请点带我去去实体店直接购买");
+            	return;
+            }
+            </script>
+            <a href="javascript:void(0);" onclick="prompt_m()">
+           <else/>
+           <a href="{:U('index/index',array('tokenTall'=>$Shop['tokenTall']))}">
+           </if>
+           {$Shop.shop_name}</a></td>
+           <td width="15%"> 
+           
+           <a href="{:U('index/navigate',array('start_point_lat'=>$start_point_lat,'shop'=>$Shop['tokenTall'],'dmodel'=>'N','start_point_lng'=>$start_point_lng,'end_point_lat'=>$Shop['lat'],'end_point_lng'=>$Shop['longtitude']))}">
            <img height="27" width="58" src="__STATIC__/weixin/images/luxury/images/brand/tell_09.png" /></a><br></td></tr>
-           <tr><td width="85%"><span class="shop_address">{$Shop.address}</span></td>
+           <tr><td width="85%"><span class="shop_address">{$Shop.show_addr}</span></td>
            <td width="15%"><img height="18" width="11" src="__STATIC__/weixin/images/luxury/images/brand/here_13.png"><span class="shop_address">{$Shop.nearJuli}KM</span></td></tr>
            </table>
 
           </div><br>
+          </if>
          </volist>
          </div>
          </if>

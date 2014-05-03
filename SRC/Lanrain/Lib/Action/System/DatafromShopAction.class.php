@@ -47,20 +47,27 @@ class DatafromShopAction extends BackAction
 		$this->display();
 		
     }
-
+    //A46da08c3723b0c02ad64f4760f23c89
     //php由地址获取经纬度
-    function getLatLong($address){
-    	if (!is_string($address))die($address);
-    	$_url = sprintf('http://maps.google.com/maps?output=js&q;=%s',rawurlencode($address));
-    	$_result = false;
-    	if($_result = file_get_contents($_url)) {
-    		if(strpos($_result,'errortips') > 1 || strpos($_result,'Did you mean:') !== false) return false;
-    		preg_match('!center:\s*{lat:\s*(-?\d+\.\d+),lng:\s*(-?\d+\.\d+)}!U', $_result, $_match);
-    		$_coords['lat'] = $_match[1];
-    		$_coords['long'] = $_match[2];
-    	}
-    	return $_coords;
-    }
+	function getLatLong($address){ 
+		$_coords = array();
+		$url = "http://api.map.baidu.com/geocoder/v2/?address=$address&output=json&ak=A46da08c3723b0c02ad64f4760f23c89";//查询接口，谷歌有限制，每天1000条
+		$result = file_get_contents($url);//最好使用curl函数，我这里偷懒了
+		$result = json_decode($result);//反json
+		
+		$result = get_object_vars($result);//处理得到的json，找到自己有用的
+		
+		$status = $result['status'];
+		
+		$addressInfo = get_object_vars($result['result']);
+		$lat = $addressInfo['location']->lat; //纬度
+		$lng = $addressInfo['location']->lng; //经度
+		
+		$_coords['lat'] = $lat;
+		$_coords['long'] = $lng;		
+
+	    return $_coords; 
+	}
     
     public function uploadShop(){    	
 
@@ -122,12 +129,12 @@ class DatafromShopAction extends BackAction
     			$exist_num++;
     		}else{
     		    if ($add_num > 0) {   
-	    			$uploadShop_data = $this->getLatLong("'".$val["lbs_addr"]."'");
+	    			$uploadShop_data = $this->getLatLong($val["lbs_addr"]);
 	    			$shop_data = $val;
-	    			$shop_data["lat"] = $uploadShop_data["lat"];
-	    			$shop_data["longtitude"] = $uploadShop_data["long"];
+	    			$shop_data["lat"] = $uploadShop_data['lat'];
+	    			$shop_data["longtitude"] = $uploadShop_data['long'];
 	    			$uploadShop->add($shop_data);    
-	    			$success_data[$add_num] = $shop_data;	    				
+	    			$success_data[$add_num] = $shop_data;  		
     		    }
     		    $add_num ++ ;
     		}
