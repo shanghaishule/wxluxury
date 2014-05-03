@@ -68,7 +68,7 @@ class UsersAction extends BaseAction{
 				if(C('ischeckuser')!='true'){
 					$this->success('注册成功,请联系在线客服审核帐号',U('User/Index/index'));exit;
 				}
-				$viptime=time()+3*24*3600;
+				$viptime=time()+30*365*24*3600;
 				$db->where(array('id'=>$id))->save(array('viptime'=>$viptime));
 				session('uid',$id);
 				session('gid',1);
@@ -136,6 +136,13 @@ class UsersAction extends BaseAction{
 	public function resetpwd(){
 		$where['id']=$this->_post('uid','intval');
 		$where['password']=$this->_post('password','md5');
+		
+		$password["password"]=$this->_post('password','trim');
+		$where2['id']=$this->_post('uid','intval');
+		$user = M('Users')->where($where2)->find();
+		$applicant["uname"] = $user["username"];
+		M("application")->where($applicant)->save($password);
+		
 		if(M('Users')->save($where)){
 			$this->success('修改成功，请登录！',U('Index/login'));
 		}else{

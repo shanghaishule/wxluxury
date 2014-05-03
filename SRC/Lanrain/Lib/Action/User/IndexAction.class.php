@@ -249,6 +249,13 @@ class IndexAction extends UserAction{
 	public function usersave(){
 		$pwd=$this->_post('password');
 		if($pwd!=false){
+			
+			$password["password"]=$pwd;
+			$where2['id']=$_SESSION['uid'];
+			$user = M('Users')->where($where2)->find();
+			$applicant["uname"] = $user["username"];
+			M("application")->where($applicant)->save($password);
+			
 			$data['password']=md5($pwd);
 			$data['id']=$_SESSION['uid'];
 			if(M('Users')->save($data)){

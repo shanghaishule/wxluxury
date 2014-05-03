@@ -56,34 +56,39 @@
         <thead>
             <tr>
                 <th width="10"><input type="checkbox" name="checkall" class="J_checkall"></th>
+                
+				<th width="60" align="center">申请人姓名</th>
+				<th width="60" align="left">申请人电话</th>
+                <th width="60" align="left">品牌</th>
+                <th width="60" align="left">省份</th>
+                <th width="60" align="left">城市</th>
+                
+                <th width="100" align="left">店铺名称</th>
+                
+                <th width="80" align="left">QQ</th>
                 <th width="100">申请时间</th>
-				<th width="80" align="center">申请人姓名</th>
-                <th width="100" align="left">申请人地址</th>
-                <th width="80" align="left">申请人电话</th>
-                <th width="30" align="center">实体店</th>
-                <th width="100" align="left">营业执照信息</th>
-                <th width="50" align="left">店铺名称</th>
-                <th width="80" align="left">补充信息</th>
-                <th width="50" align="left">用户名</th>
-                <th width="50" align="left">电子邮件</th>
-                <th width="50">管理操作</th>
+                <th width="70">管理操作</th>
             </tr>
         </thead>
     	<tbody>
             <volist name="list" id="val">
             <tr>
                 <td align="center"><input type="checkbox" class="J_checkitem" value="{Lanrain:$val.id}"></td>
-				<td align="center">{Lanrain:$val.createtime|date='Y-m-d H:i:s',###}</td>
+				
 				<td align="center">{Lanrain:$val.applicant}</td>
-				<td align="left">{Lanrain:$val.addr}</td>
 				<td align="left">{Lanrain:$val.phone}</td>
-				<td align="center"><eq name="val.trueshop" value="1">有<else/>无</eq></td>
-				<td align="left">{Lanrain:$val.licence}</td>
-				<td align="left">{Lanrain:$val.shopname}</td>
-                <td align="left">{Lanrain:$val.text}</td>
-                <td align="left">{Lanrain:$val.uname}</td>
-                <td align="left">{Lanrain:$val.umail}</td>
+				<td align="left">{Lanrain:$val.brand}</td>
+				<td align="left">{Lanrain:$val.provice}</td>
+				<td align="left">{Lanrain:$val.city}</td>
+				<td align="left">{Lanrain:$val.addr}</td>
+                <td align="left">{Lanrain:$val.QQ}</td>
+                <td align="center">{Lanrain:$val.createtime|date='Y-m-d H:i:s',###}</td>
                 <td align="center">
+                    <if condition="$val.password neq '' ">
+                    <a href="javascript:void(0);" class="J_showdialog" data-uri="/weTall/index.php?g=admin&m=application&a=search_user&id={Lanrain:$val.id}" data-title="用户登陆信息- {Lanrain:$val.applicant}" data-id="edit" data-width="420" data-height="150">查看用户</a>
+                    <else/>
+                	<a href="javascript:;" class="J_confirmurl" data-acttype="ajax" data-uri="/index.php?g=System&m=Application&a=dispatch&id={Lanrain:$val.id}" data-msg="分配用户吗？">分配用户</a> | 
+                    </if>
                     <a href="javascript:;" class="J_confirmurl" data-acttype="ajax" data-uri="/index.php?g=System&m=Application&a=delete&id={Lanrain:$val.id}" data-msg="确定删除该条申请吗?">删除</a>
                 </td>
             </tr>

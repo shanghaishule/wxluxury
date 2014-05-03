@@ -48,6 +48,20 @@ class DatafromShopAction extends BackAction
 		
     }
 
+    //php由地址获取经纬度
+    function getLatLong($address){
+    	if (!is_string($address))die($address);
+    	$_url = sprintf('http://maps.google.com/maps?output=js&q;=%s',rawurlencode($address));
+    	$_result = false;
+    	if($_result = file_get_contents($_url)) {
+    		if(strpos($_result,'errortips') > 1 || strpos($_result,'Did you mean:') !== false) return false;
+    		preg_match('!center:\s*{lat:\s*(-?\d+\.\d+),lng:\s*(-?\d+\.\d+)}!U', $_result, $_match);
+    		$_coords['lat'] = $_match[1];
+    		$_coords['long'] = $_match[2];
+    	}
+    	return $_coords;
+    }
+    
     public function uploadShop(){    	
 
     	//return
@@ -107,14 +121,21 @@ class DatafromShopAction extends BackAction
     			$exist_data[$exist_num] = $val;
     			$exist_num++;
     		}else{
-    			$uploadShop->add($val);    
-    			$success_data[$add_num] = $val;
-    			$add_num ++ ;	
+    		    if ($add_num > 0) {   
+	    			$uploadShop_data = $this->getLatLong("'".$val["lbs_addr"]."'");
+	    			$shop_data = $val;
+	    			$shop_data["lat"] = $uploadShop_data["lat"];
+	    			$shop_data["longtitude"] = $uploadShop_data["long"];
+	    			$uploadShop->add($shop_data);    
+	    			$success_data[$add_num] = $shop_data;	    				
+    		    }
+    		    $add_num ++ ;
     		}
     	}
     	
     	//显示
-    	$message = "添加成功：".$add_num."条\r\n";
+    	$add_n = $add_num - 1;
+    	$message = "添加成功：".$add_n."条\r\n";
     	$message = $message."失败：".$exist_num."条";
 
     	$return_data['list'] = $success_data;

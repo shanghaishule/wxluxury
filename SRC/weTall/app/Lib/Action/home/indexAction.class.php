@@ -311,7 +311,7 @@ class indexAction extends frontendAction {
     	$this->assign('item_cate',$item_cate);
     	
     	if (IS_POST) {
-    		$wecha_shop = M("wecha_shop");
+    		$wecha_shop = M("upload_shop");
     		$longitude = $this->_POST("longitude","trim");
     		$latitude = $this->_POST("latitude","trim");
     		$brand_id = $this->_POST("brand_id","trim");
@@ -320,17 +320,19 @@ class indexAction extends frontendAction {
     		$volumn = $brandval->where($brand_data)->find();
     		$brand_data_new["volume"] = $volumn["volume"] + 1;
     		$brandval->where($brand_data)->save($brand_data_new);
-    		$where["BelongBrand"] = $brand_id;
+    		
+    		$where["brand_name"] = $volumn["name"];
     		$data["id"]=$brand_id;
     		$endPoint = $wecha_shop->where($where)->select();
     		$nearShop=array();
-    		foreach ($endPoint as $end){    			
-    			if ($end["latitude"] != "" & $end["longitude"] != "" &$latitude != "" & $longitude !="" ) {
-    				
-    				$end["nearJuli"] = $this->GetDistance($latitude,$longitude,$end["latitude"],$end["longitude"]);
-    				//echo $latitude,$longitude,$end["latitude"],$end["longitude"];die();
-    				$nearShop[] = $end;
-    			}    			
+    		if ($longitude != "") {
+	    		foreach ($endPoint as $end){    
+	    			if ($end["lbs_addr"] != "") {		
+	    				$end["nearJuli"] = $this->GetDistance($latitude,$longitude,$end["lat"],$end["longtitude"]);
+	    				//echo $latitude,$longitude,$end["latitude"],$end["longitude"];die();
+	    				$nearShop[] = $end;
+	    			}				
+	    		}
     		}
     		
     		$start_point_lat = $latitude;
@@ -338,15 +340,23 @@ class indexAction extends frontendAction {
     		
     		//排序
     		$nearShop = $this->array_sort($nearShop,"nearJuli", "asc");
+    		$length = count($nearShop);
+    		if ($length > 10) {
+    			$length = 10;
+    		}
+    		$end_shop = array();
+    		for($i=0;$i<$length;$i++){
+    			$end_shop[] = $nearShop[$i];
+    		}
     	    $brand_ar = M("brandlist")->where($data)->find();
     		
     		$this->assign("brand",$brand_ar);
     		$this->assign("title",$brand_ar["name"]);
-    		$this->assign("countShop",count($nearShop));
+    		$this->assign("countShop",count($end_shop));
     		$this->assign("start_point_lat",$start_point_lat);
     		$this->assign("start_point_lng",$start_point_lng);
     		$this->assign("searchNear","Y");
-    		$this->assign("nearShop",$nearShop); 
+    		$this->assign("nearShop",$end_shop); 
     	}
     	$url = "http://api.map.baidu.com/geocoder?location=".$latitude.",".$longitude."&output=xml&key=28bcdd84fae25699606ffad27f8da77b";
     	//$url = "http://api.map.baidu.com/geocoder?location=31.256748,121.595578&output=xml&key=28bcdd84fae25699606ffad27f8da77b";

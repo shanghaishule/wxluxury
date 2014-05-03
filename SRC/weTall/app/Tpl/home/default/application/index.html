@@ -12,19 +12,39 @@
 		$(document).ready(function () { 
 			$("#showcard1").click(function () { 
 				var btn = $(this);
+				var brand = $("#brandvalue").val();
+				if (brand == '') {
+					tip('请选择品牌！');
+					return;
+				}
 				var applicant = $("#applicant").val();
 				if (applicant == '') {
 					tip('请填写申请人姓名！');
 					return;
 				}
-				var addr = $("#addr").val();
+				var addr = $("#address_chooce").val();
 				if (addr == '') {
-					tip('请填写地址！');
+					tip('请填写或者地址！');
 					return;
 				}
 				var phone = $("#phone").val();
 				if (phone == '') {
 					tip('请填写联系电话！');
+					return;
+				}
+				var provice = $("#select_provice").val();
+				if (provice == '') {
+					tip('请选择省份！');
+					return;
+				}
+				var city = $("#select_city").val();
+				if (city == '') {
+					tip('请选择城市！');
+					return;
+				}
+				var QQ = $("#qq").val();
+				if (QQ == '') {
+					tip('请填写QQ号码');
 					return;
 				}
 				var trueshop = $('input[name="trueshop"]:checked').val();
@@ -46,14 +66,13 @@
 				var submitData = {
 					uid:'{$uid}',
 					uname: '{$username}',
-					umail: '{$umail}',
+					QQ: QQ,
 					applicant: applicant,
 					addr: addr,
 					phone: phone,
-					licence: licence,
-					shopname: shopname,
-					trueshop: trueshop,
-					text: info,
+					brand: brand,
+					provice: provice,
+					city: city,
 					createtime:'{$createtime}',
 					tokenTall:'{$tokenTall}',
 					wecha_id:'{$wecha_id}'
@@ -107,22 +126,72 @@
 		        } 	
 		
 		}
-		
+
+		/**
+		根据品牌获得省份
+		*/
         function change_brand(brand_name){
-        	$.get('./weTall/index.php?g=home&m=application&a=addressselect&name='+brand_name,function(data,status){
+        	$.get('/weTall/index.php?g=home&m=application&a=addressselect&name='+brand_name,function(data,status){
+        		var obj = eval('('+  data +')');
+        		var dataobj = obj.status;
+        		var x=document.getElementById("select_provice");
+        		x.length = 0;
+        	
+        		//appendsele("","请选择实体店地址");
+        		for(i=0;i<dataobj.length;i++){
+        			x.length = i + 2;
+        			appendsele(dataobj[i].provice,dataobj[i].provice,x);
+                }
+        		appendsele("","选择省份",x);
+        	  });
+        }
+		/**
+		根据省份和品牌获得城市
+		*/
+		function change_provice(brand_name){
+        	$.get('/weTall/index.php?g=home&m=application&a=proviceselect&name='+brand_name,function(data,status){
+        		var obj = eval('('+  data +')');
+        		var dataobj = obj.status;
+        		var x=document.getElementById("select_city");
+        		x.length = 0;
+        		//appendsele("","请选择实体店地址");
+        		
+        		var m=document.getElementById("select_city");
+        		
+        		for(i=0;i<dataobj.length;i++){
+        			x.length = i + 2;
+        			appendsele(dataobj[i].city,dataobj[i].city,m);
+                }
+        		appendsele("","选择城市",m);
+        		
+        	  });
+        }
+		/**
+		根据省份 城市和品牌获得地址
+		*/
+		function change_city(brand_name){
+        	$.get('/weTall/index.php?g=home&m=application&a=cityselect&name='+brand_name,function(data,status){
         		var obj = eval('('+  data +')');
         		var dataobj = obj.status;
         		var x=document.getElementById("ddlTest");
         		x.length = 0;
         		//appendsele("","请选择实体店地址");
+        		
+        		var m=document.getElementById("ddlTest");
         		for(i=0;i<dataobj.length;i++){
-        			x.length = i-1;
-        			appendsele(dataobj[i].id,dataobj[i].lbs_addr);
+        			x.length = i + 1;
+        			appendsele(dataobj[i].shop_name,dataobj[i].shop_name,m);
                 }
+        		appendsele("","选择店铺",m);
+        		
         	  });
         }
-        function appendsele(value,text){
-        	var x=document.getElementById("ddlTest");
+		function select_addres(add_choce){
+			document.getElementById("address_chooce").value = add_choce;
+		}
+		
+        function appendsele(value,text,x){
+        	
         	if (x.selectedIndex>=0){
         	    var y=document.createElement('option');
         	    y.value=value;
@@ -172,22 +241,22 @@
 							       <td><select class="px" onchange="change_brand(this.options[this.selectedIndex].text)" id="brandvalue" name="brandchoose" autofocus>
 					                    <option value="" selected>请选择品牌</option>
 					                    <volist name="brand" id="bname">
-					                    <option value="{$bname.id}">{$bname.name}</option>
+					                    <option value="{$bname.name}">{$bname.name}</option>
 					                    </volist></select>
 					                </td>
 							    </tr>
 								<tr>
 								    <td><label class="pxlabel" for="addr">城市：</label></td>
-									<td><select name="province" >
+									<td><select id="select_provice" onchange="change_provice(this.options[this.selectedIndex].text)" name="province" >
 					                    <option value="" selected>省份</option>
-					                    </select><select name="city" >
+					                    </select><select id="select_city" onchange="change_city(this.options[this.selectedIndex].text)" name="city" >
 					                    <option value="" selected>城市</option>
 					                    </select> </td>
 								</tr>
 								<tr>
 									<td><label class="pxlabel" for="addr">地址：</label></td>
-									<td><input id="address" name="address" type="text" required="" class="px" tabindex="1" style="top:108px;width:180px;POSITION: absolute" value="" placeholder="实体店详细地址" />
-									<select id="ddlTest" name="up_shop_id"  onchange="document.getElementById('address').value=this.options[this.selectedIndex].text" style="top:108px;width:199px;height:41px;CLIP: rect(auto auto auto 180px); POSITION: absolute">					
+									<td><input id="address_chooce" name="address" type="text" required="required" class="px" tabindex="1" style="top:108px;width:180px;POSITION: absolute" value="" placeholder="实体店详细地址" />
+									<select id="ddlTest" name="up_shop_id"  onchange="select_addres(this.options[this.selectedIndex].text)" style="top:108px;width:199px;height:41px;CLIP: rect(auto auto auto 180px); POSITION: absolute">					
 									<option value="">请选择实体店地址</option>					
 									</select></td>
 								</tr>

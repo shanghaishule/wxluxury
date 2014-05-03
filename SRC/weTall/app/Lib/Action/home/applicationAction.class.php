@@ -44,12 +44,43 @@ class applicationAction extends frontendAction{
 		$this->assign("title","实体店入驻");
 		//dump($_SESSION);exit;
 		$this->display();
-	}
+	}	
 
 	public function addressselect(){
 		$upload_shop = M("upload_shop");
-		$where["brand_name"] = $this->_get("name","trim");
-		$result = $upload_shop->where($where)->select();
+		$select_brand = $this->_get("name","trim");
+		$where["brand_name"] = $select_brand;
+		$result = $upload_shop->where($where)->distinct(true)->field("provice")->select();
+		if ($result){
+			// 成功后返回客户端新增的用户ID，并返回提示信息和操作状态
+			$_SESSION["select_brand"] = $select_brand;
+			$this->ajaxReturn($result,"新增成功！",1);
+		}else{
+			// 错误后返回错误的操作状态和提示信息
+			$this->ajaxReturn(0,"新增错误！",0);
+		}
+	}
+	
+	public function proviceselect(){
+		$upload_shop = M("upload_shop");
+		$where["brand_name"] = $_SESSION["select_brand"];
+		$where["provice"] = $this->_get("name","trim");
+		$result = $upload_shop->where($where)->distinct(true)->field("city")->select();
+		if ($result){
+			// 成功后返回客户端新增的用户ID，并返回提示信息和操作状态
+			$_SESSION["select_provice"] = $where["provice"];
+			$this->ajaxReturn($result,"新增成功！",1);
+		}else{
+			// 错误后返回错误的操作状态和提示信息
+			$this->ajaxReturn(0,"新增错误！",0);
+		}
+	}
+	public function cityselect(){
+		$upload_shop = M("upload_shop");
+		$where["brand_name"] = $_SESSION["select_brand"];
+		$where["provice"] = $_SESSION["select_provice"];
+		$where["city"] =  $this->_get("name","trim");
+		$result = $upload_shop->where($where)->distinct(true)->field("shop_name")->select();
 		if ($result){
 			// 成功后返回客户端新增的用户ID，并返回提示信息和操作状态
 			$this->ajaxReturn($result,"新增成功！",1);
@@ -58,7 +89,6 @@ class applicationAction extends frontendAction{
 			$this->ajaxReturn(0,"新增错误！",0);
 		}
 	}
-	
 	public function add(){
 		if($_POST){
 			if ($this->application_mod->create()) {
