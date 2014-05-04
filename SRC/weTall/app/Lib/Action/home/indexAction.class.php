@@ -534,7 +534,7 @@ class indexAction extends frontendAction {
     
     	if(count($condition2) != 0 or $method != ""){
     		$count = $item->where($condition)->count();   	
-	    	$Page       = new Page($count,10);// 实例化分页类 传入总记录数
+	    	$Page       = new Page($count,$count);// 实例化分页类 传入总记录数
 	    	// 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
 	    	$nowPage = isset($_GET['p'])?$_GET['p']:1;
 	    	$show       = $Page->show();// 分页显示输出
@@ -571,7 +571,7 @@ class indexAction extends frontendAction {
     	$item = M("item_taobao");
     	$condition["brand"] = $itemid;
     	$count = $item->where($condition)->count();
-    	$Page       = new Page($count,10);// 实例化分页类 传入总记录数
+    	$Page       = new Page($count,$count);// 实例化分页类 传入总记录数
     	// 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
     	$nowPage = isset($_GET['p'])?$_GET['p']:1;
     	$show       = $Page->show();// 分页显示输出
@@ -594,7 +594,7 @@ class indexAction extends frontendAction {
     	//}
     	$condition["cate_id"] = $itemid;
     	$count = $item->where($condition)->count();
-    	$Page       = new Page($count,10);// 实例化分页类 传入总记录数
+    	$Page       = new Page($count,$count);// 实例化分页类 传入总记录数
     	// 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
     	$nowPage = isset($_GET['p'])?$_GET['p']:1;
     	$show       = $Page->show();// 分页显示输出
@@ -611,7 +611,7 @@ class indexAction extends frontendAction {
     		$item = M("wecha_shop");   		
     		$condition["name"] = array("like", "%".$keyword."%");
     		$count = $item->where($condition)->count();
-    		$Page       = new Page($count,10);// 实例化分页类 传入总记录数
+    		$Page       = new Page($count,$count);// 实例化分页类 传入总记录数
     		// 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
     		$nowPage = isset($_GET['p'])?$_GET['p']:1;
     		$show       = $Page->show();// 分页显示输出
@@ -647,7 +647,7 @@ class indexAction extends frontendAction {
 	    	$this->assign("brand",$brand);
 	    	
 	    	$count = $item->where($condition)->count();
-	    	$Page       = new Page($count,10);// 实例化分页类 传入总记录数
+	    	$Page       = new Page($count,$count);// 实例化分页类 传入总记录数
 	    	// 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
 	    	$nowPage = isset($_GET['p'])?$_GET['p']:1;
 	    	$show       = $Page->show();// 分页显示输出

@@ -136,13 +136,16 @@ var t2=new TouchSlider({id:'sliderlist', speed:600, timeout:6000, before:functio
       <label class="label" style="color:rgb(198,198,198);">￥{$product.price}元<span style="margin-left:20px;">{$product.item_model}款</span></label>
       </div>   
     </div> 
-    </volist> <div id="pages">{$page}</div>
+    </volist> <!-- <div id="pages">{$page}</div> -->
         </if>
     </div>
+    
     <div class="clear">
     </div>
 </div>
-
+<div class="goto_top">
+       <a href="#top"><img src="__STATIC__/images/top.jpg"></a>
+    </div>
 <include file="public:footer" />
 
 </body>
