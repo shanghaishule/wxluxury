@@ -554,8 +554,13 @@ class indexAction extends frontendAction {
     	$brand["id"] = $item_taobao["brand"];
     	$brand_data = M("brandlist")->where($brand)->find();
     	
+    	$brand2["BelongBrand"] = $item_taobao["brand"];
+    	$wecha_shop = M("wecha_shop")->where($brand2)->select();
+
     	$this->assign("item",$item_huohao);
+    	$this->assign("wecha_shop",$wecha_shop);
     	$this->assign("item_taobao",$item_taobao);
+    	$this->assign("title","全网比价");
     	$this->assign("brand",$brand_data);
     	$this->display();
     }

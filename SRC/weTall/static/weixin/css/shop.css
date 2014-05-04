@@ -47,7 +47,9 @@ a:visited{ color:white;}
 .find_07{background:url(../images/luxury/images/goods/find_03.png) no-repeat 0 0;background-size: 80px 37px;background-position:0px 0px; height:37px;width:80px;margin-top:4px;margin-left:8px;float:right;color:white;}
 
 .home_page_logo{background:url(../images/luxury/images/home/cate_white.png) no-repeat 0 0;background-size: 30px 24px;background-position:5px 10px; height:40px;width:140px;}
-#brandimg{width:100%;}
+#brandimg{width:98%;background:black;margin:0 auto;}
+#brandimg2{width:50%;float:left;}
+#brandimg3{width:43%;float:left;padding-left:7%;padding-top:12px;font-weight:700;font-size:13px;}
 .imgProduct{background:url(../images/luxury/images/brand/bg_17.png);width:48%;float:left;margin-left:1%;margin-right:1%;text-align:center;padding-top:10px;}
 .pro_title{color:white;font-size:12px;font-weight:500;}
 .pro_jifen{color:red;font-size:11px;}
@@ -86,7 +88,8 @@ a:visited{ color:white;}
 
 #content .module_special{margin-top:10px;}
 .shopSearch{width:90%;margin:0 auto;background:black;color:white;padding:8px 10px;font-weight:700;font-size:0.9em;}
-.shopSearch2{width:96%;margin:0 auto;background:none;color:white;padding:8px 10px;font-weight:700;font-size:0.9em;}
+.shopSearch2{width:98%;margin:0 auto;background:none;color:white;padding:8px 10px;font-weight:700;font-size:0.9em;}
+#shopSearch2 a:hover{background:blue;}
 .shopDiscount{width:98%;margin:0 auto;background:url(../images/luxury/images/discount/bj_03.png) no-repeat 0 0;background-size: 100% 105px;color:white;padding:0px 0px;font-weight:700;font-size:1em;}
 .shop_address{font-size:0.8em;color:rgb(178,177,177);}
 .shop_theme{font-size:0.8em;color:#5E5E5E;}

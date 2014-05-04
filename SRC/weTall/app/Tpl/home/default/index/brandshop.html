@@ -49,9 +49,8 @@ $(function(){
             <input type="hidden" name="method" id="method">
         </li>
         <li class="r" id="n_8"><if condition="$gowhere eq 'item'">找商品<else/>找店铺</if>
-        <div id="search_area" style="display:none;padding-left:4px;margin-top:6px;background:url(__STATIC__/weixin/images/luxury/images/home/bg_02.png);width:72px;">
-        <a href="javascript:void(0)" onclick="gosearch();">找店铺</a><br>
-        <a href="javascript:void(0)" onclick="shangpin();">找商品</a>
+        <div id="search_area" style="display:none;padding-left:4px;margin-top:6px;background:url(__STATIC__/weixin/images/luxury/images/home/bg_02.png);width:54px;border-radius:3px;">
+       <if condition="$gowhere eq 'item'"><a href='javascript:void(0)' onclick='gosearch();'>找店铺</a><else/> <a href='javascript:void(0)' onclick='shangpin();'>找商品</a></if>
         </div>
         </li>
         
