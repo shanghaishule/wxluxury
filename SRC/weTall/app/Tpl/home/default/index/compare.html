@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>查找附近的店铺</title>
+     
+    </head>
+    <include file="public:headtop" />
+    <include file="public:head" />
+     <script>
+  $(function(){
+  	var panelWidth = $(".img").width();
+  	$("#brandimg").css("height",panelWidth);
+  	$("#brandimg3").css("height",panelWidth);
+  });     
+  </script>  
+    <body style="color:white;">
+        
+        
+         <div id="brandimg">
+         <div id="brandimg2">
+         <img class="img" width="100%" alt="{$brand.name}" src="{$item_taobao.img}"></div>
+         <div id="brandimg3">
+         {$brand.name}<br><br>
+         <span style="color:rgba(255,255,255,0.6);">{$item_taobao.title}</span><br><br>
+                                货号：{$item_taobao.Huohao}
+         </div>
+         </div>  <br>
+         <div id="haveSearch">
+        	<table><tr><td width="70%">官方价格</td><td width="12%">CNY</td><td width="10%">{$item_taobao.price}</td></tr></table>
+         </div> 
+         <div>
+         <volist name="item" id="Shop" key="numer">
+         <if condition="$numer lt 11">
+          <div class="shopSearch2">
+           <div id="shopSearch2" style="width:100%;border-bottom: 1px dashed #d9d9d9;height:30px;padding-top:8px;　">
+           <a href="{:U('Item/index',array('id'=>$Shop['id'],'tokenTall'=>$Shop['tokenTall']))}">
+           <div style="width:69%;float:left;">   
+           
+            <volist name="wecha_shop" id="wecha">
+            <if condition="$wecha['tokenTall'] eq $Shop['tokenTall']">
+           &nbsp;&nbsp;{$wecha.name}</if>
+           </volist></div>    
+            <div style="width:30%；float:left;"> 
+           	￥：{$Shop.price}
+           </div></a></div>
+
+          </div>
+          </if>
+         </volist>
+         </div>
+    </body>
+    
+</html>
