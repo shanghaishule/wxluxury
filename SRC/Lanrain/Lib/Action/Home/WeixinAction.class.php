@@ -879,7 +879,7 @@ class WeixinAction extends Action
         return array(
             array(
                 array(
-                    $home['title'],
+                    $home['title'].$_SESSION["user_long"],
                     $home['info'],
                     $home['picurl'],
                     $url
