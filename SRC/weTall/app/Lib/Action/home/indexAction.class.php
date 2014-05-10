@@ -672,6 +672,8 @@ class indexAction extends frontendAction {
     	/***商品分类**/
     	$item_cate=M("item_cate")->select();
     	$this->assign('item_cate',$item_cate);
+    	$user_long = $_SESSION["user_long"];
+    	$user_lat = $_SESSION["user_lat"];echo $user_lat;die();
     	
     	$filter = $this->_get("filter","trim");
     	if ($filter == "guonei") {

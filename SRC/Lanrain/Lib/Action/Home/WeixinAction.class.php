@@ -13,6 +13,8 @@ class WeixinAction extends Action
         $this->data  = $weixin->request();
         $this->my    = C('site_my');
         list($content, $type) = $this->reply($data);
+        $_SESSION["user_lat"] = $data["Latitude"];
+        $_SESSION["user_long"] =  $data["Longitude"];
 		//$_SESSION['FromUserName'] = $data['FromUserName'];
 		$weixin->response($content, $type);
     }
@@ -861,8 +863,8 @@ class WeixinAction extends Action
         } else {
           
             if ($home['apiurl'] == false) { 
-            	$url = rtrim(C('site_url'), '/') . '/index.php?g=Wap&m=Index&a=index&token='. $this->token .'&wecha_id='.$this->data['FromUserName'];
-            	 
+            	//$url = rtrim(C('site_url'), '/') . '/index.php?g=Wap&m=Index&a=index&token='. $this->token .'&wecha_id='.$this->data['FromUserName'];
+            	$url = rtrim(C('site_url'), '/') . '/weTall/index.php?g=home&m=index&a=brandshop&user_long='.$_SESSION["user_long"].'&user_lat='.$_SESSION["user_lat"];
                 //$url = rtrim(C('site_url'), '/').'/weTall/index.php?g=home&m=index&a=index&tokenTall='. $this->token .'&wecha_id='.$this->data['FromUserName'];//rtrim(C('site_url'), '/')
             } else {
                 $url = $home['apiurl'].'&wecha_id='.$this->data['FromUserName'];

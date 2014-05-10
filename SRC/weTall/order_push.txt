@@ -1,0 +1,2 @@
+订单推送请求报文：version=1.0.0&charset=UTF-8&transType=01&merId=880000000000919&backEndUrl=http://localhost:8081/weTall/wapupay/yinlian_notify_back.php&frontEndUrl=&orderDescription=微指购订单支付&orderTime=20140507205115&orderTimeout=&orderNumber=201405072051151183&orderAmount=48000&orderCurrency=156&reqReserved=&merReserved={test=test}
+订单推送应答报文：respCode=00&tn=201405072051150006092&signMethod=MD5&transType=01&charset=UTF-8&signature=48c0cf9950f2486b7ad86b7ac638e60d&version=1.0.0

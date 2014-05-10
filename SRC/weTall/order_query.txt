@@ -1,0 +1,2 @@
+订单查询请求报文：version=1.0.0&charset=UTF-8&transType=01&merId=880000000000919&orderTime=20140507205115&orderNumber=201405072051151183&merReserved={test=test}
+订单查询应答报文：respCode=11&signMethod=MD5&transType=01&orderNumber=201405072051151183&charset=UTF-8&merId=880000000000919&respMsg=订单未支付[8600001]&signature=bbde3c1cc697d19cc6c36ad76da43626&version=1.0.0
