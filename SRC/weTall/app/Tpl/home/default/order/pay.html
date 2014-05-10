@@ -23,13 +23,26 @@ $(function(){
     });
 });
 
+function submitaction() {
+	var paytype = $('input[name="payment_id"]:checked').val();
+	if(paytype == "4"){
+		$('#goto_pay').attr("action", "{:U('order/wxpay',array('tokenTall'=>$tokenTall, 'dingdanhao'=>$dingdanhao, 'ordersumPrice'=>$order_sumPrice, 'showwxpaytitle'=>1))}");
+	}else{
+		$('#goto_pay').attr("action", "{:U('order/end',array('tokenTall'=>$tokenTall, 'dingdanhao'=>$dingdanhao, 'ordersumPrice'=>$order_sumPrice))}");
+	}
+	
+	$('#goto_pay').submit();
+	
+}
+
+
 </script>
 </head>
 
 <body>
 <include file="public:head" />
 <div id="content">
-    <form action="{:U('order/end',array('tokenTall'=>$tokenTall, 'dingdanhao'=>$dingdanhao, 'ordersumPrice'=>$order_sumPrice))}" method="POST" id="goto_pay">
+    <form action="" method="POST" id="goto_pay">
         <input type="hidden" name="orderid" value="{$orderid}" />
         <input type="hidden" name="dingdanhao" value="{$dingdanhao}" />
         <div class="step_main">
@@ -56,11 +69,19 @@ $(function(){
                             <p class="logo"><label for="payment_alipay"><img src="__STATIC__/weixin/images/zhi.png" ></label></p>
                             <p class="explain">欢迎使用支付宝</p>
                         </dd>-->
+                        <!-- eq name="current_user" value="zcb" -->
+                        <dd>
+                            <p class="radio"><input checked='checked' id="payment_wxpay" name="payment_id" value="4" type="radio"></p>
+                            <p class="logo"><label for="payment_wxpay"><img src="__STATIC__/weixin/images/wxpay_small.png" ></label></p>
+                            <p class="explain">欢迎使用微信支付</p>
+                        </dd>
+                        <!-- else />
                         <dd>
                             <p class="radio"><input checked='checked' id="payment_unionpay" name="payment_id" value="3" type="radio"></p>
                             <p class="logo"><label for="payment_unionpay"><img src="__STATIC__/weixin/images/unionpay.png" ></label></p>
                             <p class="explain">欢迎使用银联支付</p>
                         </dd>
+                        </eq -->
                     </dl>
                     <dl class="defray">
                         <dt>线下支付</dt>
@@ -73,7 +94,7 @@ $(function(){
             </div>
             <div class="make_sure">
                 <p>
-                    <a href="javascript:$('#goto_pay').submit();" class="btn enter">确认支付</a>
+                    <a href="javascript: submitaction();" class="btn enter">确认支付</a>
                 </p>
             </div>
             

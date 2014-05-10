@@ -445,6 +445,8 @@ class orderAction extends userbaseAction {
 			$this->redirect('user/index',array('tokenTall'=>$tokenTall));
 		}
 		
+		$this->assign('current_user',$_SESSION['user_info']['username']);
+		//dump($_SESSION['user_info']['username']);exit;
 		$this->display();
 	}
 	
@@ -563,7 +565,7 @@ class orderAction extends userbaseAction {
 	
 						// 准备支付控件所需信息
 						// urlEncode(base64(tn=流水号,resultURL=urlEcode(交易结果展示url),usetestmode=true|false))
-						$strOrderInfo = "tn=".$resp['tn'].",ResultURL=".urlencode($this->_server('HTTP_ORIGIN')."/weTall/index.php?m=order&a=notify_kongjian&dingdanhao=".$alldingdanhao."&rid=").",UseTestMode=true";
+						$strOrderInfo = "tn=".$resp['tn'].",ResultURL=".urlencode($this->_server('HTTP_ORIGIN')."/weTall/index.php?m=order&a=notify_kongjian&dingdanhao=".$alldingdanhao."&rid=").",UseTestMode=false";
 						// base64加密
 						$strOrderInfo = base64_encode($strOrderInfo);
 						// 转换字符串
@@ -777,5 +779,73 @@ class orderAction extends userbaseAction {
 			return "参数为空";
 		}
 	}
-
+	
+	
+	public function wxpay()
+	{
+		if(IS_POST)
+		{
+			//支付方式
+			$payment_id=$_POST['payment_id'];
+			$alldingdanhao=$_POST['dingdanhao']; //取得支付号
+			$all_order_arr = M('order_merge')->where("mergeid='".$alldingdanhao."'")->select();
+			$all_order_price = 0;
+			//xxl start
+			$orderinfos = array();
+			$orderInfo = array();
+			//xxl end
+			foreach ($all_order_arr as $dingdanhao){
+				$item_order=M('item_order')->where("userId='".$this->visitor->info['id']."' and orderId='".$dingdanhao['orderid']."'")->find();
+				!$item_order && $this->_404();
+				$all_order_price = $all_order_price + floatval($item_order['order_sumPrice']);
+	
+				//xxl start 短信提醒
+				$order_detail=M('order_detail');
+				$order_title_arr = $order_detail->field('title')->where("orderId='".$dingdanhao['orderid']."'")->select();
+				$order_titles = "";
+				foreach ($order_title_arr as $order_title){
+					$order_titles = $order_titles.$order_title['title']." ";
+				}
+	
+				$orderInfo['orderid']=$dingdanhao['orderid'];
+				$orderInfo['address_name']=$item_order['address_name'];
+				$orderInfo['mobile']=$item_order['mobile'];
+				$orderInfo['title']=$order_titles;
+				$orderinfos[] = $orderInfo;
+	
+				//xxl end
+			}
+			//xxl start
+			$_SESSION['orderinfos'] = $orderinfos;
+			//xxl end
+				
+			if (4 == $payment_id)
+			{
+				//微信支付
+				$wxpay=M('wxpay')->find();
+				$this->assign('wxname', $wxpay['wxname']);
+				$this->assign('tokenTall', $wxpay['tokenTall']);
+				$this->assign('appId', $wxpay['appId']);
+				$this->assign('paySignKey', $wxpay['paySignKey']);
+				$this->assign('appSecret', $wxpay['appSecret']);
+				$this->assign('partnerId', $wxpay['partnerId']);
+				$this->assign('partnerKey', $wxpay['partnerKey']);
+				$this->assign('notify_url', $wxpay['notify_url']);
+				$this->assign('success_url', $wxpay['success_url']);
+				$this->assign('fail_url', $wxpay['fail_url']);
+				$this->assign('cancel_url', $wxpay['cancel_url']);
+				
+				$this->assign('alldingdanhao', $alldingdanhao);
+				$this->assign('ordersumPrice', $all_order_price*100);  //支付用，精确到分
+				$this->assign('ordersumPrice_act', $all_order_price);  //显示用
+				$this->display();
+			}
+			else
+			{
+				$this->error('操作失败!');
+			}
+		}
+	}
+	
+	
 }

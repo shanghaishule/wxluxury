@@ -864,7 +864,7 @@ class WeixinAction extends Action
           
             if ($home['apiurl'] == false) { 
             	//$url = rtrim(C('site_url'), '/') . '/index.php?g=Wap&m=Index&a=index&token='. $this->token .'&wecha_id='.$this->data['FromUserName'];
-            	$url = rtrim(C('site_url'), '/') . '/weTall/index.php?g=home&m=index&a=brandshop&user_long='.$_SESSION["user_long"].'&user_lat='.$_SESSION["user_lat"];
+            	$url = rtrim(C('site_url'), '/') . '/weTall/index.php?g=home&m=index&a=brandshop&user_long='.$this->data["Longitude"].'&user_lat='.$this->data["Latitude"];
                 //$url = rtrim(C('site_url'), '/').'/weTall/index.php?g=home&m=index&a=index&tokenTall='. $this->token .'&wecha_id='.$this->data['FromUserName'];//rtrim(C('site_url'), '/')
             } else {
                 $url = $home['apiurl'].'&wecha_id='.$this->data['FromUserName'];
@@ -879,8 +879,8 @@ class WeixinAction extends Action
         return array(
             array(
                 array(
-                    $home['title'].$_SESSION["user_long"],
-                    $home['info'],
+                    $home['title'].$this->data["Latitude"],
+                    $home['info'].$this->data["Latitude"],
                     $home['picurl'],
                     $url
                 )
