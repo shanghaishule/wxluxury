@@ -36,12 +36,12 @@
 	</script>
 </head>
 
-<body>
+<body><!-- 
 <div class="subnav">
     <div class="content_menu ib_a blue line_x">
     	<a class="add fb J_showdialog" href="javascript:void(0);" data-uri="/weTall/index.php?g=admin&m=account&a=genbill" data-title="生成账单" data-id="genbill" data-width="520" data-height="100"><em>生成账单</em></a>
     </div>
-</div>
+</div> -->
 <div class="pad_lr_10">
     <form name="searchform" method="get" >
     <table width="100%" cellspacing="0" class="search_form">
@@ -53,25 +53,20 @@
                 <input type="hidden" name="m" value="Statistics" />
                 <input type="hidden" name="a" value="index" />
                 <input type="hidden" name="menuid" value="{Lanrain:$menuid}" />
-            	账单单号:
-                <input name="billnum" type="text" class="input-text" size="25" value="{Lanrain:$search.billnum}" />
-				生成时间 :
-                <input type="text" name="time_start" id="J_time_start" class="date" size="12" value="{Lanrain:$search.time_start}">
-                -
-                <input type="text" name="time_end" id="J_time_end" class="date" size="12" value="{Lanrain:$search.time_end}">
+            	
           		状态 :
 		        <select name="status" >
 		        <option value="">--所有--</option>
-		        <?php foreach($account_status as $key=>$item){ ?>
-                <option <?php if($search['status']==$key) echo "selected=''"; ?> value="<?php echo $key; ?>"><?php echo $item; ?></option>
-                <?php } ?>
+		        <option value="1" <if condition="$status_m eq 1">selected</if>>已提现</option>
+		        <option value="0" <if condition="$status_m eq 0">selected</if>>审核中</option>
+		        <option value="0" <if condition="$status_m eq 2">selected</if>>已经导出</option>
 		        </select>
 		                      商家:
 		        <select name="shop" >
 		        <option value="">--所有--</option>
-		        <?php foreach($account_shop as $key=>$item){ ?>
-                <option <?php if($search['shop']==$key) echo "selected=''"; ?> value="<?php echo $key; ?>"><?php echo $item; ?></option>
-                <?php } ?>
+		        <volist name="shop_tixian" id="val2" >
+		        <option value="{Lanrain:$val2.shop_id}" <if condition="$val2['shop_id'] eq shop_id">selected</if>>{Lanrain:$val2.name}</option>
+		        </volist>
 		        </select>                
 				<input type="submit" name="search" class="btn" value="搜索" />
         	</div>
@@ -87,33 +82,31 @@
             <tr>
                 <!--th><span data-tdtype="order_by" data-field="id">ID</span></th-->
                 <th><span data-tdtype="order_by" data-field="shop">商家</span></th>
-                <th><span data-tdtype="order_by" data-field="billnum">账单单号</span></th>
+                <th><span data-tdtype="order_by" data-field="billnum">支付宝</span></th>
                 <th><span data-tdtype="order_by" data-field="status">状态</span></th>
-                <th><span data-tdtype="order_by" data-field="gen_time">生成时间</span></th>
-                <th><span data-tdtype="order_by" data-field="start_time">账单统计时间段</span></th>
-                <th><span data-tdtype="order_by" data-field="totalamt">账单总金额(元)</span></th>
-                <th><span data-tdtype="order_by" data-field="rate">扣率</span></th>
-                <th><span data-tdtype="order_by" data-field="yingjie">应结金额(元)</span></th>
+                <th><span data-tdtype="order_by" data-field="gen_time">已经提现</span></th>
+                <th><span data-tdtype="order_by" data-field="start_time">要提现金额</span></th>
+                <th><span data-tdtype="order_by" data-field="start_time">收款人</span></th>
+                <th><span data-tdtype="order_by" data-field="start_time">联系方式</span></th>
                 <th width="80">管理操作</th>
             </tr>
         </thead>
     	<tbody>
-            <volist name="list" id="val" >
+            <volist name="shop_tixian" id="val" >
             <tr>
                 <!--td align="center">{Lanrain:$val.id}</td-->
-                <td align="center"><?php foreach($shopinfo as $item){ if($val['tokenTall']==$item['tokenTall']) echo $item['name']; } ?></td>
-                <td align="center"><span data-tdtype="view" data-field="billnum" data-id="{Lanrain:$val.billnum}" class="tdview" >{Lanrain:$val.billnum}</span></td>
-                <td align="center"><b><?php foreach($account_status as $key=>$item){ if($val['status']==$key){echo $item; }}?></b></td>
-                <td align="center"><?php if($val['gen_time']){ echo date('Y-m-d H:i:s',$val['gen_time']); }?></td>
-                <td align="center"><b><?php if($val['start_time']){ echo date('Y-m-d H:i:s',$val['start_time']); }?> -- <?php if($val['end_time']){ echo date('Y-m-d H:i:s',$val['end_time']); }?></b></td>
-                <td align="center" class="red">{Lanrain:$val.totalamt}</td>
-                <td align="center">{Lanrain:$val.rate}</td>
-                <td align="center" class="red">{Lanrain:$val.yingjie}</td>
+                <td align="center">{Lanrain:$val.name}</td>
+                <td align="center">{Lanrain:$val.account}</td>
+                <td align="center"><if condition="$val['status'] eq 1">已提现</if>
+                <if condition="$val['status'] eq 0">审核中</if>
+                <if condition="$val['status'] eq 2">已导出</if>
+                </td>
+                <td align="center">{Lanrain:$val.hadti}</td>
+                <td align="center">{Lanrain:$val.yaoti}</td>
+                <td align="center">{Lanrain:$val.payee}</td>
+                <td align="center">{Lanrain:$val.mobile}</td>
                 <td align="center">
-                <a href="{Lanrain::U('Statistics/edit',array('id'=>$val['id']))}">编辑</a>
-                <if condition = "$val['status'] eq '0' ">
-                    <a href="javascript:void(0);" class="J_confirmurl" data-uri="{Lanrain::U('Statistics/delete', array('id'=>$val['id']))}" data-msg="确认删除该账单吗？">删除</a>
-                </if>
+                    <a href="javascript:void(0);" class="J_confirmurl" data-uri="{Lanrain::U('Statistics/hadti', array('tokenTall'=>$val['tokenTall']))}" data-msg="确认设为已经提现吗？">设为已经提现</a>
                 </td>
             </tr>
             </volist>
@@ -124,19 +117,6 @@
     	<div id="pages">{Lanrain:$page}</div>
     </div>
 </div>
-<script type="text/javascript">
-Calendar.setup({
-	inputField : "J_time_start",
-	ifFormat   : "%Y-%m-%d",
-	showsTime  : false,
-	timeFormat : "24"
-});
-Calendar.setup({
-	inputField : "J_time_end",
-	ifFormat   : "%Y-%m-%d",
-	showsTime  : false,
-	timeFormat : "24"
-});
-</script>
+
 </body>
 </html>

@@ -52,3 +52,20 @@ ADD  `longtitude` VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_general_ci NULL
 ALTER TABLE  `tp_upload_shop` ADD  `status` INT( 3 ) NOT NULL DEFAULT  '0' COMMENT  '被领取数目' AFTER  `longtitude` ;
 ALTER TABLE  `tp_upload_shop` ADD  `tokenTall` VARCHAR( 30 ) NULL DEFAULT NULL AFTER  `status` ;
 ALTER TABLE  `tp_wecha_shop` ADD  `qq` INT( 15 ) NULL AFTER  `licence_img` ;
+
+/*5-7*/
+
+DROP TABLE IF EXISTS `tp_atixian`;
+CREATE TABLE IF NOT EXISTS `tp_atixian` (
+  `id` int(12) NOT NULL AUTO_INCREMENT,
+  `tokenTall` varchar(19) NOT NULL,
+  `hadti` double NOT NULL DEFAULT '0',
+  `yaoti` double NOT NULL,
+  `status` int(1) NOT NULL COMMENT '0 - 审核中 1-已经提取 ',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+ALTER TABLE  `tp_atixian` CHANGE  `status`  `status` INT( 1 ) NOT NULL DEFAULT  '1' COMMENT  '0 - 审核中 1-已经提取 ';
+
+/*5-10*/
+ALTER TABLE  `tp_atixian` CHANGE  `status`  `status` INT( 1 ) NOT NULL DEFAULT  '1' COMMENT  '0 - 审核中 1-已经提取  2-已经导出';
+ALTER TABLE  `tp_account_setting` CHANGE  `bankname`  `bankname` VARCHAR( 200 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT  '支付宝' COMMENT  '银行名称';

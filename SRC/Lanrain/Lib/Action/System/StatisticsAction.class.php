@@ -4,96 +4,53 @@ class StatisticsAction extends BackAction
 {	
 	public function _initialize() {
         $account_status = array(
-        		0=>'已生成，未对账',
-        		1=>'商城已对账，店铺未对账',
-        		2=>'商城未对账，店铺已对账',
-        		3=>'商城已对账，店铺已对账',
-        		4=>'已付款',
-        		5=>'--所有--未对账--',
-        		6=>'--所有--未付款--',
+        		0=>'已提现',
+        		1=>'审核中',
+        		
         );
         $this->assign('account_status',$account_status);
         
+        $this->_mod_setting = M('atixian');
         $this->_mod_setting = D('account_setting');
-        $this->_mod_bill_mst = M('account_bill_mst');
-        $this->_mod_bill_dtl = D('account_bill_dtl');
         $this->_mod_shop = D('wecha_shop');
         
         $shopinfo = $this->_mod_shop->select();
         $this->assign('shopinfo',$shopinfo);
-        
-        $account_shop = array();
-        $account_shop_arr = $this->_mod_bill_mst->Distinct(true)->field('tokenTall')->select();
-        foreach ($account_shop_arr as $valarr){
-        	$tokenValue = $valarr['tokenTall'];
-        	foreach ($shopinfo as $valarr2){
-        		if ($tokenValue == $valarr2['tokenTall']) {
-        			$account_shop[$tokenValue] = $valarr2['name'];
-        		}
-        	}
-        }
-        $this->assign('account_shop',$account_shop);
-        //dump($account_shop);exit;
-        $order_status=array(1=>'待付款',2=>'待发货',3=>'待收货',4=>'完成',5=>'关闭');
-        $this->assign('order_status',$order_status);
         
         
     }
 
 	public function index() {
     	$map = $this->_search();
-    	$mod = $this->_mod_bill_mst;
-    	!empty($mod) && $this->_list($mod, $map);
+    	$this->assign("shop_tixian",$map);
     	$this->display();
     }
     
     protected function _search() {
     	$map = array();
-
-    	($billnum = $this->_request('billnum', 'trim')) && $map['billnum'] = array('like', '%'.$billnum.'%');
-    	$time_start = $this->_request('time_start', 'trim');
-    	$time_end = $this->_request('time_end', 'trim');
-    	if($time_start && $time_end){
-    	    $map['gen_time'] = array('between', array(strtotime($time_start), strtotime($time_end)+(24*60*60-1)));
-    	} else if($time_start) {
-    	    $map['gen_time'] = array('egt', strtotime($time_start));
-    	} else if($time_end) {
-    	    $map['gen_time'] = array('elt', strtotime($time_end)+(24*60*60-1));
-    	}
-
-    	if( $_GET['status']==null ){
-    		$status = -1;
-    	}else{
-    		$status = intval($_GET['status']);
-    	}
-    	//$status>=0 && $map['status'] = array('eq',$status);
-    	if ($status >= 0) {
-    		if ($status == 5) {
-    			$map['status'] = array('in', '0,2');
-    		}else if ($status == 6) {
-    			$map['status'] = array('neq', '4');
-    		}else{
-    			$map['status'] = array('eq',$status);
-    		}
-    	}
     	
-    	if( $_GET['shop']==null ){
-    		$shop = -1;
-    	}else{
-    		$shop = trim($_GET['shop']);
-    	}
-    	if($shop>=0){
-    		$map['tokenTall'] = array('eq',$shop);
-    	}
+    	$shop_wecha = $this->_get("shop","trim");
+    	$status = $this->_get('status',"trim");
+    	$this->assign("status_m",100);
     	
-    	$this->assign('search', array(
-    			'billnum' => $billnum,
-    			'time_start' => $time_start,
-    			'time_end' => $time_end,
-    			'status' =>$status,
-    			'shop' =>$shop,
-    	));
+    	$str_status = "";
+    	if ($status != "") {
+    		$str_status = " and t.status=".$status;
+    		$this->assign("status_m",$status);
+    	}
+    	$str_shop = "";
+    	if($shop_wecha != ""){
+    		$str_shop = " and w.id=".$shop_wecha;
+    		$this->assign("shop_id",$shop_wecha);
+    	}
 
+        $new_map = new Model();
+       
+        $sql = "SELECT *, w.id AS shop_id FROM tp_account_setting a, tp_wecha_shop w, tp_atixian t
+				WHERE a.tokenTall = t.tokenTall
+				AND w.tokenTall = a.tokenTall".$str_status.$str_shop;
+       
+        $map = $new_map->query($sql);
     	return $map;
     }
     
@@ -175,24 +132,24 @@ class StatisticsAction extends BackAction
     
     }
     
-    public function delete()
+    public function hadti()
     {
-    	$mod_mst = $this->_mod_bill_mst;
-    	$mod_dtl = $this->_mod_bill_dtl;
-    	$ids = trim($this->_request('id'), ',');
+    	$ids = trim($this->_request('tokenTall'), ',');
     	if ($ids) {
-    		$billmst = $mod_mst->where("id = '".$ids."'")->select();
-    		if ($billmst[0]['status'] != '0') {
-    			$this->error('状态不正确！');
+    		$tixian = M("atixian")->where("tokenTall='".$ids."'")->find();
+    		if ($tixian['status'] == 1) {
+    			$this->error('已经提现，不能设置！');
     		}else{
     			//需要删除主从表
-    			$dtldel = $mod_dtl->where("billnum = '".$billmst[0]['billnum']."'")->delete();
-    			$dtlmst = $mod_mst->where("id = '".$ids."'")->delete();
+    			$dtldel["hadti"] = $tixian["hadti"] + $tixian["yaoti"];
+    			$dtldel["yaoti"] = 0;
+    			$dtldel["status"] = 1;
+    			$dtlmst =M("atixian")->where("tokenTall='".$ids."'")->save($dtldel);
 
-	    		if (false !== $dtldel && false !== $dtlmst) {
-	    			$this->success('删除成功');
+	    		if (false !== $dtldel ) {
+	    			$this->success('设置提现成功');
 	    		} else {
-	    			$this->error('删除失败');
+	    			$this->error('设置提现失败');
 	    		}
     		}
     	} else {

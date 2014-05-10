@@ -126,8 +126,47 @@
                    </p> -->
                    <p><strong>您需要关注:</strong></p>
                    <p><span>账单信息:</span>
-                       <a  href="{:U('account/index',array('status'=>6,'tokenTall'=>$tokenTall))}">已成交[<span class="count">{$account_cnt.weijie_cnt}</span>][<span class="count">合计&nbsp;{$account_cnt.weijie_amt}&nbsp;元</span>]</a>
+                       <a  href="{:U('account/index',array('status'=>6,'tokenTall'=>$tokenTall))}">已成交[<span class="count">{$account_cnt.yijie_cnt}</span>][<span class="count">合计&nbsp;{$account_cnt.yijie_amt}&nbsp;元</span>]</a>
+         <script>
+         function tixian(){
+        	 $("#tixianbutton").css("display","none");
+        	 $("#tian_area").css("display","");
+         }
+         function cancel_money(){
+        	 $("#tixianbutton").css("display","");
+        	 $("#tian_area").css("display","none");
+         }
+         function show_money(){
+        	 var max_money = $("#max_money").val();
+        	 var money = $("#money").val();
+        	 if(money > max_money){
+        		 alert("可提现的最大金额是"+max_money+"元！");
+        		 return false;
+        	 }else{
+        		 
+ 				 $.get('/weTall/index.php?g=admin&m=index&a=tixian&money='+money+"&tokenTall={$tokenTall}",function(data,status){
+ 					var obj = eval('('+  data +')');
+ 					if(obj.data == 0){
+ 						alert("提现失败！");
+ 					}else{
+ 						$("#money").attr("disabled","disabled");
+ 						$("#money_sure").attr("disabled","disabled");
+ 						alert("已经提现"+money+"元,提现需要5-7天到账，请耐心等待！");
+ 					}
+        		 });
+        	 }
+        	 
+         }
+         
+         </script>           
+                     	 冻结：{$account_cnt.suncces_dongjie} 元       <span style="color:red;margin-left:10px;">可提现：{$account_cnt.suncces_ok} 元</span><input id="tixianbutton" <if condition="$account_cnt['status'] eq 1 or $account_cnt['status'] eq ''">class="btn btn_submit"<else/>disabled class="btn btn_submit2"</if> style="width:80;height:20px;padding:2px 10px;margin-left:8px;" type="button" name="tixian" value="提      现" onclick="tixian();" />
+                      <if condition="$account_cnt['status'] eq 1 or $account_cnt['status'] eq ''"><else/>你目前有一笔<span style="color:blue">{$account_cnt.money}</span>元的提现申请正在审核中!</if><input type="hidden" id="max_money" name="max_money" value="{$account_cnt.suncces_ok}" />
                       </p>
+                       <span id="tian_area" style="display:none">
+                      提现金额：<input type="text" name="money" id="money"/>
+                      <input id="money_sure"  class="btn btn_submit" style="width:80;height:20px;padding:2px 10px;margin-left:8px;" type="button" name="money" value="确定" onclick="show_money();" />
+                      <input id="cancel_sure"  class="btn btn_submit" style="width:80;height:20px;padding:2px 10px;margin-left:8px;" type="button" name="cancel" value="取消" onclick="cancel_money();" />
+                      </span>
                </div>
             </div>
 

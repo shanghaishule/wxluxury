@@ -186,29 +186,70 @@ class indexAction extends backendAction {
 	        )
         );
         
-        $account_mod = M('account_bill_mst');
-        $account_weiduizhang = $account_mod->where("status in (0,1) and tokenTall='".$tokenTall."'")->count();
-        $account_where_weijie = "status != 4 and tokenTall = '".$tokenTall."'";
-        $account_weijie_cnt = $account_mod->where($account_where_weijie)->count();
-        $account_weijie_amt = $account_mod->where($account_where_weijie)->sum('yingjie');
-        $account_weijie_amt = $account_weijie_amt ? $account_weijie_amt : 0;
-        $account_where_yijie = "status = 4 and tokenTall = '".$tokenTall."'";
-        $account_yijie_cnt = $account_mod->where($account_where_yijie)->count();
-        $account_yijie_amt = $account_mod->where($account_where_yijie)->sum('yingjie');
-        $account_yijie_amt = $account_yijie_amt ? $account_yijie_amt : 0;
+        $tixian = M("atixian");
+        $success= $this->item_order->where(array('status'=>4,'tokenTall'=>$tokenTall))->count();
+        $success_sum= $this->item_order->where(array('status'=>4,'tokenTall'=>$tokenTall))->sum("order_sumPrice");
+        $now_time = time() - 1;//7*24*3600;//7天冻结
+        $success_ok= $this->item_order->where("status=4 and tokenTall='".$tokenTall."' and support_time < ".$now_time)->sum("order_sumPrice");
+        $success_ok==0?$success_ok:0;
+        $tixian_had = $tixian->where("tokenTall='".$tokenTall."'")->find();
+        $can_tixian = $success_ok - $tixian_had["hadti"] - $tixian_had["yaoti"];
+        $suncces_dongjie = $success_sum - $success_ok;
+//         $account_mod = M('account_bill_mst');
+//         $account_weiduizhang = $account_mod->where("status in (0,1) and tokenTall='".$tokenTall."'")->count();
+//         $account_where_weijie = "status != 4 and tokenTall = '".$tokenTall."'";
+//         $account_weijie_cnt = $account_mod->where($account_where_weijie)->count();
+//         $account_weijie_amt = $account_mod->where($account_where_weijie)->sum('yingjie');
+//         $account_weijie_amt = $account_weijie_amt ? $account_weijie_amt : 0;
+//         $account_where_yijie = "status = 4 and tokenTall = '".$tokenTall."'";
+//         $account_yijie_cnt = $account_mod->where($account_where_yijie)->count();
+//         $account_yijie_amt = $account_mod->where($account_where_yijie)->sum('yingjie');
+//         $account_yijie_amt = $account_yijie_amt ? $account_yijie_amt : 0;
 
-        $this->assign('account_cnt',
-        	array('weiduizhang'=>$account_weiduizhang,
-				'weijie_cnt'=>$account_weijie_cnt,
-        		'weijie_amt'=>$account_weijie_amt,
-        		'yijie_cnt'=>$account_yijie_cnt,
-        		'yijie_amt'=>$account_yijie_amt,
-        	)
-        );
+         $this->assign('account_cnt',
+         	array('suncces_dongjie'=>$suncces_dongjie,
+         			'suncces_ok'=>$can_tixian,
+         			'yiti'=>$tixian_had["hadti"],
+         			'status'=>$tixian_had["status"],
+         			'money'=>$tixian_had["yaoti"],
+        		'yijie_cnt'=>$success,
+         		'yijie_amt'=>$success_sum,
+         	)
+         );
 
         $this->display();
     }
 
+    public function tixian(){
+    	$data["yaoti"] = $this->_get("money","trim");
+    	$data["status"] = 0;
+    	$where["tokenTall"] = $this->_get("tokenTall","trim");
+    	$tixian_mod = M("atixian");
+    	$result = false;
+    	$tixian = $tixian_mod->where($where)->find();
+    	if ($tixian) {
+    		if ($tixian_mod->where($where)->save($data)) {
+    			$result = true;
+    		}else{
+    			$result = false;
+    		}
+    	}else{
+    		$data["tokenTall"] = $this->_get("tokenTall","trim");
+    		if ($tixian_mod->add($data)) {
+    			$result = true;
+    		}else{
+    			$result = false;
+    		}
+    	}
+    	
+    	if ($result){
+    		// 成功后返回客户端新增的用户ID，并返回提示信息和操作状态
+    		$this->ajaxReturn(1,"新增成功！",1);
+    	}else{
+    		// 错误后返回错误的操作状态和提示信息
+    		$this->ajaxReturn(0,"新增错误！",0);
+    	}
+    }
     public function login() {
        // if (IS_POST) {
             $username = 'admin';
@@ -276,13 +317,13 @@ class indexAction extends backendAction {
             if ($r = $this->_mod->where(array('often'=>2))->select()) {
                 $left_menu[2]['sub'] = $r;
             }
-            /*
-            $left_menu[3] = array('id'=>3,'name'=>'账务管理');
+            
+            $left_menu[3] = array('id'=>311,'name'=>'结账方式管理');
             $left_menu[3]['sub'] = array();
             if ($r = $this->_mod->where(array('often'=>3))->select()) {
             	$left_menu[3]['sub'] = $r;
             }
-            */
+            
             $left_menu[4] = array('id'=>4,'name'=>'会员管理');
             $left_menu[4]['sub'] = array();
             if ($r = $this->_mod->where(array('often'=>4))->select()) {

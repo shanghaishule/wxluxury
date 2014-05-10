@@ -64,6 +64,7 @@ cursor:pointer;text-decoration:none;overflow:visible;text-align:center;zoom:1;wh
 .btn:hover{background:#e9e7e7;}
 
 .btn_submit{color:#FFFFFF; background:#318dd0; text-shadow:0 -1px 0 rgba(0, 0, 0, 0.25); border-color:#106BAB #106BAB #0D68A9;}
+.btn_submit2{color:#FFFFFF; background:#666666; text-shadow:0 -1px 0 rgba(0, 0, 0, 0.25); border:2px solid red;}
 .btn_submit:hover{background:#3486c1;}
 
 .upload_btn{float:left;color:#333;background:#f1f0f0;border:1px solid #c4c4c4;border-radius:2px;text-shadow:0 1px 1px rgba(255, 255, 255, 0.75);display:inline-block;cursor:pointer;width:60px;height:22px;text-align:center;}
