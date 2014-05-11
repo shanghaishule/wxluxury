@@ -314,6 +314,13 @@ class indexAction extends frontendAction {
     		$wecha_shop = M("upload_shop");
     		$longitude = $this->_POST("longitude","trim");
     		$latitude = $this->_POST("latitude","trim");
+    		if ($latitude == "") {
+    			$longitude = $_SESSION["longtitude"] ;
+	    		$latitude = $_SESSION["latitude"] ;
+    		}else{
+	    		$_SESSION["longtitude"] = $longitude;
+	    		$_SESSION["latitude"] = $latitude;
+    		}
     		$brand_id = $this->_POST("brand_id","trim");
     		$brand_data['id'] = $brand_id;
     		$brandval = M("brandlist");
@@ -672,8 +679,7 @@ class indexAction extends frontendAction {
     	/***商品分类**/
     	$item_cate=M("item_cate")->select();
     	$this->assign('item_cate',$item_cate);
-    	$user_long = $this->_get("user_long","trim");
-    	$user_lat = $this->_get("user_lat","trim");;echo $user_lat;die();
+    	
     	
     	$filter = $this->_get("filter","trim");
     	if ($filter == "guonei") {
