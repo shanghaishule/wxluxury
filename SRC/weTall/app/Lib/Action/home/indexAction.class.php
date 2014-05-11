@@ -332,11 +332,11 @@ class indexAction extends frontendAction {
     		$data["id"]=$brand_id;
     		$endPoint = $wecha_shop->where($where)->select();
     		$nearShop=array();
-    		if ($longitude != "") {
+    		if ($longitude != "" and $latitude != "") {
 	    		foreach ($endPoint as $end){    
 	    			if ($end["lbs_addr"] != "") {		
 	    				$end["nearJuli"] = $this->GetDistance($latitude,$longitude,$end["lat"],$end["longtitude"]);
-	    				//echo $latitude,$longitude,$end["latitude"],$end["longitude"];die();
+	    				//echo $end["nearJuli"]."--0".$latitude."----1<br>".$longitude."----2<br>".$end["lat"]."----3<br>".$end["longtitude"];die();
 	    				$nearShop[] = $end;
 	    			}				
 	    		}
