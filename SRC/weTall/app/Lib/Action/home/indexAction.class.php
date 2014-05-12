@@ -691,9 +691,17 @@ class indexAction extends frontendAction {
     	if (IS_POST) {
     		$brandname = $this->_post("txtkeyword","trim");
     		$method = $this->_post("method","trim");
+    		$_SESSION["paixu_place"] = $method;
     		$where["name"] = array("like","%".$brandname."%");
-    		$this->assign("gowhere",$method);
     	}
+    	
+    	if ($_SESSION["paixu_place"] == "") {
+    		$method = "item";
+    	}else{
+    		$method = $_SESSION["paixu_place"];
+    	}
+    	
+    	$this->assign("gowhere",$method);
     	
     	$brand = M("brandlist")->where($where)->order("volume desc")->select();
     	$this->assign("brand",$brand);

@@ -57,10 +57,11 @@
 	    	$("#1").css('display','');
 	    	$(".imglittle").css('background','#d9d8d9');
 	    	$("#little1").css('background','red');
+	    	$("#BanCont").css("height",$("#display_img").width());
 	    	length = $(".imagesDetail").length;	
 	    	//currentPic = currentPic + 1;
 	    	imgdetail(currentPic);
-	    	//setTimeout("imgdetail("+currentPic+")",3000);
+	    	//setTimeout("nextPic"+currentPic+")",3000);
 			$("div.module_special .wrap .major ul.list li:last-child").addClass("remove_bottom_line");
 		});
 		var active=0,
@@ -265,7 +266,7 @@
             
 			<ul id="BanCont">
 			  <volist name="imgarr" id="bolist" key="lidaid">			     
-			     <li class="imagesDetail" id="{$lidaid}"><a href="__PARENTURL__/Uploads/items/images/{$item['Uninum']}/{$bolist}.jpg"><img src="__PARENTURL__/Uploads/items/images/{$item['Uninum']}/{$bolist}.jpg" width="320px" alt="{$item.title}" /></a></li> 
+			     <li class="imagesDetail" id="{$lidaid}"><a href="__PARENTURL__/Uploads/items/images/{$item['Uninum']}/{$bolist}.jpg"><img id="display_img" src="__PARENTURL__/Uploads/items/images/{$item['Uninum']}/{$bolist}.jpg" width="100%" alt="{$item.title}" /></a></li> 
 			  </volist>
 			</ul>
 			<div class="banner_link"><ul class="imgmiddle">
@@ -282,7 +283,7 @@
                 </volist>
             </div><!-- 
 		    <input type="button" onclick="nextPic();" name="next" value="next">
-            <input type="button" onclick="previousPic();" name="Previous" value="Previous"> -->
+            <input type="button" onclick="previousPic();" name="Previous" value="Previous">  --> 
 		</div>
          <script type="text/javascript">
          var active=0,
