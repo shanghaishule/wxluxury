@@ -334,9 +334,9 @@ class indexAction extends frontendAction {
     		$nearShop=array();
     		if ($longitude != "" and $latitude != "") {
 	    		foreach ($endPoint as $end){    
-	    			if ($end["lbs_addr"] != "") {		
+	    			if ($end["lbs_addr"] != "" and $end["longtitude"] != "") {		
 	    				$end["nearJuli"] = $this->GetDistance($latitude,$longitude,$end["lat"],$end["longtitude"]);
-	    				echo $end["nearJuli"]."--0".$latitude."----1<br>".$longitude."----2<br>".$end["lat"]."----3<br>".$end["longtitude"]."===".$end["nearJuli"];die();
+	    				//echo $end["nearJuli"]."--0".$latitude."----1<br>".$longitude."----2<br>".$end["lat"]."----3<br>".$end["longtitude"]."===".$end["nearJuli"];die();
 	    				$nearShop[] = $end;
 	    			}				
 	    		}
