@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Product Detail</title>
+<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="format-detection" content="telephone=no">
+<meta charset="utf-8">
+<script type="text/javascript" src="__STATIC__/weixin/js/jquery.js" charset="utf-8"></script>
+<link href="__STATIC__/css/productdetail.css" rel="stylesheet" type="text/css">
+
+<link type="text/css" rel="stylesheet" href="__STATIC__/weixin/css/match.css">
+<link type="text/css" rel="stylesheet" href="__STATIC__/weixin/css/shop.css">
+
+</head>
+
+<body>
+<div class="wrap">
+<div style="height:45px;"></div>
+<div id="nav">
+	<ul class="navlist">
+		<li class="r" id="n_0"><a href="{:U('home/index/index', array('tokenTall'=>$tokenTall))}"><div class="home_page_logo"></div></a></li>
+    	<li class="r" id="n_3">
+    		<span >添加我的搭配</span>
+        </li>
+        <li class="r" id="n_1"><a href="{:U('home/user/index', array('tokenTall'=>$tokenTall))}"><div class="find_04"></div></a></li>
+        
+    </ul>
+    <script type="text/javascript">
+    	$(".navlist > li#n_0").click(function(){
+			$(this).toggleClass("active");
+		});
+		$(".navlist > li.r a").each(function() {
+            href="index.php-app=member&act=login&ret_url=-index.php-app=member.htm"+$(this).attr("href");
+			whref=window.location.href;
+			if(whref.indexOf(href)!='-1'){
+				$(this).parent("li").addClass("active");
+			}
+        });
+    </script>
+    
+	
+</div>
+  
+<form id="matchForm" action="{:U('user/addMatch')}" method="post" enctype="multipart/form-data">
+<table class = "info">
+
+<tr style="background:#A3D1D1">
+	<td>上传我的照片 {$my_img}</td>
+	<td colspan="2"><input  name="my_img" id="my_img" onchange="valtext()" type="file"  >
+	    <input type="hidden" name="img_name" id="img_name" value="{$math_data.my_img}"> 
+	</td>
+</tr>
+<tr>
+	<td>写下我的心情</td>
+	<td width="68%" colspan="3"><input name="title" id="title" size="32%" type="text" value="{$math_data.title}"></td>
+</tr>
+
+<tr >
+<td colspan="3" style="background:#CA8EC2;color:white;">我的收藏:</td>
+</tr>
+
+<volist name='user_info' id='vo' key="key">
+
+<tr height="36"  onclick="match_action({$vo.item_id})" <if condition="$key%2 eq 0">style="background:#EBD3E8;"<else/>style="background:#DEDEBE;"</if>>
+	<td >
+		<a href="javascript:void(0)" onclick="match_action({$vo.item_id})">
+		<img style="position:absolute;z-index:2;margin-top:-10px"  
+		     width="20" height="20" src="__STATIC__/weixin/images/favi.png" id ="{$vo.item_id}" />
+		</a>
+		<img style="position:absolute;z-index:1;margin-top:-20px;margin-left:30px;" width="35" height="35" src="{$vo.img}"/>
+	</td>
+	<td colspan="2">{$vo.title}</td>	
+	<td><input type="hidden" name="txt_{$vo.item_id}" value="0" id="txt_{$vo.item_id}" /></td>	
+</tr>
+
+</volist>
+<tr>
+  <td width="30%">
+    <input id="preview" name="preview" value="预览" class="common_btn" type="submit"></input>
+  </td>
+  <td width="30%">
+    <input id="send" name="send" value="发稿" class="common_btn" type="submit"></input>
+  </td>
+  <td>
+	<input id="save" name="save" value="保存" class="common_btn" type="submit"></input>
+  </td>
+</tr>
+</table>
+<input type="hidden" name="is_send" value="0" id="is_send" />
+
+</form>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	
+item_ids = "{$math_data.item_ids}"; 
+item_arry = item_ids.split(",");
+nSize = item_arry.length;
+
+for(i = 0 ; i <nSize;i++　){
+	sel_id = "#"+ item_arry[i];
+	txt_id = "#txt_"+ item_arry[i];
+	
+	old_src = $(sel_id).attr("src");
+	old_file = old_src.match(/[^\/]*$/)[0];
+	old_path = old_src.replace(old_file,""); 
+	
+	$(sel_id).attr("src",old_path + "favi2.png");
+	$(txt_id).val("1"); 
+
+}
+
+});
+
+function valtext(){
+	file_name = $("#my_img").val().match(/[^\\]*$/)[0];
+	$("#img_name").val(file_name); 
+}
+
+function match_action(item_id){
+	
+	sel_id = "#"+ item_id;
+	txt_id = "#txt_"+ item_id;
+
+	old_src = $(sel_id).attr("src");
+	old_file = old_src.match(/[^\/]*$/)[0];
+	old_path = old_src.replace(old_file,""); 	
+	if(old_file == "favi2.png"){
+		$(sel_id).attr("src",old_path + "favi.png"); 
+		$(txt_id).val("0"); 
+	}else{
+		$(sel_id).attr("src",old_path + "favi2.png");
+		$(txt_id).val("1"); 
+	}
+};
+
+
+$('#save').bind('click',function(){
+	$("#is_send").val("0");	
+});
+
+$('#send').bind('click',function(){
+	$("#is_send").val("1");  
+});
+
+$('#preview').bind('click',function(){	
+	var img_string = $("#my_img").val();
+	if(img_string == ""){
+		alert("没有图片无法预览");
+		return false;
+	}else{
+		$("#matchForm").attr("action", "/weTall/index.php?m=user&a=preMatch");
+	}
+    
+});
+</script>
+
+</body>
+</html>

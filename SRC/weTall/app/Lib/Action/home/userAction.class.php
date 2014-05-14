@@ -35,14 +35,14 @@ class userAction extends userbaseAction {
     	$this->assign('tokenTall', $tokenTall);
         $this->visitor->is_login && $this->redirect('user/index', array('tokenTall'=>$tokenTall));
         if (IS_POST) {
-            $username = $this->_post('username', 'trim');
+            $username = $this->_post('user_name', 'trim');
             $password = $this->_post('password', 'trim');
             $remember = $this->_post('remember');
             if (empty($username)) {
                 IS_AJAX && $this->ajaxReturn(0, L('please_input').L('password'));
                 $this->error(L('please_input').L('username'));
             }
-            if (empty($username)) {
+            if (empty($password)) {
                 IS_AJAX && $this->ajaxReturn(0, L('please_input').L('password'));
                 $this->error(L('please_input').L('password'));
             }
@@ -685,5 +685,193 @@ class userAction extends userbaseAction {
      	
 		}
 		
-    }    
+    }  
+    public function match() {
+    	$discount_shop = M("set_discount");
+    	$brand = M("brandlist");
+    	$discount_data = $discount_shop->order("date asc")->group("status")->select();
+    
+    	$this->assign("brand",$brand->select());
+    	$this->assign("ontime",$discount_data);
+    	$this->display();
+    }
+    
+    public function addMatch() {
+    
+    	$tokenTall = $this->getTokenTall();
+    	$uid = $this->visitor->info['id'];
+    	$where['is_send'] = "0";
+    	$where['uid'] = $uid;
+    	 
+    	//获得图片和title
+    	$m=M();
+    	$Sel_sql = "SELECT i.title, i.img,s.item_id FROM tp_item i, tp_shop_favi s ";
+    	$Where_sql = "WHERE i.id = s.item_id and s.userid = ".$uid;
+    	$result=$m->query($Sel_sql.$Where_sql);
+    
+    	//items 设定
+    	//$math_data = M("match")->where($where)->find();
+    	$math_data = $_SESSION['math_data'];
+    	$this->assign("user_info",$result);
+    	$this->assign("math_data",$math_data);
+    
+    	if(IS_POST){
+    		//for the select item
+    		$data = array();
+    
+    		//uploadfile
+    		$Uninum = time();
+    		$filepath = $_SERVER['DOCUMENT_ROOT']."/Uploads/items/images/";//图片保存的路径目录
+    		if(!is_dir($filepath)){
+    			mkdir($filepath,0777, true);
+    		}
+    		$file_type = explode(".",$_POST['img_name']);
+    		$filename = $Uninum.'.'.$file_type[1]; //生成文件名
+    		move_uploaded_file($_FILES["my_img"]["tmp_name"],$filepath.$filename);
+    		$data['upd_path'] = '/Uploads/items/images/'.$filename;
+    
+    		$item_ids = "";
+    		foreach($result as $val){
+    			if($_POST['txt_'.$val['item_id']] == "1"){
+    				$item_ids = $item_ids.$val['item_id'].",";
+    			}
+    		}
+    		$item_ids = substr($item_ids,0,strlen($item_ids)-1);
+    		$data['item_ids'] = $item_ids;
+    		$data['uid'] = $uid;
+    		$data['my_img'] = $_POST['img_name'];
+    		$data['title'] = $_POST['title'];
+    		$data['is_send'] = $_POST['is_send'];
+    		if($data['is_send'] != "0"){
+    			$data['create_time'] = time();
+    			 
+    		}
+    		 
+    		$math_data = M("match")->where($where)->find();
+    		if($math_data == NULL){
+    			M("match")->add($data);
+    		}else{
+    			M("match")->where($where)->save($data);
+    		}
+    
+    		$_SESSION['math_data'] = $math_data;
+    		//
+    		if($data['is_send'] == "0"){
+    				$this->success('保存成功！');
+    	}else{
+    		$this->success('发稿成功！');
+    		}
+    
+    		}
+    
+    		$this->display();
+    }
+    
+    
+    
+    
+    
+    public function preMatch() {
+    
+    $uid = $this->visitor->info['id'];
+    
+    //uploadfile
+    $data['upd_path'] = $this->getUploadFile();
+    
+    
+    //取得所以收藏
+    $result = $this->getUserFavi();
+    //取得所选收藏
+    		$item_ids = $this->getSelFavi($result);
+    
+    $data['item_ids'] = $item_ids;
+    $data['uid'] = $uid;
+    $data['my_img'] = $_POST['img_name'];
+    $data['title'] = $_POST['title'];
+    $data['is_send'] = $_POST['is_send'];
+    $this->assign("math_data",$data);
+    
+    
+    //
+    
+    $m=M();
+    		$Sel_sql = "SELECT * from tp_match where is_send in ('0','2') and uid =".$uid ;
+    		$result=$m->query($Sel_sql);
+    
+    
+    //dump($result);
+    
+    
+    if($result == NULL){
+    	$data['is_send'] = "2";
+    
+    	M("match")->add($data);
+    }else{
+    //dump("2");
+    $data['is_send'] = "2";
+    $where['is_send'] = $result['is_send'];
+    $where['uid'] = $uid;
+    M("match")->where($where)->save($data);
+    }
+//die();
+    
+    //item_ids
+    $item_array = explode(",",$item_ids);
+    	$this->assign("item_ids",$item_array);
+    
+    	//获得图片和title
+    	$result = $this->getMatchItem($item_ids);
+    			$this->assign("item",$result);
+    
+    			$this->display();
+    
+    
+    }
+    
+    //uploadfile
+    private function getUploadFile() {
+    $Uninum = time();
+	    $filepath = $_SERVER['DOCUMENT_ROOT']."/Uploads/items/images/";//图片保存的路径目录
+    	    if(!is_dir($filepath)){
+    	    mkdir($filepath,0777, true);
+    }
+     
+    	$file_type = explode(".",$_POST['img_name']);
+    	$filename = $Uninum.'.'.$file_type[1]; //生成文件名
+    	move_uploaded_file($_FILES["my_img"]["tmp_name"],$filepath.$filename);
+	    return '/Uploads/items/images/'.$filename;
+    
+    	}
+    
+    	//取得收藏
+    		private function getUserFavi() {
+    		$uid = $this->visitor->info['id'];
+    		$m=M();
+    		$Sel_sql = "SELECT i.title, i.img,s.item_id FROM tp_item i, tp_shop_favi s ";
+    		$Where_sql = "WHERE i.id = s.item_id and s.userid = ".$uid;
+    		$result=$m->query($Sel_sql.$Where_sql);
+    		return $result;
+    		 
+    }
+    
+    //取得选择收藏
+    private function getSelFavi($result) {
+    	$item_ids = "";
+    	foreach($result as $val){
+    	if($_POST['txt_'.$val['item_id']] == "1"){
+	    		$item_ids = $item_ids.$val['item_id'].",";
+    }
+    }
+    $item_ids = substr($item_ids,0,strlen($item_ids)-1);
+    	return $item_ids;
+    }
+    
+    	//取得选择收藏
+    	private function getMatchItem($item_ids) {
+    	$m=M();
+    	$Sel_sql = "SELECT * FROM tp_item ";
+    	$Where_sql = "WHERE id in ( ".$item_ids.")";
+    	$result=$m->query($Sel_sql.$Where_sql);
+    	return $result;
+    	}  
 }

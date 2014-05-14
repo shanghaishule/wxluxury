@@ -84,6 +84,7 @@ class indexAction extends frontendAction {
     	$id=$this->_get("id","intval");
     	$set_discount=M("set_discount");
     	$discount["id"]=$id;
+    	$_SESSION["huodong_id"]=$id;
     	$data_act=$set_discount->where($discount)->find();
     	$start_time=strtotime($data_act["date"]. $data_act["start_time"]);
     	$end_time=strtotime($data_act["date"]. $data_act["end_time"]);
@@ -132,6 +133,24 @@ class indexAction extends frontendAction {
     			echo "活动已经结束";die();
     	}
     	
+    }
+    public function check_huodong(){
+    	$set_discount=M("set_discount");
+    	$discount["id"]=$_SESSION["huodong_id"];
+    	$data_act=$set_discount->where($discount)->find();
+    	$start_time=strtotime($data_act["date"]. $data_act["start_time"]);
+    	$end_time=strtotime($data_act["date"]. $data_act["end_time"]);
+    	 
+    	$start_time=strtotime(date("2014-04-20 20:54:00",time()));
+    	$nowTime = time();
+    	 
+    	if ($nowTime < $end_time and $nowTime > $start_time) {   		
+    		$this->ajaxReturn(1,"可以购买！",1);
+    	}else{
+    		$where["status"] = 2;
+    		$set_discount->where($discount)->save($where);
+    		$this->ajaxReturn(0,"购买错误！",0);
+    	}
     }
     public function addressselect(){
     	$upload_shop = M("item");
@@ -186,6 +205,7 @@ class indexAction extends frontendAction {
     		}
     	}
     	//var_dump($discount_data);die();
+    	$this->assign("huodongstatus",$update_status["status"]);
     	$this->assign("brand",$brand->select());
     	$this->assign("ontime",$discount_data);
     	$this->display();

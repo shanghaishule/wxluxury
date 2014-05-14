@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Product Detail</title>
+<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="format-detection" content="telephone=no">
+<meta charset="utf-8">
+<link href="__STATIC__/css/productdetail.css" rel="stylesheet" type="text/css">
+<link type="text/css" rel="stylesheet" href="__STATIC__/weixin/css/shop.css">
+<link type="text/css" rel="stylesheet" href="__STATIC__/weixin/css/match.css">
+
+</head>
+<body>
+<div class="wrap">
+<div style="height:45px;"></div>
+<div id="nav">
+	<ul class="navlist">
+		<li class="r" id="n_0"><a href="{:U('home/index/index', array('tokenTall'=>$tokenTall))}"><div class="home_page_logo"></div></a></li>
+    	<li class="r" id="n_3">
+    		<span >搭配分享预览</span>
+        </li>
+        <li class="r" id="n_1"><a href="{:U('home/user/index', array('tokenTall'=>$tokenTall))}"><div class="find_04"></div></a></li>
+        
+    </ul>
+    <script type="text/javascript">
+    	$(".navlist > li#n_0").click(function(){
+			$(this).toggleClass("active");
+		});
+		$(".navlist > li.r a").each(function() {
+            href="index.php-app=member&act=login&ret_url=-index.php-app=member.htm"+$(this).attr("href");
+			whref=window.location.href;
+			if(whref.indexOf(href)!='-1'){
+				$(this).parent("li").addClass("active");
+			}
+        });
+    </script>
+    
+	
+</div>
+  
+<div>
+	<span class="haveSearch">  标题：{$math_data.title}</span>
+	<div>
+	<img style="margin-right:5px;" width="720px" height="400px" src="{$math_data.upd_path}">
+	</div>
+	<span class="haveSearch">  单品购买链接</span>	
+	
+<volist name='item' id='vo' >	
+    <div class="matchItem">
+	     <table>
+			<tr height="50" >
+				<td >
+					<img width="75" height="45" src="{$vo.img}"/>
+				</td>
+				<td width="400px">{$vo.title}</td>	
+				
+				<td><font color ='red'>￥{$vo.price}</font></td>	
+			</tr>
+     	</table>				
+    </div>    
+    </br>	
+</volist>    
+ 
+	
+	
+	  
+</div>
+
+</body>
+</html>

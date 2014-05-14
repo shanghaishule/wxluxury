@@ -11,7 +11,7 @@
             <li>附加属性</li>-->
 		</ul>
 		<div class="J_panes">
-        <div class="content_list pad_10">
+        <div class="content_list pad_10"><span style="float:right;font-size:14px;font-weight:700;"><a href="javascript:history.go(-{$yema});">返回商品管理页面</a></span>
 		<table width="100%" cellpadding="2" cellspacing="1" class="table_form">
 			<tr>
 				<th width="120">所属分类 :</th>
@@ -68,6 +68,7 @@
                      </volist>
                      </div></td>
 			</tr>
+			 <if condition="$edit_m neq 'total' and $val neq ''">
 			<tr>
 			    <th width="120">库存细则：</th>
 			    <td>
@@ -107,10 +108,20 @@
 				<th>商品库存 :</th>
 				<td><input id='J_goods_stock' onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" type="text" name="goods_stock" class="input-text" size="10" value="{$info.goods_stock}"> </td>
 			</tr>
+			
 			<tr>
                 <th>商品简介 :</th>
                 <td><textarea name="intro" cols="80" rows="2">{$info.intro}</textarea></td>
             </tr>
+            <tr>
+				<th>打折价格 :</th>
+				<td><input id='J_price' onkeyup="this.value=this.value.replace(/[^0-9.]/g,'')" onafterpaste="this.value=this.value.replace(/[^0-9.]/g,'')"  type="text" name="price" size="10" class="input-text" value="{$info.price}"> 元</td>
+			</tr>
+            </if>
+             <tr>
+				<th>原价 :</th>
+				<td><input id='J_old_price' onkeyup="this.value=this.value.replace(/[^0-9.]/g,'')" onafterpaste="this.value=this.value.replace(/[^0-9.]/g,'')"  type="text" name="old_price" size="10" class="input-text" value="{$info.old_price}"> 元</td>
+			</tr>
             <tr>
 				<th>商品图片 :</th>
 				<td>
@@ -173,14 +184,7 @@
 		      快递:<input value="{$info.kuaidi}" onkeyup="value=value.replace(/[^\d\.]/g,'')" type="text" name="kuaidi" />
 		      EMS:<input value="{$info.ems}" onkeyup="value=value.replace(/[^\d\.]/g,'')" type="text" name="ems" /></td>
 		    </tr>
-		    <tr>
-				<th>原价 :</th>
-				<td><input id='J_old_price' onkeyup="this.value=this.value.replace(/[^0-9.]/g,'')" onafterpaste="this.value=this.value.replace(/[^0-9.]/g,'')"  type="text" name="old_price" size="10" class="input-text" value="{$info.old_price}"> 元</td>
-			</tr>
-            <tr>
-				<th>打折价格 :</th>
-				<td><input id='J_price' onkeyup="this.value=this.value.replace(/[^0-9.]/g,'')" onafterpaste="this.value=this.value.replace(/[^0-9.]/g,'')"  type="text" name="price" size="10" class="input-text" value="{$info.price}"> 元</td>
-			</tr>
+		    
 			
 			<!--<tr>
 				<th width="120">商品来源 :</th>
@@ -197,7 +201,7 @@
             </tr>-->
 			 <tr>
 			     <th>商品详情 :</th>
-		         <td><textarea name="info" id="info" style="width:68%;height:400px;visibility:hidden;resize:none;">{$info.info}</textarea></td>
+		         <td><textarea name="info" id="info" cols="150" rows="20" style="width:100%;height:400px;">{$info.info}</textarea></td>
 			</tr>
 		</table>
 		</div>
@@ -568,8 +572,11 @@ $(function() {
 	KindEditor.create('#info', {
 		uploadJson : '{:U("attachment/editer_upload")}',
 		fileManagerJson : '{:U("attachment/editer_manager")}',
-		allowFileManager : true
+		allowFileManager : true,
+		//下面这段代码必不可少
+		afterBlur: function(){this.sync();}  
 	});
+	
 	$('ul.J_tabs').tabs('div.J_panes > div');
 
 	//颜色选择器

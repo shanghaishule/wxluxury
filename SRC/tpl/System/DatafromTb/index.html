@@ -73,7 +73,7 @@
     </table>
     </form>
     
-    <div class="J_tablelist table_list">
+    <div class="J_tablelist table_list" data-acturi="{:U('item/ajax_edit')}">
     <style>
 	.attributes {
 	    height : 60px;
@@ -88,9 +88,9 @@
                 <th width=80px><span data-tdtype="order_by" data-field="status">商品图片</span></th>
                 <th width=200px><span data-tdtype="order_by" data-field="shop">商品名称</span></th>
                 <th width=80px><span data-tdtype="order_by" data-field="billnum">商品价格</span></th>
-                <th width=80px><span data-tdtype="order_by" data-field="billnum">同步时间</span></th>
-                <th width=200px><span data-tdtype="order_by" data-field="gen_time">商品描述</span></th>
-                <th><span data-tdtype="order_by" data-field="start_time">商品颜色</span></th>
+                <th width=80px><span data-tdtype="order_by" data-field="add_time">同步时间</span></th>
+                <th width=200px><span data-tdtype="order_by" data-field="Huohao">商品货号</span></th>
+                <th><span data-tdtype="order_by" data-field="item_model">款式年份</span></th>
                 
                 <th width="80">管理操作</th>
             </tr>
@@ -107,8 +107,8 @@
                 <td align="center">{Lanrain:$val.title}</td>
                 <td align="center">{Lanrain:$val.price}</td>
                 <td align="center">{Lanrain:$val.add_time|date='Y-m-d',###}</td>
-                <td class="tableFf" align="center"  style="table-layout:fixed;height:60px;overflow:hidden;text-overflow:ellipsis;">{Lanrain:$val.info}</td>
-                <td align="center" style="text-overflow:ellipsis;overflow:hidden; white-space:nowrap; width:150px;">{Lanrain:$val.color}</td>
+                <td class="tableFf" align="center"  style="table-layout:fixed;height:60px;overflow:hidden;text-overflow:ellipsis;">{Lanrain:$val.Huohao}</td>
+                <td align="center" style="text-overflow:ellipsis;overflow:hidden; white-space:nowrap; width:150px;">{Lanrain:$val.item_model}</td>
                 
                 <td align="center">
                 <a href="/weTall/index.php?g=admin&m=item&a=edit&id={Lanrain:$val.id}&tokenTall={Lanrain:$val.tokenTall}&edit_m=total">编辑</a>

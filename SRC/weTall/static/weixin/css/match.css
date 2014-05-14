@@ -24,3 +24,7 @@ color: #fff;
 font-size: 16px;
 cursor: pointer;
 }
+
+.matchItem{
+width:95%;margin:0 auto;background:black;color:white;padding:8px 10px;font-weight:700;font-size:0.9em;
+border-right:5px solid red;}

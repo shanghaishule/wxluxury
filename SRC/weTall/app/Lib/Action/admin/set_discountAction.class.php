@@ -177,14 +177,31 @@ class set_discountAction extends backendAction {
 		$where["id"] = $id;
 		$set_discount = M("set_discount");
 		$status = $set_discount->where($where)->find();
-		if ($status["status"] == "2") {
-			$message = "活动已经结束";
-		}elseif ($status["status"] == "1"){
+		if ($status["status"] == "1"){
 			$message = "活动已经开始";
 		}else {
 			$data["status"] = 1;
 			if ($set_discount->where($where)->save($data)) {
 				$message = "设置活动开始成功";;
+			}
+		}
+		$this->ajaxReturn(1, L('operation_success'), $tags);
+		$this->success($message);
+	}
+	/*
+	 * 设置活动立即结束
+	*/
+	public function end(){
+		$id = $this->_get("id","trim");
+		$where["id"] = $id;
+		$set_discount = M("set_discount");
+		$status = $set_discount->where($where)->find();
+		if ($status["status"] == "2") {
+			$message = "活动已经结束";
+		}else {
+			$data["status"] = 2;
+			if ($set_discount->where($where)->save($data)) {
+				$message = "设置活动结束成功";;
 			}
 		}
 		$this->ajaxReturn(1, L('operation_success'), $tags);

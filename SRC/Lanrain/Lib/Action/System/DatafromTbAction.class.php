@@ -10,11 +10,11 @@ class DatafromTbAction extends BackAction
 		//if (IS_POST){
 		$huohao = $this->_request("huohao","trim");
 		if ($huohao) {
-			$map["Huohao"] = $huohao;
+			$map["Huohao"] = array('like', '%'.$huohao.'%');
 		}
 		$brand = $this->_request("brand","trim");
 		if ($brand) {
-			$where["name"]=$brand;
+			$where["name"]=array('like', '%'.$brand.'%');
 			$brandid=M("brandlist")->where($where)->find();
 			$map["brand"] = $brandid["id"];
 		}
@@ -48,6 +48,7 @@ class DatafromTbAction extends BackAction
         ($keyword = $this->_request('keyword', 'trim')) && $map['name'] = array('like', '%'.$keyword.'%');
         $this->assign('search', array(
             'keyword' => $keyword,
+        	'name'=> $map['name']
         ));
         return $map;
     }

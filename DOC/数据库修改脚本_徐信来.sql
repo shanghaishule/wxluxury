@@ -1,6 +1,6 @@
 /*本脚本可以反复执行，重复执行*/
 DROP TABLE IF EXISTS `tp_upload_shop`;
-CREATE TABLE IF NOT EXISTS `tp_upload_shop` (
+CREATE TABLE IF NOT EXISTS `tp_upload_shop` ( 
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `provice` varchar(128) NOT NULL,
   `city` varchar(128) NOT NULL, 
@@ -27,4 +27,22 @@ CREATE TABLE IF NOT EXISTS `tp_set_promotion` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 alter table tp_item add promotion_id varchar(100);
+
+DROP TABLE IF EXISTS `tp_match`;
+CREATE TABLE IF NOT EXISTS `tp_match` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` int(11) NOT NULL,
+  `my_img`   varchar(128) NOT NULL,
+  `upd_path`   varchar(128) NOT NULL,  
+  `title`    varchar(128) NOT NULL,  
+  `item_ids` varchar(256) NOT NULL,  
+  `praise_num`  int(11),
+  `criticize_num`  int(11),  
+  `comment_num`  int(11),
+  `is_send`  varchar(2) NOT NULL,
+  `create_time` int(11),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
 

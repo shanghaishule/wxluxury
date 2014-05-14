@@ -12,9 +12,10 @@ class itemAction extends backendAction {
         //显示模式
         $sm = $this->_get('sm', 'trim');
         $this->assign('sm', $sm);
-
+       
         //分类信息
         $res = $this->_cate_mod->field('id,name')->select();
+        $_SESSION["yema"] = 1;
        
         $cate_list = array();
         foreach ($res as $val) {
@@ -675,10 +676,12 @@ class itemAction extends backendAction {
 	}
 	
     public function edit() {
+    	//echo $_SESSION["yema"];die();
         if (IS_POST) {
         	$edit_m = $this->_post("edit_m","trim");
         	if ($edit_m == "total") {
         		$this->_mod = M("item_taobao");
+        		$_SESSION["m"] = "exist";
         	}
             //获取数据
             if (false === $data = $this->_mod->create()) {
@@ -741,6 +744,10 @@ class itemAction extends backendAction {
             //加入颜色和尺码
             $data["size"]=$sizestr;
             $data["color"]=$colorstr;
+            
+            // 产品详情
+            $data["info"] = $this->_post("info","trim");
+            //var_dump($data["info"]);die();
             
             //库存细则
             $detail_stock = $_POST['detail_stock'];
@@ -826,9 +833,19 @@ class itemAction extends backendAction {
                     }
                 }
             }
+            $_SESSION["yema"] = $_SESSION["yema"] + 2;
+            $this->assign("yema",$_SESSION["yema"]);
             $this->success(L('operation_success'));
         } else {
-            $id = $this->_get('id','intval');
+        	$id = $this->_get('id','intval');
+        	if($_SESSION["item_edit_id"] != $id){
+        		$_SESSION["yema"] = 1;
+        	}elseif ($this->_get("edit_m","trim") == "total" && $_SESSION["m"] == "") {
+        		$_SESSION["yema"] = 1;
+        	}
+            
+        	$_SESSION["item_edit_id"] = $id;
+        	
             $edit_m = $this->_get("edit_m","trim");
             if ($edit_m == "total") {
             	$this->_mod = M("item_taobao");
@@ -876,7 +893,7 @@ class itemAction extends backendAction {
             $img_list = M('item_img')->where(array('item_id'=>$id))->select();
             $this->assign('img_list', $img_list);
             $this->assign("detail_stock_arr",$detail_stock_arr);
-           
+            $this->assign("yema",$_SESSION["yema"]);
             $this->display();
         }
     }
