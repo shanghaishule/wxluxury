@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Product Detail</title>
+<title>搭配分享</title>
 <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -49,7 +49,7 @@
 	</div>
 <volist name='favi_table' id='vo' key="key" >
     <if condition="$match['id'] eq $vo['id']">	
-    <a href="{:U('home/Item/index', array('tokenTall'=>$tokenTall,'id'=>$match['id']))}">
+    <a href="{:U('home/Item/index', array('tokenTall'=>$tokenTall,'id'=>$vo['item_id']))}">
     <div class="matchItem">
 	     <table>
 			<tr height="50" >

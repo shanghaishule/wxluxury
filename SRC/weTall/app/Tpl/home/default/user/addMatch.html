@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Product Detail</title>
+<title>添加我的搭配</title>
 <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -47,7 +47,7 @@
 <form id="matchForm" action="{:U('user/addMatch')}" method="post" enctype="multipart/form-data">
 <table class = "info">
 
-<tr style="background:#A3D1D1">
+<tr style="background:rgb(153,27,28);color:white;">
 	<td>上传我的照片 {$my_img}</td>
 	<td colspan="2"><input  name="my_img" id="my_img" onchange="valtext()" type="file"  >
 	    <input type="hidden" name="img_name" id="img_name" value="{$math_data.my_img}"> 
@@ -59,12 +59,12 @@
 </tr>
 
 <tr >
-<td colspan="3" style="background:#CA8EC2;color:white;">我的收藏:</td>
+<td colspan="3" style="background:rgb(153,27,28);color:white;">我的收藏:</td>
 </tr>
 
 <volist name='user_info' id='vo' key="key">
 
-<tr height="36"  onclick="match_action({$vo.item_id})" <if condition="$key%2 eq 0">style="background:#EBD3E8;"<else/>style="background:#DEDEBE;"</if>>
+<tr height="36"  onclick="match_action({$vo.item_id})" <if condition="$key%2 eq 0">style="background:white;"<else/>style="background:#EAEAEA;"</if>>
 	<td >
 		<a href="javascript:void(0)" onclick="match_action({$vo.item_id})">
 		<img onclick="match_action({$vo.item_id})" style="position:absolute;z-index:2;margin-top:-10px"  
@@ -79,13 +79,13 @@
 </volist>
 <tr>
   <td width="35%">
-    <input id="preview" name="preview" value="预览" class="common_btn" type="submit"></input>
+    <input id="preview" name="preview" value="预览" class="common_btn2" type="submit"></input>
   </td>
   <td width="30%">
-    <input id="send" name="send" value="发稿" class="common_btn" type="submit"></input>
+    <input id="send" name="send" value="发稿" class="common_btn2" type="submit"></input>
   </td>
   <td>
-	<input id="save" name="save" value="保存" class="common_btn" type="submit"></input>
+	<input id="save" name="save" value="保存" class="common_btn2" type="submit"></input>
   </td>
 </tr>
 <tr>

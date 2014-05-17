@@ -174,6 +174,7 @@ class indexAction extends frontendAction {
     				$match_favi_sequence["favi_name"] = $item["title"];
     				$match_favi_sequence["favi_img"] = $item["img"];
     				$match_favi_sequence["favi_price"] = $item["price"];
+    				$match_favi_sequence["item_id"]=$val;
     				$match_favi[] = $match_favi_sequence;
     			}
     		}
