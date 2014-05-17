@@ -152,6 +152,37 @@ class indexAction extends frontendAction {
     		$this->ajaxReturn(0,"购买错误！",0);
     	}
     }
+    public function match() {
+    	$m=M();
+    	$Sel_sql = "SELECT * from tp_match where is_send = 1" ;
+    	$result=$m->query($Sel_sql);
+    	$item_favi_detail = M("item");
+    	$match_table = array();
+    	$id=0;
+    
+    	$match_favi = array();
+    	foreach ($result as $match_result){
+    		$match_table[] = $match_result;
+    		$username = M("user")->where("id=".$match_result["uid"])->find();
+    		$match_table[$id]["uname"] = $username["username"];
+    		$id ++;
+    		if ($match_result != "" or $match_result != null) {
+    			$item_favi = explode(",", $match_result["item_ids"]);
+    			foreach ($item_favi as $val){
+    				$match_favi_sequence["id"] = $match_result["id"];
+    				$item = $item_favi_detail->where("id=".$val)->find();
+    				$match_favi_sequence["favi_name"] = $item["title"];
+    				$match_favi_sequence["favi_img"] = $item["img"];
+    				$match_favi_sequence["favi_price"] = $item["price"];
+    				$match_favi[] = $match_favi_sequence;
+    			}
+    		}
+    	}
+    	//var_dump($match_table);die();
+    	$this->assign("match_table",$match_table);
+    	$this->assign("favi_table",$match_favi);
+    	$this->display();
+    }
     public function addressselect(){
     	$upload_shop = M("item");
     	$color = $_GET["color"];
@@ -983,16 +1014,6 @@ class indexAction extends frontendAction {
     	
     	$this->display();
     }   
-
-    public function match() {
-    	$discount_shop = M("set_discount");
-    	$brand = M("brandlist");
-    	$discount_data = $discount_shop->order("date asc")->group("status")->select();
-    	 
-    	$this->assign("brand",$brand->select());
-    	$this->assign("ontime",$discount_data);
-    	$this->display();
-    }
     
     public function addMatch() {
     	$this->display();
