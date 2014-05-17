@@ -67,7 +67,7 @@
 <tr height="36"  onclick="match_action({$vo.item_id})" <if condition="$key%2 eq 0">style="background:#EBD3E8;"<else/>style="background:#DEDEBE;"</if>>
 	<td >
 		<a href="javascript:void(0)" onclick="match_action({$vo.item_id})">
-		<img style="position:absolute;z-index:2;margin-top:-10px"  
+		<img onclick="match_action({$vo.item_id})" style="position:absolute;z-index:2;margin-top:-10px"  
 		     width="20" height="20" src="__STATIC__/weixin/images/favi.png" id ="{$vo.item_id}" />
 		</a>
 		<img style="position:absolute;z-index:1;margin-top:-20px;margin-left:30px;" width="35" height="35" src="{$vo.img}"/>
@@ -86,6 +86,12 @@
   </td>
   <td>
 	<input id="save" name="save" value="保存" class="common_btn" type="submit"></input>
+  </td>
+</tr>
+<tr>
+  <td colspan="3">
+    <a href="{:U('user/mymatch')}"><input id="myshare" name="myshare" value="我的分享" class="common_btn2" type="button"></input></a>
+	<a href="{:U('user/mysave')}"><input id="mysave" name="mysave" value="我的保存" class="common_btn2" type="button"></input></a>
   </td>
 </tr>
 </table>

@@ -29,7 +29,7 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 if (url.match(/example/))
   document.getElementById("right").style.marginLeft = "190px";
 </script>
-<!--
+
 <?php
 }
 ?>

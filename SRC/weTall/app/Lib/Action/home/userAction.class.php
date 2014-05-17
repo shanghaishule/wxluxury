@@ -436,7 +436,7 @@ class userAction extends userbaseAction {
 	        $shi = $this->_post('shi', 'trim');
 	        $qu = $this->_post('qu', 'trim');
             $id = $this->_post('id', 'intval');
-            if ($id) {
+            if ($id and $address) {
                 $result = $user_address_mod->where(array('id'=>$id, 'uid'=>$this->visitor->info['id']))->save(array(
                     'consignee' => $consignee,
                     'address' => $address,
@@ -687,15 +687,111 @@ class userAction extends userbaseAction {
 		
     }  
     public function match() {
-    	$discount_shop = M("set_discount");
-    	$brand = M("brandlist");
-    	$discount_data = $discount_shop->order("date asc")->group("status")->select();
+    	$m=M();
+    	$Sel_sql = "SELECT * from tp_match where is_send = 1" ;
+    	$result=$m->query($Sel_sql);
+    	$item_favi_detail = M("item");
+    	$match_table = array();
+    	$id=0;
     
-    	$this->assign("brand",$brand->select());
-    	$this->assign("ontime",$discount_data);
+    	$match_favi = array();
+    	foreach ($result as $match_result){
+    		$match_table[] = $match_result;
+    		$username = M("user")->where("id=".$match_result["uid"])->find();
+    		$match_table[$id]["uname"] = $username["username"];
+    		$id ++;
+		    if ($match_result != "" or $match_result != null) {
+		    	$item_favi = explode(",", $match_result["item_ids"]);
+		    	foreach ($item_favi as $val){
+		    		$match_favi_sequence["id"] = $match_result["id"];
+		    		$item = $item_favi_detail->where("id=".$val)->find();
+		    		$match_favi_sequence["favi_name"] = $item["title"];
+		    		$match_favi_sequence["favi_img"] = $item["img"];
+		    		$match_favi_sequence["favi_price"] = $item["price"];
+		    		$match_favi[] = $match_favi_sequence;
+		    	}
+		    }
+    	}
+    	//var_dump($match_table);die();
+	    $this->assign("match_table",$match_table);
+	    $this->assign("favi_table",$match_favi);
     	$this->display();
     }
+    public function mymatch() {
+    	$uid = $this->visitor->info['id'];
+    	$m=M();
+    	$Sel_sql = "SELECT * from tp_match where is_send = 1 & uid = ".$uid;
+    	$result=$m->query($Sel_sql);
+    	$item_favi_detail = M("item");
+    	$match_table = array();
+    	$id=0;
     
+    	$match_favi = array();
+    	foreach ($result as $match_result){
+    		$match_table[] = $match_result;
+    		$username = M("user")->where("id=".$match_result["uid"])->find();
+    		$match_table[$id]["uname"] = $username["username"];
+    		$id ++;
+    		if ($match_result != "" or $match_result != null) {
+    			$item_favi = explode(",", $match_result["item_ids"]);
+    			foreach ($item_favi as $val){
+    				$match_favi_sequence["id"] = $match_result["id"];
+    				$item = $item_favi_detail->where("id=".$val)->find();
+    				$match_favi_sequence["favi_name"] = $item["title"];
+    				$match_favi_sequence["favi_img"] = $item["img"];
+    				$match_favi_sequence["favi_price"] = $item["price"];
+    				$match_favi[] = $match_favi_sequence;
+    			}
+    		}
+    	}
+    	//var_dump($match_table);die();
+    	$this->assign("match_table",$match_table);
+    	$this->assign("favi_table",$match_favi);
+    	$this->display();
+    }
+    public function share_save(){
+    
+    	$share_id["id"] = $this->_get("id","intval");
+    	$is_send["is_send"] = 1;
+    	$match = M("match")->where($share_id)->save($is_send);
+    	if($match){
+    		$this->ajaxReturn(1,"已经分享！",1);
+    	}else{
+    		$this->ajaxReturn(0,"分享失败！",0);
+    	}
+    }
+    public function mysave() {
+    	$uid = $this->visitor->info['id'];
+    	$m=M();
+    	$Sel_sql = "SELECT * from tp_match where is_send = 2 & uid = ".$uid;
+    	$result=$m->query($Sel_sql);
+    	$item_favi_detail = M("item");
+    	$match_table = array();
+    	$id=0;
+    
+    	$match_favi = array();
+    	foreach ($result as $match_result){
+    		$match_table[] = $match_result;
+    		$username = M("user")->where("id=".$match_result["uid"])->find();
+    		$match_table[$id]["uname"] = $username["username"];
+    		$id ++;
+    		if ($match_result != "" or $match_result != null) {
+    			$item_favi = explode(",", $match_result["item_ids"]);
+    			foreach ($item_favi as $val){
+    				$match_favi_sequence["id"] = $match_result["id"];
+    				$item = $item_favi_detail->where("id=".$val)->find();
+    				$match_favi_sequence["favi_name"] = $item["title"];
+    				$match_favi_sequence["favi_img"] = $item["img"];
+    				$match_favi_sequence["favi_price"] = $item["price"];
+    				$match_favi[] = $match_favi_sequence;
+    			}
+    		}
+    	}
+    	//var_dump($match_table);die();
+    	$this->assign("match_table",$match_table);
+    	$this->assign("favi_table",$match_favi);
+    	$this->display();
+    }
     public function addMatch() {
     
     	$tokenTall = $this->getTokenTall();
@@ -782,7 +878,7 @@ class userAction extends userbaseAction {
     //取得所以收藏
     $result = $this->getUserFavi();
     //取得所选收藏
-    		$item_ids = $this->getSelFavi($result);
+    $item_ids = $this->getSelFavi($result);
     
     $data['item_ids'] = $item_ids;
     $data['uid'] = $uid;

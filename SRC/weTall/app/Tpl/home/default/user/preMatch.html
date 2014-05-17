@@ -13,7 +13,7 @@
 <link type="text/css" rel="stylesheet" href="__STATIC__/weixin/css/match.css">
 
 </head>
-<body>
+<body background="#ffff">
 <div class="wrap">
 <div style="height:45px;"></div>
 <div id="nav">
@@ -41,30 +41,31 @@
 	
 </div>
   
-<div>
-	<span class="haveSearch">  标题：{$math_data.title}</span>
+<div id="content">
+<div class="dapei_block">
+	<div class="eject_btn"><a class="enter" style="background: purple;" href="javascript:void(0)">此刻心情:{$math_data.title}</a></div>
 	<div>
-	<img style="margin-right:5px;" width="720px" height="400px" src="{$math_data.upd_path}">
+	<img style="margin-right:0px;font-weight:700;" width="100%" src="{$math_data.upd_path}">
 	</div>
-	<span class="haveSearch">  单品购买链接</span>	
-	
-<volist name='item' id='vo' >	
+<volist name='item' id='vo' key="key" >	
     <div class="matchItem">
 	     <table>
 			<tr height="50" >
 				<td >
-					<img width="75" height="45" src="{$vo.img}"/>
+					<img width="55" height="55" src="{$vo.img}"/>
 				</td>
-				<td width="400px">{$vo.title}</td>	
-				
-				<td><font color ='red'>￥{$vo.price}</font></td>	
+				<td style="padding-left:10px;word-break:keep-all;width:210px;display:block;
+					white-space:nowrap;
+					overflow:hidden;
+					text-overflow:ellipsis;"><br>{$vo.title}</td>					
+				<td><font color ='#8B0000'>{$vo.price|number_format=###, 0, '.', ''}元</font></td>	
 			</tr>
      	</table>				
-    </div>    
-    </br>	
+    </div>
+    
 </volist>    
  
-	
+</div>	
 	
 	  
 </div>

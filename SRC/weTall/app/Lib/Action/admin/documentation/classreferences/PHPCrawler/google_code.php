@@ -2,8 +2,7 @@
 if ($_SERVER["SERVER_NAME"] == "phpcrawl.cuab.de" || $_SERVER["SERVER_NAME"] == "cuab.de")
 {
 ?>
--->
-  
+
 <div style="width: 728px !important; margin-right: auto; margin-left: auto;">
 <script type="text/javascript"><!--
 google_ad_client = "ca-pub-4351312586851155";
@@ -18,7 +17,6 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 </script>
 </div><br />
 
-<!--
 <?php
 }
 ?>

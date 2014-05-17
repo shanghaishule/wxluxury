@@ -10,9 +10,10 @@
 <meta charset="utf-8">
 <link href="__STATIC__/css/productdetail.css" rel="stylesheet" type="text/css">
 <link type="text/css" rel="stylesheet" href="__STATIC__/weixin/css/shop.css">
+<link type="text/css" rel="stylesheet" href="__STATIC__/weixin/css/match.css">
 
 </head>
-<body>
+<body background="#ffff">
 <div class="wrap">
 <div style="height:45px;"></div>
 <div id="nav">
@@ -40,25 +41,36 @@
 	
 </div>
   
-<div>
-
-   <volist name="ontime" id="product" key="k">
-    <div  class="imgIntime"><div class="status_img"><if condition="$product['status'] eq 0">
-    <img style="margin-right:5px;" width="66px" height="25px" src="/weTall/static/weixin/images/luxury/images/Ontime/1_04.png"></if>
-      <if condition="$product['status'] eq 1"><img style="margin-right:5px;" width="66px" height="25px" src="/weTall/static/weixin/images/luxury/images/Ontime/4_03.png"></if>
-      <if condition="$product['status'] eq 2"><img style="margin-right:5px;" width="66px" height="25px" src="/weTall/static/weixin/images/luxury/images/Ontime/5_03.png"></if></div>
-      <div class="intime_img">
-      <img src="{$product.img}" width="100%"></img>
-      </div> 
-      <div class="Intime_detail"><div style="float:left;margin-left:8%;">
-      <volist name="brand" id="vo">
-      <if condition="$product['brand_id'] eq $vo['id']">
-      {$vo.name}</if></volist>      
-      	活动时间：{$product.date} </div><div style="width:36px;margin-left:10px;float:left;overflow:hidden;">{$product.start_time}</div><div style="width:41px;float:left;overflow:hidden;">-{$product.end_time}</div>
-      </div>
-      <div id="timer{$k}" style="float:left;"></div>
-      </div> 
-    </volist>    
+<div id="content">
+    <volist name="match_table" id="match"><div class="dapei_block">
+	<div class="eject_btn"><a class="enter" style="background: purple;" href="javascript:void(0)">{$match.uname}的心情:{$match.title}</a></div>
+	<div>
+	<img style="margin-right:0px;font-weight:700;" width="100%" src="{$match.upd_path}">
+	</div>
+<volist name='favi_table' id='vo' key="key" >
+    <if condition="$match['id'] eq $vo['id']">	
+    <div class="matchItem">
+	     <table>
+			<tr height="50" >
+				<td >
+					<img width="55" height="55" src="{$vo.favi_img}"/>
+				</td>
+				<td style="padding-left:10px;word-break:keep-all;width:210px;display:block;
+					white-space:nowrap;
+					overflow:hidden;
+					text-overflow:ellipsis;"><br>{$vo.favi_name}</td>					
+				<td><font color ='#8B0000'>{$vo.favi_price|number_format=###, 0, '.', ''}元</font></td>	
+			</tr>
+     	</table>				
+    </div> 
+    </if>   
+</volist> 
+</div>  
+<div style="height:12px"></div>     
+ </volist>
+	
+	
+	  
 </div>
 
 </body>

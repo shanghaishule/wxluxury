@@ -1,3 +1,6 @@
+
+html,body { min-width:320px;max-width:640px; margin:0 auto;background:#fff;background-attachment:fixed;}
+
 .info {
 font-size: 15px;
 background: #f6f6f6;
@@ -24,7 +27,29 @@ color: #fff;
 font-size: 16px;
 cursor: pointer;
 }
-
+.common_btn2 {
+width: 100%;
+display: block;
+text-align: center;
+margin: 5px 0;
+height: 40px;
+line-height: 40px;
+border: 1px solid #ddd;
+background-color: #006699;
+background-image: linear-gradient(to bottom,#006699,#006699);
+border-radius: 5px;
+color: #fff;
+font-size: 16px;
+cursor: pointer;
+}
 .matchItem{
-width:95%;margin:0 auto;background:black;color:white;padding:8px 10px;font-weight:700;font-size:0.9em;
-border-right:5px solid red;}
+width:100%;margin:0 auto;color:#4F4F4F;font-weight:700;font-size:0.9em;
+-webkit-border-radius:2%;-moz-border-radius:2%;border-radius:2%;border:1px solid gray;margin-bottom:2px;
+}
+.dapei_block{
+	width:96%;
+	margin:0 auto;
+	-webkit-box-shadow: #666 6px 6px 10px;
+	-moz-box-shadow: #666 6px 6px 10px;
+	box-shadow: #666 6px 6px 10px;background: #EEFF99;behavior: url(/PIE.htc);
+}
