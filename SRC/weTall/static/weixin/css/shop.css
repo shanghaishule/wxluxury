@@ -98,7 +98,7 @@ margin-top:8px;background:rgba(165,38,38,0.7);}
 .shop_address{font-size:0.8em;color:rgb(178,177,177);}
 .shop_theme{font-size:0.8em;color:#5E5E5E;}
 #haveSearch{color:white;background:rgba(82,120,126,0.4);-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;width:88%;height:25px;padding:10px 8px 8px 8%;margin:0 auto;}
-.haveSearch{color:white;}
+.haveSearch{color:white;font-size:13px;}
 
 /*购物车*/
 #content #chose_all{ font-size:20px; text-indent:20px; color:#888; font-weight:normal;line-height:35px; border-bottom:1px solid #fdfdfd; margin:0 10px;}
@@ -1033,7 +1033,7 @@ background:rgba(25,25,25,0.9);
 position:absolute;
  z-index: 300001;
 }
-.dis{display:none}
+.dis{display:none;opacity:0.8;}
 body .pos .none{display:block; z-index: 300001;}
 .pos{cursor:pointer;}
 #nav .navlist .dis li {

@@ -37,13 +37,34 @@ $(function(){
 	});
  
 </script>
+<script>
+$(function(){
+$(".pos").click(function(event){
+	event.stopPropagation();
+	$(".dis").css("z-index","300000000");
+	$(".dis").toggleClass("none");
+	});
+$(document).click(function(event) { $(".dis").removeClass("none"); });
+//单击弹出层则自身隐藏
+});	
+</script>
 </head>
 <body>
 <div class="wrap">
   <div id="nav">
     <form id="searchForm" action="/weTall/index.php?g=home&m=index&a=brandshop" method="post">
 	<ul class="navlist">
-		<li class="r" id="n_0"><a href="{:U('home/index/index', array('tokenTall'=>$tokenTall))}"><div class="home_page_logo"></div></a></li>
+		<li class="r pos" id="n_0"><div class="home_page_logo"></div>
+		<div class="dis" id="dis">
+			 <ul>
+				  <volist name="item_cate" id="cate">
+				  	<li>
+				     <a href="{:U('home/index/search', array('itemid'=>$cate['id'],'itemname'=>$cate['name'],'tokenTall'=>$tokenTall))}">{$cate.name}</a>
+				    </li>
+				  </volist>
+			 </ul> 
+		</div>
+		</li>
     	<li class="r" id="n_5">
     		<span style="margin-top:4px;"><input style="height:35px;width:100%;" type="search" name="txtkeyword" id="keyword"  placeholder="请输入品牌关键词" autofocus x-webkit-speech> </span>
             <input type="hidden" name="method" id="method">
@@ -74,14 +95,14 @@ $(function(){
         });
     </script>
 </div>
-<div class="clear_kongge"></div>
+<div class="clear_kongge"></div><!-- 
 <div class="naviga">
    <div class="shechipin">
 	   <a href="{:U('index/brandshop',array('order'=>'hot'))}"><img width="30%" height="40" src="__STATIC__/weixin/images/luxury/images/home/reimen.png"></a>
 	   <a href="{:U('index/brandshop',array('filter'=>'guonei'))}"><img width="30%" height="40" src="__STATIC__/weixin/images/luxury/images/home/guonei.png"></a>
 	   <a href="{:U('index/brandshop',array('filter'=>'luxury'))}"><img width="30%" height="40" src="__STATIC__/weixin/images/luxury/images/home/shechipin.png"></a>
    </div>
-</div>
+</div> -->
    <volist name="brand" id="product" >
     <div class="img">
       <if condition="$gowhere eq 'item'">
@@ -93,11 +114,11 @@ $(function(){
 	      <a href="javascript:void(0)" onclick="searchshop({$product.id});" ><img src="{$product.img}" width="100%"></img></a>
 	      </div>
       </if>
-      <div class="pro_detail">
+      <div class="pro_detail2">
       <if condition="$gowhere eq 'item'">
-      	<label id="item_sea" class="label" style="font-weight:700;opacity:0.8"> <a href="{:U('index/search',array('brandid'=>$product['id']))}" > {$product.name}</a></label>
+      	<label id="item_sea" class="label" style="font-size:17px;font-weight:700;opacity:0.8"> <a href="{:U('index/search',array('brandid'=>$product['id']))}" > {$product.name}</a></label>
       <else/>
-      	<label id="shop_sea" class="label" style="font-weight:700;opacity:0.8"><a href="javascript:void(0)" onclick="searchshop({$product.id});" > {$product.name}</a></label>
+      	<label id="shop_sea" class="label" style="font-size:17px;font-weight:700;opacity:0.8"><a href="javascript:void(0)" onclick="searchshop({$product.id});" > {$product.name}</a></label>
       </if>
       </div>   
     </div> 

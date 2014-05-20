@@ -94,3 +94,9 @@ body
 .shechipin{
 	width:100%;margin:0 auto;padding-top:5px;padding-bottom:5px;text-align:center;
 }
+.pro_detail{
+	display:block;margin-top:-10px;
+}
+.pro_detail2{
+	display:block;margin-top:-3px;
+}

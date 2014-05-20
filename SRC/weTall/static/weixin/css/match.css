@@ -1,15 +1,14 @@
 
 .info {
 font-size: 15px;
-background: #f6f6f6;
+background:rgba(255,255,255,0.7);;
 border: 1px solid #ddd;
 overflow: hidden;
-width: 100%;
 min-width: 340px;
 max-width: 640px;	
 
 }
-
+.wrap3 { border: 1px solid #000; margin: 4px;}
 .common_btn {
 width: 100%;
 display: block;
@@ -18,8 +17,8 @@ margin: 5px 0;
 height: 40px;
 line-height: 40px;
 border: 1px solid #ddd;
-background-color: #ff8700;
-background-image: linear-gradient(to bottom,#ffbf00,#ff8700);
+background-color:rgb(153,27,28);
+background-image: linear-gradient(to bottom,rgb(153,27,28),rgb(153,27,28));
 border-radius: 5px;
 color: #fff;
 font-size: 16px;
@@ -45,7 +44,7 @@ width:100%;margin:0 auto;color:#4F4F4F;font-weight:700;font-size:0.9em;
 -webkit-border-radius:2%;-moz-border-radius:2%;border-radius:2%;border:1px solid gray;margin-bottom:2px;
 }
 .dapei_block{
-	width:94%;
+	width:96%;
 	margin:0 auto;
 	background: #EEFF99;behavior: url(/PIE.htc);
 }

@@ -57,7 +57,7 @@ class userAction extends userbaseAction {
             $this->visitor->login($uid, $remember);
             //登陆完成钩子
             $tag_arg = array('uid'=>$uid, 'username'=>$username, 'action'=>'login');
-            tag('login_end', $tag_arg);
+            //tag('login_end', $tag_arg);
             
             //同步登陆
             $synlogin = $passport->synlogin($uid);

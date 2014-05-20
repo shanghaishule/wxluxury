@@ -17,7 +17,7 @@
 </head>
 
 <body>
-<div class="wrap">
+<div class="wrap3">
 <div style="height:45px;"></div>
 <div id="nav">
 	<ul class="navlist">
@@ -47,7 +47,7 @@
 <form id="matchForm" action="{:U('user/addMatch')}" method="post" enctype="multipart/form-data">
 <table class = "info">
 
-<tr style="background:rgb(153,27,28);color:white;">
+<tr style="background:#006699;color:white;height:32px;">
 	<td>上传我的照片 {$my_img}</td>
 	<td colspan="2"><input  name="my_img" id="my_img" onchange="valtext()" type="file"  >
 	    <input type="hidden" name="img_name" id="img_name" value="{$math_data.my_img}"> 
@@ -59,7 +59,7 @@
 </tr>
 
 <tr >
-<td colspan="3" style="background:rgb(153,27,28);color:white;">我的收藏:</td>
+<td colspan="3" style="background:#006699;color:white;height:32px;">我的收藏:</td>
 </tr>
 
 <volist name='user_info' id='vo' key="key">
