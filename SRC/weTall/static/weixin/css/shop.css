@@ -92,13 +92,14 @@ margin-top:8px;background:rgba(165,38,38,0.7);}
 
 #content .module_special{margin-top:10px;}
 .shopSearch{width:90%;margin:0 auto;background:black;color:white;padding:8px 10px;font-weight:700;font-size:0.9em;border-bottom:1px dashed #555555;}
-.shopSearch2{width:98%;margin:0 auto;background:none;color:white;padding:8px 10px;font-weight:700;font-size:0.9em;}
+.shopSearch2{width:98%;margin:0 auto;background:none;color:white;padding:8px 10px;font-weight:700;font-size:0.9em;background:black;}
 #shopSearch2 a:hover{background:blue;}
 .shopDiscount{width:98%;margin:0 auto;background:url(../images/luxury/images/discount/bj_03.png) no-repeat 0 0;background-size: 100% 105px;color:white;padding:0px 0px;font-weight:700;font-size:1em;}
 .shop_address{font-size:0.8em;color:rgb(178,177,177);}
 .shop_theme{font-size:0.8em;color:#5E5E5E;}
 #haveSearch{color:white;background:rgba(82,120,126,0.4);-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;width:88%;height:25px;padding:10px 8px 8px 8%;margin:0 auto;}
 .haveSearch{color:white;font-size:13px;}
+.guanfangjiage{margin-top:2px;height:3px;}
 
 /*购物车*/
 #content #chose_all{ font-size:20px; text-indent:20px; color:#888; font-weight:normal;line-height:35px; border-bottom:1px solid #fdfdfd; margin:0 10px;}
@@ -384,7 +385,7 @@ div.order_cancel_box p span {color: #f34; font-weight: bold;}
 #nav .navlist li#n_4 span{ text-align:center;padding-top:7px;font-size:1.2em; color:white;font-weight:700;}
 #nav .navlist li#n_3 span{ text-align:center;padding-top:7px;font-size:1.2em; padding-left:15px;color:white;font-weight:700;}
 #nav .navlist li#n_1{text-align:center;color:white;font-weight:700;}
-#nav .navlist li#n_8{padding-top:5px;padding-left:4px;margin-top:5px;margin-left:8px;text-align:left;color:white;font-weight:500;background:url(../images/luxury/images/shoping/bg1.png);background-size:100% 100%;width:59px;height:31px;}
+#nav .navlist li#n_8{padding-top:5px;padding-left:4px;margin-top:5px;margin-left:8px;text-align:left;color:white;font-weight:500;background:url(../images/luxury/images/home/bg_button.png);background-size:100% 100%;width:59px;height:31px;}
 #nav .navlist li#n_9{width:100%;text-align:center;padding-top:8px;font-size:18px;color:white;font-weight:700;}
 
 .banner{position: relative;}

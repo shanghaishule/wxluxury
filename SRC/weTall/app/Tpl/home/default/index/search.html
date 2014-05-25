@@ -19,23 +19,23 @@
 <div id="sort_bg">
 	<ul class="sortlist">
 		<li id="n_0">
-		     <a href="/weTall/index.php?m=index&a=search&method={$method}&sortid=add_time&sortmethod={$sortmethod}&brandid={$brandid}&itemid={$itemid}">最新
+		     <a href="/weTall/index.php?m=index&a=search&method={$method}&sortid=add_time&sortmethod={$sortmethod}&brandid={$brandid}&itemid={$itemid}&search_all={$searchall}">最新
 		     <if condition="$sortfield eq 'add_time'">
 		     <img width="9px" height="11px" src="__STATIC__/images/add_time_{$sortmethod}.png"><else/>
 		     <img width="9px" height="11px" src="__STATIC__/images/BottomKingTop.png"></if></a></li>
 		<li id="n_1">
-		     <a href="/weTall/index.php?m=index&a=search&method={$method}&sortid=buy_num&sortmethod={$sortmethod}&brandid={$brandid}&itemid={$itemid}">销量
+		     <a href="/weTall/index.php?m=index&a=search&method={$method}&sortid=buy_num&sortmethod={$sortmethod}&brandid={$brandid}&itemid={$itemid}&search_all={$searchall}">销量
 		     <if condition="$sortfield eq 'buy_num'">
 		     <img width="9px" height="11px" src="__STATIC__/images/buy_num_{$sortmethod}.png"><else/>
 		     <img width="9px" height="11px" src="__STATIC__/images/BottomKingTop.png">
 		     </if></a></li>
 		<li id="n_3">
-		     <a href="/weTall/index.php?m=index&a=search&method={$method}&sortid=price&sortmethod={$sortmethod}&brandid={$brandid}&itemid={$itemid}">价格
+		     <a href="/weTall/index.php?m=index&a=search&method={$method}&sortid=price&sortmethod={$sortmethod}&brandid={$brandid}&itemid={$itemid}&search_all={$searchall}">价格
 		     <if condition="$sortfield eq 'price'">
 		     <img width="9px" height="11px" src="__STATIC__/images/price_{$sortmethod}.png"><else/>
 		     <img width="9px" height="11px" src="__STATIC__/images/BottomKingTop.png"></if></a></li>
 		<li id="n_4">
-		     <a href="/weTall/index.php?m=index&a=search&method={$method}&sortid=ordid&sortmethod={$sortmethod}&brandid={$brandid}&itemid={$itemid}">综合
+		     <a href="/weTall/index.php?m=index&a=search&method={$method}&sortid=ordid&sortmethod={$sortmethod}&brandid={$brandid}&itemid={$itemid}&search_all={$searchall}">综合
 		     <if condition="$sortfield eq 'ordid'">
 		     <img width="9px" height="11px" src="__STATIC__/images/ordid_{$sortmethod}.png"><else/>
 		     <img width="9px" height="11px" src="__STATIC__/images/BottomKingTop.png"></if></a></li>      
@@ -121,7 +121,7 @@ var t2=new TouchSlider({id:'sliderlist', speed:600, timeout:6000, before:functio
     <div class="img">
       <div class="img_detail"><if condition="$compare eq 'Y'"> <a href="{:U('index/compare',array('id'=>$product['id'],'Huohao'=>$product['Huohao']))}"><else/>
       <a href="{:U('Item/index',array('id'=>$product['id'],'tokenTall'=>$product['tokenTall']))}"></if><img src="{$product.img}" width="100%" ></img></a>
-      </div>
+      </div><br>
       <div class="pro_detail">
        <volist name="brand" id="brandname">
        <if condition="$product['brand'] eq $brandname['id']">

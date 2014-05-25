@@ -1,5 +1,4 @@
 <div id="head"></div>
-
 <style>
 	#logo{
 		height:50px;
@@ -48,8 +47,16 @@ $(".pos").click(function(event){
 $(document).click(function(event) { $(".dis").removeClass("none"); });
 //单击弹出层则自身隐藏
 });	
+function searchshop(id){
+	document.getElementById("txtHint").value=id;
+	document.getElementById('searchShop').submit();
+}
 </script>
-
+<form id="searchShop" action="{:U('index/test')}" method="post">
+     <input type="hidden" name="longitude" value="{$lng}" id="longitude">
+     <input type="hidden" name="latitude" value="{$lat}" id="latitude">
+     <input type="hidden" name="brand_id" id="txtHint">   
+   </form>
 <div id="nav">
 	<ul class="navlist">
 		<li class="r pos" id="n_0"><div class="home_page_logo"></div>
@@ -70,7 +77,12 @@ $(document).click(function(event) { $(".dis").removeClass("none"); });
         <if condition="$yemian eq 'Item'">
         <a href="{:U('home/user/index', array('tokenTall'=>$tokenTall))}"><div class="find_04"></div></a>
         <else/>
-        <div class="find_03">{$City}</div>
+        <if condition="$gohref neq ''">
+        <a href="{:U('home/user/index', array('tokenTall'=>$tokenTall))}"><div class="find_04"></div></a>
+        <elseif condition="$gosearch eq 'Y'"/>
+        <a href="javascript:void(0)" onclick="searchshop({$brand_id})"><div class="find_03">{$City}</div></a>
+        <else/><div class="find_03">{$City}</div></if>
+        
         </if>
         </li>
         

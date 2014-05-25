@@ -470,10 +470,20 @@ class indexAction extends frontendAction {
     
     	return $item=M('item')->where($where)->select();
     }
+   
     public function search() {
     	/***商品分类**/
     	$item_cate=M("item_cate")->select();
     	$this->assign('item_cate',$item_cate);
+    	
+    	$brand = M("brandlist")->select();
+    	$this->assign("brand",$brand);
+    	
+    	$_SESSION["search_all"]="N";
+    	if($this->_get("search_all","trim") != ""){
+    		$_SESSION["search_all"]="Y";
+    		$this->assign("searchall","Y");
+    	}
     	
     	//排序字段和方式的获得
     	$sortByStr=$this->_get("sortid","trim");
@@ -501,6 +511,22 @@ class indexAction extends frontendAction {
     	if(IS_POST){
     	 //搜索关键字时候	
     		$keyword=$this->_post("txtkeyword","trim");
+    		if ($keyword != "") {
+    			$this->assign("title","查询结果");
+    			$this->assign("City","附近店铺");
+    			$this->assign("gohref","Y");
+    			$longitude = $this->_POST("longitude","trim");
+    			$latitude = $this->_POST("latitude","trim");
+    			if ($latitude == "") {
+    				$longitude = $_SESSION["longtitude"] ;
+    				$latitude = $_SESSION["latitude"] ;
+    			}else{
+    				$_SESSION["longtitude"] = $longitude;
+    				$_SESSION["latitude"] = $latitude;
+    			}
+    			$this->assign("lat",$latitude);
+    			$this->assign("lng",$longitude);
+    		}
     		//搜索的方式本店，微服客，店铺
     		$method=$this->_post("method");
     		
@@ -550,6 +576,7 @@ class indexAction extends frontendAction {
     		    $this->nextPage($_SESSION['method'], $_SESSION['keyword'],$sortBy, $_SESSION['token']);
     		}else{//关键字搜索后的分页
     			$this->assign("method",$_SESSION['method']);
+    			
     			$this->nextPage($_SESSION['method'], $_SESSION['keyword'],$sortBy);
     		}
     	}
@@ -626,9 +653,16 @@ class indexAction extends frontendAction {
     public function nextPageBrand($token,$itemid,$sortBy){
     	$tokenTall = $token;
     	$this->assign('tokenTall',$tokenTall);
+    	$this->assign("City","附近店铺");
+    	$this->assign("gosearch","Y");
+    	$this->assign("brand_id",$itemid);
     	 
     	$item = M("item_taobao");
     	$condition["brand"] = $itemid;
+    	$brand_id["id"] = $itemid;
+    	$brand_name = M("brandlist")->where($brand_id)->find();
+    	$this->assign("title",$brand_name["name"]);
+    	
     	$count = $item->where($condition)->count();
     	$Page       = new Page($count,$count);// 实例化分页类 传入总记录数
     	// 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
@@ -687,20 +721,24 @@ class indexAction extends frontendAction {
     		$this->assign("count",$count);
     		$this->display();
     	}else{
+    		
 	    	$tokenTall = $token;
 	    	$this->assign('tokenTall',$tokenTall);
 	    	//echo $keyword."hi";die();
 	    	$item = M("item");
-	    	if($token != ""){
+	    	if($token != "" & $_SESSION["search_all"] != "Y"){
 	    	   $condition["tokenTall"]=$token;
 	    	}
 	    	$first["title"]=array("like", "%".$keyword."%");
 	    	$count = $item->where($first)->count();
-	    	if ($count == 0) {
-	    		$condition["Huohao"] = array("like", "%".$keyword."%");
-	    	}else{
-	    		$condition["title"] = array("like", "%".$keyword."%");
+	    	if ($_SESSION["search_all"] != "Y") {
+		    	if ($count == 0) {
+		    		$condition["Huohao"] = array("like", "%".$keyword."%");
+		    	}else{
+		    		$condition["title"] = array("like", "%".$keyword."%");
+		    	}
 	    	}
+	    	
 	    	
 	    	$brand = M("brandlist")->select();
 	    	$this->assign("brand",$brand);
@@ -713,9 +751,17 @@ class indexAction extends frontendAction {
 	    	$carryrecord  = $item->where($condition)->order($sortBy)->limit($Page->firstRow.','.$Page->listRows)->select();
 	    	 
 	    	$this->assign("item",$carryrecord);
-	    	$this->assign("method",$method);
+	    	if ($_SESSION["search_all"] != "Y") {
+	    		$this->assign("method",$method);
+	    	}else{
+	    		$this->assign("method","");
+	    		$this->assign("gohref","Y");
+	    		$this->assign("title","所有商品");
+	    	}
+	    	
 	    	$this->assign('page',$show);// 赋值分页输出pti
 	    	$this->assign("count",$count);
+    		
 	    	$this->display();
     	}
     }
@@ -733,13 +779,17 @@ class indexAction extends frontendAction {
     	$this->assign('item_cate',$item_cate);
     	
     	
-    	$filter = $this->_get("filter","trim");
-    	if ($filter == "guonei") {
-    		$where["domain"] = 0;
-    	}elseif ($filter == "luxury"){
-    		$where["domain"] = 1;
+    	$filter = $this->_get("order","trim");
+    	if ($filter == "") {
+    		$filter = 'volume';
+    		$order = $filter." desc";
+    	}elseif ($filter == "name"){
+    		$order = $filter." asc";
+    	}elseif($filter == "volume"){
+    		$order = $filter." desc";
     	}
     	
+    	    	
     	if (IS_POST) {
     		$brandname = $this->_post("txtkeyword","trim");
     		$method = $this->_post("method","trim");
@@ -755,7 +805,7 @@ class indexAction extends frontendAction {
     	
     	$this->assign("gowhere",$method);
     	
-    	$brand = M("brandlist")->where($where)->order("volume desc")->select();
+    	$brand = M("brandlist")->where($where)->order($order)->select();
     	$this->assign("brand",$brand);
     	$this->display();
     }
