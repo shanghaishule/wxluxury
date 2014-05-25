@@ -16,7 +16,7 @@ class brandlistAction extends backendAction
             'width' => '400',
             'height' => '130'
         );
-        $this->assign('big_menu', $big_menu);
+        //$this->assign('big_menu', $big_menu);
 
         //默认排序
         $this->sort = 'ordid';

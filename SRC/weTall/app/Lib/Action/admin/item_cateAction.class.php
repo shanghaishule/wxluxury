@@ -11,17 +11,17 @@ class item_cateAction extends backendAction {
         $tree = new Tree();
         $tree->icon = array('│ ','├─ ','└─ ');
         $tree->nbsp = '&nbsp;&nbsp;&nbsp;';
-        $result = $this->_mod->order($sort . ' ' . $order)->where(array('tokenTall'=>$this->getTokenTall()))->select();
+        $result = $this->_mod->order($sort . ' ' . $order)->select();
         $array = array();
         foreach($result as $r) {
             $r['str_img'] = $r['img'] ? '<span class="img_border"><img src="'.attach($r['img'], 'item_cate').'" style="width:26px; height:26px;" class="J_preview" data-bimg="'.attach($r['img'], 'item_cate').'" /></span>' : '';
             $r['str_status'] = '<img data-tdtype="toggle" data-id="'.$r['id'].'" data-field="status" data-value="'.$r['status'].'" src="__STATIC__/images/admin/toggle_' . ($r['status'] == 0 ? 'disabled' : 'enabled') . '.gif" />';
             $r['str_index'] = '<img data-tdtype="toggle" data-id="'.$r['id'].'" data-field="is_index" data-value="'.$r['is_index'].'" src="__STATIC__/images/admin/toggle_' . ($r['is_index'] == 0 ? 'disabled' : 'enabled') . '.gif" />';
             $r['str_type'] = $r['type'] ? '<span class="gray">'.L('item_cate_type_tag').'</span>' : L('item_cate_type_cat');
-            $r['str_manage'] = '<a href="javascript:;" class="J_showdialog" data-uri="'.U('item_cate/add',array('pid'=>$r['id'])).'" data-title="'.L('add_item_cate').'" data-id="add" data-width="520" data-height="360">'.L('add_item_subcate').'</a> |
+           /* $r['str_manage'] = '<a href="javascript:;" class="J_showdialog" data-uri="'.U('item_cate/add',array('pid'=>$r['id'])).'" data-title="'.L('add_item_cate').'" data-id="add" data-width="520" data-height="360">'.L('add_item_subcate').'</a> |
                             
                                 <a href="javascript:;" class="J_showdialog" data-uri="'.U('item_cate/edit',array('id'=>$r['id'])).'" data-title="'.L('edit').' - '. $r['name'] .'" data-id="edit" data-width="520" data-height="360">'.L('edit').'</a> |
-                                <a href="javascript:;" class="J_confirmurl" data-acttype="ajax" data-uri="'.U('item_cate/delete',array('id'=>$r['id'])).'" data-msg="'.sprintf(L('confirm_delete_one'),$r['name']).'">'.L('delete').'</a>';
+                                <a href="javascript:;" class="J_confirmurl" data-acttype="ajax" data-uri="'.U('item_cate/delete',array('id'=>$r['id'])).'" data-msg="'.sprintf(L('confirm_delete_one'),$r['name']).'">'.L('delete').'</a>';*/
   // <a href="'.U('item_cate/tag_list',array('cate_id'=>$r['id'])).'">'.L('tag').'</a> |
             $r['parentid_node'] = ($r['pid'])? ' class="child-of-node-'.$r['pid'].'"' : '';
             $array[] = $r;
@@ -49,7 +49,7 @@ class item_cateAction extends backendAction {
             'width' => '520',
             'height' => '360'
         );
-        $this->assign('big_menu', $big_menu);
+        //$this->assign('big_menu', $big_menu);
         $this->assign('list_table', true);
         $this->display();
     }
@@ -247,7 +247,7 @@ class item_cateAction extends backendAction {
     public function ajax_getchilds() {
         $id = $this->_get('id', 'intval');
         $type = $this->_get('type', 'intval', null);
-        $map = array('pid'=>$id, 'tokenTall'=>$this->getTokenTall());
+        $map = array('pid'=>$id);
         if (!is_null($type)) {
             $map['type'] = $type;
         }
