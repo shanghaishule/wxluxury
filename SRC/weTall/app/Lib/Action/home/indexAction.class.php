@@ -511,21 +511,12 @@ class indexAction extends frontendAction {
     	if(IS_POST){
     	 //搜索关键字时候	
     		$keyword=$this->_post("txtkeyword","trim");
+    		$brandid=$this->_post("brand_id","trim");
     		if ($keyword != "") {
     			$this->assign("title","查询结果");
     			$this->assign("City","附近店铺");
     			$this->assign("gohref","Y");
-    			$longitude = $this->_POST("longitude","trim");
-    			$latitude = $this->_POST("latitude","trim");
-    			if ($latitude == "") {
-    				$longitude = $_SESSION["longtitude"] ;
-    				$latitude = $_SESSION["latitude"] ;
-    			}else{
-    				$_SESSION["longtitude"] = $longitude;
-    				$_SESSION["latitude"] = $latitude;
-    			}
-    			$this->assign("lat",$latitude);
-    			$this->assign("lng",$longitude);
+    			
     		}
     		//搜索的方式本店，微服客，店铺
     		$method=$this->_post("method");
@@ -537,7 +528,24 @@ class indexAction extends frontendAction {
     			$token=$_SESSION["tokenTall"];
     		}
     		$this->assign("method",$method);
-    		if($keyword == ""){
+    		if ($brandid != "") {
+    			$latitude = $this->_post("latitude");
+    			$longitude = $this->_post("longitude");
+    			$_SESSION["latitude"] = $latitude;
+    			$_SESSION["longtitude"] = $longitude;
+    			
+    			$brand_name = M("brandlist")->where("id=".$brandid)->find();
+    			$this->assign("title",$brand_name["name"]);
+    			$this->assign("City","附近店铺");
+    			$this->assign("gosearch","Y");
+    			
+    			$this->assign("longitude",$longitude);
+    			$this->assign("latitude",$latitude);
+    			
+    			$this->assign("brandid",$brandid);
+    			$this->nextPageBrand($_SESSION['token'],$brandid,$sortBy);
+    		}
+    		elseif($keyword == ""){
     			$this->error("请输入关键字！");
     		}
     		else if($method=="local"){//本店

@@ -53,8 +53,8 @@ function searchshop(id){
 }
 </script>
 <form id="searchShop" action="{:U('index/test')}" method="post">
-     <input type="hidden" name="longitude" value="{$lng}" id="longitude">
-     <input type="hidden" name="latitude" value="{$lat}" id="latitude">
+     <input type="hidden" name="longitude" value="{$longitude}" id="longitude">
+     <input type="hidden" name="latitude" value="{$latitude}" id="latitude">
      <input type="hidden" name="brand_id" id="txtHint">   
    </form>
 <div id="nav">
@@ -80,7 +80,7 @@ function searchshop(id){
         <if condition="$gohref neq ''">
         <a href="{:U('home/user/index', array('tokenTall'=>$tokenTall))}"><div class="find_04"></div></a>
         <elseif condition="$gosearch eq 'Y'"/>
-        <a href="javascript:void(0)" onclick="searchshop({$brand_id})"><div class="find_03">{$City}</div></a>
+        <a href="javascript:void(0)" onclick="searchshop({$brandid})"><div class="find_03">{$City}</div></a>
         <else/><div class="find_03">{$City}</div></if>
         
         </if>
