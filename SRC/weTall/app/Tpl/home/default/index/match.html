@@ -11,7 +11,7 @@
 <link href="__STATIC__/css/productdetail.css" rel="stylesheet" type="text/css">
 <link type="text/css" rel="stylesheet" href="__STATIC__/weixin/css/shop.css">
 <link type="text/css" rel="stylesheet" href="__STATIC__/weixin/css/match.css">
-
+<script type="text/javascript" src="__STATIC__/js/jquery/jquery.js"></script>
 </head>
 <body>
 <div class="wrap3">
@@ -43,37 +43,99 @@
   
 <div id="content">
     <volist name="match_table" id="match"><div class="dapei_block">
-	<div class="eject_btn"><a class="enter" style="background: purple;" href="javascript:void(0)">{$match.uname}的心情:{$match.title}</a></div>
-	<div>
-	<img style="margin-right:0px;font-weight:700;" width="100%" src="{$match.upd_path}">
+	
+	<div class="eject_btn">
+		<div class="user-img fl"><img src="__STATIC__/weixin/css/images/p1.gif" /></div>
+		<div class="user-name-time fl">
+			<div class="u-name">{$match.uname}</div>
+			<div class="u-time">7小时前</div>
+		</div>
+		<div class="u-content fl">
+			<a class="enter" style="background:none;" href="javascript:void(0)">{$match.title}</a>
+	    </div>
 	</div>
-<volist name='favi_table' id='vo' key="key" >
-    <if condition="$match['id'] eq $vo['id']">	
-    <a href="{:U('home/Item/index', array('tokenTall'=>$tokenTall,'id'=>$vo['item_id']))}">
-    <div class="matchItem">
-	     <table>
-			<tr height="50" >
-				<td >
-					<img width="55" height="55" src="{$vo.favi_img}"/>
-				</td>
-				<td style="padding-left:10px;word-break:keep-all;width:210px;display:block;
-					white-space:nowrap;
-					overflow:hidden;
-					text-overflow:ellipsis;"><br>{$vo.favi_name}</td>					
-				<td><font color ='#8B0000'>{$vo.favi_price|number_format=###, 0, '.', ''}元</font></td>	
-			</tr>
-     	</table>				
-    </div> 
-    </a>
-    </if>   
-</volist> 
+	<div class="cl"></div>
+	<!-- 分享的图片start -->
+	<div class="shake-img">
+		<div class="shake-pic">
+			<img style="margin-right:0px;font-weight:700;" width="315px;" height="382px;" src="{$match.upd_path}" />
+		</div>	
+		<div class="shake-comments">
+			<ul>
+				<li>
+					<img class="zan" src="__STATIC__/weixin/css/images/zan.png" />
+					<span class="z-num">998</span>
+				</li>
+				
+				<li>
+					<img class="share" src="__STATIC__/weixin/css/images/share.png" />
+					<span class="s-num">888</span>
+				</li>
+				
+				<li>
+					<img class="pinglun" src="__STATIC__/weixin/css/images/pinglun.png" />
+					<span class="p-num">1002</span>
+				</li>
+				
+				<li>
+					<img class="shang" src="__STATIC__/weixin/css/images/shang.png" />
+					<span class="sh-num">557</span>
+				</li>				
+			</ul>
+			<div class="cl"></div>
+		</div>
+	</div>
+	<!-- 分享的图片end -->
+	<div class="b30 c_white">单品购买链接<span class="more">展开</span></div>
+	<div class="share-open">
+		<volist name='favi_table' id='vo' key="key" >
+		    <if condition="$match['id'] eq $vo['id']">	
+		    
+		    <div class="matchItem">
+			    <ul>
+					<li><a href="{:U('home/Item/index', array('tokenTall'=>$tokenTall,'id'=>$vo['item_id']))}"><img width="55" height="55" src="{$vo.favi_img}"/></a></li>
+					<li><a href="{:U('home/Item/index', array('tokenTall'=>$tokenTall,'id'=>$vo['item_id']))}">{$vo.favi_name|msubstr=0,10}</a></li>					
+					<li class="c_red">￥{$vo.favi_price|number_format=###, 0, '.', ''}</li>
+				</ul>
+				<div class="cl"></div>				
+		    </div> 
+		
+		    </if>   
+		</volist> 
+    </div>
 </div>  
-<div style="height:12px"></div>     
+<div style="height:1px;margin:35px 0;border-top:1px dashed #ffffff"></div>     
  </volist>
-	
-	
-	  
+		  
 </div>
+<script>
+$(function(){
+$(".more").click(function(){
+	$(this).toggleClass("m-down").parent().next(".share-open").animate({
+		  height: "toggle",
+		  opacity: "toggle"
+		}, {
+		  duration: "slow"
+		});
 
+});	
+
+$(".zan").click(function(e){
+	anp(e);
+});
+
+function anp(e){
+	//var n=Math.round(Math.random()*10);
+	var $i=$("<b>").text("+1");
+	var x=e.pageX,y=e.pageY;
+	$i.css({top:y-20,left:x,position:"absolute",color:"#E94F06"});
+	$("body").append($i);
+	$i.animate({top:y-180,opacity:0,"font-size":"1.5em"},1500,function(){
+		$i.remove();
+	});
+	e.stopPropagation();
+}	
+});
+</script>
 </body>
 </html>
