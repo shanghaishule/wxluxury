@@ -4,8 +4,8 @@ return array (
   'DB_HOST' => 'localhost',
   'DB_PORT' => '3306',
   'DB_NAME' => 'wxluxury',
-  'DB_USER' => 'root',
-  'DB_PWD' => '',
+  'DB_USER' => 'hzwxshop',
+  'DB_PWD' => 'hzwxshop',
   'DB_PREFIX' => 'tp_',
 );
 ?>
