@@ -39,10 +39,10 @@ color: #fff;
 font-size: 16px;
 cursor: pointer;
 }
-.matchItem{background:#585858;
-	height:55px;
+.matchItem{background:#000000;
+	height:55px;border-bottom:1px dashed #ffffff;
 width:100%;margin:0 auto;color:#4F4F4F;font-weight:700;font-size:0.9em;
--webkit-border-radius:2%;-moz-border-radius:2%;border-radius:2%;margin-bottom:10px;
+-webkit-border-radius:2%;-moz-border-radius:2%;border-radius:2%;
 }
 .dapei_block{
 	width:96%;
@@ -59,13 +59,14 @@ width:100%;margin:0 auto;color:#4F4F4F;font-weight:700;font-size:0.9em;
 .u-content{margin-left:10px;}
 .shake-img{position:relative;width:100%;margin-bottom:5px;}
 .shake-comments{position:absolute;bottom:0;width:100%;height:35px;background:rgba(0,0,0,0.5);}
-.shake-pic{width:100%;height:382px;}
+.shake-pic{width:100%;height:382px;background:url(../images/load2.gif) no-repeat 50% 50%}
 .shake-comments ul li{padding-top:7px;height:28px;line-height:28px;float:left;display:inline;color:#ffffff;width:25%;text-align:center}
 .shake-comments ul li img{cursor:pointer}
 .shake-comments ul li span{font-size:12px;}
 .b30{height:20px;padding:5px 0;font-weight:bold;margin-bottom:5px;}
 .c_white{color:#ffffff;}
 .c_red{color:#ff0000}
+.matchItem ul li.f_r{float:right;margin-right:20px;}
 .share-open{display:none;}
 .more{float:right;padding-right:23px;margin-right:35px;cursor:pointer;background:url(images/down.png) no-repeat 33px 5px}
 .matchItem ul li{margin-right:15px;float:left;display:inline;height:55px;line-height:55px;}

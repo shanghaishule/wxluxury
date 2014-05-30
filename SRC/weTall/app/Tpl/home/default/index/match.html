@@ -58,10 +58,15 @@
 	<!-- 分享的图片start -->
 	<div class="shake-img">
 		<div class="shake-pic">
-			<img style="margin-right:0px;font-weight:700;" width="315" height="382" src="{$match.upd_path}" />
+			<img style="margin-right:0px;font-weight:700;" width="298" height="382" src="{$match.upd_path}" />
 		</div>	
 		<div class="shake-comments">
 			<ul>
+				<li>
+					<img class="shang" src="__STATIC__/weixin/css/images/shang.png" />
+					<span class="sh-num">557</span>
+				</li>
+							
 				<li>
 					<img class="zan" src="__STATIC__/weixin/css/images/zan.png" />
 					<span class="z-num">998</span>
@@ -76,11 +81,7 @@
 					<img class="pinglun" src="__STATIC__/weixin/css/images/pinglun.png" />
 					<span class="p-num">1002</span>
 				</li>
-				
-				<li>
-					<img class="shang" src="__STATIC__/weixin/css/images/shang.png" />
-					<span class="sh-num">557</span>
-				</li>				
+								
 			</ul>
 			<div class="cl"></div>
 		</div>
@@ -95,7 +96,7 @@
 			    <ul>
 					<li><a href="{:U('home/Item/index', array('tokenTall'=>$tokenTall,'id'=>$vo['item_id']))}"><img width="55" height="55" src="{$vo.favi_img}"/></a></li>
 					<li><a href="{:U('home/Item/index', array('tokenTall'=>$tokenTall,'id'=>$vo['item_id']))}">{$vo.favi_name|msubstr=0,10}</a></li>					
-					<li class="c_red">￥{$vo.favi_price|number_format=###, 0, '.', ''}</li>
+					<li class="c_red f_r">￥{$vo.favi_price|number_format=###, 0, '.', ''}</li>
 				</ul>
 				<div class="cl"></div>				
 		    </div> 
@@ -110,6 +111,7 @@
 </div>
 <script>
 $(function(){
+$(".share-open .matchItem:last-child").css('border-bottom','0');
 $(".more").click(function(){
 	$(this).toggleClass("m-down").parent().next(".share-open").animate({
 		  height: "toggle",
