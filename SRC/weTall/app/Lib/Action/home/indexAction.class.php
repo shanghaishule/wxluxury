@@ -1079,5 +1079,30 @@ class indexAction extends frontendAction {
     public function addMatch() {
     	$this->display();
     }    
+    //分享搭配留言
+    public function comments(){
+    	$where["id"] = $_GET["id"];
+    	$match_coment=M("match");
+    	$result = $match_coment->where($where)->find();
+        $match_table[] = $result;
+    	$username = M("user")->where("id='".$result['uid']."'")->find();
+    	$match_table[0]["uname"] = $username["username"];
+    	//评论人员
+    	$data["match_id"] = $_GET["id"];
+    	$p_match = M("match_comments");
+    	$result2 = $p_match->where($data)->select();
+    	$match_comment = array();
+    	$index=0;
+    	foreach($result2 as $match_c){
+    		$match_comment[] = $match_c;
+    		$username2 = M("user")->where("id='".$match_c['uid']."'")->find();
+    		$match_comment[$index]["uname"] = $username2["username"];    		
+    		$index++;
+    	}
 
+    	//dump($match_comment);exit;
+    	$this->assign("match_comment",$match_table);
+    	$this->assign("match_p",$match_comment);
+    	$this->display();
+    }
 }

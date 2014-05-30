@@ -54,6 +54,7 @@ width:100%;margin:0 auto;color:#4F4F4F;font-weight:700;font-size:0.9em;
 .user-name-time{margin-left:10px;}
 .cl{clear:both;}
 .fl{float:left;}
+.fr{float:right;}
 .u-name{color:#ffffff;font-size:16px;}
 .u-time{font-size:12px;color:#cccccc}
 .u-content{margin-left:10px;}
@@ -72,6 +73,14 @@ width:100%;margin:0 auto;color:#4F4F4F;font-weight:700;font-size:0.9em;
 .matchItem ul li{margin-right:15px;float:left;display:inline;height:55px;line-height:55px;}
 .b30 .m-down{background:url(images/up.png) no-repeat 33px 5px}
 .z-num,.s-num,.p-num,.sh-num{position:relative;top:-5px}
-
+.match_comments{background:#000000;}
+.b10{height:1px;border-bottom:1px dashed #ffffff;}
+.comment-time{font-size:15px;}
+.match_comments .eject-con{margin:0;padding:5px 0;}
+.u-con{margin-right:10px;}
+.p-input{width:100%;position:fixed;bottom:0;height:25px;border-top:1px solid #5A5858;background:#8d0000}
+.p-input  input#inp{border-radius:25px;width:80%;padding-left:10px;}
+.p-input  input#sub{border-radius:25px;}
+.p-null{height:25px;}
 
 

@@ -42,7 +42,8 @@
 </div>
   
 <div id="content">
-    <volist name="match_table" id="match"><div class="dapei_block">
+    <volist name="match_table" id="match">
+    <div class="dapei_block">
 	
 	<div class="eject_btn">
 		<div class="user-img fl"><img src="__STATIC__/weixin/css/images/p1.gif" /></div>
@@ -51,11 +52,11 @@
 			<div class="u-time">7小时前</div>
 		</div>
 		<div class="u-content fl">
-			<a class="enter" style="background:none;" href="javascript:void(0)">{$match.title}</a>
+			<div class="enter" style="background:none;">{$match.title}</div>
 	    </div>
 	</div>
 	<div class="cl"></div>
-	<!-- 分享的图片start -->
+	{// 分享的图片start }
 	<div class="shake-img">
 		<div class="shake-pic">
 			<img style="margin-right:0px;font-weight:700;" width="297" height="382" src="{$match.upd_path}" />
@@ -78,7 +79,7 @@
 				</li>
 				
 				<li>
-					<img class="pinglun" src="__STATIC__/weixin/css/images/pinglun.png" />
+					<a href="{:U('home/index/comments', array('tokenTall'=>$tokenTall,'id'=>$match['id']))}"><img class="pinglun" src="__STATIC__/weixin/css/images/pinglun.png" /></a>
 					<span class="p-num">1002</span>
 				</li>
 								
@@ -86,7 +87,7 @@
 			<div class="cl"></div>
 		</div>
 	</div>
-	<!-- 分享的图片end -->
+	{// 分享的图片end }
 	<div class="b30 c_white">单品购买链接<span class="more">展开</span></div>
 	<div class="share-open">
 		<volist name='favi_table' id='vo' key="key" >
