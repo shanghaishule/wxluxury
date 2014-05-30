@@ -66,7 +66,7 @@ width:100%;margin:0 auto;color:#4F4F4F;font-weight:700;font-size:0.9em;
 .b30{height:20px;padding:5px 0;font-weight:bold;margin-bottom:5px;}
 .c_white{color:#ffffff;}
 .c_red{color:#ff0000}
-.matchItem ul li.f_r{float:right;margin-right:20px;}
+.matchItem ul li.f_r{float:right;margin-right:10px;}
 .share-open{display:none;}
 .more{float:right;padding-right:23px;margin-right:35px;cursor:pointer;background:url(images/down.png) no-repeat 33px 5px}
 .matchItem ul li{margin-right:15px;float:left;display:inline;height:55px;line-height:55px;}
