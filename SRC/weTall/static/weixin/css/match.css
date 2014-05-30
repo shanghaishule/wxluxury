@@ -79,7 +79,7 @@ width:100%;margin:0 auto;color:#4F4F4F;font-weight:700;font-size:0.9em;
 .match_comments .eject-con{margin:0;padding:5px 0;}
 .u-con{margin-right:10px;}
 .p-input{width:100%;position:fixed;bottom:0;height:30px;border-top:1px solid #5A5858;background:#8d0000}
-.p-input  input#inp{height:30px;border-radius:25px;width:80%;padding-left:10px;}
+.p-input  input#inp{height:30px;border-radius:25px;width:75%;padding-left:10px;}
 .p-input  input#sub{height:30px;border-radius:25px;}
 .p-null{height:30px;}
 
