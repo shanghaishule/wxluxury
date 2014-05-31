@@ -1087,6 +1087,7 @@ padding:10px 0 10px 0;
 	background:url(../images/floatMenu/left.png) no-repeat;
 	background-size:100% 60%;
 	background-position:0 0px;
+	opacity:1;
 }
 .nav_menu{
 	color:rgba(110,92,92,1);;
