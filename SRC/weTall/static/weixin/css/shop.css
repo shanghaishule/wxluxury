@@ -1064,14 +1064,14 @@ padding:10px 0 10px 0;
 	color:white;
 	position:fixed;
 	background:rgba(80,80,80,0.7);
-	height:45px;
+	height:50px;
 	width:70px;
 	left:0px;
 	bottom:0px;
 }
 #iconm{
 	float:left;
-	height:25px;
+	height:30px;
 	margin-top:15px;
 	width:8px;
 	background:url(../images/floatMenu/right.png) no-repeat;
@@ -1080,7 +1080,7 @@ padding:10px 0 10px 0;
 }
 #iconm2{
 	float:left;
-	height:25px;
+	height:30px;
 	margin-top:15px;
 	margin-left:4px;
 	width:10px;
@@ -1098,7 +1098,7 @@ padding:10px 0 10px 0;
 #logo{
 	padding-top:15px;
 	float:left;
-	height:45px;
+	height:50px;
 	width:55px;	
 }
 #menu_float{
