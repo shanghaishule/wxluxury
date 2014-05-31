@@ -386,7 +386,7 @@ class indexAction extends frontendAction {
     }
     
     public function test(){  
-    	$this->get_loaction();	
+    	//$this->get_loaction();	
     	/***商品分类**/
     	$item_cate=M("item_cate")->select();
     	$this->assign('item_cate',$item_cate);
@@ -501,7 +501,7 @@ class indexAction extends frontendAction {
     }
    
     public function search() {
-    	$this->get_loaction();
+    	//$this->get_loaction();
     	/***商品分类**/
     	$item_cate=M("item_cate")->select();
     	$this->assign('item_cate',$item_cate);

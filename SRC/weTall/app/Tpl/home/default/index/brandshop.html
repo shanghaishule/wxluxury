@@ -1,4 +1,4 @@
-<!DOCTYPE>
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -49,7 +49,7 @@ $(document).click(function(event) { $(".dis").removeClass("none"); });
 });	
 </script>
 </head>
-<body >
+<body>
 <div class="wrap">
   <div id="nav">
     <form id="searchForm" action="/weTall/index.php?g=home&m=index&a=search" method="post">
@@ -124,53 +124,76 @@ $(document).click(function(event) { $(".dis").removeClass("none"); });
     </div> 
     </volist>
     
-  </div><br><br><br><br><br><br><br><br><br><br>
+  </div>
   <form id="searchShop" action="{:U('index/search',array('brandid'=>$product['id']))}" method="post">
      <input type="hidden" name="longitude" value="" id="longitude">
      <input type="hidden" name="latitude" value="" id="latitude">
      <input type="hidden" name="brand_id" id="txtHint">   
    </form>
-  
-<div id="mapholder"></div>
-   <script>
-   function getLocation()
-  {
-	  if (navigator.geolocation)
-	    {
-	    navigator.geolocation.getCurrentPosition(showPosition,showError);
+   <script type="text/javascript">
+   (function() { // 闭包
+	    function load_script(xyUrl, callback) {
+	        var head = document.getElementsByTagName('head')[0];
+	        var script = document.createElement('script');
+	        script.type = 'text/javascript';
+	        script.src = xyUrl;
+	        // 借鉴了jQuery的script跨域方法
+	        script.onload = script.onreadystatechange = function() {
+	            if ((!this.readyState || this.readyState === "loaded" || this.readyState === "complete")) {
+	                callback && callback();
+	                // Handle memory leak in IE
+	                script.onload = script.onreadystatechange = null;
+	                if (head && script.parentNode) {
+	                    head.removeChild(script);
+	                }
+	            }
+	        };
+	        // Use insertBefore instead of appendChild to circumvent an IE6 bug.
+	        head.insertBefore(script, head.firstChild);
 	    }
-	  else{x.innerHTML="Geolocation is not supported by this browser.";}
-  }
-
-	function showPosition(position)
-	  {alert(position.coords.latitude);
-		  var latlon=position.coords.latitude+","+position.coords.longitude;
-		  alert(latlon);
-		  var img_url="http://maps.googleapis.com/maps/api/staticmap?center="
-		  +latlon+"&zoom=14&size=400x300&sensor=false";
-		  document.getElementById("mapholder").innerHTML="<img src='"+img_url+"' />";
-	  }
-
-	function showError(error)
-	  {alert(error.code);
-	  switch(error.code) 
-	    {
-	    case error.PERMISSION_DENIED:
-	      x.innerHTML="User denied the request for Geolocation."
-	      break;
-	    case error.POSITION_UNAVAILABLE:
-	      x.innerHTML="Location information is unavailable."
-	      break;
-	    case error.TIMEOUT:
-	      x.innerHTML="The request to get user location timed out."
-	      break;
-	    case error.UNKNOWN_ERROR:
-	      x.innerHTML="An unknown error occurred."
-	      break;
+	    function translate(point, type, callback) {
+	        var callbackName = 'cbk_' + Math.round(Math.random() * 10000); // 随机函数名
+	        var xyUrl = "http://api.map.baidu.com/ag/coord/convert?from=" + type
+	                + "&to=4&x=" + point.lng + "&y=" + point.lat
+	                + "&callback=BMap.Convertor." + callbackName;
+	        // 动态创建script标签
+	        load_script(xyUrl);
+	        BMap.Convertor[callbackName] = function(xyResult) {
+	            delete BMap.Convertor[callbackName]; // 调用完需要删除改函数
+	            var point = new BMap.Point(xyResult.x, xyResult.y);
+	            callback && callback(point);
+	        }
 	    }
-	  }
-</script>
-   
-   
+
+	    window.BMap = window.BMap || {};
+	    BMap.Convertor = {};
+	    BMap.Convertor.translate = translate;
+	})();
+        if (window.navigator.geolocation) {
+            var options = {
+                enableHighAccuracy: true,
+            };
+            window.navigator.geolocation.getCurrentPosition(handleSuccess, handleError, options);
+        } else {
+            alert("浏览器不支持html5来获取地理位置信息");
+        }
+        
+        function handleSuccess(position){
+            // 获取到当前位置经纬度  本例中是chrome浏览器取到的是google地图中的经纬度
+            var lng = position.coords.longitude;
+            var lat = position.coords.latitude;
+            
+            document.getElementById("longitude").value=lng;
+            document.getElementById("latitude").value=lat;
+            
+           
+        }
+        
+        function handleError(error){
+        
+        }
+ 
+       
+    </script>
 </body>
 </html>
