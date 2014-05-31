@@ -125,12 +125,14 @@ $(document).click(function(event) { $(".dis").removeClass("none"); });
     </volist>
     
   </div>
+  
   <form id="searchShop" action="{:U('index/search',array('brandid'=>$product['id']))}" method="post">
      <input type="hidden" name="longitude" value="" id="longitude">
      <input type="hidden" name="latitude" value="" id="latitude">
      <input type="hidden" name="brand_id" id="txtHint">   
    </form>
    <script type="text/javascript">
+  
    (function() { // 闭包
 	    function load_script(xyUrl, callback) {
 	        var head = document.getElementsByTagName('head')[0];
@@ -195,5 +197,6 @@ $(document).click(function(event) { $(".dis").removeClass("none"); });
  
        
     </script>
+    <include file="public:footer" />
 </body>
 </html>
