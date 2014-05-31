@@ -356,8 +356,37 @@ class indexAction extends frontendAction {
     	$this->assign("end_point_lng",$end_point_lng);
     	$this->display();
     }
+    public function get_loaction(){
+    	$ip = get_client_ip();
+    	$url = "http://api.map.baidu.com/location/ip?ak=omi69HPHpl5luMtrjFzXn9df&ip=$ip&coor=bd09ll";
+    	$ch = curl_init();
+    	curl_setopt($ch, CURLOPT_URL, $url);
+    	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    	$output = curl_exec($ch);
+    	if(curl_errno($ch))
+    	{ echo 'CURL ERROR Code: '.curl_errno($ch).', reason: '.curl_error($ch);}
+    	curl_close($ch);
+    	$info = json_decode($output, true);
+    	if($info['status'] == "0"){
+    		$lotx = $info['content']['point']['y'];
+    		$loty = $info['content']['point']['x'];
+    		$citytemp = $info['content']['address_detail']['city'];
+    		$keywords = explode("市",$citytemp);
+    		$city = $keywords[0];
+    	}
+    	else{
+    		$lotx = "34.2597";
+    		$loty = "108.9471";
+    		$city = "西安";
+    	}
+    	if ($lotx != "") {
+    		$_SESSION["longtitude"] = $loty;
+    		$_SESSION["latitude"] = $lotx;
+    	} 
+    }
     
-    public function test(){  	
+    public function test(){  
+    	$this->get_loaction();	
     	/***商品分类**/
     	$item_cate=M("item_cate")->select();
     	$this->assign('item_cate',$item_cate);
@@ -393,8 +422,7 @@ class indexAction extends frontendAction {
 	    			}				
 	    		}
     		}
-    		//echo $longitude;
-    		//var_dump($nearShop);die();
+    		
     		
     		$start_point_lat = $latitude;
     		$start_point_lng = $longitude;
@@ -474,6 +502,7 @@ class indexAction extends frontendAction {
     }
    
     public function search() {
+    	$this->get_loaction();
     	/***商品分类**/
     	$item_cate=M("item_cate")->select();
     	$this->assign('item_cate',$item_cate);
@@ -533,16 +562,19 @@ class indexAction extends frontendAction {
     		if ($brandid != "") {
     			$latitude = $this->_post("latitude");
     			$longitude = $this->_post("longitude");
-    			$_SESSION["latitude"] = $latitude;
-    			$_SESSION["longtitude"] = $longitude;
+    			if ($latitude != "" and $longitude != "") {
+    				$_SESSION["latitude"] = $latitude;
+    				$_SESSION["longtitude"] = $longitude;
+    			}
+    			
     			
     			$brand_name = M("brandlist")->where("id=".$brandid)->find();
     			$this->assign("title",$brand_name["name"]);
     			$this->assign("City","附近店铺");
     			$this->assign("gosearch","Y");
     			
-    			$this->assign("longitude",$longitude);
-    			$this->assign("latitude",$latitude);
+    			$this->assign("longitude",$_SESSION["longtitude"]);
+    			$this->assign("latitude",$_SESSION["latitude"]);
     			
     			$this->assign("brandid",$brandid);
     			$this->nextPageBrand($_SESSION['token'],$brandid,$sortBy);
