@@ -411,7 +411,7 @@ class indexAction extends frontendAction {
     		
     		$where["brand_name"] = $volumn["name"];
     		$data["id"]=$brand_id;
-    		$endPoint = $wecha_shop->where($where)->select();//echo $longitude;
+    		$endPoint = $wecha_shop->where($where)->select();echo $longitude;
     		$nearShop=array();
     		if ($longitude != "" and $latitude != "") {
 	    		foreach ($endPoint as $end){    
@@ -422,7 +422,7 @@ class indexAction extends frontendAction {
 	    			}				
 	    		}
     		}
-    		
+    		var_dump($nearShop);die();
     		
     		$start_point_lat = $latitude;
     		$start_point_lng = $longitude;
