@@ -1105,4 +1105,9 @@ class indexAction extends frontendAction {
     	$this->assign("match_p",$match_comment);
     	$this->display();
     }
+    //添加搭配分享评论
+    public function add_comments(){
+    	
+    } 
+    
 }
