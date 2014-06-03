@@ -82,11 +82,11 @@ width:100%;margin:0 auto;color:#4F4F4F;font-weight:700;font-size:0.9em;
 .p-input  input#inp{height:30px;border-radius:25px;width:75%;padding-left:10px;}
 .p-input  input#sub{height:30px;border-radius:25px;}
 .p-null{height:30px;}
-.fix-share{background:#000000;
+.fix-share{background:rgba(0,0,0,0.7);opacity:1.0;
 width:100%;
 top:0;left:0;
 height:100%;
 position:fixed;
-z-index:99999
+z-index:400001;
 }
 
