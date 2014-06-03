@@ -18,8 +18,8 @@ class baseAction extends Action
         if($tokenTall != "") {$_SESSION["tokenTall"]=$tokenTall;}
         
         //设置wecha_id值
-        $wechaid=$this->getWechaId();
-        dump($wechaid);
+        $this->getWechaId();
+        dump($_SESSION["wecha_id"]);
         exit;
         C($setting);
         //发送邮件
