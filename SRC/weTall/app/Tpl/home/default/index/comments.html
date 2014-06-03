@@ -86,10 +86,12 @@
    $(".match_comments .b10:last").remove()
    $(".match_comments").append('<div class="p-null"></div>');
    $("#inp").focus(function(){
-	   $(this).val('');
+	   if($(this).val()=='喜欢ta的范儿'){
+	   		$(this).val('');
+	   }
    }).blur(function(){
 	   if($(this).val()==''){
-	   $(this).val('喜欢ta的范儿');
+	   		$(this).val('喜欢ta的范儿');
 	   }
    });
   });
