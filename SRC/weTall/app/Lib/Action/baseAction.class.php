@@ -18,8 +18,8 @@ class baseAction extends Action
         if($tokenTall != "") {$_SESSION["tokenTall"]=$tokenTall;}
         
         //设置wecha_id值
-        $this->getWechaId();
-        
+        $wechaid=$this->getWechaId();
+        dump($wechaid);
         C($setting);
         //发送邮件
         $this->assign('async_sendmail', session('async_sendmail'));
