@@ -26,16 +26,22 @@ $(function(){
 function submitaction() {
 	var paytype = $('input[name="payment_id"]:checked').val();
 	if(paytype == "4"){
-		$('#goto_pay').attr("action", "{:U('order/wxpay',array('tokenTall'=>$tokenTall, 'dingdanhao'=>$dingdanhao, 'ordersumPrice'=>$order_sumPrice, 'showwxpaytitle'=>1))}");
+		//$('#goto_pay').attr("action", "{:U('order/wxpay',array('tokenTall'=>$tokenTall, 'dingdanhao'=>$dingdanhao, 'ordersumPrice'=>$order_sumPrice, 'showwxpaytitle'=>1))}");
+		callpay();
 	}else{
 		$('#goto_pay').attr("action", "{:U('order/end',array('tokenTall'=>$tokenTall, 'dingdanhao'=>$dingdanhao, 'ordersumPrice'=>$order_sumPrice))}");
+		$('#goto_pay').submit();
 	}
-	
-	$('#goto_pay').submit();
-	
+
 }
 
-
+function callpay()
+{
+	WeixinJSBridge.invoke('getBrandWCPayRequest',{$biz_package},function(res){
+	WeixinJSBridge.log(res.err_msg);
+	alert(res.err_code+res.err_desc+res.err_msg);
+	});
+}
 </script>
 </head>
 
@@ -64,24 +70,11 @@ function submitaction() {
                 <h3>选择支付方式并付款</h3>
                     <dl class="defray">
                         <dt>在线支付</dt>                        
-                        <!--<dd>
-                            <p class="radio"><input checked='checked' id="payment_alipay" name="payment_id" value="1" type="radio"></p>
-                            <p class="logo"><label for="payment_alipay"><img src="__STATIC__/weixin/images/zhi.png" ></label></p>
-                            <p class="explain">欢迎使用支付宝</p>
-                        </dd>-->
-                        <!-- eq name="current_user" value="zcb" -->
                         <dd>
                             <p class="radio"><input checked='checked' id="payment_wxpay" name="payment_id" value="4" type="radio"></p>
                             <p class="logo"><label for="payment_wxpay"><img src="__STATIC__/weixin/images/wxpay_small.png" ></label></p>
                             <p class="explain">欢迎使用微信支付</p>
                         </dd>
-                        <!-- else />
-                        <dd>
-                            <p class="radio"><input checked='checked' id="payment_unionpay" name="payment_id" value="3" type="radio"></p>
-                            <p class="logo"><label for="payment_unionpay"><img src="__STATIC__/weixin/images/unionpay.png" ></label></p>
-                            <p class="explain">欢迎使用银联支付</p>
-                        </dd>
-                        </eq -->
                     </dl>
                     <dl class="defray">
                         <dt>线下支付</dt>
