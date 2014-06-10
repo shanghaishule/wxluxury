@@ -82,5 +82,5 @@
 border-radius: 10px;
 z-index:1000;position:absolute;}
 .favi2{
-	z-index:1000;position:absolute;top:40px;left:75%;width:80px;background:none;font-size:0.9em;color:rgb(116,113,113);
+	z-index:1000;position:absolute;top:40px;right:-25px;width:80px;background:none;font-size:0.9em;color:rgb(116,113,113);
 }

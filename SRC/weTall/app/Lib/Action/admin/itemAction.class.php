@@ -285,9 +285,10 @@ class itemAction extends backendAction {
     		}
     	}
     }
+    
     public function data_excel() {
     	$mod_taobao = D("item_taobao");
-    	$brand_ar = M("brandlist")->select();
+    	$brand_ar = M("brandlist")->order("name asc")->select();
     	$this->assign("brand_ar",$brand_ar);
     	$message = M("message_check");
     	if (IS_POST) {
@@ -306,6 +307,12 @@ class itemAction extends backendAction {
     				echo "请输入品牌！";die();
     			}elseif(!empty($bid["id"])){
     				$item["brand"] = $bid["id"];
+    				$item_brand["brand_id"] = $bid["id"];
+    				$item_brand["url"] = $tianmao_urls;
+    				if(false == M("aused_taobao")->find($item_brand)){
+    					M("aused_taobao")->add($item_brand);
+    				}
+    				
     			}else {
     				$brandid_arr->add($brandid);
     				 $bid2 = $brandid_arr->where($brandid)->field("id")->find();

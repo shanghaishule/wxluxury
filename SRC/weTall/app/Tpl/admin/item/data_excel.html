@@ -1,6 +1,25 @@
 <!--生成账单-->
 <!DOCTYPE HTML>
+<head>
+<link rel="stylesheet" type="text/css" href="__STATIC__/css/default/message.css" media="all">
+<script type="text/javascript" src="__STATIC__/js/jquery_min.js"></script>
+</head>
+<body>
 <div class="dialog_content">
+
+<script>
+    function change_brand(brand_name){
+    	$.get('/weTall/index.php?g=home&m=index&a=brandselect&brand_name='+brand_name,function(data,status){
+    		var obj = eval('('+  data +')');  
+    		if(obj.status == 0){
+    			$("#url").val("");
+    		}else{
+    			$("#url").val(obj.status);
+    		}
+    		
+    	  });
+    }
+</script>
 <form id="info_form" action="{:U('item/data_excel')}" method="post" enctype="multipart/form-data">
 <table width="100%" cellpadding="2" cellspacing="1" class="table_form">
 <!-- <tr>
@@ -17,7 +36,7 @@
       </td>
        <td>
        
-        <select name="brandid" id="brandid">
+        <select name="brandid" id="brandid" onchange="change_brand(this.options[this.selectedIndex].text);">
         <volist name="brand_ar" id="vo">
         <option value="{$vo.name}">{$vo.name}</option>
         </volist>
@@ -35,3 +54,5 @@
 </table>
 </form>
 </div>
+</body>
+</html>

@@ -79,6 +79,26 @@ class indexAction extends frontendAction {
         $this->_config_seo();
         $this->display();
     }
+    public function brandselect(){
+    	$upload_shop = M("aused_taobao");
+    	$brand_name = $_GET["brand_name"];
+    
+    	$where["name"] = $brand_name;
+    	$brand_id = M("brandlist")->where($where)->find();
+    	
+    	$where2["brand_id"] = $brand_id["id"];
+    	$result2 = $upload_shop->where($where2)->find();
+    
+    	$result = $result2["url"];
+    
+    	if ($result){
+    		// 成功后返回客户端新增的用户ID，并返回提示信息和操作状态
+    		$this->ajaxReturn($result,"新增成功！",1);
+    	}else{
+    		// 错误后返回错误的操作状态和提示信息
+    		$this->ajaxReturn(0,"新增错误！",0);
+    	}
+    }
     public function saohuo(){
     	$brand_id=$this->_get("brand_id","trim");
     	$id=$this->_get("id","intval");
@@ -506,6 +526,9 @@ class indexAction extends frontendAction {
     	$item_cate=M("item_cate")->select();
     	$this->assign('item_cate',$item_cate);
     	
+    	//所有的搜索进入比价页面
+    	$this->assign("compare","Y");
+    	
     	$brand = M("brandlist")->select();
     	$this->assign("brand",$brand);
     	
@@ -639,7 +662,7 @@ class indexAction extends frontendAction {
     		case "meishi":$itemCate="百货食品";break;
     	}
     	
-    	$item = M("item");
+    	$item = M("item_taobao");
     	if($itemCate == ""){
     		if ($method=="0") {
     			$condition["news"] = "1";
@@ -722,7 +745,7 @@ class indexAction extends frontendAction {
     	$tokenTall = $token;
     	$this->assign('tokenTall',$tokenTall);
     	
-    	$item = M("item");
+    	$item = M("item_taobao");
     	//if($token != ""){
     	//	$condition["tokenTall"]=$token;
     	//}
@@ -766,7 +789,7 @@ class indexAction extends frontendAction {
 	    	$tokenTall = $token;
 	    	$this->assign('tokenTall',$tokenTall);
 	    	//echo $keyword."hi";die();
-	    	$item = M("item");
+	    	$item = M("item_taobao");
 	    	if($token != "" & $_SESSION["search_all"] != "Y"){
 	    	   $condition["tokenTall"]=$token;
 	    	}

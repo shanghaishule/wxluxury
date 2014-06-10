@@ -246,16 +246,19 @@ class IndexAction extends UserAction{
 		$items_taobao_data["brand"] = $brand["BelongBrand"];
 		$items_taobao_data["Huohao"] = $this->_post("Huohao","trim");
 		$item_goods = $items_taobao->where($items_taobao_data)->select();
+		$item_new = array();
 		foreach ($item_goods as $item_good){
-			$item_good["tokenTall"] = $token;
-			$item_good["id"]="";
+			$item_new = $item_good;
+			$item_new["tokenTall"] = $token;
+			$item_new["id"]="";
+			$item_new["old_price"] = $item_good["price"];
 			$items_having["Uninum"] = $item_good["Uninum"];
 			$items_having["tokenTall"] = $token;
-			
+			//var_dump($item_new);die();
 			if ($items->where($items_having)->find()) {
 				$having_num ++;
 			}
-			elseif ($items->add($item_good)) {
+			elseif ($items->add($item_new)) {
 				$get_num ++;
 			}else{
 				$failed_num ++;
