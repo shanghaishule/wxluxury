@@ -1153,10 +1153,14 @@ class indexAction extends frontendAction {
     		$match_comment[$index]["uname"] = $username2["username"];    		
     		$index++;
     	}
-
     	//dump($match_comment);exit;
     	$this->assign("match_comment",$match_table);
     	$this->assign("match_p",$match_comment);
     	$this->display();
     }
+    //添加搭配分享评论
+    public function add_comments(){
+    	
+    } 
+    
 }

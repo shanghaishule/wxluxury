@@ -83,19 +83,26 @@
   </div>
   <script>
   $(function(){
-   $(".match_comments .b10:last").remove()
+   $(".match_comments .b10:last").remove();
    $(".match_comments").append('<div class="p-null"></div>');
    $("#inp").focus(function(){
-	   $(this).val('');
+	   if($(this).val()=='喜欢ta的范儿'){
+	   		$(this).val('');
+	   }
    }).blur(function(){
-	   $(this).val('喜欢ta的范儿');
+	   if($(this).val()==''){
+	   		$(this).val('喜欢ta的范儿');
+	   }
    });
   });
   </script>
   {// 评论end}
   <div class="p-input">
+  <form name="form1" action="{:U('home/user/index')}" method="post">
+  <input type="hidden" value="" name="match_id"/>
   <input id="inp" type="text" value="喜欢ta的范儿" />
   <input id="sub" type="submit" value="发送" />
+  </form>
   </div>		
 </div>
 </div>

@@ -39,9 +39,8 @@
         });
     </script>
     
-	
 </div>
-  
+<div class="fix-share" style="display:none"><img width="100%" height="100%" src="__STATIC__/images/share.png" /></div> 
 <div id="content">
     <volist name="match_table" id="match">
     <div class="dapei_block">
@@ -76,7 +75,6 @@
 				
 				<li>
 					<img class="share" src="__STATIC__/weixin/css/images/share.png" />
-					<span class="s-num">888</span>
 				</li>
 				
 				<li>
@@ -108,8 +106,7 @@
     </div>
 </div>  
 <div style="height:1px;margin:35px 0;border-top:1px dashed #ffffff"></div>     
- </volist>
-		  
+ </volist>		  
 </div>
 <include file="public:footer" />
 <script>
@@ -124,7 +121,12 @@ $(".more").click(function(){
 		});
 
 });	
-
+$(".share").click(function(){
+	$(".fix-share").show();
+});
+$(".fix-share").click(function(){
+	$(this).hide();
+});
 $(".zan").click(function(e){
 	anp(e);
 });

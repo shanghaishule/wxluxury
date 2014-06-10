@@ -19,7 +19,7 @@ class baseAction extends Action
         
         //设置wecha_id值
         $this->getWechaId();
-        
+        //dump($_SESSION["wecha_id"]);
         C($setting);
         //发送邮件
         $this->assign('async_sendmail', session('async_sendmail'));
