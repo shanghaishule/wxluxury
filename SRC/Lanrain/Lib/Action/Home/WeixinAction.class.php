@@ -29,6 +29,14 @@ class WeixinAction extends Action
 			$follow_data['follow_time']=$data['CreateTime'];
 			$foloow_lists = M('Follow')->add($follow_data);
 			
+			$data_user['sessid'] = $_COOKIE['PHPSESSID'];
+			$data_user['wecha_id'] = $data['FromUserName'];
+			
+			$user_phone['wecha_id'] = $data['FromUserName'];
+			if (false == M("auser_phone")->find($user_phone)) {
+				M("auser_phone")->save($data_user);
+			}
+			
             $this->requestdata('follownum');
             $data = M('Areply')->field('home,keyword,content')->where(array(
                 'token' => $this->token

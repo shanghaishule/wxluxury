@@ -842,7 +842,7 @@ class indexAction extends frontendAction {
     	/***商品分类**/
     	$item_cate=M("item_cate")->select();
     	$this->assign('item_cate',$item_cate);
-    	var_dump($_COOKIE);die();
+    	//var_dump();die();
     	
     	$filter = $this->_get("order","trim");
     	if ($filter == "") {
