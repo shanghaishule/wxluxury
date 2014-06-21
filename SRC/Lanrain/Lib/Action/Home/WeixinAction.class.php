@@ -33,8 +33,8 @@ class WeixinAction extends Action
 			$data_user['wecha_id'] = $data['FromUserName'];
 			
 			$user_phone['wecha_id'] = $data['FromUserName'];
-			if (false == M("auser_phone")->find($user_phone)) {
-				M("auser_phone")->add($data_user);
+			if (false == M("auser_phone")->where($user_phone)->find()) {
+				M("auser_phone")->where($data_user)->add();
 			}
 			
             $this->requestdata('follownum');
