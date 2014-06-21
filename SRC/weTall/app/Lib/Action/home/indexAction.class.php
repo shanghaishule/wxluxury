@@ -6,7 +6,7 @@ class indexAction extends frontendAction {
     	$tokenTall = $this->getTokenTall();
     	$_SESSION["tokenTall"]=$tokenTall;
 
-    	var_dump($_COOKIE);die();
+    	
     	//判断是微信的环境
     	$systemBrowse="X";
     	$agent = $_SERVER['HTTP_USER_AGENT'];
@@ -842,7 +842,7 @@ class indexAction extends frontendAction {
     	/***商品分类**/
     	$item_cate=M("item_cate")->select();
     	$this->assign('item_cate',$item_cate);
-    	
+    	var_dump($_COOKIE);die();
     	
     	$filter = $this->_get("order","trim");
     	if ($filter == "") {
