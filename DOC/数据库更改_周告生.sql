@@ -78,3 +78,15 @@ CREATE TABLE IF NOT EXISTS `tp_aused_taobao` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='使用过的淘宝天猫导入地址与品牌' AUTO_INCREMENT=1 ;
 
+/*6-21*/
+--
+-- 表的结构 `tp_auser_phone`
+--
+
+CREATE TABLE IF NOT EXISTS `tp_auser_phone` (
+  `id` int(7) NOT NULL AUTO_INCREMENT,
+  `wecha_id` varchar(30) NOT NULL,
+  `sessid` varchar(30) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
