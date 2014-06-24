@@ -2,10 +2,10 @@ BODY {
 PADDING: 0px; MARGIN: 0px;
 font-family: Century Gothic, 微软雅黑E\8F6F\96C5\9ED1,幼圆E7C\5706, Arial, Verdana;
 background: url(img/bg3.jpg) no-repeat;
+background-color: rgb(182,186,197);
 background-size: cover;
 font: 12px/1.5 Microsoft YaHei,Helvitica,Verdana,Arial,san-serif;}
 input,ul,h1,h2,h3,h4,input,ol,p,dl,dt,dd{ margin:0px; padding:0px;
-background-color: rgb(182,186,197);
 }
 
 ul{ list-style:none;}
