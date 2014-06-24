@@ -1,9 +1,58 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-<title>登陆与注册－{lanrain::C('site_title')}</title>
-<include file="Public:header2"/>
+<title>登陆与注册－志愿白沙</title>
+<link rel="stylesheet" type="text/css" href="./tpl/Home/lanrain/common/css/style2.css"/>
+<link rel="stylesheet" type="text/css" href="./tpl/Home/lanrain/common/css/index.css"/>
+<!--[if lte IE 6]>
+<link rel="stylesheet" type="text/css" href="./tpl/Home/lanrain/common/css/ie6.css"/>
+<![endif]-->
+<link rel="stylesheet" type="text/css" href="./tpl/Home/lanrain/common/css/home.css"/>
+<script type="text/javascript">window.onerror=function(){return true;}</script>
+<script type="text/javascript" src="./tpl/Home/lanrain/common/js/lang.js"></script>
+<script type="text/javascript" src="./tpl/Home/lanrain/common/js/config.js"></script>
+<script type="text/javascript" src="./tpl/Home/lanrain/common/js/jquery.js"></script>
+<script type="text/javascript" src="./tpl/Home/lanrain/common/js/common.js"></script>
+<script type="text/javascript" src="./tpl/Home/lanrain/common/js/page.js"></script>
+<script type="text/javascript" src="./tpl/Home/lanrain/common/js/jquery.lazyload.js"></script>
+<script type="text/javascript">
+GoMobile('');
+var searchid = 5;
+</script>
+</head>
+<body >
+<div class="topbg">
+<div class="top">
+<div class="toplink">
+<div class="welcome">
+	<a href="" title="淘乐"><img src="/images/logo.png" width="125px" height="40px"/></a>
+</div>
+    <div class="memberinfo"  id="destoon_member">	
+		你好&nbsp;&nbsp;<span class="f_red">游客</span>&nbsp;&nbsp;
+			<a href="/index.php?m=Index&a=login">登录</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+			<a href="/index.php?m=Index&a=reg">注册</a>
+				
+	</div>
+	
+	<!-- div class="logo">
+    	<div class="navr">
+        <ul id="topMenu">           
+			 <li  ><a href="/index.php?g=Home&m=Index&a=index" >首页</a></li>
+             <li ><a href="/index.php?g=Home&m=Index&a=fc">功能介绍</a></li>
+             <li ><a href="/index.php?g=Home&m=Index&a=about">关于我们</a></li>
+             <li ><a href="/index.php?g=Home&m=Index&a=price">资费说明</a></li>
+			 <li ><a href="/index.php?g=User&m=Index&a=index">管理中心</a></li>
+             <li ><a href="/index.php?g=Home&m=Index&a=help">帮助中心</a></li>
+        </ul>
+        </div>
+      </div -->
+</body>
+</div>
+    
+    </div>
+</div>
 
 
 <style>
@@ -46,10 +95,10 @@ a:hover{ text-decoration: underline; }
 .login-other .head strong{ font-weight: normal; color: #999; }
 </style>
 <div class="abody">
-<div id="company_name">酷衣地图后台管理系统</div>
+<div id="company_name">志愿白沙后台管理系统</div>
       
      <div class="body think-form">       
-<form action="{lanrain::U('Users/checklogin')}" method="post" class="login" id="tform">
+<form action="/index.php?m=Users&a=checklogin" method="post" class="login" id="tform">
 	<table width="200" border="0" align="center">
 	<tr><td>
             <strong style="font-weight: normal;font-size: 30px;vertical-align: bottom;color: white;">用户登录</strong>
@@ -67,11 +116,11 @@ a:hover{ text-decoration: underline; }
 </tr>
 	<tr>
 		<td align="right">
-			<input id="login" type="image" src="{lanrain::RES}/images/login.png" width="100" height="35" onclick="return dosubmit();" />
+			<input id="login" type="image" src="./tpl/Home/lanrain/common/images/login.png" width="100" height="35" onclick="return dosubmit();" />
 		</td>
 	</tr>
 	</table>
-</form>
+<input type="hidden" name="__hash__" value="3e9fde7441cc55bf46afe7f8361af205_b748f5208ce0bb7a3b40bad2af1ad908" /></form>
 
             
     </div>
