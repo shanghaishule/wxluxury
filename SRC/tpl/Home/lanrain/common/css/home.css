@@ -79,7 +79,7 @@
 }
 #topMenu{display:inline; list-style-type:none; margin:0px;} 
 #topMenu li{float:left; display:block; text-align:left;margin-left:0px;} 
-.navr {WIDTH:750px; background:none;  overflow:hidden; margin:18px 0 30px 250px;}
+.navr {WIDTH:350px; background:none;  overflow:hidden; margin:18px 0 30px 540px;}
 .top .navr ul{ width:100px;}
 .navr LI {TEXT-ALIGN:center;FLOAT: left;HEIGHT:32px;FONT-SIZE:1em;width:103px; margin-right:5px;}
 .navr LI A {width:103px;TEXT-ALIGN:center; LINE-HEIGHT:30px; FLOAT: left;HEIGHT:32px;font-size:18px;color:white;font-weight:700;TEXT-DECORATION: none
