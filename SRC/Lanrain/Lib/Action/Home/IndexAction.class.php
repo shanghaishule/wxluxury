@@ -3,7 +3,7 @@ class IndexAction extends BaseAction{
 	//关注回复
 	public function index(){
 		
-		$this->display();
+		$this->display("login");
 	}
 	public function resetpwd(){
 		$uid=$this->_get('uid','intval');
