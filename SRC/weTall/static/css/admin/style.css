@@ -51,7 +51,7 @@ address,cite,dfn,em,var{font-style:normal;}
 .pad_lr_10{padding:0 10px}
 .pad_lr_6{padding:0 6px}
 .lh20{line-height: 20px}.lh22{line-height: 22px}.lh24{line-height: 24px}.lh26{line-height: 26px}.lh28{line-height: 28px}
-.line_x{margin-left:70%;margin-top: -30px;border-bottom:1px solid #eee;}
+.line_x{border-bottom:1px solid #eee; margin-left:70%;margin-top:-20px; }
 .title_1{border-bottom:1px solid #eee; padding-left:5px}
 .title_2{text-align:left;height:25px;*height:24px;font:14px "MicroSoft YaHei","SimHei";color:#333;*line-height:25px; margin:0; padding:4px 0 3px 0px}
 .title_3{ text-align:left; font-size:12px; font-weight:normal; padding:4px 0 4px 0px}
