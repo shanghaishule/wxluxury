@@ -19,8 +19,17 @@ class brandlistAction extends backendAction
         //$this->assign('big_menu', $big_menu);
 
         //默认排序
-        $this->sort = 'ordid';
-        $this->order = 'ASC';
+        //$this->sort = 'ordid';
+       // $this->order = 'ASC';
+        
+        sort($big_menu);
+        foreach($big_menu as $key => $val){
+        	echo "big_menu[".$key."] = " . $val . "\n";
+        	
+        }
+    }
+         
+        
     }
 
     public function _before_add(){
