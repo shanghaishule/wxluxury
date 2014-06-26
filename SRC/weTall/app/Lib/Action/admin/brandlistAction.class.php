@@ -16,22 +16,18 @@ class brandlistAction extends backendAction
             'width' => '400',
             'height' => '130'
         );
+        
         //$this->assign('big_menu', $big_menu);
-
+        //sort($big_menu);
         //默认排序
         //$this->sort = 'ordid';
-       // $this->order = 'ASC';
+       //$this->order = 'ASC';
+        $this->sort="name";
+        $this->order ="asc";
         
-        sort($big_menu);
-        foreach($big_menu as $key => $val){
-        	echo "big_menu[".$key."] = " . $val . "\n";
-        	
-        }
-    }
-         
-        
-    }
-
+    }           
+    
+    
     public function _before_add(){
     	if (IS_POST) {
     		//上传图片
