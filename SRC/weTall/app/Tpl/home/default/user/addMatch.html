@@ -46,17 +46,19 @@
   
 <form id="matchForm" action="{:U('user/addMatch')}" method="post" enctype="multipart/form-data">
 <table class = "info">
-
+<tr>
+	<!-- <td width="68%" colspan="3"><input style="height:25px;" name="title" id="title" size="32%" type="text" value="{$math_data.title}"></td> -->	
+	
+	<td width="68%" colspan="3"><textarea style="height:100%;width:100%;overflow-y:auto;background-color:block;" rows=5;name="title" id="title" size="32%" type="text" value="{$math_data.title}">写下我的心情······</textarea></td>	
+	
+</tr>
 <tr style="background:#006699;color:white;height:32px;">
 	<td>上传我的照片 {$my_img}</td>
 	<td colspan="2"><input  name="my_img" id="my_img" onchange="valtext()" type="file"  >
 	    <input type="hidden" name="img_name" id="img_name" value="{$math_data.my_img}"> 
 	</td>
 </tr>
-<tr>
-	<td>写下我的心情</td>
-	<td width="68%" colspan="3"><input style="height:25px;" name="title" id="title" size="32%" type="text" value="{$math_data.title}"></td>
-</tr>
+
 
 <tr >
 <td colspan="3" style="background:#006699;color:white;height:32px;">我的收藏:</td>
