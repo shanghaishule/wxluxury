@@ -49,8 +49,13 @@ function shopSearch(){
 							&nbsp;&nbsp;
 			                                                       店名：
 			                <input type="text" name="shop_name" class="text" id="shop_name" value="{Lanrain:$shop_name}"> &nbsp;							
-							<a class="btn" style="height:18px; padding-top:1px" href="javascript:void(0)" onClick="shopSearch();" >检索</a>							
+							<a class="btn" style="height:18px; padding-top:1px" href="javascript:void(0)" onClick="shopSearch();" >检索</a>	
+							
+    							<div class="content_menu ib_a blue line_x" style="margin-left:90%;margin-top:-20px;">
+    							<a class="content_menu ib_a blue line_x add fb J_showdialog" href="javascript:void(0);" data-uri="/weTall/index.php?g=Admin&m=brandlistsf&a=add" data-title="添加" data-id="add" data-width="520" data-height="360"><em>添加</em></a>
+    							</div>					
 			        	</div>
+			        	
 		            </td>
 	            </tr>
 	        </tbody>
@@ -77,6 +82,7 @@ function shopSearch(){
                 <th width=100px align="left"><span data-tdtype="order_by" data-field="id" >LBS地址</span></th>
                 <th width=80px  align="left"><span data-tdtype="order_by" data-field="status">显示地址</span></th>
                 <th width=60px  align="left"><span data-tdtype="order_by" data-field="status">电话</span></th>
+                <th width="80">管理操作</th>
             </tr>
         </thead>
     	<tbody>
@@ -88,7 +94,12 @@ function shopSearch(){
                 <td align="left">{Lanrain:$val.shop_name}</td>
                 <td align="left">{Lanrain:$val.lbs_addr}</td>            
                 <td align="left">{Lanrain:$val.show_addr}</td>
-                <td align="left">{Lanrain:$val.phone}</td>                
+                <td align="left">{Lanrain:$val.phone}</td>  
+                
+               <td align="center">
+                	<a href="javascript:;" class="J_showdialog" data-uri="/weTall/index.php?g=admin&m=brandlistsf&a=edit&id={Lanrain:$val.id}" data-title="编辑 - {Lanrain:$val.name}"  data-id="edit" data-acttype="ajax" data-width="520" data-height="360">编辑</a> | 
+                    <a href="javascript:;" class="J_confirmurl" data-acttype="ajax" data-uri="/weTall/index.php?g=admin&m=brandlistsf&a=delete&id={Lanrain:$val.id}" data-msg="确定删除{Lanrain:$val.name}吗?">删除</a>
+                </td>             
             </tr>
             </volist>
     	</tbody>

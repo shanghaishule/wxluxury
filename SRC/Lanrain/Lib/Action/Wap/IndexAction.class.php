@@ -15,9 +15,9 @@ class IndexAction extends BaseAction{
 	public function _initialize(){
 		parent::_initialize();
 		$agent = $_SERVER['HTTP_USER_AGENT']; 
-		if(!strpos($agent,"icroMessenger")&&!isset($_GET['show'])) {
+		/*if(!strpos($agent,"icroMessenger")&&!isset($_GET['show'])) {
 			echo '此功能只能在微信浏览器中使用';exit;
-		}
+		}*/
 		//
 		$Model = new Model();
 		$rt=$Model->query("CREATE TABLE IF NOT EXISTS `tp_site_plugmenu` (

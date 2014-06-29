@@ -5,7 +5,7 @@ class set_discountAction extends BackAction {
 	public function index() {
 		
 		$map = array();
-		$UserDB = D('set_discount');
+		$UserDB = M('set_discount');
 		$count = $UserDB->where($map)->count();
 		$Page       = new Page($count,8);// 实例化分页类 传入总记录数
 		// 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取

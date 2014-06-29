@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>搭配分享评论</title>
+<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="format-detection" content="telephone=no">
+<meta charset="utf-8">
+<link href="__STATIC__/css/productdetail.css" rel="stylesheet" type="text/css">
+<link type="text/css" rel="stylesheet" href="__STATIC__/weixin/css/shop.css">
+<link type="text/css" rel="stylesheet" href="__STATIC__/weixin/css/match.css">
+<script type="text/javascript" src="__STATIC__/js/jquery/jquery.js"></script>
+</head>
+<body>
+<div class="wrap3">
+<div style="height:45px;"></div>
+<div id="nav">
+	<ul class="navlist">
+		<li class="r" id="n_0"><a href="{:U('home/index/index', array('tokenTall'=>$tokenTall))}"><div class="home_page_logo"></div></a></li>
+    	<li class="r" id="n_3">
+    		<span >搭配分享</span>
+        </li>
+        <li class="r" id="n_1"><a href="{:U('home/user/index', array('tokenTall'=>$tokenTall))}"><div class="find_04"></div></a></li>
+        
+    </ul>
+    <script type="text/javascript">
+    	$(".navlist > li#n_0").click(function(){
+			$(this).toggleClass("active");
+		});
+		$(".navlist > li.r a").each(function() {
+            href="index.php-app=member&act=login&ret_url=-index.php-app=member.htm"+$(this).attr("href");
+			whref=window.location.href;
+			if(whref.indexOf(href)!='-1'){
+				$(this).parent("li").addClass("active");
+			}
+        });
+    </script>
+    
+	
+</div>
+<div id="content">
+  <volist name="match_comment" id="match">
+   <div class="dapei_block">
+	
+	<div class="eject_btn">
+		<div class="user-img fl"><img src="__STATIC__/weixin/css/images/p1.gif" /></div>
+		<div class="user-name-time fl">
+			<div class="u-name">{$match.uname}</div>
+			<div class="u-time">7小时前</div>
+		</div>
+		<div class="u-content fl">
+			<div class="enter" style="background:none;">{$match.title}</div>
+	    </div>
+	</div>
+	<div class="cl"></div>
+	{// 分享的图片start }
+	<div class="shake-img">
+		<div class="shake-pic">
+			<img style="margin-right:0px;font-weight:700;" width="297" height="382" src="{$match.upd_path}" />
+		</div>	
+
+	</div>
+	{// 分享的图片end }
+   </div>
+  </volist>
+  {// 评论start}
+  <div class="match_comments">
+  <volist name="match_p" id="match_p">
+	<div class="eject_btn eject-con">
+		<div class="user-img fl"><img src="__STATIC__/weixin/css/images/p1.gif" /></div>
+		<div class="user-name-time fl">
+			<div class="u-name">{$match_p.uname}</div>
+			<div class="u-time">{$match_p.comments}</div>
+		</div>
+		<div class="u-con fr">
+			<div class="comment-time c_white" style="background:none;">{$match_p.addtime}</div>
+	    </div>
+	</div>
+	<div class="b10"></div>
+  </volist>
+  </div>
+  <script>
+  $(function(){
+   $(".match_comments .b10:last").remove();
+   $(".match_comments").append('<div class="p-null"></div>');
+   $("#inp").focus(function(){
+	   if($(this).val()=='喜欢ta的范儿'){
+	   		$(this).val('');
+	   }
+   }).blur(function(){
+	   if($(this).val()==''){
+	   		$(this).val('喜欢ta的范儿');
+	   }
+   });
+  });
+  </script>
+  {// 评论end}
+  <div class="p-input">
+  <form name="form1" action="{:U('home/user/index')}" method="post">
+  <input type="hidden" value="" name="match_id"/>
+  <input id="inp" type="text" value="喜欢ta的范儿" />
+  <input id="sub" type="submit" value="发送" />
+  </form>
+  </div>		
+</div>
+</div>
+</body>
+</html>

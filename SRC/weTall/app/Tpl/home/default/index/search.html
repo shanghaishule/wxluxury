@@ -122,13 +122,13 @@ var t2=new TouchSlider({id:'sliderlist', speed:600, timeout:6000, before:functio
       <div class="img_detail"><if condition="$compare eq 'Y'"> <a href="{:U('index/compare',array('id'=>$product['id'],'Huohao'=>$product['Huohao']))}"><else/>
       <a href="{:U('Item/index',array('id'=>$product['id'],'tokenTall'=>$product['tokenTall']))}"></if><img src="{$product.img}" width="100%" ></img></a>
       </div><br>
-      <div class="pro_detail">
+      <div class="pro_detail"><!-- 
        <volist name="brand" id="brandname">
        <if condition="$product['brand'] eq $brandname['id']">
       <label class="label" style="font-weight:700;"> {$brandname.name} <span style="color:red;">已售出:{$product.buy_num}</span></label>
       </if>
       </volist>
-      <br>
+      <br> -->
       <label class="label2">
       <if condition="$compare eq 'Y'"> <a href="{:U('index/compare',array('id'=>$product['id'],'Huohao'=>$product['Huohao']))}"><else/>
       <a href="{:U('Item/index',array('id'=>$product['id'],'tokenTall'=>$product['tokenTall']))}"></if>

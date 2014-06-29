@@ -5,6 +5,7 @@ class indexAction extends frontendAction {
     	//取商家token值，取不到则默认为空
     	$tokenTall = $this->getTokenTall();
     	$_SESSION["tokenTall"]=$tokenTall;
+
     	
     	//判断是微信的环境
     	$systemBrowse="X";
@@ -78,6 +79,26 @@ class indexAction extends frontendAction {
         $this->assign('tuijian',$tuijian);
         $this->_config_seo();
         $this->display();
+    }
+    public function brandselect(){
+    	$upload_shop = M("aused_taobao");
+    	$brand_name = $_GET["brand_name"];
+    
+    	$where["name"] = $brand_name;
+    	$brand_id = M("brandlist")->where($where)->find();
+    	
+    	$where2["brand_id"] = $brand_id["id"];
+    	$result2 = $upload_shop->where($where2)->find();
+    
+    	$result = $result2["url"];
+    
+    	if ($result){
+    		// 成功后返回客户端新增的用户ID，并返回提示信息和操作状态
+    		$this->ajaxReturn($result,"新增成功！",1);
+    	}else{
+    		// 错误后返回错误的操作状态和提示信息
+    		$this->ajaxReturn(0,"新增错误！",0);
+    	}
     }
     public function saohuo(){
     	$brand_id=$this->_get("brand_id","trim");
@@ -193,7 +214,7 @@ class indexAction extends frontendAction {
     	$result2 = $upload_shop->where($where)->find();
         $detail_stock=explode(",", $result2["detail_stock"]);
         foreach ($detail_stock as $stock){
-        	$stock_real=explode("|", $stock);
+        	$stock_real=explode("|",$stock);
         	if ($stock_real[0] == $color and $stock_real[1] == $size) {
         		$item_stcok = $stock_real[2];
         	}
@@ -356,8 +377,37 @@ class indexAction extends frontendAction {
     	$this->assign("end_point_lng",$end_point_lng);
     	$this->display();
     }
+    public function get_loaction(){
+    	$ip = get_client_ip();
+    	$url = "http://api.map.baidu.com/location/ip?ak=omi69HPHpl5luMtrjFzXn9df&ip=$ip&coor=bd09ll";
+    	$ch = curl_init();
+    	curl_setopt($ch, CURLOPT_URL, $url);
+    	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    	$output = curl_exec($ch);
+    	if(curl_errno($ch))
+    	{ echo 'CURL ERROR Code: '.curl_errno($ch).', reason: '.curl_error($ch);}
+    	curl_close($ch);
+    	$info = json_decode($output, true);
+    	if($info['status'] == "0"){
+    		$lotx = $info['content']['point']['y'];
+    		$loty = $info['content']['point']['x'];
+    		$citytemp = $info['content']['address_detail']['city'];
+    		$keywords = explode("市",$citytemp);
+    		$city = $keywords[0];
+    	}
+    	else{
+    		$lotx = "34.2597";
+    		$loty = "108.9471";
+    		$city = "西安";
+    	}
+    	if ($lotx != "") {
+    		$_SESSION["longtitude"] = $loty;
+    		$_SESSION["latitude"] = $lotx;
+    	} 
+    }
     
-    public function test(){  	
+    public function test(){  
+    	//$this->get_loaction();	
     	/***商品分类**/
     	$item_cate=M("item_cate")->select();
     	$this->assign('item_cate',$item_cate);
@@ -472,9 +522,13 @@ class indexAction extends frontendAction {
     }
    
     public function search() {
+    	//$this->get_loaction();
     	/***商品分类**/
     	$item_cate=M("item_cate")->select();
     	$this->assign('item_cate',$item_cate);
+    	
+    	//所有的搜索进入比价页面
+    	$this->assign("compare","Y");
     	
     	$brand = M("brandlist")->select();
     	$this->assign("brand",$brand);
@@ -531,16 +585,19 @@ class indexAction extends frontendAction {
     		if ($brandid != "") {
     			$latitude = $this->_post("latitude");
     			$longitude = $this->_post("longitude");
-    			$_SESSION["latitude"] = $latitude;
-    			$_SESSION["longtitude"] = $longitude;
+    			if ($latitude != "" and $longitude != "") {
+    				$_SESSION["latitude"] = $latitude;
+    				$_SESSION["longtitude"] = $longitude;
+    			}
+    			
     			
     			$brand_name = M("brandlist")->where("id=".$brandid)->find();
     			$this->assign("title",$brand_name["name"]);
     			$this->assign("City","附近店铺");
     			$this->assign("gosearch","Y");
     			
-    			$this->assign("longitude",$longitude);
-    			$this->assign("latitude",$latitude);
+    			$this->assign("longitude",$_SESSION["longtitude"]);
+    			$this->assign("latitude",$_SESSION["latitude"]);
     			
     			$this->assign("brandid",$brandid);
     			$this->nextPageBrand($_SESSION['token'],$brandid,$sortBy);
@@ -606,7 +663,7 @@ class indexAction extends frontendAction {
     		case "meishi":$itemCate="百货食品";break;
     	}
     	
-    	$item = M("item");
+    	$item = M("item_taobao");
     	if($itemCate == ""){
     		if ($method=="0") {
     			$condition["news"] = "1";
@@ -689,7 +746,7 @@ class indexAction extends frontendAction {
     	$tokenTall = $token;
     	$this->assign('tokenTall',$tokenTall);
     	
-    	$item = M("item");
+    	$item = M("item_taobao");
     	//if($token != ""){
     	//	$condition["tokenTall"]=$token;
     	//}
@@ -733,7 +790,7 @@ class indexAction extends frontendAction {
 	    	$tokenTall = $token;
 	    	$this->assign('tokenTall',$tokenTall);
 	    	//echo $keyword."hi";die();
-	    	$item = M("item");
+	    	$item = M("item_taobao");
 	    	if($token != "" & $_SESSION["search_all"] != "Y"){
 	    	   $condition["tokenTall"]=$token;
 	    	}
@@ -785,7 +842,7 @@ class indexAction extends frontendAction {
     	/***商品分类**/
     	$item_cate=M("item_cate")->select();
     	$this->assign('item_cate',$item_cate);
-    	
+    
     	
     	$filter = $this->_get("order","trim");
     	if ($filter == "") {
@@ -1077,5 +1134,34 @@ class indexAction extends frontendAction {
     public function addMatch() {
     	$this->display();
     }    
-
+    //分享搭配留言
+    public function comments(){
+    	$where["id"] = $_GET["id"];
+    	$match_coment=M("match");
+    	$result = $match_coment->where($where)->find();
+        $match_table[] = $result;
+    	$username = M("user")->where("id='".$result['uid']."'")->find();
+    	$match_table[0]["uname"] = $username["username"];
+    	//评论人员
+    	$data["match_id"] = $_GET["id"];
+    	$p_match = M("match_comments");
+    	$result2 = $p_match->where($data)->select();
+    	$match_comment = array();
+    	$index=0;
+    	foreach($result2 as $match_c){
+    		$match_comment[] = $match_c;
+    		$username2 = M("user")->where("id='".$match_c['uid']."'")->find();
+    		$match_comment[$index]["uname"] = $username2["username"];    		
+    		$index++;
+    	}
+    	//dump($match_comment);exit;
+    	$this->assign("match_comment",$match_table);
+    	$this->assign("match_p",$match_comment);
+    	$this->display();
+    }
+    //添加搭配分享评论
+    public function add_comments(){
+    	
+    } 
+    
 }

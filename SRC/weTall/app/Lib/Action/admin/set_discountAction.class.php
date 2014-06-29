@@ -12,15 +12,14 @@ class set_discountAction extends backendAction {
 	
 	public function _before_index() {
 		
-		$tokenTall = $this->getTokenTall();
-		$this->assign('tokenTall',$tokenTall);
+		
 		//显示模式
 		$sm = $this->_get('sm', 'trim');
 		$this->assign('sm', $sm);
 	
 		$big_menu = array(
 				'title' => '添加促销活动',
-				'iframe' => U('set_discount/add',array('tokenTall'=>$tokenTall)),
+				'iframe' => U('set_discount/add'),
 				'id' => 'add',
 				'width' => '520',
 				'height' => '410',
@@ -45,6 +44,7 @@ class set_discountAction extends backendAction {
 	public function _before_add(){
 		$brand = M("brandlist");
 		$this->assign("brand",$brand->select());
+		echo "hi";die();
 		if (IS_POST) {
 		//上传图片
 			if (empty($_FILES['img']['name'])) {

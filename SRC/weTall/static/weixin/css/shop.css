@@ -138,7 +138,8 @@ margin-top:8px;background:rgba(165,38,38,0.7);}
 #content form .text,#content #address_form .text{height:40px;margin:5px 0; border-radius:5px; border:1px solid #ddd; text-indent:10px; width:100%;}
 #content form .text,#content #address_form select{margin-left:10px; border-radius:5px; border:1px solid #ddd; height: 38px; margin: 5px 0;}
 #content form .text.error{ border:1px solid #F00;}
-#content .enter,#content .login_btn{ width:100%; display:block; text-align:center; margin:5px 0; height:40px; line-height:40px; border:1px solid #ddd;  background-color: #ff8700;background-image: -webkit-gradient(linear,left top,left bottom,from(#ffbf00),to(#ff8700));background-image: -webkit-linear-gradient(top,#ffbf00,#ff8700);background-image: linear-gradient(to bottom,#ffbf00,#ff8700);border-radius:5px; color:#fff; font-size:16px; cursor:pointer;}
+#content .login_btn{cursor:pointer;}
+#content .enter,#content .login_btn{width:100%;display:block;text-align:center;line-height:50px;background-color: #ff8700;background-image: -webkit-gradient(linear,left top,left bottom,from(#ffbf00),to(#ff8700));background-image: -webkit-linear-gradient(top,#ffbf00,#ff8700);background-image: linear-gradient(to bottom,#ffbf00,#ff8700);color:#fff; font-size:15px;}
 #content .ware_btn .enter{background-color: #f52f40;
 background-image: -webkit-gradient(linear,left top,left bottom,from(#ff4747),to(#f52f40));background-image: -webkit-linear-gradient(top,#ff4747,#f52f40);background-image: linear-gradient(to bottom,#ff4747,#f52f40);}
 #buy_float{
@@ -231,7 +232,7 @@ div.order_cancel_box p span {color: #f34; font-weight: bold;}
 .eject_btn,.eject_con .add{ margin-top:25px;}
 .eject_btn,.eject_con .add #warning{ color: #fd207d; margin: 8px 0;}
 .eject_btn,.eject_con .add .form_address {color: #aaa;}
-.eject_btn,.eject_con .add .form_address select {padding: 6px; margin:4px;}
+.eject_btn,.eject_con .add .form_address select {width:100%;height:50px;font-size:13px;padding-left:0 5px;/*padding: 6px; margin:4px;*/}
 .eject_con .add .form_address h3{ }
 .form_address .edit_region{border: 1px solid #ccc; padding: 3px 6px; cursor: pointer; }
 .address_list{ background: #ffffff; margin:0 10px;}
@@ -1040,8 +1041,8 @@ body .pos .none{display:block; z-index: 300001;}
 #nav .navlist .dis li {
 float:none;
 height:26px;   
-padding-left:10px;
-
+padding:3px 0 3px 10px;
+border-bottom:1px dashed white;
 }
 #nav .navlist .dis li:hover{
 background:#d9d9d9;	
@@ -1054,6 +1055,66 @@ background:#d9d9d9;
 padding:10px 0 10px 0;	
 }
 /*扫货详情*/
-.intime_img_detail{width:100%;}
+.intime_img_detail{width:96%;margin:0 auto;background:black;}
 .item_detail{color:white;font-size:13px;}
 #discount_detail{background:url(../images/luxury/images/danpin/2_06.png) no-repeat;background-size:100% 100%;height:90px;padding:5px;font-size:11px;color:white;margin-left:10px}
+
+.floatMenu{
+	font-size:12px;
+	color:white;
+	position:fixed;
+	background:rgba(80,80,80,0.7);
+	height:50px;
+	width:70px;
+	left:0px;
+	bottom:0px;
+}
+#iconm{
+	float:left;
+	height:30px;
+	margin-top:15px;
+	width:8px;
+	background:url(../images/floatMenu/right.png) no-repeat;
+	background-size:100% 60%;
+	background-position:0 0px;
+}
+#iconm2{
+	float:left;
+	height:30px;
+	margin-top:15px;
+	margin-left:4px;
+	width:10px;
+	background:url(../images/floatMenu/left.png) no-repeat;
+	background-size:100% 60%;
+	background-position:0 0px;
+	opacity:1;
+}
+.nav_menu{
+	color:rgba(110,92,92,1);;
+	background:rgba(255,255,255,1);
+	float:left;
+	width:15%;
+	padding:5px;
+	border-right:0.1em solid rgb(211,211,211);
+}
+#logo{
+	padding-top:15px;
+	float:left;
+	height:50px;
+	width:55px;	
+}
+#menu_float{
+	text-align:center;
+	width:100%;
+}
+.title_float{
+	float:left;
+	margin-top:-6px;
+	width:100%;
+}
+#imgIntime2{
+	background:black;
+	margin:0 auto;
+	width:96%;
+	height:80px;
+}
