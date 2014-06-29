@@ -2,7 +2,7 @@
 class alarmAction extends frontendAction {
     public function index() {
     	
-    	$data = $this->getXmlArray();
+		$data = $this->getXmlArray();
     	
     	// 写入文件
     	$filename = 'alarm.txt';
