@@ -13,6 +13,7 @@ class WeixinAction extends Action
         $this->data  = $weixin->request();
         $this->my    = C('site_my');
         list($content, $type) = $this->reply($data);
+        dump('test');exit;
 		$weixin->response($content, $type);
     }
     private function reply($data)
@@ -23,7 +24,6 @@ class WeixinAction extends Action
         if ('subscribe' == $data['Event']) {
 			
 			$follow_data['follow_form_id']=$data['FromUserName'];
-			$_SESSION['openid']=$data['FromUserName'];
 			$follow_data['follow_to_id']=$data['ToUserName'];
 			$follow_data['follow_time']=$data['CreateTime'];
 			$foloow_lists = M('Follow')->add($follow_data);
