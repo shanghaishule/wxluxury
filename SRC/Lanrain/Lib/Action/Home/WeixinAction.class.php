@@ -58,11 +58,12 @@ class WeixinAction extends Action
                         ));
                     }
                     $return[] = array(
-                        $infot['title'].$data['FromUserName'],
+                        $infot['title'],
                         $infot['text'],
                         $infot['pic'],
                         $url
                     );
+                    $return[] = $data['FromUserName'].'111';
                 }
                 return array(
                     $return,
