@@ -1,12 +1,12 @@
 
 .info {
 font-size: 15px;
-background:rgba(255,255,255,0.7);;
-border: 1px solid #ddd;
+/*background:rgba(255,255,255,0.7);*/
+border: 1px solid #DBD7B9;
 overflow: hidden;
 min-width: 340px;
 max-width: 640px;	
-
+width: 100%;
 }
 .wrap3 { border: 1px solid #000; margin: 4px;}
 .common_btn {
