@@ -14,7 +14,7 @@ class WeixinAction extends Action
         $this->my    = C('site_my');
         list($content, $type) = $this->reply($data);
         
-		$_SESSION['openid']=$this->data['FromUserName'];
+		$_SESSION['openid']='123456';
 		$weixin->response($content, $type);
     }
     private function reply($data)
