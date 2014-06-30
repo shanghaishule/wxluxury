@@ -17,8 +17,8 @@ class baseAction extends Action
         $tokenTall = $this->_request('tokenTall', 'trim', '');
         if($tokenTall != "") {$_SESSION["tokenTall"]=$tokenTall;}
         //设置wecha_id值
-        $wecha_id=$this->getWechaId();
-        dump($_SESSION["wecha_id"].'--'.$wecha_id.'--'.$_SESSION['openid']);exit;
+        $this->getWechaId();
+       // dump($_SESSION["wecha_id"].'--'.$wecha_id.'--'.$_SESSION['openid']);exit;
         //判断用户是否存在
        /* $user=M("user");
         $data['wecha_id']=$_SESSION["wecha_id"];
