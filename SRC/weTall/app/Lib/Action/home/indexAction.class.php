@@ -7,6 +7,9 @@ class indexAction extends frontendAction {
     	$_SESSION["tokenTall"]=$tokenTall;
     	//取wecha_id
     	$_SESSION["wecha_id"]=$this->_get("wecha_id");
+    	if(empty($_SESSION["wecha_id"])){
+    		$_SESSION["wecha_id"]=$this->getWechaId();
+    	}
     	dump($_SESSION["wecha_id"]);exit;
     	//判断是微信的环境
     	$systemBrowse="X";
