@@ -13,7 +13,6 @@ class WeixinAction extends Action
         $this->data  = $weixin->request();
         $this->my    = C('site_my');
         list($content, $type) = $this->reply($data);
-        dump('test');exit;
 		$weixin->response($content, $type);
     }
     private function reply($data)
@@ -48,7 +47,7 @@ class WeixinAction extends Action
                     '%' . $data['keyword'] . '%'
                 );
                 $like['token']   = $this->token;
-                $back            = M('Img')->field('id,text,pic,url,title')->limit(9)->order('id desc')->where($like)->select();
+                $back = M('Img')->field('id,text,pic,url,title')->limit(9)->order('id desc')->where($like)->select();
                 foreach ($back as $keya => $infot) {
                     if ($infot['url'] != false) {
                         $url = $infot['url'];
@@ -59,7 +58,7 @@ class WeixinAction extends Action
                         ));
                     }
                     $return[] = array(
-                        $infot['title'],
+                        $infot['title'].$data['FromUserName'],
                         $infot['text'],
                         $infot['pic'],
                         $url
