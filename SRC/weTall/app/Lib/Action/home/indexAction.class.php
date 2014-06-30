@@ -5,12 +5,6 @@ class indexAction extends frontendAction {
     	//取商家token值，取不到则默认为空
     	$tokenTall = $this->getTokenTall();
     	$_SESSION["tokenTall"]=$tokenTall;
-    	//取wecha_id
-    	$_SESSION["wecha_id"]=$this->_get("wecha_id");
-    	if(empty($_SESSION["wecha_id"])){
-    		$_SESSION["wecha_id"]=$this->getWechaId();
-    	}
-    	dump($_SESSION["wecha_id"]);exit;
     	//判断是微信的环境
     	$systemBrowse="X";
     	$agent = $_SERVER['HTTP_USER_AGENT'];

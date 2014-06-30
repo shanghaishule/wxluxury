@@ -20,6 +20,23 @@ class baseAction extends Action
         //设置wecha_id值
         $this->getWechaId();
         //dump($_SESSION["wecha_id"]);
+        //设置wecha_id值
+        $this->getWechaId();
+        dump($_SESSION["wecha_id"]);exit;
+        //判断用户是否存在
+       /* $user=M("user");
+        $data['wecha_id']=$_SESSION["wecha_id"];
+        $arr=$user->where($data)->find();
+        if(!empty($arr)){
+        	$userinfo=$user->where($data)->select();
+        	$_SESSION["userinfo"]=$userinfo;
+        	$_SESSION["uid"]=$userinfo[0]['id'];
+        	$_SESSION["username"]=$userinfo[0]['username'];
+        	$this->assign('userinfo',$userinfo);
+        	$this->assign("login_exist","Y");
+        }else{
+        	$this->assign("login_exist","N");
+        }*/
         C($setting);
         //发送邮件
         $this->assign('async_sendmail', session('async_sendmail'));
