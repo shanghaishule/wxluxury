@@ -51,7 +51,7 @@ address,cite,dfn,em,var{font-style:normal;}
 .pad_lr_10{padding:0 10px}
 .pad_lr_6{padding:0 6px}
 .lh20{line-height: 20px}.lh22{line-height: 22px}.lh24{line-height: 24px}.lh26{line-height: 26px}.lh28{line-height: 28px}
-.line_x{border-bottom:1px solid #eee; margin-left:70%;margin-top:-20px; }
+.line_x{border-bottom:1px solid #eee; margin-left:70%;/*margin-top:-20px;*/ }
 .title_1{border-bottom:1px solid #eee; padding-left:5px}
 .title_2{text-align:left;height:25px;*height:24px;font:14px "MicroSoft YaHei","SimHei";color:#333;*line-height:25px; margin:0; padding:4px 0 3px 0px}
 .title_3{ text-align:left; font-size:12px; font-weight:normal; padding:4px 0 4px 0px}
@@ -282,7 +282,8 @@ select{ vertical-align:middle;background:none repeat scroll 0 0 #F9F9F9;border-c
 .content_menu a.on,.content_menu a.on em{background:url(bgimg/bnt_bg.png) no-repeat;background-position:0px 0px;height:28px;line-height:28px;*line-height:28px}
 .content_menu span{color:#ddd;padding:0 8px}
 .content_menu a{cursor:pointer;}
-.content_menu a.add{ padding:0 0 0 4px;}
+.content_menu a.a54
+dd{ padding:0 0 0 4px;}
 .content_menu a.add em{ padding:0 10px 0 5px;color:#fff;background-position: right top;background-position:right -1px\0;}
 .content_menu a.on{background-position:left -40px;*background-position:left -41px;_background-position:left -39px;color:#fff;padding:0 0 0 5px;}
 .content_menu a.on em{background-position:right -40px;background-position:right -41px\0;*background-position:right -41px;_background-position:right -39px;padding:0 10px 0 5px}
