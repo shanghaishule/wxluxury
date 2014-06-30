@@ -834,7 +834,7 @@ class WeixinAction extends Action
                             }
 							
                             $return[] = array(
-                                $infot['title'],
+                                $infot['title'].'1',
                                 $infot['text'],
                                 $infot['pic'],
                                 $url
