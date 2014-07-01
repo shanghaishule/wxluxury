@@ -246,6 +246,7 @@ class userAction extends userbaseAction {
     	//dump($userinfo);exit;
     	$userinfo['last_login_time']=time(); 
     	$userinfo['last_login_ip']=get_client_ip();
+    	echo $userinfo['openid'];
     	$Userarr= M('user')->where("openid='".$userinfo['openid']."'")->find();
     	dump($Userarr);
     	if(!empty($Userarr) && $Userarr!=''){
