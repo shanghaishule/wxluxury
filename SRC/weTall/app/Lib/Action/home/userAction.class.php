@@ -236,7 +236,7 @@ class userAction extends userbaseAction {
     */
     public function index() {
     	//取商家token值，取不到则默认为空
-    	import('ORG.Oauth2');
+    	import('Think.ORG.Oauth2');
     	$config['appId'] = "wx3079f89b18863917";
     	$config['appSecret'] = "69289876b8d040b3f9a367c80f8754c8";
     	if (isset($_GET['code'])){
