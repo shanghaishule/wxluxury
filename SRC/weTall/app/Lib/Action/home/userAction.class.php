@@ -262,7 +262,6 @@ class userAction extends userbaseAction {
 	    	}
     	   
    	 	}	
-    	dump($_SESSION['uid'].'--'.$_SESSION['name']);exit;
     	$tokenTall = $this->getTokenTall();
     	
         $item_order=M('item_order');
