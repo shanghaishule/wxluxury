@@ -5,8 +5,6 @@ class indexAction extends frontendAction {
     	//取商家token值，取不到则默认为空
     	$tokenTall = $this->getTokenTall();
     	$_SESSION["tokenTall"]=$tokenTall;
-
-    	
     	//判断是微信的环境
     	$systemBrowse="X";
     	$agent = $_SERVER['HTTP_USER_AGENT'];

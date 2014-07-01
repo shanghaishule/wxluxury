@@ -337,13 +337,14 @@ class itemAction extends backendAction {
                 $total_page1 = explode("/",$total_page[0]);
 
                 $total_pages = intval($total_page1[1]);
-                
+                //echo $total_pages;die();
                 $pageNo = 1;
                 $current_url = $item_search; //初始url
                 $url_array = array();
                 for($pageNo=1;$pageNo <= $total_pages;$pageNo++){
                 	$current_url = $item_search."&pageNo=".$pageNo;
                 	$result_url_arr = $this->crawler($current_url);
+                	//dump($result_url_arr);die();
                 	if ($result_url_arr) {
                 		foreach ($result_url_arr as $url) {
                 			$url10 = explode("\"",$url);
@@ -373,7 +374,7 @@ class itemAction extends backendAction {
     				}
     			}
     			
-    			$msg_su = "此店铺有".$have."个商品已经村子此次成功导入".$success_num."个，有".$failed_num."个失败了！";
+    			$msg_su = "此店铺有".$have."个商品已经成功导入".$success_num."个，有".$failed_num."个失败了！";
     			//  	*/
     			if ($success_num > 0) {
     				$messge = $message->find();
@@ -670,6 +671,7 @@ class itemAction extends backendAction {
 	 */
 	public function crawler($url) {
 		$content = $this->getUrlContent($url);//echo $content;
+		
 		if ($content) {
 			$url_list = $this->_reviseUrl($this->_filterUrl($content));
 			if ($url_list) {
