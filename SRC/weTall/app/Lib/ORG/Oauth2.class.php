@@ -19,11 +19,7 @@ class Oauth2{
 		$request2 = $this->curlGet($url2);
 		$requestArray2 = json_decode($request2, true);
 		header('Content-Type:text/html;charset=utf-8');
-		$requestArray2['last_login_time']=time();
-		$requestArray2['last_login_ip']=get_client_ip();
-		//$uid=$User->add($requestArray2);
-		//return $uid;
-		dump($requestArray2);exit;
+		return $requestArray2;
 		}
 	}
 	function curlGet($url){

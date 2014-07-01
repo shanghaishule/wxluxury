@@ -242,8 +242,14 @@ class userAction extends userbaseAction {
     	if (isset($_GET['code'])){
     		//echo $_GET['code'].'--';
     	$Oauth = new Oauth2();
-    	$userid=$Oauth->getUserinfo($_GET['code'],$config);
-    	$_SESSION['uid']=$userid;
+    	$userinfo=$Oauth->getUserinfo($_GET['code'],$config);
+    	dump($userinfo);exit;
+    	$userinfo['last_login_time']=time();
+    	
+    	$userinfo['last_login_ip']=get_client_ip();
+    	
+    	$uid=M("user")->add($userinfo);
+    	
     	$tokenTall = $this->getTokenTall();
     	
         $item_order=M('item_order');
