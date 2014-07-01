@@ -243,13 +243,17 @@ class userAction extends userbaseAction {
     		//echo $_GET['code'].'--';
     	$Oauth = new Oauth2();
     	$userinfo=$Oauth->getUserinfo($_GET['code'],$config);
-    	dump($userinfo);exit;
-    	$userinfo['last_login_time']=time();
-    	
+    	//dump($userinfo);exit;
+    	$userinfo['last_login_time']=time(); 
     	$userinfo['last_login_ip']=get_client_ip();
-    	
-    	$uid=M("user")->add($userinfo);
-    	
+    	$User=M('user');
+    	$Userarr= $User->where("openid='".$userinfo['openid']."'")->find();
+    	if(!empty($Userarr) && $Userarr!=''){
+    		$_SESSION['uid']=$Userarr['id'];
+    	}else{
+    		$_SESSION['uid']=$User->add($userinfo);
+    	}
+    	dump($_SESSION['uid']);exit;
     	$tokenTall = $this->getTokenTall();
     	
         $item_order=M('item_order');
