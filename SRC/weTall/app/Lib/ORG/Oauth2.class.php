@@ -9,7 +9,7 @@ class Oauth2{
 		$requestArray = json_decode($request, true);
 		//var_dump($requestArray);
 		$User = M('user');
-		$where['openid']=$requestArray['opneid'];
+		$where['openid']=$requestArray['openid'];
 		$Userarr=$User->where($where)->find();
 		if(!empty($Userarr) && $Userarr!=''){
 		return $Userarr;	
