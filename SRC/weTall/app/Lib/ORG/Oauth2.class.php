@@ -12,7 +12,7 @@ class Oauth2{
 		$where['wecha_id']=$requestArray['opneid'];
 		$Userarr=$User->where($where)->find();
 		if(!empty($Userarr)){
-		return $$Userarr;	
+		return $Userarr;	
 		}else{
 		$accessToken = $this->getAccessToken($config);
 		$url2 = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=".$accessToken."&openid=".$requestArray['openid'];

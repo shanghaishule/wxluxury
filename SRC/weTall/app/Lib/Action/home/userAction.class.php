@@ -240,7 +240,7 @@ class userAction extends userbaseAction {
     	$config['appId'] = "wx3079f89b18863917";
     	$config['appSecret'] = "69289876b8d040b3f9a367c80f8754c8";
     	if (isset($_GET['code'])){
-    		echo $_GET['code'].'--';
+    		//echo $_GET['code'].'--';
     		$Oauth = new Oauth2();
     		$userinfo=$Oauth->getUserinfo($_GET['code'],$config);
     		dump($userinfo);exit;
