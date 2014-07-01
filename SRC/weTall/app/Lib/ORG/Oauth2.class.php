@@ -7,7 +7,7 @@ class Oauth2{
 		$url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid='.$config['appId'].'&secret='.$config['appSecret'].'&code='.$code.'&grant_type=authorization_code';
 		$request =$this->curlGet($url);
 		$requestArray = json_decode($request, true);
-		//var_dump($requestArray);
+		var_dump($requestArray);
 		$User = M('user');
 		$where['openid']=$requestArray['openid'];
 		$Userarr=$User->where($where)->find();
