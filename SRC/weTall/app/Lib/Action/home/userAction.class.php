@@ -241,16 +241,20 @@ class userAction extends userbaseAction {
     	$config['appSecret'] = "69289876b8d040b3f9a367c80f8754c8";
     	if (isset($_GET['code'])){
     		//echo $_GET['code'].'--';
-    		$Oauth = new Oauth2();
-    		$userinfo=$Oauth->getUserinfo($_GET['code'],$config);
-    		dump($userinfo);exit;
-    	}else{
-    		echo "NO CODE";exit;
-    	}
+    	$Oauth = new Oauth2();
+    	$userinfo=$Oauth->getUserinfo($_GET['code'],$config);
+    	$userinfo['last_login_time']=time();
+    	
+    	$userinfo['last_login_ip']=get_client_ip();
+    	
+    	$uid=M("user")->add($userinfo);
     	
     	$tokenTall = $this->getTokenTall();
+    	
         $item_order=M('item_order');
+        
         $order_detail=M('order_detail');
+        
         if(!isset($_GET['status']))
         {
       	    $status=1;
@@ -260,7 +264,7 @@ class userAction extends userbaseAction {
       	    $status=$_GET['status'];
         }
       
-        $item_orders= $item_order->order('id desc')->where(array('status'=>$status,userId=>$this->visitor->info['id']))->select();
+        $item_orders= $item_order->order('id desc')->where(array('status'=>$status,userId=>$_SESSION['uid']))->select();
         foreach ($item_orders as $key=>$val)
         {
       		$order_details = $order_detail->where("orderId='".$val['orderId']."'")->select();
@@ -277,6 +281,9 @@ class userAction extends userbaseAction {
        $this->assign('tokenTall',$tokenTall);
        $this->_config_seo();
        $this->display();
+       }else{
+       	echo "NO CODE";
+       }
     }
 
     /**
