@@ -254,6 +254,7 @@ class userAction extends userbaseAction {
     		$_SESSION['uid']=M('user')->add($userinfo);
     		$_SESSION['name']=$userinfo['nickname'];
     	}
+    	
    	 }else{
     		echo "NO CODE";
     	}	
