@@ -25,7 +25,7 @@ class AdminAction extends Action{
         $authInfo = RBAC::authenticate($map);
 		//exit;
         //使用用户名、密码和状态的方式进行认证
-		//if($authInfo['password']!=$password)$this->error('账号密码不匹配，请认真填写');
+		if($authInfo['password']!=$password)$this->error('账号密码不匹配，请认真填写');
         if((false == $authInfo)) {
             $this->error('帐号不存在或已禁用！');
         }else {
