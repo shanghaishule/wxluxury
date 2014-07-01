@@ -21,8 +21,9 @@ class Oauth2{
 		header('Content-Type:text/html;charset=utf-8');
 		$requestArray2['last_login_time']=time();
 		$requestArray2['last_login_ip']=get_client_ip();
-		$uid=$User->add($requestArray2);
-		return $uid;
+		//$uid=$User->add($requestArray2);
+		//return $uid;
+		dump($requestArray2);exit;
 		}
 	}
 	function curlGet($url){
