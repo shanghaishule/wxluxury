@@ -9,9 +9,9 @@ class Oauth2{
 		$requestArray = json_decode($request, true);
 		//var_dump($requestArray);
 		$User = M('user');
-		$where['wecha_id']=$requestArray['opneid'];
+		$where['openid']=$requestArray['opneid'];
 		$Userarr=$User->where($where)->find();
-		if(!empty($Userarr)){
+		if(!empty($Userarr) && $Userarr!=''){
 		return $Userarr;	
 		}else{
 		$accessToken = $this->getAccessToken($config);
