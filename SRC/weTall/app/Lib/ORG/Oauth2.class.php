@@ -14,7 +14,6 @@ class Oauth2{
 		header('Content-Type:text/html;charset=utf-8');
 		//var_dump($requestArray2);
 		return $requestArray2;
-		}
 	}
 	function curlGet($url){
 		$ch = curl_init();
