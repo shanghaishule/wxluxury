@@ -246,14 +246,12 @@ class userAction extends userbaseAction {
     	//dump($userinfo);exit;
     	$userinfo['last_login_time']=time(); 
     	$userinfo['last_login_ip']=get_client_ip();
-    	$User=M('user');
-    	echo $userinfo['openid'];
-    	$Userarr= $User->where("openid='".$userinfo['openid']."'")->find();
+    	$Userarr= M('user')->where("openid='".$userinfo['openid']."'")->find();
     	dump($Userarr);
     	if(!empty($Userarr) && $Userarr!=''){
     		$_SESSION['uid']=$Userarr['id'];
     	}else{
-    		$_SESSION['uid']=$User->add($userinfo);
+    		$_SESSION['uid']=M('user')->add($userinfo);
     	}
     	dump($_SESSION['uid']);exit;
     	$tokenTall = $this->getTokenTall();
