@@ -1,12 +1,11 @@
 <?php
-
 class userAction extends userbaseAction {
-	public $commetns_mod;
+	/*public $commetns_mod;
 	public function _initialize(){
 		parent::_initialize();
 		$this->commetns_mod = M('comments');
 	}
-	
+	*/
 	public function ajaxlogin()
     {
        $user_name=$_POST['user_name'];
@@ -226,14 +225,29 @@ class userAction extends userbaseAction {
         $result = D('user_msgtip')->get_list($this->visitor->info['id']);
         $this->ajaxReturn(1, '', $result);
     }
-
+    public function logintest(){
+    	$redirecturl = urlencode("http://www.kuyimap.com/weTall/index.php?g=home&m=user&a=index");
+    	$url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx3079f89b18863917&redirect_uri=".$redirecturl."&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
+    	//$url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx3079f89b18863917&redirect_uri=".$redirecturl."&response_type=code&scope=snsapi_userinfo&state=zcb#wechat_redirect";
+    	header("location: ".$url);
+    }
     /**
     * 基本信息修改
     */
     public function index() {
     	//取商家token值，取不到则默认为空
+    	import('Think.ORG.Oauth2');
+    	$config['appId'] = "wx3079f89b18863917";
+    	$config['appSecret'] = "69289876b8d040b3f9a367c80f8754c8";
+    	if (isset($_GET['code'])){
+    		$Oauth = new Oauth2();
+    		$userinfo=$Oauth->getUserinfo($_GET['code'],$config);
+    		dump($userinfo);exit;
+    	}else{
+    		echo "NO CODE";exit;
+    	}
+    	
     	$tokenTall = $this->getTokenTall();
- 	
         $item_order=M('item_order');
         $order_detail=M('order_detail');
         if(!isset($_GET['status']))
@@ -676,8 +690,8 @@ class userAction extends userbaseAction {
     public function addcomm() {
      if($_POST){
      	     	
-			if ($this->commetns_mod->create()) {
-				if($this->commetns_mod->add()){
+			if (M('commetns_mod')->create()) {
+				if(M('commetns_mod')->add()){
 					echo '您的评论已经成功提交！';
 				}else{
 					echo '很遗憾，您的评论提交失败了！';
