@@ -229,7 +229,7 @@ class userAction extends userbaseAction {
     	$redirecturl = urlencode("http://www.kuyimap.com/weTall/index.php?g=home&m=user&a=index");
     	$url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx3079f89b18863917&redirect_uri=".$redirecturl."&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
     	//$url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx3079f89b18863917&redirect_uri=".$redirecturl."&response_type=code&scope=snsapi_userinfo&state=zcb#wechat_redirect";
-    	header("location: ".$url);
+    	header("Location: ".$url);
     }
     /**
     * 基本信息修改
