@@ -239,7 +239,7 @@ class userAction extends userbaseAction {
     	import('Think.ORG.Oauth2');
     	$config['appId'] = "wx3079f89b18863917";
     	$config['appSecret'] = "69289876b8d040b3f9a367c80f8754c8";
-    	if (isset($_GET['code'])){
+    	if (isset($_GET['code'])&& !isset($_SESSION['uid'])){
     		//echo $_GET['code'].'--';
     	$Oauth = new Oauth2();
     	$userinfo=$Oauth->getUserinfo($_GET['code'],$config);
@@ -248,13 +248,17 @@ class userAction extends userbaseAction {
     	$userinfo['last_login_ip']=get_client_ip();
     	echo $userinfo['openid'];
     	$Userarr= M('user')->where(array('openid'=>$userinfo['openid']))->find();
-    	dump($Userarr);
     	if(!empty($Userarr) && $Userarr!=''){
     		$_SESSION['uid']=$Userarr['id'];
+    		$_SESSION['name']=$Userarr['name'];
     	}else{
     		$_SESSION['uid']=M('user')->add($userinfo);
+    		$_SESSION['name']=$userinfo['name'];
     	}
-    	dump($_SESSION['uid']);exit;
+   	 }else{
+    		echo "NO CODE";
+    	}	
+    	//dump($_SESSION['uid']);exit;
     	$tokenTall = $this->getTokenTall();
     	
         $item_order=M('item_order');
@@ -287,9 +291,6 @@ class userAction extends userbaseAction {
        $this->assign('tokenTall',$tokenTall);
        $this->_config_seo();
        $this->display();
-       }else{
-       	echo "NO CODE";
-       }
     }
 
     /**
