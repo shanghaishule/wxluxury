@@ -239,26 +239,30 @@ class userAction extends userbaseAction {
     	import('Think.ORG.Oauth2');
     	$config['appId'] = "wx3079f89b18863917";
     	$config['appSecret'] = "69289876b8d040b3f9a367c80f8754c8";
-    	if (isset($_GET['code'])&& !isset($_SESSION['uid'])){
-    		//echo $_GET['code'].'--';
-    	$Oauth = new Oauth2();
-    	$userinfo=$Oauth->getUserinfo($_GET['code'],$config);
-    	//dump($userinfo);exit;
-    	$userinfo['last_login_time']=time(); 
-    	$userinfo['last_login_ip']=get_client_ip();
-    	$Userarr= M('user')->where(array('openid'=>$userinfo['openid']))->find();
-    	if(!empty($Userarr) && $Userarr!=''){
-    		$_SESSION['uid']=$Userarr['id'];
-    		$_SESSION['name']=$Userarr['nickname'];
-    	}else{
-    		$_SESSION['uid']=M('user')->add($userinfo);
-    		$_SESSION['name']=$userinfo['nickname'];
-    	}
-    	
-   	 }else{
-    		echo "NO CODE";
-    	}	
-    	//dump($_SESSION['uid']);exit;
+    	if(!isset($_SESSION['uid']) && $_SESSION['uid']==''){
+
+	    	if (isset($_GET['code'])){
+	    		//echo $_GET['code'].'--';
+	    	$Oauth = new Oauth2();
+	    	$userinfo=$Oauth->getUserinfo($_GET['code'],$config);
+	    	//dump($userinfo);exit;
+	    	$userinfo['last_login_time']=time(); 
+	    	$userinfo['last_login_ip']=get_client_ip();
+	    	$Userarr= M('user')->where(array('openid'=>$userinfo['openid']))->find();
+	    	if(!empty($Userarr) && $Userarr!=''){
+	    		$_SESSION['uid']=$Userarr['id'];
+	    		$_SESSION['name']=$Userarr[0]['nickname'];
+	    	}else{
+	    		$_SESSION['uid']=M('user')->add($userinfo);
+	    		$_SESSION['name']=$userinfo['nickname'];
+	    	}
+    	    		
+	    	}else{
+	    		echo "NO CODE";
+	    	}
+    	   
+   	 	}	
+    	dump($_SESSION['uid'].'--'.$_SESSION['name']);exit;
     	$tokenTall = $this->getTokenTall();
     	
         $item_order=M('item_order');
