@@ -249,6 +249,7 @@ class userAction extends userbaseAction {
     	$User=M('user');
     	echo $userinfo['openid'];
     	$Userarr= $User->where("openid='".$userinfo['openid']."'")->find();
+    	dump($Userarr);
     	if(!empty($Userarr) && $Userarr!=''){
     		$_SESSION['uid']=$Userarr['id'];
     	}else{
