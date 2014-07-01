@@ -55,29 +55,54 @@
 </table>
 <table>
 <tr style="background:black;color:white;height:32px;">
+	<tr>
+		<td style="color:white;font-size:12px;"><img src="/weTall/static/images/yulan.png" /></br>上传图片</td>
+		<td style="color:white;font-size:12px;"><img src="/weTall/static/images/heart.png"/></br>添加收藏</td>
+		<td style="color:white;font-size:12px;margin-left:5px;"><img  src="/weTall/static/images/eye_24.png"/></br> &nbsp 预览</td>
+		<td style="rowspan"><input id="save" name="save" value="保存" class="common_btn2" type="submit" style="width:149px;height:54px;margin-left:20%;font-size:30px;"></input></td>
+		<td style="rowspan"><input id="send" name="send" value="发稿" class="common_btn2" type="submit" style="width:149px;height:54px;margin-left:25%;font-size:30px;"></input></td>
+		
+	</tr>	
+</table>
+
+
+
+
+
 	<!-- <td>上传我的照片 {$my_img}</td> -->
 	<!-- td colspan="2">
 		<input  name="my_img" id="my_img" onchange="valtext()" type="file" />
 	    <input type="hidden" name="img_name" id="img_name" value="{$math_data.my_img}"> 
 	</td> -->
-	<td>
+	<!-- <tr style="float:left">
+		<tr><td><img width="30px" height="30px" src="/weTall/static/images/yulan.png" /></td></tr>
+		<tr><td style="color:white">上传图片</td></tr>
+	</tr>
+	<tr style="float:left">
+		<td><img width="30px" height="30px" src="/weTall/static/images/heart.png"/></td>
+		<td style="color:white">添加收藏</td>
+	</tr>
+	<tr style="float:left">
+		<td><img width="30px" height="30px" src="/weTall/static/images/eye_24.png"/></td>
+		<td style="color:white">预览</td>
+	</tr>
+	<!--<td>
 		<a href="javascript:void(0)" onclick="match_action({$vo.item_id})">
 		<img onclick="match_action({$vo.item_id})" style="position:absolute;z-index:2;margin-top:-10px"  
 		     width="20" height="20" src="__STATIC__/weixin/images/favi.png" id ="{$vo.item_id}" />
 		</a>
-	</td>	
- <td width="35%">
-    <input id="preview" name="preview" value="预览" class="common_btn2" type="submit"></input>
-  </td>
-  <td width="30%">
-    <input id="send" name="send" value="发稿" class="common_btn2" type="submit"></input>
-  </td>
-  <td>
-	<input id="save" name="save" value="保存" class="common_btn2" type="submit"></input>
-  </td>
+	</td>
+ <tr width="35%">
+   <td style="width:20px"> <input id="preview" name="preview" value="预览" class="common_btn2" type="submit"></input></td>
+  </tr> -->	
+<!--<tr  style="float:left;">
+    <td ><input id="send" name="send" value="发稿" class="common_btn2" type="submit" style="width:149px;height:54px;margin-top:-20px;margin-left:10px;"></input></td>
+  </tr>
+  <tr style="float:left;">
+	<td><input id="save" name="save" value="保存" class="common_btn2" type="submit" style="width:149px;height:54px;margin-top:-20px;margin-left:10px;"></input></td>
+  </tr>
 </tr> 
-
-</table>
+</table> -->
 <div style="background:#006699;color:white;height:32px;width: 100%;">我的收藏:</div>
 <div class="d-content">
 <ul>
@@ -89,9 +114,10 @@
 		     width="20" height="20" src="__STATIC__/weixin/images/favi.png" id ="{$vo.item_id}" />
 		</a>--> 
 		<div class="item" style="position: relative;">
-		    <img width="30px" height="30px" src="/weTall/static/images/eye_24.png" style=" position: absolute;right:0;top:0" />
-			<img width="190px" height="210px" src="{$vo.img}"/>
-			<p style="color:white"><span>{$vo.title|msubstr=0,12,'UTF-8',true}</span></p>
+		  <img width="30px" height="30px" src="/weTall/static/images/1.png" style=" position: absolute;right:0;top:0" />
+		  <img width="30px" height="30px" src="/weTall/static/images/2.png" style=" position: absolute;right:0;top:0" />
+			<img width="155px" height="173px" src="{$vo.img}"/>
+			<p style="color:white"><span>{$vo.title|msubstr=0,7,'UTF-8',true}</span></p>
 		</div>
 	<!-- <td colspan="2">{$vo.title}</td>	
 	<td><input type="hidden" name="txt_{$vo.item_id}" value="0" id="txt_{$vo.item_id}" /></td>	- -->
@@ -113,10 +139,14 @@
 <tr>
   <td colspan="3">
     <a href="{:U('user/mymatch')}"><input id="myshare" name="myshare" value="我的分享" class="common_btn2" type="button"></input></a>
+  </td>
+</tr>
+<tr>
+  <td >
 	<a href="{:U('user/mysave')}"><input id="mysave" name="mysave" value="我的保存" class="common_btn2" type="button"></input></a>
   </td>
 </tr>
-</table>
+
 <input type="hidden" name="is_send" value="0" id="is_send" />
 
 </form>
