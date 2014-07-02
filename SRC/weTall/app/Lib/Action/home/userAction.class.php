@@ -256,7 +256,7 @@ class userAction extends userbaseAction {
 	    		$_SESSION['uid']=M('user')->add($userinfo);
 	    		$_SESSION['name']=$userinfo['nickname'];
 	    	}
-    	    		
+    	    dump($_SESSION['uid'].'--'.$_SESSION['nickname']);exit;		
 	    	}else{
 	    		echo "NO CODE";
 	    	}
