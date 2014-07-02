@@ -183,7 +183,8 @@ class indexAction extends frontendAction {
     	foreach ($result as $match_result){
     		$match_table[] = $match_result;
     		$username = M("user")->where("id=".$match_result["uid"])->find();
-    		$match_table[$id]["uname"] = $username["username"];
+    		$match_table[$id]["uname"] = $username["nickname"];
+    		$match_table[$id]["userimgurl"] = $username["userimgurl"];
     		$id ++;
     		if ($match_result != "" or $match_result != null) {
     			$item_favi = explode(",", $match_result["item_ids"]);
@@ -1138,7 +1139,7 @@ class indexAction extends frontendAction {
     	$result = $match_coment->where($where)->find();
         $match_table[] = $result;
     	$username = M("user")->where("id='".$result['uid']."'")->find();
-    	$match_table[0]["uname"] = $username["username"];
+    	$match_table[0]["uname"] = $username["nickname"];
     	//评论人员
     	$data["match_id"] = $_GET["id"];
     	$p_match = M("match_comments");
@@ -1148,7 +1149,7 @@ class indexAction extends frontendAction {
     	foreach($result2 as $match_c){
     		$match_comment[] = $match_c;
     		$username2 = M("user")->where("id='".$match_c['uid']."'")->find();
-    		$match_comment[$index]["uname"] = $username2["username"];    		
+    		$match_comment[$index]["uname"] = $username2["nickname"];    		
     		$index++;
     	}
     	//dump($match_comment);exit;
@@ -1158,7 +1159,35 @@ class indexAction extends frontendAction {
     }
     //添加搭配分享评论
     public function add_comments(){
-    	
+    	$tokenTall=$_GET['tokenTall'];
+    	if($_SESSION['uid']==''){
+    		$this->success("页面已失效","{:U('index/match',array('tokenTall'=>$tokenTall))}");
+    	}else{
+    		$data['match_id']=$this->_post('match_id','intval');
+    		$data['uid']=$_SESSION['uid'];
+    		$data['comments']=$this->_post('comments');
+    		$data['addtime']=time();
+    		if(M('match_comments')->add($data)){
+    			$this->success('评论成功');
+    		}else{
+    			$this->success('服务器繁忙，请稍后再试！');
+    		}
+    	}
     } 
-    
+    //点赞
+    public function add_love(){
+    	if($_SESSION['uid']==''){
+    		echo '1';//页面已过期
+    	}else{
+    		$M_love = M('match_love');
+    		$data['match_id']= $_POST['matchid'];
+    		dump($_POST['matchid']);exit;
+    		$data['uid']=$_SESSION['uid'];
+    		if($M_love->add()){
+    		 echo '2';
+    		}else{
+    		 echo '3';	
+    		}
+    	}
+    }
 }
