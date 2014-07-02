@@ -46,7 +46,7 @@
     <div class="dapei_block">
 	
 	<div class="eject_btn">
-		<div class="user-img fl"><img src="__STATIC__/weixin/css/images/p1.gif" /></div>
+		<div class="user-img fl"><img src="{$match.userimgurl}" /></div>
 		<div class="user-name-time fl">
 			<div class="u-name">{$match.uname}</div>
 			<div class="u-time">7小时前</div>
@@ -58,7 +58,7 @@
 	<div class="cl"></div>
 	{// 分享的图片start }
 	<div class="shake-img">
-		<div class="shake-pic loading">
+		<div class="shake-pic">
 			<img style="margin-right:0px;font-weight:700;" width="297" height="382" src="{$match.upd_path}" />
 		</div>	
 		<div class="shake-comments">
@@ -70,6 +70,7 @@
 							
 				<li>
 					<img class="zan" src="__STATIC__/weixin/css/images/zan.png" />
+					<input type="hidden" id="matchid" value="{$match.id}"/>
 					<span class="z-num">998</span>
 				</li>
 				
@@ -128,6 +129,12 @@ $(".fix-share").click(function(){
 	$(this).hide();
 });
 $(".zan").click(function(e){
+	var m_id=$(this).next('#matchid').val();
+	$.post("{:U('index/add_love')}",{matchid:m_id},function(data){
+		if(data==1){
+			alert('页面已失效，请重新进入该页面！');
+		}
+	});
 	anp(e);
 });
 
