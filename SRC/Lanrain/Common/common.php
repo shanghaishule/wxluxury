@@ -15,5 +15,7 @@ function attach($attach, $type) {
 		//URL链接
 		return $attach;
 	}
+	
 }
+
 ?>

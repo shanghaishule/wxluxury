@@ -1,12 +1,11 @@
 <?php
-
 class userAction extends userbaseAction {
-	public $commetns_mod;
+	/*public $commetns_mod;
 	public function _initialize(){
 		parent::_initialize();
 		$this->commetns_mod = M('comments');
 	}
-	
+	*/
 	public function ajaxlogin()
     {
        $user_name=$_POST['user_name'];
@@ -104,7 +103,7 @@ class userAction extends userbaseAction {
 	    	$address= $this->_post('address', 'trim');
 	    	$phone_mob= $this->_post('phone_mob', 'trim');
 	    	
-	    	$data['uid']=$this->visitor->info['id'];
+	    	$data['uid']=$_SESSION['uid'];
 	    	$data['consignee']=$consignee;
 	        $data['sheng']=$sheng;
 	    	$data['shi']=$shi;
@@ -112,7 +111,7 @@ class userAction extends userbaseAction {
 	    	$data['address']=$address;
 	    	$data['mobile']=$phone_mob;
     	
-    		//echo $this->visitor->info['id'];
+    		//echo $_SESSION['uid'];
     	
 	        if($user_address->data($data)->add()!==false)
 	        {
@@ -223,19 +222,54 @@ class userAction extends userbaseAction {
      * 用户消息提示 
      */
     public function msgtip() {
-        $result = D('user_msgtip')->get_list($this->visitor->info['id']);
+       // $result = D('user_msgtip')->get_list($_SESSION['uid']);
+        $result = D('user_msgtip')->get_list($_SESSION['uid']);
         $this->ajaxReturn(1, '', $result);
     }
-
+    public function logintest(){
+    	$redirecturl = urlencode("http://www.kuyimap.com/weTall/index.php?g=home&m=user&a=index");
+    	$url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx3079f89b18863917&redirect_uri=".$redirecturl."&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
+    	//$url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx3079f89b18863917&redirect_uri=".$redirecturl."&response_type=code&scope=snsapi_userinfo&state=zcb#wechat_redirect";
+    	header("Location: ".$url);
+    }
     /**
     * 基本信息修改
     */
     public function index() {
     	//取商家token值，取不到则默认为空
+    	import('Think.ORG.Oauth2');
+    	$config['appId'] = "wx3079f89b18863917";
+    	$config['appSecret'] = "69289876b8d040b3f9a367c80f8754c8";
+    	if(!isset($_SESSION['uid']) || $_SESSION['uid']==''){
+
+	    	if (isset($_GET['code'])){
+	    		//echo $_GET['code'].'--';
+	    	$Oauth = new Oauth2();
+	    	$userinfo=$Oauth->getUserinfo($_GET['code'],$config);
+	    	//dump($userinfo);exit;
+	    	$userinfo['last_login_time']=time(); 
+	    	$userinfo['last_login_ip']=get_client_ip();
+	    	$Userarr= M('user')->where(array('openid'=>$userinfo['openid']))->find();
+	    	if(!empty($Userarr) && $Userarr!=''){
+	    		$_SESSION['uid']=$Userarr['id'];
+	    		$_SESSION['name']=$Userarr['nickname'];
+	    	}else{
+	    		$_SESSION['uid']=M('user')->add($userinfo);
+	    		$_SESSION['name']=$userinfo['nickname'];
+	    	}
+    	   // dump($_SESSION['uid'].'-1-'.$_SESSION['name']);exit;		
+	    	}else{
+	    		echo "NO CODE";
+	    	}
+    	   
+   	 	}	
+   	 	//dump($_SESSION['uid'].'-2-'.$_SESSION['name']);exit;
     	$tokenTall = $this->getTokenTall();
- 	
+    	
         $item_order=M('item_order');
+        
         $order_detail=M('order_detail');
+        
         if(!isset($_GET['status']))
         {
       	    $status=1;
@@ -245,7 +279,7 @@ class userAction extends userbaseAction {
       	    $status=$_GET['status'];
         }
       
-        $item_orders= $item_order->order('id desc')->where(array('status'=>$status,userId=>$this->visitor->info['id']))->select();
+        $item_orders= $item_order->order('id desc')->where(array('status'=>$status,userId=>$_SESSION['uid']))->select();
         foreach ($item_orders as $key=>$val)
         {
       		$order_details = $order_detail->where("orderId='".$val['orderId']."'")->select();
@@ -273,7 +307,7 @@ class userAction extends userbaseAction {
             //会员头像规格
             $avatar_size = explode(',', C('pin_avatar_size'));
             //回去会员头像保存文件夹
-            $uid = abs(intval($this->visitor->info['id']));
+            $uid = abs(intval($_SESSION['uid']));
             $suid = sprintf("%09d", $uid);
             $dir1 = substr($suid, 0, 3);
             $dir2 = substr($suid, 3, 2);
@@ -318,7 +352,7 @@ class userAction extends userbaseAction {
             }
             //连接用户中心
             $passport = $this->_user_server();
-            $result = $passport->edit($this->visitor->info['id'], $oldpassword, array('password'=>$password));
+            $result = $passport->edit($_SESSION['uid'], $oldpassword, array('password'=>$password));
             if ($result) {
                 $msg = array('status'=>1, 'info'=>L('edit_password_success'));
             } else {
@@ -335,7 +369,7 @@ class userAction extends userbaseAction {
      */
     public function bind() {
         //获取已经绑定列表
-        $bind_list = M('user_bind')->field('type')->where(array('uid'=>$this->visitor->info['id']))->select();
+        $bind_list = M('user_bind')->field('type')->where(array('uid'=>$_SESSION['uid']))->select();
         $binds = array();
         if ($bind_list) {
             foreach ($bind_list as $val) {
@@ -370,7 +404,7 @@ class userAction extends userbaseAction {
      * 取消封面
      */
     public function cancle_cover() {
-        $result = M('user')->where(array('id'=>$this->visitor->info['id']))->setField('cover', '');
+        $result = M('user')->where(array('id'=>$_SESSION['uid']))->setField('cover', '');
         !$result && $this->ajaxReturn(0, L('illegal_parameters'));
         $this->ajaxReturn(1, L('edit_success'));
     }
@@ -381,7 +415,7 @@ class userAction extends userbaseAction {
     public function upload_cover() {
         if (!empty($_FILES['cover']['name'])) {
             $data_dir = date('ym/d');
-            $file_name = md5($this->visitor->info['id']);
+            $file_name = md5($_SESSION['uid']);
             $result = $this->_upload($_FILES['cover'], 'cover/'.$data_dir, array('width'=>'900', 'height'=>'330', 'remove_origin'=>true), $file_name);
             if ($result['error']) {
                 $this->ajaxReturn(0, $result['info']);
@@ -390,7 +424,7 @@ class userAction extends userbaseAction {
                 $cover = $data_dir.'/'.$file_name.'_thumb.'.$ext;
                 $data = '<img src="./data/upload/cover/'.$data_dir.'/'.$file_name.'_thumb.'.$ext.'?'.time().'">';
                 //更新数据
-                M('user')->where(array('id'=>$this->visitor->info['id']))->setField('cover', $cover);
+                M('user')->where(array('id'=>$_SESSION['uid']))->setField('cover', $cover);
                 $this->ajaxReturn(1, L('upload_success'), $data);
             }
         } else {
@@ -420,7 +454,7 @@ class userAction extends userbaseAction {
         $type = $this->_get('type', 'trim', 'edit');
         if ($id) {
             if ($type == 'del') {
-                $user_address_mod->where(array('id'=>$id, 'uid'=>$this->visitor->info['id']))->delete();
+                $user_address_mod->where(array('id'=>$id, 'uid'=>$_SESSION['uid']))->delete();
                 $msg = array('status'=>1, 'info'=>L('delete_success'));
                 $this->assign('msg', $msg);
             } else {
@@ -438,7 +472,7 @@ class userAction extends userbaseAction {
 	        $qu = $this->_post('qu', 'trim');
             $id = $this->_post('id', 'intval');
             if ($id and $address) {
-                $result = $user_address_mod->where(array('id'=>$id, 'uid'=>$this->visitor->info['id']))->save(array(
+                $result = $user_address_mod->where(array('id'=>$id, 'uid'=>$_SESSION['uid']))->save(array(
                     'consignee' => $consignee,
                     'address' => $address,
                     // 'zip' => $zip,
@@ -454,7 +488,7 @@ class userAction extends userbaseAction {
                 }
             } else {
                 $result = $user_address_mod->add(array(
-                    'uid' => $this->visitor->info['id'],
+                    'uid' => $_SESSION['uid'],
                     'consignee' => $consignee,
                     'address' => $address,
                     'zip' => $zip,
@@ -469,7 +503,7 @@ class userAction extends userbaseAction {
             $this->assign('msg', $msg);
         }
         
-        $address_list = $user_address_mod->where(array('uid'=>$this->visitor->info['id']))->select();
+        $address_list = $user_address_mod->where(array('uid'=>$_SESSION['uid']))->select();
         $this->assign('address_list', $address_list);
         //取商家token值，取不到则默认为空
         $tokenTall = $this->getTokenTall();
@@ -504,21 +538,21 @@ class userAction extends userbaseAction {
     public function follow() {
         $uid = $this->_get('uid', 'intval');
         !$uid && $this->ajaxReturn(0, L('follow_invalid_user'));
-        $uid == $this->visitor->info['id'] && $this->ajaxReturn(0, L('follow_self_not_allow'));
+        $uid == $_SESSION['uid'] && $this->ajaxReturn(0, L('follow_self_not_allow'));
         $user_mod = M('user');
         if (!$user_mod->where(array('id'=>$uid))->count('id')) {
             $this->ajaxReturn(0, L('follow_invalid_user'));
         }
         $user_follow_mod = M('user_follow');
         //已经关注？
-        $is_follow = $user_follow_mod->where(array('uid'=>$this->visitor->info['id'], 'follow_uid'=>$uid))->count();
+        $is_follow = $user_follow_mod->where(array('uid'=>$_SESSION['uid'], 'follow_uid'=>$uid))->count();
         $is_follow && $this->ajaxReturn(0, L('user_is_followed'));
         //关注动作
         $return = 1;
         //他是否已经关注我
-        $map = array('uid'=>$uid, 'follow_uid'=>$this->visitor->info['id']);
+        $map = array('uid'=>$uid, 'follow_uid'=>$_SESSION['uid']);
         $isfollow_me = $user_follow_mod->where($map)->count();
-        $data = array('uid'=>$this->visitor->info['id'], 'follow_uid'=>$uid, 'add_time'=>time());
+        $data = array('uid'=>$_SESSION['uid'], 'follow_uid'=>$uid, 'add_time'=>time());
         if ($isfollow_me) {
             $data['mutually'] = 1; //互相关注
             $user_follow_mod->where($map)->setField('mutually', 1); //更新他关注我的记录为互相关注
@@ -527,7 +561,7 @@ class userAction extends userbaseAction {
         $result = $user_follow_mod->add($data);
         !$result && $this->ajaxReturn(0, L('follow_user_failed'));
         //增加我的关注人数
-        $user_mod->where(array('id'=>$this->visitor->info['id']))->setInc('follows');
+        $user_mod->where(array('id'=>$_SESSION['uid']))->setInc('follows');
         //增加Ta的粉丝人数
         $user_mod->where(array('id'=>$uid))->setInc('fans');
         //提醒被关注的人
@@ -544,20 +578,20 @@ class userAction extends userbaseAction {
         $uid = $this->_get('uid', 'intval');
         !$uid && $this->ajaxReturn(0, L('unfollow_invalid_user'));
         $user_follow_mod = M('user_follow');
-        if ($user_follow_mod->where(array('uid'=>$this->visitor->info['id'], 'follow_uid'=>$uid))->delete()) {
+        if ($user_follow_mod->where(array('uid'=>$_SESSION['uid'], 'follow_uid'=>$uid))->delete()) {
             $user_mod = M('user');
             //他是否已经关注我
-            $map = array('uid'=>$uid, 'follow_uid'=>$this->visitor->info['id']);
+            $map = array('uid'=>$uid, 'follow_uid'=>$_SESSION['uid']);
             $isfollow_me = $user_follow_mod->where($map)->count();
             if ($isfollow_me) {
                 $user_follow_mod->where($map)->setField('mutually', 0); //更新他关注我的记录为互相关注
             }
             //减少我的关注人数
-            $user_mod->where(array('id'=>$this->visitor->info['id']))->setDec('follows');
+            $user_mod->where(array('id'=>$_SESSION['uid']))->setDec('follows');
             //减少Ta的粉丝人数
             $user_mod->where(array('id'=>$uid))->setDec('fans');
             //删除我微薄中Ta的内容
-            M('topic_index')->where(array('author_id'=>$uid, 'uid'=>$this->visitor->info['id']))->delete();
+            M('topic_index')->where(array('author_id'=>$uid, 'uid'=>$_SESSION['uid']))->delete();
             $this->ajaxReturn(1, L('unfollow_user_success'));
         } else {
             $this->ajaxReturn(0, L('unfollow_user_failed'));
@@ -571,14 +605,14 @@ class userAction extends userbaseAction {
         $uid = $this->_get('uid', 'intval');
         !$uid && $this->ajaxReturn(0, L('delete_invalid_fans'));
         $user_follow_mod = M('user_follow');
-        if ($user_follow_mod->where(array('follow_uid'=>$this->visitor->info['id'], 'uid'=>$uid))->delete()) {
+        if ($user_follow_mod->where(array('follow_uid'=>$_SESSION['uid'], 'uid'=>$uid))->delete()) {
             $user_mod = M('user');
             //减少我的粉丝人数
-            $user_mod->where(array('id'=>$this->visitor->info['id']))->setDec('fans');
+            $user_mod->where(array('id'=>$_SESSION['uid']))->setDec('fans');
             //减少Ta的关注人数
             M('user')->where(array('id'=>$uid))->setDec('follows');
             //删除Ta微薄中我的内容
-            M('topic_index')->where(array('author_id'=>$this->visitor->info['id'], 'uid'=>$uid))->delete();
+            M('topic_index')->where(array('author_id'=>$_SESSION['uid'], 'uid'=>$uid))->delete();
             $this->ajaxReturn(1, L('delete_fans_success'));
         } else {
             $this->ajaxReturn(0, L('delete_fans_failed'));
@@ -593,8 +627,8 @@ class userAction extends userbaseAction {
     	$tokenTall = $this->getTokenTall();
     	
     	//$favi_mod = M('shop_favi');
-    	//$favi_list = $favi_mod->where(array('userid'=>$this->visitor->info['id']))->select();
-    	$userid = $this->visitor->info['id'];
+    	//$favi_list = $favi_mod->where(array('userid'=>$_SESSION['uid']))->select();
+    	$userid = $_SESSION['uid'];
     	/*店铺信息*/
     	$model=new Model();
     	$weChaShop = $model->table('tp_shop_favi a, tp_item b')
@@ -617,8 +651,8 @@ class userAction extends userbaseAction {
     	$tokenTall = $this->getTokenTall();
     	 
     	//$favi_mod = M('shop_favi');
-    	//$favi_list = $favi_mod->where(array('userid'=>$this->visitor->info['id']))->select();
-    	$where["id"] = $this->visitor->info['id'];
+    	//$favi_list = $favi_mod->where(array('userid'=>$_SESSION['uid']))->select();
+    	$where["id"] = $_SESSION['uid'];
     	/*店铺信息*/
     	$model=M("user")->where($where)->find();
     	$weChaShop=explode(",",$model["brand_jifen"]);
@@ -676,8 +710,8 @@ class userAction extends userbaseAction {
     public function addcomm() {
      if($_POST){
      	     	
-			if ($this->commetns_mod->create()) {
-				if($this->commetns_mod->add()){
+			if (M('commetns_mod')->create()) {
+				if(M('commetns_mod')->add()){
 					echo '您的评论已经成功提交！';
 				}else{
 					echo '很遗憾，您的评论提交失败了！';
@@ -689,7 +723,7 @@ class userAction extends userbaseAction {
     }  
     
     public function mymatch() {
-    	$uid = $this->visitor->info['id'];
+    	$uid = $_SESSION['uid'];
     	$m=M();
     	$Sel_sql = "SELECT * from tp_match where is_send = 1 & uid = ".$uid;
     	$result=$m->query($Sel_sql);
@@ -732,7 +766,7 @@ class userAction extends userbaseAction {
     	}
     }
     public function mysave() {
-    	$uid = $this->visitor->info['id'];
+    	$uid = $_SESSION['uid'];
     	$m=M();
     	$Sel_sql = "SELECT * from tp_match where is_send = 2 & uid = ".$uid;
     	$result=$m->query($Sel_sql);
@@ -766,7 +800,8 @@ class userAction extends userbaseAction {
     public function addMatch() {
     
     	$tokenTall = $this->getTokenTall();
-    	$uid = $this->visitor->info['id'];
+    	//$uid = $_SESSION['uid','1'];
+    	$uid =$_SESSION['uid'];
     	$where['is_send'] = "0";
     	$where['uid'] = $uid;
     	 
@@ -840,8 +875,8 @@ class userAction extends userbaseAction {
     
     public function preMatch() {
     
-    $uid = $this->visitor->info['id'];
-    
+    //$uid = $_SESSION['uid'];
+    $uid =$_SESSION['uid'];
     //uploadfile
     $data['upd_path'] = $this->getUploadFile();
     
@@ -912,7 +947,8 @@ class userAction extends userbaseAction {
     
     	//取得收藏
     		private function getUserFavi() {
-    		$uid = $this->visitor->info['id'];
+    		//$uid = $_SESSION['uid'];
+    		$uid =$_SESSION['uid'];
     		$m=M();
     		$Sel_sql = "SELECT i.title, i.img,s.item_id FROM tp_item i, tp_shop_favi s ";
     		$Where_sql = "WHERE i.id = s.item_id and s.userid = ".$uid;

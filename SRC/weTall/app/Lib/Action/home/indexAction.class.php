@@ -5,8 +5,6 @@ class indexAction extends frontendAction {
     	//取商家token值，取不到则默认为空
     	$tokenTall = $this->getTokenTall();
     	$_SESSION["tokenTall"]=$tokenTall;
-
-    	
     	//判断是微信的环境
     	$systemBrowse="X";
     	$agent = $_SERVER['HTTP_USER_AGENT'];
@@ -173,7 +171,39 @@ class indexAction extends frontendAction {
     		$this->ajaxReturn(0,"购买错误！",0);
     	}
     }
+    public function matchtest(){
+    	$redirecturl = urlencode("http://www.kuyimap.com/weTall/index.php?g=home&m=index&a=match");
+    	$url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx3079f89b18863917&redirect_uri=".$redirecturl."&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
+    	//$url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx3079f89b18863917&redirect_uri=".$redirecturl."&response_type=code&scope=snsapi_userinfo&state=zcb#wechat_redirect";
+    	header("Location: ".$url);
+    }
     public function match() {
+    	import('Think.ORG.Oauth2');
+    	$config['appId'] = "wx3079f89b18863917";
+    	$config['appSecret'] = "69289876b8d040b3f9a367c80f8754c8";
+    	if(!isset($_SESSION['uid']) || $_SESSION['uid']==''){
+    	
+    		if (isset($_GET['code'])){
+    			//echo $_GET['code'].'--';
+    			$Oauth = new Oauth2();
+    			$userinfo=$Oauth->getUserinfo($_GET['code'],$config);
+    			//dump($userinfo);exit;
+    			$userinfo['last_login_time']=time();
+    			$userinfo['last_login_ip']=get_client_ip();
+    			$Userarr= M('user')->where(array('openid'=>$userinfo['openid']))->find();
+    			if(!empty($Userarr) && $Userarr!=''){
+    				$_SESSION['uid']=$Userarr['id'];
+    				$_SESSION['name']=$Userarr['nickname'];
+    			}else{
+    				$_SESSION['uid']=M('user')->add($userinfo);
+    				$_SESSION['name']=$userinfo['nickname'];
+    			}
+    			// dump($_SESSION['uid'].'-1-'.$_SESSION['name']);exit;
+    		}else{
+    			$this->error('页面异常',"{:U(index/brandshop)}");
+    		}
+    	
+    	}
     	$m=M();
     	$Sel_sql = "SELECT * from tp_match where is_send = 1" ;
     	$result=$m->query($Sel_sql);
@@ -185,7 +215,8 @@ class indexAction extends frontendAction {
     	foreach ($result as $match_result){
     		$match_table[] = $match_result;
     		$username = M("user")->where("id=".$match_result["uid"])->find();
-    		$match_table[$id]["uname"] = $username["username"];
+    		$match_table[$id]["uname"] = $username["nickname"];
+    		$match_table[$id]["userimgurl"] = $username["headimgurl"];
     		$id ++;
     		if ($match_result != "" or $match_result != null) {
     			$item_favi = explode(",", $match_result["item_ids"]);
@@ -853,8 +884,7 @@ class indexAction extends frontendAction {
     	}elseif($filter == "volume"){
     		$order = $filter." desc";
     	}
-    	
-    	    	
+    	  	
     	if (IS_POST) {
     		$brandname = $this->_post("txtkeyword","trim");
     		$method = $this->_post("method","trim");
@@ -1141,7 +1171,7 @@ class indexAction extends frontendAction {
     	$result = $match_coment->where($where)->find();
         $match_table[] = $result;
     	$username = M("user")->where("id='".$result['uid']."'")->find();
-    	$match_table[0]["uname"] = $username["username"];
+    	$match_table[0]["uname"] = $username["nickname"];
     	//评论人员
     	$data["match_id"] = $_GET["id"];
     	$p_match = M("match_comments");
@@ -1151,7 +1181,8 @@ class indexAction extends frontendAction {
     	foreach($result2 as $match_c){
     		$match_comment[] = $match_c;
     		$username2 = M("user")->where("id='".$match_c['uid']."'")->find();
-    		$match_comment[$index]["uname"] = $username2["username"];    		
+    		$match_comment[$index]["uname"] = $username2["nickname"]; 
+    		$match_comment[$index]["userimgurl"] = $username2["headimgurl"];
     		$index++;
     	}
     	//dump($match_comment);exit;
@@ -1161,7 +1192,35 @@ class indexAction extends frontendAction {
     }
     //添加搭配分享评论
     public function add_comments(){
-    	
+    	$tokenTall=$_GET['tokenTall'];
+    	if($_SESSION['uid']==''){
+    		$this->success("页面已失效","{:U('index/match',array('tokenTall'=>$tokenTall))}");
+    	}else{
+    		$data['match_id']=$this->_post('match_id','intval');
+    		$data['uid']=$_SESSION['uid'];
+    		$data['comments']=$this->_post('comments');
+    		$data['addtime']=time();
+    		if(M('match_comments')->add($data)){
+    			$this->success('评论成功');
+    		}else{
+    			$this->success('服务器繁忙，请稍后再试！');
+    		}
+    	}
     } 
-    
+    //点赞
+    public function add_love(){
+    	if($_SESSION['uid']==''){
+    		echo '1';//页面已过期
+    	}else{
+    		$M_love = M('match_love');
+    		$data['match_id']= $_POST['matchid'];
+    		dump($_POST['matchid']);exit;
+    		$data['uid']=$_SESSION['uid'];
+    		if($M_love->add()){
+    		 echo '2';
+    		}else{
+    		 echo '3';	
+    		}
+    	}
+    }
 }

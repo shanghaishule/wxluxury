@@ -21,11 +21,14 @@
 /*
  * -------------------------------------------------------
  * ******************** initialize.css *******************
+ /*background:url(../images/luxury/images/home/home_bg.png) repeat;
+ 	 background-attachment:fixed;
+ */
  * -------------------------------------------------------
  */
 
-body {font-family: 'STHupo'; line-height:1.6; background:#f6f6f6; background-attachment:fixed;}
-html,body { min-width:320px;max-width:640px; margin:0 auto;background:url(../images/luxury/images/home/home_bg.png) repeat;background-attachment:fixed;}
+body {font-family: 'STHupo'; line-height:1.6; background:#000000;}
+html,body { min-width:320px;max-width:640px;background:#000000; margin:0 auto;}
 h1, h2, h3, h4, h5, h6, p, ul, ol, dl, dt, dd, li, body, form, input, button, img, cite, strong, em, table, td, th { padding:0; margin:0; }
 h1, h2, h3, h4, h5, h6 { font-size: 16px;}
 hr{border:1px solid #D9D9D9;}
@@ -1118,3 +1121,25 @@ padding:10px 0 10px 0;
 	width:96%;
 	height:80px;
 }
+/**2014-6-27 anan 搭配分享**/
+.d-content{width:100%;margin:0;padding:10px 20px;}
+.d-content ul li{float:left;display:inline;margin-right:10px;}
+.d-content ul li.mar-rig-none{margin-right:0;}
+/*.d-content .item{width:30%}*/
+/**2014-7-1 搭配分享 安安**/
+
+.info .head tr .head_h{background-color:block;}
+#title{color:white;font-size:25px;background-color:black;height:100%;width:100%;overflow-y:auto;}
+.head_two tr .head_t{color:white;font-size:12px;width:16%;}
+.head_two tr .head_t{rowspan;width:25%;}
+#save{width:100px;height:60px;font-size:30px;border:none}
+#send{width:100px;height:60px;margin-left:5%;font-size:30px;border:none}
+.tb_foot{width:100%}
+.tb_foot tr{width:50%}
+.tb_foot tr td{width:50%}
+#myshare{font-size:30px;height:55px;padding-top:15px;border:none}
+#mysave{font-size:30px;height:55px;padding-top:15px;border:none}
+.dpfx{background-color:balck;}
+
+.c_b{clear:both;}
+.s-w50{width:50%;}

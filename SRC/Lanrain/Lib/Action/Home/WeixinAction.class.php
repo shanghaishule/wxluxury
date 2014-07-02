@@ -13,8 +13,6 @@ class WeixinAction extends Action
         $this->data  = $weixin->request();
         $this->my    = C('site_my');
         list($content, $type) = $this->reply($data);
-        
-		//$_SESSION['FromUserName'] = $data['FromUserName'];
 		$weixin->response($content, $type);
     }
     private function reply($data)
@@ -28,7 +26,6 @@ class WeixinAction extends Action
 			$follow_data['follow_to_id']=$data['ToUserName'];
 			$follow_data['follow_time']=$data['CreateTime'];
 			$foloow_lists = M('Follow')->add($follow_data);
-			
 			$data_user['sessid'] = $_COOKIE['PHPSESSID'];
 			$data_user['wecha_id'] = $data['FromUserName'];
 			
@@ -50,7 +47,7 @@ class WeixinAction extends Action
                     '%' . $data['keyword'] . '%'
                 );
                 $like['token']   = $this->token;
-                $back            = M('Img')->field('id,text,pic,url,title')->limit(9)->order('id desc')->where($like)->select();
+                $back = M('Img')->field('id,text,pic,url,title')->limit(9)->order('id desc')->where($like)->select();
                 foreach ($back as $keya => $infot) {
                     if ($infot['url'] != false) {
                         $url = $infot['url'];
@@ -61,9 +58,9 @@ class WeixinAction extends Action
                         ));
                     }
                     $return[] = array(
-                        $infot['title'],
-                        $infot['text'],
-                        $infot['pic'],
+                        $infot['title'].'1',
+                        $infot['text'].'2',
+                        $infot['pic'].'3',
                         $url
                     );
                 }
@@ -837,11 +834,12 @@ class WeixinAction extends Action
                             }
 							
                             $return[] = array(
-                                $infot['title'],
+                                $infot['title'].'1',
                                 $infot['text'],
                                 $infot['pic'],
                                 $url
                             );
+                            
                         }
                         return array(
                             $return,

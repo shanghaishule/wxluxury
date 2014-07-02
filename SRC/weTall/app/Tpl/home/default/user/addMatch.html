@@ -16,7 +16,7 @@
 
 </head>
 
-<body>
+<body class="dpfx">
 <div class="wrap3">
 <div style="height:45px;"></div>
 <div id="nav">
@@ -30,7 +30,7 @@
     </ul>
     <script type="text/javascript">
     	$(".navlist > li#n_0").click(function(){
-			$(this).toggleClass("active");
+			$(this).toggleClass("active"); 
 		});
 		$(".navlist > li.r a").each(function() {
             href="index.php-app=member&act=login&ret_url=-index.php-app=member.htm"+$(this).attr("href");
@@ -46,41 +46,83 @@
   
 <form id="matchForm" action="{:U('user/addMatch')}" method="post" enctype="multipart/form-data">
 <table class = "info">
+	<table style="width:100%;" class="head">
 <tr>
-	 	<!--<td width="68%" colspan="3"><input style="height:25px;background-color:black;color:white" name="title" id="title" size="100%" type="text" value="{$math_data.title} 写下我的心情···"></td> -->	
-	
-	<td width="68%" colspan="3" style="background-color:block;"><textarea style="color:white;background-color:black;height:100%;width:100%;overflow-y:auto;"rows=5;name="title" id="title" size="32%" type="text" value="{$math_data.title}">写下我的心情······</textarea></td>	
-	
+	 <!--<td width="68%" colspan="3"><input style="height:25px;background-color:black;color:white" name="title" id="title" size="100%" type="text" value="{$math_data.title} 写下我的心情···"></td> -->	
+
+	<td class="head_h" width="100%" colspan="5" ><textarea style="width:100%" class="textarea" rows=5;name="title" id="title" size="32%" type="text" value="{$math_data.title}">写下我的心情······</textarea></td>
 </tr>
-<tr style="background:#006699;color:white;height:32px;">
+	</table>
+<div style="width:100%">
+<div style="width:15%;height:30px;border:1px;position:relative;float:left;margin-left:5%;">
+    <img src="/weTall/static/images/yulan.png" style="position:relative;z-index:1;"/>
+	<input  name="my_img" id="my_img" onchange="valtext()" type="file" style="position:absolute;top:0px;left:0px;z-index:2;opacity: 0;"/><br/>
+	<input type="text" name="img_name" id="img_name" value="{$math_data.my_img}" style="width:40px;">
+</div>	
+<div class="head_two"style="float:left;width:70%;">
+		<ul style="background:black;color:white;height:32px">		
+	   
+	    <!-- <td class="head_t" style="width:57px"><img src="/weTall/static/images/yulan.png" /> </br>上传图片-->
+		<!-- <td class="head_t" style="width:57px" ><img src="/weTall/static/images/heart.png"/></br>添加收藏</td> -->
+		<li class="head_t"  style="width:23%;float:left;"><img  src="/weTall/static/images/eye_24.png" /></br>预览</li>
+		<li class="keep"  style="width:23%;float:left;margin-right:50px"><input id="save" name="save" value="保存" class="common_btn2" type="submit"></input></li>
+		<li class="keep"  style="width:23%;float:left;"><input id="send" name="send" value="发稿" class="common_btn2" type="submit" ></input></li>	
+		</ul>	
+</div>
+<div style="clear:both"></div>
+</div>
 	<!-- <td>上传我的照片 {$my_img}</td> -->
-	<td colspan="2">
+	<!-- td colspan="2">
 		<input  name="my_img" id="my_img" onchange="valtext()" type="file" />
 	    <input type="hidden" name="img_name" id="img_name" value="{$math_data.my_img}"> 
-	</td>
-</tr>
+	</td> -->
 
-
-<tr >
-<td colspan="3" style="background:#006699;color:white;height:32px;">我的收藏:</td>
-</tr>
-
-<volist name='user_info' id='vo' key="key">
-
-<tr height="36"  onclick="match_action({$vo.item_id})" <if condition="$key%2 eq 0">style="background:white;"<else/>style="background:#EAEAEA;"</if>>
-	<td >
+	<!--<td>
 		<a href="javascript:void(0)" onclick="match_action({$vo.item_id})">
 		<img onclick="match_action({$vo.item_id})" style="position:absolute;z-index:2;margin-top:-10px"  
 		     width="20" height="20" src="__STATIC__/weixin/images/favi.png" id ="{$vo.item_id}" />
 		</a>
-		<img style="position:absolute;z-index:1;margin-top:-20px;margin-left:30px;" width="35" height="35" src="{$vo.img}"/>
 	</td>
-	<td colspan="2">{$vo.title}</td>	
-	<td><input type="hidden" name="txt_{$vo.item_id}" value="0" id="txt_{$vo.item_id}" /></td>	
+ <tr width="35%">
+   <td style="width:20px"> <input id="preview" name="preview" value="预览" class="common_btn2" type="submit"></input></td>
+  </tr> -->	
+<!--<tr  style="float:left;">
+    <td ><input id="send" name="send" value="发稿" class="common_btn2" type="submit" style="width:149px;height:54px;margin-top:-20px;margin-left:10px;"></input></td>
+  </tr>
+  <tr style="float:left;">
+	<td><input id="save" name="save" value="保存" class="common_btn2" type="submit" style="width:149px;height:54px;margin-top:-20px;margin-left:10px;"></input></td>
+  </tr>
+</tr> 
+</table> -->
+
+
+<div style="color:white;height:40px;width: 100%;font-size:30px">我的收藏:</div>
+<div class="d-content">
+<ul>
+ <volist name='user_info' id='vo' key="key">
+ <li <if condition="$key eq 3">class="mar-rig-none"</if>>
+<!-- -<tr height="36"  onclick="match_action({$vo.item_id})"<if condition="$key%2 eq 0">style="background:white;"<else/>style="background:#EAEAEA;"</if>- -->
+		<!-- a href="javascript:void(0)" onclick="match_action({$vo.item_id})">
+		<img onclick="match_action({$vo.item_id})" style="position:absolute;z-index:2;margin-top:-10px"  
+		     width="20" height="20" src="__STATIC__/weixin/images/favi.png" id ="{$vo.item_id}" />
+		</a>--> 
+		<div class="item" style="position: relative;width:100%">
+		  <img width="30px" height="30px" src="/weTall/static/images/1.png" style=" position: absolute;right:0;top:0" />
+		  <img width="30px" height="30px" src="/weTall/static/images/2.png" style=" position: absolute;right:0;top:0" />
+			<img width="190px" height="190px" src="{$vo.img}"/>
+			<p style="color:white"><span>{$vo.title|msubstr=0,7,'UTF-8',true}</span></p>
+		</div>
+	<!-- <td colspan="2">{$vo.title}</td>	
+	<td><input type="hidden" name="txt_{$vo.item_id}" value="0" id="txt_{$vo.item_id}" /></td>-->
+</li>
+</volist> 
+</ul>
+<div class="c_b"></div>
+</div>
 </tr>
 
-</volist>
-<tr>
+
+<!-- <tr>
   <td width="35%">
     <input id="preview" name="preview" value="预览" class="common_btn2" type="submit"></input>
   </td>
@@ -90,16 +132,19 @@
   <td>
 	<input id="save" name="save" value="保存" class="common_btn2" type="submit"></input>
   </td>
-</tr>
-<tr>
-  <td colspan="3">
-    <a href="{:U('user/mymatch')}"><input id="myshare" name="myshare" value="我的分享" class="common_btn2" type="button"></input></a>
-	<a href="{:U('user/mysave')}"><input id="mysave" name="mysave" value="我的保存" class="common_btn2" type="button"></input></a>
-  </td>
-</tr>
+</tr>--> 
+
 </table>
 <input type="hidden" name="is_send" value="0" id="is_send" />
-
+<div class="tb_foot">
+   <div class="fl s-w50">
+    <a href="{:U('user/mymatch')}" id="myshare" class="common_btn2">我的分享<!-- <input id="myshare" name="myshare" value="我的分享" class="common_btn2" type="button" width="100%"/> --></a>
+   </div>
+   <div class="fl s-w50">
+	<a href="{:U('user/mysave')}" id="mysave" class="common_btn2">我的保存<!-- <input id="mysave"  name="mysave" value="我的保存" class="common_btn2" type="button" width="100%"/> --></a>
+   </div>
+</div>
+<div class="c_b"></div>
 </form>
 
 <script type="text/javascript">

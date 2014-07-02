@@ -45,7 +45,7 @@
    <div class="dapei_block">
 	
 	<div class="eject_btn">
-		<div class="user-img fl"><img src="__STATIC__/weixin/css/images/p1.gif" /></div>
+		<div class="user-img fl"><img <if condition="$match.userimgurl neq ''">src="$match.userimgurl"<else />src="__STATIC__/weixin/css/images/p1.gif"</if>/></div>
 		<div class="user-name-time fl">
 			<div class="u-name">{$match.uname}</div>
 			<div class="u-time">7小时前</div>
@@ -69,7 +69,7 @@
   <div class="match_comments">
   <volist name="match_p" id="match_p">
 	<div class="eject_btn eject-con">
-		<div class="user-img fl"><img src="__STATIC__/weixin/css/images/p1.gif" /></div>
+		<div class="user-img fl"><img <if condition="$match_p.userimgurl neq ''">src="$match_p.userimgurl"<else />src="__STATIC__/weixin/css/images/p1.gif"</if> /></div>
 		<div class="user-name-time fl">
 			<div class="u-name">{$match_p.uname}</div>
 			<div class="u-time">{$match_p.comments}</div>
@@ -84,7 +84,7 @@
   <script>
   $(function(){
    $(".match_comments .b10:last").remove();
-   $(".match_comments").append('<div class="p-null"></div>');
+ /*  $(".match_comments").append('<div class="p-null"></div>');
    $("#inp").focus(function(){
 	   if($(this).val()=='喜欢ta的范儿'){
 	   		$(this).val('');
@@ -93,14 +93,19 @@
 	   if($(this).val()==''){
 	   		$(this).val('喜欢ta的范儿');
 	   }
+   });*/
+   $("#sub").click(function(){
+	   if($("#inp").val()==''){
+		   return false;
+	   }
    });
   });
   </script>
   {// 评论end}
   <div class="p-input">
-  <form name="form1" action="{:U('home/user/index')}" method="post">
-  <input type="hidden" value="" name="match_id"/>
-  <input id="inp" type="text" value="喜欢ta的范儿" />
+  <form name="form1" action="{:U('home/index/add_comments',array('tokenTall'=>$tokenTall))}" method="post">
+  <input type="hidden" value="{$match['id']}" name="match_id"/>
+  <input id="inp" name="comments" type="text" placeholder="喜欢ta的范儿" />
   <input id="sub" type="submit" value="发送" />
   </form>
   </div>		
