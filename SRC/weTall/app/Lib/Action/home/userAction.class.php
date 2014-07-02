@@ -369,7 +369,7 @@ class userAction extends userbaseAction {
      */
     public function bind() {
         //获取已经绑定列表
-        $bind_list = M('user_bind')->field('type')->where(array('uid'=>$_SESSION['uid'])->select();
+        $bind_list = M('user_bind')->field('type')->where(array('uid'=>$_SESSION['uid']))->select();
         $binds = array();
         if ($bind_list) {
             foreach ($bind_list as $val) {
