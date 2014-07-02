@@ -77,7 +77,7 @@ body
     display:block;
 }
 .head{
-	background-image:url('../images/productdetail/ic_03.png');
+	/*background-image:url('../images/productdetail/ic_03.png');*/
 	background-repeat:repeat;
 	padding:   0px;border:   0px; 
     vertical-align:middle;

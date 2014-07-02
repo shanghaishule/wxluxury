@@ -798,7 +798,8 @@ class userAction extends userbaseAction {
     public function addMatch() {
     
     	$tokenTall = $this->getTokenTall();
-    	$uid = $this->visitor->info['id'];
+    	//$uid = $this->visitor->info['id'];
+    	$uid =$_SESSION['uid'];
     	$where['is_send'] = "0";
     	$where['uid'] = $uid;
     	 
@@ -872,8 +873,8 @@ class userAction extends userbaseAction {
     
     public function preMatch() {
     
-    $uid = $this->visitor->info['id'];
-    
+    //$uid = $this->visitor->info['id'];
+    $uid =$_SESSION['uid'];
     //uploadfile
     $data['upd_path'] = $this->getUploadFile();
     
@@ -944,7 +945,8 @@ class userAction extends userbaseAction {
     
     	//取得收藏
     		private function getUserFavi() {
-    		$uid = $this->visitor->info['id'];
+    		//$uid = $this->visitor->info['id'];
+    		$uid =$_SESSION['uid'];
     		$m=M();
     		$Sel_sql = "SELECT i.title, i.img,s.item_id FROM tp_item i, tp_shop_favi s ";
     		$Where_sql = "WHERE i.id = s.item_id and s.userid = ".$uid;

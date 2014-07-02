@@ -1123,3 +1123,18 @@ padding:10px 0 10px 0;
 .d-content ul li{float:left;display:inline;margin-right:10px;}
 .d-content ul li.mar-rig-none{margin-right:0;}
 /*.d-content .item{width:30%}*/
+/**2014-7-1 搭配分享 安安**/
+
+.info .head tr .head_h{background-color:block;}
+#title{color:white;font-size:25px;background-color:black;height:100%;width:100%;overflow-y:auto;}
+.head_two tr .head_t{color:white;font-size:12px;width:16%;}
+.head_two tr .head_t{rowspan;width:25%;}
+#save{width:140px;height:60px;font-size:30px;border:none}
+#send{width:140px;height:60px;margin-left:5%;font-size:30px;border:none}
+.tb_foot{width:100%}
+.tb_foot tr{width:100%}
+.tb_foot tr td{width:50%}
+#myshare{font-size:30px;width:320px;height:70px;border:none}
+#mysave{font-size:30px;width:320px;height:70px;border:none}
+html .dpfx{background-color:balck;}
+
