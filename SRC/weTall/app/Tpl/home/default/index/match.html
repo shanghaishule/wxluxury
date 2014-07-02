@@ -46,7 +46,7 @@
     <div class="dapei_block">
 	
 	<div class="eject_btn">
-		<div class="user-img fl"><img src="{if condition='$match_p.userimgurl eq '''}{/else}__STATIC__/weixin/css/images/p1.gif{/if}" /></div>
+		<div class="user-img fl"><img src="{if condition='$match_p.userimgurl neq '''}$match_p.userimgurl{/else}__STATIC__/weixin/css/images/p1.gif{/if}" /></div>
 		<div class="user-name-time fl">
 			<div class="u-name">{$match.uname}</div>
 			<div class="u-time">7小时前</div>
