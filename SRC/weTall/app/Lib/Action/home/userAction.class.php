@@ -251,18 +251,19 @@ class userAction extends userbaseAction {
 	    	$Userarr= M('user')->where(array('openid'=>$userinfo['openid']))->find();
 	    	if(!empty($Userarr) && $Userarr!=''){
 	    		$_SESSION['uid']=$Userarr['id'];
+	    		dump($Userarr);
 	    		$_SESSION['name']=$Userarr[0]['nickname'];
 	    	}else{
 	    		$_SESSION['uid']=M('user')->add($userinfo);
 	    		$_SESSION['name']=$userinfo['nickname'];
 	    	}
-    	    dump($_SESSION['uid'].'--'.$_SESSION['nickname']);exit;		
+    	    dump($_SESSION['uid'].'-1-'.$_SESSION['nickname']);exit;		
 	    	}else{
 	    		echo "NO CODE";
 	    	}
     	   
    	 	}	
-   	 	dump($_SESSION['uid'].'--'.$_SESSION['nickname']);exit;
+   	 	dump($_SESSION['uid'].'-2-'.$_SESSION['nickname']);exit;
     	$tokenTall = $this->getTokenTall();
     	
         $item_order=M('item_order');
