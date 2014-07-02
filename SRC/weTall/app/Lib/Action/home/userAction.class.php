@@ -251,8 +251,7 @@ class userAction extends userbaseAction {
 	    	$Userarr= M('user')->where(array('openid'=>$userinfo['openid']))->find();
 	    	if(!empty($Userarr) && $Userarr!=''){
 	    		$_SESSION['uid']=$Userarr['id'];
-	    		dump($Userarr);
-	    		$_SESSION['name']=$Userarr[0]['nickname'];
+	    		$_SESSION['name']=$Userarr['nickname'];
 	    	}else{
 	    		$_SESSION['uid']=M('user')->add($userinfo);
 	    		$_SESSION['name']=$userinfo['nickname'];
