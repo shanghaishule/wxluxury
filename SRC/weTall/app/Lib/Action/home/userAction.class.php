@@ -801,7 +801,7 @@ class userAction extends userbaseAction {
     
     	$tokenTall = $this->getTokenTall();
     	//$uid = $_SESSION['uid','1'];
-    	$uid =$_SESSION['uid']."1";
+    	$uid =$_SESSION['uid'];
     	$where['is_send'] = "0";
     	$where['uid'] = $uid;
     	 
