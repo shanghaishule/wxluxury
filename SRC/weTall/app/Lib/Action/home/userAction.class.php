@@ -256,13 +256,13 @@ class userAction extends userbaseAction {
 	    		$_SESSION['uid']=M('user')->add($userinfo);
 	    		$_SESSION['name']=$userinfo['nickname'];
 	    	}
-    	    dump($_SESSION['uid'].'-1-'.$_SESSION['name']);exit;		
+    	   // dump($_SESSION['uid'].'-1-'.$_SESSION['name']);exit;		
 	    	}else{
 	    		echo "NO CODE";
 	    	}
     	   
    	 	}	
-   	 	dump($_SESSION['uid'].'-2-'.$_SESSION['name']);exit;
+   	 	//dump($_SESSION['uid'].'-2-'.$_SESSION['name']);exit;
     	$tokenTall = $this->getTokenTall();
     	
         $item_order=M('item_order');
