@@ -216,7 +216,7 @@ class indexAction extends frontendAction {
     		$match_table[] = $match_result;
     		$username = M("user")->where("id=".$match_result["uid"])->find();
     		$match_table[$id]["uname"] = $username["nickname"];
-    		$match_table[$id]["userimgurl"] = $username["userimgurl"];
+    		$match_table[$id]["userimgurl"] = $username["headimgurl"];
     		$id ++;
     		if ($match_result != "" or $match_result != null) {
     			$item_favi = explode(",", $match_result["item_ids"]);
@@ -1181,7 +1181,8 @@ class indexAction extends frontendAction {
     	foreach($result2 as $match_c){
     		$match_comment[] = $match_c;
     		$username2 = M("user")->where("id='".$match_c['uid']."'")->find();
-    		$match_comment[$index]["uname"] = $username2["nickname"];    		
+    		$match_comment[$index]["uname"] = $username2["nickname"]; 
+    		$match_comment[$index]["userimgurl"] = $username2["headimgurl"];
     		$index++;
     	}
     	//dump($match_comment);exit;
