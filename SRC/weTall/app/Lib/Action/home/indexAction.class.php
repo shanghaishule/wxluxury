@@ -171,7 +171,39 @@ class indexAction extends frontendAction {
     		$this->ajaxReturn(0,"购买错误！",0);
     	}
     }
+    public function matchtest(){
+    	$redirecturl = urlencode("http://www.kuyimap.com/weTall/index.php?g=home&m=index&a=match");
+    	$url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx3079f89b18863917&redirect_uri=".$redirecturl."&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
+    	//$url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx3079f89b18863917&redirect_uri=".$redirecturl."&response_type=code&scope=snsapi_userinfo&state=zcb#wechat_redirect";
+    	header("Location: ".$url);
+    }
     public function match() {
+    	import('Think.ORG.Oauth2');
+    	$config['appId'] = "wx3079f89b18863917";
+    	$config['appSecret'] = "69289876b8d040b3f9a367c80f8754c8";
+    	if(!isset($_SESSION['uid']) || $_SESSION['uid']==''){
+    	
+    		if (isset($_GET['code'])){
+    			//echo $_GET['code'].'--';
+    			$Oauth = new Oauth2();
+    			$userinfo=$Oauth->getUserinfo($_GET['code'],$config);
+    			//dump($userinfo);exit;
+    			$userinfo['last_login_time']=time();
+    			$userinfo['last_login_ip']=get_client_ip();
+    			$Userarr= M('user')->where(array('openid'=>$userinfo['openid']))->find();
+    			if(!empty($Userarr) && $Userarr!=''){
+    				$_SESSION['uid']=$Userarr['id'];
+    				$_SESSION['name']=$Userarr['nickname'];
+    			}else{
+    				$_SESSION['uid']=M('user')->add($userinfo);
+    				$_SESSION['name']=$userinfo['nickname'];
+    			}
+    			// dump($_SESSION['uid'].'-1-'.$_SESSION['name']);exit;
+    		}else{
+    			$this->error('页面异常',"{:U(index/brandshop)}");
+    		}
+    	
+    	}
     	$m=M();
     	$Sel_sql = "SELECT * from tp_match where is_send = 1" ;
     	$result=$m->query($Sel_sql);
