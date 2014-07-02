@@ -1135,7 +1135,7 @@ padding:10px 0 10px 0;
 #save{width:140px;height:60px;font-size:30px;border:none}
 #send{width:140px;height:60px;margin-left:5%;font-size:30px;border:none}
 .tb_foot{width:100%}
-.tb_foot tr{width:100%}
+.tb_foot tr{width:50%}
 .tb_foot tr td{width:50%}
 #myshare{font-size:30px;height:55px;padding-top:15px;border:none}
 #mysave{font-size:30px;height:55px;padding-top:15px;border:none}

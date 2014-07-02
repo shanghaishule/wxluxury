@@ -800,7 +800,7 @@ class userAction extends userbaseAction {
     public function addMatch() {
     
     	$tokenTall = $this->getTokenTall();
-    	//$uid = $_SESSION['uid'];
+    	//$uid = $_SESSION['uid','1'];
     	$uid =$_SESSION['uid'];
     	$where['is_send'] = "0";
     	$where['uid'] = $uid;
