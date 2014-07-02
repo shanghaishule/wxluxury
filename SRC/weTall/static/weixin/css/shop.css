@@ -24,8 +24,8 @@
  * -------------------------------------------------------
  */
 
-body {font-family: 'STHupo'; line-height:1.6; background: black; background-attachment:fixed;}
-html,body { min-width:320px;max-width:640px;background:black; margin:0 auto;/*background:url(../images/luxury/images/home/home_bg.png) repeat;*/background-attachment:fixed;}
+body {font-family: 'STHupo'; line-height:1.6; background:#000000; background-attachment:fixed;}
+html,body { min-width:320px;max-width:640px;background:#000000; margin:0 auto;/*background:url(../images/luxury/images/home/home_bg.png) repeat;*/background-attachment:fixed;}
 h1, h2, h3, h4, h5, h6, p, ul, ol, dl, dt, dd, li, body, form, input, button, img, cite, strong, em, table, td, th { padding:0; margin:0; }
 h1, h2, h3, h4, h5, h6 { font-size: 16px;}
 hr{border:1px solid #D9D9D9;}
