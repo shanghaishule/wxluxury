@@ -30,7 +30,7 @@
     </ul>
     <script type="text/javascript">
     	$(".navlist > li#n_0").click(function(){
-			$(this).toggleClass("active");
+			$(this).toggleClass("active"); 
 		});
 		$(".navlist > li.r a").each(function() {
             href="index.php-app=member&act=login&ret_url=-index.php-app=member.htm"+$(this).attr("href");
@@ -133,7 +133,7 @@
     <a href="{:U('user/mymatch')}"><input id="myshare" name="myshare" value="我的分享" class="common_btn2" type="button"></input></a>
   </td>
 
-  <td style="width:50%;">
+  <td>
 	<a href="{:U('user/mysave')}"><input id="mysave"  name="mysave" value="我的保存" class="common_btn2" type="button"></input></a>
   </td>
 </tr>
