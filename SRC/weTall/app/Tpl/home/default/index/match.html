@@ -58,7 +58,7 @@
 	<div class="cl"></div>
 	{// 分享的图片start }
 	<div class="shake-img">
-		<div class="shake-pic">
+		<div class="shake-pic loading">
 			<img style="margin-right:0px;font-weight:700;" width="297" height="382" src="{$match.upd_path}" />
 		</div>	
 		<div class="shake-comments">
@@ -132,7 +132,6 @@ $(".zan").click(function(e){
 });
 
 function anp(e){
-	//var n=Math.round(Math.random()*10);
 	var $i=$("<b>").text("+1");
 	var x=e.pageX,y=e.pageY;
 	$i.css({top:y-20,left:x,position:"absolute",color:"#E94F06"});

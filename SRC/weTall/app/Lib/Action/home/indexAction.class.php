@@ -851,8 +851,7 @@ class indexAction extends frontendAction {
     	}elseif($filter == "volume"){
     		$order = $filter." desc";
     	}
-    	
-    	    	
+    	  	
     	if (IS_POST) {
     		$brandname = $this->_post("txtkeyword","trim");
     		$method = $this->_post("method","trim");
