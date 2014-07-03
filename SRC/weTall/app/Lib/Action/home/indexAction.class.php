@@ -1218,7 +1218,7 @@ class indexAction extends frontendAction {
     } 
     //点赞
     public function add_love(){
-    	if($_SESSION['uid']==''){
+    	if(!isset($_SESSION['uid']) && $_SESSION['uid']==''){
     		echo '1';//页面已过期
     	}else{
     		$M_love = M('match_love');

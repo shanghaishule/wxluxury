@@ -130,6 +130,7 @@ $(".fix-share").click(function(){
 $(".zan").click(function(e){
 	var m_id=$(this).next('#matchid').val();
 	$.post("{:U('index/add_love')}",{matchid:m_id},function(data){
+		alert(data);
 		if(data==1){
 			alert('页面已失效，请重新进入该页面！');
 		}else if(data==4){
