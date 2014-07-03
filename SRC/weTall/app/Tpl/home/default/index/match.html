@@ -139,7 +139,7 @@ $(".zan").click(function(e){
 		}else if(data==3){
 			alert("当前服务器忙，请稍后再试！");
 		}else{
-			$(".z-num").text(data);
+			$(this).next('.z-num').text(data);
 			anp(e);
 		}
 	});
