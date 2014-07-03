@@ -1146,8 +1146,8 @@ padding:10px 0 10px 0;
 
 /**2014-7-3 anan 商品详情**/
 .ware_text .handle_add{border:1px dashed #ddd;border-left:none;border-right:none;background:none;}
-.ware_text .handle_title{color:white}
-.handle .xh{margin-top:15px;margin-bottom:15px;}
+.ware_text .handle_title{color:white;width:18%;}
+.handle .xh{margin-top:15px;margin-bottom:15px;width:100%;}
 #content .user_menu{border-top:1px solid #ddd;border-bottom:1px solid #ddd;}
 .user_menu .active span{background:none;color:white;}
 
@@ -1157,7 +1157,7 @@ padding:10px 0 10px 0;
 
 .btn_1_l{height:1px;border-top:2px solid #ff0000;position:absolute;left:0;top:-1px;width:100%;display:none;}
 .active .btn_1_l{display:block;}
-
+.xh .size_title{width:28%;height:29px;margin-bottom: 5px;}
 
 
 
