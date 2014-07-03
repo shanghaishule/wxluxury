@@ -1215,8 +1215,7 @@ class indexAction extends frontendAction {
     		echo '1';//页面已过期
     	}else{
     		$M_love = M('match_love');
-    		$data['match_id']= $_POST['matchid'];
-    		dump($_POST['matchid']);exit;
+    		$data['matchid']= $_POST['matchid'];
     		$data['uid']=$_SESSION['uid'];
     		if($M_love->add()){
     		 echo '2';
