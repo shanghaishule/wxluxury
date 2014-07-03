@@ -370,7 +370,7 @@
                     <input name="size" id="sizeChoose" type="hidden" value="无">
                 <else/>
                 <ul class="xh">
-                	<li class="handle_title">型号:</li>
+                	<li class="handle_title">型　号:</li>
 
                     <li>
                     
@@ -385,7 +385,7 @@
                 	<input name="color" id="colorChoose" type="hidden" value="无">
                 <else/>
                 <ul class="xh">
-                    <li class="handle_title">颜色:</li>
+                    <li class="handle_title">颜　色:</li>
                     <li>
                     <volist name='color' id='vo'>
                     	<a href="javascript:void(0);" onclick="colortitle('{$vo}')" ><div class="color_title" id="color{$vo}">{$vo}</div></a>
@@ -396,7 +396,7 @@
 
                 </ul></if>
                 <ul class="xh">
-                    <li class="handle_title">购买数量:</li>
+                    <li class="handle_title bsum">购买数量:</li>
                     <li> 
                         <script>
                            function decrease_quantity(){
@@ -449,8 +449,8 @@
         <div class="ornament1"></div>
         <div class="ornament2"></div>
 	<!--xxl start-->
-        <li class="btn_1 active" id = "sheet1" style="color:red;"><a href="javascript:showinfo(1);"><span>商品详情</span></a></li>
-        <li class="btn_2" id = "sheet2"><a href="javascript:showinfo(2);"><span>用户留言</span></a></li>
+        <li class="btn_1 active" id = "sheet1" style="color:red;"><div class="btn_1_l"></div><a href="javascript:showinfo(1);"><span>商品详情</span></a></li>
+        <li class="btn_2" id = "sheet2"><a href="javascript:showinfo(2);"><div class="btn_1_l"></div><span>用户留言</span></a></li>
 	<!--xxl end-->
     </ul>
 	<div class="option_box" id = "item_info">		 
@@ -487,7 +487,7 @@
 	<!--xxl end-->
     <div class="clear"></div>
 </div>
-<include file="public:footer" />
+<!--<include file="public:footer" /> -->
 
 </div>
 </body>

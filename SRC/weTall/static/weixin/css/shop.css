@@ -683,14 +683,14 @@ div.order_cancel_box p span {color: #f34; font-weight: bold;}
 .fill_in_fun .btn_fun { padding-left: 60px; }
 .fill_in_fun .btn_fun input { border: 0; width: 75px; height: 29px; font-weight: bold; color: #c53800; background: url(../images/enter_btn.gif) no-repeat; }
 
-.user_menu {height: 30px; padding-left: 20px;position: relative; border-bottom:3px solid #ddd;}
-.user_menu li { float: left; margin-right: 4px; border:2px solid #ddd; border-bottom:none; border-radius:5px 5px 0 0;}
-
+.user_menu {height: 31px;position: relative; border-bottom:3px solid #ddd;}
+.user_menu li { float: left;border-right:1px solid #ddd; border-bottom:none;position:relative; /*border-radius:5px 5px 0 0;*/}
 .user_menu .ornament1 { position: absolute; }
 .user_menu .ornament2 { position: absolute; }
 
-.user_menu .active { display: block; font-size: 14px; font-weight: bold; color: #3f4140; text-decoration: none;}
-.user_menu .active span { display: block; padding: 2px 3px; background:#f6f6f6;color:black;height:24px;}
+.user_menu .active { display: block;/* font-size: 14px; font-weight: bold; */color: #3f4140;text-decoration: none;}
+#content .user_menu li.active{border-bottom:1px solid black}
+.user_menu span { display: block; padding: 2px 15px; /*background:#f6f6f6;color:black;*/height:24px;padding-top:5px}
 .user_menu .normal { display: block; font-size: 12px; font-weight: bold; color: #3e403f; text-decoration: none; background: url(../images/user_menu_nav.gif) no-repeat right 0; }
 .user_menu .normal:hover { text-decoration: underline; }
 .user_menu .normal span { display: block; padding: 8px 20px 8px 22px; background: url(../images/user_menu_nav.gif) no-repeat left -150px; }
@@ -1150,12 +1150,13 @@ padding:10px 0 10px 0;
 .handle .xh{margin-top:15px;margin-bottom:15px;}
 #content .user_menu{border-top:1px solid #ddd;border-bottom:1px solid #ddd;}
 .user_menu .active span{background:none;color:white;}
-.user_menu li{border:1px solid white;}
 
 
+.xh .bsum{margin-right:10px;}
 
 
-
+.btn_1_l{height:1px;border-top:2px solid #ff0000;position:absolute;left:0;top:-1px;width:100%;display:none;}
+.active .btn_1_l{display:block;}
 
 
 
