@@ -1183,9 +1183,9 @@ class indexAction extends frontendAction {
     		$username2 = M("user")->where("id='".$match_c['uid']."'")->find();
     		$match_comment[$index]["uname"] = $username2["nickname"]; 
     		$match_comment[$index]["userimgurl"] = $username2["headimgurl"];
+    		$match_comment[$index]['addtime']=fdate($username2["addtime"]);
     		$index++;
     	}
-    	//dump($match_comment);exit;
     	$this->assign("match_comment",$match_table);
     	$this->assign("match_p",$match_comment);
     	$this->display();
