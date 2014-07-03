@@ -128,7 +128,8 @@ $(".fix-share").click(function(){
 	$(this).hide();
 });
 $(".zan").click(function(e){
-	var m_id=$(this).next('#matchid').val();
+	var Z=$(this);
+	var m_id=Z.next('#matchid').val();
 	$.post("{:U('index/add_love')}",{matchid:m_id},function(data){
 		//alert(data);
 		if(data==0){
@@ -139,7 +140,7 @@ $(".zan").click(function(e){
 		}else if(data==3){
 			alert("当前服务器忙，请稍后再试！");
 		}else{
-			$(this).next('.z-num').text(data);
+			Z.next('.z-num').text(data);
 			anp(e);
 		}
 	});
