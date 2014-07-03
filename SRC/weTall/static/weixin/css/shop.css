@@ -1149,7 +1149,7 @@ padding:10px 0 10px 0;
 .ware_text .handle_title{color:white}
 .handle .xh{margin-top:15px;margin-bottom:15px;}
 #content .user_menu{border-top:1px solid #ddd;border-bottom:1px solid #ddd;}
-.user_menu .activ span{background:none;color:white;}
+.user_menu .active span{background:none;color:white;}
 .user_menu li{border:1px solid white;}
 
 
