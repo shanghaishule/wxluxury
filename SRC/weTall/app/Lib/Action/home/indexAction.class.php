@@ -1228,7 +1228,7 @@ class indexAction extends frontendAction {
     		if(empty($res)){
     			if($M_love->add($data)){
     				$sun_l=$M_love->where("matchid='".$data['matchid']."'")->count();
-    				echo $sun_l;//成功
+    				echo ''.$sun_l;//成功
     			}else{
     				echo '3';
     			}
