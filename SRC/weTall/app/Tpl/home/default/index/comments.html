@@ -51,7 +51,7 @@
 				<div class="u-name fl">{$match.uname}</div>
 			    <div class="comment-time fr c_white" style="background:none;">{$match.create_time}</div>
 	    	</div>
-	    	<div class="u-time cl">{$match.title}</div>
+	    	<div class="u-time u-time-16 cl">{$match.title}</div>
 		</div>
 	</div>
 	<div class="cl"></div>
@@ -106,7 +106,7 @@
   <div class="p-input">
   <form name="form1" action="{:U('home/index/add_comments',array('tokenTall'=>$tokenTall))}" method="post">
   <input type="hidden" value="{$match['id']}" name="match_id"/>
-  <input id="inp" name="comments" type="text" placeholder="喜欢ta的范儿" />
+  <input id="inp" name="comments" type="text" size="40" maxlength="40" placeholder="喜欢ta的范儿(40字内)" />
   <input id="sub" type="submit" value="发送" />
   </form>
   </div>		
