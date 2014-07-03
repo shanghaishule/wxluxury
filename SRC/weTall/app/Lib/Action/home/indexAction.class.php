@@ -1171,7 +1171,7 @@ class indexAction extends frontendAction {
     	$match_coment=M("match");
     	$result = $match_coment->where($where)->find();
         $match_table[] = $result;
-        $match_table['create_time']=fdate($result['create_time']);
+        $match_table[0]['create_time']=fdate($result['create_time']);
     	$username = M("user")->where("id='".$result['uid']."'")->find();
     	$match_table[0]["uname"] = $username["nickname"];
     	//评论人员
