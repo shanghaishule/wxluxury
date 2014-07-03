@@ -70,7 +70,7 @@
 				<li>
 					<img class="zan" src="__STATIC__/weixin/css/images/zan.png" />
 					<input type="hidden" id="matchid" value="{$match.id}"/>
-					<span class="z-num" id="z-num"><if condition="$match.sum_l eq ''">0<else />{$match.sum_l}</if></span>
+					<span class="z-num" id="z-num-{$match.id}"><if condition="$match.sum_l eq ''">0<else />{$match.sum_l}</if></span>
 				</li>
 				
 				<li>
@@ -129,8 +129,6 @@ $(".fix-share").click(function(){
 });
 $(".zan").click(function(e){
 	var m_id=$(this).next('#matchid').val();
-	var zan_num = $(this).next('#z-num').text();
-	alert(m_id);
 	$.post("{:U('index/add_love')}",{matchid:m_id},function(data){
 		//alert(data);
 		if(data==0){
@@ -141,7 +139,8 @@ $(".zan").click(function(e){
 		}else if(data==3){
 			alert("当前服务器忙，请稍后再试！");
 		}else{
-			alert(zan_num);
+			alert(m_id);
+			$('#z-num-'+m_id).text(data);
 			anp(e);
 		}
 	});
