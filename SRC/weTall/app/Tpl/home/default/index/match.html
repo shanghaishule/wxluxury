@@ -130,6 +130,7 @@ $(".fix-share").click(function(){
 $(".zan").click(function(e){
 	var Z=$(this);
 	var m_id=Z.next('#matchid').val();
+	var zan_num = Z.next('.z-num');
 	$.post("{:U('index/add_love')}",{matchid:m_id},function(data){
 		//alert(data);
 		if(data==0){
@@ -140,7 +141,7 @@ $(".zan").click(function(e){
 		}else if(data==3){
 			alert("当前服务器忙，请稍后再试！");
 		}else{
-			alert(Z.next('.z-num').text(data));
+			zan_num.text(data);
 			anp(e);
 		}
 	});
