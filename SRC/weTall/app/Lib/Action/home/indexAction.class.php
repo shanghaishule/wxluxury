@@ -1219,7 +1219,7 @@ class indexAction extends frontendAction {
     //点赞
     public function add_love(){
     	if(!isset($_SESSION['uid']) && $_SESSION['uid']==''){
-    		echo '1';//页面已过期
+    		echo '0';//页面已过期
     	}else{
     		$M_love = M('match_love');
     		$data['matchid']= $_POST['matchid'];
