@@ -70,7 +70,7 @@
 				<li>
 					<img class="zan" src="__STATIC__/weixin/css/images/zan.png" />
 					<input type="hidden" id="matchid" value="{$match.id}"/>
-					<span class="z-num"><if condition="$match.sum_l eq ''">0<else />{$match.sum_l}</if></span>
+					<span class="z-num" id="z-num"><if condition="$match.sum_l eq ''">0<else />{$match.sum_l}</if></span>
 				</li>
 				
 				<li>
@@ -129,7 +129,7 @@ $(".fix-share").click(function(){
 });
 $(".zan").click(function(e){
 	var m_id=$(this).next('#matchid').val();
-	var zan_num = $(this).next('.z-num').text();
+	var zan_num = $(this).next('#z-num').text();
 	alert(zan_num);
 	$.post("{:U('index/add_love')}",{matchid:m_id},function(data){
 		//alert(data);
