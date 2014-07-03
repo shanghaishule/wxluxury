@@ -214,7 +214,7 @@ class indexAction extends frontendAction {
     	$match_favi = array();
     	foreach ($result as $match_result){
     		$match_table[] = $match_result;
-    		$match_table['createtime']=fdate($match_result['create_time']);
+    		$match_table[$id]['create_time']=fdate($match_result['create_time']);
     		$username = M("user")->where("id=".$match_result["uid"])->find();
     		$match_table[$id]["uname"] = $username["nickname"];
     		$match_table[$id]["userimgurl"] = $username["headimgurl"];
@@ -1171,13 +1171,13 @@ class indexAction extends frontendAction {
     	$match_coment=M("match");
     	$result = $match_coment->where($where)->find();
         $match_table[] = $result;
-        $match_table['createtime']=fdate($result['create_time']);
+        $match_table['create_time']=fdate($result['create_time']);
     	$username = M("user")->where("id='".$result['uid']."'")->find();
     	$match_table[0]["uname"] = $username["nickname"];
     	//评论人员
     	$data["match_id"] = $_GET["id"];
     	$p_match = M("match_comments");
-    	$result2 = $p_match->where($data)->order("addtime desc")->select();
+    	$result2 = $p_match->where($data)->order("addtime DESC")->select();
     	$match_comment = array();
     	$index=0;
     	foreach($result2 as $match_c){
