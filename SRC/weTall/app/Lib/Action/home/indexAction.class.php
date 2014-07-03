@@ -205,7 +205,7 @@ class indexAction extends frontendAction {
     	
     	}
     	$m=M();
-    	$Sel_sql = "SELECT * from tp_match where is_send = 1" ;
+    	$Sel_sql = "SELECT * from tp_match where is_send = 1 order by createtime desc" ;
     	$result=$m->query($Sel_sql);
     	$item_favi_detail = M("item");
     	$match_table = array();
@@ -214,6 +214,7 @@ class indexAction extends frontendAction {
     	$match_favi = array();
     	foreach ($result as $match_result){
     		$match_table[] = $match_result;
+    		$match_table['createtime']=fdate($match_result['create']);
     		$username = M("user")->where("id=".$match_result["uid"])->find();
     		$match_table[$id]["uname"] = $username["nickname"];
     		$match_table[$id]["userimgurl"] = $username["headimgurl"];
@@ -1170,12 +1171,13 @@ class indexAction extends frontendAction {
     	$match_coment=M("match");
     	$result = $match_coment->where($where)->find();
         $match_table[] = $result;
+        $match_table['createtime']=fdate($result['create']);
     	$username = M("user")->where("id='".$result['uid']."'")->find();
     	$match_table[0]["uname"] = $username["nickname"];
     	//评论人员
     	$data["match_id"] = $_GET["id"];
     	$p_match = M("match_comments");
-    	$result2 = $p_match->where($data)->select();
+    	$result2 = $p_match->where($data)->order("addtime desc")->select();
     	$match_comment = array();
     	$index=0;
     	foreach($result2 as $match_c){
