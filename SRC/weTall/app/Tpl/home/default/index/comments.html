@@ -47,12 +47,12 @@
 	<div class="eject_btn">
 		<div class="user-img fl"><img <if condition="$match.userimgurl neq ''">src="{$match.userimgurl}"<else />src="__STATIC__/weixin/css/images/p1.gif"</if> width="50px" height="50px"/></div>
 		<div class="user-name-time fl">
-			<div class="u-name">{$match.uname}</div>
-			<div class="u-time">{$match.create_time}</div>
+			<div class="u-con">
+				<div class="u-name fl">{$match.uname}</div>
+			    <div class="comment-time fr c_white" style="background:none;">{$match.create_time}</div>
+	    	</div>
+	    	<div class="u-time u-time-16 cl">{$match.title}</div>
 		</div>
-		<div class="u-content fl">
-			<div class="enter" style="background:none;">{$match.title}</div>
-	    </div>
 	</div>
 	<div class="cl"></div>
 	{// 分享的图片start }
@@ -71,12 +71,12 @@
 	<div class="eject_btn eject-con">
 		<div class="user-img fl"><img <if condition="$match_p.userimgurl neq ''">src="{$match_p.userimgurl}"<else />src="__STATIC__/weixin/css/images/p1.gif"</if> width="50px" height="50px" /></div>
 		<div class="user-name-time fl">
-			<div class="u-name">{$match_p.uname}</div>
-			<div class="u-time">{$match_p.comments}</div>
+			<div class="u-con">
+				<div class="u-name fl">{$match_p.uname}</div>
+			    <div class="comment-time fr c_white" style="background:none;">{$match_p.addtime}</div>
+	    	</div>
+	    	<div class="u-time cl">{$match_p.comments}</div>
 		</div>
-		<div class="u-con fr">
-			<div class="comment-time c_white" style="background:none;">{$match_p.addtime}</div>
-	    </div>
 	</div>
 	<div class="b10"></div>
   </volist>
@@ -106,7 +106,7 @@
   <div class="p-input">
   <form name="form1" action="{:U('home/index/add_comments',array('tokenTall'=>$tokenTall))}" method="post">
   <input type="hidden" value="{$match['id']}" name="match_id"/>
-  <input id="inp" name="comments" type="text" placeholder="喜欢ta的范儿" />
+  <input id="inp" name="comments" type="text" size="40" maxlength="40" placeholder="喜欢ta的范儿(40字内)" />
   <input id="sub" type="submit" value="发送" />
   </form>
   </div>		
