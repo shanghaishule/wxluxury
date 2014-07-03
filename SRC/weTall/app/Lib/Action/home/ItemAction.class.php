@@ -82,8 +82,7 @@ class itemAction extends frontendAction {
         if (M("shop_favi")->where($favi)->find()) {
         	$this->assign("favi_suc","Y");
         }
-        
-        
+
         $this->assign('countSize', $countSize);
         $this->assign('countColor', $countColor);
 
