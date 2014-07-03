@@ -1183,7 +1183,7 @@ class indexAction extends frontendAction {
     		$username2 = M("user")->where("id='".$match_c['uid']."'")->find();
     		$match_comment[$index]["uname"] = $username2["nickname"]; 
     		$match_comment[$index]["userimgurl"] = $username2["headimgurl"];
-    		$match_comment[$index]['addtime']=fdate($username2["addtime"]);
+    		$match_comment[$index]['addtime']=fdate($match_c["addtime"]);
     		$index++;
     	}
     	$this->assign("match_comment",$match_table);
