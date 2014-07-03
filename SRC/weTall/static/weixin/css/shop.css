@@ -688,7 +688,7 @@ div.order_cancel_box p span {color: #f34; font-weight: bold;}
 .user_menu .ornament1 { position: absolute; }
 .user_menu .ornament2 { position: absolute; }
 
-.user_menu .active { display: block;/* font-size: 14px; font-weight: bold; */color: #3f4140;text-decoration: none;}
+.user_menu .active { display: block;/* font-size: 14px; font-weight: bold; */color: #3f4140;text-decoration: none;height:65px;}
 #content .user_menu li.active{border-bottom:1px solid black}
 .user_menu span { display: block; padding: 2px 15px; /*background:#f6f6f6;color:black;*/height:24px;padding-top:5px}
 .user_menu .normal { display: block; font-size: 12px; font-weight: bold; color: #3e403f; text-decoration: none; background: url(../images/user_menu_nav.gif) no-repeat right 0; }
