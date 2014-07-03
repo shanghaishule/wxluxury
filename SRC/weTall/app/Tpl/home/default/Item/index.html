@@ -319,11 +319,11 @@
 	                <div style="margin-right:20px;float:left;">现价: <span style="color:red">¥{$item.new_price}</span></div>                                
 	                <div style="margin-right:20px;float:left;text-decoration:line-through;">原价:¥{$item.price} </div>                   
 	                <div style="margin-right:20px;float:left;">折扣:<span style="color:red;">{$item.discount_rate}</span>折</div>	                
-                </if>               
+                </if>              
                 
                 </div>
 			</div>
-            <div class="handle">
+            <div class="handle handle_add">
 
            <script type="text/javascript">
            var colorchoose = "";
@@ -338,7 +338,8 @@
 	                	  });
 			    	}
 	             $(".size_title").css('background','none');
-	             $(".size_title").css('color','black');
+	             //$(".size_title").css('color','black');
+	             $(".size_title").css('color','white');
 			     $("#size" + size_title).css('background','url(/weTall/static/images/xiaokuang.png)');
 			     $("#size" + size_title).css('color','white');
 			     $("#sizeChoose").val(size_title);
@@ -353,15 +354,16 @@
                 	  });
 		    	}
 	             $(".color_title").css('background','none');
-	             $(".color_title").css('color','black');
+	            // $(".color_title").css('color','black');
+	            $(".color_title").css('color','white');
 			     $("#color" + color_title).css('background','url(/weTall/static/images/xiaokuang.png)');
 			     $("#color" + color_title).css('color','white');
 			     $("#colorChoose").val(color_title);
 		    }
 		  </script>
 		  <style>
-		   .size_title{border:1px solid #d9d9d9;color:black;width:75px;height:24px;background:none;font-size:14px;float:left;margin-left:3px;}
-		   .color_title{border:1px solid #d9d9d9;color:black;width:75px;height:24px;background:none;font-size:14px;float:left;margin-left:3px;}
+		  .size_title{border:1px solid #d9d9d9;color:white;width:75px;height:24px;background:none;font-size:14px;float:left;margin-left:3px;}
+		  .color_title{border:1px solid #d9d9d9;color:white;width:75px;height:24px;background:none;font-size:14px;float:left;margin-left:3px;}
 		  </style>
                
                 <if condition="$countSize eq 0">
