@@ -216,8 +216,15 @@ class indexAction extends frontendAction {
     		$match_table[] = $match_result;
     		$match_table[$id]['create_time']=fdate($match_result['create_time']);
     		$username = M("user")->where("id=".$match_result["uid"])->find();
+    		//总评数
+    		$sum_com=M("match_comments")->where("match_id=".$match_result["id"])->count();
+    		//总赞数
+    		$sum_love=M("match_love")->where("matchid=".$match_result["id"])->count();
+    		
     		$match_table[$id]["uname"] = $username["nickname"];
     		$match_table[$id]["userimgurl"] = $username["headimgurl"];
+    		$match_table[$id]['sum_c']=$sum_com;
+    		$match_table[$id]['sum_l']=$sum_love;
     		$id ++;
     		if ($match_result != "" or $match_result != null) {
     			$item_favi = explode(",", $match_result["item_ids"]);

@@ -70,7 +70,7 @@
 				<li>
 					<img class="zan" src="__STATIC__/weixin/css/images/zan.png" />
 					<input type="hidden" id="matchid" value="{$match.id}"/>
-					<span class="z-num">998</span>
+					<span class="z-num"><if condition="$match.sum_l eq ''">0<else />{$match.sum_l}</if></span>
 				</li>
 				
 				<li>
@@ -79,7 +79,7 @@
 				
 				<li>
 					<a href="{:U('home/index/comments', array('tokenTall'=>$tokenTall,'id'=>$match['id']))}"><img class="pinglun" src="__STATIC__/weixin/css/images/pinglun.png" /></a>
-					<span class="p-num">1002</span>
+					<span class="p-num"><if condition="$match.sum_c eq ''">0<else />{$match.sum_c}</if></span>
 				</li>
 								
 			</ul>
