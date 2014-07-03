@@ -69,6 +69,7 @@ class itemAction extends frontendAction {
         }
         
         //color的数量
+        
         $countColor=0;
         foreach($color as $val){
         	if($val != ""){
