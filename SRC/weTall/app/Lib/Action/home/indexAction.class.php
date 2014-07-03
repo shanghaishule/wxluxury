@@ -1217,11 +1217,17 @@ class indexAction extends frontendAction {
     		$M_love = M('match_love');
     		$data['matchid']= $_POST['matchid'];
     		$data['uid']=$_SESSION['uid'];
-    		if($M_love->add()){
-    		 echo '2';
+    		$res=$M_love->where($data)->find();
+    		if(empty($res)){
+    			if($M_love->add($data)){
+    				echo '2';
+    			}else{
+    				echo '3';
+    			}
     		}else{
-    		 echo '3';	
+    			echo '4';//已赞
     		}
+
     	}
     }
 }
