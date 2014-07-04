@@ -19,6 +19,6 @@ define(SIGNTYPE, "sha1"); //method
 define(PARTNERKEY,$config['partnerKey']);//通加密串
 define(APPSERCERT, $config['appSecret']);
 
-//var_dump(APPKEY);exit;
+var_dump(APPKEY);exit;
 
 ?>
