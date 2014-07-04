@@ -636,7 +636,7 @@ div.order_cancel_box p span {color: #f34; font-weight: bold;}
 
 .rate { margin-top:15px; color: #999; line-height: 24px;margin-bottom: 10px; overflow: hidden; font-size: 15px;}
 .rate .ware_title{font-weight: normal;}
-.handle {font-size:15px; background: #f6f6f6; border: 1px solid #ddd; overflow: hidden; padding:5px 5px 5px 10px; border-radius:5px;}
+.handle {font-size:15px; background: #f6f6f6; border: 1px solid #ddd; overflow: hidden; padding:5px 5px 5px 10px;}
 .handle ul { overflow: hidden; color: #7a7a7a;}
 .handle li { float: left; cursor: pointer; }
 .handle_title { padding-top: 3px; color: #333;}
