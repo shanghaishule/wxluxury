@@ -393,7 +393,7 @@ class orderAction extends userbaseAction {
 	
 				}
 				else
-				{
+				{	dump('shibai');exit;
 					$this->error('生成订单失败!');
 				}
 	
@@ -435,7 +435,7 @@ class orderAction extends userbaseAction {
 	
 		}
 		else if(isset($_GET['orderId']))
-		{
+		{	dump('shibai_1');exit;
 			$item_order = M('item_order');
 			$orderId=$_GET['orderId'];//订单号
 			$orders=$item_order->where("userId='".$_SESSION['uid']."' and orderId='".$orderId."'")->find();
@@ -479,7 +479,7 @@ class orderAction extends userbaseAction {
 			}
 		}
 		else
-		{
+		{dump('shibai2');exit;
 			$this->redirect('user/index',array('tokenTall'=>$tokenTall));
 		}
 		$this->assign('current_user',$_SESSION['name']);
