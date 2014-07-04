@@ -24,17 +24,38 @@ background: #2BD54D;
 <body>
 <include file="public:head" />
 <div class="content">
+<img src="/weTall/static/weixin/images/hongse.png"  width="100%"/>
+   <div class="touming">
+       <img src="/weTall/static/weixin/images/touming.png"  width="100%"/>
+   </div>
     <h3 class="membertop">
-       <div class="my_name"><a>{$Think.session.name}</a></div>
-       <!-- -<div class="logout"><a href="{:U('user/logout')}">注销</a> | - --><a href="{:U('user/favi')}">我的收藏</a> | <a href="{:U('user/jifen')}">我的品牌积分</a> | <a href="{:U('user/addMatch')}">我的搭配分享</a></div>
-       <p class="my_address"><a href="{:U('user/address', array('tokenTall'=>$tokenTall))}">收货地址管理</a></p>
-    </h3>
+      <!--  <div class="my_name"><a>{$Think.session.name}</a></div>
+       <!-- -<div class="logout"><a href="{:U('user/logout')}">注销</a> | - -->
+       <ul> 
+       <li><a href="{:U('user/favi')}"><img src="/weTall/static/weixin/images/geren.png"/><p>个人资料</p></a></li>
+        <li><a href="{:U('user/favi')}"><img src="/weTall/static/weixin/images/shoucang.png"/><p>我的收藏</p></a> </li>
+       <li> <a href="{:U('user/jifen')}"><img src="/weTall/static/weixin/images/jifen.png"/><p>我的品牌积分</p></a> </li>
+        <li><a href="{:U('user/addMatch')}"><img src="/weTall/static/weixin/images/dapei.png"/><p>我的搭配</p></a></li>
+        </ul>
+ </h3>  
+ </div>
+      <!--  <p class="my_address"><a href="{:U('user/address', array('tokenTall'=>$tokenTall))}">收货地址管理</a></p>
+       -->
+ <div class="xuxian">
+     
+ </div>
+   
+  <div class="yonghu">
+    
     <ul class="buyer_stat">
           <li class="btn_1 <if condition='$status eq 1'>active</if> "><a href="{:U('user/index',array('status'=>1,'tokenTall'=>$tokenTall))}">待付款</a><span>待付款</span></li>        
           <li class="btn_2 <if condition='$status eq 2'>active</if> "><a href="{:U('user/index',array('status'=>2,'tokenTall'=>$tokenTall))}">待发货</a><span>待发货</span></li>
           <li class="btn_3 <if condition='$status eq 3'>active</if>"><a href="{:U('user/index',array('status'=>3,'tokenTall'=>$tokenTall))}">待收货</a><span>待收货</span></li>
           <li class="btn_4 <if condition='$status eq 4'>active</if>"><a href="{:U('user/index',array('status'=>4,'tokenTall'=>$tokenTall))}">已完成</a><span>已完成</span></li>
+          <li class="btn_5 <if condition='$status eq 5'>active</if>"><a href="{:U('user/index',array('status'=>5,'tokenTall'=>$tokenTall))}">待换货</a><span>待换货</span></li>
+    
     </ul>
+   
 	<script type="text/javascript">
 	    $(function(){
 	    $(".buyer_stat > li a").each(function() {
