@@ -19,9 +19,10 @@ class itemAction extends frontendAction {
         !$id && $this->_404();
         $tokenTall = $this->getTokenTall();
         $item_mod = M('item');
-        $item = $item_mod->field('id,title,Uninum,favi,old_price,goods_stock,intro,price,info,comments,add_time,goods_stock,buy_num,brand,size,color,images,promotion_id')->where(array('id' => $id, 'status' => 1))->find();
+        $item = $item_mod->field('id,title,Uninum,favi,old_price,goods_stock,intro,price,info,comments,add_time,goods_stock,buy_num,brand,size,color,images,promotion_id,item_model')->where(array('id' => $id, 'status' => 1))->find();
+       
         !$item && $this->_404();
-    
+        
         //xxl start
         //折扣设定      
         if($item['promotion_id'] != NULL){

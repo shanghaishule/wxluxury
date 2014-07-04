@@ -636,7 +636,7 @@ div.order_cancel_box p span {color: #f34; font-weight: bold;}
 
 .rate { margin-top:15px; color: #999; line-height: 24px;margin-bottom: 10px; overflow: hidden; font-size: 15px;}
 .rate .ware_title{font-weight: normal;}
-.handle {font-size:15px; background: #f6f6f6; border: 1px solid #ddd; overflow: hidden; padding:5px 5px 5px 10px; border-radius:5px;}
+.handle {font-size:15px; background: #f6f6f6; border: 1px solid #ddd; overflow: hidden; padding:5px 5px 5px 10px;}
 .handle ul { overflow: hidden; color: #7a7a7a;}
 .handle li { float: left; cursor: pointer; }
 .handle_title { padding-top: 3px; color: #333;}
@@ -1145,8 +1145,8 @@ padding:10px 0 10px 0;
 .s-w50{width:50%;}
 
 /**2014-7-3 anan 商品详情**/
-.ware_text .handle_add{border:1px dashed #ddd;border-left:none;border-right:none;background:none;}
-.ware_text .handle_title{color:white;width:18%;}
+.ware_text .handle_add{border:1px dashed #ddd;border-left:none;border-right:none;background:none;width: 100%;}
+.ware_text .handle_title{color:white;width:20%;}
 .handle .xh{margin-top:15px;margin-bottom:15px;width:100%;}
 #content .user_menu{border-top:1px solid #ddd;border-bottom:1px solid #ddd;}
 .user_menu .active span{background:none;color:white;}
