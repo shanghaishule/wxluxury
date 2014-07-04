@@ -157,7 +157,7 @@ class orderAction extends userbaseAction {
 		!$orderId && $this->_404();
 		$status=$_GET['status'];
 		$item_order=M('item_order');
-		$order=$item_order->where("orderId='".$orderId."' and userId='".$this->visitor->info['id']."'")->find();
+		$order=$item_order->where("orderId='".$orderId."' and userId='".$_SESSION['uid']."'")->find();
 		if(!is_array($order))
 		{
 			$this->error('该订单不存在');
@@ -181,15 +181,47 @@ class orderAction extends userbaseAction {
 		$this->_config_seo();
 		$this->display();
 	}
-	
+	public function jiesuantest(){
+		    $tokenTall = $this->_get('tokenTall');
+			$redirecturl = urlencode("http://www.kuyimap.com/weTall/index.php?g=home&m=order&a=jiesuan&tokenTall=".$tokenTall);
+			$url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx3079f89b18863917&redirect_uri=".$redirecturl."&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
+			//$url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx3079f89b18863917&redirect_uri=".$redirecturl."&response_type=code&scope=snsapi_userinfo&state=zcb#wechat_redirect";
+			header("Location: ".$url);
+	}
 	
 	public function jiesuan(){//结算
+		import('Think.ORG.Oauth2');
+		$config['appId'] = "wx3079f89b18863917";
+		$config['appSecret'] = "69289876b8d040b3f9a367c80f8754c8";
+		if(!isset($_SESSION['uid']) || $_SESSION['uid']==''){
+			 
+			if (isset($_GET['code'])){
+				//echo $_GET['code'].'--';
+				$Oauth = new Oauth2();
+				$userinfo=$Oauth->getUserinfo($_GET['code'],$config);
+				//dump($userinfo);exit;
+				$userinfo['last_login_time']=time();
+				$userinfo['last_login_ip']=get_client_ip();
+				$Userarr= M('user')->where(array('openid'=>$userinfo['openid']))->find();
+				if(!empty($Userarr) && $Userarr!=''){
+					$_SESSION['uid']=$Userarr['id'];
+					$_SESSION['name']=$Userarr['nickname'];
+				}else{
+					$_SESSION['uid']=M('user')->add($userinfo);
+					$_SESSION['name']=$userinfo['nickname'];
+				}
+				// dump($_SESSION['uid'].'-1-'.$_SESSION['name']);exit;
+			}else{
+				$this->error('页面异常',"{:U(home/index/brandshop)}");
+			}
+			 
+		}
 		$tokenTall = $this->getTokenTall();
 		$this->assign('tokenTall',$tokenTall);
 		if(count($_SESSION['cart'])>0)
 		{
 			$user_address_mod = M('user_address');
-			$address_list = $user_address_mod->where(array('uid' => $this->visitor->info['id']))->select();
+			$address_list = $user_address_mod->where(array('uid' => $_SESSION['uid']))->select();
 			$this->assign('address_list', $address_list);
 				
 			//购物车按店铺分组
@@ -250,8 +282,8 @@ class orderAction extends userbaseAction {
 			$item_order=M('item_order');
 			$order_detail=M('order_detail');
 			$item_goods=M('item');
-			$this->visitor->info['id'];//用户ID
-			$this->visitor->info['username'];//用户账号
+			//$this->visitor->info['id'];//用户ID
+			//$this->visitor->info['username'];//用户账号
 			 
 			//收货地址begin
 			$addr = array();
@@ -272,7 +304,7 @@ class orderAction extends userbaseAction {
 	
 				if($save_address)//保存地址
 				{
-					$add_address['uid']=$this->visitor->info['id'];
+					$add_address['uid']=$_SESSION['uid'];
 					$add_address['consignee']=$consignee;
 					$add_address['address']=$address;
 					$add_address['mobile']=$phone_mob;
@@ -283,7 +315,7 @@ class orderAction extends userbaseAction {
 					$user_address->data($add_address)->add();
 				}
 			}else{
-				$address= $user_address->where("uid='".$this->visitor->info['id']."'")->find($address_options);//取到地址
+				$address= $user_address->where("uid='".$_SESSION['uid']."'")->find($address_options);//取到地址
 				$addr['address_name']=$address['consignee'];//收货人姓名
 				$addr['mobile']=$address['mobile'];//电话号码
 				$addr['address']=$address['sheng'].$address['shi'].$address['qu'].$address['address'];//地址
@@ -329,8 +361,8 @@ class orderAction extends userbaseAction {
 				$data['goods_sumPrice']=$goods_sum;//商品总额
 				$data['order_sumPrice']=$goods_sum+$free_sum;//订单总额
 				$data['note']=$postscript;
-				$data['userId']=$this->visitor->info['id'];//用户ID
-				$data['userName']=$this->visitor->info['username'];//用户名
+				$data['userId']=$_SESSION['uid'];//用户ID
+				$data['userName']=$_SESSION['name'];//用户名
 				$data['address_name']=$addr['address_name'];//收货人姓名
 				$data['mobile']=$addr['mobile'];//电话号码
 				$data['address']=$addr['address'];//地址
@@ -408,7 +440,7 @@ class orderAction extends userbaseAction {
 		{
 			$item_order = M('item_order');
 			$orderId=$_GET['orderId'];//订单号
-			$orders=$item_order->where("userId='".$this->visitor->info['id']."' and orderId='".$orderId."'")->find();
+			$orders=$item_order->where("userId='".$_SESSION['uid']."' and orderId='".$orderId."'")->find();
 			if(!is_array($orders))
 				$this->_404();
 
@@ -453,7 +485,7 @@ class orderAction extends userbaseAction {
 			$this->redirect('user/index',array('tokenTall'=>$tokenTall));
 		}
 		
-		$this->assign('current_user',$_SESSION['user_info']['username']);
+		$this->assign('current_user',$_SESSION['name']);
 		//dump($_SESSION['user_info']['username']);exit;
 		
 //微信支付
@@ -502,7 +534,7 @@ $this->assign('biz_package', $biz_package);
 			$orderInfo = array();
 			//xxl end
 			foreach ($all_order_arr as $dingdanhao){			
-				$item_order=M('item_order')->where("userId='".$this->visitor->info['id']."' and orderId='".$dingdanhao['orderid']."'")->find();
+				$item_order=M('item_order')->where("userId='".$_SESSION['uid']."' and orderId='".$dingdanhao['orderid']."'")->find();
 				!$item_order && $this->_404();
 				$all_order_price = $all_order_price + floatval($item_order['order_sumPrice']);
 				
@@ -533,7 +565,7 @@ $this->assign('biz_package', $biz_package);
 					$data['status']=2;
 					$data['supportmetho']=2;
 					$data['support_time']=time();
-					if(M('item_order')->where("userId='".$this->visitor->info['id']."' and orderId='".$dingdanhao['orderid']."'")->data($data)->save())
+					if(M('item_order')->where("userId='".$_SESSION['uid']."' and orderId='".$dingdanhao['orderid']."'")->data($data)->save())
 					{
 						//成功就继续
 						//$this->redirect('user/index');
@@ -827,7 +859,7 @@ $this->assign('biz_package', $biz_package);
 			$orderInfo = array();
 			//xxl end
 			foreach ($all_order_arr as $dingdanhao){
-				$item_order=M('item_order')->where("userId='".$this->visitor->info['id']."' and orderId='".$dingdanhao['orderid']."'")->find();
+				$item_order=M('item_order')->where("userId='".$_SESSION['uid']."' and orderId='".$dingdanhao['orderid']."'")->find();
 				!$item_order && $this->_404();
 				$all_order_price = $all_order_price + floatval($item_order['order_sumPrice']);
 	
