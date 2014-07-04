@@ -483,11 +483,10 @@ class orderAction extends userbaseAction {
 			$this->redirect('user/index',array('tokenTall'=>$tokenTall));
 		}
 		$this->assign('current_user',$_SESSION['name']);
-		dump($_SESSION['name']);exit;
 		//微信支付
 		$all_order_price_100 = $ordersumPrice*100;  //支付用，精确到分
 		
-		//header('Content-Type:text/html;charset=utf-8');
+		   header('Content-Type:text/html;charset=utf-8');
 			include_once("WxPayphp/WxPayHelper.php");
 			$commonUtil = new CommonUtil();
 			$wxPayHelper = new WxPayHelper();
@@ -504,8 +503,7 @@ class orderAction extends userbaseAction {
 			
 			$biz_package = $wxPayHelper->create_biz_package();
 			$this->assign('biz_package', $biz_package);
-
-		$this->display();
+			$this->display();
 	}
 	
 	
