@@ -435,7 +435,7 @@ class orderAction extends userbaseAction {
 	
 		}
 		else if(isset($_GET['orderId']))
-		{	dump('1111');exit;
+		{	
 			$item_order = M('item_order');
 			$orderId=$_GET['orderId'];//订单号
 			$orders=$item_order->where("userId='".$_SESSION['uid']."' and orderId='".$orderId."'")->find();
@@ -479,7 +479,7 @@ class orderAction extends userbaseAction {
 			}
 		}
 		else
-		{dump('22222');exit;
+		{
 			$this->redirect('user/index',array('tokenTall'=>$tokenTall));
 		}
 		$this->assign('current_user',$_SESSION['name']);
