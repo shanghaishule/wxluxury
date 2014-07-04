@@ -18,7 +18,7 @@ if ($result = $mysqli->query($query)) {
 		$config['failUrl'] = $row[7];
 		$config['cancelUrl'] = $row[8];
 		
-		//var_dump($config);exit;
+		var_dump($config);exit;
 	}
 	$result->close();
 }
