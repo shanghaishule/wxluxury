@@ -484,7 +484,6 @@ class orderAction extends userbaseAction {
 		}
 		$this->assign('current_user',$_SESSION['name']);
 		//dump($_SESSION['user_info']['username']);exit;
-		dump('33333');exit;
 //微信支付
 $all_order_price_100 = $ordersumPrice*100;  //支付用，精确到分
 
