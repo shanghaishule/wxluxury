@@ -182,6 +182,7 @@ class orderAction extends userbaseAction {
 		$this->display();
 	}
 	public function jiesuantest(){
+			dump("jiesuantest");
 		    $tokenTall = $this->_get('tokenTall');
 			$redirecturl = urlencode("http://www.kuyimap.com/weTall/index.php?g=home&m=order&a=jiesuan&tokenTall=".$tokenTall);
 			$url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx3079f89b18863917&redirect_uri=".$redirecturl."&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
@@ -194,7 +195,7 @@ class orderAction extends userbaseAction {
 		$config['appId'] = "wx3079f89b18863917";
 		$config['appSecret'] = "69289876b8d040b3f9a367c80f8754c8";
 		if(!isset($_SESSION['uid']) || $_SESSION['uid']==''){
-			 
+			 echo '1';
 			if (isset($_GET['code'])){
 				//echo $_GET['code'].'--';
 				$Oauth = new Oauth2();
@@ -216,6 +217,7 @@ class orderAction extends userbaseAction {
 			}
 			 
 		}
+		dump($_SESSION['uid']);exit;
 		$tokenTall = $this->getTokenTall();
 		$this->assign('tokenTall',$tokenTall);
 		if(count($_SESSION['cart'])>0)
@@ -301,7 +303,6 @@ class orderAction extends userbaseAction {
 				$addr['address_name']=$consignee;//收货人姓名
 				$addr['mobile']=$phone_mob;//电话号码
 				$addr['address']=$sheng.$shi.$qu.$address;//地址
-				dump($_SESSION['uid']);exit;
 				if($save_address)//保存地址
 				{
 					$add_address['uid']=$_SESSION['uid'];
