@@ -393,7 +393,7 @@ class orderAction extends userbaseAction {
 	
 				}
 				else
-				{	dump('shibai');exit;
+				{	dump('00000');exit;
 					$this->error('生成订单失败!');
 				}
 	
@@ -435,7 +435,7 @@ class orderAction extends userbaseAction {
 	
 		}
 		else if(isset($_GET['orderId']))
-		{	dump('shibai_1');exit;
+		{	dump('1111');exit;
 			$item_order = M('item_order');
 			$orderId=$_GET['orderId'];//订单号
 			$orders=$item_order->where("userId='".$_SESSION['uid']."' and orderId='".$orderId."'")->find();
@@ -479,12 +479,12 @@ class orderAction extends userbaseAction {
 			}
 		}
 		else
-		{dump('shibai2');exit;
+		{dump('22222');exit;
 			$this->redirect('user/index',array('tokenTall'=>$tokenTall));
 		}
 		$this->assign('current_user',$_SESSION['name']);
 		//dump($_SESSION['user_info']['username']);exit;
-		
+		dump('33333');exit;
 //微信支付
 $all_order_price_100 = $ordersumPrice*100;  //支付用，精确到分
 
