@@ -483,30 +483,28 @@ class orderAction extends userbaseAction {
 			$this->redirect('user/index',array('tokenTall'=>$tokenTall));
 		}
 		$this->assign('current_user',$_SESSION['name']);
-		//dump($_SESSION['user_info']['username']);exit;
-//微信支付
-$all_order_price_100 = $ordersumPrice*100;  //支付用，精确到分
-
-//header('Content-Type:text/html;charset=utf-8');
-include_once("WxPayphp/WxPayHelper.php");
-$commonUtil = new CommonUtil();
-$wxPayHelper = new WxPayHelper();
-
-$wxPayHelper->setParameter("bank_type", "WX");
-$wxPayHelper->setParameter("body", "BILL(NO:".$alldingdanhao.")");
-$wxPayHelper->setParameter("partner", "1218886101");
-$wxPayHelper->setParameter("out_trade_no", $alldingdanhao);
-$wxPayHelper->setParameter("total_fee", "$all_order_price_100");
-$wxPayHelper->setParameter("fee_type", "1");
-$wxPayHelper->setParameter("notify_url", "http://www.kuyimap.com/weTall/wxpay/notify_url.php");
-$wxPayHelper->setParameter("spbill_create_ip", "127.0.0.1");
-$wxPayHelper->setParameter("input_charset", "GBK");
-
-$biz_package = $wxPayHelper->create_biz_package();
-$this->assign('biz_package', $biz_package);
+		dump($_SESSION['name']);exit;
+		//微信支付
+		$all_order_price_100 = $ordersumPrice*100;  //支付用，精确到分
 		
-		
-		
+		//header('Content-Type:text/html;charset=utf-8');
+			include_once("WxPayphp/WxPayHelper.php");
+			$commonUtil = new CommonUtil();
+			$wxPayHelper = new WxPayHelper();
+			
+			$wxPayHelper->setParameter("bank_type", "WX");
+			$wxPayHelper->setParameter("body", "BILL(NO:".$alldingdanhao.")");
+			$wxPayHelper->setParameter("partner", "1218886101");
+			$wxPayHelper->setParameter("out_trade_no", $alldingdanhao);
+			$wxPayHelper->setParameter("total_fee", "$all_order_price_100");
+			$wxPayHelper->setParameter("fee_type", "1");
+			$wxPayHelper->setParameter("notify_url", "http://www.kuyimap.com/weTall/wxpay/notify_url.php");
+			$wxPayHelper->setParameter("spbill_create_ip", "127.0.0.1");
+			$wxPayHelper->setParameter("input_charset", "GBK");
+			
+			$biz_package = $wxPayHelper->create_biz_package();
+			$this->assign('biz_package', $biz_package);
+
 		$this->display();
 	}
 	
