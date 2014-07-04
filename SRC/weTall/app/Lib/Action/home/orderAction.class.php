@@ -301,7 +301,7 @@ class orderAction extends userbaseAction {
 				$addr['address_name']=$consignee;//收货人姓名
 				$addr['mobile']=$phone_mob;//电话号码
 				$addr['address']=$sheng.$shi.$qu.$address;//地址
-	
+				dump($_SESSION['uid']);exit;
 				if($save_address)//保存地址
 				{
 					$add_address['uid']=$_SESSION['uid'];
