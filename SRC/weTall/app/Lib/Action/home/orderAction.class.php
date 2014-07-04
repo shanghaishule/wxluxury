@@ -182,7 +182,6 @@ class orderAction extends userbaseAction {
 		$this->display();
 	}
 	public function jiesuantest(){
-			dump("jiesuantest");exit;
 		    $tokenTall = $this->_get('tokenTall');
 			$redirecturl = urlencode("http://www.kuyimap.com/weTall/index.php?g=home&m=order&a=jiesuan&tokenTall=".$tokenTall);
 			$url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx3079f89b18863917&redirect_uri=".$redirecturl."&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
