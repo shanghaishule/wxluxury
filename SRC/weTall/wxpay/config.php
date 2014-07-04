@@ -2,7 +2,7 @@
 header('Content-Type:text/html;charset=utf-8');
 $wetallroute = dirname(dirname(__FILE__));
 include $wetallroute."/data/config/db.php";
-//var_dump($arr);exit;
+var_dump($arr);exit;
 $config = array();
 $mysqli = new mysqli($arr["DB_HOST"], $arr["DB_USER"], $arr["DB_PWD"], $arr["DB_NAME"], $arr["DB_PORT"]);
 $query = "SELECT appId,appSecret,paySignKey,partnerId,partnerKey,notify_url,success_url,fail_url,cancel_url FROM ".$arr["DB_PREFIX"]."wxpay LIMIT 1";	
