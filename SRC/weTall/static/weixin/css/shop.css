@@ -213,11 +213,15 @@ div.order_cancel_box p span {color: #f34; font-weight: bold;}
 #address_form ul.form_address {	padding: 10px;}
 
 /*会员中心*/
-.content {margin: -17px 0 auto; min-height:300px; position: relative;}
+.content {margin: 0 auto;  position: relative;}
+.content img{z-index:20}
+.membertop{ padding:4px 10px 0px 0px; position: absolute ;display:block;bottom :-20px;left:0px;width:100%;height:80px} 
 
-.membertop{ padding:4px 10px 0px 0px; position: absolute ;display:block;bottom :0px;left:0px;width:100%;height:80px} 
-.content .touming img{position: absolute ;bottom :0px;left:0px}
-.yonghu{margin-top:50px}
+.content .touming img{position: absolute ;bottom :0px;left:0px;}
+.content .headpic {position: absolute;top:0;left:0;z-index:40}
+.xuxian{height:50px;margin:0;background:black;border-bottom:1px solid white;position:relative}
+.xuxian .xx{display:block;height:25px;margin:0;border-bottom-style:dotted;}
+.yonghu{margin-top:0px}
 ul{list-style：none}
 .membertop ul li{width:25%;float:left;text-align:center;margin:10px 0 auto;dispaly:inline;z-index:100}
 .membertop ul li a{display：block}
@@ -229,7 +233,7 @@ ul{list-style：none}
 .membertop .logout a { font-size:16px; text-shadow:1px 1px 1px #888;Line-height:10px;}
 .membertop .logout {float:right; width:140px; color:#FFC0CB; font-size:15px; display:block; text-shadow:1px 1px 1px #888;}
 .buyer_stat{ overflow:hidden;}
-.buyer_stat li{background: black; float:left; width:25%; height:44px; line-height:24px;text-align:center; border-bottom:1px solid #ccc;font-size:15px;}
+.buyer_stat li{background: black; float:left; width:20%; height:44px; line-height:24px;text-align:center; border-bottom:1px solid #ccc;font-size:15px;}
 .buyer_stat li a{ height:44px; display:block; color:#333333;}
 .buyer_stat li span, .buyer_stat li a { line-height:44px;font-weight:bold;color:white;} 
 .buyer_stat li.btn_2 a{border-left:1px solid #ccc;  }
@@ -384,13 +388,13 @@ ul{list-style：none}
  * -------------------------------------------------------
  */
 
-#nav {width:100%; min-width:340px;max-width:640px;left:0px;position:fixed; top:0px; z-index: 400000; margin: 0 auto;display:block;background:url(../images/luxury/images/home/bg_02.png);}
-#nav ul.navlist { position: relative; z-index:9999; height:45px; width:100%;margin:0 auto; background:url(../images/luxury/images/home/bg_02.png); }
+#nav {width:100%; min-width:200px;max-width:640px;left:0px;position:fixed; top:0px; z-index: 400000; margin: 0 auto;display:block;background:url(../images/luxury/images/home/bg_02.png);}
+#nav ul.navlist { position: relative;top:0px;left:0px z-index:9999; height:45px; width:100%;margin:0 ;  }
 #nav .navlist li { float: left;height:45px;  position:relative;}
 #nav .navlist li#n_3 i{ position:absolute; height:14px; width:14px;background:#C00; color:#fff; left:55%; top:10px; border-radius:50%; font-style:normal; text-align:center; font-size:12px; display:none;}
 #nav .navlist li span{ display:inline-block; width:100%; height:45px; cursor:pointer;}
 
-#nav .navlist li#n_4{width:100%;padding-top:1px;}
+#nav .navlist li#n_4{width:100%;padding-top:0px;}
 #nav .navlist li#n_5{width:58%;margin-left:10px;}
 #nav .navlist li#n_3{width:69%;}
 #nav .navlist li#n_0{width:40px;}
