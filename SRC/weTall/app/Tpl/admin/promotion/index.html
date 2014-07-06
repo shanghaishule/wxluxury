@@ -117,19 +117,17 @@ $(function(){
                 <td align="left"><span data-tdtype="edit" data-field="ordid" data-id="{$val.id}" class="tdedit">{$val.end_date}</span></td>                
                 <td align="center"><span data-tdtype="edit" data-field="ordid" data-id="{$val.id}" class="tdedit">{$val.discount_rate}%</span></td>
                 <td align="center"><span data-tdtype="edit" data-field="ordid" data-id="{$val.id}" class="tdedit">
-				<if condition="$val['status'] eq 0">活动未开始</if>
-				<if condition="$val['status'] eq 1">
-				活动进行中</if>
-				<if condition="$val['status'] eq 2">
-				活动已经结束</if>
+				<if condition="$val['status'] eq 0">未开始</if>
+				<if condition="$val['status'] eq 1">进行中</if>
+				<if condition="$val['status'] eq 2">已结束</if>
 				</span></td>
                 <td align="center">
                 	<a href="javascript:;" class="J_showdialog" data-uri="/weTall/index.php?g=admin&m=set_promotion&a=edit&id={$val.id}" data-title="编辑 - {$val.theme}"  data-id="edit" data-acttype="ajax" data-width="520" data-height="360">编辑</a> | 
                     <a href="javascript:;" class="J_confirmurl" data-acttype="ajax" data-uri="/weTall/index.php?g=admin&m=set_promotion&a=delete&id={$val.id}" data-msg="确定删除{$val.name}吗?">删除</a> | 
-                    <if condition="$val['status'] eq 0">
+                    <!-- if condition="$val['status'] eq 0">
                     <a href="javascript:;" class="J_confirmurl" data-acttype="ajax" data-uri="/weTall/index.php?g=admin&m=set_promotion&a=start&id={$val.id}" data-msg="确定开始{$val.name}吗?">开始</a>
                     <else/><span style="color:#d9d9d9;">开始</span>
-                    </if>
+                    </if -->
                 </td>
             </tr>
             </volist>
