@@ -50,6 +50,7 @@ class set_promotionAction extends backendAction {
 		$this->assign("brand",$brand->select());
 		if (IS_POST) {
 			if (strtotime($_POST['start_date']) < strtotime($_POST['end_date'])) {
+				IS_AJAX && $this->ajaxReturn(0, '开始时间不能晚于结束时间');
 				$this->error('开始时间不能晚于结束时间');
 			}
 		//上传图片
@@ -81,6 +82,7 @@ class set_promotionAction extends backendAction {
 		$this->assign("brand",$brand->select());
 		if (IS_POST) {
 			if (strtotime($_POST['start_date']) < strtotime($_POST['end_date'])) {
+				IS_AJAX && $this->ajaxReturn(0, '开始时间不能晚于结束时间');
 				$this->error('开始时间不能晚于结束时间');
 			}
 			//上传图片
