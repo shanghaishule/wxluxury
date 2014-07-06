@@ -49,6 +49,9 @@ class set_promotionAction extends backendAction {
 		$brand = M("brandlist");
 		$this->assign("brand",$brand->select());
 		if (IS_POST) {
+			if (strtotime($_POST['start_date']) < strtotime($_POST['end_date'])) {
+				$this->error('开始时间不能晚于结束时间');
+			}
 		//上传图片
 			if (empty($_FILES['img']['name'])) {
 				$_SESSION["img_name"] = "";
@@ -77,6 +80,9 @@ class set_promotionAction extends backendAction {
 		$brand = M("brandlist");
 		$this->assign("brand",$brand->select());
 		if (IS_POST) {
+			if (strtotime($_POST['start_date']) < strtotime($_POST['end_date'])) {
+				$this->error('开始时间不能晚于结束时间');
+			}
 			//上传图片
 			if (!empty($_FILES['img']['name'])) {
 				$date_dir = date('ym/d/'); //上传目录

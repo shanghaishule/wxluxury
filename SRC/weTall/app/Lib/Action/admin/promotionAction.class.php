@@ -4,7 +4,7 @@ class promotionAction extends backendAction {
 	
 	public function _initialize() {
 		parent::_initialize();
-		$this->_mod = D('set_discount');
+		$this->_mod = D('set_promotion');
 		$this->_cate_mod = D('item_cate');
 		$brandlist= $this->_brand=M('brandlist')->where('status=1')->order('ordid asc,id asc')->select();
 		$this->assign('brandlist',$brandlist);
