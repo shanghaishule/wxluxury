@@ -9,9 +9,9 @@ return array(
 	
 'DB_NAME'=>'wxluxury',
 	
-'DB_USER'=>'hzwxshop',
-	
-'DB_PWD'=>'hzwxshop',
+'DB_USER' => 'root',
+		
+'DB_PWD' => '27cd904dcf',
 	
 'DB_PREFIX'=>'tp_',
 
