@@ -4,10 +4,17 @@ class promotionAction extends backendAction {
 	
 	public function _initialize() {
 		parent::_initialize();
-		$this->_mod = D('set_discount');
+		$this->_mod = D('set_promotion');
 		$this->_cate_mod = D('item_cate');
 		$brandlist= $this->_brand=M('brandlist')->where('status=1')->order('ordid asc,id asc')->select();
 		$this->assign('brandlist',$brandlist);
+		
+		//检查促销情况，自动设置促销状态
+		$alldata = $this->_mod->select();
+		foreach ($alldata as $onedata){
+			$status = $this->checkPromotion($onedata['start_date'], $onedata['end_date']);
+			$this->_mod->where(array('id'=>$onedata['id']))->save(array('status'=>$status));
+		}
 	}
 	
 	

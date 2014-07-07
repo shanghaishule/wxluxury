@@ -184,4 +184,25 @@ class baseAction extends Action
     		return false;
     	}
     }
+    
+    /*
+     * 比较当前时间与开始和结束时间，给予反馈。 0-未开始，1-进行中，2-已结束
+     */
+    public function checkPromotion($bdate, $edate){
+    	$btime = strtotime($bdate.' 00:00:00');
+    	$etime = strtotime($edate.' 23:59:59');
+    	
+    	$nowtime = mktime();
+    	
+    	if ($nowtime < $btime) {
+    		return 0;
+    	}
+    	if ($nowtime >= $btime && $nowtime <= $etime) {
+    		return 1;
+    	}
+    	if ($nowtime > $etime) {
+    		return 2;
+    	}
+    	
+    }
 }

@@ -486,7 +486,7 @@ class orderAction extends userbaseAction {
 		//微信支付
 		$all_order_price_100 = $ordersumPrice*100;  //支付用，精确到分
 		
-		   header('Content-Type:text/html;charset=utf-8');
+		   //header('Content-Type:text/html;charset=utf-8');
 			include_once("WxPayphp/WxPayHelper.php");
 			$commonUtil = new CommonUtil();
 			$wxPayHelper = new WxPayHelper();
@@ -495,7 +495,7 @@ class orderAction extends userbaseAction {
 			$wxPayHelper->setParameter("body", "BILL(NO:".$alldingdanhao.")");
 			$wxPayHelper->setParameter("partner", "1218886101");
 			$wxPayHelper->setParameter("out_trade_no", $alldingdanhao);
-			$wxPayHelper->setParameter("total_fee", "$all_order_price_100");
+			$wxPayHelper->setParameter("total_fee", $all_order_price_100);
 			$wxPayHelper->setParameter("fee_type", "1");
 			$wxPayHelper->setParameter("notify_url", "http://www.kuyimap.com/weTall/wxpay/notify_url.php");
 			$wxPayHelper->setParameter("spbill_create_ip", "127.0.0.1");
