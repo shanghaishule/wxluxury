@@ -501,8 +501,8 @@ class orderAction extends userbaseAction {
 			$wxPayHelper->setParameter("spbill_create_ip", "127.0.0.1");
 			$wxPayHelper->setParameter("input_charset", "GBK");
 			
-			$biz_package = $wxPayHelper->create_biz_package();
-			$this->assign('biz_package', $biz_package);
+			//$biz_package = $wxPayHelper->create_biz_package();
+			//$this->assign('biz_package', $biz_package);
 			$this->display();
 	}
 	
