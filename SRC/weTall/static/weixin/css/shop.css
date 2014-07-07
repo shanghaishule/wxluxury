@@ -214,10 +214,10 @@ div.order_cancel_box p span {color: #f34; font-weight: bold;}
 
 /*会员中心*/
 .content {margin: 0 auto;  position: relative;}
-.touxiang {position:absolute;top:60px;left:60px;background:url(../images/dapei.png) no-repeat;width:300px;height:400px;color:white}
-.touxiang p{display:block;margin:0 0 0 50px}
+.touxiang {position:absolute;top:60px;left:100px;background:url(../images/touxiang.png) no-repeat;width:300px;height:200px;color:white}
+.touxiang p{display:block;margin:0 0 0 80px}
 .touxiang .shouhuo p{float:left}
-.touxiang .shouhuo img{margin:0 0 0 50px}
+.touxiang .shouhuo img{margin:0 0 0 60px}
 .membertop{ padding:4px 10px 0px 0px; position: absolute ;display:block;bottom :-20px;left:0px;width:100%;height:80px} 
 
 .content .touming img{position: absolute ;bottom :0px;left:0px;}
@@ -248,7 +248,7 @@ ul{list-style：none}
 #profile_form th{ text-align:right; padding-right:5px;}
 /*地址管理*/
 .eject_btn,.eject_con .add{ margin-top:25px;}
-.eject_btn,.eject_con .add #warning{ color: #fd207d; margin: 8px 0;}
+.eject_btn,.eject_con .add #warning{ color: #fd207d; margin: 45px 0;}
 .eject_btn,.eject_con .add .form_address {color: #aaa;}
 .eject_btn,.eject_con .add .form_address select {width:100%;height:50px;font-size:13px;padding-left:0 5px;/*padding: 6px; margin:4px;*/}
 .eject_con .add .form_address h3{ }
