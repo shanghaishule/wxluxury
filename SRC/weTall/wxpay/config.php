@@ -22,6 +22,7 @@ if ($result = $mysqli->query($query)) {
 	}
 	$result->close();
 }
+var_dump($config);exit;
 $mysqli->close();
 
 

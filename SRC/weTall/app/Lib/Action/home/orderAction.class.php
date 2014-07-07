@@ -486,7 +486,7 @@ class orderAction extends userbaseAction {
 		//微信支付
 		$all_order_price_100 = $ordersumPrice*100;  //支付用，精确到分
 		
-		   header('Content-Type:text/html;charset=utf-8');
+		   //header('Content-Type:text/html;charset=utf-8');
 			include_once("WxPayphp/WxPayHelper.php");
 			$commonUtil = new CommonUtil();
 			$wxPayHelper = new WxPayHelper();
@@ -501,8 +501,8 @@ class orderAction extends userbaseAction {
 			$wxPayHelper->setParameter("spbill_create_ip", "127.0.0.1");
 			$wxPayHelper->setParameter("input_charset", "GBK");
 			
-			//$biz_package = $wxPayHelper->create_biz_package();
-			//$this->assign('biz_package', $biz_package);
+			$biz_package = $wxPayHelper->create_biz_package();
+			$this->assign('biz_package', $biz_package);
 			$this->display();
 	}
 	
