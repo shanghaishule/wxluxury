@@ -495,7 +495,7 @@ class orderAction extends userbaseAction {
 			$wxPayHelper->setParameter("body", "BILL(NO:".$alldingdanhao.")");
 			$wxPayHelper->setParameter("partner", "1218886101");
 			$wxPayHelper->setParameter("out_trade_no", $alldingdanhao);
-			$wxPayHelper->setParameter("total_fee", "$all_order_price_100");
+			$wxPayHelper->setParameter("total_fee", $all_order_price_100);
 			$wxPayHelper->setParameter("fee_type", "1");
 			$wxPayHelper->setParameter("notify_url", "http://www.kuyimap.com/weTall/wxpay/notify_url.php");
 			$wxPayHelper->setParameter("spbill_create_ip", "127.0.0.1");
