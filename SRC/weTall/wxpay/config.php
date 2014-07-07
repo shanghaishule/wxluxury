@@ -8,6 +8,7 @@ $mysqli = new mysqli($arr["DB_HOST"], $arr["DB_USER"], $arr["DB_PWD"], $arr["DB_
 $query = "SELECT appId,appSecret,paySignKey,partnerId,partnerKey,notify_url,success_url,fail_url,cancel_url FROM ".$arr["DB_PREFIX"]."wxpay LIMIT 1";	
 if ($result = $mysqli->query($query)) {
 	if ($row = $result->fetch_row()) {
+		dump($row);exit;
 		$config['appId'] = $row[0]; // 公众号身份标识
 		$config['appSecret'] = $row[1]; // 权限获取所需密钥 Key
 		$config['paySignKey'] = $row[2]; // 加密密钥 Key，也即appKey
@@ -22,7 +23,7 @@ if ($result = $mysqli->query($query)) {
 	}
 	$result->close();
 }
-var_dump($config);exit;
+//var_dump($config);exit;
 $mysqli->close();
 
 
