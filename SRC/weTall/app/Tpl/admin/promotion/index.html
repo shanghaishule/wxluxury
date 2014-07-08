@@ -95,7 +95,7 @@ $(function(){
             <tr>
                 <th width="40"><input type="checkbox" name="checkall" class="J_checkall"></th>
 				<th width="50"><span data-type="order_by"  data-field="img">活动图片</span></th>
-                <th align="left" width=200><span data-tdtype="order_by" data-field="name">活动标题</span></th>
+                <th align="left" width=150><span data-tdtype="order_by" data-field="name">活动标题</span></th>
                 <th align="left" width=100><span data-tdtype="order_by" data-field="name">活动品牌</span></th>
                 <th align="left" width=50><span data-tdtype="order_by" data-field="name">开始日期</span></th>
                 <th align="left" width=50><span data-tdtype="order_by" data-field="name">结束日期</span></th>
@@ -109,17 +109,17 @@ $(function(){
             <tr>
                 <td align="center"><input type="checkbox" class="J_checkitem" value="{$val.id}"></td>
 				<td align="center"><img width="75" height="30"  src="{$val.img}"></td>
-                <td align="left"><span data-tdtype="edit" data-field="title" data-id="{$val.id}" >{$val.theme}</span></td>
-                <td align="left"><span data-tdtype="edit" data-field="content" data-id="{$val.id}" >
+                <td align="left"><span data-tdtype="view" data-field="title" data-id="{$val.id}" >{$val.theme}</span></td>
+                <td align="left"><span data-tdtype="view" data-field="content" data-id="{$val.id}" >
                 <volist name="brand" id="brandvar"><if condition="$val['brand_id'] eq $brandvar['id']">
                 {$brandvar.name}</if></volist></span></td>
-                <td align="left"><span data-tdtype="edit" data-field="ptime" data-id="{$val.id}" >{$val.start_date}</span></td>
-                <td align="left"><span data-tdtype="edit" data-field="ordid" data-id="{$val.id}" class="tdedit">{$val.end_date}</span></td>                
-                <td align="center"><span data-tdtype="edit" data-field="ordid" data-id="{$val.id}" class="tdedit">{$val.discount_rate}%</span></td>
-                <td align="center"><span data-tdtype="edit" data-field="ordid" data-id="{$val.id}" class="tdedit">
+                <td align="left"><span data-tdtype="view" data-field="ptime" data-id="{$val.id}" >{$val.start_date}</span></td>
+                <td align="left"><span data-tdtype="view" data-field="ordid" data-id="{$val.id}" class="tdview">{$val.end_date}</span></td>                
+                <td align="center"><span data-tdtype="view" data-field="ordid" data-id="{$val.id}" class="tdview">{$val.discount_rate}%</span></td>
+                <td align="center"><span data-tdtype="view" data-field="ordid" data-id="{$val.id}" class="tdview">
 				<if condition="$val['status'] eq 0">未开始</if>
-				<if condition="$val['status'] eq 1">进行中</if>
-				<if condition="$val['status'] eq 2">已结束</if>
+				<if condition="$val['status'] eq 1"><span style="color:red;">进行中</span></if>
+				<if condition="$val['status'] eq 2"><span style="color:green;">已结束</span></if>
 				</span></td>
                 <td align="center">
                 	<a href="javascript:;" class="J_showdialog" data-uri="/weTall/index.php?g=admin&m=set_promotion&a=edit&id={$val.id}" data-title="编辑 - {$val.theme}"  data-id="edit" data-acttype="ajax" data-width="520" data-height="360">编辑</a> | 
