@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<include file="public:headtop" />
+<include file="public:headtop1" />
 <script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/dialog.js" id="dialog_js"></script>
-<link href="__STATIC__/weixin/css/dialog.css" rel="stylesheet" type="text/css">
 <script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/jquery_003.js"></script>
 <script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/zh-CN.js"></script>
 <script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/jquery_002.js"></script>
-<link rel="stylesheet" type="text/css" href="__STATIC__/weixin/css/jquery.css">
+<link rel="stylesheet" type="text/css" href="__STATIC__/weixin/css/jquery1.css">
 <style>
 .button_aaa
 {
@@ -22,20 +21,29 @@ background: #2BD54D;
 </head>
 
 <body>
-<include file="public:head" />
-<div class="content">  
-    <img src="/weTall/static/weixin/images/hongse.png"  width="100%"/>
-    <div class="touxiang">
-         <p>道晖芝</p>
-         <div class="shouhuo">
-             <img src="/weTall/static/weixin/images/shouhuo.png" width="5%" style="">
-             <span class="my_address"><a href="{:U('user/address', array('tokenTall'=>$tokenTall))}">收获地址管理</a>
-             </span>
-         </div>
+<include file="public:head1" />
+
+
+
+<div class="content"> 
+  <div class="hongse"> 
+    <div class="tupian">
+            <img src="/weTall/static/weixin/images/hongse.png"  width="100%"/>
+    </div>
+     <div class="all"> 
+           <div class="touxiang">
+               <img src="{$Think.session.headimgurl}"  width="50px" height="50px"/>
+           </div>
+            <div class="gereninfo">
+                <p>{$Think.session.name}</p>
+                <div class="shouhuo">
+                  <img src="/weTall/static/weixin/images/shouhuo.png" width="15%" style="">
+                   <span class="my_address"><a href="{:U('user/address', array('tokenTall'=>$tokenTall))}">收获地址管理</a>
+                   </span>             
+                </div>
+             </div>
      </div>
-
-
-
+   </div>
    
    <div class="touming">
        <img src="/weTall/static/weixin/images/touming.png"  width="100%"/>
@@ -62,11 +70,11 @@ background: #2BD54D;
   <div class="yonghu">
     
     <ul class="buyer_stat">
-          <li class="btn_1 <if condition='$status eq 1'>active</if> "><a href="{:U('user/index',array('status'=>1,'tokenTall'=>$tokenTall))}">待付款</a><span>待付款</span></li>        
-          <li class="btn_2 <if condition='$status eq 2'>active</if> "><a href="{:U('user/index',array('status'=>2,'tokenTall'=>$tokenTall))}">待发货</a><span>待发货</span></li>
-          <li class="btn_3 <if condition='$status eq 3'>active</if>"><a href="{:U('user/index',array('status'=>3,'tokenTall'=>$tokenTall))}">待收货</a><span>待收货</span></li>
-          <li class="btn_4 <if condition='$status eq 4'>active</if>"><a href="{:U('user/index',array('status'=>4,'tokenTall'=>$tokenTall))}">已完成</a><span>已完成</span></li>
-          <li class="btn_5 <if condition='$status eq 5'>active</if>"><a href="{:U('user/index',array('status'=>5,'tokenTall'=>$tokenTall))}">待换货</a><span>待换货</span></li>
+          <li class="btn_1 <if condition='$status eq 1'>active</if> "><a href="{:U('user/index',array('status'=>1,'tokenTall'=>$tokenTall))}">待付款</a><span></span></li>        
+          <li class="btn_2 <if condition='$status eq 2'>active</if> "><a href="{:U('user/index',array('status'=>2,'tokenTall'=>$tokenTall))}">待发货</a><span></span></li>
+          <li class="btn_3 <if condition='$status eq 3'>active</if>"><a href="{:U('user/index',array('status'=>3,'tokenTall'=>$tokenTall))}">待收货</a><span></span></li>
+          <li class="btn_4 <if condition='$status eq 4'>active</if>"><a href="{:U('user/index',array('status'=>4,'tokenTall'=>$tokenTall))}">已完成</a><span></span></li>
+          <li class="btn_5 <if condition='$status eq 5'>active</if>"><a href="{:U('user/index',array('status'=>5,'tokenTall'=>$tokenTall))}">待换货</a><span></span></li>
     
     </ul>
    
@@ -101,8 +109,6 @@ background: #2BD54D;
                         <p class="price">价格: <span>¥{$item.price}</span></p>
                         <p class="amount">数量: <span>{$item.quantity}</span>
                         </p>
-                        
-
                     </div>
                     </volist>
                     <div class="clear"></div>
@@ -159,6 +165,9 @@ background: #2BD54D;
     </div>
     <div class="clear"></div>
 </div>
-<include file="public:footer" />
+
+
+
+<include file="public:footer" /> 
 </body>
 </html>
