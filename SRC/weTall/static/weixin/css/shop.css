@@ -217,7 +217,7 @@ div.order_cancel_box p span {color: #f34; font-weight: bold;}
 .content {margin: 0 auto;  position: relative;}  
 .hongse {position:relative}
 .all {position:absolute;top:30%;left:30%;float:left}
-.touxiang{float:left;border-radius:50%}
+.touxiang{float:left;border-radius:50%;overflow:hidden}
 .gereninfo {float:left;}
 .gereninfo p{margin-left:15px}
 .shouhuo{margin-left:15px;margin-top:5px}
