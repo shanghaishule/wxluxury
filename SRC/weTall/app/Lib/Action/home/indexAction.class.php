@@ -1133,12 +1133,14 @@ class indexAction extends frontendAction {
     	$length = count($nearShop);
     	
     	//促销信息
-    	$promotion = array();
+    	$promotion_theme = array();
+		$promotion_discount = array();
     	foreach ($volumn as $val){
-    		$promotion[$val['name']]['theme'] = $val['theme'];
-    		$promotion[$val['name']]['discount_rate'] = $val['discount_rate'];
+    		$promotion_theme[$val['name']] = $val['theme'];
+    		$promotion_discount[$val['name']] = $val['discount_rate'];
     	}
-    	$this->assign("promotion",$promotion);
+    	$this->assign("promotion_theme",$promotion_theme);
+		$this->assign("promotion_discount",$promotion_discount);
     	
     	$this->assign("title","店内促销");
     	$this->assign("countShop",$length);
