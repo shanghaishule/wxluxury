@@ -246,13 +246,13 @@ ul{list-style：none}
 .buyer_stat li span{display:none;
 /* display: block; */
 height: 44px;
-top: 0px;
+top: -1px;
 width: 100%;
 left: 0;
 position: absolute;
 border-top: 2px solid #ff0000;}
 .buyer_stat li.btn_1 span {border-left:none;}
-.buyer_stat li.active{border-bottom:none;border-top:none}
+.buyer_stat li.active{border-bottom:none;border-top:1px solid #000000}
 /*.buyer_stat li.active a{ display:none;}*/
 #profile_form th{ text-align:right; padding-right:5px;}
 /*地址管理*/
