@@ -39,8 +39,7 @@ class applicationAction extends frontendAction{
 				// dump($_SESSION['uid'].'-1-'.$_SESSION['name']);exit;
 			}else{
 				$this->error('页面异常',"{:U(index/brandshop)}");
-			}
-			 
+			} 
 		}
 		//$user = $this->_session('user_info');
 		$user = $_SESSION['user_info'];
