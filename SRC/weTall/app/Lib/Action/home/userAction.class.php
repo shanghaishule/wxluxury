@@ -977,4 +977,12 @@ class userAction extends userbaseAction {
     	$result=$m->query($Sel_sql.$Where_sql);
     	return $result;
     	}  
+    	
+    	//积分使用说明
+    	public function  jifenuse(){
+    		$this->display();
+    	}
+    	
+    	
+    	
 }
