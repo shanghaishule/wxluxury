@@ -216,7 +216,7 @@ div.order_cancel_box p span {color: #f34; font-weight: bold;}
 /*会员中心*/
 .content {margin: 0 auto;  position: relative;}  
 .hongse {position:relative}
-.all {position:absolute;top:30%;left:30%;float:left}
+.all {position:absolute;top:30%;left:30%;float:left;height:60px;}
 .touxiang{float:left;border-radius:50%;overflow:hidden}
 .gereninfo {float:left;}
 .gereninfo p{margin-left:15px}
