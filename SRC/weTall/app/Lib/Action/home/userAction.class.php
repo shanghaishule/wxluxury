@@ -651,7 +651,7 @@ class userAction extends userbaseAction {
     public function jifen() {
     	//取商家token值，取不到则默认为空
     	$tokenTall = $this->getTokenTall();
-    	 
+ 	 /**
     	//$favi_mod = M('shop_favi');
     	//$favi_list = $favi_mod->where(array('userid'=>$_SESSION['uid']))->select();
     	$where["id"] = $_SESSION['uid'];
@@ -979,4 +979,15 @@ class userAction extends userbaseAction {
     	$result=$m->query($Sel_sql.$Where_sql);
     	return $result;
     	}  
+    	
+    	//积分使用说明
+    	public function  jifenuse(){
+    		$this->display();
+    	}
+    	
+    	//个人资料说明
+    	public function  singledata(){
+    		$this->display();
+    	}
+    	
 }
