@@ -1107,7 +1107,7 @@ class indexAction extends frontendAction {
     	}
     	
     	$Model = new Model();
-    	$volumn = $Model->query("select b.name, a.img from tp_set_promotion a, tp_brandlist b where a.brand_id=b.id and a.status=1");
+    	$volumn = $Model->query("select b.name, a.img, a.theme, a.discount_rate from tp_set_promotion a, tp_brandlist b where a.brand_id=b.id and a.status=1 LIMIT 300;");
     	$brand_name = "";
     	foreach ($volumn as $val){
     		$brand_name .= $val['name'].',';
@@ -1131,9 +1131,14 @@ class indexAction extends frontendAction {
     	//排序
     	$new_nearShop = $this->array_sort($nearShop,"nearJuli", "asc");
     	$length = count($nearShop);
-    	if ($length > 300) {
-    		$length = 300;
+    	
+    	//促销信息
+    	$promotion = array();
+    	foreach ($volumn as $val){
+    		$promotion[$val['name']]['theme'] = $val['theme'];
+    		$promotion[$val['name']]['discount_rate'] = $val['discount_rate'];
     	}
+    	$this->assign("promotion",$promotion);
     	
     	$this->assign("title","店内促销");
     	$this->assign("countShop",$length);
@@ -1153,42 +1158,7 @@ class indexAction extends frontendAction {
     	 
     	$this->display();
     		
-    }    
-    
-    public function promotioninfo(){
-    	
-    	$keyword = NULL;
-    	/***商品分类**/
-    	$item_cate=M("item_cate")->select();
-    	$this->assign('item_cate',$item_cate);
-    	if (IS_POST) {
-    		$keyword = $this->_POST("keyword","trim");	
-    	}
-    	//promotion event
-    	$id = $this->_get("id","trim");
-    	$Sel_sql = "SELECT i.id,b.name AS brand_name, i.title AS title, s.discount_rate * i.price /100 AS price, i.item_model, i.img ";
-    	$From_sql ="FROM tp_set_promotion s, tp_item i, tp_brandlist b ";
-    	$Where_sql = "WHERE s.id = i.promotion_id AND i.brand = b.id AND s.tokentall = i.tokentall AND s.id =".$id." ";
-    	if($keyword != NULL){
-    		$like = "And i.title like '%".$keyword."%' "; 
-    		$Where_sql = $Where_sql.$like;      		
-    	}
-    	     	 
-    	$m=M();
-	
-    	$result=$m->query($Sel_sql.$From_sql.$Where_sql);
-    	$this->assign("promotioninfo",$result);
-    	
-    	//promotion event
-    	$Sel_sql = "SELECT w.name FROM tp_set_promotion s, tp_wecha_shop w ";
-    	$Where_sql = "WHERE s.tokentall = w.tokentall AND w.shop_city =  '上海' AND s.id =".$id;  	
-    	$result=$m->query($Sel_sql.$Where_sql);    	 	
-    	$this->assign("name",$result[0]['name']);
-    	$this->assign("id",$id);
-    	$this->assign("keyword",$keyword);
-    	
-    	$this->display();
-    }   
+    }
     
     public function addMatch() {
     	$this->display();
