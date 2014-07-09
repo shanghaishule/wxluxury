@@ -253,9 +253,11 @@ class userAction extends userbaseAction {
 	    	if(!empty($Userarr) && $Userarr!=''){
 	    		$_SESSION['uid']=$Userarr['id'];
 	    		$_SESSION['name']=$Userarr['nickname'];
+	    		$_SESSION['headimgurl']=$Userarr['headimgurl'];
 	    	}else{
 	    		$_SESSION['uid']=M('user')->add($userinfo);
 	    		$_SESSION['name']=$userinfo['nickname'];
+	    		$_SESSION['headimgurl']=$Userarr['headimgurl'];
 	    	}
     	   // dump($_SESSION['uid'].'-1-'.$_SESSION['name']);exit;		
 	    	}else{
