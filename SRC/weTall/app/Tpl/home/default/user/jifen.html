@@ -18,17 +18,31 @@
 </head>
 <body>
 <include file="public:head" />
-<div id="content">
-<div class="eject_btn"><a class="enter" style="background: green;" href="javascript:void(0)">我的品牌积分</a></div>
-    <div class="order_form">
-	    <volist name="jifen_array"  id="vo">
-		<div class="shoplogo" style="height:40px">
-		   <div class="favi">	      
-		       {$vo[0]} : {$vo[1]}积分<br>
-		   </div>
-		</div>
-		</volist>
-    </div>
+<div id="content" style="width:100%;">
+	 <!-- <div class="eject_btn"><a class="enter" style="background: green;" href="javascript:void(0)">我的品牌积分</a></div>
+	   <div class="order_form">
+		    <volist name="jifen_array"  id="vo">
+			<div class="shoplogo" style="height:40px">
+			   <div class="favi">	      
+			       {$vo[0]} : {$vo[1]}积分<br>
+			   </div>
+			</div>
+			</volist>
+	    </div> -->
+	  
+	   <div class="content" style="width:100%;margin-top:60px;border:1px dashed;border-top:none;border-left:none;border-right:none;border-color:gray;">
+	   		<div class="img" style="float:left;width:50%;">
+	   			<img src="__STATIC__/weixin/images/pinpai.png" style="margin:0px 5px 10px 5px;width:95%;height:128px;"/>
+	   		</div>
+	   		<div class="text" style="float:left;width:50%;font-size:15px;line-height: 1.5;">
+	   			<ul>
+	   				<li class="cishu" style="color:white;">已参加N次本品牌一元购活动</li>
+	   				<li class="keyong" style="color:red;">可使用积分：2222</li>
+	   				<li class="yiyong" style="color:gray;">已使用积分：3333</li>
+	   			</ul>
+	   		</div>
+	   		<div style="clear:both;"></div>
+	   </div> 
 </div>
 <include file="public:footer" />
 

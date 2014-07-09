@@ -223,7 +223,7 @@ div.order_cancel_box p span {color: #f34; font-weight: bold;}
 
 .content .touming img{position: absolute ;bottom :0px;left:0px;}
 .content .headpic {position: absolute;top:0;left:0;z-index:40}
-.xuxian{height:50px;margin:0;background:black;border-bottom:1px solid white;position:relative}
+.xuxian{height:1px;margin:0;background:black;margin:20px 0;border-bottom:1px dashed white;position:relative}
 .xuxian .xx{position:absolute;height:1px;margin-top:25px;border-bottom-style:dotted;width:100%}
 .yonghu{margin-top:0px}
 ul{list-style：none}
@@ -237,15 +237,24 @@ ul{list-style：none}
 .membertop .logout a { font-size:16px; text-shadow:1px 1px 1px #888;Line-height:10px;}
 .membertop .logout {float:right; width:140px; color:#FFC0CB; font-size:15px; display:block; text-shadow:1px 1px 1px #888;}
 .buyer_stat{ overflow:hidden;}
-.buyer_stat li{background: black; float:left; width:20%; height:44px; line-height:24px;text-align:center; border-bottom:1px solid #ccc;font-size:15px;}
+.buyer_stat li{background: black;position:relative;border-top:1px solid #fff; float:left; width:20%; height:44px; line-height:24px;text-align:center; border-bottom:1px solid #ccc;font-size:15px;}
 .buyer_stat li a{ height:44px; display:block; color:#333333;}
 .buyer_stat li span, .buyer_stat li a { line-height:44px;font-weight:bold;color:white;} 
 .buyer_stat li.btn_2 a{border-left:1px solid #ccc;  }
 .buyer_stat li.btn_3 a{border-left:1px solid #ccc;  }
 .buyer_stat li.btn_4 a{border-left:1px solid #ccc; border-right:1px solid #ccc; }
-.buyer_stat li span{display:none; display:block; height:44px; border-left:1px solid #ccc;}
-.buyer_stat li.active{border-bottom: 0px; background: none;}
-.buyer_stat li.active a{ display:none;}
+.buyer_stat li.active span{display:block;}
+.buyer_stat li span{display:none;
+/* display: block; */
+height: 44px;
+top: -1px;
+width: 100%;
+left: 0;
+position: absolute;
+border-top: 2px solid #ff0000;}
+.buyer_stat li.btn_1 span {border-left:none;}
+.buyer_stat li.active{border-bottom:none;border-top:1px solid #000000}
+/*.buyer_stat li.active a{ display:none;}*/
 #profile_form th{ text-align:right; padding-right:5px;}
 /*地址管理*/
 .eject_btn,.eject_con .add{ margin-top:25px;}
