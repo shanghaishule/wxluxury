@@ -244,7 +244,7 @@ ul{list-style：none}
 .buyer_stat li.btn_4 a{border-left:1px solid #ccc; border-right:1px solid #ccc; }
 .buyer_stat li span{display:none; display:block; height:44px; border-left:1px solid #ccc;}
 .buyer_stat li.active{border-bottom: 0px; background: none;}
-.buyer_stat li.active a{ display:none;}
+/*.buyer_stat li.active a{ display:none;}*/
 #profile_form th{ text-align:right; padding-right:5px;}
 /*地址管理*/
 .eject_btn,.eject_con .add{ margin-top:25px;}
