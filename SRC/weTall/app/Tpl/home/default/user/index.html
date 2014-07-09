@@ -3,7 +3,6 @@
 <head>
 <include file="public:headtop" />
 <script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/dialog.js" id="dialog_js"></script>
-<link href="__STATIC__/weixin/css/dialog.css" rel="stylesheet" type="text/css">
 <script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/jquery_003.js"></script>
 <script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/zh-CN.js"></script>
 <script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/jquery_002.js"></script>
@@ -33,14 +32,13 @@ background: #2BD54D;
                <img src="/weTall/static/weixin/images/touxiang.png"  width="100%"/>
            </div>
             <div class="gereninfo">
-                <p>道晖芝</p>
+                <p>{$Think.session.name}</p>
                 <div class="shouhuo">
                   <img src="/weTall/static/weixin/images/shouhuo.png" width="15%" style="">
                    <span class="my_address"><a href="{:U('user/address', array('tokenTall'=>$tokenTall))}">收获地址管理</a>
                    </span>             
                 </div>
              </div>
-           
      </div>
    </div>
      
@@ -73,11 +71,11 @@ background: #2BD54D;
   <div class="yonghu">
     
     <ul class="buyer_stat">
-          <li class="btn_1 <if condition='$status eq 1'>active</if> "><a href="{:U('user/index',array('status'=>1,'tokenTall'=>$tokenTall))}">待付款</a><span>待付款</span></li>        
-          <li class="btn_2 <if condition='$status eq 2'>active</if> "><a href="{:U('user/index',array('status'=>2,'tokenTall'=>$tokenTall))}">待发货</a><span>待发货</span></li>
-          <li class="btn_3 <if condition='$status eq 3'>active</if>"><a href="{:U('user/index',array('status'=>3,'tokenTall'=>$tokenTall))}">待收货</a><span>待收货</span></li>
-          <li class="btn_4 <if condition='$status eq 4'>active</if>"><a href="{:U('user/index',array('status'=>4,'tokenTall'=>$tokenTall))}">已完成</a><span>已完成</span></li>
-          <li class="btn_5 <if condition='$status eq 5'>active</if>"><a href="{:U('user/index',array('status'=>5,'tokenTall'=>$tokenTall))}">待换货</a><span>待换货</span></li>
+          <li class="btn_1 <if condition='$status eq 1'>active</if> "><a href="{:U('user/index',array('status'=>1,'tokenTall'=>$tokenTall))}">待付款</a><span></span></li>        
+          <li class="btn_2 <if condition='$status eq 2'>active</if> "><a href="{:U('user/index',array('status'=>2,'tokenTall'=>$tokenTall))}">待发货</a><span></span></li>
+          <li class="btn_3 <if condition='$status eq 3'>active</if>"><a href="{:U('user/index',array('status'=>3,'tokenTall'=>$tokenTall))}">待收货</a><span></span></li>
+          <li class="btn_4 <if condition='$status eq 4'>active</if>"><a href="{:U('user/index',array('status'=>4,'tokenTall'=>$tokenTall))}">已完成</a><span></span></li>
+          <li class="btn_5 <if condition='$status eq 5'>active</if>"><a href="{:U('user/index',array('status'=>5,'tokenTall'=>$tokenTall))}">待换货</a><span></span></li>
     
     </ul>
    
