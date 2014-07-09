@@ -31,12 +31,12 @@ class applicationAction extends frontendAction{
 					$_SESSION['uid']=$Userarr['id'];
 					$_SESSION['name']=$Userarr['nickname'];
 					$_SESSION['user_info']=$Userarr;
-					dump($Userarr['openid']);exit;
+					//dump($Userarr['openid']);exit;
 				}else{
 					$_SESSION['uid']=M('user')->add($userinfo);
 					$_SESSION['name']=$userinfo['nickname'];
 					$_SESSION['user_info']=$userinfo;
-					dump($userinfo['openid']);exit;
+					//dump($userinfo['openid']);exit;
 				}
 				// dump($_SESSION['uid'].'-1-'.$_SESSION['name']);exit;
 			}else{
@@ -68,7 +68,7 @@ class applicationAction extends frontendAction{
 		
 		//$wecha_id = $this->getWechaId();
 		$wecha_id = $user['openid'];
-		dump($wecha_id);exit;
+		//dump($wecha_id);exit;
 		$this->assign('wecha_id',$wecha_id);
 		
 		if($this->application_mod->where(array('wecha_id'=>$wecha_id))->find()){
