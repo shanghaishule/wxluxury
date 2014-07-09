@@ -1,61 +1,54 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head id="Head1"><title>店内促销</title>
-<meta name="Keywords" content="Micronet，服装商城,专业服装批发，服饰" />
-<meta name="Description" content="Micronet商城" />
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0;" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
-<meta http-equiv="x-ua-compatible" content="ie=7" />
-    <script type="text/javascript" src="__STATIC__/js/jquery.min.js"></script>    
-    <script type="text/javascript" src="__STATIC__/js/MobileSlide.js"></script>
-    <script type="text/javascript" src="__STATIC__/js/js.js"></script>
-    <script type="text/javascript" src="__STATIC__/js/index.js"></script>
-<link type="text/css" rel="stylesheet" href="__STATIC__/weixin/css/promotion.css">
-    
-        <title>查找附近的店铺</title>        
-    </head>    
-    <include file="public:headtop" />
-    <include file="public:promotionhead" />
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>查找附近的促销店铺</title>
         
+    </head>
+    <include file="public:headtop" />
+    <include file="public:head" />
     <body>
-        <div id="map" style="width:600px; height:400px;display:none;">          
-        </div>        
-         
-        <!--幻灯片广告-->
-        <div class="banner">
-		<ul id="BanCont">
-		  <volist name="weTallboard" id="bolist">
-		     <if condition="$bolist['boadid'] eq 1">
-		     <li><a href="{$bolist.url}" title="{$bolist.desc}"><img src="/weTall/data/upload/advert/{$img_dir}{$bolist.content}" width="640" height="161" alt="{$bolist.desc}" /></a></li> 
-		     </if>
-		  </volist>
-		</ul>
-		<ul class="banner_link"></ul>
-		</div>       
-	         
-         <if condition="$countPromotion eq 0">
-           <span class="haveSearch">你处在的位置 附近没有促销活动</span>
+        <div id="map" style="width:600px; height:400px;display:none;">
+          
+        </div>
+        
+         <if condition="$countShop eq 0">
+           <span class="haveSearch">你处在的位置 附近没有正在促销的实体店铺！</span>
          <else/>
-        	<span class="haveSearch"> 查找到附近<span style="red">{$countPromotion}</span>家店铺,有促销活动</span>
-	         <div>		              
-		         <volist name="nearPromotion" id="Promotion">
-			          <div class="shopSearch">
-			           <table>
-			           <tr><td width="85%"><a href="{:U('index/promotioninfo',array('id'=>$Promotion['id']))}">{$Promotion.name}</a></td>
-			           <td width="15%"> <a href="{:U('index/navigate',array('start_point_lat'=>$start_point_lat,'start_point_lng'=>$start_point_lng,'end_point_lat'=>$Shop['latitude'],'end_point_lng'=>$Shop['longitude']))}">
-			           <img height="27" width="58" src="__STATIC__/weixin/images/luxury/images/brand/tell_09.png" /></a><br></td></tr>
-			           <tr><td width="85%"><span class="shop_address">{$Promotion.theme}</span></td>
-			           <tr><td width="85%"><span class="shop_address">活动期间: {$Promotion.start_date} -- {$Promotion.end_date}</span></td>
-			           <td width="15%"><img height="18" width="11" src="__STATIC__/weixin/images/luxury/images/brand/here_13.png"><span class="shop_address">{$Shop.nearJuli}KM</span></td></tr>
-			           </table>				
-			          </div><br>
-		         </volist>
-	         </div>
+        	<span class="haveSearch"> 查找到附近<span style="color:red;">{$countShop}</span>家正在促销的店铺</span>
+         <div>   
+           
+         <volist name="nearShop" id="Shop" key="numer">
+         <if condition="$numer lt 11">
+          <div class="shopSearch">
+           <table>
+           <tr><td width="85%">
+           <if condition="$Shop['status'] eq 0">
+            <script>
+            function prompt_m(){
+            	alert("网上店铺还未开通，请点击“带我去”去实体店直接购买");
+            	return;
+            }
+            </script>
+            <a href="javascript:void(0);" onclick="prompt_m()">
+           <else/>
+           <a href="{:U('index/index',array('tokenTall'=>$Shop['tokenTall']))}">
+           </if>
+           <span style="font-size:16px;">{$Shop.shop_name}</span></a></td>
+           <td width="15%"> 
+           
+           <a href="{:U('index/navigate',array('start_point_lat'=>$start_point_lat,'shop'=>$Shop['tokenTall'],'dmodel'=>'N','start_point_lng'=>$start_point_lng,'end_point_lat'=>$Shop['lat'],'end_point_lng'=>$Shop['longtitude']))}">
+           <img height="27" width="58" src="__STATIC__/weixin/images/luxury/images/brand/tell_09.png" /></a><br></td></tr>
+           <tr><td width="85%"><span class="shop_address">{$Shop.show_addr}</span></td>
+           <td width="15%"><img height="18" width="11" src="__STATIC__/weixin/images/luxury/images/brand/here_13.png"><span class="shop_address">{$Shop.nearJuli}KM</span></td></tr>
+           </table>
+           
+          </div>
+          
+          </if>
+         </volist>
+         </div>
          </if>
-
-	   <include file="public:footer" />      
-	         
+         <include file="public:footer" />
     </body>
     
 </html>
