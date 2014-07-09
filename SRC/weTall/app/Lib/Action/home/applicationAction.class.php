@@ -31,10 +31,12 @@ class applicationAction extends frontendAction{
 					$_SESSION['uid']=$Userarr['id'];
 					$_SESSION['name']=$Userarr['nickname'];
 					$_SESSION['user_info']=$Userarr;
+					dump($Userarr['openid']);exit;
 				}else{
 					$_SESSION['uid']=M('user')->add($userinfo);
 					$_SESSION['name']=$userinfo['nickname'];
 					$_SESSION['user_info']=$userinfo;
+					dump($userinfo['openid']);exit;
 				}
 				// dump($_SESSION['uid'].'-1-'.$_SESSION['name']);exit;
 			}else{
