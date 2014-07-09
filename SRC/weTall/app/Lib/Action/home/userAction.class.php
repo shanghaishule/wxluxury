@@ -983,6 +983,9 @@ class userAction extends userbaseAction {
     		$this->display();
     	}
     	
-    	
+    	//个人资料说明
+    	public function  singledata(){
+    		$this->display();
+    	}
     	
 }

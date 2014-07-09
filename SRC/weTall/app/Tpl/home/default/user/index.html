@@ -23,16 +23,27 @@ background: #2BD54D;
 
 <body>
 <include file="public:head" />
-<div class="content">  
-    <img src="/weTall/static/weixin/images/hongse.png"  width="100%"/>
-    <div class="touxiang">
-         <p>道晖芝</p>
-         <div class="shouhuo">
-             <img src="/weTall/static/weixin/images/shouhuo.png" width="5%" style="">
-             <span class="my_address"><a href="{:U('user/address', array('tokenTall'=>$tokenTall))}">收获地址管理</a>
-             </span>
-         </div>
+<div class="content"> 
+  <div class="hongse"> 
+    <div class="tupian">
+            <img src="/weTall/static/weixin/images/hongse.png"  width="100%"/>
+    </div>
+     <div class="all"> 
+           <div class="touxiang">
+               <img src="/weTall/static/weixin/images/touxiang.png"  width="100%"/>
+           </div>
+            <div class="gereninfo">
+                <p>道晖芝</p>
+                <div class="shouhuo">
+                  <img src="/weTall/static/weixin/images/shouhuo.png" width="15%" style="">
+                   <span class="my_address"><a href="{:U('user/address', array('tokenTall'=>$tokenTall))}">收获地址管理</a>
+                   </span>             
+                </div>
+             </div>
+           
      </div>
+   </div>
+     
 
 
 
