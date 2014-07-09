@@ -66,6 +66,7 @@ class applicationAction extends frontendAction{
 		
 		//$wecha_id = $this->getWechaId();
 		$wecha_id = $user['openid'];
+		dump($wecha_id);exit;
 		$this->assign('wecha_id',$wecha_id);
 		
 		if($this->application_mod->where(array('wecha_id'=>$wecha_id))->find()){
