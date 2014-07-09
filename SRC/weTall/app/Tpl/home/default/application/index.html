@@ -280,6 +280,21 @@
 						</dl>
 						</li>
 						<li></li>
+						<elseif condition="($apply_again eq '0')" />
+							<table>
+								<tr>
+									<td>用户名：</td>
+									<td>{$suser['uname']}</td>
+								</tr>
+								<tr>
+									<td>密　码：</td>
+									<td>{$suser['password']}</td>
+								</tr>
+								<tr>
+									<td>品牌：</td>
+									<td>{$suser['brand']}</td>
+								</tr>
+							</table>
 						<else /> 
 							<h2 class="first" >您的申请已在处理中</h2>
 							<br />

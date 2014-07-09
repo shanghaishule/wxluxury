@@ -70,9 +70,14 @@ class applicationAction extends frontendAction{
 		$wecha_id = $user['openid'];
 		//dump($wecha_id);exit;
 		$this->assign('wecha_id',$wecha_id);
-		
-		if($this->application_mod->where(array('wecha_id'=>$wecha_id))->find()){
+		$res=$this->application_mod->where(array('wecha_id'=>$wecha_id))->find();
+		if($res || !empty($res)){
+			if($res['uname'] != ''){
+			$this->assign('apply_again','-1');
+			$this->assign('suser',$res);
+			}else{
 			$this->assign('apply_again','1');
+			}
 		}else{
 			$this->assign('apply_again','0');
 		}
