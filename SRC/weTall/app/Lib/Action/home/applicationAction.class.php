@@ -30,12 +30,12 @@ class applicationAction extends frontendAction{
 				if(!empty($Userarr) && $Userarr!=''){
 					$_SESSION['uid']=$Userarr['id'];
 					$_SESSION['name']=$Userarr['nickname'];
-					$_SESSION['user_info']=$Userarr;
+					$_SESSION['openid']=$userinfo['openid'];
 					//dump($Userarr['openid']);exit;
 				}else{
 					$_SESSION['uid']=M('user')->add($userinfo);
 					$_SESSION['name']=$userinfo['nickname'];
-					$_SESSION['user_info']=$userinfo;
+					$_SESSION['openid']=$userinfo['openid'];
 					//dump($userinfo['openid']);exit;
 				}
 				// dump($_SESSION['uid'].'-1-'.$_SESSION['name']);exit;
@@ -44,8 +44,8 @@ class applicationAction extends frontendAction{
 			} 
 		}
 		//$user = $this->_session('user_info');
-		$user = $_SESSION['user_info'];
-		if ($user) {
+		//$user = $_SESSION['user_info'];
+		if (isset($_SESSION['uid'])) {
 			$uid = $_SESSION['uid'];
 			$username = $_SESSION['nickname'];
 			//$umail = $user['email'];
@@ -67,7 +67,7 @@ class applicationAction extends frontendAction{
 		$this->assign('tokenTall',$tokenTall);
 		
 		//$wecha_id = $this->getWechaId();
-		$wecha_id = $user['openid'];
+		$wecha_id = $_SESSION['openid'];
 		dump($wecha_id);exit;
 		$this->assign('wecha_id',$wecha_id);
 		$res=$this->application_mod->where(array('wecha_id'=>$wecha_id))->find();
