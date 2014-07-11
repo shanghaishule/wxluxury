@@ -16,7 +16,7 @@ class applicationAction extends frontendAction{
 		import('Think.ORG.Oauth2');
 		$config['appId'] = "wx3079f89b18863917";
 		$config['appSecret'] = "69289876b8d040b3f9a367c80f8754c8";
-		if(!isset($_SESSION['uid']) || $_SESSION['uid']==''){
+		if(!isset($_SESSION['openid']) && !empty($_SESSION['openid'])){
 			 
 			if (isset($_GET['code'])){
 				//echo $_GET['code'].'--';
