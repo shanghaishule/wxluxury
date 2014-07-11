@@ -80,8 +80,13 @@ function searchshop(id){
     <img src="/weTall/static/weixin/images/luxury/images/home/bg_02.png" width="100%"/>
 
 	<ul class="navlist">
-		 <li class="r pos" id="n_0"><div class="back_page_logo"></div>
-		<div class="dis" id="dis">
+		 <li class="r pos" id="n_0">
+		  
+		    <div class="back_page_logo">
+		      <a href="#"><img src="/weTall/static/weixin/images/back_page_logo.png" width="20%"/></a>
+		         
+		    </div>
+		   <div class="dis" id="dis">
 			<!--   <ul>
 				  <volist name="item_cate" id="cate">
 				  	<li>
@@ -89,14 +94,16 @@ function searchshop(id){
 				    </li>
 				  </volist>
 			 </ul> -->
-		</div>
+		      </div>
 		</li>
     	<li class="r" id="n_4"> 
-    		<span >{$title}</span>
+    		<span >个人资料</span>
         </li>
           <li class="r" id="n_1">
           <div class="gouxuan">
-          
+             
+                <a href="#"><img src="/weTall/static/images/gouxuan.png" width="25%"/></a>
+               
           </div>
        <!--   <if condition="$yemian eq 'Item'">
         <a href="{:U('home/user/index', array('tokenTall'=>$tokenTall))}"><div class="find_04"></div></a>
@@ -128,6 +135,7 @@ function searchshop(id){
 
 
 <!-- 以上是headtop -->
+
 
 
 
