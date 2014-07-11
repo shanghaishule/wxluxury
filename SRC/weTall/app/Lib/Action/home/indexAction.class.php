@@ -1150,6 +1150,13 @@ class indexAction extends frontendAction {
     	$this->assign("nearShop",$new_nearShop);
     	$this->assign("promotion",$volumn[0]);
     	
+    	$data["status"]=1;
+    	$data["checkstatus"]=1;
+    	$data["boadid"]=array(array('eq',1),array('eq',2),array('eq',3),'or');
+    	$weTallboard = M("adforhome")->where($data)->order("id asc")->select();
+    	$this->assign("weTallboard",$weTallboard);
+    	
+    	
     	$url = "http://api.map.baidu.com/geocoder?location=".$latitude.",".$longitude."&output=xml&key=28bcdd84fae25699606ffad27f8da77b";
     	//$url = "http://api.map.baidu.com/geocoder?location=31.256748,121.595578&output=xml&key=28bcdd84fae25699606ffad27f8da77b";
     	$city_data = file_get_contents($url);
