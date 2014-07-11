@@ -75,8 +75,6 @@
 			   return false;
 		   }
 	   })
-	   var brandname = $("#brandvalue").find("option:selected").text();
-	   change_brand(brand_name);
 	});
 </script>
 
@@ -191,7 +189,7 @@
                   <td><input type="text" required="" name="wxfans" value="0" class="px" tabindex="1" size="25"></td>
                 </tr>
              
-               <!-- <tr>
+               <tr style="display:none">
                   <th>类型：</th>
                   <td><select id="type" name="type">                  
                   <option value="1,情感">情感</option>
@@ -199,12 +197,11 @@
                   <option value="3,娱乐">娱乐</option>
                   <option value="4,IT">IT</option>
                   <option value="5,数码">数码</option>
-                  <option value="6,购物">购物</option>
+                  <option value="6,购物" selected>购物</option>
                   <option value="7,生活">生活</option>
                   <option value="8,服务">服务</option>
                   </select></td>
-                </tr>
-              -->  
+                </tr>  
                 <tr>
                   <th></th>
                   <td><button type="submit" class="btnGreen" id="saveSetting">保存</button></td>
@@ -220,6 +217,11 @@
       </div>
     </div>
   </div>
+  <script>
+  var t= document.getElementById("brandvalue");
+  var brand_name=t.options[t.selectedIndex].text;
+  change_brand(brand_name);
+  </script>
   <!--底部-->
   	</div>
 <include file="Public:footer"/>	
