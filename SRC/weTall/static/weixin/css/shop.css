@@ -408,7 +408,20 @@ border-top: 2px solid #ff0000;}
 #nav .navlist li { float: left;height:45px;  position:relative;width:33.3333333333%;margin:auto}
 #nav .navlist li#n_3 i{ position:absolute; height:14px; width:14px;background:#C00; color:#fff; left:55%; top:10px; border-radius:50%; font-style:normal; text-align:center; font-size:12px; display:none;}
 #nav .navlist li span{ display:inline-block; width:100%; height:45px; cursor:pointer; color:white ;margin-top:10px;text-align:center}
-
+#nav .navlist li#n_10{padding-top: 5px;
+padding-left: 4px;
+margin-top: 5px;
+margin-left: 8px;
+text-align: left;
+color: white;
+font-weight: 500;
+background: url(../images/luxury/images/home/bg_button.png);
+background-size: 100% 100%;
+width: 59px;
+height: 31px;
+position: absolute;
+right: 5px;}
+#nav .navlist li#n_10 .shiyongshuoming{font-size:14px;margin-top:2px}
 <<<<<<< HEAD
 #nav .navlist li#n_4{width:60%;padding-top:0px;}
 =======
