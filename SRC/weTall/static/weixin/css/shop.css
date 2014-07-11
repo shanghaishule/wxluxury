@@ -346,7 +346,7 @@ border-top: 2px solid #ff0000;}
  * -------------------------------------------------------
  */
 
-#head {height: 45px; position: relative; margin: 0 auto; z-index: 0;text-align:center;}
+#head {height: 52px; position: relative; margin: 0 auto; z-index: 0;text-align:center;}
 #head img{ display:none;}
 
 #subnav { position: absolute; top: 5px; right: 0; word-spacing: 3px; }
@@ -415,14 +415,14 @@ border-top: 2px solid #ff0000;}
 #nav .navlist li#n_4{width:70%;padding-top:0px;}
 >>>>>>> branch 'master' of https://github.com/shanghaishule/wxluxury.git
 #nav .navlist li#n_5{width:58%;margin-left:10px;}
-#nav .navlist li#n_3{width:69%;}
+#nav .navlist li#n_3{width:33.3333%;}
 <<<<<<< HEAD
 #nav .navlist li#n_0{width:25%;}
 =======
 #nav .navlist li#n_0{width:5%;}
 >>>>>>> branch 'master' of https://github.com/shanghaishule/wxluxury.git
 #nav .navlist li#n_4 span{ text-align:center;padding-top:7px;font-size:1.2em; color:white;font-weight:700;}
-#nav .navlist li#n_3 span{ text-align:center;padding-top:7px;font-size:1.2em; padding-left:15px;color:white;font-weight:700;}
+#nav .navlist li#n_3 span{ text-align:center;padding-top:0px;font-size:1.2em; padding-left:0px;color:white;font-weight:700;}
 #nav .navlist li#n_1{text-align:center;color:white;font-weight:700;}
 #nav .navlist li#n_8{padding-top:5px;padding-left:4px;margin-top:5px;margin-left:8px;text-align:left;color:white;font-weight:500;background:url(../images/luxury/images/home/bg_button.png);background-size:100% 100%;width:59px;height:31px;position:absolute;right:5px}
 #nav .navlist li#n_9{width:100%;text-align:center;padding-top:8px;font-size:18px;color:white;font-weight:700;}
@@ -954,13 +954,13 @@ border-top: 2px solid #ff0000;}
  * -------------------------------------------------------
  */
 
-#sort_bg {width:100%; font-size:12px; left:0px;position:fixed; top:45px; z-index: 300000; margin: 0 auto;display:block;
+#sort_bg {width:100%; font-size:12px; left:0px;position:fixed; top:50px; z-index:100; margin: 0 auto;display:block;
 		background: -webkit-gradient(linear, 50% 50%, 50% 50%, from(#fff), to(#999d9c));      /* Safari 4-5, Chrome 1-9*/  
         background: -webkit-linear-gradient(bottom, #fff, #999d9c);   /*Safari5.1 Chrome 10+*/  
         background: -o-linear-gradient(bottom, #fff, #999d9c);   
 
 }
-#sort_bg ul.sortlist { position: relative; z-index:9999; height:35px; margin:0 auto;
+#sort_bg ul.sortlist { position: relative;  height:35px; margin:0 auto;
      	background: -webkit-gradient(linear, 50% 50%, 50% 50%, from(#fff), to(#999d9c));      /* Safari 4-5, Chrome 1-9*/  
         background: -webkit-linear-gradient(bottom, #fff, #999d9c);   /*Safari5.1 Chrome 10+*/  
         background: -o-linear-gradient(bottom, #fff, #999d9c);  /*Opera 11.10+*/   border-bottom:1px solid #ccc;box-shadow:0 2px 4px #d9d9d9;}
