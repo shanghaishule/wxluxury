@@ -32,7 +32,7 @@
 					  <TD class="norightborder">　<a href="{lanrain::U('Index/edit',array('id'=>$vo['id']))}">编辑</a>　<a  href="{lanrain::U('Index/del',array('id'=>$vo['id']))};">删除</a>　
 					  <a href="{lanrain::U('Function/index',array('id'=>$vo['id'],'token'=>$vo['token']))}" class="btnGreens" >功能管理</a>
 					  <a href="{lanrain::U('Home/Index/help',array('id'=>$vo['id'],'token'=>$vo['token']))}" class="btnGreens" >API接口</a>
-					  <a href="/weTall/index.php?g=admin&m=index&a=index&token=$vo['token']))}" class="btnGreens" >直接进入商城管理</a>					  
+					  <a href="/weTall/index.php?g=admin&m=index&a=index&token={Lanrain:$vo.token}" class="btnGreens" >直接进入商城管理</a>					  
 					  </TD>
 					</TR>
 					<TR>
