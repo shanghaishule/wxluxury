@@ -16,7 +16,7 @@ class applicationAction extends frontendAction{
 		import('Think.ORG.Oauth2');
 		$config['appId'] = "wx3079f89b18863917";
 		$config['appSecret'] = "69289876b8d040b3f9a367c80f8754c8";
-		dump($_SESSION['openid'].'--'.$_SESSION['uid'].'--'.$_GET['code']);
+		//dump($_SESSION['openid'].'--'.$_SESSION['uid'].'--'.$_GET['code']);
 		if(!isset($_SESSION['openid']) && empty($_SESSION['openid'])){
 			 
 			if (isset($_GET['code'])){
@@ -32,19 +32,18 @@ class applicationAction extends frontendAction{
 					$_SESSION['uid']=$Userarr['id'];
 					$_SESSION['name']=$Userarr['nickname'];
 					$_SESSION['openid']=$userinfo['openid'];
-					dump($Userarr['openid']);
+					//dump($Userarr['openid']);
 				}else{
 					$_SESSION['uid']=M('user')->add($userinfo);
 					$_SESSION['name']=$userinfo['nickname'];
 					$_SESSION['openid']=$userinfo['openid'];
-					dump($userinfo['openid']);
+					//dump($userinfo['openid']);
 				}
 				// dump($_SESSION['uid'].'-1-'.$_SESSION['name']);exit;
 			}else{
 				$this->error('页面异常',"{:U(index/brandshop)}");
 			} 
 		}
-		exit;
 		//$user = $this->_session('user_info');
 		//$user = $_SESSION['user_info'];
 		if (isset($_SESSION['uid'])) {
