@@ -129,9 +129,9 @@
                     
                     </script> 
                     <select onchange="change_brand(this.options[this.selectedIndex].text)" id="brandvalue" name="brandchoose" autofocus>
-                    <option value="" selected>请选择品牌</option>
+                    <option value="" >请选择品牌</option>
                     <volist name="brand" id="bname">
-                    <option value="{Lanrain:$bname.id}">{Lanrain:$bname.name}</option>
+                    <option value="{Lanrain:$bname.id}" <if condition="$mybrand['brand'] eq $bname.name">selected</if>>{Lanrain:$bname.name}</option>
                     </volist></select><span class="red">*</span>选择之后不能更改，请正确选择
                   </td>
                 </tr>
@@ -189,7 +189,7 @@
                   <td><input type="text" required="" name="wxfans" value="0" class="px" tabindex="1" size="25"></td>
                 </tr>
              
-                <tr>
+               <!-- <tr>
                   <th>类型：</th>
                   <td><select id="type" name="type">                  
                   <option value="1,情感">情感</option>
@@ -202,7 +202,7 @@
                   <option value="8,服务">服务</option>
                   </select></td>
                 </tr>
-              
+              -->  
                 <tr>
                   <th></th>
                   <td><button type="submit" class="btnGreen" id="saveSetting">保存</button></td>

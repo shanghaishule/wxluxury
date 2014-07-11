@@ -36,7 +36,7 @@ class IndexAction extends UserAction{
 	public function add(){
 		$randLength=6;
 		$chars='abcdefghijklmnopqrstuvwxyz';
-		
+		$where['uid']=session('uid');
 		$len=strlen($chars);
 		$randStr='';
 		for ($i=0;$i<$randLength;$i++){
@@ -47,7 +47,8 @@ class IndexAction extends UserAction{
 		$this->assign('email',time().'@yourdomain.com');
 		
 		//品牌
-
+        $application= M("application")->where($where)->find();
+        $this->assign('mybrand',$application);
 		$brand = M("brandlist")->select();
 		$this->assign("brand",$brand);		
 		
