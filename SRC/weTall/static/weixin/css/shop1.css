@@ -214,11 +214,12 @@ div.order_cancel_box p span {color: #f34; font-weight: bold;}
 #address_form ul.form_address {	padding: 10px;}
 
 /*会员中心*/
-.allinfo{margin: 0 auto;  position: fixed;} 
-.content {margin: 0 auto;  position: relative;}  
+.allinfo{margin: 0 auto;  position: fixed;}
+.kongge{height:37px;}
+.content {margin: auto;  position: relative;clear:both}  
 .hongse {position:relative}
 .all {position:absolute;top:30%;left:30%;float:left}
-.touxiang{float:left}
+.touxiang{float:left;width:50px; height:50px; border-radius:50%; overflow:hidden}
 .gereninfo {float:left;}
 .gereninfo p{margin-left:15px}
 .shouhuo{margin-left:15px;margin-top:5px}
