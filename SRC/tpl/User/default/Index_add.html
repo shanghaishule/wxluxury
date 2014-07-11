@@ -75,6 +75,8 @@
 			   return false;
 		   }
 	   })
+	   var brandname = $("#brandvalue").find("option:selected").text();
+	   change_brand(brand_name);
 	});
 </script>
 
@@ -127,11 +129,11 @@
                     	    }
                     }
                     
-                    </script>{Lantain:$mybrand['brand']} 
+                    </script>
                     <select onchange="change_brand(this.options[this.selectedIndex].text)" id="brandvalue" name="brandchoose" autofocus>
                     <option value="" >请选择品牌</option>
                     <volist name="brand" id="bname">
-                    <option value="{Lanrain:$bname.id}" <if condition="$mybrand['brand'] eq $bname.name">selected</if>>{Lanrain:$bname.name}</option>
+                    <option value="{Lanrain:$bname.id}" <if condition="$mybrand['brand'] eq $bname['name']">selected</if>>{Lanrain:$bname.name}</option>
                     </volist></select><span class="red">*</span>选择之后不能更改，请正确选择
                   </td>
                 </tr>
