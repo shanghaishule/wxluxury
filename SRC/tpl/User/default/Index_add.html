@@ -75,8 +75,6 @@
 			   return false;
 		   }
 	   })
-	   var brandname = $("#brandvalue").find("option:selected").text();
-	   change_brand(brand_name);
 	});
 </script>
 
@@ -128,7 +126,9 @@
                     	      }
                     	    }
                     }
-                    
+                    var t= document.getElementById("brandvalue");
+                    var brand name=t.options[t.selectedIndex].text;
+                    change_brand(brand_name);
                     </script>
                     <select onchange="change_brand(this.options[this.selectedIndex].text)" id="brandvalue" name="brandchoose" autofocus>
                     <option value="" >请选择品牌</option>
