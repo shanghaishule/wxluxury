@@ -48,6 +48,7 @@ class IndexAction extends UserAction{
 		
 		//品牌
         $application= M("application")->where($where)->find();
+        dump($application);exit;
         $this->assign('mybrand',$application);
 		$brand = M("brandlist")->select();
 		$this->assign("brand",$brand);		
