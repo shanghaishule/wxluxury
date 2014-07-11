@@ -73,6 +73,10 @@ class adforhomeAction extends backendAction {
         if ($data['start_time'] >= $data['end_time']) {
             $this->ajaxReturn(0, L('ad_endtime_less_startime'));
         }
+        if ($this->_post('img', 'trim') == '') {
+        	$this->ajaxReturn(0, "必须要有广告图片");
+        }
+        
 
         switch ($data['type']) {
             case 'text':
@@ -109,6 +113,10 @@ class adforhomeAction extends backendAction {
         if ($data['start_time'] >= $data['end_time']) {
             $this->ajaxReturn(0, L('ad_endtime_less_startime'));
         }
+        if ($this->_post('img', 'trim') == '') {
+        	$this->ajaxReturn(0, "必须要有广告图片");
+        }
+        
         switch ($data['type']) {
             case 'text':
                 $data['content'] = $this->_post('text', 'trim');
