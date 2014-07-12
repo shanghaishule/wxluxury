@@ -9,6 +9,7 @@ class AdNTAXAction extends BackAction
     public function index() {
         $map = array();
 		$UserDB = D('adforhome');
+		/*
 		$updateData = $UserDB->select();
 		$today=strtotime(date("Y-m-d"));
 		foreach ($updateData as $varData){
@@ -20,6 +21,15 @@ class AdNTAXAction extends BackAction
 				M("adforhome")->save($data);
 			}
 		}
+		*/
+		//检查生效情况，自动设置生效状态
+		$alldata = $UserDB->where(array('checkstatus'=>1))->select();
+		foreach ($alldata as $onedata){
+			$status = $this->checkPromotion(date('Y-m-d',$onedata['start_time']), date('Y-m-d',$onedata['end_time']));
+			$UserDB->where(array('id'=>$onedata['id']))->save(array('status'=>$status));
+		}
+		
+		
 		$tax = D("set_tax");
 		$currentTax = $tax->find();
 		$count = $UserDB->where($map)->count();

@@ -7,6 +7,14 @@ class adforhomeAction extends backendAction {
         parent::_initialize();
         $this->_mod = D('adforhome');
         $this->_adboard_mod = D('adboard');
+        
+        //检查生效情况，自动设置生效状态
+        $alldata = $this->_mod->where(array('checkstatus'=>1))->select();
+        foreach ($alldata as $onedata){
+        	$status = $this->checkPromotion(date('Y-m-d',$onedata['start_time']), date('Y-m-d',$onedata['end_time']));
+        	$this->_mod->where(array('id'=>$onedata['id']))->save(array('status'=>$status));
+        }
+        
     }
 
     public function _search() {
@@ -76,7 +84,8 @@ class adforhomeAction extends backendAction {
         if ($this->_post('img', 'trim') == '') {
         	$this->ajaxReturn(0, "必须要有广告图片");
         }
-        
+        //初始值为0
+        $data['status']=0;
 
         switch ($data['type']) {
             case 'text':
