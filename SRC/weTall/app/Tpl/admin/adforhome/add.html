@@ -33,7 +33,7 @@
     <tr id="ad_image" class="bill_media">
       <th>{:L('ad_image')} :</th>
       <td>
-          <input type="text" name="img" id="J_img" class="input-text fl mr10" size="30">
+          <input type="text" name="img" id="J_img" class="input-text fl mr10" size="30" readonly>
           <div id="J_upload_img" class="upload_btn"><span>{:L('upload')}</span></div>
       </td>
     </tr>
@@ -52,14 +52,14 @@
       <th>{:L('ad_text')} :</th>
       <td><textarea rows="3" cols="50" name="text" id="text"></textarea></td>
     </tr>
-    <tr>
+    <tr style="display:none;">
       <th>{:L('ad_ext_image')} :</th>
       <td>
           <input type="text" name="extimg" id="J_extimg" class="input-text fl mr10" size="30">
           <div id="J_upload_extimg" class="upload_btn"><span>{:L('upload')}</span></div>
       </td>
     </tr>
-    <tr>
+    <tr style="display:none;">
       <th>{:L('ad_ext_val')} :</th>
       <td>
           <input type="text" name="extval" class="input-text fl mr10">
@@ -93,13 +93,13 @@
         </script>
       </td>
     </tr>
-    <!--tr>
+    <tr style="display:none;">
         <th>{:L('enabled')} :</th>
         <td>
             <label><input type="radio" name="status" value="1" checked> {:L('yes')}</label>&nbsp;&nbsp;
             <label><input type="radio" name="status" value="0"> {:L('no')}</label>
         </td>
-    </tr-->
+    </tr>
     <tr>
         <th>审核状态 :</th>
         <td>
