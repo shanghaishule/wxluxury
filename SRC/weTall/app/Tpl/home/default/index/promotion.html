@@ -2,32 +2,38 @@
 <html>
     <head>
         <title>查找附近的促销店铺</title>
-    <script type="text/javascript" src="__STATIC__/js/jquery.min.js"></script>    
-    <script type="text/javascript" src="__STATIC__/js/MobileSlide.js"></script>
-    <script type="text/javascript" src="__STATIC__/js/js.js"></script>
-    <script type="text/javascript" src="__STATIC__/js/index.js"></script>
+		
     </head>
     <include file="public:headtop" />
     <include file="public:head" />
     <body>
-        <div id="map" style="width:600px; height:400px;display:none;">
-          
-        </div>
-        
-         <!-- div class="brandimg">
-         <img id="brandimg" alt="{$promotion.name}" src="{$promotion.img}">
-         </div -->
-         <!--幻灯片广告-->
-         <div class="banner">
-         <ul id="BanCont">
-         <volist name="weTallboard" id="bolist">
-         <if condition="$bolist['boadid'] eq 1">
-         <li><a href="{Lanrain:$bolist.url}" title="{Lanrain:$bolist.desc}"><img src="/weTall/data/upload/advert/{Lanrain:$img_dir}{Lanrain:$bolist.content}" width="320" height="161" alt="{Lanrain:$bolist.desc}" /></a></li> 
-         </if>
-         </volist>
-         </ul>
-         <ul class="banner_link"></ul>
-         </div>
+        <div id="map" style="width:600px; height:400px;display:none;"></div>
+        <!--幻灯片广告-->
+        <link type="text/css" rel="stylesheet" href="__STATIC__/css/slide.css">
+        <div class="container">
+    		<div id="slides">
+    			<volist name="weTallboard" id="bolist">
+         			<a href="{$bolist.url}" title="{$bolist.desc}"><img src="/weTall/data/upload/advert/{$img_dir}{$bolist.content}" alt="{$bolist.desc}" /></a>
+         		</volist>
+        	</div>
+  		</div> 
+		<script src="__STATIC__/js/jquery.slides.min.js"></script>
+		<script>
+		  $(function() {
+		    $('#slides').slidesjs({
+		  	  width: 320,
+		        height: 160,
+		      play: {
+		        active: true,
+		        auto: true,
+		        interval: 4000,
+		        swap: true
+		      }
+		    });
+		  });
+		</script>
+  		<!--幻灯片广告 end-->
+  
          
          <if condition="$countShop eq 0">
            <span class="haveSearch">你处在的位置 附近没有正在促销的实体店铺！</span>

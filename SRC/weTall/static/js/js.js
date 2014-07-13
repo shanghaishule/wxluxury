@@ -26,13 +26,10 @@ $.fn.SlideTab=function(options){
 		})
 	};
 /* 示例 */
-/*$(document).ready(function(){
-	$("#BanCont").SlideBtn({
-		TabBtn:""          //按钮的样式名（可ID,Class）
-		,TabCont:""        //需要移动的内容样式名
-		,TabBtnLi:"li"     //按钮的名称
-		,TabShow:0         //默认显示第几个
-		,TabBtnStyle:""    //点击后的样式名
-		,TabTime:300       //移动使用的时间（毫秒）
+$(document).ready(function(){
+	$("#BanCont").SlideTab({
+		,TabBtnLi:"li"
+		,TabShow:0
+		,TabTime:300
 		});
-	})*/
+})
