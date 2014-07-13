@@ -2,7 +2,10 @@
 <html>
     <head>
         <title>查找附近的促销店铺</title>
-        
+    <script type="text/javascript" src="__STATIC__/js/jquery.min.js"></script>    
+    <script type="text/javascript" src="__STATIC__/js/MobileSlide.js"></script>
+    <script type="text/javascript" src="__STATIC__/js/js.js"></script>
+    <script type="text/javascript" src="__STATIC__/js/index.js"></script>
     </head>
     <include file="public:headtop" />
     <include file="public:head" />
@@ -11,8 +14,19 @@
           
         </div>
         
-         <div class="brandimg">
+         <!-- div class="brandimg">
          <img id="brandimg" alt="{$promotion.name}" src="{$promotion.img}">
+         </div -->
+         <!--幻灯片广告-->
+         <div class="banner">
+         <ul id="BanCont">
+         <volist name="weTallboard" id="bolist">
+         <if condition="$bolist['boadid'] eq 1">
+         <li><a href="{Lanrain:$bolist.url}" title="{Lanrain:$bolist.desc}"><img src="/weTall/data/upload/advert/{Lanrain:$img_dir}{Lanrain:$bolist.content}" width="320" height="161" alt="{Lanrain:$bolist.desc}" /></a></li> 
+         </if>
+         </volist>
+         </ul>
+         <ul class="banner_link"></ul>
          </div>
          
          <if condition="$countShop eq 0">
