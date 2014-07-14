@@ -318,8 +318,9 @@
 						<elseif condition="($apply_again eq '-1')" />
 						<div>
 							<div style="color:white;line-height:5px;">
-								<h1 style="font-size:20px;color:red;">恭喜您申请成功</h1>
+								
 								<ul>
+								    <li><h1 style="font-size:20px;color:red;">恭喜您申请成功</h1></li>
 									<li>用户名：{$suser['uname']}</li>
 									<li>密　码：{$suser['password']}</li>
 									<li>品　牌：{$suser['brand']}</li>
@@ -327,9 +328,10 @@
 									<li>店　铺：{$suser['addr']}</li>
 								</ul>
 							</div>
-							<div style="color:white;line-height:5px;">
-								<h1>店家使用说明：</h1>
+							<div style="color:white;line-height:15px;">
+								
 								<ul>
+									<li><h1>店家使用说明：</h1></li>
 									<li>1、在电脑端输入网址<a style="color:red;">www.kuyimap.com</a></li>
 									<li>2、用生成的用户名和密码登陆</li>
 									<li>3、进入后台管理商城信息</li>
@@ -342,7 +344,7 @@
 							</div>
 						</div>
 						
-						<table>
+						<!-- <table>
 							<tr>
 								<td>用户名：</td>
 								<td>{$suser['uname']}</td>
@@ -363,7 +365,7 @@
 								<td>店铺：</td>
 								<td>{$suser['addr']}</td>
 							</tr>
-						</table>
+						</table> -->
 						<else />
 						<h2 class="first">您的申请已在处理中</h2>
 						<br />
