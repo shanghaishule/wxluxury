@@ -6,9 +6,9 @@
 	min-height: 26px;
 }
 .qiandaobanner img{
-	width:100%;
+	/*width:100%;*/
 	border:0;
-	min-width:320px;
+	/*min-width:320px;*/
 }
 
 .qiandaobanner  span {
@@ -241,7 +241,7 @@
 .history-date ul li h3 { color:#c3c3c3; font:normal 18px/16px Arial; margin: -2px 0 10px 0}
 .history-date ul li h3 img { float:left; margin-right:5px; width:32ox; height:32px;border-radius: 3px;}
 .history-date ul li h3 span { display:block; color:#d0d0d0; font-size:12px; margin-top:2px;}
-.history-date ul li dl { background-color: #FFFFFF;
+.history-date ul li dl { background-color: black;
     color: #666666;
     display: block;
     font-size: 12px;
@@ -273,4 +273,5 @@
 .container{
 	max-width:640px;
 	margin:auto;
+	background-color: black;
 }
