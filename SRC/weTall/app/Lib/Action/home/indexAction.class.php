@@ -181,7 +181,7 @@ class indexAction extends frontendAction {
     	import('Think.ORG.Oauth2');
     	$config['appId'] = "wx3079f89b18863917";
     	$config['appSecret'] = "69289876b8d040b3f9a367c80f8754c8";
-    	if(!isset($_SESSION['uid']) || $_SESSION['uid']==''){
+    	if(!isset($_SESSION['uid']) && empty($_SESSION['uid'])){
     	
     		if (isset($_GET['code'])){
     			//echo $_GET['code'].'--';
@@ -1088,86 +1088,93 @@ class indexAction extends frontendAction {
     }    
     	 
     public function promotion(){
-    	//if (IS_POST) {					
-    		//map 功能需要post ?
-    	    $longitude = $this->_POST("longitude","trim");
-	        $latitude = $this->_POST("latitude","trim");
-	        
-	        /***商品分类**/
-	        $item_cate=M("item_cate")->select();
-	        $this->assign('item_cate',$item_cate);
-    	    //
-	        //xxl
-	        //$brand_id = $this->_POST("brand_id","trim");
-	        //$brand_data['id'] = $brand_id;
-
-	        //取商家token值，取不到则默认为空
-	        $tokenTall = $this->getTokenTall();
-	        $_SESSION["tokenTall"]=$tokenTall;	        
-	        //广告位
-	        $weTallad = M("adforhome");
-	        $data["status"]=1;
-	        $data["checkstatus"]=1;
-	        $data["boadid"]=array(array('eq',1),array('eq',2),array('eq',3),'or');
-	        $weTallboard = $weTallad->where($data)->order("id asc")->select();
-	        $this->assign("weTallboard",$weTallboard);	        
-	        /*****首页广告end******/	        
-	        
-	        //promotion event
-			$Sel_sql = "SELECT s.id,s.theme, s.start_date, s.end_date, w.name FROM tp_set_promotion s, tp_wecha_shop w ";
-		    $Where_sql = "WHERE s.tokentall = w.tokentall  AND s.status = 1 AND w.shop_city =  '上海' " ;
-		    					
-	        
-	        $m=M();	        
-	        $result=$m->query($Sel_sql.$Where_sql);
-
-	        
-	        $this->assign("nearPromotion",$result);
-	        $this->assign("countPromotion",count($result));
-			
-	        
-	        
-    	//}
-    	 
-    	$this->assign("City","北京");
+    	$wecha_shop = M("upload_shop");
+    	$longitude = $this->_POST("longitude","trim");
+    	$latitude = $this->_POST("latitude","trim");
+    	if ($latitude == "") {
+    		$longitude = $_SESSION["longtitude"] ;
+    		$latitude = $_SESSION["latitude"] ;
+    	}else{
+    		$_SESSION["longtitude"] = $longitude;
+    		$_SESSION["latitude"] = $latitude;
+    	}
+    	
+    	//检查促销情况，自动设置促销状态
+    	$alldata = M('set_promotion')->select();
+    	foreach ($alldata as $onedata){
+    		$status = $this->checkPromotion($onedata['start_date'], $onedata['end_date']);
+    		M('set_promotion')->where(array('id'=>$onedata['id']))->save(array('status'=>$status));
+    	}
+    	
+    	$Model = new Model();
+    	$volumn = $Model->query("select b.name, a.img, a.theme, a.discount_rate from tp_set_promotion a, tp_brandlist b where a.brand_id=b.id and a.status=1 LIMIT 300;");
+    	$brand_name = "";
+    	foreach ($volumn as $val){
+    		$brand_name .= $val['name'].',';
+    	}
+    	$where["brand_name"] = array('in',$brand_name);
+    	$endPoint = $wecha_shop->where($where)->select();
+    	$nearShop=array();
+    	if ($longitude != "" and $latitude != "") {
+    		foreach ($endPoint as $end){
+    			if ($end["lbs_addr"] != "" and $end["longtitude"] != "") {
+    				$end["nearJuli"] = $this->GetDistance($latitude,$longitude,$end["lat"],$end["longtitude"]);
+    				//echo $end["nearJuli"]."--0".$latitude."----1<br>".$longitude."----2<br>".$end["lat"]."----3<br>".$end["longtitude"]."===".$end["nearJuli"];die();
+    				$nearShop[] = $end;
+    			}
+    		}
+    	}
+    	
+    	$start_point_lat = $latitude;
+    	$start_point_lng = $longitude;
+    	
+    	//排序
+    	$new_nearShop = $this->array_sort($nearShop,"nearJuli", "asc");
+    	$length = count($nearShop);
+    	
+    	//促销信息
+    	$promotion_theme = array();
+		$promotion_discount = array();
+    	foreach ($volumn as $val){
+    		$promotion_theme[$val['name']] = $val['theme'];
+    		$promotion_discount[$val['name']] = $val['discount_rate'];
+    	}
+    	$this->assign("promotion_theme",$promotion_theme);
+		$this->assign("promotion_discount",$promotion_discount);
+    	
     	$this->assign("title","店内促销");
-    	$this->display();
-    }    
-    
-    public function promotioninfo(){
+    	$this->assign("countShop",$length);
+    	$this->assign("start_point_lat",$start_point_lat);
+    	$this->assign("start_point_lng",$start_point_lng);
+    	$this->assign("searchNear","Y");
+    	$this->assign("nearShop",$new_nearShop);
+    	$this->assign("promotion",$volumn[0]);
     	
-    	$keyword = NULL;
-    	/***商品分类**/
-    	$item_cate=M("item_cate")->select();
-    	$this->assign('item_cate',$item_cate);
-    	if (IS_POST) {
-    		$keyword = $this->_POST("keyword","trim");	
+    	//广告生效和读取 begin
+    	$alldata = M('adforhome')->where(array('checkstatus'=>1))->select();
+    	foreach ($alldata as $onedata){
+    		$status = $this->checkPromotion(date('Y-m-d',$onedata['start_time']), date('Y-m-d',$onedata['end_time']));
+    		M('adforhome')->where(array('id'=>$onedata['id']))->save(array('status'=>$status));
     	}
-    	//promotion event
-    	$id = $this->_get("id","trim");
-    	$Sel_sql = "SELECT i.id,b.name AS brand_name, i.title AS title, s.discount_rate * i.price /100 AS price, i.item_model, i.img ";
-    	$From_sql ="FROM tp_set_promotion s, tp_item i, tp_brandlist b ";
-    	$Where_sql = "WHERE s.id = i.promotion_id AND i.brand = b.id AND s.tokentall = i.tokentall AND s.id =".$id." ";
-    	if($keyword != NULL){
-    		$like = "And i.title like '%".$keyword."%' "; 
-    		$Where_sql = $Where_sql.$like;      		
-    	}
-    	     	 
-    	$m=M();
-	
-    	$result=$m->query($Sel_sql.$From_sql.$Where_sql);
-    	$this->assign("promotioninfo",$result);
+    	$data["status"]=1;
+    	$data["checkstatus"]=1;
+    	$data["boadid"]=array(array('eq',1),array('eq',2),array('eq',3),'or');
+    	$weTallboard = M("adforhome")->where($data)->order("id asc")->select();
+    	$this->assign("weTallboard",$weTallboard);
+    	//dump($weTallboard);exit;
+    	//广告生效和读取  end
     	
-    	//promotion event
-    	$Sel_sql = "SELECT w.name FROM tp_set_promotion s, tp_wecha_shop w ";
-    	$Where_sql = "WHERE s.tokentall = w.tokentall AND w.shop_city =  '上海' AND s.id =".$id;  	
-    	$result=$m->query($Sel_sql.$Where_sql);    	 	
-    	$this->assign("name",$result[0]['name']);
-    	$this->assign("id",$id);
-    	$this->assign("keyword",$keyword);
-    	
+    	$url = "http://api.map.baidu.com/geocoder?location=".$latitude.",".$longitude."&output=xml&key=28bcdd84fae25699606ffad27f8da77b";
+    	//$url = "http://api.map.baidu.com/geocoder?location=31.256748,121.595578&output=xml&key=28bcdd84fae25699606ffad27f8da77b";
+    	$city_data = file_get_contents($url);
+    	preg_match('/<city>.*<\/city>/',$city_data,$total_page);
+    	//$city_info = iconv('GBK', 'UTF-8',$total_page[0]);echo $city_info;die();
+    	$currentcity = preg_replace('/市/',"",$total_page[0]);
+    	$this->assign("City",$currentcity);
+    	 
     	$this->display();
-    }   
+    		
+    }
     
     public function addMatch() {
     	$this->display();

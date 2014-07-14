@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<include file="public:headtop" />
+<meta content="width=device-width,minimum-scale=1.0,maximum-scale=1.0" name="viewport">
+<include file="public:headtop1" />
 <script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/dialog.js" id="dialog_js"></script>
 <script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/jquery_003.js"></script>
 <script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/zh-CN.js"></script>
 <script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/jquery_002.js"></script>
-<link rel="stylesheet" type="text/css" href="__STATIC__/weixin/css/jquery.css">
+<link rel="stylesheet" type="text/css" href="__STATIC__/weixin/css/jquery1.css">
 <style>
 .button_aaa
 {
@@ -21,20 +22,31 @@ background: #2BD54D;
 </head>
 
 <body>
-<include file="public:head" />
-<div class="content">  
-    <img src="/weTall/static/weixin/images/hongse.png"  width="100%"/>
-    <div class="touxiang">
-         <p>{$Think.session.name}</p>
-         <div class="shouhuo">
-             <img src="/weTall/static/weixin/images/shouhuo.png" width="5%" style="">
-             <span class="my_address"><a href="{:U('user/address', array('tokenTall'=>$tokenTall))}">收获地址管理</a>
-             </span>
-         </div>
+<include file="public:head1" />
+
+<div class="kongge">
+</div>
+
+
+<div class="content"> 
+  <div class="hongse"> 
+    <div class="tupian">
+            <img src="/weTall/static/weixin/images/hongse.png"  width="100%"/>
+    </div>
+     <div class="all"> 
+           <div class="touxiang">
+               <img src="{$Think.session.headimgurl}"  width="50px" height="50px"/>
+           </div>
+            <div class="gereninfo">
+                <p>{$Think.session.name}</p>
+                <div class="shouhuo">
+                  <img src="/weTall/static/weixin/images/shouhuo.png" width="15%" style="">
+                   <span class="my_address"><a href="{:U('user/address', array('tokenTall'=>$tokenTall))}">收获地址管理</a>
+                   </span>             
+                </div>
+             </div>
      </div>
-
-
-
+   </div>
    
    <div class="touming">
        <img src="/weTall/static/weixin/images/touming.png"  width="100%"/>
@@ -100,8 +112,6 @@ background: #2BD54D;
                         <p class="price">价格: <span>¥{$item.price}</span></p>
                         <p class="amount">数量: <span>{$item.quantity}</span>
                         </p>
-                        
-
                     </div>
                     </volist>
                     <div class="clear"></div>
@@ -158,6 +168,9 @@ background: #2BD54D;
     </div>
     <div class="clear"></div>
 </div>
-<include file="public:footer" />
+
+
+
+<include file="public:footer" /> 
 </body>
 </html>

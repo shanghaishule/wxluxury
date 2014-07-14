@@ -10,7 +10,7 @@ body
 	padding:   0px;border:   0px; 
 
 }
-.clear_kongge{height:45px;}
+.clear_kongge{height:50px;}
 .img{
 	width: 48%;
 	font-size:0.8em;
@@ -95,7 +95,7 @@ body
 	width:100%;margin:0 auto;padding-top:5px;padding-bottom:5px;text-align:center;
 }
 .pro_detail{
-	display:block;margin-top:-10px;
+	display:block;margin-top:0px;
 }
 .pro_detail2{
 	display:block;margin-top:0px;

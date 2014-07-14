@@ -16,7 +16,8 @@ class applicationAction extends frontendAction{
 		import('Think.ORG.Oauth2');
 		$config['appId'] = "wx3079f89b18863917";
 		$config['appSecret'] = "69289876b8d040b3f9a367c80f8754c8";
-		if(!isset($_SESSION['uid']) || $_SESSION['uid']==''){
+		//dump($_SESSION['openid'].'--'.$_SESSION['uid'].'--'.$_GET['code']);
+		if(!isset($_SESSION['openid']) && empty($_SESSION['openid'])){
 			 
 			if (isset($_GET['code'])){
 				//echo $_GET['code'].'--';
@@ -30,13 +31,13 @@ class applicationAction extends frontendAction{
 				if(!empty($Userarr) && $Userarr!=''){
 					$_SESSION['uid']=$Userarr['id'];
 					$_SESSION['name']=$Userarr['nickname'];
-					$_SESSION['user_info']=$Userarr;
-					//dump($Userarr['openid']);exit;
+					$_SESSION['openid']=$userinfo['openid'];
+					//dump($Userarr['openid']);
 				}else{
 					$_SESSION['uid']=M('user')->add($userinfo);
 					$_SESSION['name']=$userinfo['nickname'];
-					$_SESSION['user_info']=$userinfo;
-					//dump($userinfo['openid']);exit;
+					$_SESSION['openid']=$userinfo['openid'];
+					//dump($userinfo['openid']);
 				}
 				// dump($_SESSION['uid'].'-1-'.$_SESSION['name']);exit;
 			}else{
@@ -44,8 +45,8 @@ class applicationAction extends frontendAction{
 			} 
 		}
 		//$user = $this->_session('user_info');
-		$user = $_SESSION['user_info'];
-		if ($user) {
+		//$user = $_SESSION['user_info'];
+		if (isset($_SESSION['uid'])) {
 			$uid = $_SESSION['uid'];
 			$username = $_SESSION['nickname'];
 			//$umail = $user['email'];
@@ -67,8 +68,8 @@ class applicationAction extends frontendAction{
 		$this->assign('tokenTall',$tokenTall);
 		
 		//$wecha_id = $this->getWechaId();
-		$wecha_id = $user['openid'];
-		//dump($wecha_id);exit;
+		$wecha_id = $_SESSION['openid'];
+		//dump($wecha_id.$_SESSION['uid'].$_SESSION['name']);exit;
 		$this->assign('wecha_id',$wecha_id);
 		$res=$this->application_mod->where(array('wecha_id'=>$wecha_id))->find();
 		if($res || !empty($res)){
