@@ -228,7 +228,7 @@ div.order_cancel_box p span {color: #f34; font-weight: bold;}
 .xuxian{height:1px;margin:0;background:black;margin:20px 0;border-bottom:1px dashed white;position:relative}
 .xuxian .xx{position:absolute;height:1px;margin-top:25px;border-bottom-style:dotted;width:100%}
 .yonghu{margin-top:0px}
-ul{list-style：none}
+ul{list-style：none;margin-left: 20%;}
 .membertop ul li{width:25%;float:left;text-align:center;margin:10px 0 auto;dispaly:inline;z-index:100}
 .membertop ul li a{display：block}
 .membertop ul li a img{margin-bottom:5px;width:20%}
@@ -1236,4 +1236,7 @@ width: 100%;}
 /**2014-7-9 nick 个人资料**/
 .gouxuan{position:relative}	
 .gouxuan img{margin-left:80px;margin-top:5px;position:absolute}
+	
+/** 实体店 2014 7 14 anan**/
+h1, h2, h3, h4, h5, h6, p, ul, ol, dl, dt, dd, li, body, form, input, button, img, cite, strong, em, table, td, th { padding:0; margin:0;color:white; }
 
