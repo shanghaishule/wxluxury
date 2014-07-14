@@ -229,7 +229,7 @@
 
 /*history*/
 #message{ background-color:#f7f7f7}
-.history { background:url(images/line04.gif) repeat-y 15px 0;  position:relative; }
+.history { /*background:url(images/line04.gif) repeat-y 15px 0;*/  position:relative; }
 .history-date h2 {/* background:url(images/icon06.gif) no-repeat 0 0;*/ height:32px; font-size:24px; font-family:微软雅黑; font-weight:normal; padding-left:38px; margin:0 0 30px 0; padding-top:0; background-size:32px auto;/*color:#1DB702;*/ }
 .history-date h2.first { position:absolute; left:0; top:0; z-index:99;}
 .history-date h2 img { vertical-align:-5px;}
