@@ -2,316 +2,349 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
 <head>
 <include file="public:headtop" />
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta content="width=device-width,minimum-scale=1.0,maximum-scale=1.0" name="viewport">	
-    <link rel="stylesheet" type="text/css" href="__STATIC__/css/default/message.css" media="all">
-	<script type="text/javascript" src="__STATIC__/js/jquery_min.js"></script>
-	<title>请在此申请</title> 
- 
-	<script type="text/javascript"> 
-		$(document).ready(function () { 
-			$("#showcard1").click(function () { 
-				var btn = $(this);
-				var brand = $("#brandvalue").val();
-				if (brand == '') {
-					tip('请选择品牌！');
-					return;
-				}
-				var applicant = $("#applicant").val();
-				if (applicant == '') {
-					tip('请填写申请人姓名！');
-					return;
-				}
-				var addr = $("#address_chooce").val();
-				if (addr == '') {
-					tip('请填写或者地址！');
-					return;
-				}
-				var phone = $("#phone").val();
-				if (phone == '') {
-					tip('请填写联系电话！');
-					return;
-				}
-				var provice = $("#select_provice").val();
-				if (provice == '') {
-					tip('请选择省份！');
-					return;
-				}
-				var city = $("#select_city").val();
-				if (city == '') {
-					tip('请选择城市！');
-					return;
-				}
-				var QQ = $("#qq").val();
-				if (QQ == '') {
-					tip('请填写QQ号码');
-					return;
-				}
-				var trueshop = $('input[name="trueshop"]:checked').val();
-				var licence = $("#licence").val();
-				var shopname = $("#shopname").val();
-				if(trueshop == '1'){
-					if (licence == '') {
-						tip('请填写营业执照相关信息！');
-						return;
-					}
-					if (shopname == '') {
-						tip('请填写店铺名称！');
-						return;
-					}
-				}
-				
-				var info = $("#info").val();
-				
-				var submitData = {
-					uid:'{$uid}',
-					uname: '{$username}',
-					QQ: QQ,
-					applicant: applicant,
-					addr: addr,
-					phone: phone,
-					brand: brand,
-					provice: provice,
-					city: city,
-					createtime:'{$createtime}',
-					tokenTall:'{$tokenTall}',
-					wecha_id:'{$wecha_id}'
-				};
-				$.post("{:U('application/add',array('tokenTall'=>$tokenTall))}", submitData,
-					function(data) {
-						//alert(data);
-						setTimeout('window.location.href=location.href',500);
-						return;
-					}
-				)
-			}); 
-			
-			$("#alertclose").click(function () { 
-				$("#windowcenter").slideUp(500);
-			});
-		}); 
-		
-		function tip(title){ 
-			//window.scrollTo(0, -1);
-			$("#windowcenter").slideToggle("slow"); 
-			$("#txt").html(title);
-			setTimeout(function(){ 
-				$("#windowcenter").slideUp(500);
-			},3000);
-		}
-		/*
-		$(document).ready(function(){
-			$(".first1").click(function(){
-				$(".ly1").slideToggle();
-			});
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"
+	name="viewport">
+<link rel="stylesheet" type="text/css"
+	href="__STATIC__/css/default/message.css" media="all">
+<script type="text/javascript" src="__STATIC__/js/jquery_min.js"></script>
+<title>请在此申请</title>
+
+<script type="text/javascript">
+	$(document)
+			.ready(
+					function() {
+						$("#showcard1")
+								.click(
+										function() {
+											var btn = $(this);
+											var brand = $("#brandvalue").val();
+											if (brand == '') {
+												tip('请选择品牌！');
+												return;
+											}
+											var applicant = $("#applicant")
+													.val();
+											if (applicant == '') {
+												tip('请填写申请人姓名！');
+												return;
+											}
+											var addr = $("#address_chooce")
+													.val();
+											if (addr == '') {
+												tip('请填写或者地址！');
+												return;
+											}
+											var phone = $("#phone").val();
+											if (phone == '') {
+												tip('请填写联系电话！');
+												return;
+											}
+											var provice = $("#select_provice")
+													.val();
+											if (provice == '') {
+												tip('请选择省份！');
+												return;
+											}
+											var city = $("#select_city").val();
+											if (city == '') {
+												tip('请选择城市！');
+												return;
+											}
+											var QQ = $("#qq").val();
+											if (QQ == '') {
+												tip('请填写QQ号码');
+												return;
+											}
+											var trueshop = $(
+													'input[name="trueshop"]:checked')
+													.val();
+											var licence = $("#licence").val();
+											var shopname = $("#shopname").val();
+											if (trueshop == '1') {
+												if (licence == '') {
+													tip('请填写营业执照相关信息！');
+													return;
+												}
+												if (shopname == '') {
+													tip('请填写店铺名称！');
+													return;
+												}
+											}
+
+											var info = $("#info").val();
+
+											var submitData = {
+												uid : '{$uid}',
+												uname : '{$username}',
+												QQ : QQ,
+												applicant : applicant,
+												addr : addr,
+												phone : phone,
+												brand : brand,
+												provice : provice,
+												city : city,
+												createtime : '{$createtime}',
+												tokenTall : '{$tokenTall}',
+												wecha_id : '{$wecha_id}'
+											};
+											$
+													.post(
+															"{:U('application/add',array('tokenTall'=>$tokenTall))}",
+															submitData,
+															function(data) {
+																//alert(data);
+																setTimeout(
+																		'window.location.href=location.href',
+																		500);
+																return;
+															})
+										});
+
+						$("#alertclose").click(function() {
+							$("#windowcenter").slideUp(500);
+						});
+					});
+
+	function tip(title) {
+		//window.scrollTo(0, -1);
+		$("#windowcenter").slideToggle("slow");
+		$("#txt").html(title);
+		setTimeout(function() {
+			$("#windowcenter").slideUp(500);
+		}, 3000);
+	}
+	/*
+	$(document).ready(function(){
+		$(".first1").click(function(){
+			$(".ly1").slideToggle();
 		});
-		*/
-		
-		//xxl		
-		function change()
-		{
-			var radio= document.getElementsByName("trueshop");
-		        for(i=0;i<radio.length;i++){  
-				  if(radio[i].checked){ 
-				          if(radio[i].value ==0 ){
-				          	$("#worknum").text("身份证号");
-				          	$("#licence").attr('placeholder',"身份证号");
-				                $("#workname").hide();
-				          }else{
-				          	$("#worknum").text("营业执照注册号");
-				          	$("#licence").attr('placeholder',"营业执照注册号");
-				          	$("#workname").show();
-				          }
-				  } 
-		        } 	
-		
+	});
+	 */
+
+	//xxl		
+	function change() {
+		var radio = document.getElementsByName("trueshop");
+		for (i = 0; i < radio.length; i++) {
+			if (radio[i].checked) {
+				if (radio[i].value == 0) {
+					$("#worknum").text("身份证号");
+					$("#licence").attr('placeholder', "身份证号");
+					$("#workname").hide();
+				} else {
+					$("#worknum").text("营业执照注册号");
+					$("#licence").attr('placeholder', "营业执照注册号");
+					$("#workname").show();
+				}
+			}
 		}
 
-		/**
-		根据品牌获得省份
-		*/
-        function change_brand(brand_name){
-        	$.get('/weTall/index.php?g=home&m=application&a=addressselect&name='+brand_name,function(data,status){
-        		var obj = eval('('+  data +')');
-        		var dataobj = obj.status;
-        		var x=document.getElementById("select_provice");
-        		x.length = 0;
-        	
-        		//appendsele("","请选择实体店地址");
-        		for(i=0;i<dataobj.length;i++){
-        			x.length = i + 2;
-        			appendsele(dataobj[i].provice,dataobj[i].provice,x);
-                }
-        		appendsele("","选择省份",x);
-        	  });
-        }
-		/**
-		根据省份和品牌获得城市
-		*/
-		function change_provice(brand_name){
-        	$.get('/weTall/index.php?g=home&m=application&a=proviceselect&name='+brand_name,function(data,status){
-        		var obj = eval('('+  data +')');
-        		var dataobj = obj.status;
-        		var x=document.getElementById("select_city");
-        		x.length = 0;
-        		//appendsele("","请选择实体店地址");
-        		
-        		var m=document.getElementById("select_city");
-        		
-        		for(i=0;i<dataobj.length;i++){
-        			x.length = i + 2;
-        			appendsele(dataobj[i].city,dataobj[i].city,m);
-                }
-        		appendsele("","选择城市",m);
-        		
-        	  });
-        }
-		/**
-		根据省份 城市和品牌获得地址
-		*/
-		function change_city(brand_name){
-        	$.get('/weTall/index.php?g=home&m=application&a=cityselect&name='+brand_name,function(data,status){
-        		var obj = eval('('+  data +')');
-        		var dataobj = obj.status;
-        		var x=document.getElementById("ddlTest");
-        		x.length = 0;
-        		//appendsele("","请选择实体店地址");
-        		
-        		var m=document.getElementById("ddlTest");
-        		for(i=0;i<dataobj.length;i++){
-        			x.length = i + 1;
-        			appendsele(dataobj[i].shop_name,dataobj[i].shop_name,m);
-                }
-        		appendsele("","选择店铺",m);
-        		
-        	  });
-        }
-		function select_addres(add_choce){
-			document.getElementById("address_chooce").value = add_choce;
+	}
+
+	/**
+	根据品牌获得省份
+	 */
+	function change_brand(brand_name) {
+		$.get('/weTall/index.php?g=home&m=application&a=addressselect&name='
+				+ brand_name, function(data, status) {
+			var obj = eval('(' + data + ')');
+			var dataobj = obj.status;
+			var x = document.getElementById("select_provice");
+			x.length = 0;
+
+			//appendsele("","请选择实体店地址");
+			for (i = 0; i < dataobj.length; i++) {
+				x.length = i + 2;
+				appendsele(dataobj[i].provice, dataobj[i].provice, x);
+			}
+			appendsele("", "选择省份", x);
+		});
+	}
+	/**
+	根据省份和品牌获得城市
+	 */
+	function change_provice(brand_name) {
+		$.get('/weTall/index.php?g=home&m=application&a=proviceselect&name='
+				+ brand_name, function(data, status) {
+			var obj = eval('(' + data + ')');
+			var dataobj = obj.status;
+			var x = document.getElementById("select_city");
+			x.length = 0;
+			//appendsele("","请选择实体店地址");
+
+			var m = document.getElementById("select_city");
+
+			for (i = 0; i < dataobj.length; i++) {
+				x.length = i + 2;
+				appendsele(dataobj[i].city, dataobj[i].city, m);
+			}
+			appendsele("", "选择城市", m);
+
+		});
+	}
+	/**
+	根据省份 城市和品牌获得地址
+	 */
+	function change_city(brand_name) {
+		$.get('/weTall/index.php?g=home&m=application&a=cityselect&name='
+				+ brand_name, function(data, status) {
+			var obj = eval('(' + data + ')');
+			var dataobj = obj.status;
+			var x = document.getElementById("ddlTest");
+			x.length = 0;
+			//appendsele("","请选择实体店地址");
+
+			var m = document.getElementById("ddlTest");
+			for (i = 0; i < dataobj.length; i++) {
+				x.length = i + 1;
+				appendsele(dataobj[i].shop_name, dataobj[i].shop_name, m);
+			}
+			appendsele("", "选择店铺", m);
+
+		});
+	}
+	function select_addres(add_choce) {
+		document.getElementById("address_chooce").value = add_choce;
+	}
+
+	function appendsele(value, text, x) {
+
+		if (x.selectedIndex >= 0) {
+			var y = document.createElement('option');
+			y.value = value;
+			y.text = text;
+			y.selected = true;
+			var sel = x.options[x.selectedIndex];
+			try {
+				x.add(y, sel); // standards compliant
+			} catch (ex) {
+				x.add(y, x.selectedIndex); // IE only
+			}
 		}
-		
-        function appendsele(value,text,x){
-        	
-        	if (x.selectedIndex>=0){
-        	    var y=document.createElement('option');
-        	    y.value=value;
-        	    y.text=text;
-        	    y.selected=true;
-        	    var sel=x.options[x.selectedIndex]; 
-        	    try
-        	      {
-        	      x.add(y,sel); // standards compliant
-        	      }
-        	    catch(ex)
-        	      {
-        	      x.add(y,x.selectedIndex); // IE only
-        	      }
-        	    }
-        }
-        
-        </script> 
+	}
+</script>
 </head>
-  
+
 <body id="message">
-<include file="public:head" />
+	<include file="public:head" />
 	<div class="container">
-	
-	  	<div class="qiandaobanner" style="width:100%;background-color:black;border:1px dashed gray;border-top:none;border:left:none;border-right:none;">
-			<ul><!-- <img src="__STATIC__/css/default/images/application.png"> -->
-			<li style="width:50%;float:left;">
-			<img src="__STATIC__/css/default/images/key.png"  width= "100%" ></li>
-			<li style="color:white;float:left; width:50%;">我要开店/Application</li>
-			<li style="clear:both;"></li>
+
+		<div class="qiandaobanner"
+			style="width: 100%; background-color: black; border: 1px dashed gray; border-top: none; border: left:none; border-right: none;">
+			<ul>
+				<!-- <img src="__STATIC__/css/default/images/application.png"> -->
+				<li style="width: 50%; float: left;line-height:100px;"><img
+					src="__STATIC__/css/default/images/key.png" width="55px"
+					height="53px " /></li>
+				<li style="color: white; float: left; width: 50%;line-height:100px;">我要开店/Application</li>
 			</ul>
-	    </div>
+		</div>
 
 		<div class="cardexplain">
 			<div class="window" id="windowcenter">
-				<div id="title" class="wtitle">操作提示<span class="close" id="alertclose"></span></div>
+				<div id="title" class="wtitle">
+					操作提示<span class="close" id="alertclose"></span>
+				</div>
 				<div class="content1">
 					<div id="txt"></div>
 				</div>
 			</div>
- 
+
 			<div class="history">
 				<div class="history-date">
 					<ul class="history-ul">
 						<if condition="($apply_again eq '0')">
 						<h2 class="first" style="position: relative;">请填写实体店注册信息</h2>
-						<li class="green ly1" >
-						<dl>
-							<table style = "width:100%;">
-							    <tr>
-							       <td><label class="pxlabel" for="brand">品牌：</label></td>
-							       <td><select class="px" onchange="change_brand(this.options[this.selectedIndex].text)" id="brandvalue" name="brandchoose" autofocus>
-					                    <option value="" selected>请选择品牌</option>
-					                    <volist name="brand" id="bname">
-					                    <option value="{$bname.name}">{$bname.name}</option>
-					                    </volist></select>
-					                </td>
-							    </tr>
-								<tr>
-								    <td><label class="pxlabel" for="addr">城市：</label></td>
-									<td><select id="select_provice" onchange="change_provice(this.options[this.selectedIndex].text)" name="province" >
-					                    <option value="" selected>省份</option>
-					                    </select><select id="select_city" onchange="change_city(this.options[this.selectedIndex].text)" name="city" >
-					                    <option value="" selected>城市</option>
-					                    </select> </td>
-								</tr>
-								<tr>
-									<td><label class="pxlabel" for="addr">地址：</label></td>
-									<td><input id="address_chooce" name="address" type="text" required="required" class="px" tabindex="1" style="top:108px;width:180px;POSITION: absolute" value="" placeholder="实体店详细地址" />
-									<select id="ddlTest" name="up_shop_id"  onchange="select_addres(this.options[this.selectedIndex].text)" style="top:108px;width:199px;height:41px;CLIP: rect(auto auto auto 180px); POSITION: absolute">					
-									<option value="">请选择实体店地址</option>					
-									</select></td>
-								</tr>
-								<tr>
-									<td><label class="pxlabel" for="applicant">联系人：</label></td>
-									<td><input name="applicant" class="px" id="applicant" placeholder="请输入联系人" type="text"></td>
-								</tr>
-								<tr>
-									<td><label class="pxlabel" for="phone">手机：</label></td>
-									<td><input name="phone" class="px" id="phone" placeholder="请输入申请人电话" type="text"></td>
-								</tr>
-								<tr>
-									<td><label class="pxlabel" for="QQ">QQ：</label></td>
-									<td><input type="text" name="qq" class="px" id="qq" placeholder="请输入QQ">
-									</td>
-									<!--xxl end-->
-								</tr>
-								
-								<tr><td colspan="2"><a id="showcard1" class="submit" href="javascript:void(0)">提交申请</a></td></tr>
-							</table>
-						</dl>
+						<li class="green ly1">
+							<dl>
+								<table style="width: 100%;">
+									<tr>
+										<td><label class="pxlabel" for="brand">品牌：</label></td>
+										<td><select class="px"
+											onchange="change_brand(this.options[this.selectedIndex].text)"
+											id="brandvalue" name="brandchoose" autofocus>
+												<option value="" selected>请选择品牌</option>
+												<volist name="brand" id="bname">
+												<option value="{$bname.name}">{$bname.name}</option>
+												</volist>
+										</select></td>
+									</tr>
+									<tr>
+										<td><label class="pxlabel" for="addr">城市：</label></td>
+										<td><select id="select_provice"
+											onchange="change_provice(this.options[this.selectedIndex].text)"
+											name="province">
+												<option value="" selected>省份</option>
+										</select><select id="select_city"
+											onchange="change_city(this.options[this.selectedIndex].text)"
+											name="city">
+												<option value="" selected>城市</option>
+										</select></td>
+									</tr>
+									<tr>
+										<td><label class="pxlabel" for="addr">地址：</label></td>
+										<td><input id="address_chooce" name="address" type="text"
+											required="required" class="px" tabindex="1"
+											style="top: 108px; width: 180px; POSITION: absolute" value=""
+											placeholder="实体店详细地址" /> <select id="ddlTest"
+											name="up_shop_id"
+											onchange="select_addres(this.options[this.selectedIndex].text)"
+											style="top: 108px; width: 199px; height: 41px; CLIP: rect(auto, auto, auto, 180px); POSITION: absolute">
+												<option value="">请选择实体店地址</option>
+										</select></td>
+									</tr>
+									<tr>
+										<td><label class="pxlabel" for="applicant">联系人：</label></td>
+										<td><input name="applicant" class="px" id="applicant"
+											placeholder="请输入联系人" type="text"></td>
+									</tr>
+									<tr>
+										<td><label class="pxlabel" for="phone">手机：</label></td>
+										<td><input name="phone" class="px" id="phone"
+											placeholder="请输入申请人电话" type="text"></td>
+									</tr>
+									<tr>
+										<td><label class="pxlabel" for="QQ">QQ：</label></td>
+										<td><input type="text" name="qq" class="px" id="qq"
+											placeholder="请输入QQ"></td>
+										<!--xxl end-->
+									</tr>
+
+									<tr>
+										<td colspan="2"><a id="showcard1" class="submit"
+											href="javascript:void(0)">提交申请</a></td>
+									</tr>
+								</table>
+							</dl>
 						</li>
 						<li></li>
 						<elseif condition="($apply_again eq '-1')" />
-							<table>
-								<tr>
-									<td>用户名：</td>
-									<td>{$suser['uname']}</td>
-								</tr>
-								<tr>
-									<td>密　码：</td>
-									<td>{$suser['password']}</td>
-								</tr>
-								<tr>
-									<td>品牌：</td>
-									<td>{$suser['brand']}</td>
-								</tr>
-								<tr>
-									<td>申请人：</td>
-									<td>{$suser['applicant']}</td>
-								</tr>
-								<tr>
-									<td>店铺：</td>
-									<td>{$suser['addr']}</td>
-								</tr>														
-							</table>
-						<else /> 
-							<h2 class="first" >您的申请已在处理中</h2>
-							<br />
+						<table>
+							<tr>
+								<td>用户名：</td>
+								<td>{$suser['uname']}</td>
+							</tr>
+							<tr>
+								<td>密 码：</td>
+								<td>{$suser['password']}</td>
+							</tr>
+							<tr>
+								<td>品牌：</td>
+								<td>{$suser['brand']}</td>
+							</tr>
+							<tr>
+								<td>申请人：</td>
+								<td>{$suser['applicant']}</td>
+							</tr>
+							<tr>
+								<td>店铺：</td>
+								<td>{$suser['addr']}</td>
+							</tr>
+						</table>
+						<else />
+						<h2 class="first">您的申请已在处理中</h2>
+						<br />
 						</if>
 					</ul>
 				</div>
@@ -319,6 +352,6 @@
 		</div>
 	</div>
 
-<include file="public:footer" />
+	<include file="public:footer" />
 </body>
 </html>
