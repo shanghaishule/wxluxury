@@ -650,8 +650,10 @@ class userAction extends userbaseAction {
      */
     public function jifen() {
     	//取商家token值，取不到则默认为空
-    	$tokenTall = $this->getTokenTall();
- 	 /**
+    	$tokenTall = $this->getTokenTall();    	
+    	
+    	
+    	
     	//$favi_mod = M('shop_favi');
     	//$favi_list = $favi_mod->where(array('userid'=>$_SESSION['uid']))->select();
     	$where["id"] = $_SESSION['uid'];
