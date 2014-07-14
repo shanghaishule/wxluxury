@@ -19,7 +19,7 @@ class applicationAction extends frontendAction{
 		//dump($_SESSION['openid'].'--'.$_SESSION['uid'].'--'.$_GET['code']);
 		if(!isset($_SESSION['openid']) && empty($_SESSION['openid'])){
 			 
-			if (isset($_GET['code'])){
+			//if (isset($_GET['code'])){
 				//echo $_GET['code'].'--';
 				$Oauth = new Oauth2();
 				$userinfo=$Oauth->getUserinfo($_GET['code'],$config);
@@ -40,9 +40,9 @@ class applicationAction extends frontendAction{
 					//dump($userinfo['openid']);
 				}
 				// dump($_SESSION['uid'].'-1-'.$_SESSION['name']);exit;
-			}else{
-				$this->error('页面异常',"{:U(index/brandshop)}");
-			} 
+		//	}else{
+		//		$this->error('页面异常',"U(index/brandshop)");
+		//	} 
 		}
 		//$user = $this->_session('user_info');
 		//$user = $_SESSION['user_info'];
