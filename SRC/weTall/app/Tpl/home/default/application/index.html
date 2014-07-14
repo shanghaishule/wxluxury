@@ -252,7 +252,7 @@
 				<div class="history-date">
 					<ul class="history-ul">
 						<if condition="($apply_again eq '0')">
-						<h2 class="first" style="position: relative;">请填写实体店注册信息</h2>
+						<li style="border:1px solide red;border-top:none;border-right:none;border-bottom:none;"><h2 class="first" style="position: relative;">请填写实体店注册信息</h2></li>
 						<li class="green ly1">
 							<dl>
 								<table style="width: 100%;">
@@ -280,13 +280,11 @@
 									</tr>
 									<tr>
 										<td><label class="pxlabel" for="addr">地址：</label></td>
-										<td><input id="address_chooce" name="address" type="text"
-											required="required" class="px" tabindex="1"
-											style="top: 108px; width: 180px; POSITION: absolute" value=""
-											placeholder="实体店详细地址" /> <select id="ddlTest"
-											name="up_shop_id"
-											onchange="select_addres(this.options[this.selectedIndex].text)"
-											style="top: 108px; width: 199px; height: 41px; CLIP: rect(auto, auto, auto, 180px); POSITION: absolute">
+										<td>
+										<input id="address_chooce" name="address" type="text" required="required" class="px" tabindex="1" style="top: 108px; width: 180px; POSITION: absolute" value="" placeholder="实体店详细地址" /> 
+										<td style="color:red;font-size:10px;">若下拉菜单没有详细地址，请在下面填写</td>
+										<input id="address_chooce" name="address" type="text" required="required" class="px" tabindex="1" style="top: 108px; width: 180px; POSITION: absolute" value="" placeholder="实体店详细地址" /> 
+											<select id="ddlTest"	name="up_shop_id" onchange="select_addres(this.options[this.selectedIndex].text)" style="top: 108px; width: 199px; height: 41px; CLIP: rect(auto, auto, auto, 180px); POSITION: absolute">
 												<option value="">请选择实体店地址</option>
 										</select></td>
 									</tr>
@@ -328,14 +326,14 @@
 									<li>店　铺：{$suser['addr']}</li>
 								</ul>
 							</div>
-							<div style="color:white;line-height:15px;">
+							<div style="color:white;line-height:15px;width:100%">
 								
 								<ul>
 									<li><h1>店家使用说明：</h1></li>
 									<li>1、在电脑端输入网址<a style="color:red;">www.kuyimap.com</a></li>
 									<li>2、用生成的用户名和密码登陆</li>
 									<li>3、进入后台管理商城信息</li>
-									<li>酷衣地图是一个给大众用户户提供便捷购物的平台。
+									<li style="line-height:17px;">　　酷衣地图是一个给大众用户户提供便捷购物的平台。
 									酷衣地图不同于其他购物平台的有点是，给用户提供高端品牌的消费途径，
 									除此之外还可以搜索附近店铺就近试穿购买，
 									参加酷衣地图平台上举行的一些品牌抢购活动。</li>
