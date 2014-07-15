@@ -1236,6 +1236,33 @@ width: 100%;}
 /**2014-7-9 nick 个人资料**/
 .gouxuan{position:relative}	
 .gouxuan img{margin-left:80px;margin-top:5px;position:absolute}
+.kongge1{height:70px}
+.first1{margin-left:15%}
+.first2{margin-left:15%;margin-top:20px;}
+.chima1{float:left;margin-top:5px}
+.chima2{float:left ; margin-left:10px;margin-top:0px}
+.chima_list li{float:left;margin-left:0px  
+	}
+.chima_list li p{float:left;margin-top:5px}
+.chima_list li form{float:left}
+.firstall{height:100px;position:relative}
+.dashed{height:1px;border-bottom:1px dashed white;position:absolute;bottom:0;width:100%}
+
+
+
+.secall_1{margin-left:10px;margin-top:10px}
+.secall_1 p{font-size:20px}
+.title_1{font-size:18px}
+.wanzhuang{margin-left:0px}
+.secall_2{margin-left:15%;margin-top:10px}
+.secall_3{margin-left:15%;margin-top:10px}	
+.secall_4{margin-left:15%;margin-top:10px}
+.secall_5{margin-left:15%;margin-top:10px}	
+/**.seclist_a ul li{float:left}
+.seclist_b ul li{float:left}
+.seclist_c ul li{float:left}
+.seclist_d ul li{float:left}**/	
+	
 	
 /** 实体店 2014 7 14 anan**/
 h1, h2, h3, h4, h5, h6, p, ul, ol, dl, dt, dd, li, body, form, input, button, img, cite, strong, em, table, td, th { padding:0; margin:0;color:white; }
