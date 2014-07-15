@@ -30,3 +30,6 @@ CREATE TABLE `tp_match_comments` (
 -- ----------------------------
 INSERT INTO `tp_match_comments` VALUES ('1', '1', '好漂亮啊', '1023545645');
 INSERT INTO `tp_match_comments` VALUES ('1', '18', '真的挺不错的', '1013136216');
+
+--wecha_shop添加店铺级别
+ALTER TABLE `tp_wecha_shop` ADD  `level` int(5) NOT NULL DEFAULT 0;

@@ -143,6 +143,8 @@ class IndexAction extends UserAction{
 					$up_shop['id'] = $this->_post("up_shop_id","trim");
 					$select_shop = M("upload_shop")->where($up_shop)->find();
 					
+					$usergid=M("users")->where(array('id'=>session('uid')))->find();
+					$weChaShop->add($usergid['gid']);
 					
 					$data1["name"] = $select_shop["shop_name"];
 					$data1["phone"] = $select_shop["phone"];
