@@ -235,7 +235,7 @@
 .history-date h2 img { vertical-align:-5px;}
 .history-date h2.date02 { background:none;}
 .history-date ul {}
-.history-date ul li {/* background:url(images/icon07.gif) no-repeat 8px 6px;*/ background-size:15px 14px; padding: 0 0 20px 30px; zoom:1; }
+.history-date ul li {/* background:url(images/icon07.gif) no-repeat 8px 6px;*/ background-size:15px 14px; padding: 0 0 20px 0px; zoom:1; }
 .history-date ul li.last { padding-bottom:0;}
 .history-date ul li:after{content:" "; display:block; height:0; clear:both; visibility:hidden;}
 .history-date ul li h3 { color:#c3c3c3; font:normal 18px/16px Arial; margin: -2px 0 10px 0}
