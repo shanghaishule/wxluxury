@@ -194,13 +194,17 @@ class indexAction extends frontendAction {
     			if(!empty($Userarr) && $Userarr!=''){
     				$_SESSION['uid']=$Userarr['id'];
     				$_SESSION['name']=$Userarr['nickname'];
+    				$_SESSION['headimgurl']=$Userarr['headimgurl'];
+    				$_SESSION['openid']=$userinfo['openid'];
     			}else{
     				$_SESSION['uid']=M('user')->add($userinfo);
     				$_SESSION['name']=$userinfo['nickname'];
+    				$_SESSION['headimgurl']=$Userarr['headimgurl'];
+    				$_SESSION['openid']=$userinfo['openid'];
     			}
     			// dump($_SESSION['uid'].'-1-'.$_SESSION['name']);exit;
     		}else{
-    			$this->error('页面异常',"{:U(index/brandshop)}");
+    			$this->error('页面已过期',U("index/brandshop"));
     		}
     	
     	}
@@ -479,7 +483,7 @@ class indexAction extends frontendAction {
 	    				$end["nearJuli"] = $this->GetDistance($latitude,$longitude,$end["lat"],$end["longtitude"]);
 	    				//echo $end["nearJuli"]."--0".$latitude."----1<br>".$longitude."----2<br>".$end["lat"]."----3<br>".$end["longtitude"]."===".$end["nearJuli"];die();
 	    				$nearShop[] = $end;
-	    			}				
+	    			}
 	    		}
     		}
     		
@@ -747,6 +751,8 @@ class indexAction extends frontendAction {
     	$brand2["BelongBrand"] = $item_taobao["brand"];
     	$wecha_shop = M("wecha_shop")->where($brand2)->select();
 
+    	$users = M()->query("select wu.token,u.gid from tp_wxuser wu join tp_users u on wu.uid=u.id");  
+    	dump($users);exit;  	
     	$this->assign("item",$item_huohao);
     	$this->assign("wecha_shop",$wecha_shop);
     	$this->assign("item_taobao",$item_taobao);
