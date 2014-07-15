@@ -144,8 +144,7 @@ class IndexAction extends UserAction{
 					$select_shop = M("upload_shop")->where($up_shop)->find();
 					
 					$usergid=M("users")->where(array('id'=>session('uid')))->find();
-					$level['level']=$usergid['gid'];
-					$weChaShop->add($level);
+					$data1['level']=$usergid['gid'];
 					
 					$data1["name"] = $select_shop["shop_name"];
 					$data1["phone"] = $select_shop["phone"];
