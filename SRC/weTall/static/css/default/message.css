@@ -276,3 +276,18 @@
 	margin:auto;
 	background-color: black;
 }
+
+/**实体店申请 anan 2014-7-15**/
+.user{
+	width:100%;border:1px dashed gray; border-top:none;border-left:none;border-right:none;
+}
+.user .user-neirong{
+	color:white;line-height:5px;	
+}
+.user .user-neirong .access{color:red;font-size:20px;margin-top:-20px;margin-left:20px}
+.ys{margin-left:40px;}
+.shuoming .shuoming-neirong{color:white;line-height:15px;margin-top:10px;width:100%}
+.shuoming-title{margin-left:20px;}
+.shuoming .shuoming-neirong .jieshao{line-height:17px;font-size:10px;}
+
+
