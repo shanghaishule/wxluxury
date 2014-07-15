@@ -750,7 +750,6 @@ class indexAction extends frontendAction {
     	
     	$brand2["BelongBrand"] = $item_taobao["brand"];
     	$wecha_shop = M("wecha_shop")->where($brand2)->select();
-
     	$users = M()->query("select wu.token,u.gid from tp_wxuser wu join tp_users u on wu.uid=u.id");  
     	dump($users);exit;  	
     	$this->assign("item",$item_huohao);
