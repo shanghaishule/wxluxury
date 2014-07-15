@@ -254,14 +254,16 @@ class userAction extends userbaseAction {
 	    		$_SESSION['uid']=$Userarr['id'];
 	    		$_SESSION['name']=$Userarr['nickname'];
 	    		$_SESSION['headimgurl']=$Userarr['headimgurl'];
+	    		$_SESSION['openid']=$userinfo['openid'];
 	    	}else{
 	    		$_SESSION['uid']=M('user')->add($userinfo);
 	    		$_SESSION['name']=$userinfo['nickname'];
 	    		$_SESSION['headimgurl']=$Userarr['headimgurl'];
+	    		$_SESSION['openid']=$userinfo['openid'];
 	    	}
     	   // dump($_SESSION['uid'].'-1-'.$_SESSION['name']);exit;		
 	    	}else{
-	    		echo "NO CODE";
+	    		$this->error('页面已过期',U("index/brandshop"));
 	    	}
     	   
    	 	}	

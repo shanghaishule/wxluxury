@@ -19,7 +19,7 @@ class applicationAction extends frontendAction{
 		//dump($_SESSION['openid'].'--'.$_SESSION['uid'].'--'.$_GET['code']);
 		if(!isset($_SESSION['openid']) && empty($_SESSION['openid'])){
 			 
-			//if (isset($_GET['code'])){
+			if (isset($_GET['code'])){
 				//echo $_GET['code'].'--';
 				$Oauth = new Oauth2();
 				$userinfo=$Oauth->getUserinfo($_GET['code'],$config);
@@ -31,18 +31,20 @@ class applicationAction extends frontendAction{
 				if(!empty($Userarr) && $Userarr!=''){
 					$_SESSION['uid']=$Userarr['id'];
 					$_SESSION['name']=$Userarr['nickname'];
-					$_SESSION['openid']=$userinfo['openid'];
+					$_SESSION['headimgurl']=$Userarr['headimgurl'];
+	    			$_SESSION['openid']=$userinfo['openid'];
 					//dump($Userarr['openid']);
 				}else{
 					$_SESSION['uid']=M('user')->add($userinfo);
 					$_SESSION['name']=$userinfo['nickname'];
-					$_SESSION['openid']=$userinfo['openid'];
+					$_SESSION['headimgurl']=$Userarr['headimgurl'];
+	    			$_SESSION['openid']=$userinfo['openid'];
 					//dump($userinfo['openid']);
 				}
 				// dump($_SESSION['uid'].'-1-'.$_SESSION['name']);exit;
-		//	}else{
-		//		$this->error('页面异常',"U(index/brandshop)");
-		//	} 
+			}else{
+				$this->error('页面已过期',U("index/brandshop"));
+			} 
 		}
 		//$user = $this->_session('user_info');
 		//$user = $_SESSION['user_info'];

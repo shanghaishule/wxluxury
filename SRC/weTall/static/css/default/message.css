@@ -99,6 +99,7 @@
 	font-family:Arial, Helvetica, sans-serif;
 	border:0;
 	-webkit-appearance:none;
+	width: 65px;
 }
 
 .pxlabeltextarea {
@@ -174,26 +175,26 @@
      -moz-box-sizing: border-box;
 }
 .submit {
-	background-color:#179F00;
+	background-color:#851616;
 	padding:10px 20px;
 	font-size:16px;
 	text-decoration:none;
-	border:1px solid #0B8E00;
-	background-image: linear-gradient(bottom,  #179F00 0%, #5DD300 100%);
-	background-image: -o-linear-gradient(bottom, #179F00 0%, #5DD300 100%);
-	background-image: -moz-linear-gradient(bottom, #179F00 0%, #5DD300 100%);
-	background-image: -webkit-linear-gradient(bottom, #179F00 0%, #5DD300 100%);
-	background-image: -ms-linear-gradient(bottom, #179F00 0%, #5DD300 100%);
+	border:1px solid #851616;
+	background-image: linear-gradient(bottom,  #851616 0%, #851616 100%);
+	background-image: -o-linear-gradient(bottom, #851616 0%, #851616 100%);
+	background-image: -moz-linear-gradient(bottom, #8516160%, #851616 100%);
+	background-image: -webkit-linear-gradient(bottom, #851616 0%, #851616 100%);
+	background-image: -ms-linear-gradient(bottom, #851616 0%, #851616 100%);
 	background-image: -webkit-gradient(
 	linear,
 	left bottom,
 	left top,
-	color-stop(0, #179F00),
-	color-stop(1, #5DD300)
+	color-stop(0, #851616),
+	color-stop(1, #851616)
 	);
-	-webkit-box-shadow: 0 1px 0 #94E700 inset, 0 1px 2px rgba(0, 0, 0, 0.5);
-	-moz-box-shadow: 0 1px 0 #94E700 inset, 0 1px 2px rgba(0, 0, 0, 0.5);
-	box-shadow: 0 1px 0 #94E700 inset, 0 1px 2px rgba(0, 0, 0, 0.5);
+	-webkit-box-shadow: 0 1px 0 #851616 inset, 0 1px 2px rgba(0, 0, 0, 0.5);
+	-moz-box-shadow: 0 1px 0 #851616 inset, 0 1px 2px rgba(0, 0, 0, 0.5);
+	box-shadow: 0 1px 0 #851616 inset, 0 1px 2px rgba(0, 0, 0, 0.5);
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	-o-border-radius: 5px;
@@ -228,14 +229,14 @@
 .submit img{ width:15px; margin:-4px 10px 0 0;}
 
 /*history*/
-#message{ background-color:#f7f7f7}
+#message{/* background-color:#f7f7f7*/}
 .history { /*background:url(images/line04.gif) repeat-y 15px 0;*/  position:relative; }
 .history-date h2 {/* background:url(images/icon06.gif) no-repeat 0 0;*/ height:32px; font-size:24px; font-family:微软雅黑; font-weight:normal; padding-left:38px; margin:0 0 30px 0; padding-top:0; background-size:32px auto;/*color:#1DB702;*/ }
 .history-date h2.first { position:absolute; left:0; top:0; z-index:99;}
 .history-date h2 img { vertical-align:-5px;}
 .history-date h2.date02 { background:none;}
 .history-date ul {}
-.history-date ul li {/* background:url(images/icon07.gif) no-repeat 8px 6px;*/ background-size:15px 14px; padding: 0 0 20px 30px; zoom:1; }
+.history-date ul li {/* background:url(images/icon07.gif) no-repeat 8px 6px;*/ background-size:15px 14px; padding: 0 0 20px 0px; zoom:1; }
 .history-date ul li.last { padding-bottom:0;}
 .history-date ul li:after{content:" "; display:block; height:0; clear:both; visibility:hidden;}
 .history-date ul li h3 { color:#c3c3c3; font:normal 18px/16px Arial; margin: -2px 0 10px 0}
@@ -275,3 +276,19 @@
 	margin:auto;
 	background-color: black;
 }
+
+/**实体店申请 anan 2014-7-15**/
+.user{
+	width:100%;border:1px dashed gray; border-top:none;border-left:none;border-right:none;
+}
+.user .user-neirong{
+	color:white;line-height:5px;	
+}
+.user .user-neirong .access{color:red;font-size:24px;margin-top:-20px;margin-left:20px}
+.ys{margin-left:40px;}
+.shuoming .shuoming-neirong{color:white;line-height:15px;margin-top:10px;width:100%}
+.shuoming-title{margin-left:20px;margin-top:10px;}
+.y{margin-left:30px;}
+.shuoming .shuoming-neirong .jieshao{line-height:17px;font-size:8px;margin-left:20px;}
+
+

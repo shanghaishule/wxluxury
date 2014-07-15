@@ -234,8 +234,8 @@
 			style="width: 100%;height: 100px; background-color: black; border: 1px dashed gray; border-top: none; border-left:none; border-right:none;">
 			<ul>
 				<!-- <img src="__STATIC__/css/default/images/application.png"> -->
-				<li style="width: 50%; float: left;line-height:100px;"><img	src="__STATIC__/css/default/images/key.png" width="55px" height="53px " style="margin-top:25px;margin-left:20%" /></li>
-				<li style="color: white; float: left; width: 50%;line-height:100px; margin-left:-8%;sss ">我要开店/Application</li>
+				<li style="width: 50%; float: left;line-height:100px;"><img	src="__STATIC__/css/default/images/key.png" width="55px" height="53px " style="margin-top:25px;margin-left:18%" /></li>
+				<li style="color: white; float: left; width: 50%;line-height:100px; margin-left:-10%;sss ">我要开店/Application</li>
 			</ul>
 		</div>
 
@@ -252,11 +252,11 @@
 				<div class="history-date">
 					<ul class="history-ul">
 						<if condition="($apply_again eq '0')">
-						<li style="border:1px solide red;border-top:none;border-right:none;border-bottom:none;"><h2 class="first" style="position: relative;">请填写实体店注册信息</h2></li>
+						<li style="border:1px solide red;border-top:none;border-right:none;border-bottom:none;"><h2 class="first" style="/*position: relative;*/">请填写实体店注册信息</h2></li>
 						<li class="green ly1">
 							<dl>
 								<table style="width: 100%;">
-									<tr>
+									<tr style="width:70px;">
 										<td><label class="pxlabel" for="brand">品牌：</label></td>
 										<td><select class="px" onchange="change_brand(this.options[this.selectedIndex].text)"
 											id="brandvalue" name="brandchoose" autofocus>
@@ -278,16 +278,23 @@
 												<option value="" selected>城市</option>
 										</select></td>
 									</tr>
-									<tr>
+									<tr style="line-height: 45px;">
 										<td><label class="pxlabel" for="addr">地址：</label></td>
 										<td>
 										<input id="address_chooce" name="address" type="text" required="required" class="px" tabindex="1" style="top: 108px; width: 180px; POSITION: absolute" value="" placeholder="实体店详细地址" />										
 											<select id="ddlTest"	name="up_shop_id" onchange="select_addres(this.options[this.selectedIndex].text)" style="top: 108px; width: 199px; height: 41px; CLIP: rect(auto, auto, auto, 180px); POSITION: absolute">
 											<option value="">请选择实体店地址</option>
 										</select>
-										</td>
-										<!-- <td style="color:red;font-size:10px;">若下拉菜单没有详细地址，请在下面填写</td>
-										<td><input type="text" placeholder="实体店详细地址" /></td>  -->
+										</td>										
+									</tr>
+									<tr style="height: 28px">
+										<td></td>
+										<td style="color:red;font-size:10px;">若下拉菜单没有详细地址，请在下面填写</td>
+										
+									</tr>
+									<tr>
+										<td></td>
+										<td><input type="text" style="margin-bottom: 12px;margin-top: -10px;" placeholder="实体店详细地址" /></td>
 									</tr>
 									
 									<tr>
@@ -315,25 +322,27 @@
 						</li>
 						<li></li>
 						<elseif condition="($apply_again eq '-1')" />
-						<div style="margin-left:20px">
-							<div style="color:white;line-height:5px;border:1px dashed gray; border-top:none;border-left:none;border-right:none;">
-								
+						<div class="user" >
+							<div class="user-neirong">								 
 								<ul>
-								    <li><h1 style="font-size:20px;color:red;">恭喜您申请成功</h1></li>
-									<li>用户名：{$suser['uname']}</li>
-									<li>密　码：{$suser['password']}</li>
-									<li>品　牌：{$suser['brand']}</li>
-									<li>申请人：{$suser['applicant']}</li>
-									<li>店　铺：{$suser['addr']}</li>
+									<li></li>	
+									<li><h1 class="access" >恭喜您申请成功</h1></li>															 							
+								    <li class="ys">用户名：{$suser['uname']}</li>
+									<li class="ys">密　码：{$suser['password']}</li>
+									<li class="ys">品　牌：{$suser['brand']}</li>
+									<li class="ys">申请人：{$suser['applicant']}</li>
+									<li class="ys">店　铺：{$suser['addr']}</li>
 								</ul>
 							</div>
-							<div style="color:white;line-height:15px;margin-top:10px;width:100%">								
+						</div>
+						<div class="shuoming">
+							<div calss="shuoming-neirong" >								
 								<ul>
-									<li><h1>店家使用说明：</h1></li>
-									<li style="width:100%">1、在电脑端输入网址<a style="color:red;width:100%;">www.kuyimap.com</a></li>
-									<li>2、用生成的用户名和密码登陆</li>
-									<li>3、进入后台管理商城信息</li>
-									<li style="line-height:17px;font-size:10px;">　　酷衣地图是一个给大众用户户提供便捷购物的平台。
+									<li><h1 class="shuoming-title">店家使用说明：</h1></li>
+									　<li class="y">1、在电脑端输入网址<span style="color:red;">www.kuyimap.com</span></li>
+									　<li class="y">2、用生成的用户名和密码登陆</li>
+									　<li class="y">3、进入后台管理商城信息</li>
+									  <li calss="jieshao" style="line-height:17px;font-size:10px;margin-left:20px;" >酷衣地图是一个给大众用户户提供便捷购物的平台。
 									酷衣地图不同于其他购物平台的有点是，给用户提供高端品牌的消费途径，
 									除此之外还可以搜索附近店铺就近试穿购买，
 									参加酷衣地图平台上举行的一些品牌抢购活动。</li>

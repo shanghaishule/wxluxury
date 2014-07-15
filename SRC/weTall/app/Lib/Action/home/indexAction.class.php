@@ -194,13 +194,17 @@ class indexAction extends frontendAction {
     			if(!empty($Userarr) && $Userarr!=''){
     				$_SESSION['uid']=$Userarr['id'];
     				$_SESSION['name']=$Userarr['nickname'];
+    				$_SESSION['headimgurl']=$Userarr['headimgurl'];
+    				$_SESSION['openid']=$userinfo['openid'];
     			}else{
     				$_SESSION['uid']=M('user')->add($userinfo);
     				$_SESSION['name']=$userinfo['nickname'];
+    				$_SESSION['headimgurl']=$Userarr['headimgurl'];
+    				$_SESSION['openid']=$userinfo['openid'];
     			}
     			// dump($_SESSION['uid'].'-1-'.$_SESSION['name']);exit;
     		}else{
-    			$this->error('页面异常',"{:U(index/brandshop)}");
+    			$this->error('页面已过期',U("index/brandshop"));
     		}
     	
     	}
@@ -479,7 +483,7 @@ class indexAction extends frontendAction {
 	    				$end["nearJuli"] = $this->GetDistance($latitude,$longitude,$end["lat"],$end["longtitude"]);
 	    				//echo $end["nearJuli"]."--0".$latitude."----1<br>".$longitude."----2<br>".$end["lat"]."----3<br>".$end["longtitude"]."===".$end["nearJuli"];die();
 	    				$nearShop[] = $end;
-	    			}				
+	    			}
 	    		}
     		}
     		
