@@ -77,7 +77,6 @@ class itemAction extends backendAction {
     public function add() {
     	
     	$tokenTall = $this->getTokenTall();
-    	dump($tokenTall);exit;
     	$this->assign('tokenTall',$tokenTall);
     	if (IS_POST) {
     		//得到商品的尺码和颜色
