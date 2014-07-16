@@ -1267,3 +1267,6 @@ width: 100%;}
 /** 实体店 2014 7 14 anan**/
 h1, h2, h3, h4, h5, h6, p, ul, ol, dl, dt, dd, li, body, form, input, button, img, cite, strong, em, table, td, th { padding:0; margin:0;color:white; }
 
+#qijian_B{background: #BB1212;
+border: 3px solid rgba(0,0,0,0.5);}
+#qijian_B #shopSearch2{border-bottom:none}
