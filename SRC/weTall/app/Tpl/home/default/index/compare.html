@@ -33,20 +33,36 @@
          <div>
          <volist name="item" id="Shop" key="numer">
          <if condition="$numer lt 11">
-           
-          <div class="shopSearch2" <if condition="$numer eq 1"> id="qijian_B"</if>>
+           <if condition="($numer eq 1) AND ($Shop.level eq 4)">
+          <div class="shopSearch2"  id="qijian_B">
            <div id="shopSearch2">
-           <a href="{:U('Item/index',array('id'=>$Shop['id'],'tokenTall'=>$Shop['tokenTall']))}">
-	           <div style="width:69%;float:left;">   
-	            {$Shop.name}
+	           <a href="{:U('Item/index',array('id'=>$Shop['id'],'tokenTall'=>$Shop['tokenTall']))}">
+		           <div style="width:30%;float:left;">   
+		            {$Shop.name}
+		           </div>
+		           <div style="width:29%;float:left;">   
+		            CNY&nbsp;&nbsp;{$item_taobao.price}
+		           </div>	           
+	            <div style="width:30%；float:left;"> 
+	           	￥ {$Shop.price}
 	           </div>
-            <div style="width:30%；float:left;"> 
-           	￥：{$Shop.price}
+	           </a>
            </div>
-           </a>
-           </div>
-
           </div>
+          <else />
+          <div class="shopSearch2"  id="qijian_B">
+           <div id="shopSearch2">
+	           <a href="{:U('Item/index',array('id'=>$Shop['id'],'tokenTall'=>$Shop['tokenTall']))}">
+		           <div style="width:69%;float:left;">   
+		            {$Shop.name}
+		           </div>	           
+	            <div style="width:30%；float:left;"> 
+	           	￥ {$Shop.price}
+	           </div>
+	           </a>
+           </div>
+          </div>          
+          </if>
           </if>
           
          </volist>
