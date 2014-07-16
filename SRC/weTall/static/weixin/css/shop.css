@@ -1269,4 +1269,5 @@ h1, h2, h3, h4, h5, h6, p, ul, ol, dl, dt, dd, li, body, form, input, button, im
 
 #qijian_B{background: #BB1212;
 border: 3px solid rgba(0,0,0,0.5);}
+#shopSearch2{width:100%;border-bottom: 1px dashed #d9d9d9;height:30px;padding-top:8px;}
 #qijian_B #shopSearch2{border-bottom:none}
