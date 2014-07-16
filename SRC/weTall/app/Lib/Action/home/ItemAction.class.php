@@ -35,7 +35,6 @@ class itemAction extends frontendAction {
         	
         }   
         //xxl end
-        
         //大小
         $size = substr(trim($item['size']),0,1) == '|' ? explode('|', substr(trim($item['size']),1)) : explode('|', $item['size']);
         
