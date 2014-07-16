@@ -743,16 +743,18 @@ class indexAction extends frontendAction {
     }
     public function compare(){
     	$Huohao["Huohao"] = $this->_get("Huohao","trim");
-    	$item_huohao = M("item")->where($Huohao)->select();
+    	//$item_huohao = M("item")->where($Huohao)->select();
     	$item_taobao = M("item_taobao")->where($Huohao)->find();
     	$brand["id"] = $item_taobao["brand"];
     	$brand_data = M("brandlist")->where($brand)->find();
     	
     	$brand2["BelongBrand"] = $item_taobao["brand"];
-    	$wecha_shop = M("wecha_shop")->where($brand2)->select();
-
-    	$this->assign("item",$item_huohao);
-    	$this->assign("wecha_shop",$wecha_shop);
+    	//$wecha_shop = M("wecha_shop")->where($brand2)->select();
+        
+    	$result = M()->table(array("tp_item"=>"i","tp_wecha_shop"=>"w"))->field("i.*,w.*")->where("i.tokenTall=w.tokenTall AND i.Huohao='".$Huohao["Huohao"]."' AND w.BelongBrand='".$brand2["BelongBrand"]."'")->order("w.level asc")->select();
+    	dump($result);exit;
+    	//$this->assign("item",$item_huohao);
+    	//$this->assign("wecha_shop",$wecha_shop);
     	$this->assign("item_taobao",$item_taobao);
     	$this->assign("title","全网比价");
     	$this->assign("brand",$brand_data);
