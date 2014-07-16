@@ -991,7 +991,7 @@ class indexAction extends frontendAction {
     	if($_POST['act']){
     		$act = $_POST['act'];
     		$item_id = $act;
-    		//if ($_SESSION['user_info']) {
+    		if ($_SESSION['user_info']) {
 	    		$userid = $_SESSION['user_info']['id'];
 	    		$shopfav_mod = M('shop_favi');
 	    		$insdata = array('userid'=>$userid, 'item_id'=>$item_id);
@@ -1021,10 +1021,10 @@ class indexAction extends frontendAction {
 	    		//当前未登录
 	    		$data = array('status'=>0, 'url'=>U('user/index', array('tokenTall'=>$tokenTall)));
 	    	}
-    	//}else{
+    	}else{
     		//没有动作类型
-    		//$data = array('status'=>3);
-    	//}
+    		$data = array('status'=>3);
+    	}
     	
     	echo json_encode($data);
     }
