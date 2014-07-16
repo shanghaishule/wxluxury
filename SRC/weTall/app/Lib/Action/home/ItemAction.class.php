@@ -16,12 +16,13 @@ class itemAction extends frontendAction {
      */
     public function index() {
         $id = $this->_get('id', 'intval');
-       // !$id && $this->_404();
+        dump($id);exit;
+        !$id && $this->_404();
         $tokenTall = $this->getTokenTall();
         $item_mod = M('item');
         $item = $item_mod->field('id,title,Uninum,favi,old_price,goods_stock,intro,price,info,comments,add_time,goods_stock,buy_num,brand,size,color,images,promotion_id,item_model')->where(array('id' => $id, 'status' => 1))->find();
        
-      //  !$item && $this->_404();
+        !$item && $this->_404();
         
         //xxl start
         //折扣设定      
