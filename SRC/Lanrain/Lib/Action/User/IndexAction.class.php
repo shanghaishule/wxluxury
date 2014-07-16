@@ -105,8 +105,7 @@ class IndexAction extends UserAction{
 		$where_shop['weName']=$_POST["wxname"];
 		$weChaShop->where($where_shop)->save($data1);
 		$this->all_save('Wxuser');
-	}
-	
+	}	
 	public function insert(){
 		$data=M('User_group')->field('wechat_card_num')->where(array('id'=>session('gid')))->find();
 		$users=M('Users')->field('wechat_card_num')->where(array('id'=>session('uid')))->find();
