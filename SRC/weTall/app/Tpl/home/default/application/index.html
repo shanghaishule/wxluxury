@@ -245,7 +245,7 @@
 					操作提示<span class="close" id="alertclose"></span>
 				</div>
 				<div class="content1">
-					<div id="txt"></div>
+					<div id="txt" style="color:black;"></div>
 				</div>
 			</div>
 			<div class="history">
@@ -278,43 +278,43 @@
 												<option value="" selected>城市</option>
 										</select></td>
 									</tr>
-									<tr style="line-height: 45px;">
+									<tr style="line-height: 8px;">
+										<td></td>
+										<td style="color:red;font-size:10px;margin-bottom:10px;">若下拉菜单没有详细地址，请在直接填写</td>										
+									</tr>
+									<tr style="line-height: 50px;">
 										<td><label class="pxlabel" for="addr">地址：</label></td>
 										<td>
 										<input id="address_chooce" name="address" type="text" required="required" class="px" tabindex="1" style="top: 108px; width: 180px; POSITION: absolute" value="" placeholder="实体店详细地址" />										
 											<select id="ddlTest"	name="up_shop_id" onchange="select_addres(this.options[this.selectedIndex].text)" style="top: 108px; width: 199px; height: 41px; CLIP: rect(auto, auto, auto, 180px); POSITION: absolute">
 											<option value="">请选择实体店地址</option>
 										</select>
-										</td>										
-									</tr>
-									<tr style="height: 28px">
-										<td></td>
-										<td style="color:red;font-size:10px;">若下拉菜单没有详细地址，请在下面填写</td>
-										
-									</tr>
-									<tr>
-										<td></td>
-										<td><input type="text" style="margin-bottom: 12px;margin-top: -10px;" placeholder="实体店详细地址" /></td>
+										</td>	
+																			
 									</tr>
 									
-									<tr>
+									<!--<tr>
+										<td></td>
+										<td><input type="text" class="address" style="margin-bottom:12px;margin-top:-10px;" placeholder="实体店详细地址" /></td>
+									</tr> -->
+									
+									<tr style="line-height: 28px;">
 										<td><label class="pxlabel" for="applicant">联系人：</label></td>
-										<td><input name="applicant" class="px" id="applicant"
-											placeholder="请输入联系人" type="text"></td>
+										<td><input name="applicant" class="px" id="applicant" placeholder="请输入联系人" type="text"></td>
 									</tr>
-									<tr>
+									<tr style="line-height: 50px;">
 										<td><label class="pxlabel" for="phone">手机：</label></td>
 										<td><input name="phone" class="px" id="phone"
 											placeholder="请输入申请人电话" type="text"></td>
 									</tr>
-									<tr>
+									<tr style="line-height: 28px;">
 										<td><label class="pxlabel" for="QQ">QQ：</label></td>
 										<td><input type="text" name="qq" class="px" id="qq"
 											placeholder="请输入QQ"></td>
 										<!--xxl end-->
 									</tr>
-									<tr>
-										<td colspan="2"><a id="showcard1" class="submit"
+									<tr style="line-height: 28px;width:100%">
+										<td colspan="2"><a id="showcard1" class="submit" style="100%"
 											href="javascript:void(0)">提交申请</a></td>
 									</tr>
 								</table>
@@ -341,7 +341,7 @@
 									<li><h1 class="shuoming-title">店家使用说明：</h1></li>
 									　<li class="y">1、在电脑端输入<span style="color:red;">www.kuyimap.com</span></li>
 									　<li class="y">2、用生成的用户名和密码登陆</li>
-									　<li class="y" style="margin-bottom:4px;">3、进入后台管理商城信息</li>
+									　<li class="y" style="margin-bottom:6px;">3、进入后台管理商城信息</li>
 									  <li calss="jieshao" style="line-height:17px;font-size:10px;margin-left:20px;" >酷衣地图是一个给大众用户户提供便捷购物的平台。
 									酷衣地图不同于其他购物平台的有点是，给用户提供高端品牌的消费途径，
 									除此之外还可以搜索附近店铺就近试穿购买，
@@ -374,7 +374,7 @@
 							</tr>
 						</table> -->
 						<else />
-						<h2 class="first">您的申请已在处理中</h2>
+						<h2 class="first" style="color:red;">您的申请已在处理中...</h2>
 						<br />
 						</if>
 					</ul>
