@@ -16,6 +16,7 @@ class itemAction extends frontendAction {
      */
     public function index() {
         $id = $this->_get('id', 'intval');
+        dump($id);exit;
         !$id && $this->_404();
         $tokenTall = $this->getTokenTall();
         $item_mod = M('item');
