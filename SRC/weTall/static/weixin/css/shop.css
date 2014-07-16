@@ -422,6 +422,7 @@ width: 59px;
 height: 31px;
 position: absolute;
 right: 5px;}
+#searchForm .navlist{}
 #nav .navlist li#n_10 .shiyongshuoming{font-size:14px;margin-top:2px}
 .body-conent #nav .navlist li#n_0{width:25%;}
 #nav .navlist li#n_4{width:33%;padding-top:0px;}
@@ -1069,7 +1070,7 @@ right: 5px;}
 .status_img{z-index:1000;position:absolute;width:100%;height:25px;text-align:right;float:right;margin-top:5px;padding-right:5px;}
 
 /**2014-4-20 顶部菜单下拉区域**/
-.dis{width:300px;
+.dis{width:83px;
     -moz-border-radius: 5px;      /* Gecko browsers */
     -webkit-border-radius: 5px;   /* Webkit browsers */
     border-radius:5px;            /* W3C syntax */
@@ -1085,6 +1086,7 @@ body .pos .none{display:block; z-index: 300001;}
 #nav .navlist .dis li {
 float:none;
 height:26px;   
+width:83%;
 padding:3px 0 3px 10px;
 border-bottom:1px dashed white;
 }
