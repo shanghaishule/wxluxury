@@ -752,7 +752,7 @@ class indexAction extends frontendAction {
     	//$wecha_shop = M("wecha_shop")->where($brand2)->select();
         
     	$result = M()->table(array("tp_item"=>"i","tp_wecha_shop"=>"w"))->field("i.*,w.*")->where("i.tokenTall=w.tokenTall AND i.Huohao='".$Huohao["Huohao"]."' AND w.BelongBrand='".$brand2["BelongBrand"]."'")->order("w.level asc")->select();
-    	//dump($result);exit;
+    	dump($result);exit;
     	//$this->assign("item",$item_huohao);
     	//$this->assign("wecha_shop",$wecha_shop);
     	$this->assign('item',$result);
