@@ -1210,7 +1210,7 @@ padding:10px 0 10px 0;
 
 /**2014-7-9 nick 积分使用说明**/
 .method_jifen {width:100%;height:110px;border-bottom:dotted;color:white;position:relative;margin:80px 20px 0 0 ;}
-.method_jifen .wenzi{position:absolute;font-size:2px}
+.method_jifen .wenzi{position:absolute;font-size:2px;color:grey}
 .method_jifen h1{margin-left:20px;border-left:0.1em solid red;}
 .method_jifen h2{margin:5px 40px 5px 40px ;font-size:12px}
 .method_jifen h3{margin:5px 40px 5px 40px ;font-size:12px}
@@ -1237,7 +1237,7 @@ width: 100%;}
 .gouxuan{position:relative}	
 .gouxuan img{margin-left:80px;margin-top:5px;position:absolute}
 .kongge1{height:70px}
-.first1{margin-left:15%}
+.first1{margin-left:15%;margin-top:15px;clear:both}
 .first2{margin-left:15%;margin-top:20px;}
 .chima1{float:left;margin-top:5px}
 .chima2{float:left ; margin-left:10px;margin-top:0px}
@@ -1245,23 +1245,38 @@ width: 100%;}
 	}
 .chima_list li p{float:left;margin-top:5px}
 .chima_list li form{float:left}
-.firstall{height:100px;position:relative}
+.firstall{height:260px;position:relative}
 .dashed{height:1px;border-bottom:1px dashed white;position:absolute;bottom:0;width:100%}
+.mydata{font-size:20px;margin-left:10px}
+.boygirl{margin-left:20%;margin-top:5px}
+.height{margin-left:10%;margin-top:15px;clear:both}
+.boygirl ul li{float:left;margin-left:50px}
+.height ul li{float:left;margin-left:18px}
+.borntime {clear:both;margin-left:11%}	
+.borntime ul li{float:left;margin-left:5%}
+.konggea{height:15px;clear:both}
+.firstall input{background:black;border:1px solid grey;color:red}
+.firstall select{border-radius:0px;scrollbar-arrow-color:red;
+border:1px solid grey;background:black;color:grey}
 
 
-
+	
+	
 .secall_1{margin-left:10px;margin-top:10px}
 .secall_1 p{font-size:20px}
 .title_1{font-size:18px}
 .wanzhuang{margin-left:0px}
-.secall_2{margin-left:15%;margin-top:10px}
-.secall_3{margin-left:15%;margin-top:10px}	
-.secall_4{margin-left:15%;margin-top:10px}
-.secall_5{margin-left:15%;margin-top:10px}	
-/**.seclist_a ul li{float:left}
-.seclist_b ul li{float:left}
-.seclist_c ul li{float:left}
-.seclist_d ul li{float:left}**/	
+.secall_2{margin-left:15%;margin-top:20px;}	
+.secall_3{margin-left:15%;margin-top:30px;clear:both}	
+.secall_4{margin-left:15%;margin-top:20px;clear:both}
+.secall_5{margin-left:15%;margin-top:20px; clear:both}	
+.seclist_a ul li{float:left;margin-left:10%}
+.seclist_b ul li{float:left;margin-left:10%}
+.seclist_c ul li{float:left;margin-left:10%}
+.seclistd ul li{float:left;margin-left:10%}
+
+
+
 	
 	
 /** 实体店 2014 7 14 anan**/
