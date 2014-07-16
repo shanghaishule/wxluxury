@@ -247,10 +247,10 @@
 				//收藏
 				$.post("{:U('index/favi')}", {act: act}, function(data){
 					//alert("Data Loaded: "+data.status);
-					if(data.status == '0'){
-						alert("您还没有登录，请登录！")
-						window.location.href=data.url;
-					}else 
+					//if(data.status == '0'){
+					//	alert("您还没有登录，请登录！")
+					//	window.location.href=data.url;
+					//}else 
 						if(data.status == '2'){
 						alert("该店铺您已收藏！")
 					}else{
