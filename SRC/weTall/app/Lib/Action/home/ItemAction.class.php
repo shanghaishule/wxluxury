@@ -69,7 +69,6 @@ class itemAction extends frontendAction {
         		$countSize=$countSize+1;
         	}
         }
-        
         //color的数量
         
         $countColor=0;
