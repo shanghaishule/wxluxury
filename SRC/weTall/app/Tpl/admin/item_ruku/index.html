@@ -67,7 +67,10 @@ $('.J_preview').preview(); //查看大图
 $('.J_tooltip[title]').tooltip({offset:[10, 2], effect:'slide'}).dynamic({bottom:{direction:'down', bounce:true}});
 function alloneruku(){
 	//alert('xxx');
-	window.location.href="{:U('item_ruku/alloneruku')}";
+	var truthBeTold = window.confirm("确定要一次性全部入库所有商品吗？"); 
+	if (truthBeTold) { 
+		window.location.href="{:U('item_ruku/alloneruku')}";
+	}
 }
 </script>
 </body>
