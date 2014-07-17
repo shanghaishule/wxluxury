@@ -15,6 +15,7 @@
 					货号 :
                     <input name="Huohao" type="text" class="input-text" size="25" value="{$search.Huohao}" />
                     <input type="submit" name="search" class="btn" value="搜索" />
+                    <input type="button" class="btn" value="一次性入库所有商品" onclick="alloneruku()"/>
                 </div>
                 </td>
             </tr>
@@ -55,7 +56,7 @@
     </div>
     <div class="btn_wrap_fixed">
         <label class="select_all mr10"><input type="checkbox" name="checkall" class="J_checkall">{:L('select_all')}/{:L('cancel')}</label>
-        <input type="button" class="btn" data-tdtype="batch_action" data-acttype="ajax" data-uri="{:U('item_ruku/ruku', array('tokenTall'=>$search.tokenTall))}" data-name="id" data-msg="确定要批量入库这些商品吗？" value="批量入库" />
+        <input type="button" class="btn" data-tdtype="batch_action" data-acttype="ajax" data-uri="{:U('item_ruku/ruku')}" data-name="id" data-msg="确定要批量入库这些商品吗？" value="批量入库" />
         <div id="pages">{$page}</div>
     </div>
 </div>
@@ -64,6 +65,13 @@
 <script>
 $('.J_preview').preview(); //查看大图
 $('.J_tooltip[title]').tooltip({offset:[10, 2], effect:'slide'}).dynamic({bottom:{direction:'down', bounce:true}});
+function alloneruku(){
+	//alert('xxx');
+	var truthBeTold = window.confirm("确定要一次性全部入库所有商品吗？"); 
+	if (truthBeTold) { 
+		window.location.href="{:U('item_ruku/alloneruku')}";
+	}
+}
 </script>
 </body>
 </html>

@@ -66,7 +66,6 @@ class itemAction extends frontendAction {
         		$countSize=$countSize+1;
         	}
         }
-        
         //color的数量
         
         $countColor=0;
@@ -81,7 +80,7 @@ class itemAction extends frontendAction {
        // $favi['item_id'] = $item['id'];
        // if (M("shop_favi")->where($favi)->find()) {
        // 	$this->assign("favi_suc","Y");
-       // }
+      //  }
 
         $this->assign('countSize', $countSize);
         $this->assign('countColor', $countColor);
