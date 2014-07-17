@@ -83,7 +83,7 @@ function searchshop(id){
 		 <li class="r pos" id="n_0">
 		  
 		    <div class="back_page_logo">
-		      <a href="#"><img src="/weTall/static/weixin/images/back_page_logo.png" width="20%"/></a>
+		      <a href="javascript :history.back(-1)"><img src="/weTall/static/weixin/images/back_page_logo.png" width="20%"/></a>
 		         
 		    </div>
 		   <div class="dis" id="dis">
@@ -100,7 +100,7 @@ function searchshop(id){
     		<span >个人资料</span>
         </li>
           <li class="r" id="n_1">
-          <div class="gouxuan">
+         <!--  <div class="gouxuan">
              
                 <a href="#"><img src="/weTall/static/images/gouxuan.png" width="25%"/></a>
                
@@ -115,7 +115,8 @@ function searchshop(id){
         <else/><div class="find_03">{$City}</div></if>
         
         </if>-->
-        </li>
+        
+        
         
     </ul>
     <script type="text/javascript">
@@ -484,6 +485,13 @@ function searchshop(id){
 </div>
 </div>
 <div class="konggea"></div>
+<div class="submit_a">
+
+<form>
+<input type="submit" value="提交" />
+</form>
+
+</div>
 <div class="konggea"></div>
 <include file="public:footer" />
 

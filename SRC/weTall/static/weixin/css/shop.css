@@ -1253,7 +1253,8 @@ width: 100%;}
 .firstall input{background:black;border:1px solid grey;color:grey}
 .firstall select{border-radius:0px;scrollbar-arrow-color:red;
 border:1px solid grey;background:black;color:grey}
-
+.submit_a{text-align:center}
+.submit_a input{width:100px;height:30px;background:#981f1f;border:1px solid #981f1f;border-radius:0px;font-size:20px}
 
 	
 	
