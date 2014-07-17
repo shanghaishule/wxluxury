@@ -10,7 +10,6 @@ class itemAction extends frontendAction {
             $this->redirect('user/login');
         }
     }
-
     /**
      * 商品详细页
      */
