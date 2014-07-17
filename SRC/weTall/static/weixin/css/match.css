@@ -25,6 +25,7 @@ font-size: 16px;
 cursor: pointer;
 }
 .common_btn2 {
+width:100px;height:50px;font-size:30px;border:none;
 width: 100%;
 display: block;
 text-align: center;
