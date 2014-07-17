@@ -83,7 +83,7 @@ function searchshop(id){
 		 <li class="r pos" id="n_0">
 		  
 		    <div class="back_page_logo">
-		      <a href="#"><img src="/weTall/static/weixin/images/back_page_logo.png" width="20%"/></a>
+		      <a href="javascript :history.back(-1)"><img src="/weTall/static/weixin/images/back_page_logo.png" width="20%"/></a>
 		         
 		    </div>
 		   <div class="dis" id="dis">
@@ -100,7 +100,7 @@ function searchshop(id){
     		<span >个人资料</span>
         </li>
           <li class="r" id="n_1">
-          <div class="gouxuan">
+         <!--  <div class="gouxuan">
              
                 <a href="#"><img src="/weTall/static/images/gouxuan.png" width="25%"/></a>
                
@@ -115,7 +115,8 @@ function searchshop(id){
         <else/><div class="find_03">{$City}</div></if>
         
         </if>-->
-        </li>
+        
+        
         
     </ul>
     <script type="text/javascript">
@@ -258,29 +259,40 @@ function searchshop(id){
    <ul>
       <li>
       
-
+<form>
 <input type="checkbox" name="wanzhuang">
 晚装
+</form>
  </li>
    <li>
+   <form>
 <input type="checkbox" name="wanzhuang">
 正装
+</form>
 </li>
    <li>
+   <form>
 <input type="checkbox" name="wanzhuang">
 休闲
+</form>
 </li>
    <li>
+   <form>
 <input type="checkbox" name="wanzhuang">
 运动
+</form>
 </li>
    <li>
+   <form>
 <input type="checkbox" name="wanzhuang">
 打底
+</form>
 </li>
    <li>
+   <form>
 <input type="checkbox" name="wanzhuang">
 其他（可多选）
+</form>
 </li>
    
 
@@ -300,26 +312,30 @@ function searchshop(id){
    <ul>
       <li>
       
-
+<form>
 <input type="checkbox" name="wanzhuang">
+
 纯色
+</form>
   </li>
    <li>
-  
+ <form>
 <input type="checkbox" name="wanzhuang">
 撞色
+</form>
 </li>
    <li>
-  
+<form> 
 <input type="checkbox" name="wanzhuang">
 拼贴
+</form>
 </li>
    <li>
   
-
+<form>
 <input type="checkbox" name="wanzhuang">
 其他（可多选）
-
+</form>
 
       </li>
    
@@ -337,38 +353,52 @@ function searchshop(id){
    <ul>
       <li>
       
-
+<form>
 <input type="checkbox" name="wanzhuang">
 嬉皮
+</form>
  </li>
  <li>
+ <form>
 <input type="checkbox" name="wanzhuang">
 英伦风
+</form>
 </li>
  <li>
+ <form>
 <input type="checkbox" name="wanzhuang">
 日韩风
+</form>
 </li>
  <li>
+ <form>
 <input type="checkbox" name="wanzhuang">
 民族
+</form>
 </li>
  <li>
+ <form>
 <input type="checkbox" name="wanzhuang">
 田园风
+</form>
 </li>
  <li>
+ <form>
 <input type="checkbox" name="wanzhuang">
 运动风
+</form>
 </li>
  <li>
+ <form>
 <input type="checkbox" name="wanzhuang">
 百搭
+</form>
 </li>
  <li>
+ <form>
 <input type="checkbox" name="wanzhuang">
 其他（可多选）
-
+</form>
 
       
       
@@ -388,42 +418,58 @@ function searchshop(id){
    <ul>
       <li>
  
-
+<form>
 <input type="checkbox" name="wanzhuang">
 印花
+</form>
 </li>
  <li>
+ <form>
 <input type="checkbox" name="wanzhuang">
 透视
+</form>
 </li>
  <li>
+ <form>
 <input type="checkbox" name="wanzhuang">
 花卉
+</form>
 </li>
  <li>
+ <form>
 <input type="checkbox" name="wanzhuang">
 图案
+</form>
 </li>
  <li>
+ <form>
 <input type="checkbox" name="wanzhuang">
 条纹
+</form>
 </li>
  <li>
+ <form>
 <input type="checkbox" name="wanzhuang">
 格子
+</form>
 </li>
  <li>
+ <form>
 <input type="checkbox" name="wanzhuang">
 波点
+</form>
 </li>
  <li>
+ <form>
 <input type="checkbox" name="wanzhuang">
 蕾丝
+</form>
 </li>
  <li>
+ <form>
 <input type="checkbox" name="wanzhuang">
 其他（可多选）
-
+</form>
 
       
       
@@ -438,6 +484,15 @@ function searchshop(id){
 
 </div>
 </div>
+<div class="konggea"></div>
+<div class="submit_a">
+
+<form>
+<input type="submit" value="提交" />
+</form>
+
+</div>
+<div class="konggea"></div>
 <include file="public:footer" />
 
 </body>
