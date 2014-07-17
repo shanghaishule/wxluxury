@@ -6,14 +6,14 @@ class itemAction extends frontendAction {
         parent::_initialize();
         //访问者控制
         if (!$this->visitor->is_login && in_array(ACTION_NAME, array('share_item', 'fetch_item', 'publish_item', 'like', 'unlike', 'delete', 'comment'))) {
-            IS_AJAX && $this->ajaxReturn(0, L('login_please'));
+            IS_AJAX && $this->ajaxReturn(0,L('login_please'));
             $this->redirect('user/login');
         }
     }
     /**
      * 商品详细页
      */
-    public function index() {
+    public function index(){
         $id = $this->_get('id', 'intval');
         !$id && $this->_404();
         $tokenTall = $this->getTokenTall();
