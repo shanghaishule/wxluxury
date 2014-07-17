@@ -204,6 +204,7 @@ $('#preview').bind('click',function(){
 		return false;
 	}else{
 		$("#matchForm").attr("action", "/weTall/index.php?m=user&a=preMatch");
+		$("#matchForm").submit();
 	}
     
 });
