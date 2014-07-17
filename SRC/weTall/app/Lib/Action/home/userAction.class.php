@@ -242,7 +242,7 @@ class userAction extends userbaseAction {
     	$config['appSecret'] = "69289876b8d040b3f9a367c80f8754c8";
     	if(!isset($_SESSION['uid']) && empty($_SESSION['uid'])){
 
-	    	if (isset($_GET['code'])){
+	    	//if (isset($_GET['code'])){
 	    		//echo $_GET['code'].'--';
 	    	$Oauth = new Oauth2();
 	    	$userinfo=$Oauth->getUserinfo($_GET['code'],$config);
@@ -262,9 +262,9 @@ class userAction extends userbaseAction {
 	    		$_SESSION['openid']=$userinfo['openid'];
 	    	}
     	   // dump($_SESSION['uid'].'-1-'.$_SESSION['name']);exit;		
-	    	}else{
-	    		$this->error('页面已过期',U("index/brandshop"));
-	    	}
+	    	//}else{
+	    	//	$this->error('页面已过期',U("index/brandshop"));
+	    	//}
     	   
    	 	}	
    	 	//dump($_SESSION['uid'].'-2-'.$_SESSION['name']);exit;
