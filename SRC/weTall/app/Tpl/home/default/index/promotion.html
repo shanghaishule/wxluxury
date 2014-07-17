@@ -13,8 +13,7 @@
         <div class="container">
     		<div id="slides">
     			<volist name="weTallboard" id="bolist">
-         			<!-- <a href="{$bolist.url}" title="{$bolist.desc}"> -->
-         			<a href="/weTall/Tpl/home/index/brandshop" title="{$bolist.desc}">
+         			<a href="{$bolist.url}" title="{$bolist.desc}"> 
          			<img src="/weTall/data/upload/advert/{$img_dir}{$bolist.content}" alt="{$bolist.desc}" /></a>
          		</volist>
         	</div>
@@ -62,7 +61,10 @@
            <span style="font-size:16px;">{$Shop.shop_name}</span></a></td>
            <td width="15%"> 
            
-           <a href="{:U('index/navigate',array('start_point_lat'=>$start_point_lat,'shop'=>$Shop['tokenTall'],'dmodel'=>'N','start_point_lng'=>$start_point_lng,'end_point_lat'=>$Shop['lat'],'end_point_lng'=>$Shop['longtitude']))}">
+           <!--<a href="{:U('index/navigate',array('start_point_lat'=>$start_point_lat,'shop'=>$Shop['tokenTall'],'dmodel'=>'N','start_point_lng'=>$start_point_lng,'end_point_lat'=>$Shop['lat'],'end_point_lng'=>$Shop['longtitude']))}">-->
+           
+           
+           <a href="{:U('home/index/brandshop',array('start_point_lat'=>$start_point_lat,'shop'=>$Shop['tokenTall'],'dmodel'=>'N','start_point_lng'=>$start_point_lng,'end_point_lat'=>$Shop['lat'],'end_point_lng'=>$Shop['longtitude']))}">
            <img height="27" width="58" src="__STATIC__/weixin/images/luxury/images/brand/tell_09.png" /></a><br></td></tr>
            <tr><td width="85%"><span class="shop_address">{$Shop.show_addr}</span></td>
            <td width="15%"><img height="18" width="11" src="__STATIC__/weixin/images/luxury/images/brand/here_13.png"><span class="shop_address">{$Shop.nearJuli}KM</span></td></tr>
