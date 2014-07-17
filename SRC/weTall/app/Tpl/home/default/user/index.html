@@ -119,7 +119,7 @@ background: #2BD54D;
                             <div>订单总价: <b id="order118_order_amount" style="color:red;">¥{$vo.order_sumPrice}&nbsp;&nbsp;</b></div>
                             <div style="float:left;" class="fukuan">
                             <switch name="vo.status" >
-	                        <case value="1"><!--待付款 -->
+	                        <case value="1" class="case"><!--待付款 -->
 	                           <a class="button_aaa" href="{:U('order/pay',array('orderId'=>$vo['orderId'],'tokenTall'=>$tokenTall, 'showwxpaytitle'=>1))}" id="order118_action_pay" class="btn" >付款</a>
 	                           <a class="button_aaa" href="{:U('order/cancelOrder',array('orderId'=>$vo['orderId'],'tokenTall'=>$tokenTall))}" id="order118_action_cancel" > 取消订单</a>
 	                           <a class="button_aaa" href="{:U('order/checkOrder',array('orderId'=>$vo['orderId'],'status'=>$status,'tokenTall'=>$tokenTall))}">查看订单</a>
