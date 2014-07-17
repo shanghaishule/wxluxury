@@ -18,7 +18,6 @@ class itemAction extends frontendAction {
         !$id && $this->_404();
         $tokenTall = $this->getTokenTall();
         $item_mod = M('item');
-        echo $id;exit;
         $item = $item_mod->field('id,title,Uninum,favi,old_price,goods_stock,intro,price,info,comments,add_time,buy_num,brand,size,color,images,promotion_id,item_model')->where(array('id' => $id, 'status' => 1))->find();
         !$item && $this->_404();
         //xxl start
