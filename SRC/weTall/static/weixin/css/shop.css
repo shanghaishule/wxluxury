@@ -1191,9 +1191,7 @@ padding:10px 0 10px 0;
 #content .user_menu{border-top:1px solid #ddd;border-bottom:1px solid #ddd;}
 .user_menu .active span{background:none;color:white;}
 
-
 .xh .bsum{margin-right:10px;}
-
 
 .btn_1_l{height:1px;border-top:2px solid #ff0000;position:absolute;left:0;top:-1px;width:100%;display:none;}
 .active .btn_1_l{display:block;}
