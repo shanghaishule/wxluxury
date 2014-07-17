@@ -1170,7 +1170,7 @@ padding:10px 0 10px 0;
 .d-content ul li.mar-rig-none{margin-right:0;}
 /*.d-content .item{width:30%}*/
 /**2014-7-1 搭配分享 安安**/
-#save,#send{height:50px;font-size:30px;border:none;}
+#save,#send{height:50px;font-size:25px;border:none;}
 .info .head tr .head_h{background-color:block;}
 #title{color:white;font-size:25px;background-color:black;height:100%;width:100%;overflow-y:auto;}
 .head_two tr .head_t{color:white;font-size:12px;width:16%;}
@@ -1179,7 +1179,7 @@ padding:10px 0 10px 0;
 .tb_foot{width:100%}
 .tb_foot tr{width:50%}
 .tb_foot tr td{width:50%}
-#myshare,#mysave{font-size:30px;height:45px;padding-top:5px;border:none}
+#myshare,#mysave{font-size:25px;height:45px;padding-top:5px;border:none}
 .dpfx{background-color:balck;}
 .head_two .keep{width:35%;}
 .c_b{clear:both;}
