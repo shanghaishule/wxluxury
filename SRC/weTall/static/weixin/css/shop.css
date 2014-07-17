@@ -1165,12 +1165,12 @@ padding:10px 0 10px 0;
 	height:80px;
 }
 /**2014-6-27 anan 搭配分享**/
-.d-content{width:100%;margin:0;padding:10px 20px;}
+.d-content{margin:0;padding:10px 20px;}
 .d-content ul li{float:left;display:inline;margin-right:10px;}
 .d-content ul li.mar-rig-none{margin-right:0;}
 /*.d-content .item{width:30%}*/
 /**2014-7-1 搭配分享 安安**/
-#save,#send{width:100px;height:50px;font-size:30px;border:none;}
+#save,#send{width:130px;height:50px;font-size:30px;border:none;}
 .info .head tr .head_h{background-color:block;}
 #title{color:white;font-size:25px;background-color:black;height:100%;width:100%;overflow-y:auto;}
 .head_two tr .head_t{color:white;font-size:12px;width:16%;}
