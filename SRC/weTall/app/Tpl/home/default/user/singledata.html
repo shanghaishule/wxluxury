@@ -78,7 +78,7 @@ input,button,select,textarea{outline:none}
 	});
  </script>
 </head>
-<body>
+<body data-role="none">
 
 	<script>
 		$(function() {
@@ -117,19 +117,19 @@ input,button,select,textarea{outline:none}
 			value="{$latitude}" id="latitude"> <input data-role="none" type="hidden"
 			name="brand_id" id="txtHint">
 
-		<div id="nav">
+		<div data-role="none" id="nav">
 			<img src="/weTall/static/weixin/images/luxury/images/home/bg_02.png"
 				width="100%" />
 
 			<ul class="navlist">
 				<li class="r pos" id="n_0">
 
-					<div class="back_page_logo">
+					<div data-role="none" class="back_page_logo">
 						<a href="javascript:history.back(-1)"><img
 							src="/weTall/static/weixin/images/back_page_logo.png" width="20%" /></a>
 
 					</div>
-					<div class="dis" id="dis">
+					<div data-role="none" class="dis" id="dis">
 						<!--   <ul>
 				  <volist name="item_cate" id="cate">
 				  	<li>
@@ -141,19 +141,19 @@ input,button,select,textarea{outline:none}
 				</li>
 				<li class="r" id="n_4"><span>个人资料</span></li>
 				<li class="r" id="n_1">
-					<!--  <div class="gouxuan">
+					<!--  <div data-role="none" class="gouxuan">
              
                 <a href="#"><img src="/weTall/static/images/gouxuan.png" width="25%"/></a>
                
           </div>
        <!--   <if condition="$yemian eq 'Item'">
-        <a href="{:U('home/user/index', array('tokenTall'=>$tokenTall))}"><div class="find_04"></div></a>
+        <a href="{:U('home/user/index', array('tokenTall'=>$tokenTall))}"><div data-role="none" class="find_04"></div></a>
         <else/>
         <if condition="$gohref neq ''">
-        <a href="{:U('home/user/index', array('tokenTall'=>$tokenTall))}"><div class="find_04"></div></a>
+        <a href="{:U('home/user/index', array('tokenTall'=>$tokenTall))}"><div data-role="none" class="find_04"></div></a>
         <elseif condition="$gosearch eq 'Y'"/>
-        <a href="javascript:void(0)" onclick="searchshop({$brandid})"><div class="find_03">{$City}</div></a>
-        <else/><div class="find_03">{$City}</div></if>
+        <a href="javascript:void(0)" onclick="searchshop({$brandid})"><div data-role="none" class="find_03">{$City}</div></a>
+        <else/><div data-role="none" class="find_03">{$City}</div></if>
         
         </if>-->
 			</ul>
@@ -161,26 +161,26 @@ input,button,select,textarea{outline:none}
 		</div>
 
 		<!-- 以上是headtop -->
-		<div class="kongge1"></div>
-		  <form name="form1" action="" method="post">
-			<div class="firstall">
-				<div class="mydata">我的资料</div>
-				<div class="boygirl">
+		<div data-role="none" class="kongge1"></div>
+		  <form name="form1" action="{:U('home/user/saveinfo')}" method="post">
+			<div data-role="none" class="firstall">
+				<div data-role="none" class="mydata">我的资料</div>
+				<div data-role="none" class="boygirl">
 					<ul>
 						<li><input data-role="none" data-role="none" type="radio" name="sex" checked value="male" /> 男</li>
 						<li><input data-role="none" type="radio" name="sex" value="female" /> 女</li>
 					</ul>
 				</div>
 
-				<div class="konggea"></div>
-				<div class="borntime">
+				<div data-role="none" class="konggea"></div>
+				<div data-role="none" class="borntime">
 					<ul>
 						<li>出生日期：<input data-role="none" name="birthday" id="birthday" type="text" style="width: 100px" readonly/>
 						</li>
 					</ul>
 				</div>
-				<div class="konggea"></div>
-				<div class="height">
+				<div data-role="none" class="konggea"></div>
+				<div data-role="none" class="height">
 					<ul>
 						<li>身&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;高：<input data-role="none" type="text"
 							style="width: 40px; background: black" name="height" />cm
@@ -190,20 +190,20 @@ input,button,select,textarea{outline:none}
 						</li>
 					</ul>
 				</div>
-				<div class="konggea"></div>
-				<div class="first1">
+				<div data-role="none" class="konggea"></div>
+				<div data-role="none" class="first1">
 					<p>
 						QQ&nbsp;&nbsp;邮箱: <input data-role="none" type="text" name="mail" />
 					</p>
 
 				</div>
 
-				<div class="first2">
+				<div data-role="none" class="first2">
 
-					<div class="chima1">
+					<div data-role="none" class="chima1">
 						<p>尺码:</p>
 					</div>
-					<div class="chima2">
+					<div data-role="none" class="chima2">
 
 						<ul class="chima_list">
 							<li>
@@ -228,7 +228,8 @@ input,button,select,textarea{outline:none}
 
 							</li>
 							<li>
-								<p>鞋</p> <select name="shoe" data-role="none">
+								<p>鞋</p>
+							<select name="shoe" data-role="none">
 									<option value="S36">36</option>
 									<option value="S37">37</option>
 									<option value="S38" selected="selected">38</option>
@@ -247,30 +248,29 @@ input,button,select,textarea{outline:none}
 						</ul>
 					</div>
 				</div>
-				<div class="dashed"></div>
+				<div data-role="none" class="dashed"></div>
 			</div>
-			<div class="secall">
-				<div class="secall_1">
+			<div data-role="none" class="secall">
+				<div data-role="none" class="secall_1">
 					<p>我的偏好</p>
 
 				</div>
-				<div class="secall_2">
-					<div class="title1">主题：</div>
-					<div class="seclistd">
+				<div data-role="none" class="secall_2">
+					<div data-role="none" class="title1">主题：</div>
+					<div data-role="none" class="seclistd">
 						<ul>
 							<li><input data-role="none" type="checkbox" name="wanzhuang"> 晚装</li>
 							<li><input data-role="none" type="checkbox" name="wanzhuang"> 正装</li>
 							<li><input data-role="none" type="checkbox" name="wanzhuang"> 休闲</li>
 							<li><input data-role="none" type="checkbox" name="wanzhuang"> 运动</li>
 							<li><input data-role="none" type="checkbox" name="wanzhuang"> 打底</li>
-							<li><input data-role="none" type="checkbox" name="wanzhuang"></li>
 						</ul>
 					</div>
 
 				</div>
-				<div class="secall_3">
-					<div class="title_1">颜色：</div>
-					<div class="seclist_c">
+				<div data-role="none" class="secall_3">
+					<div data-role="none" class="title_1">颜色：</div>
+					<div data-role="none" class="seclist_c">
 						<ul>
 							<li><input data-role="none" type="checkbox" name="wanzhuang"> 纯色</li>
 							<li><input data-role="none" type="checkbox" name="wanzhuang"> 撞色</li>
@@ -280,9 +280,9 @@ input,button,select,textarea{outline:none}
 						</ul>
 					</div>
 				</div>
-				<div class="secall_4">
-					<div class="title_1">风格：</div>
-					<div class="seclist_a">
+				<div data-role="none" class="secall_4">
+					<div data-role="none" class="title_1">风格：</div>
+					<div data-role="none" class="seclist_a">
 						<ul>
 							<li><input data-role="none" type="checkbox" name="wanzhuang"> 嬉皮</li>
 							<li><input data-role="none" type="checkbox" name="wanzhuang"> 英伦风</li>
@@ -299,9 +299,9 @@ input,button,select,textarea{outline:none}
 
 
 				</div>
-				<div class="secall_5">
-					<div class="title_1">元素：</div>
-					<div class="seclist_b">
+				<div data-role="none" class="secall_5">
+					<div data-role="none" class="title_1">元素：</div>
+					<div data-role="none" class="seclist_b">
 						<ul>
 							<li><input data-role="none" type="checkbox" name="wanzhuang"> 印花</li>
 							<li><input data-role="none" type="checkbox" name="wanzhuang"> 透视</li>
@@ -327,8 +327,8 @@ input,button,select,textarea{outline:none}
 
 				</div>
 			</div>
-			<div class="konggea"></div>
-			<div class="submit_a">
+			<div data-role="none" class="konggea"></div>
+			<div data-role="none" class="submit_a">
 
 
 				<input data-role="none" type="submit" value="提交" />
@@ -336,7 +336,7 @@ input,button,select,textarea{outline:none}
 
 			</div>
 		</form>
-		<div class="konggea"></div>
+		<div data-role="none" class="konggea"></div>
 		<include file="public:footer" />
 </body>
 </html>
