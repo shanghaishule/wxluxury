@@ -874,19 +874,14 @@ class userAction extends userbaseAction {
     
     		$this->display();
     }
-    
-    
-    
-    
-    
+ 
     public function preMatch() {
     
     //$uid = $_SESSION['uid'];
     $uid =$_SESSION['uid'];
     //uploadfile
     $data['upd_path'] = $this->getUploadFile();
-    
-    
+
     //取得所以收藏
     $result = $this->getUserFavi();
     //取得所选收藏
@@ -898,21 +893,13 @@ class userAction extends userbaseAction {
     $data['title'] = $_POST['title'];
     $data['is_send'] = $_POST['is_send'];
     $this->assign("math_data",$data);
-    
-    
-    //
-    
     $m=M();
-    		$Sel_sql = "SELECT * from tp_match where is_send in ('0','2') and uid =".$uid ;
-    		$result=$m->query($Sel_sql);
-    
-    
+    $Sel_sql = "SELECT * from tp_match where is_send in ('0','2') and uid =".$uid ;
+    $result=$m->query($Sel_sql);
     //dump($result);
-    
     
     if($result == NULL){
     	$data['is_send'] = "2";
-    
     	M("match")->add($data);
     }else{
     //dump("2");
@@ -921,19 +908,15 @@ class userAction extends userbaseAction {
     $where['uid'] = $uid;
     M("match")->where($where)->save($data);
     }
-//die();
-    
     //item_ids
     $item_array = explode(",",$item_ids);
-    	$this->assign("item_ids",$item_array);
+    $this->assign("item_ids",$item_array);
     
     	//获得图片和title
-    	$result = $this->getMatchItem($item_ids);
-    			$this->assign("item",$result);
+    $result = $this->getMatchItem($item_ids);
+    $this->assign("item",$result);
     
-    			$this->display();
-    
-    
+    $this->display();
     }
     
     //uploadfile
@@ -952,7 +935,7 @@ class userAction extends userbaseAction {
     	}
     
     	//取得收藏
-    		private function getUserFavi() {
+    private function getUserFavi() {
     		//$uid = $_SESSION['uid'];
     		$uid =$_SESSION['uid'];
     		$m=M();
@@ -967,21 +950,21 @@ class userAction extends userbaseAction {
     private function getSelFavi($result) {
     	$item_ids = "";
     	foreach($result as $val){
-    	if($_POST['txt_'.$val['item_id']] == "1"){
-	    		$item_ids = $item_ids.$val['item_id'].",";
-    }
-    }
-    $item_ids = substr($item_ids,0,strlen($item_ids)-1);
+	    	if($_POST['txt_'.$val['item_id']] == "1"){
+		    		$item_ids = $item_ids.$val['item_id'].",";
+	   		 }
+   		 }
+    	$item_ids = substr($item_ids,0,strlen($item_ids)-1);
     	return $item_ids;
     }
     
     	//取得选择收藏
     	private function getMatchItem($item_ids) {
-    	$m=M();
-    	$Sel_sql = "SELECT * FROM tp_item ";
-    	$Where_sql = "WHERE id in ( ".$item_ids.")";
-    	$result=$m->query($Sel_sql.$Where_sql);
-    	return $result;
+	    	$m=M();
+	    	$Sel_sql = "SELECT * FROM tp_item ";
+	    	$Where_sql = "WHERE id in ( ".$item_ids.")";
+	    	$result=$m->query($Sel_sql.$Where_sql);
+	    	return $result;
     	}  
     	
     	//积分使用说明
