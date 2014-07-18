@@ -11,6 +11,7 @@
 	type="text/css">
 <script charset="utf-8" type="text/javascript" src="__STATIC__/js/mobiscroll.js"></script>
 <style type="text/css">
+.ui-loader{display:none;}
 .showhavereal {
 	margin-left: 5px;
 	font: italic bold 15px arial, sans-serif;
@@ -53,7 +54,7 @@
 	background: none;
 	font-size: .8em;
 }
-
+input,button,select,textarea{outline:none}
 #search_box #go {
 	float: right;
 	margin: 4px 4px 0 0;
@@ -111,9 +112,9 @@
 									}
 								});
 			</script>	
-		<input type="hidden" name="longitude" value="{$longitude}"
-			id="longitude"> <input type="hidden" name="latitude"
-			value="{$latitude}" id="latitude"> <input type="hidden"
+		<input data-role="none" type="hidden" name="longitude" value="{$longitude}"
+			id="longitude"> <input data-role="none" type="hidden" name="latitude"
+			value="{$latitude}" id="latitude"> <input data-role="none" type="hidden"
 			name="brand_id" id="txtHint">
 
 		<div id="nav">
@@ -166,25 +167,25 @@
 				<div class="mydata">我的资料</div>
 				<div class="boygirl">
 					<ul>
-						<li><input type="radio" name="sex" checked value="male" /> 男</li>
-						<li><input type="radio" name="sex" value="female" /> 女</li>
+						<li><input data-role="none" data-role="none" type="radio" name="sex" checked value="male" /> 男</li>
+						<li><input data-role="none" type="radio" name="sex" value="female" /> 女</li>
 					</ul>
 				</div>
 
 				<div class="konggea"></div>
 				<div class="borntime">
 					<ul>
-						<li>出生日期：<input name="birthday" id="birthday" type="text" style="width: 100px" readonly/>
+						<li>出生日期：<input data-role="none" name="birthday" id="birthday" type="text" style="width: 100px" readonly/>
 						</li>
 					</ul>
 				</div>
 				<div class="konggea"></div>
 				<div class="height">
 					<ul>
-						<li>身&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;高：<input type="text"
+						<li>身&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;高：<input data-role="none" type="text"
 							style="width: 40px; background: black" name="height" />cm
 						</li>
-						<li>体&nbsp;&nbsp;&nbsp;&nbsp;重：<input type="text"
+						<li>体&nbsp;&nbsp;&nbsp;&nbsp;重：<input data-role="none" type="text"
 							style="width: 40px" name="weight"/>kg
 						</li>
 					</ul>
@@ -192,7 +193,7 @@
 				<div class="konggea"></div>
 				<div class="first1">
 					<p>
-						QQ&nbsp;&nbsp;邮箱: <input type="text" name="mail" />
+						QQ&nbsp;&nbsp;邮箱: <input data-role="none" type="text" name="mail" />
 					</p>
 
 				</div>
@@ -206,7 +207,7 @@
 
 						<ul class="chima_list">
 							<li>
-								<p>衣服</p> <select name="cloth">
+								<p>衣服</p> <select name="cloth" data-role="none">
 									<option value="S">S</option>
 									<option value="M">M</option>
 									<option value="L" selected="selected">L</option>
@@ -215,7 +216,7 @@
 
 							</li>
 							<li>
-								<p>裤子</p> <select name="trou">
+								<p>裤子</p> <select name="trou" data-role="none">
 									<option value="T28">28</option>
 									<option value="T29">29</option>
 									<option value="T30" selected="selected">30</option>
@@ -227,7 +228,7 @@
 
 							</li>
 							<li>
-								<p>鞋</p> <select name="shoe">
+								<p>鞋</p> <select name="shoe" data-role="none">
 									<option value="S36">36</option>
 									<option value="S37">37</option>
 									<option value="S38" selected="selected">38</option>
@@ -257,12 +258,12 @@
 					<div class="title1">主题：</div>
 					<div class="seclistd">
 						<ul>
-							<li><input type="checkbox" name="wanzhuang"> 晚装</li>
-							<li><input type="checkbox" name="wanzhuang"> 正装</li>
-							<li><input type="checkbox" name="wanzhuang"> 休闲</li>
-							<li><input type="checkbox" name="wanzhuang"> 运动</li>
-							<li><input type="checkbox" name="wanzhuang"> 打底</li>
-							<li><input type="checkbox" name="wanzhuang"></li>
+							<li><input data-role="none" type="checkbox" name="wanzhuang"> 晚装</li>
+							<li><input data-role="none" type="checkbox" name="wanzhuang"> 正装</li>
+							<li><input data-role="none" type="checkbox" name="wanzhuang"> 休闲</li>
+							<li><input data-role="none" type="checkbox" name="wanzhuang"> 运动</li>
+							<li><input data-role="none" type="checkbox" name="wanzhuang"> 打底</li>
+							<li><input data-role="none" type="checkbox" name="wanzhuang"></li>
 						</ul>
 					</div>
 
@@ -271,10 +272,10 @@
 					<div class="title_1">颜色：</div>
 					<div class="seclist_c">
 						<ul>
-							<li><input type="checkbox" name="wanzhuang"> 纯色</li>
-							<li><input type="checkbox" name="wanzhuang"> 撞色</li>
-							<li><input type="checkbox" name="wanzhuang"> 拼贴</li>
-							<li><input type="checkbox" name="wanzhuang"> 其他（可多选）</li>
+							<li><input data-role="none" type="checkbox" name="wanzhuang"> 纯色</li>
+							<li><input data-role="none" type="checkbox" name="wanzhuang"> 撞色</li>
+							<li><input data-role="none" type="checkbox" name="wanzhuang"> 拼贴</li>
+							<li><input data-role="none" type="checkbox" name="wanzhuang"> 其他（可多选）</li>
 
 						</ul>
 					</div>
@@ -283,14 +284,14 @@
 					<div class="title_1">风格：</div>
 					<div class="seclist_a">
 						<ul>
-							<li><input type="checkbox" name="wanzhuang"> 嬉皮</li>
-							<li><input type="checkbox" name="wanzhuang"> 英伦风</li>
-							<li><input type="checkbox" name="wanzhuang"> 日韩风</li>
-							<li><input type="checkbox" name="wanzhuang"> 民族</li>
-							<li><input type="checkbox" name="wanzhuang"> 田园风</li>
-							<li><input type="checkbox" name="wanzhuang"> 运动风</li>
-							<li><input type="checkbox" name="wanzhuang"> 百搭</li>
-							<li><input type="checkbox" name="wanzhuang"> 其他（可多选）
+							<li><input data-role="none" type="checkbox" name="wanzhuang"> 嬉皮</li>
+							<li><input data-role="none" type="checkbox" name="wanzhuang"> 英伦风</li>
+							<li><input data-role="none" type="checkbox" name="wanzhuang"> 日韩风</li>
+							<li><input data-role="none" type="checkbox" name="wanzhuang"> 民族</li>
+							<li><input data-role="none" type="checkbox" name="wanzhuang"> 田园风</li>
+							<li><input data-role="none" type="checkbox" name="wanzhuang"> 运动风</li>
+							<li><input data-role="none" type="checkbox" name="wanzhuang"> 百搭</li>
+							<li><input data-role="none" type="checkbox" name="wanzhuang"> 其他（可多选）
 							</li>
 
 						</ul>
@@ -302,15 +303,15 @@
 					<div class="title_1">元素：</div>
 					<div class="seclist_b">
 						<ul>
-							<li><input type="checkbox" name="wanzhuang"> 印花</li>
-							<li><input type="checkbox" name="wanzhuang"> 透视</li>
-							<li><input type="checkbox" name="wanzhuang"> 花卉</li>
-							<li><input type="checkbox" name="wanzhuang"> 图案</li>
-							<li><input type="checkbox" name="wanzhuang"> 条纹</li>
-							<li><input type="checkbox" name="wanzhuang"> 格子</li>
-							<li><input type="checkbox" name="wanzhuang"> 波点</li>
-							<li><input type="checkbox" name="wanzhuang"> 蕾丝</li>
-							<li><input type="checkbox" name="wanzhuang"> 其他（可多选）
+							<li><input data-role="none" type="checkbox" name="wanzhuang"> 印花</li>
+							<li><input data-role="none" type="checkbox" name="wanzhuang"> 透视</li>
+							<li><input data-role="none" type="checkbox" name="wanzhuang"> 花卉</li>
+							<li><input data-role="none" type="checkbox" name="wanzhuang"> 图案</li>
+							<li><input data-role="none" type="checkbox" name="wanzhuang"> 条纹</li>
+							<li><input data-role="none" type="checkbox" name="wanzhuang"> 格子</li>
+							<li><input data-role="none" type="checkbox" name="wanzhuang"> 波点</li>
+							<li><input data-role="none" type="checkbox" name="wanzhuang"> 蕾丝</li>
+							<li><input data-role="none" type="checkbox" name="wanzhuang"> 其他（可多选）
 
 
 
@@ -330,7 +331,7 @@
 			<div class="submit_a">
 
 
-				<input type="submit" value="提交" />
+				<input data-role="none" type="submit" value="提交" />
 
 
 			</div>
