@@ -1,106 +1,151 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<include file="public:headtop" />
-<script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/dialog.js" id="dialog_js"></script>
-<script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/jquery.ui.js" ></script>
-<script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/jquery.validate.js" ></script>
-<script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/mlselection.js" ></script>
-<link rel="stylesheet" type="text/css" href="__STATIC__/weixin/css/jquery.ui.css" />
-<link href="__STATIC__/weixin/css/shop.css" rel="stylesheet" type="text/css">
-	<style>
-		.showhavereal{
-			margin-left: 5px;
-			font:italic bold 15px arial,sans-serif;
-			color: #c00000 ;
-			text-shadow: 5px 5px 2px #ff6000 ;
-		}
-	</style>
-</head>
-<body>
-<style>
-	#logo{
-		height:50px;
-		width:116px;
-	}
-	#headshop select{
-		-webkit-border-radius:5px ; -moz-border-radius:5px;
-		float:left;
-		height:30px;
-		top:30px;
-		border-color:rgb(102,204,51);
-		margin:2px 0px 0px 2px;
-	}
-	#leftfloat{
-		height:35px;
-		margin:2px 2px 0px 10px;
-	}
-	#search_box {
-		width: 301px; 
-		height: 34px; 
-		background: url(__ROOT__/static/weixin/css/images/bg_search_box.gif); 
-	} 
-	#s { 
-		float:left;
-		padding: 0; 
-		margin: 2px 0 0 6px; 
-		border: 0; 
-		height:30px;
-		width: 175px; 
-		background: none; 
-		font-size: .8em; 
-	} 
-	#search_box #go { 
-		float: right; 
-		margin: 4px 4px 0 0;
-	}
-</style>
-<script src="__STATIC__/js/jquery/jquery10.js"></script>
-<script>
-$(function(){
-$(".pos").click(function(event){
-	event.stopPropagation();
-	$(".dis").css("z-index","300000000");
-	$(".dis").toggleClass("none");
-	});
-$(document).click(function(event) { $(".dis").removeClass("none"); });
-//单击弹出层则自身隐藏
-});	
-function searchshop(id){
-	document.getElementById("txtHint").value=id;
-	document.getElementById('searchShop').submit();
+<title>个人资料</title>
+<meta content="width=device-width,minimum-scale=1.0,maximum-scale=1.0" name="viewport">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
+<link href="__STATIC__/weixin/css/shop.css" rel="stylesheet"
+	type="text/css">
+<link href="__STATIC__/css/mobiscroll.css" rel="stylesheet"
+	type="text/css">
+<script charset="utf-8" type="text/javascript" src="__STATIC__/js/mobiscroll.js"></script>
+<style type="text/css">
+.ui-loader{display:none;}
+.showhavereal {
+	margin-left: 5px;
+	font: italic bold 15px arial, sans-serif;
+	color: #c00000;
+	text-shadow: 5px 5px 2px #ff6000;
 }
-</script>
-<form id="searchShop" action="{:U('index/test')}" method="post">
-     <input type="hidden" name="longitude" value="{$longitude}" id="longitude">
-     <input type="hidden" name="latitude" value="{$latitude}" id="latitude">
-     <input type="hidden" name="brand_id" id="txtHint">   
-   </form>
-<div id="nav">
-    <img src="/weTall/static/weixin/images/luxury/images/home/bg_02.png" width="100%"/>
+#logo {
+	height: 50px;
+	width: 116px;
+}
 
-	<ul class="navlist">
-		 <li class="r pos" id="n_0">
-		  
-		    <div class="back_page_logo">
-		      <a href="javascript:history.back(-1)"><img src="/weTall/static/weixin/images/back_page_logo.png" width="20%"/></a>
-		         
-		    </div>
-		   <div class="dis" id="dis">
-			<!--   <ul>
+#headshop select {
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	float: left;
+	height: 30px;
+	top: 30px;
+	border-color: rgb(102, 204, 51);
+	margin: 2px 0px 0px 2px;
+}
+
+#leftfloat {
+	height: 35px;
+	margin: 2px 2px 0px 10px;
+}
+
+#search_box {
+	width: 301px;
+	height: 34px;
+	background: url(__ROOT__/static/weixin/css/images/bg_search_box.gif);
+}
+
+#s {
+	float: left;
+	padding: 0;
+	margin: 2px 0 0 6px;
+	border: 0;
+	height: 30px;
+	width: 175px;
+	background: none;
+	font-size: .8em;
+}
+input,button,select,textarea{outline:none}
+#search_box #go {
+	float: right;
+	margin: 4px 4px 0 0;
+}
+</style>
+ <script type="text/javascript">
+ $(function(){
+		var opt = {
+	        preset: 'date', //日期
+	        theme: 'sense-ui', //皮肤样式
+	        display: 'modal', //显示方式 
+	        mode: 'scroller', //日期选择模式
+	        dateFormat: 'yy-mm-dd', // 日期格式
+	        setText: '确定', //确认按钮名称
+	        cancelText: '取消',//取消按钮名籍我
+	        dateOrder: 'yymmdd', //面板中日期排列格式
+	        dayText: '日', monthText: '月', yearText: '年', //面板中年月日文字
+	        endYear:2020 //结束年份
+	    };
+	    $("#birthday").mobiscroll(opt).date(opt);
+	    $.mobile.hidePageLoadingMsg();
+	});
+ </script>
+</head>
+<body data-role="none">
+
+	<script>
+		$(function() {
+			$(".pos").click(function(event) {
+				event.stopPropagation();
+				$(".dis").css("z-index", "300000000");
+				$(".dis").toggleClass("none");
+			});
+			$(document).click(function(event) {
+				$(".dis").removeClass("none");
+			});
+			//单击弹出层则自身隐藏
+		});
+		function searchshop(id) {
+			document.getElementById("txtHint").value = id;
+			document.getElementById('searchShop').submit();
+		}
+	</script>
+			<script type="text/javascript">
+				$(".navlist > li#n_0").click(function() {
+					$(this).toggleClass("active");
+				});
+				$(".navlist > li.r a")
+						.each(
+								function() {
+									href = "index.php-app=member&act=login&ret_url=-index.php-app=member.htm"
+											+ $(this).attr("href");
+									whref = window.location.href;
+									if (whref.indexOf(href) != '-1') {
+										$(this).parent("li").addClass("active");
+									}
+								});
+			</script>	
+		<input data-role="none" type="hidden" name="longitude" value="{$longitude}"
+			id="longitude"> <input data-role="none" type="hidden" name="latitude"
+			value="{$latitude}" id="latitude"> <input data-role="none" type="hidden"
+			name="brand_id" id="txtHint">
+
+		<div id="nav">
+			<img src="/weTall/static/weixin/images/luxury/images/home/bg_02.png"
+				width="100%" />
+
+			<ul class="navlist">
+				<li class="r pos" id="n_0">
+
+					<div class="back_page_logo">
+						<a href="javascript:history.back(-1)"><img
+							src="/weTall/static/weixin/images/back_page_logo.png" width="20%" /></a>
+
+					</div>
+					<div class="dis" id="dis">
+						<!--   <ul>
 				  <volist name="item_cate" id="cate">
 				  	<li>
 				     <a href="{:U('home/index/search', array('itemid'=>$cate['id'],'itemname'=>$cate['name'],'tokenTall'=>$tokenTall))}">{$cate.name}</a>
 				    </li>
 				  </volist>
 			 </ul> -->
-		      </div>
-		</li>
-    	<li class="r" id="n_4"> 
-    		<span >个人资料</span>
-        </li>
-          <li class="r" id="n_1">
-         <!--  <div class="gouxuan">
+					</div>
+				</li>
+				<li class="r" id="n_4"><span>个人资料</span></li>
+				<li class="r" id="n_1">
+					<!--  <div class="gouxuan">
              
                 <a href="#"><img src="/weTall/static/images/gouxuan.png" width="25%"/></a>
                
@@ -115,385 +160,175 @@ function searchshop(id){
         <else/><div class="find_03">{$City}</div></if>
         
         </if>-->
-        
-        
-        
-    </ul>
-    <script type="text/javascript">
-    	$(".navlist > li#n_0").click(function(){
-			$(this).toggleClass("active");
-		});
-		$(".navlist > li.r a").each(function() {
-            href="index.php-app=member&act=login&ret_url=-index.php-app=member.htm"+$(this).attr("href");
-			whref=window.location.href;
-			if(whref.indexOf(href)!='-1'){
-				$(this).parent("li").addClass("active");
-			}
-        });
-    </script>
-</div>
+			</ul>
+
+		</div>
+
+		<!-- 以上是headtop -->
+		<div class="kongge1"></div>
+		  <form name="form1" data-ajax="false" action="{:U('home/user/saveinfo',array('tokenTall'=>$tokenTall))}" method="post">
+			<div class="firstall">
+				<div class="mydata">我的资料</div>
+				<div class="boygirl">
+					<ul>
+						<li><label><input data-role="none" data-role="none" type="radio" name="sex" checked value="0" /> 男</label></li>
+						<li><label><input data-role="none" type="radio" name="sex" value="1" /> 女</label></li>
+					</ul>
+				</div>
+
+				<div class="konggea"></div>
+				<div class="borntime">
+					<ul>
+						<li>出生日期：<input data-role="none" name="birthday" id="birthday" type="text" style="width: 100px" readonly/>
+						</li>
+					</ul>
+				</div>
+				<div class="konggea"></div>
+				<div class="height">
+					<ul>
+						<li>身&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;高：<input data-role="none" type="text"
+							style="width: 40px; background: black" name="height" />cm
+						</li>
+						<li>体&nbsp;&nbsp;&nbsp;&nbsp;重：<input data-role="none" type="text"
+							style="width: 40px" name="weight"/>kg
+						</li>
+					</ul>
+				</div>
+				<div class="konggea"></div>
+				<div class="first1">
+					<p>
+						QQ&nbsp;&nbsp;邮箱: <input data-role="none" type="email" name="mail" />
+					</p>
+
+				</div>
+
+				<div class="first2">
+
+					<div class="chima1">
+						<p>尺码:</p>
+					</div>
+					<div class="chima2">
+
+						<ul class="chima_list">
+							<li>
+								<p>衣服</p> <select name="yifu_size" data-role="none">
+									<option value="S">S</option>
+									<option value="M">M</option>
+									<option value="L" selected="selected">L</option>
+									<option value="XL">XL</option>
+							</select>
+
+							</li>
+							<li>
+								<p>裤子</p> <select name="kuzi_size" data-role="none">
+									<option value="T28">28</option>
+									<option value="T29">29</option>
+									<option value="T30" selected="selected">30</option>
+									<option value="T31">31</option>
+									<option value="T32">32</option>
+									<option value="T33">33</option>
+									<option value="T34">34</option>
+							</select>
+
+							</li>
+							<li>
+								<p>鞋</p>
+							<select name="xie_size" data-role="none">
+									<option value="S36">36</option>
+									<option value="S37">37</option>
+									<option value="S38" selected="selected">38</option>
+									<option value="S39">39</option>
+									<option value="S41">41</option>
+									<option value="S42">42</option>
+									<option value="S43">43</option>
+									<option value="S44">44</option>
+									<option value="S45">45</option>
+									<option value="S46">46</option>
+									<option value="S47">47</option>
+							</select>
+
+							</li>
+
+						</ul>
+					</div>
+				</div>
+				<div class="dashed"></div>
+			</div>
+			<div class="secall">
+				<div class="secall_1">
+					<p>我的偏好</p>
+
+				</div>
+				<div class="secall_2">
+					<div class="title1">主题：</div>
+					<div class="seclistd">
+						<ul>
+							<li><label><input data-role="none" type="checkbox" name="hobby_title[]" value="晚装"> 晚装</label></li>
+							<li><label><input data-role="none" type="checkbox" name="hobby_title[]" value="正装"> 正装</label></li>
+							<li><label><input data-role="none" type="checkbox" name="hobby_title[]" value="休闲"> 休闲</label></li>
+							<li><label><input data-role="none" type="checkbox" name="hobby_title[]" value="运动"> 运动</label></li>
+							<li><label><input data-role="none" type="checkbox" name="hobby_title[]" value="打底"> 打底</label></li>
+						</ul>
+					</div>
+
+				</div>
+				<div class="secall_3">
+					<div class="title_1">颜色：</div>
+					<div class="seclist_c">
+						<ul>
+							<li><label><input data-role="none" type="checkbox" name="hobby_color[]" value="纯色"> 纯色</label></li>
+							<li><label><input data-role="none" type="checkbox" name="hobby_color[]" value="撞色"> 撞色</label></li>
+							<li><label><input data-role="none" type="checkbox" name="hobby_color[]" value="拼贴"> 拼贴</label></li>
+							<li><label><input data-role="none" type="checkbox" name="hobby_color[]" value="其他"> 其他（可多选）</label></li>
+
+						</ul>
+					</div>
+				</div>
+				<div class="secall_4">
+					<div class="title_1">风格：</div>
+					<div class="seclist_a">
+						<ul>
+							<li><label><input data-role="none" type="checkbox" name="hobby_style[]" value="嬉皮"> 嬉皮</label></li>
+							<li><label><input data-role="none" type="checkbox" name="hobby_style[]" value="英伦风"> 英伦风</label></li>
+							<li><label><input data-role="none" type="checkbox" name="hobby_style[]" value="日韩风"> 日韩风</label></li>
+							<li><label><input data-role="none" type="checkbox" name="hobby_style[]" value="民族"> 民族</label></li>
+							<li><label><input data-role="none" type="checkbox" name="hobby_style[]" value="田园风"> 田园风</label></li>
+							<li><label><input data-role="none" type="checkbox" name="hobby_style[]" value="运动风"> 运动风</label></li>
+							<li><label><input data-role="none" type="checkbox" name="hobby_style[]" value="百搭"> 百搭</label></li>
+							<li><label><input data-role="none" type="checkbox" name="hobby_style[]" value="其他"> 其他（可多选）</label>
+							</li>
+
+						</ul>
+					</div>
 
 
+				</div>
+				<div class="secall_5">
+					<div class="title_1">元素：</div>
+					<div class="seclist_b">
+						<ul>
+							<li><input data-role="none" type="checkbox" name="hobby_element[]" value="印花"> 印花</li>
+							<li><input data-role="none" type="checkbox" name="hobby_element[]" value="透视"> 透视</li>
+							<li><input data-role="none" type="checkbox" name="hobby_element[]" value="花卉"> 花卉</li>
+							<li><input data-role="none" type="checkbox" name="hobby_element[]" value="图案"> 图案</li>
+							<li><input data-role="none" type="checkbox" name="hobby_element[]" value="条纹"> 条纹</li>
+							<li><input data-role="none" type="checkbox" name="hobby_element[]" value="格子"> 格子</li>
+							<li><input data-role="none" type="checkbox" name="hobby_element[]" value="波点"> 波点</li>
+							<li><input data-role="none" type="checkbox" name="hobby_element[]" value="蕾丝"> 蕾丝</li>
+							<li><input data-role="none" type="checkbox" name="hobby_element[]" value="其他"> 其他（可多选）
 
-<!-- 以上是headtop -->
-<div class="kongge1">
-</div>
-<div class="firstall">
-<div class="mydata">我的资料</div>
-<div class="boygirl">
-<ul>
-<li>
-<input type="radio" name="sex" value="male" /> 男
-</li>
-<li>
-<input type="radio" name="sex" value="female" /> 女
-</li>
-</ul>
-</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="konggea"></div>
+			<div class="submit_a">
+				<input data-role="none" data-inline="true" type="submit" value="提交" />
 
-<div class="konggea"></div>
-<div class="borntime">
-<ul>
-<li>
-  
-    
-    出生日期：<input type="text" style="width:40px"/>
-    </li>
-<li>
-    <input type="text" style="width:40px"/>
-  
-</li>
-<li>
-    <input type="text" style="width:40px"/>
-  
-</li>
-</ul>
-
-</div>
-<div class="konggea"></div>
-<div class="height">
-<ul>
-<li>
-  
-    
-    身&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;高：<input type="text" style="width:40px;background:black"/>
-    </li>
-<li>
-    体&nbsp;&nbsp;&nbsp;&nbsp;重：<input type="text" style="width:40px"/>
-  
-</li>
-</ul>
-
-
-</div>
-<div class="konggea"></div>
-<div class="first1">
-         <form action="/example/html/form_action.asp" method="get">
-                <p>QQ&nbsp;&nbsp;邮箱: <input type="text" name="fname" /></p>
-          </form>
-  </div>
-  
-<div class="first2">
-
-   <div class="chima1"><p>尺码:</p></div>
-   <div class="chima2">
-   
-   <ul class="chima_list">      
-     <li>   
-     <p> 衣服</p>
-          <form>
-             <select name="cloth">
-               <option value="S">S</option>
-               <option value="M">M</option>
-                 <option value="L" selected="selected">L</option>
-              <option value="XL">XL</option>
-           </select>
-           </form>
-       </li>
-      <li>  
-      <p> 裤子</p>  
-          <form>
-             <select name="trou">
-               <option value="T28">28</option>
-               <option value="T29">29</option>
-                 <option value="T30" selected="selected">30</option>
-              <option value="T31">31</option>
-              <option value="T32">32</option>
-              <option value="T33">33</option>
-              <option value="T34">34</option>
-           </select>
-           </form>
-       </li>
-       <li>   
-       <p> 鞋</p> 
-          <form>
-             <select name="shoe">
-               <option value="S36">36</option>
-               <option value="S37">37</option>
-                 <option value="S38" selected="selected">38</option>
-              <option value="S39">39</option>
-              <option value="S41">41</option>
-              <option value="S42">42</option>
-              <option value="S43">43</option>
-              <option value="S44">44</option>
-              <option value="S45">45</option>
-              <option value="S46">46</option>
-              <option value="S47">47</option>
-           </select>
-           </form>
-       </li>
-
-      </ul>
-   </div>
-</div>
-                        <div class="dashed"></div>
-</div>
-        <div class="secall">
-<div class="secall_1">
-<p>我的偏好</p>
-
-</div>
-<div class="secall_2">
-   <div class="title1">主题：</div>
-   <div class="seclistd">
-   <ul>
-      <li>
-      
-<form>
-<input type="checkbox" name="wanzhuang">
-晚装
-</form>
- </li>
-   <li>
-   <form>
-<input type="checkbox" name="wanzhuang">
-正装
-</form>
-</li>
-   <li>
-   <form>
-<input type="checkbox" name="wanzhuang">
-休闲
-</form>
-</li>
-   <li>
-   <form>
-<input type="checkbox" name="wanzhuang">
-运动
-</form>
-</li>
-   <li>
-   <form>
-<input type="checkbox" name="wanzhuang">
-打底
-</form>
-</li>
-   <li>
-   <form>
-<input type="checkbox" name="wanzhuang">
-其他（可多选）
-</form>
-</li>
-   
-
-
-     
-   
-   </ul>
-   
-   
-   
-   </div>
-
-</div>
-<div class="secall_3">
- <div class="title_1">颜色：</div>
-   <div class="seclist_c">
-   <ul>
-      <li>
-      
-<form>
-<input type="checkbox" name="wanzhuang">
-
-纯色
-</form>
-  </li>
-   <li>
- <form>
-<input type="checkbox" name="wanzhuang">
-撞色
-</form>
-</li>
-   <li>
-<form> 
-<input type="checkbox" name="wanzhuang">
-拼贴
-</form>
-</li>
-   <li>
-  
-<form>
-<input type="checkbox" name="wanzhuang">
-其他（可多选）
-</form>
-
-      </li>
-   
-   </ul>
-   
-   
-   
-   </div>
-
-
-</div>
-<div class="secall_4">
- <div class="title_1">风格：</div>
-   <div class="seclist_a">
-   <ul>
-      <li>
-      
-<form>
-<input type="checkbox" name="wanzhuang">
-嬉皮
-</form>
- </li>
- <li>
- <form>
-<input type="checkbox" name="wanzhuang">
-英伦风
-</form>
-</li>
- <li>
- <form>
-<input type="checkbox" name="wanzhuang">
-日韩风
-</form>
-</li>
- <li>
- <form>
-<input type="checkbox" name="wanzhuang">
-民族
-</form>
-</li>
- <li>
- <form>
-<input type="checkbox" name="wanzhuang">
-田园风
-</form>
-</li>
- <li>
- <form>
-<input type="checkbox" name="wanzhuang">
-运动风
-</form>
-</li>
- <li>
- <form>
-<input type="checkbox" name="wanzhuang">
-百搭
-</form>
-</li>
- <li>
- <form>
-<input type="checkbox" name="wanzhuang">
-其他（可多选）
-</form>
-
-      
-      
-      </li>
-   
-   </ul>
-   
-   
-   
-   </div>
-
-
-</div>
-<div class="secall_5">
- <div class="title_1">元素：</div>
-   <div class="seclist_b">
-   <ul>
-      <li>
- 
-<form>
-<input type="checkbox" name="wanzhuang">
-印花
-</form>
-</li>
- <li>
- <form>
-<input type="checkbox" name="wanzhuang">
-透视
-</form>
-</li>
- <li>
- <form>
-<input type="checkbox" name="wanzhuang">
-花卉
-</form>
-</li>
- <li>
- <form>
-<input type="checkbox" name="wanzhuang">
-图案
-</form>
-</li>
- <li>
- <form>
-<input type="checkbox" name="wanzhuang">
-条纹
-</form>
-</li>
- <li>
- <form>
-<input type="checkbox" name="wanzhuang">
-格子
-</form>
-</li>
- <li>
- <form>
-<input type="checkbox" name="wanzhuang">
-波点
-</form>
-</li>
- <li>
- <form>
-<input type="checkbox" name="wanzhuang">
-蕾丝
-</form>
-</li>
- <li>
- <form>
-<input type="checkbox" name="wanzhuang">
-其他（可多选）
-</form>
-
-      
-      
-      </li>
-   
-   </ul>
-   
-   
-   
-   </div>
-
-
-</div>
-</div>
-<div class="konggea"></div>
-<div class="submit_a">
-
-<form>
-<input type="submit" value="提交" />
-</form>
-
-</div>
-<div class="konggea"></div>
-<include file="public:footer" />
-
+			</div>
+		</form>
+		<div class="konggea"></div>
+		<include file="public:footer" />
 </body>
 </html>

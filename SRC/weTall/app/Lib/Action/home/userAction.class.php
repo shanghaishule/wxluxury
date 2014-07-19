@@ -86,7 +86,7 @@ class userAction extends userbaseAction {
             }
         }
     }
-    
+
     public function addaddress()
     {
     	//取商家token值，取不到则默认为空
@@ -874,19 +874,14 @@ class userAction extends userbaseAction {
     
     		$this->display();
     }
-    
-    
-    
-    
-    
+ 
     public function preMatch() {
     
     //$uid = $_SESSION['uid'];
     $uid =$_SESSION['uid'];
     //uploadfile
     $data['upd_path'] = $this->getUploadFile();
-    
-    
+
     //取得所以收藏
     $result = $this->getUserFavi();
     //取得所选收藏
@@ -898,21 +893,13 @@ class userAction extends userbaseAction {
     $data['title'] = $_POST['title'];
     $data['is_send'] = $_POST['is_send'];
     $this->assign("math_data",$data);
-    
-    
-    //
-    
     $m=M();
-    		$Sel_sql = "SELECT * from tp_match where is_send in ('0','2') and uid =".$uid ;
-    		$result=$m->query($Sel_sql);
-    
-    
+    $Sel_sql = "SELECT * from tp_match where is_send in ('0','2') and uid =".$uid ;
+    $result=$m->query($Sel_sql);
     //dump($result);
-    
     
     if($result == NULL){
     	$data['is_send'] = "2";
-    
     	M("match")->add($data);
     }else{
     //dump("2");
@@ -921,19 +908,15 @@ class userAction extends userbaseAction {
     $where['uid'] = $uid;
     M("match")->where($where)->save($data);
     }
-//die();
-    
     //item_ids
     $item_array = explode(",",$item_ids);
-    	$this->assign("item_ids",$item_array);
+    $this->assign("item_ids",$item_array);
     
     	//获得图片和title
-    	$result = $this->getMatchItem($item_ids);
-    			$this->assign("item",$result);
+    $result = $this->getMatchItem($item_ids);
+    $this->assign("item",$result);
     
-    			$this->display();
-    
-    
+    $this->display();
     }
     
     //uploadfile
@@ -952,7 +935,7 @@ class userAction extends userbaseAction {
     	}
     
     	//取得收藏
-    		private function getUserFavi() {
+    private function getUserFavi() {
     		//$uid = $_SESSION['uid'];
     		$uid =$_SESSION['uid'];
     		$m=M();
@@ -967,21 +950,21 @@ class userAction extends userbaseAction {
     private function getSelFavi($result) {
     	$item_ids = "";
     	foreach($result as $val){
-    	if($_POST['txt_'.$val['item_id']] == "1"){
-	    		$item_ids = $item_ids.$val['item_id'].",";
-    }
-    }
-    $item_ids = substr($item_ids,0,strlen($item_ids)-1);
+	    	if($_POST['txt_'.$val['item_id']] == "1"){
+		    		$item_ids = $item_ids.$val['item_id'].",";
+	   		 }
+   		 }
+    	$item_ids = substr($item_ids,0,strlen($item_ids)-1);
     	return $item_ids;
     }
     
     	//取得选择收藏
     	private function getMatchItem($item_ids) {
-    	$m=M();
-    	$Sel_sql = "SELECT * FROM tp_item ";
-    	$Where_sql = "WHERE id in ( ".$item_ids.")";
-    	$result=$m->query($Sel_sql.$Where_sql);
-    	return $result;
+	    	$m=M();
+	    	$Sel_sql = "SELECT * FROM tp_item ";
+	    	$Where_sql = "WHERE id in ( ".$item_ids.")";
+	    	$result=$m->query($Sel_sql.$Where_sql);
+	    	return $result;
     	}  
     	
     	//积分使用说明
@@ -991,7 +974,38 @@ class userAction extends userbaseAction {
     	
     	//个人资料说明
     	public function  singledata(){
+    		$tokenTall = $this->getTokenTall();
+    		$this->assign('tokenTall',$tokenTall);
     		$this->display();
     	}
-    	
+    	public function saveinfo(){
+    		header("Content-type: text/html; charset=utf-8"); 
+    		$data['uid'] = session('uid');
+    		$data['sex'] = $this->_post("sex");
+    		$data['birthday']=$this->_post("birthday");
+    		$data['height']=$this->_post("height");
+    		$data['weight']=$this->_post("weight");
+    		$data['mail']=$this->_post("mail");
+    		$data['yifu_size']=$this->_post("yifu_size");
+    		$data['kuzi_size']=$this->_post("kuzi_size");
+    		$data['xie_size']=$this->_post("xie_size");
+    		
+    		$hobby_title_arr = $this->_post("hobby_title");
+    		$data['hobby_title'] = implode("|", $hobby_title_arr);
+    
+    		$hobby_color_arr = $this->_post("hobby_color");
+    		$data['hobby_color'] = implode("|", $hobby_color_arr);
+    		
+    		$hobby_style_arr = $this->_post("hobby_style");
+    		$data['hobby_style'] = implode("|", $hobby_style_arr);
+    		
+    		$hobby_element_arr = $this->_post("hobby_element");
+    		$data['hobby_element'] = implode("|", $hobby_element_arr);
+    		if(M('user_info')->add($data)){
+    			$this->success("保存成功");
+    		}else{
+    			$this->error("保存失败");
+    		}
+    		
+    	}
 }
