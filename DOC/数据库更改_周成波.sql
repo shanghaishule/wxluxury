@@ -12,3 +12,11 @@ update `tp_user` set `username` = 'admin', `password` = 'b80c4de605487af2bf83a7c
 -- 增加商品入库模块
 insert into tp_menu(NAME,pid,module_name,action_name,often,ordid,display)
 values('商品入库',51,'item_ruku','index',0,7,1);
+
+-- 商品销售数据管理模块
+insert into tp_node(name,title,status,remark,pid,level,sort,display)
+values('spxssjgl','商品销售数据管理',1,0,84,2,0,2);
+
+insert into tp_access(role_id,node_id,pid,level)
+values(5,100,84,2);
+
