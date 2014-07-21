@@ -1241,7 +1241,7 @@ width: 100%;}
 .dashed{height:1px;border-bottom:1px dashed white;position:absolute;bottom:0;width:100%}
 .mydata{font-size:20px;margin-left:10px}
 .boygirl{margin-left:20%;margin-top:5px}
-.height{margin-left:10%;clear:both}
+.height{margin-left:10%;width:100%;clear:both}
 .boygirl ul li{float:left;margin-left:50px}
 .height ul li{float:left;margin-left:32px}
 .borntime {clear:both;margin-left:11%}	
