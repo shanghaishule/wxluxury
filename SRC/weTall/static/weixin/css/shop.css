@@ -1229,28 +1229,28 @@ width: 100%;}
 .gouxuan{position:relative}	
 .gouxuan img{margin-left:80px;margin-top:5px;position:absolute}
 .kongge1{height:70px}
-.first1{margin-left:15%;margin-top:15px;clear:both}
-.first2{margin-left:15%;margin-top:20px;}
+.first1{margin-left:15%;clear:both}
+.first2{margin-left:15%;margin-top:15px;}
 .chima1{float:left;margin-top:5px}
 .chima2{float:left ; margin-left:10px;margin-top:0px}
 .chima_list li{float:left;margin-left:0px  
 	}
 .chima_list li p{float:left;margin-top:5px}
 .chima_list li form{float:left}
-.firstall{height:260px;position:relative}
+.firstall{height:200px;position:relative}
 .dashed{height:1px;border-bottom:1px dashed white;position:absolute;bottom:0;width:100%}
 .mydata{font-size:20px;margin-left:10px}
 .boygirl{margin-left:20%;margin-top:5px}
-.height{margin-left:10%;margin-top:15px;clear:both}
+.height{margin-left:10%;clear:both}
 .boygirl ul li{float:left;margin-left:50px}
-.height ul li{float:left;margin-left:18px}
+.height ul li{float:left;margin-left:32px}
 .borntime {clear:both;margin-left:11%}	
 .borntime ul li{float:left;margin-left:5%}
 .konggea{height:15px;clear:both}
 .firstall input{background:black;border:1px solid grey;color:red}
 .firstall select{border-radius:0px;scrollbar-arrow-color:red;
 border:1px solid grey;background:black;color:grey}
-.submit_a input{width:80px;height:30px;background:#981f1f;/*border:1px solid #981f1f*/}
+.submit_a input{width:80px;height:30px;border:none;background:#981f1f;/*border:1px solid #981f1f*/}
 .submit_a{text-align:center;margin:auto}
 	
 	
