@@ -1004,12 +1004,11 @@ class userAction extends userbaseAction {
 	    		$hobby_element_arr = $this->_post("hobby_element");
 	    		$data['hobby_element'] = implode("|", $hobby_element_arr);
 	    		if(M('user_info')->add($data)){
-	    			$this->success("保存成功",U("user/index"));
+	    			$this->success("保存成功",U("user/logintest"));
 	    		}else{
 	    			$this->error("保存失败");
 	    		}
     		}else{
-    			dump(U("user/singledate"));exit;
     			$this->error("服务器繁忙！");
     		}	
     	}
