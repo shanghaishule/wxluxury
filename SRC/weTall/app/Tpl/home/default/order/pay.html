@@ -73,27 +73,27 @@ function callpay()
         <input type="hidden" name="dingdanhao" value="{$dingdanhao}" />
         <div class="step_main" style="background-color:black;">
         	<eq name="order_exist" value="1">
-        		<div class="clue_on" style="color:white;"><h4>订单信息：</h4></div>
+        		<div class="clue_on" style="color:white;background-color:black;"><h4 >订单信息：</h4></div>
             <else />
-            	<div class="clue_on"><h4>订单提交成功！</h4><p>您的订单已成功生成，共生成<span style="font-weight:bold; color:red;">{$allorderid|count}</span>单。</p></div>
+            	<div class="clue_on"><h4>订单提交成功！</h4><p>您的订单已成功生成，共生成<span style="font-weight:bold; color:#851616;">{$allorderid|count}</span>单。</p></div>
             </eq>
             <div class="order_information">
             	<volist name="allorderid" id="vo">
-            	<p>订单单号：<span>{$vo}</span></p>
+            	<p>订单单号：<span style="color:#851616;">{$vo}</span></p>
             	</volist>
-                <p>订单总价：<span>¥{$order_sumPrice}</span></p>
+                <p>订单总价：<span style="color:#851616;">¥{$order_sumPrice}</span></p>
             </div>
 
 
             <div class="buy">
-            	<p>支付编号：<span style="color:blue;">{$dingdanhao}</span></p>
-                <h3 style="color:white;">选择支付方式并付款</h3>
+            	<p>支付编号：<span style="color:#851616;">{$dingdanhao}</span></p>
+                <h3 style="color:white;background-color:black;">选择支付方式并付款</h3>
                     <dl class="defray">
                         <dt>在线支付</dt>                        
-                        <dd style="color:white;">
+                        <dd >
                             <p class="radio"><input checked='checked' id="payment_wxpay" name="payment_id" value="4" type="radio"></p>
                             <p class="logo"><label for="payment_wxpay"><img src="__STATIC__/weixin/images/wxpay_small.png" ></label></p>
-                            <p class="explain" >欢迎使用微信支付</p>
+                            <p class="explain" style="color:white;">欢迎使用微信支付</p>
                         </dd>
                     </dl>
                     <dl class="defray">
@@ -101,13 +101,13 @@ function callpay()
                         <dd style="color:white;">
                             <p class="radio"><input id="payment_cod" name="payment_id" value="2" type="radio"></p>
                             <p class="logo"><label for="payment_cod"><img  src="__STATIC__/weixin/images/huodao.png"></label></p>
-                            <p class="explain">欢迎使用货到付款</p>
+                            <p class="explain" style="color:white;">欢迎使用货到付款</p>
                         </dd>
                     </dl>           
             </div>
-            <div class="make_sure" style="background-color:#851616">
+            <div class="make_sure">
                 <p>
-                    <a href="javascript: submitaction();" class="btn enter" >确认支付</a>
+                    <a href="javascript: submitaction();" class="btn enter" style="background-color:#851616;" >确认支付</a>
                 </p>
             </div>
             
