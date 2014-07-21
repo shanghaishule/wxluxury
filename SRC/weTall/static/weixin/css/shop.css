@@ -405,7 +405,7 @@ border-top: 2px solid #ff0000;}
 
 #nav {width:100%; min-width:200px;max-width:640px;left:0px;position:fixed; top:0px; z-index: 999; margin: 0 auto;display:block;}
 #nav ul.navlist { position: absolute;top:0px;left:0px; z-index:9999; height:45px; width:100%;margin:0 ;  }
-#nav .navlist li { float: left;height:45px;  position:relative;width:34%;margin:auto}
+#nav .navlist li { float: left;height:45px;  position:relative;width:40%;margin:auto}
 #nav .navlist li#n_3 i{ position:absolute; height:14px; width:14px;background:#C00; color:#fff; left:55%; top:10px; border-radius:50%; font-style:normal; text-align:center; font-size:12px; display:none;}
 #nav .navlist li span{ display:inline-block; width:100%; height:45px; cursor:pointer; color:white ;margin-top:10px;text-align:center}
 #nav .navlist li span input{color:#202020}
