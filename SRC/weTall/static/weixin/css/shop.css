@@ -179,7 +179,7 @@ width:100%;
 .add_title{ clear:both;}
 div.order_address_list, div.order_delivery, div.message_box ,.particular_wrap dl,.particular_wrap .ware_line, .particular_wrap .ware_line ul,
 .ware_line .transportation,div.order_cancel_box, #content .step_main, #content .payment_desc
-{color:#333; margin:15px; border: 1px solid #EAEAEA;background-color: #FFF;box-shadow: 0 0 2px rgba(0,0,0,.1);font-size: 14px;line-height: 24px;padding: 10px 0 5px 15px;}
+{color:#333; margin:15px; border: 1px solid #EAEAEA;background-color: #000;box-shadow: 0 0 2px rgba(0,0,0,.1);font-size: 14px;line-height: 24px;padding: 10px 0 5px 15px;}
 div.order_address_list h4, div.order_delivery h4{font-weight: normal; margin-bottom: 5px;}
 div.order_delivery ul li{min-height: 25px;}
 div.order_address_list ul, div.order_delivery ul, div.message_box .message textarea{margin-bottom: 5px; color:#666;}
