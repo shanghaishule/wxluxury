@@ -75,7 +75,9 @@ function callpay()
         	<eq name="order_exist" value="1">
         		<div class="clue_on" ><h4 style="color:white;background-color:black;" >订单信息：</h4></div>
             <else />
-            	<div class="clue_on" ><h4  style="background-color:black;border:1px dashed white; border-top:none;border-left:none;border-right:none;">订单提交成功！</h4><p>您的订单已成功生成，共生成<span style="font-weight:bold; color:#851616;">{$allorderid|count}</span>单。</p></div>
+            	<div class="clue_on" ><h4 style="background-color:black;border:1px dashed white;color:red; border-top:none;border-left:none;border-right:none;">订单提交成功!</h4>
+            	<p>您的订单已成功生成，共生成<span style="font-weight:bold; color:#851616;">{$allorderid|count}</span>单。</p>
+            	</div>
             </eq>
             <div class="order_information">
             	<volist name="allorderid" id="vo">
