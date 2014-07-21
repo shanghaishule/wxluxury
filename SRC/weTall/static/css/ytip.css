@@ -1,0 +1,117 @@
+/**
+ * tip css
+ * @author yulipu
+ */
+/* utils */
+div {word-break:break-all;}
+.y-tip-pullLeft { float:left;}
+.y-tip-pullRight { float:right;}
+.y-tip-clear {clear:both;height:1px;padding:0;border:0;overflow:hidden;font-size:0px;}
+.y-tip-clearL {clear:left;height:1px;padding:0;border:0;overflow:hidden;font-size:0px;}
+.y-tip-clearR {clear:right;height:1px;padding:0;border:0;overflow:hidden;font-size:0px;}
+
+/* common */
+/* 特殊符号 */
+.y-webdingsTip {
+	font-family:'webdings'; 
+	display:block;
+	width:32px; height:32px; 
+	overflow:hidden;
+	text-align:center;
+	font-size:30px;
+	/*border:1px solid green;*/
+}
+/* unicode 符号 */
+.y-unicodeTip {
+	display:block;
+	width:32px; height:32px;
+	overflow:hidden;
+	text-align:center;
+	font-size:30px;
+	/*border:1px solid green;*/
+}
+
+/* icon */
+/* 心形 */
+.y-ico-love {
+	filter: glow(color=#6ccff7,strength=3);
+	text-shadow:2px 0 4px #6ccff7,0 2px 4px #6ccff7,0 -2px 4px #6ccff7,-2px 0 4px #6ccff7;
+	color:#ffffff;
+}
+/* 成功 */
+.y-ico-success {
+	color:#FFF;
+}
+/* 失败 */
+.y-ico-error {
+	color:#FFF;
+}
+/* 警告 */
+.y-ico-warning {
+	color:#FFF;
+}
+/* // utils end */
+
+/* backgroundcolor */
+.y-tip-bgDefault {
+	background-color: #5bb75b;
+	background-image: -moz-linear-gradient(top, #62c462, #51a351);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#62c462), to(#51a351));
+	background-image: -webkit-linear-gradient(top, #62c462, #51a351);
+	background-image: -o-linear-gradient(top, #62c462, #51a351);
+	background-image: linear-gradient(to bottom, #62c462, #51a351);
+	background-repeat: repeat-x;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff62c462', endColorstr='#ff51a351', GradientType=0);
+	border-color: #51a351 #51a351 #387038;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+	*background-color: #51a351;
+	color:#FFF;
+}
+.y-tip-bgDanger {
+	background-color: #da4f49;
+	background-image: -moz-linear-gradient(top, #ee5f5b, #bd362f);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ee5f5b), to(#bd362f));
+	background-image: -webkit-linear-gradient(top, #ee5f5b, #bd362f);
+	background-image: -o-linear-gradient(top, #ee5f5b, #bd362f);
+	background-image: linear-gradient(to bottom, #ee5f5b, #bd362f);
+	background-repeat: repeat-x;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffee5f5b', endColorstr='#ffbd362f', GradientType=0);
+	border-color: #bd362f #bd362f #802420;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+	*background-color: #bd362f;
+	color:#FFF;
+}
+.y-tip-bgWarning {
+	background-color: #faa732;
+	background-image: -moz-linear-gradient(top, #fbb450, #f89406);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fbb450), to(#f89406));
+	background-image: -webkit-linear-gradient(top, #fbb450, #f89406);
+	background-image: -o-linear-gradient(top, #fbb450, #f89406);
+	background-image: linear-gradient(to bottom, #fbb450, #f89406);
+	background-repeat: repeat-x;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fffbb450', endColorstr='#fff89406', GradientType=0);
+	border-color: #f89406 #f89406 #ad6704;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+	*background-color: #f89406;
+}
+
+/* 主容器 */
+.y-tip-container {
+	font-family:not specified;
+	font-weight:bold;
+	position:absolute;
+	z-index:1127;
+	line-height:36px;
+	width:160px;
+	min-width:160px;
+	max-width:260px;
+	box-shadow:0 0 60px 0 rgba(0,0,0,.4);
+	border-radius:4px;
+}
+.y-tip-container .y-tip-text {
+	margin-left:36px;  /* 左边加float 右边不加，右边添加 margin-left在让文字始终距离左侧36px */
+	padding:0 6px 0 0;
+	font-size:16px;
+}
+
+

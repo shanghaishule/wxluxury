@@ -13,6 +13,7 @@
 <link href="__STATIC__/css/mobiscroll.css" rel="stylesheet"
 	type="text/css">
 <script charset="utf-8" type="text/javascript" src="__STATIC__/js/mobiscroll.js"></script>
+<script charset="utf-8" type="text/javascript" src="__STATIC__/js/SysUtil.js"></script>
 <style type="text/css">
 .ui-loader{display:none;}
 .showhavereal {
@@ -129,7 +130,7 @@ input,button,select,textarea{outline:none}
 				   && validate.hobby_color && validate.hobby_style && validate.hobby_element){
 			  return; 
 		   }else{
-			  alert("请填写完整信息"); 
+			   SysUtil.Tip.warning('请填写完整信息'); 
 			  return false;
 		   }
 	   }); 
