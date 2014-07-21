@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>查找附近的促销店铺</title>
-		
+        <title>查找附近的促销店铺</title>		
     </head>
     <include file="public:headtop" />
     <include file="public:head" />
@@ -13,7 +12,8 @@
         <div class="container">
     		<div id="slides">
     			<volist name="weTallboard" id="bolist">
-         			<a href="{$bolist.url}" title="{$bolist.desc}"> 
+         			<!--<a href="{$bolist.url}" title="{$bolist.desc}">-->
+         			<a href="{:U('home/index/brandshop', array('tokenTall'=>$tokenTall))}" title="{$bolist.desc}">
          			<img src="/weTall/data/upload/advert/{$img_dir}{$bolist.content}" alt="{$bolist.desc}" /></a>
          		</volist>
         	</div>
@@ -61,10 +61,8 @@
            <span style="font-size:16px;">{$Shop.shop_name}</span></a></td>
            <td width="15%"> 
            
-           <!--<a href="{:U('index/navigate',array('start_point_lat'=>$start_point_lat,'shop'=>$Shop['tokenTall'],'dmodel'=>'N','start_point_lng'=>$start_point_lng,'end_point_lat'=>$Shop['lat'],'end_point_lng'=>$Shop['longtitude']))}">-->
+          <a href="{:U('index/navigate',array('start_point_lat'=>$start_point_lat,'shop'=>$Shop['tokenTall'],'dmodel'=>'N','start_point_lng'=>$start_point_lng,'end_point_lat'=>$Shop['lat'],'end_point_lng'=>$Shop['longtitude']))}">                     
            
-           
-           <a href="{:U('home/index/brandshop',array('start_point_lat'=>$start_point_lat,'shop'=>$Shop['tokenTall'],'dmodel'=>'N','start_point_lng'=>$start_point_lng,'end_point_lat'=>$Shop['lat'],'end_point_lng'=>$Shop['longtitude']))}">
            <img height="27" width="58" src="__STATIC__/weixin/images/luxury/images/brand/tell_09.png" /></a><br></td></tr>
            <tr><td width="85%"><span class="shop_address">{$Shop.show_addr}</span></td>
            <td width="15%"><img height="18" width="11" src="__STATIC__/weixin/images/luxury/images/brand/here_13.png"><span class="shop_address">{$Shop.nearJuli}KM</span></td></tr>
