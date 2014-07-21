@@ -139,7 +139,7 @@ margin-top:8px;
 #register_form,#order_form{ margin:0 10px;}
 #content form .width5,#content form .width10{ width:100%;}
 
-#content form .text,#content #address_form .text{height:40px;margin:5px 0; border-radius:5px; border:1px solid #ddd; text-indent:10px; width:100%;}
+#content form .text,#content #address_form .text{height:40px;margin:5px 0; border-radius:5px; border:1px solid #ddd; text-indent:10px; width:100%;color: black;}
 #content form .text,#content #address_form select{margin-left:10px; border-radius:5px; border:1px solid #ddd; height: 38px; margin: 5px 0;}
 #content form .text.error{ border:1px solid #F00;}
 #content .login_btn{cursor:pointer;}
