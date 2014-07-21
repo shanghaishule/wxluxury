@@ -143,7 +143,7 @@ margin-top:8px;
 #content form .text,#content #address_form select{margin-left:10px; border-radius:5px; border:1px solid #ddd; height: 38px; margin: 5px 0;}
 #content form .text.error{ border:1px solid #F00;}
 #content .login_btn{cursor:pointer;}
-#content .enter,#content .login_btn{width:100%;display:block;text-align:center;line-height:50px;background-image: -webkit-gradient(linear,left top,left bottom,from(#ffbf00),to(#ff8700));color:#fff; font-size:15px;}
+#content .enter,#content .login_btn{width:100%;display:block;text-align:center;line-height:50px;background-image: -webkit-gradient(linear,left top,left bottom,from(#851616),to(#851616));color:#fff; font-size:15px;}
 /*background-color: #ff8700;background-image: -webkit-linear-gradient(top,#ffbf00,#ff8700);background-image: linear-gradient(to bottom,#851616,#851616);*/
 #content .ware_btn .enter{background-color: #f52f40;
 background-image: -webkit-gradient(linear,left top,left bottom,from(#ff4747),to(#f52f40));background-image: -webkit-linear-gradient(top,#ff4747,#f52f40);background-image: linear-gradient(to bottom,#ff4747,#f52f40);}
