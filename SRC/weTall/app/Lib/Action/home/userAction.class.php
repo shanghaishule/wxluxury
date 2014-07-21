@@ -977,35 +977,39 @@ class userAction extends userbaseAction {
     		$tokenTall = $this->getTokenTall();
     		$this->assign('tokenTall',$tokenTall);
     		$this->display();
+    		
     	}
     	public function saveinfo(){
     		header("Content-type: text/html; charset=utf-8"); 
     		$data['uid'] = session('uid');
-    		$data['sex'] = $this->_post("sex");
-    		$data['birthday']=$this->_post("birthday");
-    		$data['height']=$this->_post("height");
-    		$data['weight']=$this->_post("weight");
-    		$data['mail']=$this->_post("mail");
-    		$data['yifu_size']=$this->_post("yifu_size");
-    		$data['kuzi_size']=$this->_post("kuzi_size");
-    		$data['xie_size']=$this->_post("xie_size");
-    		
-    		$hobby_title_arr = $this->_post("hobby_title");
-    		$data['hobby_title'] = implode("|", $hobby_title_arr);
-    
-    		$hobby_color_arr = $this->_post("hobby_color");
-    		$data['hobby_color'] = implode("|", $hobby_color_arr);
-    		
-    		$hobby_style_arr = $this->_post("hobby_style");
-    		$data['hobby_style'] = implode("|", $hobby_style_arr);
-    		
-    		$hobby_element_arr = $this->_post("hobby_element");
-    		$data['hobby_element'] = implode("|", $hobby_element_arr);
-    		if(M('user_info')->add($data)){
-    			$this->success("保存成功");
+    		if(!empty($data['uid'])){
+	    		$data['sex'] = $this->_post("sex");
+	    		$data['birthday']=$this->_post("birthday");
+	    		$data['height']=$this->_post("height");
+	    		$data['weight']=$this->_post("weight");
+	    		$data['mail']=$this->_post("mail");
+	    		$data['yifu_size']=$this->_post("yifu_size");
+	    		$data['kuzi_size']=$this->_post("kuzi_size");
+	    		$data['xie_size']=$this->_post("xie_size");
+	    		
+	    		$hobby_title_arr = $this->_post("hobby_title");
+	    		$data['hobby_title'] = implode("|", $hobby_title_arr);
+	    
+	    		$hobby_color_arr = $this->_post("hobby_color");
+	    		$data['hobby_color'] = implode("|", $hobby_color_arr);
+	    		
+	    		$hobby_style_arr = $this->_post("hobby_style");
+	    		$data['hobby_style'] = implode("|", $hobby_style_arr);
+	    		
+	    		$hobby_element_arr = $this->_post("hobby_element");
+	    		$data['hobby_element'] = implode("|", $hobby_element_arr);
+	    		if(M('user_info')->add($data)){
+	    			$this->success("保存成功",U("user/singledate"));
+	    		}else{
+	    			$this->error("保存失败");
+	    		}
     		}else{
-    			$this->error("保存失败");
-    		}
-    		
+    			$this->error("服务器繁忙！");
+    		}	
     	}
 }
