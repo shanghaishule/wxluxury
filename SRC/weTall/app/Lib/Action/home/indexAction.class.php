@@ -742,6 +742,10 @@ class indexAction extends frontendAction {
     	$this->display();
     }
     public function compare(){
+    	$item_cate=M("item_cate")->select();
+    	$this->assign('item_cate',$item_cate);
+    	
+    	
     	$Huohao["Huohao"] = $this->_get("Huohao","trim");
     	//$item_huohao = M("item")->where($Huohao)->select();
     	$item_taobao = M("item_taobao")->where($Huohao)->find();

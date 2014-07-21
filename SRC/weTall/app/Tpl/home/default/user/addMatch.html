@@ -1,6 +1,64 @@
 <!DOCTYPE html>
 <html>
+
+
+
+
 <head>
+
+
+<include file="public:headtop" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/default/message.css" media="all">
+    
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/default/commments.css" media="all">
+	<script type="text/javascript" src="__STATIC__/js/jquery_min.js"></script>
+	
+
+	
+	<title>请在此申请</title>
+
+	<script type="text/javascript"> 
+		$(document).ready(function () { 
+			$("#addcomm").click(function () { 
+				var btn = $(this);
+
+				var itemtype = $('input[name="itemtype"]:checked').val();				
+				var info = $("#info").val();
+				
+				var submitData = {
+					item_id:'{$item.itemId}',
+					user_name:'{$username}',
+					comments_type:itemtype,
+					user_comments:info,
+					create_time:'{$createtime}'
+				};
+				$.post("{:U('user/addcomm')}", submitData,
+					function(data) {
+						alert(data);
+						setTimeout("window.location.href='index.php?m=user&a=index&status=4&tokenTall={$tokenTall}'",500);
+						return;
+					}
+				)
+			}); 			
+		}); 				
+
+		function xian(){
+//alert("OK");
+return "/weTall/index.php?m=user&a=index&status=4&tokenTall={$tokenTall}";
+		}		
+  </script>
+
+
+
+
+
+
+
+
+
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>添加我的搭配</title>
 <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
