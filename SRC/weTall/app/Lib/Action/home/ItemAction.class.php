@@ -169,7 +169,7 @@ class itemAction extends frontendAction {
             $this->ajaxReturn(0, $item_comment_mod->getError());
         }
         $comment_id = $item_comment_mod->add();
-        if ($comment_id) {
+       // if ($comment_id) {
             $this->assign('cmt_list', array(
                 array(
                     'uid' => $data['uid'],
@@ -180,9 +180,9 @@ class itemAction extends frontendAction {
             ));
             $resp = $this->fetch('comment_list');
             $this->ajaxReturn(1, L('comment_success'), $resp);
-        } else {
-            $this->ajaxReturn(0, L('comment_failed'));
-        }
+        //} else {
+         //   $this->ajaxReturn(0, L('comment_failed'));
+       // }
     }
 
     //分享商品弹窗
