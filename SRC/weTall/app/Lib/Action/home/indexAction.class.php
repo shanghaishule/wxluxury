@@ -1095,6 +1095,9 @@ class indexAction extends frontendAction {
     }    
     	 
     public function promotion(){
+    	$item_cate=M("item_cate")->select();
+    	$this->assign('item_cate',$item_cate);
+    	
     	$wecha_shop = M("upload_shop");
     	$longitude = $this->_POST("longitude","trim");
     	$latitude = $this->_POST("latitude","trim");
