@@ -67,11 +67,11 @@ function callpay()
 
 <body>
 <include file="public:head" />
-<div id="content" style="background-color:yellow;">
+<div id="content" >
     <form action="" method="POST" id="goto_pay">
         <input type="hidden" name="orderid" value="{$orderid}" />
         <input type="hidden" name="dingdanhao" value="{$dingdanhao}" />
-        <div class="step_main">
+        <div class="step_main" style="background-color:yellow;">
         	<eq name="order_exist" value="1">
         		<div class="clue_on"><h4>订单信息：</h4></div>
             <else />
