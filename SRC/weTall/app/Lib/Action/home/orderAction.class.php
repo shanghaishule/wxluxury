@@ -193,7 +193,7 @@ class orderAction extends userbaseAction {
 		import('Think.ORG.Oauth2');
 		$config['appId'] = "wx3079f89b18863917";
 		$config['appSecret'] = "69289876b8d040b3f9a367c80f8754c8";
-		//if(!isset($_SESSION['uid']) || $_SESSION['uid']==''){
+		if(!isset($_SESSION['uid']) || $_SESSION['uid']==''){
 			if (isset($_GET['code'])){
 				//echo $_GET['code'].'--';
 				$Oauth = new Oauth2();
@@ -210,9 +210,9 @@ class orderAction extends userbaseAction {
 					$_SESSION['name']=$userinfo['nickname'];
 				}
 				// dump($_SESSION['uid'].'-1-'.$_SESSION['name']);exit;
-			//}else{
-			//	$this->error('页面异常',"{:U(home/index/brandshop)}");
-			//}
+			}else{
+				$this->error('页面异常',"{:U(home/index/brandshop)}");
+			}
 			 
 		}
 		$tokenTall = $this->getTokenTall();
