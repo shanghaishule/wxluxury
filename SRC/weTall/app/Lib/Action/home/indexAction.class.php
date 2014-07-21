@@ -1191,6 +1191,7 @@ class indexAction extends frontendAction {
     }
     
     public function addMatch() {
+    	
     	$item_cate=M("item_cate")->select();
     	$this->assign('item_cate',$item_cate);
     	 
