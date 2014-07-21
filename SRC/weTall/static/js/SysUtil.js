@@ -123,7 +123,7 @@ SysUtil.Tip = function() {
 			this.tmpTipContainer = document.createElement('span');
 			this.tmpTipContainer.id = this.tmpTipContainerId;
 			this.tmpTipContainer.setAttribute('id', this.tmpTipContainerId);
-			this.tmpTipContainer.style.position = 'absolute';
+			this.tmpTipContainer.style.position = 'fixed';
 			this.tmpTipContainer.style.zIndex = '1127';
 			// 加载css
 			var linkObj = document.createElement('link');  
