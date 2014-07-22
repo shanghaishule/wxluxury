@@ -43,7 +43,7 @@ $(function(){
                 </switch>
                 </dd>
                 <dt>订单号</dt>
-                <dd>{$order.orderId}</dd>
+                <dd style="color:red;">{$order.orderId}</dd>
                 <dt>下单时间</dt>
                 <dd>{$order.add_time|date='Y-m-d H:i:s',###}</dd>
             </dl>
@@ -94,7 +94,7 @@ $(function(){
                     <!-- <br> -->
                                                     总价:<b>¥{$order.order_sumPrice}</b>
                  </div>
-             <span style="border:1px dashed gray; width:100%;"/>
+             <div style="border:1px dashed gray; width:100%;"></div>
             
 			<dl style="border:0;">
 				<dt class="til_font" style="font-size:20px;">物流信息</dt>

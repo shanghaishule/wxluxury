@@ -194,13 +194,13 @@ div.make_sure #order_amount{color: #f34; }
 .particular .particular_wrap dl h2,.particular .particular_wrap dl h3{font-weight: normal; color: #333;}
 .particular .particular_wrap dl dt{min-width: 70px; float: left; padding-top: 5px; height: auto;}
 .particular .particular_wrap .til_font{font-size:16px; color:white; float: none; margin-bottom: 6px;}
-.particular .particular_wrap dl dd{padding-left: 70px; min-height: 22px; /*border-bottom: 1px solid #eaeaea;*/padding-top: 5px;padding-bottom: 5px;overflow: visible;color:red;}
+.particular .particular_wrap dl dd{padding-left: 70px; min-height: 22px; /*border-bottom: 1px solid #eaeaea;*/padding-top: 5px;padding-bottom: 5px;overflow: visible;}
 .ware .ware_list{min-height: 60px;}
 .ware .ware_list strong ,.transportation span,.transportation b{color: red;}
 .ware .ware_pic, .ware .ware_text{float: left;}
 .ware .ware_text{margin:0px 0px 2px 10px;}
 div.btn_list{padding: 15px;}
-div.btn_list a {width: 45%;text-shadow: none;border: 1px solid #eaeaea;border-radius: 5px;text-align: center;text-decoration: none;-webkit-appearance: none;display: inline-block;line-height: 40px;height: 40px;font-size: 17px;color: #999;padding: 0 5px;}
+div.btn_list a {width: 45%;text-shadow: none;/*border: 1px solid #eaeaea;*/border-radius: 5px;text-align: center;text-decoration: none;-webkit-appearance: none;display: inline-block;line-height: 40px;height: 40px;font-size: 17px;color: #999;padding: 0 5px;}
 div.btn_list a.order_cancel{margin-right:2px; background-color: #851616;background-image: linear-gradient(to bottom,#ff4747,#f52f40);}
 div.btn_list a.order_pay{float:right;border: 0;color: #FFF;background-color: #851616;background-image: linear-gradient(to bottom,#ff4747,#f52f40);}
 
