@@ -32,7 +32,7 @@ $(function(){
     <div class="particular">
         <div class="particular_wrap">
             <dl class="order_detail" style="border:0;">
-            	<dt class="til_font">订单详情</dt>
+            	<dt class="til_font" style="font-size:16px;">订单详情</dt>
                 <dt>订单状态</dt>
                 <dd>
                 <switch name="order.status" >
@@ -49,9 +49,9 @@ $(function(){
             </dl>
      
             <div class="ware_line" style="border:1px solid white;">
-                <div class="ware" style="border:0;">
+                <div class="ware" >
                 <volist name='item_detail' id='item' >
-                     <ul class="order_detail_list">
+                     <ul class="order_detail_list" style="border:0;">
                        <li><img src="{$item.img}" height="50" width="50"></li>
                        <li>品名:{$item.title}</li>
                        <li>大小:{$item.size}</li>
@@ -91,12 +91,12 @@ $(function(){
                        </strong>
                        </span>
                     </if>	
-                    <br>
+                    <!-- <br> -->
                                                     总价:<b>¥{$order.order_sumPrice}</b>
                  </div>
             
-			<dl>
-				<dt class="til_font">物流信息</dt>
+			<dl style="border:0;">
+				<dt class="til_font" style="font-size:16px;">物流信息</dt>
 				<dt>收货地址</dt>
 				<dd>{$order.address_name}, &nbsp;{$order.mobile}, {$order.address}</dd>
 				<dt>配送方式</dt>
