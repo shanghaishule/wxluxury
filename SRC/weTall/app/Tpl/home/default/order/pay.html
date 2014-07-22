@@ -71,7 +71,7 @@ function callpay()
     <form action="" method="POST" id="goto_pay">
         <input type="hidden" name="orderid" value="{$orderid}" />
         <input type="hidden" name="dingdanhao" value="{$dingdanhao}" />
-        <div class="step_main" style="background-color:black;width:100%;line-height:30px; margin-top:15px;">
+        <div class="step_main" style="background-color:black;width:100%;line-height:30px; margin-top:15px;margin-left:15px;">
         	<eq name="order_exist" value="1">
         		<div class="clue_on" ><h4 style="color:white;background-color:black;" >订单信息：</h4></div>
             <else />
@@ -81,14 +81,14 @@ function callpay()
         </div>
         <div style="border:1px dashed white;color:red;width:100%; border-top:none;border-left:none;border-right:none;margin-top:5px;"></div>
             </eq>
-            <div class="order_information;" style="margin-top:15px;">
+            <div class="order_information;" style="margin-top:15px;margin-left:15px;">
             	<volist name="allorderid" id="vo">
             	<p>订单单号：<span style="color:red;">{$vo}</span></p>
             	</volist>
                 <p>订单总价：<span style="color:red;">¥{$order_sumPrice}</span></p>
             </div>
          <div style="border:1px dashed white;color:red; border-top:none;border-left:none;border-right:none;margin-top:5px;width:100%;"></div>    
-            <div class="buy" style="line-height:30px;">
+            <div class="buy" style="line-height:30px;margin-top:15px;margin-left:15px;">
             	<p>支付编号：<span style="color:#red;">{$dingdanhao}</span></p>
                 <h3 style="color:white;background-color:black;">选择支付方式并付款</h3>
                     <dl class="defray">
