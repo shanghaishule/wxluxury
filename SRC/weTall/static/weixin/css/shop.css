@@ -190,7 +190,7 @@ div.make_sure p{ margin:2px 33px 5px 0;font-size: 14px; line-height: 18px;}
 div.make_sure #order_amount{color: #f34; }
 
 /*查看订单页面*/
-.particular .particular_wrap dl{ font-size: 14px; line-height: 16px; border-bottom: 1px solid #eaeaea; padding: 10px; color: #666;}
+.particular .particular_wrap dl{ font-size: 14px; line-height: 16px; /*border-bottom: 1px solid #eaeaea; */padding: 10px; color: white;}
 .particular .particular_wrap dl h2,.particular .particular_wrap dl h3{font-weight: normal; color: #333;}
 .particular .particular_wrap dl dt{min-width: 70px; float: left; padding-top: 5px; height: auto;}
 .particular .particular_wrap .til_font{font-size:16px; color: #333; float: none; margin-bottom: 6px;}
