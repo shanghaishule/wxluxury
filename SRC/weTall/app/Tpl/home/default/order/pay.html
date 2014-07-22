@@ -79,7 +79,7 @@ function callpay()
             	<p>您的订单已成功生成，共生成<span style="font-weight:bold; color:#851616;">{$allorderid|count}</span>单。</p>
             	</div>
             </eq>
-            <div class="order_information">
+            <div class="order_information" style="border:1px dashed white;border-top:none;border-left:none;border-right:none; ">
             	<volist name="allorderid" id="vo">
             	<p>订单单号：<span style="color:red;">{$vo}</span></p>
             	</volist>
