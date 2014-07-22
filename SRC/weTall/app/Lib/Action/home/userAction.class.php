@@ -669,7 +669,6 @@ class userAction extends userbaseAction {
 	    		$brand_data[1] = $jifen[1];
 	    		$jifen_array[]=$brand_data;
     		}
-
     	}
     	if (count($jifen_array) != 0) {
     		$this->assign("jifen_array",$jifen_array);
