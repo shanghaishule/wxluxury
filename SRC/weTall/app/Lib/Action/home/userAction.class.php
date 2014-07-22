@@ -694,7 +694,7 @@ class userAction extends userbaseAction {
     		$brand_info = M("brandlist")->where(array("id"=>$key['brandid']))->find();
     		$array_mypoints[] = $brand_info;
     	}
-    	//dump($array_mypoints);exit;
+    	dump($array_mypoints);exit;
     	$this->assign("my_points",$array_mypoints);
     	$this->assign("title","我的积分");
     	$this->display("jifen");
