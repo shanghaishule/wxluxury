@@ -71,22 +71,24 @@ function callpay()
     <form action="" method="POST" id="goto_pay">
         <input type="hidden" name="orderid" value="{$orderid}" />
         <input type="hidden" name="dingdanhao" value="{$dingdanhao}" />
-        <div class="step_main" style="background-color:black;width:100%;line-height:30px; margin-left: 15px;">
+        <div class="step_main" style="background-color:black;width:100%;line-height:30px; margin-left:10px;">
         	<eq name="order_exist" value="1">
         		<div class="clue_on" ><h4 style="color:white;background-color:black;" >订单信息：</h4></div>
             <else />
-            	<div class="clue_on" ><h4 style="background-color:black;border:1px dashed white;color:red; border-top:none;border-left:none;border-right:none;margin-bottom:15px;margin-top:5px;">订单提交成功!</h4>
+            	<div class="clue_on" >
+            	<h4 style="background-color:black;">订单提交成功!</h4>
             	<p>您的订单已成功生成，共生成<span style="font-weight:bold; color:#851616;">{$allorderid|count}</span>单。</p>
-            	</div>
+        </div>
+        <div style="border:1px dashed white;color:red; border-top:none;border-left:none;border-right:none;margin-top:5px;"></div>
             </eq>
-            <div class="order_information" style="border:1px dashed white;border-top:none;border-left:none;border-right:none;line-height:30px;margin-left: 15px;margin-bottom:15px; ">
+            <div class="order_information;">
             	<volist name="allorderid" id="vo">
             	<p>订单单号：<span style="color:red;">{$vo}</span></p>
             	</volist>
                 <p>订单总价：<span style="color:red;">¥{$order_sumPrice}</span></p>
             </div>
-            
-            <div class="buy" style="line-height:30px;margin-left: 15px;">
+         <div style="border:1px dashed white;color:red; border-top:none;border-left:none;border-right:none;margin-top:5px;"></div>    
+            <div class="buy" style="line-height:30px;margin-left:10px;">
             	<p>支付编号：<span style="color:#red;">{$dingdanhao}</span></p>
                 <h3 style="color:white;background-color:black;">选择支付方式并付款</h3>
                     <dl class="defray">
