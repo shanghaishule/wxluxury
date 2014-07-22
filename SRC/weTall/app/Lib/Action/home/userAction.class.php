@@ -695,7 +695,7 @@ class userAction extends userbaseAction {
     		$array_mypoints[$key['id']]["imgurl"] = $brand_info["imgurl"];
     		$array_mypoints[$key['id']]["name"] = $brand_info["name"];
     	}
-    	dump($array_mypoints);exit;
+    	//dump($array_mypoints);exit;
     	$this->assign("my_points",$array_mypoints);
     	$this->assign("title","我的积分");
     	$this->display("jifen");
