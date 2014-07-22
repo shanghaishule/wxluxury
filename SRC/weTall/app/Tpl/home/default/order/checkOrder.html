@@ -32,7 +32,7 @@ $(function(){
     <div class="particular">
         <div class="particular_wrap">
             <dl class="order_detail" style="border:0;">
-            	<dt class="til_font" style="font-size:16px;">订单详情</dt>
+            	<dt class="til_font" style="font-size:20px;">订单详情</dt>
                 <dt>订单状态</dt>
                 <dd>
                 <switch name="order.status" >
@@ -94,9 +94,10 @@ $(function(){
                     <!-- <br> -->
                                                     总价:<b>¥{$order.order_sumPrice}</b>
                  </div>
+             <span style="border:1px dashed gray; width:100%;"/>
             
 			<dl style="border:0;">
-				<dt class="til_font" style="font-size:16px;">物流信息</dt>
+				<dt class="til_font" style="font-size:20px;">物流信息</dt>
 				<dt>收货地址</dt>
 				<dd>{$order.address_name}, &nbsp;{$order.mobile}, {$order.address}</dd>
 				<dt>配送方式</dt>
