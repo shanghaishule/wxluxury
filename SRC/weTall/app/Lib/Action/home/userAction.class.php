@@ -678,6 +678,7 @@ class userAction extends userbaseAction {
     	$this->assign('tokenTall',$tokenTall);
     	$this->display();
     }
+    
     /**
      *我的品牌积分
      */
