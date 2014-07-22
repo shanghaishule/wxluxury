@@ -688,11 +688,11 @@ class userAction extends userbaseAction {
     	$mypoints = M("brandpoints")->where($where)->select();
     	$array_mypoints = array();
     	foreach ($mypoints as $key){
-    		$array_mypoints[]["points"] = $key["points"];
-    		$array_mypoints[]["used_points"] = $key["used_points"];
-    		$array_mypoints[]["num"] = $key['num'];
+    		$array_mypoints[$key['id']]["points"] = $key["points"];
+    		$array_mypoints[$key['id']]["used_points"] = $key["used_points"];
+    		$array_mypoints[$key['id']]["num"] = $key['num'];
     		$brand_info = M("brandlist")->where(array("id"=>$key['brandid']))->find();
-    		$array_mypoints[] = $brand_info;
+    		$array_mypoints[$key['id']] = $brand_info;
     	}
     	dump($array_mypoints);exit;
     	$this->assign("my_points",$array_mypoints);
