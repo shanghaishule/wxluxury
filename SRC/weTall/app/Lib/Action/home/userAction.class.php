@@ -692,7 +692,8 @@ class userAction extends userbaseAction {
     		$array_mypoints[$key['id']]["used_points"] = $key["used_points"];
     		$array_mypoints[$key['id']]["num"] = $key['num'];
     		$brand_info = M("brandlist")->where(array("id"=>$key['brandid']))->find();
-    		$array_mypoints[][$key['id']] = $brand_info;
+    		$array_mypoints[$key['id']]["imgurl"] = $brand_info["imgurl"];
+    		$array_mypoints[$key['id']]["name"] = $brand_info["name"];
     	}
     	dump($array_mypoints);exit;
     	$this->assign("my_points",$array_mypoints);
