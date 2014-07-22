@@ -71,7 +71,7 @@ function callpay()
     <form action="" method="POST" id="goto_pay">
         <input type="hidden" name="orderid" value="{$orderid}" />
         <input type="hidden" name="dingdanhao" value="{$dingdanhao}" />
-        <div class="step_main" style="background-color:black;width:100%;">
+        <div class="step_main" style="background-color:black;width:100%;line-height:30px;">
         	<eq name="order_exist" value="1">
         		<div class="clue_on" ><h4 style="color:white;background-color:black;" >订单信息：</h4></div>
             <else />
@@ -79,14 +79,14 @@ function callpay()
             	<p>您的订单已成功生成，共生成<span style="font-weight:bold; color:#851616;">{$allorderid|count}</span>单。</p>
             	</div>
             </eq>
-            <div class="order_information" style="border:1px dashed white;border-top:none;border-left:none;border-right:none; ">
+            <div class="order_information" style="border:1px dashed white;border-top:none;border-left:none;border-right:none;line-height:30px; ">
             	<volist name="allorderid" id="vo">
             	<p>订单单号：<span style="color:red;">{$vo}</span></p>
             	</volist>
                 <p>订单总价：<span style="color:red;">¥{$order_sumPrice}</span></p>
             </div>
             
-            <div class="buy">
+            <div class="buy" style="line-height:30px;">
             	<p>支付编号：<span style="color:#red;">{$dingdanhao}</span></p>
                 <h3 style="color:white;background-color:black;">选择支付方式并付款</h3>
                     <dl class="defray">
@@ -106,7 +106,7 @@ function callpay()
                         </dd>
                     </dl>           
             </div>
-            <div class="make_sure" style="width:100%;">
+            <div class="make_sure" style="width:100%;background-color:#851616;">
                 <p style="width:100%;">
                 <a href="javascript: submitaction();" class="btn enter" style="width:100%">确认支付</a>
                 </p>
