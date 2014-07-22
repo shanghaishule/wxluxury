@@ -207,8 +207,9 @@ div.btn_list a.order_pay{float:right;border: 0;color: #FFF;background-color: #85
 
 
 /*取消订单页面*/
-form .btn .btn1{background-image: none !important;}
-div.order_cancel_box p span {color: #f34; font-weight: bold;}
+form .btn .btn1{background-color:#851616;}
+/*form .btn .btn1{background-image: none !important;}*/
+div.order_cancel_box p span {color: red; font-weight: bold;}
 
 
 /*新增地址*/
