@@ -71,21 +71,27 @@ function callpay()
     <form action="" method="POST" id="goto_pay">
         <input type="hidden" name="orderid" value="{$orderid}" />
         <input type="hidden" name="dingdanhao" value="{$dingdanhao}" />
-        <div class="step_main" style="background-color:black;width:100%;line-height:30px; margin-top:15px;">
+        <div class="step_main"><!--  style="background-color:black;width:100%;line-height:30px; margin-top:15px;" -->
         	<eq name="order_exist" value="1">
-        		<div class="clue_on" ><h4 style="color:white;background-color:black;margin-left:15px;" >订单信息：</h4></div>
+        		<div class="clue_on" ><h4 class="ddxx"  >
+        		<!-- style="color:white;background-color:black;margin-left:15px;" -->
+        		订单信息：</h4></div>
             <else />
-            	<div class="clue_on" style="margin-left:15px;">
-            	<h4 style="background-color:black;color:red;">订单提交成功!</h4>
-            	<p>您的订单已成功生成，共生成<span style="font-weight:bold; color:#851616;">{$allorderid|count}</span>单。</p>
+            	<div class="clue_on1" >
+            	<!-- style="margin-left:15px;" -->
+            	<h4 class="sucess" >
+            	<!-- style="background-color:black;color:red;" -->
+            	订单提交成功!</h4>
+            	<p>您的订单已成功生成，共生成<span class="dd" style="font-weight:bold; color:#851616;">{$allorderid|count}</span>单。</p>
         		</div>
         <div style="border:1px dashed white;color:red;width:100%; border-top:none;border-left:none;border-right:none;margin-top:5px;"></div>
             </eq>
-            <div class="order_information;" style="margin-top:15px;margin-left:15px;">
+            <div class="order_information;" >
+            <!-- style="margin-top:15px;margin-left:15px;" -->
             	<volist name="allorderid" id="vo">
-            	<p>订单单号：<span style="color:red;">{$vo}</span></p>
+            	<p>订单单号：<span class="order" style="color:red;">{$vo}</span></p>
             	</volist>
-                <p>订单总价：<span style="color:red;">¥{$order_sumPrice}</span></p>
+                <p>订单总价：<span class="order" style="color:red;">¥{$order_sumPrice}</span></p>
             </div>
          <div style="border:1px dashed white;color:red; border-top:none;border-left:none;border-right:none;margin-top:5px;width:100%;"></div>    
             <div class="buy" style="line-height:30px;margin-top:15px;margin-left:15px;">
@@ -108,7 +114,8 @@ function callpay()
                         </dd>
                     </dl>           
             </div>
-            <div class="make_sure" style="width:100%;background-color:#851616;height:49px;text-align: center;">
+            <div class="make_sure" >
+            <!-- style="width:100%;background-color:#851616;height:49px;text-align: center;" -->
                 <p style="margin-top:18px;padding-top:18px;">
                 <a href="javascript: submitaction();" class="btn enter" >确认支付</a>
                 </p>

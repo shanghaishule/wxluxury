@@ -1279,3 +1279,40 @@ h1, h2, h3, h4, h5, h6, p, ul, ol, dl, dt, dd, li, body, form, input, button, im
 border: 3px solid rgba(0,0,0,0.5);}
 #shopSearch2{width:100%;border-bottom: 1px dashed #d9d9d9;height:30px;padding-top:8px;}
 #qijian_B #shopSearch2{border-bottom:none}
+
+
+
+
+/**确认订单 2014-7-22 anan**/
+.step_main{background-color:black;width:100%;line-height:30px; margin-top:15px;}
+.step_main .clue_on .ddxx{color:white;background-color:black;margin-left:15px;}
+.clue_on1{margin-left:15px;}
+.clue_on1 .sucess{background-color:black;color:red;}
+.clue_on1 .dd{"font-weight:bold; color:#851616;"}
+.step_main .order_information .order{color:red;}
+.step_main .buy{line-height:30px;margin-top:15px;margin-left:15px;}
+.step_main .make_sure{width:100%;background-color:#851616;height:49px;text-align: center;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
