@@ -194,7 +194,7 @@ div.make_sure #order_amount{color: #f34; }
 .particular .particular_wrap dl h2,.particular .particular_wrap dl h3{font-weight: normal; color: #333;}
 .particular .particular_wrap dl dt{min-width: 70px; float: left; padding-top: 5px; height: auto;}
 .particular .particular_wrap .til_font{font-size:16px; color:white; float: none; margin-bottom: 6px;}
-.particular .particular_wrap dl dd{padding-left: 70px; min-height: 22px; /*border-bottom: 1px solid #eaeaea;*/padding-top: 5px;padding-bottom: 5px;overflow: visible;}
+.particular .particular_wrap dl dd{padding-left: 70px; min-height: 22px; /*border-bottom: 1px solid #eaeaea;*/padding-top: 5px;padding-bottom: 5px;overflow: visible;color:red;}
 .ware .ware_list{min-height: 60px;}
 .ware .ware_list strong ,.transportation span,.transportation b{color: red;}
 .ware .ware_pic, .ware .ware_text{float: left;}
