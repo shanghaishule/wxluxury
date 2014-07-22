@@ -284,7 +284,7 @@ border-top: 2px solid #ff0000;}
 .order_form .con{margin:5px; border:1px solid #ddd; padding:5px; border-radius:5px; overflow:hidden;}
 .order_form .con p{ float:left; line-height:25px; margin:5px 5px 0 0;}
 .order_form .con p.ware_text{float: none;}
-.order_form .con p.price span, div.handle #order39_order_amount{color: #f34;}
+.order_form .con p.price span, div.handle #order39_order_amount{color: red;}
 
 /*支付成功页面*/
 #content .step_main{ max-width:600px; margin: 10px auto; padding:10px;}
