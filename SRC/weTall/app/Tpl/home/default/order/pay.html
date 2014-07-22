@@ -81,13 +81,13 @@ function callpay()
             </eq>
             <div class="order_information">
             	<volist name="allorderid" id="vo">
-            	<p>订单单号：<span style="color:#851616;">{$vo}</span></p>
+            	<p>订单单号：<span style="color:red;">{$vo}</span></p>
             	</volist>
-                <p>订单总价：<span style="color:#851616;">¥{$order_sumPrice}</span></p>
+                <p>订单总价：<span style="color:#red;">¥{$order_sumPrice}</span></p>
             </div>
             
             <div class="buy">
-            	<p>支付编号：<span style="color:#851616;">{$dingdanhao}</span></p>
+            	<p>支付编号：<span style="color:#red;">{$dingdanhao}</span></p>
                 <h3 style="color:white;background-color:black;">选择支付方式并付款</h3>
                     <dl class="defray">
                         <dt>在线支付</dt>                        
@@ -108,7 +108,7 @@ function callpay()
             </div>
             <div class="make_sure" >
                 <p>
-                <a href="javascript: submitaction();" class="btn enter" >确认支付</a>
+                <a href="javascript: submitaction();" class="btn enter" style="100%">确认支付</a>
                 </p>
             </div>
             
