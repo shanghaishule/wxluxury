@@ -653,9 +653,6 @@ class userAction extends userbaseAction {
     public function jifen() {
     	//取商家token值，取不到则默认为空
     	$tokenTall = $this->getTokenTall();    	
-    	
-    	
-    	
     	//$favi_mod = M('shop_favi');
     	//$favi_list = $favi_mod->where(array('userid'=>$_SESSION['uid']))->select();
     	$where["id"] = $_SESSION['uid'];
@@ -664,50 +661,64 @@ class userAction extends userbaseAction {
     	$weChaShop=explode(",",$model["brand_jifen"]);
     	$jifen_array=array();
     	foreach ($weChaShop as $detail_jifen){
-    		$jifen=explode("|",$detail_jifen);
-    		if ($jifen[0] != "") {  			
+    		  $jifen=explode("|",$detail_jifen);
+    		if ($jifen[0] != ""){
 	    		$brand_data1["id"] = $jifen[0];
 	    		$brand_fenzhi1 = M("brandlist")->where($brand_data1)->find();
 	    		$brand_data[0] = $brand_fenzhi1["name"];
 	    		$brand_data[1] = $jifen[1];
 	    		$jifen_array[]=$brand_data;
     		}
+
     	}
-    	
     	if (count($jifen_array) != 0) {
     		$this->assign("jifen_array",$jifen_array);
     	}
     	//dump($weChaShop);exit;
-    	
         $this->assign("title","我的积分");
     	$this->assign('tokenTall',$tokenTall);
     	$this->display();
     }
+    /**
+     *我的品牌积分
+     */
+    public function my_jifen(){
+    	$tokenTall = $this->getTokenTall();
+    	$this->assign('tokenTall',$tokenTall);
+    	$where["uid"] = $_SESSION['uid'];
+    	$mypoints = M("brandpoints")->where($where)->select();
+    	$array_mypoints = array();
+    	foreach ($mypoints as $key){
+    		$array_mypoints[]["points"] = $key["points"];
+    		$array_mypoints[]["used_points"] = $key["used_points"];
+    		$brand_info = M("brandlist")->where(array("id"=>$key['brandid']))->find();
+    		$array_mypoints[] = $brand_info;
+    	}
+    	dump($array_mypoints);exit;
+    	$this->assign("title","我的积分");
+    	$this->display();
+    	
+    }
      /**
      *	追加评论
      */
-    public function comments() {
-    
+    public function comments(){
     /*
         $data['user_comments']= $this->_get('user_comments', 'intval');        
     	$data['item_id'] = $_SESSION['item_id'] ;
         $data['user_name'] = $this->visitor->info['username'];
-	$data['create_time'] = date('y-m-d H:i:m');
-
-	$record= M('comments');
-	$record->add($data);
-	
+		$data['create_time'] = date('y-m-d H:i:m');
+		$record= M('comments');
+		$record->add($data);
     	$username = $this->visitor->info['username'];
     	$createtime = date('y-m-d H:i:m');
-	
     */
     	$item = $this->_get('item');    	    	
     	$this->assign('item',$item);
     	$this->assign('username',$this->visitor->info['username']);
     	$this->assign('createtime',date('y-m-d H:i:m'));
     	$this->assign('tokenTall',$this->getTokenTall());
-        $this->display();        
-        
+        $this->display();
     } 
     
     /**
@@ -715,16 +726,15 @@ class userAction extends userbaseAction {
      */
     public function addcomm() {
      if($_POST){
-     	     	
-			if (M('commetns_mod')->create()) {
-				if(M('commetns_mod')->add()){
-					echo '您的评论已经成功提交！';
-				}else{
-					echo '很遗憾，您的评论提交失败了！';
-				}
+		if (M('commetns_mod')->create()) {
+			if(M('commetns_mod')->add()){
+				echo '您的评论已经成功提交！';
+			}else{
+				echo '很遗憾，您的评论提交失败了！';
 			}
-     	
 		}
+     	
+	}
 		
     }  
     
