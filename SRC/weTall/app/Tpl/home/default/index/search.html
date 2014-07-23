@@ -2,7 +2,6 @@
 <html>
 <head>
 <include file="public:headtop" />
-
 <link href="__STATIC__/css/productdetail.css" rel="stylesheet" type="text/css">
 	<style>
 		.showhavereal{
@@ -15,132 +14,7 @@
 </head>
 
 <body>
-<!-- <include file="public:search_head" /> -->
-
- 
-   <div id="head" style="height"></div>
-<style>
-	#logo{
-		height:50px;
-		width:116px;
-	}
-	#headshop select{
-		-webkit-border-radius:5px ; -moz-border-radius:5px;
-		float:left;
-		height:30px;
-		top:30px;
-		border-color:rgb(102,204,51);
-		margin:2px 0px 0px 2px;
-	}
-	#leftfloat{
-		height:35px;
-		margin:2px 2px 0px 10px;
-	}
-	#search_box {
-		width: 301px; 
-		height: 34px; 
-		background: url(__ROOT__/static/weixin/css/images/bg_search_box.gif); 
-	} 
-	#s { 
-		float:left;
-		padding: 0; 
-		margin: 2px 0 0 6px; 
-		border: 0; 
-		height:30px;
-		width: 175px; 
-		background: none; 
-		font-size: .8em; 
-	} 
-	#search_box #go { 
-		float: right; 
-		margin: 4px 4px 0 0;
-	}
-</style>
-<script src="__STATIC__/js/jquery/jquery10.js"></script>
-<script>
-$(function(){
-$(".pos").click(function(event){
-	event.stopPropagation();
-	$(".dis").css("z-index","300000000");
-	$(".dis").toggleClass("none");
-	});
-$(document).click(function(event) { $(".dis").removeClass("none"); });
-//单击弹出层则自身隐藏
-});	
-function searchshop(id){
-	document.getElementById("txtHint").value=id;
-	document.getElementById('searchShop').submit();
-}
-</script>
-<form id="searchShop" action="{:U('index/test')}" method="post">
-     <input type="hidden" name="longitude" value="{$longitude}" id="longitude">
-     <input type="hidden" name="latitude" value="{$latitude}" id="latitude">
-     <input type="hidden" name="brand_id" id="txtHint">   
-   </form>
-<div id="nav">
-    <img src="/weTall/static/weixin/images/luxury/images/home/bg_02.png" width="100%"/>
-
-	<ul class="navlist">
-		 <li class="r pos" id="n_0"><div class="home_page_logo"></div>
-		<div class="dis" id="dis">
-			 <ul>
-				  <volist name="item_cate" id="cate">
-				  	<li>
-				     <a href="{:U('home/index/search', array('itemid'=>$cate['id'],'itemname'=>$cate['name'],'tokenTall'=>$tokenTall))}">{$cate.name}</a>
-				    </li>
-				  </volist>
-			 </ul> 
-		</div>
-		</li>
-    	<li class="r" id="n_4"> 
-    		<span >全网比价</span>
-        </li>
-         <li class="r" id="n_1">
-        <if condition="$yemian eq 'Item'">
-        <a href="{:U('home/user/index', array('tokenTall'=>$tokenTall))}"><div class="find_04"></div></a>
-        <else/>
-        <if condition="$gohref neq ''">
-        <a href="{:U('home/user/index', array('tokenTall'=>$tokenTall))}"><div class="find_04"></div></a>
-        <elseif condition="$gosearch eq 'Y'"/>
-       <!--  <a href="javascript:void(0)" onclick="searchshop({$brandid})"> -->
-        <a href="{:U('home/user/index', array('tokenTall'=>$tokenTall))}">
-        <div class="find_03">{$City}</div></a>
-        <else/>
-       <a href="{:U('home/user/index', array('tokenTall'=>$tokenTall))}">
-        <div class="find_03">{$City}</div></a></if>
-        
-        </if>
-        </li>
-        
-    </ul>
-    <script type="text/javascript">
-    	$(".navlist > li#n_0").click(function(){
-			$(this).toggleClass("active");
-		});
-		$(".navlist > li.r a").each(function() {
-            href="index.php-app=member&act=login&ret_url=-index.php-app=member.htm"+$(this).attr("href");
-			whref=window.location.href;
-			if(whref.indexOf(href)!='-1'){
-				$(this).parent("li").addClass("active");
-			}
-        });
-    </script>
-</div>
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<include file="public:search_head" />
 <if condition="$method neq 'shop'">
 <div id="sort_bg">
 	<ul class="sortlist">
