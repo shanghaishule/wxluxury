@@ -14,6 +14,10 @@ class itemAction extends frontendAction {
      * 商品详细页
      */
     public function index(){
+    	
+    	$item_cate=M("item_cate")->select();
+    	$this->assign('item_cate',$item_cate);
+    	
         $id = $this->_get('id', 'intval');
         !$id && $this->_404();
         $tokenTall = $this->getTokenTall();
