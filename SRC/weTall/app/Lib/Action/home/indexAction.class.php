@@ -674,7 +674,6 @@ class indexAction extends frontendAction {
     			$this->assign("brandid",$brandid);
     			echo '1';
     			$this->nextPageBrand($_SESSION['token'],$brandid,$sortBy);
-    			
     		}else if ($itemid != "") {//新品上市  服装鞋帽等
     			echo '2';exit;
     			//$this->assign("method",$itemid);
