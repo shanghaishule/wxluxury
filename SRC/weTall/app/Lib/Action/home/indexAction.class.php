@@ -665,7 +665,7 @@ class indexAction extends frontendAction {
     	}else{
     		$itemid=$this->_get("itemid","trim");
     		$brandid=$this->_get("brandid","trim");
-    		echo $brandid.'2';exit;
+    		
     		$method2=$this->_get("method","trim");
     		if($method2 != "local" and $method2 != "weFig" and $method2 != "shop" and $method2 != ""){//类别搜索
     			$this->assign("method",$method2);
@@ -673,8 +673,11 @@ class indexAction extends frontendAction {
     		}else if ($brandid != ""){//品牌
     			//$this->assign("method",$brandid);
     			$this->assign("brandid",$brandid);
+    			echo '1';
     			$this->nextPageBrand($_SESSION['token'],$brandid,$sortBy);
+    			
     		}else if ($itemid != "") {//新品上市  服装鞋帽等
+    			echo '2';exit;
     			//$this->assign("method",$itemid);
     			$this->assign("itemid",$itemid);
     			$this->assign("title",$this->_get("itemname","trim"));
