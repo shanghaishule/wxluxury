@@ -613,7 +613,6 @@ class indexAction extends frontendAction {
     			$this->assign("title","查询结果");
     			$this->assign("City","附近店铺");
     			$this->assign("gohref","Y");
-    			
     		}
     		echo $brandid.'1';exit;
     		//搜索的方式本店，微服客，店铺
