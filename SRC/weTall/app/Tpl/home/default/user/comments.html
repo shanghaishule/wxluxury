@@ -46,7 +46,7 @@ return "/weTall/index.php?m=user&a=index&status=4&tokenTall={$tokenTall}";
 
 </head>
 
-<body id="message" style="background-color:black;>
+<body id="message">
 <include file="public:head" />
 	<div class="container" style="background-color:black;">
 	
@@ -66,8 +66,8 @@ return "/weTall/index.php?m=user&a=index&status=4&tokenTall={$tokenTall}";
 					<ul class="history-ul" style="background-color:black;">
 						<h2 class="first" style="position: relative;">请填写您的评论</h2>
 						
-	            	<div class="commment_form">
-	                    <p class="title" style="background-color:black;">商品信息</p>
+	            	<div class="commment_form" style="background-color:black;">
+	                    <p class="title" >商品信息</p>
 	                    <div class="con" style="background-color:black;">
 	                        <p class="ware_pic"><a href="{:U('Item/index',array('id'=>$item['itemId'],'tokenTall'=>$tokenTall))}" ><img src="{$item.img}" height="80" width="80"></a></p>
 	                        <p class="ware_text"><a href="{:U('Item/index',array('id'=>$item['itemId'],'tokenTall'=>$tokenTall))}">{$item.title}</a><br><span class="attr"></span></p>
