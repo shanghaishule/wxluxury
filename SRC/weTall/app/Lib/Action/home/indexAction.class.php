@@ -669,6 +669,7 @@ class indexAction extends frontendAction {
     		if($method2 != "local" and $method2 != "weFig" and $method2 != "shop" and $method2 != ""){//类别搜索
     			$this->assign("method",$method2);
     			$this->nextPagetuan($_SESSION['token'],$method2,$sortBy);
+    		
     		}else if ($brandid != ""){//品牌
     			//$this->assign("method",$brandid);
     			$this->assign("brandid",$brandid);
