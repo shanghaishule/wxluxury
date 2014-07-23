@@ -642,7 +642,7 @@ class indexAction extends frontendAction {
     			$this->assign("latitude",$_SESSION["latitude"]);
     			
     			$this->assign("brandid",$brandid);
-    			$this->nextPageBrand($_SESSION['token'],$brandid,$sortBy);
+    			$this->nextPageBrand($_SESSION['token'],$brandid,$itemid="",$sortBy);
     		}
     		elseif($keyword == ""){
     			$this->error("请输入关键字！");
@@ -774,7 +774,9 @@ class indexAction extends frontendAction {
     	 
     	$item = M("item_taobao");
     	$condition["brand"] = $brandid;
-    	$condition["cate_id"]=$itemid;
+    	if(!empty($itemid)){
+    		$condition["cate_id"]=$itemid;
+    	}
     	$brand_id["id"] = $brandid;
     	$brand_name = M("brandlist")->where($brand_id)->find();
     	$this->assign("title",$brand_name["name"]);
