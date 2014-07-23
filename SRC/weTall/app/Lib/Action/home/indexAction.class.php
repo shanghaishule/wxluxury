@@ -633,7 +633,6 @@ class indexAction extends frontendAction {
     				$_SESSION["longtitude"] = $longitude;
     			}
     			
-    			
     			$brand_name = M("brandlist")->where("id=".$brandid)->find();
     			$this->assign("title",$brand_name["name"]);
     			$this->assign("City","附近店铺");
@@ -801,6 +800,7 @@ class indexAction extends frontendAction {
     	//	$condition["tokenTall"]=$token;
     	//}
     	$condition["cate_id"] = $itemid;
+
     	$count = $item->where($condition)->count();
     	$Page       = new Page($count,$count);// 实例化分页类 传入总记录数
     	// 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
@@ -816,7 +816,7 @@ class indexAction extends frontendAction {
     }
     public function nextPage($method,$keyword,$sortBy,$token){
     	if($method=="shop"){   		
-    		$item = M("wecha_shop");   		
+    		$item = M("wecha_shop");
     		$condition["name"] = array("like", "%".$keyword."%");
     		$count = $item->where($condition)->count();
     		$Page       = new Page($count,$count);// 实例化分页类 传入总记录数
@@ -836,7 +836,6 @@ class indexAction extends frontendAction {
     		$this->assign("count",$count);
     		$this->display();
     	}else{
-    		
 	    	$tokenTall = $token;
 	    	$this->assign('tokenTall',$tokenTall);
 	    	//echo $keyword."hi";die();
