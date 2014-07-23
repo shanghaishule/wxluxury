@@ -95,7 +95,9 @@ function searchshop(id){
        <!--  <a href="javascript:void(0)" onclick="searchshop({$brandid})"> -->
         <a href="{:U('home/user/index', array('tokenTall'=>$tokenTall))}">
         <div class="find_03">{$City}</div></a>
-        <else/><div class="find_03">{$City}</div></if>
+        <else/>
+       <a href="{:U('home/user/index', array('tokenTall'=>$tokenTall))}">
+        <div class="find_03">{$City}</div></a></if>
         
         </if>
         </li>
