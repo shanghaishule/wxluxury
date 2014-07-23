@@ -770,7 +770,7 @@ class indexAction extends frontendAction {
     	$this->assign('tokenTall',$tokenTall);
     	$this->assign("City","附近店铺");
     	$this->assign("gosearch","Y");
-    	$this->assign("brand_id",$itemid);
+    	$this->assign("brand_id",$brandid);
     	 
     	$item = M("item_taobao");
     	$condition["brand"] = $brandid;
