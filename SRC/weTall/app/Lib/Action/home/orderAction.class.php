@@ -276,6 +276,9 @@ class orderAction extends userbaseAction {
 
 		//header("content-Type: text/html; charset=Utf-8");
 		//dump($_POST);exit;
+		
+		$item_cate=M("item_cate")->select();
+		$this->assign('item_cate',$item_cate);
 	
 		if(IS_POST && count($_SESSION['cart'])>0)
 		{
