@@ -92,7 +92,9 @@ function searchshop(id){
         <if condition="$gohref neq ''">
         <a href="{:U('home/user/index', array('tokenTall'=>$tokenTall))}"><div class="find_04"></div></a>
         <elseif condition="$gosearch eq 'Y'"/>
-        <a href="javascript:void(0)" onclick="searchshop({$brandid})"><div class="find_03">{$City}</div></a>
+       <!--  <a href="javascript:void(0)" onclick="searchshop({$brandid})"> -->
+        <a href="{:U('home/user/index', array('tokenTall'=>$tokenTall))}">
+        <div class="find_03">{$City}</div></a>
         <else/><div class="find_03">{$City}</div></if>
         
         </if>
