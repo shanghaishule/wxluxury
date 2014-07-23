@@ -615,6 +615,7 @@ class indexAction extends frontendAction {
     			$this->assign("gohref","Y");
     			
     		}
+    		echo $brandid.'1';exit;
     		//搜索的方式本店，微服客，店铺
     		$method=$this->_post("method");
     		
@@ -665,6 +666,7 @@ class indexAction extends frontendAction {
     	}else{
     		$itemid=$this->_get("itemid","trim");
     		$brandid=$this->_get("brandid","trim");
+    		echo $brandid.'2';exit;
     		$method2=$this->_get("method","trim");
     		if($method2 != "local" and $method2 != "weFig" and $method2 != "shop" and $method2 != ""){//类别搜索
     			$this->assign("method",$method2);
