@@ -138,8 +138,13 @@ function searchshop(id){
         <elseif condition="$gosearch eq 'Y'"/>
         <!-- <a href="javascript:void(0)" onclick="searchshop({$brandid})"> -->
         <a href="/weTall/app/Tpl/home/user/index">       
-        <div class="find_03">{$City}</div></a>
-        <else/><div class="find_03">{$City}</div></if>
+        <div class="find_03">{$City}</div>
+        </a>
+        <else/>
+         <a href="/weTall/app/Tpl/home/user/index">   
+        <div class="find_03">{$City}</div>
+        </a>
+        </if>
         
         </if>
         </li>
