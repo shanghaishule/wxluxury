@@ -655,10 +655,7 @@ class userAction extends userbaseAction {
      * 我的品牌积分
      */
     public function jifen() {
-    	
-    	$item_cate=M("item_cate")->select();
-    	$this->assign('item_cate',$item_cate);
-    	
+    	   	
     	//取商家token值，取不到则默认为空
     	$tokenTall = $this->getTokenTall();    	
     	//$favi_mod = M('shop_favi');
