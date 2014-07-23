@@ -665,7 +665,6 @@ class indexAction extends frontendAction {
     	}else{
     		$itemid=$this->_get("itemid","trim");
     		$brandid=$this->_get("brandid","trim");
-    		
     		$method2=$this->_get("method","trim");
     		if($method2 != "local" and $method2 != "weFig" and $method2 != "shop" and $method2 != ""){//类别搜索
     			$this->assign("method",$method2);
