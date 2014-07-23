@@ -11,6 +11,9 @@ class orderAction extends userbaseAction {
 	public  function cancelOrder()//取消订单
 	{
 		//取商家token值，取不到则默认为空
+		$item_cate=M("item_cate")->select();
+		$this->assign('item_cate',$item_cate);
+		
 		$tokenTall = $this->getTokenTall();
 		$this->assign('tokenTall',$tokenTall);
 		
@@ -150,8 +153,9 @@ class orderAction extends userbaseAction {
 	public  function checkOrder()//查看订单
 	{
 		//取商家token值，取不到则默认为空
-		$tokenTall = $this->getTokenTall();
-		$this->assign('tokenTall',$tokenTall);
+		$item_cate=M("item_cate")->select();
+		$this->assign('item_cate',$item_cate);
+		
 	
 		$orderId=$_GET['orderId'];
 		!$orderId && $this->_404();
