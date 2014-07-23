@@ -716,6 +716,9 @@ class userAction extends userbaseAction {
     	$username = $this->visitor->info['username'];
     	$createtime = date('y-m-d H:i:m');
     */
+    	$upload_shop = M("aused_taobao");
+    	$brand_name = $_GET["brand_name"];
+    	
     	$item = $this->_get('item');    	    	
     	$this->assign('item',$item);
     	$this->assign('username',$this->visitor->info['username']);
