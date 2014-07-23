@@ -673,10 +673,8 @@ class indexAction extends frontendAction {
     		}else if ($brandid != ""){//品牌
     			//$this->assign("method",$brandid);
     			$this->assign("brandid",$brandid);
-    			echo '1';
-    			$this->nextPageBrand($_SESSION['token'],$brandid,$sortBy);
+    			$this->nextPageBrand($_SESSION['token'],$brandid,$itemid,$sortBy);
     		}else if ($itemid != "") {//新品上市  服装鞋帽等
-    			echo '2';exit;
     			//$this->assign("method",$itemid);
     			$this->assign("itemid",$itemid);
     			$this->assign("title",$this->_get("itemname","trim"));
@@ -767,7 +765,7 @@ class indexAction extends frontendAction {
     	$this->assign("brand",$brand_data);
     	$this->display();
     }
-    public function nextPageBrand($token,$itemid,$sortBy){
+    public function nextPageBrand($token,$brandid,$itemid,$sortBy){
     	$tokenTall = $token;
     	$this->assign('tokenTall',$tokenTall);
     	$this->assign("City","附近店铺");
@@ -775,8 +773,9 @@ class indexAction extends frontendAction {
     	$this->assign("brand_id",$itemid);
     	 
     	$item = M("item_taobao");
-    	$condition["brand"] = $itemid;
-    	$brand_id["id"] = $itemid;
+    	$condition["brand"] = $brandid;
+    	$condition["cate_id"]=$itemid;
+    	$brand_id["id"] = $brandid;
     	$brand_name = M("brandlist")->where($brand_id)->find();
     	$this->assign("title",$brand_name["name"]);
     	
