@@ -89,6 +89,9 @@ class userAction extends userbaseAction {
 
     public function addaddress()
     {
+    	$item_cate=M("item_cate")->select();
+    	$this->assign('item_cate',$item_cate);
+    	
     	//取商家token值，取不到则默认为空
     	$tokenTall = $this->getTokenTall();
 
@@ -439,6 +442,11 @@ class userAction extends userbaseAction {
     
     public function edit_address()
     {
+    	
+    	$item_cate=M("item_cate")->select();
+    	$this->assign('item_cate',$item_cate);
+    	
+    	
         $user_address_mod = M('user_address');
         $id = $this->_get('id', 'intval');
         $info = $user_address_mod->find($id);
@@ -453,6 +461,10 @@ class userAction extends userbaseAction {
      * 收货地址
      */
     public function address() {
+    	
+    	$item_cate=M("item_cate")->select();
+    	$this->assign('item_cate',$item_cate);
+    	
         $user_address_mod = M('user_address');
         $id = $this->_get('id', 'intval');
         $type = $this->_get('type', 'trim', 'edit');
