@@ -1286,7 +1286,7 @@ border: 3px solid rgba(0,0,0,0.5);}
 
 /**确认订单 2014-7-22 anan**/
 .step_main{background-color:black;width:100%;line-height:30px; margin-top:15px;}
-.step_main .clue_on .ddxx{color:white;background-color:black;margin-left:15px;font-size:18px;}
+.step_main .clue_on .ddxx{color:white;background-color:black;margin-left:15px;}
 .clue_on1{margin-left:15px;}
 .clue_on1 .sucess{background-color:black;color:red;}
 .clue_on1 .dd{"font-weight:bold; color:#851616;"}
