@@ -66,56 +66,181 @@ function callpay()
 </head>
 
 <body>
-<include file="public:head" />
-<div id="content">
+<!--<include file="public:head" />-->
+
+
+   <div id="head" style="height"></div>
+<style>
+	#logo{
+		height:50px;
+		width:116px;
+	}
+	#headshop select{
+		-webkit-border-radius:5px ; -moz-border-radius:5px;
+		float:left;
+		height:30px;
+		top:30px;
+		border-color:rgb(102,204,51);
+		margin:2px 0px 0px 2px;
+	}
+	#leftfloat{
+		height:35px;
+		margin:2px 2px 0px 10px;
+	}
+	#search_box {
+		width: 301px; 
+		height: 34px; 
+		background: url(__ROOT__/static/weixin/css/images/bg_search_box.gif); 
+	} 
+	#s { 
+		float:left;
+		padding: 0; 
+		margin: 2px 0 0 6px; 
+		border: 0; 
+		height:30px;
+		width: 175px; 
+		background: none; 
+		font-size: .8em; 
+	} 
+	#search_box #go { 
+		float: right; 
+		margin: 4px 4px 0 0;
+	}
+</style>
+<script src="__STATIC__/js/jquery/jquery10.js"></script>
+<script>
+$(function(){
+$(".pos").click(function(event){
+	event.stopPropagation();
+	$(".dis").css("z-index","300000000");
+	$(".dis").toggleClass("none");
+	});
+$(document).click(function(event) { $(".dis").removeClass("none"); });
+//单击弹出层则自身隐藏
+});	
+function searchshop(id){
+	document.getElementById("txtHint").value=id;
+	document.getElementById('searchShop').submit();
+}
+</script>
+<form id="searchShop" action="{:U('index/test')}" method="post">
+     <input type="hidden" name="longitude" value="{$longitude}" id="longitude">
+     <input type="hidden" name="latitude" value="{$latitude}" id="latitude">
+     <input type="hidden" name="brand_id" id="txtHint">   
+   </form>
+<div id="nav">
+    <img src="/weTall/static/weixin/images/luxury/images/home/bg_02.png" width="100%"/>
+
+	<ul class="navlist">
+		 <li class="r pos" id="n_0"><div class="home_page_logo"></div>
+		<div class="dis" id="dis">
+			 <ul>
+				  <volist name="item_cate" id="cate">
+				  	<li>
+				     <a href="{:U('home/index/search', array('itemid'=>$cate['id'],'itemname'=>$cate['name'],'tokenTall'=>$tokenTall))}">{$cate.name}</a>
+				    </li>
+				  </volist>
+			 </ul> 
+		</div>
+		</li>
+    	<li class="r" id="n_4"> 
+    		<span >支付订单</span>
+        </li>
+         <li class="r" id="n_1">
+        <if condition="$yemian eq 'Item'">
+        <a href="{:U('home/user/index', array('tokenTall'=>$tokenTall))}"><div class="find_04"></div></a>
+        <else/>
+        <if condition="$gohref neq ''">
+        <a href="{:U('home/user/index', array('tokenTall'=>$tokenTall))}"><div class="find_04"></div></a>
+        <elseif condition="$gosearch eq 'Y'"/>
+       <!--  <a href="javascript:void(0)" onclick="searchshop({$brandid})"> -->
+        <a href="{:U('home/user/index', array('tokenTall'=>$tokenTall))}">
+        <div class="find_03">{$City}</div></a>
+        <else/>
+       <a href="{:U('home/user/index', array('tokenTall'=>$tokenTall))}">
+        <div class="find_03">{$City}</div></a></if>
+        
+        </if>
+        </li>
+        
+    </ul>
+    <script type="text/javascript">
+    	$(".navlist > li#n_0").click(function(){
+			$(this).toggleClass("active");
+		});
+		$(".navlist > li.r a").each(function() {
+            href="index.php-app=member&act=login&ret_url=-index.php-app=member.htm"+$(this).attr("href");
+			whref=window.location.href;
+			if(whref.indexOf(href)!='-1'){
+				$(this).parent("li").addClass("active");
+			}
+        });
+    </script>
+</div>
+    
+
+
+
+
+
+
+<!-- <div id="content" > -->
     <form action="" method="POST" id="goto_pay">
         <input type="hidden" name="orderid" value="{$orderid}" />
         <input type="hidden" name="dingdanhao" value="{$dingdanhao}" />
-        <div class="step_main">
+        <div class="step_main"><!--  style="background-color:black;width:100%;line-height:30px; margin-top:15px;" -->
         	<eq name="order_exist" value="1">
-        		<div class="clue_on"><h4>订单信息：</h4></div>
+        		<div class="clue_on" ><h4 class="ddxx"  >
+        		<!-- style="color:white;background-color:black;margin-left:15px;" -->
+        		订单信息：</h4></div>
             <else />
-            	<div class="clue_on"><h4>订单提交成功！</h4><p>您的订单已成功生成，共生成<span style="font-weight:bold; color:red;">{$allorderid|count}</span>单。</p></div>
+            	<div class="clue_on1" >
+            	<!-- style="margin-left:15px;" -->
+            	<h4 class="sucess" >
+            	<!-- style="background-color:black;color:red;" -->
+            	订单提交成功!</h4>
+            	<p>您的订单已成功生成，共生成<span class="dd" style="font-weight:bold; color:#851616;">{$allorderid|count}</span>单。</p>
+        		</div>
+        <div style="border:1px dashed white;color:red;width:100%; border-top:none;border-left:none;border-right:none;margin-top:5px;"></div>
             </eq>
-            <div class="order_information">
+            <div class="order_information;"  style="margin-top:15px;margin-left:15px;>
+            <!-- style="margin-top:15px;margin-left:15px;" -->
             	<volist name="allorderid" id="vo">
-            	<p>订单单号：<span>{$vo}</span></p>
+            	<p>订单单号：<span class="order" style="color:red;">{$vo}</span></p>
             	</volist>
-                <p>订单总价：<span>¥{$order_sumPrice}</span></p>
+                <p>订单总价：<span class="order" style="color:red;">¥{$order_sumPrice}</span></p>
             </div>
-
-
-            <div class="buy">
-            	<p>支付编号：<span style="color:blue;">{$dingdanhao}</span></p>
-                <h3>选择支付方式并付款</h3>
+         <div style="border:1px dashed white;color:red; border-top:none;border-left:none;border-right:none;margin-top:5px;width:100%;"></div>    
+            <div class="buy" style="line-height:30px;margin-top:15px;margin-left:15px;">
+            	<p>支付编号：<span style="color:#red;">{$dingdanhao}</span></p>
+                <h3 style="color:white;background-color:black;">选择支付方式并付款</h3>
                     <dl class="defray">
                         <dt>在线支付</dt>                        
-                        <dd>
+                        <dd >
                             <p class="radio"><input checked='checked' id="payment_wxpay" name="payment_id" value="4" type="radio"></p>
                             <p class="logo"><label for="payment_wxpay"><img src="__STATIC__/weixin/images/wxpay_small.png" ></label></p>
-                            <p class="explain">欢迎使用微信支付</p>
+                            <p class="explain" style="color:white;">欢迎使用微信支付</p>
                         </dd>
                     </dl>
                     <dl class="defray">
                         <dt>线下支付</dt>
-                        <dd>
+                        <dd style="color:white;">
                             <p class="radio"><input id="payment_cod" name="payment_id" value="2" type="radio"></p>
                             <p class="logo"><label for="payment_cod"><img  src="__STATIC__/weixin/images/huodao.png"></label></p>
-                            <p class="explain">欢迎使用货到付款</p>
+                            <p class="explain" style="color:white;">欢迎使用货到付款</p>
                         </dd>
                     </dl>           
             </div>
-            <div class="make_sure">
-                <p>
-                    <a href="javascript: submitaction();" class="btn enter">确认支付</a>
+            <div class="make_sure" >
+            <!-- style="width:100%;background-color:#851616;height:49px;text-align: center;" -->
+                <p style="margin-top:18px;padding-top:18px;">
+                <a href="javascript: submitaction();" class="btn enter" >确认支付</a>
                 </p>
             </div>
-            
-            
             <div class="clear"></div>
-        </div>
+       </div>
     </form>
-</div>
+<!--  </div>-->
 <include file="public:footer" />
 </body>
 </html>

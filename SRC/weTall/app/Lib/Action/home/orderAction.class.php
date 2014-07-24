@@ -11,6 +11,9 @@ class orderAction extends userbaseAction {
 	public  function cancelOrder()//取消订单
 	{
 		//取商家token值，取不到则默认为空
+		$item_cate=M("item_cate")->select();
+		$this->assign('item_cate',$item_cate);
+		
 		$tokenTall = $this->getTokenTall();
 		$this->assign('tokenTall',$tokenTall);
 		
@@ -39,7 +42,7 @@ class orderAction extends userbaseAction {
 			$this->error('该订单不存在!');
 		}
 		$data['status']=4;//收到货
-		if($item_order->where("orderId='".$orderId."' and userId='".$this->visitor->info['id']."'")->save($data))
+		//if($item_order->where("orderId='".$orderId."' and userId='".$this->visitor->info['id']."'")->save($data))
 		{
 			$order_detail=M('order_detail');
 			$order_details = $order_detail->where("orderId='".$orderId."'")->select();
@@ -103,9 +106,9 @@ class orderAction extends userbaseAction {
 				$item->where("id='".$val['itemId']."'")->save($stock_data);
 			}
 			$this->redirect('user/index',array('status'=>$status,'tokenTall'=>$tokenTall));
-		}else
-		{
-			$this->error('确定收货失败');
+		//}else
+		//{
+		//	$this->error('确定收货失败');
 		}
 		 
 	}
@@ -150,8 +153,9 @@ class orderAction extends userbaseAction {
 	public  function checkOrder()//查看订单
 	{
 		//取商家token值，取不到则默认为空
-		$tokenTall = $this->getTokenTall();
-		$this->assign('tokenTall',$tokenTall);
+		$item_cate=M("item_cate")->select();
+		$this->assign('item_cate',$item_cate);
+		
 	
 		$orderId=$_GET['orderId'];
 		!$orderId && $this->_404();
@@ -190,11 +194,15 @@ class orderAction extends userbaseAction {
 	}
 	
 	public function jiesuan(){//结算
+		
+		$item_cate=M("item_cate")->select();
+		$this->assign('item_cate',$item_cate);
+		
 		import('Think.ORG.Oauth2');
 		$config['appId'] = "wx3079f89b18863917";
 		$config['appSecret'] = "69289876b8d040b3f9a367c80f8754c8";
 		if(!isset($_SESSION['uid']) || $_SESSION['uid']==''){
-			if (isset($_GET['code'])){
+			//if (isset($_GET['code'])){
 				//echo $_GET['code'].'--';
 				$Oauth = new Oauth2();
 				$userinfo=$Oauth->getUserinfo($_GET['code'],$config);
@@ -210,9 +218,9 @@ class orderAction extends userbaseAction {
 					$_SESSION['name']=$userinfo['nickname'];
 				}
 				// dump($_SESSION['uid'].'-1-'.$_SESSION['name']);exit;
-			}else{
-				$this->error('页面异常',"{:U(home/index/brandshop)}");
-			}
+			//}else{
+			//	$this->error('页面异常',"{:U(home/index/brandshop)}");
+			//}
 			 
 		}
 		$tokenTall = $this->getTokenTall();
@@ -272,6 +280,9 @@ class orderAction extends userbaseAction {
 
 		//header("content-Type: text/html; charset=Utf-8");
 		//dump($_POST);exit;
+		
+		$item_cate=M("item_cate")->select();
+		$this->assign('item_cate',$item_cate);
 	
 		if(IS_POST && count($_SESSION['cart'])>0)
 		{

@@ -1,0 +1,81 @@
+/**
+ * ypen css
+ * @author yulipu
+ */
+/* reset */
+ul {list-style-type:none;}
+ul, li {margin:0; padding:0;}
+
+.y-pen {
+	position:absolute;
+	z-index:1127;
+	width:260px;
+	background-color:#fff;
+	box-shadow:0px 0px 15px #666;
+	border:1px solid #666;
+	border-radius:3px;
+	cursor:auto;
+}
+.y-pen div {
+	height:27px;
+	line-height:27px;
+}
+.y-pen-drag {
+	width:13px;
+	float:left;
+	background:url(../images/graph_panel/drag.png) no-repeat center center;
+	cursor:default;
+}
+.y-pen-help {
+	width:28px;
+	float:left;
+	background:url(../images/graph_panel/help.jpg) no-repeat center center;
+}
+.y-pen-help-info {
+	position:relative;
+	left:0px;
+	top:40px;
+	width:260px;
+	padding:10px 6px;
+	text-align:left;
+	background-color:#fefdc2;
+	border:1px solid #e0e0e0;
+	border-radius:3px;
+	font-size:12px;
+	color:#333;
+	display:none;
+}
+.y-pen-help:hover span {display:block;}
+
+.y-pen-colors {
+	float:left;
+	margin-left:6px;
+}
+.y-pen-colors li {
+	float:left;
+	width:19px;
+	height:19px;
+	margin:4px 0;
+}
+.y-pen-colors li:hover {
+	height:21px;
+	margin:2px 0;
+}
+
+.y-pen-del {
+	width:23px;
+	margin-left:6px;
+	float:left;
+	background:url(../images/graph_panel/clear.jpg) no-repeat center center;
+	cursor:pointer;
+	/*border:1px solid green;*/
+}
+.y-pen-close {
+	width:23px;
+	float:left;
+	background:url(../images/graph_panel/close.jpg) no-repeat center center;
+	cursor:pointer;
+	/*border:1px solid green;*/
+}
+
+

@@ -242,7 +242,7 @@ class userAction extends userbaseAction {
     	$config['appSecret'] = "69289876b8d040b3f9a367c80f8754c8";
     	if(!isset($_SESSION['uid']) && empty($_SESSION['uid'])){
 
-	    	//if (isset($_GET['code'])){
+	    	if (isset($_GET['code'])){
 	    		//echo $_GET['code'].'--';
 	    	$Oauth = new Oauth2();
 	    	$userinfo=$Oauth->getUserinfo($_GET['code'],$config);
@@ -262,9 +262,9 @@ class userAction extends userbaseAction {
 	    		$_SESSION['openid']=$userinfo['openid'];
 	    	}
     	   // dump($_SESSION['uid'].'-1-'.$_SESSION['name']);exit;		
-	    	//}else{
-	    	//	$this->error('页面已过期',U("index/brandshop"));
-	    	//}
+	    	}else{
+	    	$this->error('页面已过期',U("index/brandshop"));
+	    	}
     	   
    	 	}	
    	 	//dump($_SESSION['uid'].'-2-'.$_SESSION['name']);exit;
@@ -628,6 +628,10 @@ class userAction extends userbaseAction {
      */
     public function favi() {
     	//取商家token值，取不到则默认为空
+    	$item_cate=M("item_cate")->select();
+    	$this->assign('item_cate',$item_cate);
+    	
+    	
     	$tokenTall = $this->getTokenTall();
     	
     	//$favi_mod = M('shop_favi');
@@ -651,11 +655,9 @@ class userAction extends userbaseAction {
      * 我的品牌积分
      */
     public function jifen() {
+    	   	
     	//取商家token值，取不到则默认为空
     	$tokenTall = $this->getTokenTall();    	
-    	
-    	
-    	
     	//$favi_mod = M('shop_favi');
     	//$favi_list = $favi_mod->where(array('userid'=>$_SESSION['uid']))->select();
     	$where["id"] = $_SESSION['uid'];
@@ -664,8 +666,8 @@ class userAction extends userbaseAction {
     	$weChaShop=explode(",",$model["brand_jifen"]);
     	$jifen_array=array();
     	foreach ($weChaShop as $detail_jifen){
-    		$jifen=explode("|",$detail_jifen);
-    		if ($jifen[0] != "") {  			
+    		  $jifen=explode("|",$detail_jifen);
+    		if ($jifen[0] != ""){
 	    		$brand_data1["id"] = $jifen[0];
 	    		$brand_fenzhi1 = M("brandlist")->where($brand_data1)->find();
 	    		$brand_data[0] = $brand_fenzhi1["name"];
@@ -673,41 +675,61 @@ class userAction extends userbaseAction {
 	    		$jifen_array[]=$brand_data;
     		}
     	}
-    	
     	if (count($jifen_array) != 0) {
     		$this->assign("jifen_array",$jifen_array);
     	}
     	//dump($weChaShop);exit;
-    	
         $this->assign("title","我的积分");
     	$this->assign('tokenTall',$tokenTall);
     	$this->display();
     }
+    
+    /**
+     *我的品牌积分
+     */
+    public function my_jifen(){
+    	$tokenTall = $this->getTokenTall();
+    	$this->assign('tokenTall',$tokenTall);
+    	$where["uid"] = $_SESSION['uid'];
+    	$mypoints = M("brandpoints")->where($where)->select();
+    	$array_mypoints = array();
+    	foreach ($mypoints as $key){
+    		$array_mypoints[$key['id']]["points"] = $key["points"];
+    		$array_mypoints[$key['id']]["used_points"] = $key["used_points"];
+    		$array_mypoints[$key['id']]["num"] = $key['num'];
+    		$brand_info = M("brandlist")->where(array("id"=>$key['brandid']))->find();
+    		$array_mypoints[$key['id']]["imgurl"] = $brand_info["imgurl"];
+    		$array_mypoints[$key['id']]["name"] = $brand_info["name"];
+    	}
+    	//dump($array_mypoints);exit;
+    	$this->assign("my_points",$array_mypoints);
+    	$this->assign("title","我的积分");
+    	$this->display("jifen");
+    	
+    }
      /**
      *	追加评论
      */
-    public function comments() {
-    
+    public function comments(){
     /*
         $data['user_comments']= $this->_get('user_comments', 'intval');        
     	$data['item_id'] = $_SESSION['item_id'] ;
         $data['user_name'] = $this->visitor->info['username'];
-	$data['create_time'] = date('y-m-d H:i:m');
-
-	$record= M('comments');
-	$record->add($data);
-	
+		$data['create_time'] = date('y-m-d H:i:m');
+		$record= M('comments');
+		$record->add($data);
     	$username = $this->visitor->info['username'];
     	$createtime = date('y-m-d H:i:m');
-	
     */
+    	$item_cate=M("item_cate")->select();
+    	$this->assign('item_cate',$item_cate);
+    	
     	$item = $this->_get('item');    	    	
     	$this->assign('item',$item);
     	$this->assign('username',$this->visitor->info['username']);
     	$this->assign('createtime',date('y-m-d H:i:m'));
     	$this->assign('tokenTall',$this->getTokenTall());
-        $this->display();        
-        
+        $this->display();
     } 
     
     /**
@@ -715,16 +737,15 @@ class userAction extends userbaseAction {
      */
     public function addcomm() {
      if($_POST){
-     	     	
-			if (M('commetns_mod')->create()) {
-				if(M('commetns_mod')->add()){
-					echo '您的评论已经成功提交！';
-				}else{
-					echo '很遗憾，您的评论提交失败了！';
-				}
+		if (M('commetns_mod')->create()) {
+			if(M('commetns_mod')->add()){
+				echo '您的评论已经成功提交！';
+			}else{
+				echo '很遗憾，您的评论提交失败了！';
 			}
-     	
 		}
+     	
+	}
 		
     }  
     
@@ -977,35 +998,39 @@ class userAction extends userbaseAction {
     		$tokenTall = $this->getTokenTall();
     		$this->assign('tokenTall',$tokenTall);
     		$this->display();
+    		
     	}
     	public function saveinfo(){
     		header("Content-type: text/html; charset=utf-8"); 
     		$data['uid'] = session('uid');
-    		$data['sex'] = $this->_post("sex");
-    		$data['birthday']=$this->_post("birthday");
-    		$data['height']=$this->_post("height");
-    		$data['weight']=$this->_post("weight");
-    		$data['mail']=$this->_post("mail");
-    		$data['yifu_size']=$this->_post("yifu_size");
-    		$data['kuzi_size']=$this->_post("kuzi_size");
-    		$data['xie_size']=$this->_post("xie_size");
-    		
-    		$hobby_title_arr = $this->_post("hobby_title");
-    		$data['hobby_title'] = implode("|", $hobby_title_arr);
-    
-    		$hobby_color_arr = $this->_post("hobby_color");
-    		$data['hobby_color'] = implode("|", $hobby_color_arr);
-    		
-    		$hobby_style_arr = $this->_post("hobby_style");
-    		$data['hobby_style'] = implode("|", $hobby_style_arr);
-    		
-    		$hobby_element_arr = $this->_post("hobby_element");
-    		$data['hobby_element'] = implode("|", $hobby_element_arr);
-    		if(M('user_info')->add($data)){
-    			$this->success("保存成功");
+    		if(!empty($data['uid'])){
+	    		$data['sex'] = $this->_post("sex");
+	    		$data['birthday']=$this->_post("birthday");
+	    		$data['height']=$this->_post("height");
+	    		$data['weight']=$this->_post("weight");
+	    		$data['mail']=$this->_post("mail");
+	    		$data['yifu_size']=$this->_post("yifu_size");
+	    		$data['kuzi_size']=$this->_post("kuzi_size");
+	    		$data['xie_size']=$this->_post("xie_size");
+	    		
+	    		$hobby_title_arr = $this->_post("hobby_title");
+	    		$data['hobby_title'] = implode("|", $hobby_title_arr);
+	    
+	    		$hobby_color_arr = $this->_post("hobby_color");
+	    		$data['hobby_color'] = implode("|", $hobby_color_arr);
+	    		
+	    		$hobby_style_arr = $this->_post("hobby_style");
+	    		$data['hobby_style'] = implode("|", $hobby_style_arr);
+	    		
+	    		$hobby_element_arr = $this->_post("hobby_element");
+	    		$data['hobby_element'] = implode("|", $hobby_element_arr);
+	    		if(M('user_info')->add($data)){
+	    			$this->success("保存成功",U("user/logintest"));
+	    		}else{
+	    			$this->error("保存失败");
+	    		}
     		}else{
-    			$this->error("保存失败");
-    		}
-    		
+    			$this->error("服务器繁忙！");
+    		}	
     	}
 }

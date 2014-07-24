@@ -14,6 +14,10 @@ class itemAction extends frontendAction {
      * 商品详细页
      */
     public function index(){
+    	
+    	$item_cate=M("item_cate")->select();
+    	$this->assign('item_cate',$item_cate);
+    	
         $id = $this->_get('id', 'intval');
         !$id && $this->_404();
         $tokenTall = $this->getTokenTall();
@@ -169,7 +173,7 @@ class itemAction extends frontendAction {
             $this->ajaxReturn(0, $item_comment_mod->getError());
         }
         $comment_id = $item_comment_mod->add();
-        if ($comment_id) {
+     	 if ($comment_id) {
             $this->assign('cmt_list', array(
                 array(
                     'uid' => $data['uid'],

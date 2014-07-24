@@ -33,3 +33,24 @@ INSERT INTO `tp_match_comments` VALUES ('1', '18', '真的挺不错的', '101313
 
 --wecha_shop添加店铺级别
 ALTER TABLE `tp_wecha_shop` ADD  `level` int(5) NOT NULL DEFAULT 0;
+
+--添加我的品牌积分表--
+DROP TABLE IF EXISTS `tp_brandpoints`;
+CREATE TABLE `tp_brandpoints` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` int(11) NOT NULL,
+  `brandid` int(11) DEFAULT '0',
+  `points` int(11) DEFAULT '0',
+  `num` int(11) DEFAULT '1',
+  `used_points` int(11) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tp_brandpoints
+-- ----------------------------
+INSERT INTO `tp_brandpoints` VALUES ('1', '31', '45', '500', '1', '20');
+INSERT INTO `tp_brandpoints` VALUES ('2', '31', '42', '200', '1', '10');
+
+
+

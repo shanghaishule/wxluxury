@@ -613,8 +613,8 @@ class indexAction extends frontendAction {
     			$this->assign("title","查询结果");
     			$this->assign("City","附近店铺");
     			$this->assign("gohref","Y");
-    			
     		}
+    		
     		//搜索的方式本店，微服客，店铺
     		$method=$this->_post("method");
     		
@@ -633,7 +633,6 @@ class indexAction extends frontendAction {
     				$_SESSION["longtitude"] = $longitude;
     			}
     			
-    			
     			$brand_name = M("brandlist")->where("id=".$brandid)->find();
     			$this->assign("title",$brand_name["name"]);
     			$this->assign("City","附近店铺");
@@ -643,7 +642,7 @@ class indexAction extends frontendAction {
     			$this->assign("latitude",$_SESSION["latitude"]);
     			
     			$this->assign("brandid",$brandid);
-    			$this->nextPageBrand($_SESSION['token'],$brandid,$sortBy);
+    			$this->nextPageBrand($_SESSION['token'],$brandid,$itemid="",$sortBy);
     		}
     		elseif($keyword == ""){
     			$this->error("请输入关键字！");
@@ -670,10 +669,11 @@ class indexAction extends frontendAction {
     		if($method2 != "local" and $method2 != "weFig" and $method2 != "shop" and $method2 != ""){//类别搜索
     			$this->assign("method",$method2);
     			$this->nextPagetuan($_SESSION['token'],$method2,$sortBy);
+    		
     		}else if ($brandid != ""){//品牌
     			//$this->assign("method",$brandid);
     			$this->assign("brandid",$brandid);
-    			$this->nextPageBrand($_SESSION['token'],$brandid,$sortBy);
+    			$this->nextPageBrand($_SESSION['token'],$brandid,$itemid,$sortBy);
     		}else if ($itemid != "") {//新品上市  服装鞋帽等
     			//$this->assign("method",$itemid);
     			$this->assign("itemid",$itemid);
@@ -742,6 +742,10 @@ class indexAction extends frontendAction {
     	$this->display();
     }
     public function compare(){
+    	$item_cate=M("item_cate")->select();
+    	$this->assign('item_cate',$item_cate);
+    	
+    	
     	$Huohao["Huohao"] = $this->_get("Huohao","trim");
     	//$item_huohao = M("item")->where($Huohao)->select();
     	$item_taobao = M("item_taobao")->where($Huohao)->find();
@@ -761,16 +765,19 @@ class indexAction extends frontendAction {
     	$this->assign("brand",$brand_data);
     	$this->display();
     }
-    public function nextPageBrand($token,$itemid,$sortBy){
+    public function nextPageBrand($token,$brandid,$itemid,$sortBy){
     	$tokenTall = $token;
     	$this->assign('tokenTall',$tokenTall);
     	$this->assign("City","附近店铺");
     	$this->assign("gosearch","Y");
-    	$this->assign("brand_id",$itemid);
+    	$this->assign("brand_id",$brandid);
     	 
     	$item = M("item_taobao");
-    	$condition["brand"] = $itemid;
-    	$brand_id["id"] = $itemid;
+    	$condition["brand"] = $brandid;
+    	if(!empty($itemid)){
+    		$condition["cate_id"]=$itemid;
+    	}
+    	$brand_id["id"] = $brandid;
     	$brand_name = M("brandlist")->where($brand_id)->find();
     	$this->assign("title",$brand_name["name"]);
     	
@@ -797,6 +804,7 @@ class indexAction extends frontendAction {
     	//	$condition["tokenTall"]=$token;
     	//}
     	$condition["cate_id"] = $itemid;
+
     	$count = $item->where($condition)->count();
     	$Page       = new Page($count,$count);// 实例化分页类 传入总记录数
     	// 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
@@ -812,7 +820,7 @@ class indexAction extends frontendAction {
     }
     public function nextPage($method,$keyword,$sortBy,$token){
     	if($method=="shop"){   		
-    		$item = M("wecha_shop");   		
+    		$item = M("wecha_shop");
     		$condition["name"] = array("like", "%".$keyword."%");
     		$count = $item->where($condition)->count();
     		$Page       = new Page($count,$count);// 实例化分页类 传入总记录数
@@ -832,7 +840,6 @@ class indexAction extends frontendAction {
     		$this->assign("count",$count);
     		$this->display();
     	}else{
-    		
 	    	$tokenTall = $token;
 	    	$this->assign('tokenTall',$tokenTall);
 	    	//echo $keyword."hi";die();
@@ -1095,6 +1102,9 @@ class indexAction extends frontendAction {
     }    
     	 
     public function promotion(){
+    	$item_cate=M("item_cate")->select();
+    	$this->assign('item_cate',$item_cate);
+    	
     	$wecha_shop = M("upload_shop");
     	$longitude = $this->_POST("longitude","trim");
     	$latitude = $this->_POST("latitude","trim");
@@ -1184,6 +1194,10 @@ class indexAction extends frontendAction {
     }
     
     public function addMatch() {
+    	
+    	$item_cate=M("item_cate")->select();
+    	$this->assign('item_cate',$item_cate);
+    	 
     	$this->display();
     }    
     //分享搭配留言

@@ -6,13 +6,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="" />
 <meta name="description" content="" />
-<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="__STATIC__/js/jquery/jquery.js"></script>
 <script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
-<link href="__STATIC__/weixin/css/shop.css" rel="stylesheet"
+<link href="__STATIC__/weixin/css/shop2.css" rel="stylesheet"
 	type="text/css">
 <link href="__STATIC__/css/mobiscroll.css" rel="stylesheet"
 	type="text/css">
 <script charset="utf-8" type="text/javascript" src="__STATIC__/js/mobiscroll.js"></script>
+<script charset="utf-8" type="text/javascript" src="__STATIC__/js/SysUtil.js"></script>
 <style type="text/css">
 .ui-loader{display:none;}
 .showhavereal {
@@ -79,43 +80,66 @@ input,button,select,textarea{outline:none}
 	    };
 	    $("#birthday").mobiscroll(opt).date(opt);
 	    $.mobile.hidePageLoadingMsg();
+	    
+	    //表单验证
+	    var validate = {
+	    		birthday:false,
+	    		height:false,
+	    		weight:false,
+	    		mail:false,
+	    		hobby_title:false,
+	    		hobby_color:false,
+	    		hobby_style:false,
+	    		hobby_element:false
+	    };
+	   $("#submit").click(function(){
+		   if($("#birthday").val()!=""){
+		   		validate.birthday=true;
+		   }
+		   if($("#height").val()!=""){
+			    validate.height=true;
+		   }
+		   if($("#weight").val()!=""){
+			    validate.weight=true;
+		   }
+		   if($("#email").val()!=""){
+			    validate.mail=true;
+		   }
+		   $("input[name='hobby_title[]']").each(function(){
+			   if(this.checked==true){
+				  validate.hobby_title=true;
+			   }
+		   });
+		   $("input[name='hobby_color[]']").each(function(){
+			   if(this.checked==true){
+				  validate.hobby_color=true;
+			   }
+		   });
+		   $("input[name='hobby_style[]']").each(function(){
+			   if(this.checked==true){
+				  validate.hobby_style=true;
+			   }
+		   });
+		   $("input[name='hobby_element[]']").each(function(){
+			   if(this.checked==true){
+				  validate.hobby_element=true;
+			   }
+		   });
+		   if(validate.birthday && validate.height 
+				   && validate.weight && validate.mail && validate.hobby_title
+				   && validate.hobby_color && validate.hobby_style && validate.hobby_element){
+			  return; 
+		   }else{
+			   SysUtil.Tip.warning('请填写完整信息'); 
+			  return false;
+		   }
+	   }); 
+	    
 	});
  </script>
 </head>
 <body data-role="none">
-
-	<script>
-		$(function() {
-			$(".pos").click(function(event) {
-				event.stopPropagation();
-				$(".dis").css("z-index", "300000000");
-				$(".dis").toggleClass("none");
-			});
-			$(document).click(function(event) {
-				$(".dis").removeClass("none");
-			});
-			//单击弹出层则自身隐藏
-		});
-		function searchshop(id) {
-			document.getElementById("txtHint").value = id;
-			document.getElementById('searchShop').submit();
-		}
-	</script>
-			<script type="text/javascript">
-				$(".navlist > li#n_0").click(function() {
-					$(this).toggleClass("active");
-				});
-				$(".navlist > li.r a")
-						.each(
-								function() {
-									href = "index.php-app=member&act=login&ret_url=-index.php-app=member.htm"
-											+ $(this).attr("href");
-									whref = window.location.href;
-									if (whref.indexOf(href) != '-1') {
-										$(this).parent("li").addClass("active");
-									}
-								});
-			</script>	
+	
 		<input data-role="none" type="hidden" name="longitude" value="{$longitude}"
 			id="longitude"> <input data-role="none" type="hidden" name="latitude"
 			value="{$latitude}" id="latitude"> <input data-role="none" type="hidden"
@@ -166,7 +190,7 @@ input,button,select,textarea{outline:none}
 
 		<!-- 以上是headtop -->
 		<div class="kongge1"></div>
-		  <form name="form1" data-ajax="false" action="{:U('home/user/saveinfo',array('tokenTall'=>$tokenTall))}" method="post">
+		  <form name="form1" id="form1" data-ajax="false" action="{:U('home/user/saveinfo',array('tokenTall'=>$tokenTall))}" method="post">
 			<div class="firstall">
 				<div class="mydata">我的资料</div>
 				<div class="boygirl">
@@ -176,28 +200,28 @@ input,button,select,textarea{outline:none}
 					</ul>
 				</div>
 
-				<div class="konggea"></div>
+				<!-- <div class="konggea"></div> -->
 				<div class="borntime">
 					<ul>
-						<li>出生日期：<input data-role="none" name="birthday" id="birthday" type="text" style="width: 100px" readonly/>
+						<li>出生日期：<input data-role="none" name="birthday" id="birthday" type="text" style="width: 120px" readonly/>
 						</li>
 					</ul>
 				</div>
 				<div class="konggea"></div>
 				<div class="height">
 					<ul>
-						<li>身&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;高：<input data-role="none" type="text"
-							style="width: 40px; background: black" name="height" />cm
+						<li>身高：<input data-role="none" type="text"
+							style="width: 40px; background: black" id="height" name="height" />cm
 						</li>
-						<li>体&nbsp;&nbsp;&nbsp;&nbsp;重：<input data-role="none" type="text"
-							style="width: 40px" name="weight"/>kg
+						<li>体重：<input data-role="none" type="text"
+							style="width: 40px" id="weight" name="weight"/>kg
 						</li>
 					</ul>
 				</div>
 				<div class="konggea"></div>
 				<div class="first1">
 					<p>
-						QQ&nbsp;&nbsp;邮箱: <input data-role="none" type="email" name="mail" />
+						QQ&nbsp;&nbsp;邮箱: <input data-role="none" type="email" id="email" name="mail" />
 					</p>
 
 				</div>
@@ -211,7 +235,8 @@ input,button,select,textarea{outline:none}
 
 						<ul class="chima_list">
 							<li>
-								<p>衣服</p> <select name="yifu_size" data-role="none">
+								<p>衣服</p>
+							<select name="yifu_size" data-role="none">
 									<option value="S">S</option>
 									<option value="M">M</option>
 									<option value="L" selected="selected">L</option>
@@ -300,22 +325,20 @@ input,button,select,textarea{outline:none}
 
 						</ul>
 					</div>
-
-
 				</div>
 				<div class="secall_5">
 					<div class="title_1">元素：</div>
 					<div class="seclist_b">
 						<ul>
-							<li><input data-role="none" type="checkbox" name="hobby_element[]" value="印花"> 印花</li>
-							<li><input data-role="none" type="checkbox" name="hobby_element[]" value="透视"> 透视</li>
-							<li><input data-role="none" type="checkbox" name="hobby_element[]" value="花卉"> 花卉</li>
-							<li><input data-role="none" type="checkbox" name="hobby_element[]" value="图案"> 图案</li>
-							<li><input data-role="none" type="checkbox" name="hobby_element[]" value="条纹"> 条纹</li>
-							<li><input data-role="none" type="checkbox" name="hobby_element[]" value="格子"> 格子</li>
-							<li><input data-role="none" type="checkbox" name="hobby_element[]" value="波点"> 波点</li>
-							<li><input data-role="none" type="checkbox" name="hobby_element[]" value="蕾丝"> 蕾丝</li>
-							<li><input data-role="none" type="checkbox" name="hobby_element[]" value="其他"> 其他（可多选）
+							<li><label><input data-role="none" type="checkbox" name="hobby_element[]" value="印花"> 印花</label></li>
+							<li><label><input data-role="none" type="checkbox" name="hobby_element[]" value="透视"> 透视</label></li>
+							<li><label><input data-role="none" type="checkbox" name="hobby_element[]" value="花卉"> 花卉</label></li>
+							<li><label><input data-role="none" type="checkbox" name="hobby_element[]" value="图案"> 图案</label></li>
+							<li><label><input data-role="none" type="checkbox" name="hobby_element[]" value="条纹"> 条纹</label></li>
+							<li><label><input data-role="none" type="checkbox" name="hobby_element[]" value="格子"> 格子</label></li>
+							<li><label><input data-role="none" type="checkbox" name="hobby_element[]" value="波点"> 波点</label></li>
+							<li><label><input data-role="none" type="checkbox" name="hobby_element[]" value="蕾丝"> 蕾丝</label></li>
+							<li><label><input data-role="none" type="checkbox" name="hobby_element[]" value="其他"> 其他（可多选）</label>
 
 							</li>
 						</ul>
@@ -324,7 +347,7 @@ input,button,select,textarea{outline:none}
 			</div>
 			<div class="konggea"></div>
 			<div class="submit_a">
-				<input data-role="none" data-inline="true" type="submit" value="提交" />
+				<input data-role="none" data-inline="true" id="submit" type="submit" value="提交" />
 
 			</div>
 		</form>
