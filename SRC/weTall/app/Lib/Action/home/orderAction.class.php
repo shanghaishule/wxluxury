@@ -213,7 +213,7 @@ class orderAction extends userbaseAction {
 				if(!empty($Userarr) && $Userarr!=''){
 					$_SESSION['uid']=$Userarr['id'];
 					$_SESSION['name']=$Userarr['nickname'];
-				}else{
+				}else{ 
 					$_SESSION['uid']=M('user')->add($userinfo);
 					$_SESSION['name']=$userinfo['nickname'];
 				}
