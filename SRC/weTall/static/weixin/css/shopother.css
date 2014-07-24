@@ -409,7 +409,7 @@ border-top: 2px solid #ff0000;}
 
 #nav {width:100%; min-width:200px;max-width:640px;left:0px;position:fixed; top:0px; z-index: 999; margin: 0 auto;display:block;}
 #nav ul.navlist { position: absolute;top:0px;left:0px; z-index:9999; height:45px; width:100%;margin:0 ;  }
-#nav .navlist li { float: left;height:45px;  position:relative;width:39%;margin:auto}
+#nav .navlist li { float: left;height:45px;  position:relative;width:22%;margin:auto}
 #nav .navlist li#n_3 i{ position:absolute; height:14px; width:14px;background:#C00; color:#fff; left:55%; top:10px; border-radius:50%; font-style:normal; text-align:center; font-size:12px; display:none;}
 #nav .navlist li span{ display:inline-block; width:100%; height:45px; cursor:pointer; color:white ;margin-top:10px;text-align:center}
 #nav .navlist .r1 span{ display:inline-block; width:100%; height:45px; cursor:pointer;font-size: 1.2em;
@@ -432,7 +432,7 @@ right: 5px;}
 #searchForm .navlist{}
 #nav .navlist li#n_10 .shiyongshuoming{font-size:14px;margin-top:2px}
 .body-conent #nav .navlist li#n_0{width:25%;}
-#nav .navlist li#n_4{width:33%;padding-top:0px;}
+#nav .navlist li#n_4{width:56%;padding-top:0px;}
 #nav .navlist li#n_5{width:38%;margin-left:10px;}
 #nav .navlist li#n_0{width:22%;}
 #nav .navlist li#n_4 span{ text-align:center;padding-top:2px;font-size:1.2em; color:white;font-weight:700;}
