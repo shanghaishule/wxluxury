@@ -42,7 +42,7 @@ class backendAction extends baseAction
      */
     public function index() {
         $map = $this->_search();
-        var_dump($map);exit;
+        //var_dump($map);exit;
         
         $mod = D($this->_name);
         !empty($mod) && $this->_list($mod, $map);
