@@ -50,7 +50,7 @@ h3 a{ text-decoration: none; }
 #top-navigation a{text-decoration:none;float:left;background:none;height:14px;width:50px; color:white; font-size:14px;margin:-15px -30px 0 0;}
 #top-navigation a:hover{color:red;background:none;text-decoration:underline;}
 #top-navigation span{ color:#dca598; }
-#top { height:53px; background:url(images/header.gif);}
+#top { height:53px;/* background:url(images/header.gif);*/}
 
 #navigation { height:36px;}
 #navigation ul{ list-style-type: none;}
