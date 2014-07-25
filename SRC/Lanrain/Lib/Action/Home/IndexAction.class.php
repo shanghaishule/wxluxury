@@ -2,8 +2,12 @@
 class IndexAction extends BaseAction{
 	//关注回复
 	public function index(){
+		if(session('uid')==""){
+			$this->display("login");
+		}else{
+			$this->display(U('User/Index/index'));
+		}
 		
-		$this->display("login");
 	}
 	public function resetpwd(){
 		$uid=$this->_get('uid','intval');
