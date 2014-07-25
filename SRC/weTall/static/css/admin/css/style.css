@@ -22,7 +22,7 @@ textarea { overflow:hidden; }
 
 a img { border:0; }
 
-a { color:#ba4c32; text-decoration: underline; cursor:pointer; }
+a { color: rgb(0,113,156); text-decoration: underline; cursor:pointer; }
 a:hover { color:#8d341f; text-decoration: none;}
 
 .left, .alignleft { float:left; display:inline; }
@@ -44,7 +44,7 @@ h3 a{ text-decoration: none; }
 
 .shell { width:988px; margin:0 auto; }
 
-#header2 { height:56px; background:url(images/header.gif); white-space:nowrap; }
+#header2 { height:56px; /*background:url(images/header.gif);*/ background:rgb(20,113,193); white-space:nowrap; }
 #header2 h1{ float:left; display:inline; padding-top:12px; }
 #top-navigation { float:right; white-space:nowrap; color:#fff; padding-top:15px;margin-right:200px; }
 #top-navigation a{text-decoration:none;float:left;background:none;height:14px;width:50px; color:white; font-size:14px;margin:-15px -30px 0 0;}
@@ -88,7 +88,7 @@ h3 a{ text-decoration: none; }
 .table a.ico{ }
 
 .box { background:#fbfcfc; height:100%; padding:1px; margin-bottom:10px; }
-.box-head { background:#ba4c32; height:32px; color:#fff; padding: 0 10px; line-height:32px; white-space:nowrap; border-bottom:solid 1px #fff; }
+.box-head { background: rgb(4,172,203); height:32px; color:#fff; padding: 0 10px; line-height:32px; white-space:nowrap; border-bottom:solid 1px #fff; }
 .box-head .right{ padding-top:5px; line-height:13px;}
 .box-head .right label,
 .box-head .right input { float:left; }
@@ -142,7 +142,7 @@ textarea.size1 { height:180px; }
 .add-button:hover { color:#333;}
 
 
-#footer { height:44px; background:url(images/footer.gif); line-height:44px; color:#fff;}
+#footer { height:44px; /*background:url(images/footer.gif);*/background:rgb(20,113,193); line-height:44px; color:#fff;}
 #footer a{ color:#fff; }
 
 
