@@ -564,7 +564,7 @@ class indexAction extends frontendAction {
     	return $item=M('item')->where($where)->select();
     }
    
-    public function search() {
+    public function search(){
     	//$this->get_loaction();
     	/***商品分类**/
     	$item_cate=M("item_cate")->select();

@@ -55,11 +55,8 @@ class item_orderAction extends backendAction {
       	}
       }
       
-      
     }
     
-    
-
     protected function _search() {
         $map = array();
         //'status'=>1
