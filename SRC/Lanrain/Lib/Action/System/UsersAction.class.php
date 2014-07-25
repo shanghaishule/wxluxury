@@ -54,7 +54,15 @@ class UsersAction extends BackAction{
             $this->assign('role',$role);
             $userinfo = M('User')->field('id, username')->where('status = 1')->select();
             $this->assign('userinfo',$userinfo);
+            /**anan 显示商家名称和所属品牌**/
+            $shop->M('wecha_shop')->field('name')->where('status = 1')->select();
+            $this->assign('shop',$shop);
+            $brand-> M('brandlist')->field('name')->where('status = 1')->select();
+            $this->assign('brand',$brand);
             
+            
+            
+            /**anan 显示商家名称和所属品牌**/
             $this->assign('tpltitle','添加');
             $this->display();
         }
