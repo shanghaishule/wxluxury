@@ -5,7 +5,7 @@ class IndexAction extends BaseAction{
 		if(session('uid')==""){
 			$this->display("login");
 		}else{
-			$this->display(U('User/Index/index'));
+			$this->redirect(U('User/Index/index'));
 		}
 		
 	}
