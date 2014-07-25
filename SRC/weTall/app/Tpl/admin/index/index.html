@@ -28,7 +28,9 @@
 			<h1>微信商城后台管理</h1>
 			<div id="top-navigation" class="right_back">
 				欢迎您， {$weshopData.name}
-				<a href="__PARENTURL__/index.php?g=User&m=Adma&a=index&token={$tokenTall}">返回管理中心</a>
+				<!--<a href="__PARENTURL__/index.php?g=User&m=Adma&a=index&token={$tokenTall}">-->
+				<a href="{lanrain::U('User/Index/index')}">
+				返回管理中心</a>
 				
 			</div>
 		</div>
