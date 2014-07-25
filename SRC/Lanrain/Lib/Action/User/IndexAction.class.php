@@ -10,7 +10,7 @@ class IndexAction extends UserAction{
 		}
 		unset($group);
 		
-		$db=M('Wxuser');
+		$db=M('wxuser');
 		$count=$db->where($where)->count();
 		$page=new Page($count,25);
 		$info=$db->where($where)->limit($page->firstRow.','.$page->listRows)->select();
