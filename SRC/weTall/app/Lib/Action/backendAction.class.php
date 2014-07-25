@@ -31,7 +31,7 @@ class backendAction extends baseAction
                     }
                 }
             }
-            $this->assign('sub_menu', $sub_menu);
+            //$this->assign('sub_menu', $sub_menu);
         }
         $this->assign('menuid', $this->menuid);
         $this->assign('tokenTall', $this->getTokenTall());
@@ -42,7 +42,7 @@ class backendAction extends baseAction
      */
     public function index() {
         $map = $this->_search();
-        //var_dump($map);exit;
+        var_dump($map);exit;
         
         $mod = D($this->_name);
         !empty($mod) && $this->_list($mod, $map);
