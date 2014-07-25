@@ -9,7 +9,7 @@ class indexAction extends backendAction {
     }
 
     public function index() {    	
-           
+         
         $top_menus = $this->_mod->admin_menu(0);
         $this->assign('top_menus', $top_menus);
         $my_admin = array('username'=>$_SESSION['admin']['username'], 'rolename'=>$_SESSION['admin']['role_id']);
@@ -40,6 +40,7 @@ class indexAction extends backendAction {
         $tokenTall = $this->getTokenTall();
         $weshopData["tokenTall"] = $tokenTall;
         $weChaShopDetail = $weshop->where($weshopData)->find();//商城基本信息var_dump($weChaShopDetail);die();
+        //dump($weChaShopDetail);exit;
         $this->assign("weshopData",$weChaShopDetail);
         $this->display(); 
     }
