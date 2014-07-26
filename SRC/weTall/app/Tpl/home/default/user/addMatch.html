@@ -55,17 +55,17 @@
           </tr>
 	   </table>
    <div style="width:100%;margin-top:25px;">
-        <div class="shark-review" style="width:25%;height:30px;border:1px;position:relative;float:left;margin-left:5%;">
-            <img src="/weTall/static/images/yulan.png" style="position:relative;z-index:1;" width="30px" height="30px"/>
+        <div class="shark-review" style="width:25%;height:30px;border:1px;position:relative;float:left;margin-left:1%;">
+            <img src="/weTall/static/images/yulan.png" style="position:relative;z-index:1;marign:30%" width="30px" height="30px"/>
 	        <input  name="my_img" id="my_img" onchange="valtext()" type="file" style="position:absolute;top:0px;left:0px;z-index:2;opacity: 0;"/><br/>
-	        <input type="text" name="img_name" id="img_name" style="background:transparent;border:1px solid white;color:grey;height:20px;font-size:7px" 
-	        placeholder="图片名称" autofocus x-webkit-speech value="{$math_data.my_img}">
+	        <input type="text" name="img_name" id="img_name" style="background:transparent;border:1px solid white;color:grey;height:20px;font-size:7px;font-family:"宋体" 
+	        placeholder="输入图片名称" autofocus x-webkit-speech value="{$math_data.my_img}">
         </div>
         <div class="head_two"style="float:left;width:70%;">
 		    <ul style="background:black;color:white;height:32px">
 	            <!-- <td class="head_t" style="width:57px"><img src="/weTall/static/images/yulan.png" /> </br>上传图片-->
 		        <!-- <td class="head_t" style="width:57px" ><img src="/weTall/static/images/heart.png"/></br>添加收藏</td> -->
-		        <li class="head_t" style="width:23%;float:left;"><img id="preview" src="/weTall/static/images/eye_24.png" width="60%"/><br/>预览</li>
+		        <li class="head_t" style="width:15%;float:left;"><img id="preview" src="/weTall/static/images/eye_24.png" "/><br/>预览</li>
 	         	<li class="keep" style="float:left;"><input id="save" name="save" style="border-radius:0px;font-size:20px" value="保存" class="common_btn2" type="submit"></input></li>
 	         	<li class="keep" style="float:left;"><input id="send" name="send"  style="border-radius:0px;font-size:20px" value="发稿" class="common_btn2" type="submit" ></input></li>	
 		   </ul>	
