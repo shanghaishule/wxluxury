@@ -406,7 +406,7 @@ border-top: 2px solid #ff0000;}
  * ******************** module.css ***********************
  * -------------------------------------------------------
  */
-.kongge{height:30px}
+.kongge{height:100px}
 #nav {width:100%; min-width:200px;max-width:640px;left:0px;position:fixed; top:0px; z-index: 999; margin: 0 auto;display:block;}
 #nav ul.navlist { position: absolute;top:0px;left:0px; z-index:9999; height:45px; width:100%;margin:0 ;  }
 #nav .navlist li { float: left;height:45px;  position:relative;width:22%;margin:auto}
