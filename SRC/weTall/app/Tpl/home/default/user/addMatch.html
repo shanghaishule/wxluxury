@@ -49,7 +49,9 @@
            <tr>
 	            <!--<td width="68%" colspan="3"><input style="height:25px;background-color:black;color:white" name="title" id="title" size="100%" type="text" value="{$math_data.title} 写下我的心情···"></td> -->	
 
-	          <td class="head_h" width="100%" colspan="5" ><textarea style="width:100%" class="textarea" rows=5 name="title" id="title" size="32%" type="text" value="{$math_data.title}">写下我的心情······</textarea></td>
+	          <td class="head_h" width="100%" colspan="5" ><textarea style="width:100%" class="textarea" rows=5 name="title" id="title" size="32%" type="text" value="{$math_data.title}" 
+	          onfocus="if(value=='写下我的心情······') {value=''}" onblur="if(value=='') {value='写下我的心情······'}"
+	              style="font-size:15px ">写下我的心情······</textarea></td>
           </tr>
 	   </table>
    <div style="width:100%;margin-top:25px;">
