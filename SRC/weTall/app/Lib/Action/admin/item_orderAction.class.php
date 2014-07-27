@@ -410,7 +410,22 @@ class item_orderAction extends backendAction {
     		}
     		$date['fahuo_time']=time();
     		$date['status']=3;
-    		if($this->orderWxDeliver($data['orderId'])){
+    		
+    		/*如果是微信支付，则要求微信发货*/
+    		$supportmetho_result = false;
+    		$supportmetho = $mod->where("orderId='".$data['orderId']."'")->find();
+    		if ($supportmetho['supportmetho'] == 4) {
+    			if($this->orderWxDeliver($data['orderId'])){
+    				$supportmetho_result = true;
+    			} else {
+    				IS_AJAX && $this->ajaxReturn(0, '微信发货通知失败');
+    				$this->error('微信发货通知失败');
+    			}
+    		}else{
+    			$supportmetho_result = true;
+    		}
+    		
+    		if($supportmetho_result){
     			$updresult = $mod->where("orderId='".$data['orderId']."'")->data($date)->save();
     			if($updresult !== false){
     				IS_AJAX && $this->ajaxReturn(1, L('operation_success'), '', 'add');
@@ -420,8 +435,8 @@ class item_orderAction extends backendAction {
     				$this->error(L('operation_failure'));
     			}
     		} else {
-    			IS_AJAX && $this->ajaxReturn(0, '微信发货通知失败');
-    			$this->error('微信发货通知失败');
+    			IS_AJAX && $this->ajaxReturn(0, L('operation_failure'));
+    			$this->error(L('operation_failure'));
     		}
     	} else {
     		$this->assign('open_validator', true);
