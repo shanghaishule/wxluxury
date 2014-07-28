@@ -1058,7 +1058,7 @@ class userAction extends userbaseAction {
 	    			}
 	    		}
 	    		if($flag=='1'){
-	    			if(M('user_info')->save($data)){
+	    			if(M('user_info')->where(array('uid'=>$data['uid']))->save($data)){
 	    				$this->success("保存成功",U("user/logintest"));
 	    			}else{
 	    				$this->error("保存失败");
