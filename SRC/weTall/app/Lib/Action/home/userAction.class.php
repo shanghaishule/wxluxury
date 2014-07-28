@@ -1012,6 +1012,7 @@ class userAction extends userbaseAction {
     		$data['uid'] = session('uid');
     		if(!empty($data['uid'])){
     			$userinfo=M('user_info')->where($data)->find();
+    			//$title_arr=array("晚装","正装","休闲","运动","打底");//
     			if(empty($userinfo)){
     				$this->assign('flag','0');//新增
     			}else{
