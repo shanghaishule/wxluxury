@@ -191,6 +191,7 @@ input,button,select,textarea{outline:none}
 		<!-- 以上是headtop -->
 		<div class="kongge1"></div>
 		  <form name="form1" id="form1" data-ajax="false" action="{:U('home/user/saveinfo',array('tokenTall'=>$tokenTall))}" method="post">
+			<input type="hidden" name="flag" value="{$flag}" />
 			<volist name="uInfo" id="vo">
 			<div class="firstall">
 				<div class="mydata">我的资料</div>

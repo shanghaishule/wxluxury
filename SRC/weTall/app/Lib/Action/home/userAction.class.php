@@ -1012,8 +1012,12 @@ class userAction extends userbaseAction {
     		$data['uid'] = session('uid');
     		if(!empty($data['uid'])){
     			$userinfo=M('user_info')->where($data)->find();
-    			$this->assign("uInfo",$userinfo);
-    			dump($userinfo);exit;
+    			if(empty($userinfo)){
+    				$this->assign('flag','0');//新增
+    			}else{
+    				$this->assign('flag','1');//编辑
+    				$this->assign("uInfo",$userinfo);
+    			}
     			$this->display();
     		}else{
     			$this->error("服务器繁忙！");
@@ -1023,6 +1027,7 @@ class userAction extends userbaseAction {
     	public function saveinfo(){
     		header("Content-type: text/html; charset=utf-8"); 
     		$data['uid'] = session('uid');
+    		$flag=$this->_post('flag','trim');
     		if(!empty($data['uid'])){
 	    		$data['sex'] = $this->_post("sex");
 	    		$data['birthday']=$this->_post("birthday");
@@ -1044,11 +1049,21 @@ class userAction extends userbaseAction {
 	    		
 	    		$hobby_element_arr = $this->_post("hobby_element");
 	    		$data['hobby_element'] = implode("|", $hobby_element_arr);
-	    		if(M('user_info')->add($data)){
-	    			$this->success("保存成功",U("user/logintest"));
-	    		}else{
-	    			$this->error("保存失败");
+	    		if($flag=='0'){
+	    			if(M('user_info')->add($data)){
+	    				$this->success("保存成功",U("user/logintest"));
+	    			}else{
+	    				$this->error("保存失败");
+	    			}
 	    		}
+	    		if($flag=='1'){
+	    			if(M('user_info')->save($data)){
+	    				$this->success("保存成功",U("user/logintest"));
+	    			}else{
+	    				$this->error("保存失败");
+	    			}
+	    		}
+
     		}else{
     			$this->error("服务器繁忙！");
     		}	
