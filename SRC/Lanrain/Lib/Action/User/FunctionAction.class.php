@@ -2,7 +2,7 @@
 class FunctionAction extends UserAction{
 	function index(){
 		$id=$this->_get('id','intval');
-		$token=$this->_get('token','trim');	
+		$token=$this->_get('tokenTall','trim');	
 		$info=M('Wxuser')->find($id);
 		if($info==false||$info['token']!==$token){
 			$this->error('非法操作',U('Home/Index/index'));
