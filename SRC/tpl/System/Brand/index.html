@@ -100,11 +100,11 @@ $(function(){
             <tr>
                 <td align="center"><input type="checkbox" class="J_checkitem" value="{Lanrain:$val.id}"></td>
 				<td align="center">{Lanrain:$val.id}</td>
-                <td align="left"><span data-tdtype="edit" data-field="name" data-id="{$val.id}" class="tdedit">{Lanrain:$val.name}</span></td>
-                <td align="left"><span data-tdtype="view" data-field="jifen" data-id="{$val.id}" class="tdview">{Lanrain:$val.jifen}</span></td>
-                <td align="left"><span data-tdtype="edit" data-field="name" data-id="{$val.id}" class="tdedit"><if condition="$val['domain'] eq 0">知名订单品牌<else/>奢侈品牌</if></span></td>
-                <td align="left"><span data-tdtype="edit" data-field="name" data-id="{$val.id}" class="tdedit"><img width="33" height="30" src="{Lanrain:$val.img}"></span></td>
-                <td align="left"><span data-tdtype="edit" data-field="name" data-id="{$val.id}" class="tdedit"><img width="75" height="30" src="{Lanrain:$val.imgurl}"></span></td> 
+                <td align="left"><span data-tdtype="edit" data-field="name" data-id="{Lanrain:$val.id}" class="tdedit">{Lanrain:$val.name}</span></td>
+                <td align="left"><span data-tdtype="view" data-field="jifen" data-id="{Lanrain:$val.id}" class="tdview">{Lanrain:$val.jifen}</span></td>
+                <td align="left"><span data-tdtype="edit" data-field="name" data-id="{Lanrain:$val.id}" class="tdedit"><if condition="$val['domain'] eq 0">知名订单品牌<else/>奢侈品牌</if></span></td>
+                <td align="left"><span data-tdtype="edit" data-field="name" data-id="{Lanrain:$val.id}" class="tdedit"><img width="33" height="30" src="{Lanrain:$val.img}"></span></td>
+                <td align="left"><span data-tdtype="edit" data-field="name" data-id="{Lanrain:$val.id}" class="tdedit"><img width="75" height="30" src="{Lanrain:$val.imgurl}"></span></td> 
                 <td align="left"><span data-tdtype="edit" data-field="ordid" data-id="{Lanrain:$val.id}" class="tdedit" style="color:{Lanrain:$val.colors};">{Lanrain:$val.ordid}</span></td>
                 <td align="center"><img data-tdtype="toggle" data-id="{$val.id}" data-field="status" data-value="{Lanrain:$val.status}" src="__ROOT__/weTall/static/images/admin/toggle_<if condition="$val.status eq 0">disabled<else/>enabled</if>.gif" /></td>
                 
@@ -130,15 +130,6 @@ $(function(){
 <script src="/weTall/static/js/jquery/plugins/formvalidator.js"></script>
 <script src="/weTall/static/js/pinphp.js"></script>
 <script src="/weTall/static/js/admin.js"></script>
-<script>
-//初始化弹窗
-(function (d) {
-    d['okValue'] = lang.dialog_ok;
-    d['cancelValue'] = lang.dialog_cancel;
-    d['title'] = lang.dialog_title;
-})($.dialog.defaults);
-</script>
-
 <script src="/weTall/static/js/jquery/plugins/listTable_.js"></script>
 <script>
 $(function(){
