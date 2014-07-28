@@ -1050,14 +1050,14 @@ class userAction extends userbaseAction {
 	    		
 	    		$hobby_element_arr = $this->_post("hobby_element");
 	    		$data['hobby_element'] = implode("|", $hobby_element_arr);
-	    		if($flag=='0'){
+	    		if($flag=='0'){//新增
 	    			if(M('user_info')->add($data)){
 	    				$this->success("保存成功",U("user/logintest"));
 	    			}else{
 	    				$this->error("保存失败");
 	    			}
 	    		}
-	    		if($flag=='1'){
+	    		if($flag=='1'){//编辑
 	    			if(M('user_info')->where(array('uid'=>$data['uid']))->save($data)){
 	    				$this->success("保存成功",U("user/logintest"));
 	    			}else{
