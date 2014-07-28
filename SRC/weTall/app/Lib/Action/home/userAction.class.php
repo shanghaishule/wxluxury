@@ -1018,7 +1018,7 @@ class userAction extends userbaseAction {
     				$this->assign('flag','1');//编辑
     				$this->assign("uInfo",$userinfo);
     			}
-    			dump($userinfo);exit;
+    			//dump($userinfo);exit;
     			$this->display();
     		}else{
     			$this->error("服务器繁忙！");
