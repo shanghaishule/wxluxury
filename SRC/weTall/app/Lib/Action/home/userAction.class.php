@@ -1009,9 +1009,17 @@ class userAction extends userbaseAction {
     	public function  singledata(){
     		$tokenTall = $this->getTokenTall();
     		$this->assign('tokenTall',$tokenTall);
-    		$this->display();
-    		
+    		$data['uid'] = session('uid');
+    		if(!empty($data['uid'])){
+    			$userinfo=M('user_info')->where($data)->find();
+    			$this->assign("uInfo",$userinfo);
+    			dump($userinfo);exit;
+    			$this->display();
+    		}else{
+    			$this->error("服务器繁忙！");
+    		}
     	}
+    	
     	public function saveinfo(){
     		header("Content-type: text/html; charset=utf-8"); 
     		$data['uid'] = session('uid');

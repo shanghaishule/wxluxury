@@ -31,7 +31,6 @@ class item_rukuAction extends backendAction {
         $this->assign('search', array(
         	'brand' => $brand,
             'Huohao' => $Huohao,
-        	
         ));
         return $map;
     }
