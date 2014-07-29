@@ -958,7 +958,7 @@ class userAction extends userbaseAction {
 	    $filepath = $_SERVER['DOCUMENT_ROOT']."/Uploads/items/images/";//图片保存的路径目录
     	    if(!is_dir($filepath)){
     	    mkdir($filepath,0777, true);
-    }
+    	}
      
     	$file_type = explode(".",$_POST['img_name']);
     	$filename = $Uninum.'.'.$file_type[1]; //生成文件名
