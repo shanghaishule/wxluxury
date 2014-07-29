@@ -78,7 +78,7 @@ $(function(){
 		onwait : lang.connecting_please_wait
 	}).defaultPassed();
 	*/
-$("#contacts").formValidator({onshow:'请填写联系人',onfocus:'请填写联系人'}).inputValidator({min:1,onerror:'请填写联系人'});
+    $("#contacts").formValidator({onshow:'请填写联系人',onfocus:'请填写联系人'}).inputValidator({min:1,onerror:'请填写联系人'});
 	$("#address").formValidator({onshow:'请填写详细地址',onfocus:'请填写详细地址'}).inputValidator({min:1,onerror:'请填写详细地址'});
 	$("#Province").formValidator({onshow:'请选择所在地区',onfocus:'请选择所在地区'}).inputValidator({min:1,onerror:'请选择所在地区'});
 	$('#info_form').ajaxForm({success:complate,dataType:'json'});
