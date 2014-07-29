@@ -59,6 +59,7 @@
                 <th width="100" align="left">用户名</th>
                 <th width="100" align="left">地区</th>
                 <th width="100" align="center">最后登录时间</th>
+                <th width="100" align="center">操作</th>
             </tr>
         </thead>
     	<tbody>
@@ -68,6 +69,7 @@
                 <td align="left">{Lanrain:$val.nickname}</td>
                 <td align="left">{Lanrain:$val.province}{Lanrain:$val.city}</td>
                 <td align="center">{Lanrain:$val.last_login_time|date='Y-m-d H:i:s',###}</td>
+                <td align="center"><a href="/index.php?g=System&m=Member&a=delete&id={Lanrain:$val.id}">删除</a></td>
             </tr>
             </volist>
     	</tbody>
@@ -76,7 +78,7 @@
 
     <div class="btn_wrap_fixed">
     	<label><input type="checkbox" name="checkall" class="J_checkall">全选/取消</label>
-    	<input type="button" class="btn" data-tdtype="batch_action" data-acttype="ajax" data-uri="/index.php?g=System&m=Application&a=delete" data-name="id" data-msg="确定删除吗？" value="删除" />
+    	<input type="button" class="btn" data-tdtype="batch_action" data-acttype="ajax" data-uri="/index.php?g=System&m=Member&a=delete" data-name="id" data-msg="确定删除吗？" value="删除" />
     	<div id="pages">{Lanrain:$page}</div>
     </div>
 </div>
