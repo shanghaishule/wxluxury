@@ -11,8 +11,7 @@ class set_discountAction extends backendAction {
 	}
 	
 	public function _before_index() {
-		
-		
+				
 		//显示模式
 		$sm = $this->_get('sm', 'trim');
 		$this->assign('sm', $sm);
@@ -42,9 +41,10 @@ class set_discountAction extends backendAction {
 	}
 	
 	public function _before_add(){
+
 		$brand = M("brandlist");
 		$this->assign("brand",$brand->select());
-		echo "hi";die();
+		//echo "hi";die();
 		if (IS_POST) {
 		//上传图片
 			if (empty($_FILES['img']['name'])) {
