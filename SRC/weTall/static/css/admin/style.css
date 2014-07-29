@@ -112,7 +112,6 @@ cursor:pointer;text-decoration:none;overflow:visible;text-align:center;zoom:1;wh
 .tdedit{background: url(bgimg/tdedit.gif) no-repeat right 2px; padding-right: 4px;width:102px;}
 .lt_input_text{height:14px; line-height:100%; padding:2px 4px;border: 1px solid #A8D0F4;font-family: Verdana, Geneva, sans-serif,"宋体";font-size:12px;}
 
-
 .input-text,.measure-input,textarea,input.date,input.endDate,.input-focus{border:1px solid #A7A6AA;height:18px;padding:2px 0 2px 5px;border: 1px solid #d0d0d0;background: #FFF url(bgimg/input.png) repeat-x; font-family: Verdana, Geneva, sans-serif,"宋体";font-size:12px;}
 .input-focus{background: #FFF url(bgimg/input_focus.png) repeat-x; border-color:#afcee6;font-size:12px;}
 input.date,input.endDate{background: #fff url(bgimg/input_date.png) no-repeat right 3px; padding-right:18px;font-size:12px;}
