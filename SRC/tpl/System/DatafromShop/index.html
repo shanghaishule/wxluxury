@@ -3,11 +3,7 @@
 <head>
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<script src="/weTall/static/js/jquery/jquery.js"></script>
-	<script src="/weTall/static/js/jquery/plugins/jquery.tools.min.js"></script>
-	<script src="/weTall/static/js/jquery/plugins/formvalidator.js"></script>
-	<script src="/weTall/static/js/pinphp.js"></script>
-	<script src="/weTall/static/js/admin.js"></script>
+
 	<!--link rel="stylesheet" type="text/css" href="/weTall/static/css/admin/upd_style.css" /-->
 	<link href="/weTall/static/css/admin/style.css" rel="stylesheet"/>
 	<link rel="stylesheet" type="text/css" href="/weTall/static/js/calendar/calendar-blue.css"/>
@@ -22,6 +18,13 @@
 	var lang = new Object();
 	lang.connecting_please_wait = "请稍后...";lang.confirm_title = "提示消息";lang.move = "移动";lang.dialog_title = "消息";lang.dialog_ok = "确定";lang.dialog_cancel = "取消";lang.please_input = "请输入";lang.please_select = "请选择";lang.not_select = "不选择";lang.all = "所有";lang.input_right = "输入正确";lang.plsease_select_rows = "请选择要操作的项目！";lang.upload = "上传";lang.uploading = "上传中";lang.upload_type_error = "不允许上传的文件类型！";lang.upload_size_error = "文件大小不能超过{sizeLimit}！";lang.upload_minsize_error = "文件大小不能小于{minSizeLimit}！";lang.upload_empty_error = "文件为空，请重新选择！";lang.upload_nofile_error = "没有选择要上传的文件！";lang.upload_onLeave = "正在上传文件，离开此页将取消上传！";
 	</script>
+	<style>
+	.attributes {
+	    height : 60px;
+	    line-height : 20px;
+		text-overflow: ellipsis;
+	}
+    </style>
 </head>
 
 <body>
@@ -34,10 +37,7 @@ $(function(){
     $(".J_preview").preview();
 });        
 </script>
-
-
 <div class="pad_lr_10">
-
 
     <form id="uploadShop" method="post" enctype="multipart/form-data">    
 	    <table width="100%" cellspacing="0" class="search_form">
@@ -75,13 +75,6 @@ $(function(){
     </form>    
     
     <div class="J_tablelist table_list">
-    <style>
-	.attributes {
-	    height : 60px;
-	    line-height : 20px;
-		text-overflow: ellipsis;
-	}
-    </style>
         
     <table  width="100%" cellspacing="0" style="table-layout:fixed;border-collapse:collapse;font-size:12px;">
         <thead>
@@ -144,7 +137,7 @@ $(function(){
     d['title'] = lang.dialog_title;
 })($.dialog.defaults);
 </script>
-<script src="/weTall/static/js/jquery/plugins/listTable_.js"></script>
+<script src="/weTall/static/js/jquery/plugins/listTable.js"></script>
 <script>
 $(function(){
 	$('.J_tablelist').listTable();
