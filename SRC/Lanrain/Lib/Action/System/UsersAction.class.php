@@ -16,7 +16,7 @@ class UsersAction extends BackAction{
 			$list[$key]['shopname']=$shopname['name'];
 			$list[$key]['brandname']=$brandname['name'];
 		}
-		foreach($group as $key=>$val){
+		foreach($group as $key =>$val){
 			$g[$val['id']]=$val['name'];
 		}
 		unset($group);
