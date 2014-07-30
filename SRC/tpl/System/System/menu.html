@@ -10,6 +10,7 @@ function tourl(url){
 	parent.main.location.href=url;
 }
 </script>
+<script src="/weTall/static/js/jquery/jquery.js"></script>
 </head>
 <body style="background:none">
 
@@ -25,6 +26,13 @@ function tourl(url){
 <!--/mbox-->
 
 <!--/mbox-->
-
+<script>
+$(function(){
+	$(".mbox > ul > li").click(function(){
+		$('.mbox > ul > li').removeClass('current');
+		$(this).addClass('current');
+	});
+});
+</script>
 </body>
 </html>

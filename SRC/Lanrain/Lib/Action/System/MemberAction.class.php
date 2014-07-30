@@ -13,7 +13,7 @@ class MemberAction extends BackAction
     	$this->_list($mod);
     	$this->display();
     }
-   public function delete(){
+   public function delete(){//会员管理删除会员
    	$mod =M('user');
    	$ids = trim($this->_request('id'), ',');
    	if($ids){
