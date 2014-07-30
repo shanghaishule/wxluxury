@@ -968,17 +968,20 @@ right: 5px;}
  * -------------------------------------------------------
  */
 #sort_bg {width:100%; font-size:12px; left:0px;position:fixed; top:50px; z-index:100; margin: -3px auto;display:block;
-		background: -webkit-gradient(linear, 50% 50%, 50% 50%, from(#fff), to(#999d9c));      /* Safari 4-5, Chrome 1-9*/  
-        background: -webkit-linear-gradient(bottom, #fff, #999d9c);   /*Safari5.1 Chrome 10+*/  
-        background: -o-linear-gradient(bottom, #fff, #999d9c);   
+		/*background: -webkit-gradient(linear, 50% 50%, 50% 50%, from(#fff), to(#999d9c));   
+        background: -webkit-linear-gradient(bottom, #fff, #999d9c);     
+        background: -o-linear-gradient(bottom, #fff, #999d9c);  */ 
 
 }
 #sort_bg ul.sortlist { position: relative;  height:35px; margin:0 auto;
-     	background: -webkit-gradient(linear, 50% 50%, 50% 50%, from(#fff), to(#999d9c));      /* Safari 4-5, Chrome 1-9*/  
-        background: -webkit-linear-gradient(bottom, #fff, #999d9c);   /*Safari5.1 Chrome 10+*/  
-        background: -o-linear-gradient(bottom, #fff, #999d9c);  /*Opera 11.10+*/   border-bottom:1px solid #ccc;box-shadow:0 2px 4px #d9d9d9;}
-#sort_bg .sortlist li { float: left; width:24%;height:35px;  position:relative;text-align:center;border-left:1px solid white;}
-#sort_bg .sortlist li a{ display:block; margin-top:10px;height:35px;color:#778899;font-weight:700;}
+     	/*background: -webkit-gradient(linear, 50% 50%, 50% 50%, from(#fff), to(#999d9c));        
+        background: -webkit-linear-gradient(bottom, #fff, #999d9c);   
+        background: -o-linear-gradient(bottom, #fff, #999d9c);    
+        border-bottom:1px solid #ccc;box-shadow:0 2px 4px #d9d9d9;
+        */
+        }
+#sort_bg .sortlist li { float: left; width:25%;height:35px;  position:relative;text-align:center;/*border-left:1px solid white;*/}
+#sort_bg .sortlist li a{ display:block;/* margin-top:10px;*/height:35px;color:#778899;font-weight:700;}
 #sort_bg .sortlist li img{ margin-top:0px;vertical-align:middle;}
 
 .btn_big{
