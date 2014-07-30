@@ -56,6 +56,7 @@ class set_promotionAction extends backendAction {
 		//上传图片
 			if (empty($_FILES['img']['name'])) {
 				$_SESSION["img_name"] = "";
+				IS_AJAX && $this->ajaxReturn(0, '请上传商品图片');
 				$this->error('请上传商品图片');
 			}
 			else{
@@ -69,6 +70,7 @@ class set_promotionAction extends backendAction {
 	            ));
 	            $_SESSION["im_name"] = $result['info'][0]['savename'];
 	            if ($result['error']) {
+	            	IS_AJAX && $this->ajaxReturn(0, $result['info']);
 	                $this->error($result['info']);
 	            } else {
 	            	$_SESSION["img_name"] = $result['info'][0]['savename'];
