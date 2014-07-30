@@ -1102,6 +1102,9 @@ class indexAction extends frontendAction {
     }    
     	 
     public function promotion(){
+    	//获取地理位置
+    	$this->get_loaction();
+    	
     	$item_cate=M("item_cate")->select();
     	$this->assign('item_cate',$item_cate);
     	
