@@ -141,7 +141,7 @@ function searchshop(id){
            <if condition="$Shop['status'] eq 0">
             <script>
             function prompt_m(){
-            	alert("网上店铺还未开通，请点带我去去实体店直接购买");
+            	alert("网上店铺还未开通，请点击\"带我去\"去实体店直接购买");
             	return;
             }
             </script>
@@ -150,6 +150,7 @@ function searchshop(id){
            <a href="{:U('index/index',array('tokenTall'=>$Shop['tokenTall']))}">
            </if>
            <span style="font-size:16px;">{$Shop.shop_name}</span></a></td>
+          <td>{:U('index/navigate',array('start_point_lat'=>$start_point_lat,'shop'=>$Shop['tokenTall'],'dmodel'=>'N','start_point_lng'=>$start_point_lng,'end_point_lat'=>$Shop['lat'],'end_point_lng'=>$Shop['longtitude']))}</td>
            <td width="15%"> 
            
            <a href="{:U('index/navigate',array('start_point_lat'=>$start_point_lat,'shop'=>$Shop['tokenTall'],'dmodel'=>'N','start_point_lng'=>$start_point_lng,'end_point_lat'=>$Shop['lat'],'end_point_lng'=>$Shop['longtitude']))}">
