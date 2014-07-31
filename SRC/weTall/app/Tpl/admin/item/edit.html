@@ -131,7 +131,7 @@
 				<th>商品图片 :</th>
 				<td>
 					<notempty name="info['img']"><img src="{$info.img}" width="100" height="100"/><br /></notempty>
-					<input type="file" name="img" /><input type="hidden" name="edit_m" value="{$edit_m}">
+					<input type="file" name="img" /><input type="hidden" name="edit_m" value="{$edit_m}">(建议大小460*460px)
 				</td>
  			</tr>
  			<!-- <tr>
@@ -236,6 +236,10 @@
                     <th width="100" align="left"><a href="javascript:void(0);" class="blue" onclick="add_file();"><img src="__STATIC__/css/admin/bgimg/tv-expandable.gif" /></a>上传文件 :</th>
                     <td><input type="file" name="imgs[]"></td>
                 </tr>
+                <tr>
+                    <th width="100" align="left"></th>
+                    <td>(建议大小460*460px)</td>
+                </tr>                
                 </tbody>
             </table></if>
         </div>
