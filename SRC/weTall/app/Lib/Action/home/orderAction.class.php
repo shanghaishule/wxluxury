@@ -153,10 +153,14 @@ class orderAction extends userbaseAction {
 	public  function checkOrder()//查看订单
 	{
 		//取商家token值，取不到则默认为空
+		$tokenTall = $this->getTokenTall();
 		$item_cate=M("item_cate")->select();
 		$this->assign('item_cate',$item_cate);
+		//获取卖家信息
+		$salsInfo = M("address")->where(array("tokenTall"=>$tokenTall))->find();
+	    //获取卖家店名
+		$shopName = M("wecha_shop")->field("name")->where(array("tokenTall"=>$tokenTall))->find();
 		
-	
 		$orderId=$_GET['orderId'];
 		!$orderId && $this->_404();
 		$status=$_GET['status'];
@@ -181,7 +185,8 @@ class orderAction extends userbaseAction {
 	
 		$this->assign('item_detail',$item_detail);
 		$this->assign('order',$order);
-	
+	    $this->assign('sInfo',$salsInfo);
+	    $this->assign('shopName',$shopName);
 		$this->_config_seo();
 		$this->display();
 	}
