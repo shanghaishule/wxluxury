@@ -68,7 +68,7 @@
                      </volist>
                      </div></td>
 			</tr>
-			 <if condition="$edit_m neq 'total' and $val neq ''">
+		<if condition="$edit_m neq 'total' and $val neq ''">
 			<tr>
 			    <th width="120">库存细则：</th>
 			    <td>
@@ -108,7 +108,6 @@
 				<th>商品库存 :</th>
 				<td><input id='J_goods_stock' onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" type="text" name="goods_stock" class="input-text" size="10" value="{$info.goods_stock}"> </td>
 			</tr>
-			
 			<tr>
                 <th>商品简介 :</th>
                 <td><textarea name="intro" cols="80" rows="2">{$info.intro}</textarea></td>
@@ -120,7 +119,13 @@
             </if>
              <tr>
 				<th>原价 :</th>
-				<td><input id='J_old_price' onkeyup="this.value=this.value.replace(/[^0-9.]/g,'')" onafterpaste="this.value=this.value.replace(/[^0-9.]/g,'')"  type="text" name="old_price" size="10" class="input-text" value="{$info.old_price}"> 元</td>
+				<td>
+				<if condition="$edit_m neq 'total' and $val neq ''">
+				<input id='J_old_price' onkeyup="this.value=this.value.replace(/[^0-9.]/g,'')" onafterpaste="this.value=this.value.replace(/[^0-9.]/g,'')"  type="text" name="old_price" size="10" class="input-text" value="{$info.old_price}"> 元
+				<else />
+				<input id='J_price' onkeyup="this.value=this.value.replace(/[^0-9.]/g,'')" onafterpaste="this.value=this.value.replace(/[^0-9.]/g,'')"  type="text" name="price" size="10" class="input-text" value="{$info.price}"> 元				
+				</if>
+				</td>
 			</tr>
             <tr>
 				<th>商品图片 :</th>

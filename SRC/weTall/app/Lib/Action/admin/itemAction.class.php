@@ -767,7 +767,7 @@ class itemAction extends backendAction {
             $data["Huohao"]=$_POST["Huohao"];
             //echo $_POST["Huohao"];die();
             $data["item_model"]=$this->_post("item_model","trim");
-            
+
             //上传图片
             $Uninum = $_POST["Uninum"];
     		if (!empty($_FILES["img"])){
@@ -776,11 +776,12 @@ class itemAction extends backendAction {
 	    		if(!is_dir($filepath)){
 	    			mkdir($filepath,0777, true);
 	    		}
-	    		$filename = $Uninum.'.jpg'; //生成文件名，
+	    		$filename = $Uninum."/".time().rand(100, 999).'.jpg'; //生成文件名，
 	    		move_uploaded_file($_FILES["img"]["tmp_name"],$filepath.$filename);
 	    	
 	    		$data['img'] = '/Uploads/items/images/'.$filename;
     		}
+    		//dump($data['img']);exit;
             //上传相册
     		$file_imgs = array();
     		$filepath_imgs=$filepath.$Uninum."/";
@@ -824,7 +825,7 @@ class itemAction extends backendAction {
                     $data['tag_cache'] = serialize($tag_cache);
                 }
             }
-
+			//dump($data);die();
             //更新商品
             $this->_mod->where(array('id'=>$item_id))->save($data);
             //更新图片和相册
@@ -894,7 +895,7 @@ class itemAction extends backendAction {
             $imagesstr = $item["images"];
             $imagesarr = explode("|",$imagesstr);
             $this->assign("imagesarr",$imagesarr);
-            
+            //dump($item);exit;
             $this->assign('info', $item);
             $this->assign("edit_m",$edit_m);
            
