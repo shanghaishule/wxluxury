@@ -506,7 +506,7 @@ class indexAction extends frontendAction {
     		$this->assign("start_point_lng",$start_point_lng);
     		$this->assign("searchNear","Y");
     		$this->assign("nearShop",$new_nearShop); 
-    		dump($new_nearShop);exit;
+    		//dump($new_nearShop);exit;
     	}
     	$url = "http://api.map.baidu.com/geocoder?location=".$latitude.",".$longitude."&output=xml&key=28bcdd84fae25699606ffad27f8da77b";
     	//$url = "http://api.map.baidu.com/geocoder?location=31.256748,121.595578&output=xml&key=28bcdd84fae25699606ffad27f8da77b";
