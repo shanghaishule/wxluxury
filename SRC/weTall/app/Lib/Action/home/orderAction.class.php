@@ -156,11 +156,7 @@ class orderAction extends userbaseAction {
 		$tokenTall = $this->getTokenTall();
 		$item_cate=M("item_cate")->select();
 		$this->assign('item_cate',$item_cate);
-		//获取卖家信息
-		$salsInfo = M("address")->where(array("tokenTall"=>$tokenTall))->find();
-	    //获取卖家店名
-		$shopName = M("wecha_shop")->field("name")->where(array("tokenTall"=>$tokenTall))->find();
-		
+
 		$orderId=$_GET['orderId'];
 		!$orderId && $this->_404();
 		$status=$_GET['status'];
@@ -182,7 +178,11 @@ class orderAction extends userbaseAction {
 				$item_detail[]=$items;
 			}
 		}
-	
+		//获取卖家信息
+		$salsInfo = M("address")->where(array("tokenTall"=>$order['tokenTall']))->find();
+		//获取卖家店名
+		$shopName = M("wecha_shop")->field("name")->where(array("tokenTall"=>$order['tokenTall']))->find();
+		
 		$this->assign('item_detail',$item_detail);
 		$this->assign('order',$order);
 	    $this->assign('sInfo',$salsInfo);
