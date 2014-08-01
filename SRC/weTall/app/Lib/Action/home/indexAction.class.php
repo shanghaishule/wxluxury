@@ -296,8 +296,8 @@ class indexAction extends frontendAction {
     			array('name'=>'液晶电视','brand'=>'索尼','price'=>6299),
     			array('name'=>'激光打印机','brand'=>'惠普','price'=>1200)
     	);
-    	$this->array_sort($array,'price','desc');
-    	dump($array);die();
+    	$this->array_sort($array,'price');
+    	print_r($array);die();
     	$this->assign("match_table",$match_table);
     	$this->assign("favi_table",$match_favi);
     	$this->display('match');
