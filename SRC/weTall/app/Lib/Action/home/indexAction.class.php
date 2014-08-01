@@ -287,18 +287,8 @@ class indexAction extends frontendAction {
     			}
     		}
     	}
-		$array = array(
-			array('name'=>'手机','brand'=>'诺基亚','price'=>1050),
-			array('name'=>'笔记本电脑','brand'=>'lenovo','price'=>4300),
-			array('name'=>'剃须刀','brand'=>'飞利浦','price'=>3100),
-			array('name'=>'跑步机','brand'=>'三和松石','price'=>4900),
-			array('name'=>'手表','brand'=>'卡西欧','price'=>960),
-			array('name'=>'液晶电视','brand'=>'索尼','price'=>6299),
-			array('name'=>'激光打印机','brand'=>'惠普','price'=>1200)
-		);
-		
-		$ShoppingList = $this->array_sort($array,'price');
-		dump($ShoppingList);die();
+    	$match_table=$this->array_sort($match_table,'sum_c');
+    	dump($match_table);die();
     	$this->assign("match_table",$match_table);
     	$this->assign("favi_table",$match_favi);
     	$this->display('match');
