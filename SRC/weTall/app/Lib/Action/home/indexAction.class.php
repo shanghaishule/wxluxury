@@ -287,7 +287,7 @@ class indexAction extends frontendAction {
     			}
     		}
     	}
-    	$this->array_sort(array_sort,'sum_c','desc');
+    	$this->array_sort($match_table,'sum_c','desc');
     	var_dump($match_table);die();
     	$this->assign("match_table",$match_table);
     	$this->assign("favi_table",$match_favi);
@@ -331,7 +331,7 @@ class indexAction extends frontendAction {
     			}
     		}
     	}
-    	$this->array_sort(array_sort,'create_time','desc');
+    	$this->array_sort($match_table,'create_time','desc');
     	var_dump($match_table);die();
     	$this->assign("match_table",$match_table);
     	$this->assign("favi_table",$match_favi);
