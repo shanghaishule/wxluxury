@@ -287,8 +287,8 @@ class indexAction extends frontendAction {
     			}
     		}
     	}
-    	$match_table=$this->array_sort($match_table,'sum_c');
-    	dump($match_table);die();
+    	$match_table=$this->array_sort($match_table,'sum_c','desc');
+    	//dump($match_table);die();
     	$this->assign("match_table",$match_table);
     	$this->assign("favi_table",$match_favi);
     	$this->display('match');
@@ -307,6 +307,7 @@ class indexAction extends frontendAction {
     	foreach ($result as $match_result){
     		$match_table[] = $match_result;
     		$match_table[$id]['create_time']=fdate($match_result['create_time']);
+    		$match_table[$id]['add_time']=$match_result['create_time'];
     		$username = M("user")->where("id=".$match_result["uid"])->find();
     		//总评数
     		$sum_com=M("match_comments")->where("match_id=".$match_result["id"])->count();
@@ -331,8 +332,8 @@ class indexAction extends frontendAction {
     			}
     		}
     	}
-    	$this->array_sort($match_table,'create_time','desc');
-    	dump($match_table);die();
+    	$match_table=$this->array_sort($match_table,'create_time','desc');
+    	//dump($match_table);die();
     	$this->assign("match_table",$match_table);
     	$this->assign("favi_table",$match_favi);
     	$this->display('match');
