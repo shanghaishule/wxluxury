@@ -216,11 +216,15 @@ class orderAction extends userbaseAction {
 				$userinfo['last_login_ip']=get_client_ip();
 				$Userarr= M('user')->where(array('openid'=>$userinfo['openid']))->find();
 				if(!empty($Userarr) && $Userarr!=''){
-					$_SESSION['uid']=$Userarr['id'];
-					$_SESSION['name']=$Userarr['nickname'];
+    				$_SESSION['uid']=$Userarr['id'];
+    				$_SESSION['name']=$Userarr['nickname'];
+    				$_SESSION['headimgurl']=$Userarr['headimgurl'];
+    				$_SESSION['openid']=$userinfo['openid'];
 				}else{ 
-					$_SESSION['uid']=M('user')->add($userinfo);
-					$_SESSION['name']=$userinfo['nickname'];
+    				$_SESSION['uid']=M('user')->add($userinfo);
+    				$_SESSION['name']=$userinfo['nickname'];
+    				$_SESSION['headimgurl']=$Userarr['headimgurl'];
+    				$_SESSION['openid']=$userinfo['openid'];
 				}
 				// dump($_SESSION['uid'].'-1-'.$_SESSION['name']);exit;
 			//}else{
