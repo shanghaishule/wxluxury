@@ -32,7 +32,6 @@ $(document).click(function(event) { $(".dis").removeClass("none"); });
 <div class="wrap body-conent">
   <div id="nav">
   <img src="/weTall/static/weixin/images/luxury/images/home/bg_02.png" width="100%"/>
-  
     <form id="searchForm" action="{:U('home/index/search', array('tokenTall'=>$tokenTall))}" method="post">
 	<ul class="navlist">
 		<li class="r pos" id="n_0"><div class="home_page_logo"></div>
@@ -40,7 +39,6 @@ $(document).click(function(event) { $(".dis").removeClass("none"); });
 			 <ul>
 			      <li>
 				     <a href="{:U('home/index/search', array('search_all'=>'all'))}">所有商品</a>
-				    
 				  </li>
 				  <volist name="item_cate" id="cate">
 				  	<li>
@@ -96,6 +94,7 @@ $(document).click(function(event) { $(".dis").removeClass("none"); });
     </volist>
     
   </div>
+  <div class="h40"></div>
   <div class="goto_top">
        <a href="#top"><img src="__STATIC__/images/top.jpg"></a>
     </div>
