@@ -287,6 +287,7 @@ class indexAction extends frontendAction {
     			}
     		}
     	}
+    	dump($match_table);die();
     	$this->array_sort($match_table,'sum_c','desc');
     	dump($match_table);die();
     	$this->assign("match_table",$match_table);
