@@ -287,7 +287,7 @@ class indexAction extends frontendAction {
     			}
     		}
     	}
-    	//$this->array_sort($match_table,'sum_c','desc');
+    	$this->array_sort($match_table,'sum_c','desc');
     	dump($match_table);die();
     	$this->assign("match_table",$match_table);
     	$this->assign("favi_table",$match_favi);
@@ -337,24 +337,7 @@ class indexAction extends frontendAction {
     	$this->assign("favi_table",$match_favi);
     	$this->display('match');
     }
-    
-    //对二维数组按指定字段排序
-    public function array_sort($arr,$keys,$type='asc'){
-    	$keysvalue = $new_array = array();
-    	foreach ($arr as $k=>$v){
-    		$keysvalue[$k] = $v[$keys];
-    	}
-    	if($type == 'asc'){
-    		asort($keysvalue);
-    	}else{
-    		arsort($keysvalue);
-    	}
-    	reset($keysvalue);
-    	foreach ($keysvalue as $k=>$v){
-    		$new_array[$k] = $arr[$k];
-    	}
-    	return $new_array;
-    }    
+        
     public function addressselect(){
     	$upload_shop = M("item");
     	$color = $_GET["color"];
