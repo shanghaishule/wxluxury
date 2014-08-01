@@ -248,6 +248,112 @@ class indexAction extends frontendAction {
     	$this->assign("favi_table",$match_favi);
     	$this->display();
     }
+    
+    //搭配按热度
+    public function matchHot(){
+    	$m=M();
+    	$Sel_sql = "SELECT * from tp_match where is_send = 1 order by create_time desc" ;
+    	$result=$m->query($Sel_sql);
+    	$item_favi_detail = M("item");
+    	$match_table = array();
+    	$id=0;
+    	
+    	$match_favi = array();
+    	foreach ($result as $match_result){
+    		$match_table[] = $match_result;
+    		$match_table[$id]['create_time']=fdate($match_result['create_time']);
+    		$username = M("user")->where("id=".$match_result["uid"])->find();
+    		//总评数
+    		$sum_com=M("match_comments")->where("match_id=".$match_result["id"])->count();
+    		//总赞数
+    		$sum_love=M("match_love")->where("matchid=".$match_result["id"])->count();
+    	
+    		$match_table[$id]["uname"] = $username["nickname"];
+    		$match_table[$id]["userimgurl"] = $username["headimgurl"];
+    		$match_table[$id]['sum_c']=$sum_com;
+    		$match_table[$id]['sum_l']=$sum_love;
+    		$id ++;
+    		if ($match_result != "" or $match_result != null) {
+    			$item_favi = explode(",", $match_result["item_ids"]);
+    			foreach ($item_favi as $val){
+    				$match_favi_sequence["id"] = $match_result["id"];
+    				$item = $item_favi_detail->where("id=".$val)->find();
+    				$match_favi_sequence["favi_name"] = $item["title"];
+    				$match_favi_sequence["favi_img"] = $item["img"];
+    				$match_favi_sequence["favi_price"] = $item["price"];
+    				$match_favi_sequence["item_id"]=$val;
+    				$match_favi[] = $match_favi_sequence;
+    			}
+    		}
+    	}
+    	$this->array_sort(array_sort,'sum_c','desc');
+    	var_dump($match_table);die();
+    	$this->assign("match_table",$match_table);
+    	$this->assign("favi_table",$match_favi);
+    	$this->display('match');
+    }
+    
+    //搭配按时间
+    public function matchTime(){
+    	$m=M();
+    	$Sel_sql = "SELECT * from tp_match where is_send = 1 order by create_time desc" ;
+    	$result=$m->query($Sel_sql);
+    	$item_favi_detail = M("item");
+    	$match_table = array();
+    	$id=0;
+    	
+    	$match_favi = array();
+    	foreach ($result as $match_result){
+    		$match_table[] = $match_result;
+    		$match_table[$id]['create_time']=fdate($match_result['create_time']);
+    		$username = M("user")->where("id=".$match_result["uid"])->find();
+    		//总评数
+    		$sum_com=M("match_comments")->where("match_id=".$match_result["id"])->count();
+    		//总赞数
+    		$sum_love=M("match_love")->where("matchid=".$match_result["id"])->count();
+    	
+    		$match_table[$id]["uname"] = $username["nickname"];
+    		$match_table[$id]["userimgurl"] = $username["headimgurl"];
+    		$match_table[$id]['sum_c']=$sum_com;
+    		$match_table[$id]['sum_l']=$sum_love;
+    		$id ++;
+    		if ($match_result != "" or $match_result != null) {
+    			$item_favi = explode(",", $match_result["item_ids"]);
+    			foreach ($item_favi as $val){
+    				$match_favi_sequence["id"] = $match_result["id"];
+    				$item = $item_favi_detail->where("id=".$val)->find();
+    				$match_favi_sequence["favi_name"] = $item["title"];
+    				$match_favi_sequence["favi_img"] = $item["img"];
+    				$match_favi_sequence["favi_price"] = $item["price"];
+    				$match_favi_sequence["item_id"]=$val;
+    				$match_favi[] = $match_favi_sequence;
+    			}
+    		}
+    	}
+    	$this->array_sort(array_sort,'create_time','desc');
+    	var_dump($match_table);die();
+    	$this->assign("match_table",$match_table);
+    	$this->assign("favi_table",$match_favi);
+    	$this->display('match');
+    }
+    
+    //对二维数组按指定字段排序
+    public function array_sort($arr,$keys,$type='asc'){
+    	$keysvalue = $new_array = array();
+    	foreach ($arr as $k=>$v){
+    		$keysvalue[$k] = $v[$keys];
+    	}
+    	if($type == 'asc'){
+    		asort($keysvalue);
+    	}else{
+    		arsort($keysvalue);
+    	}
+    	reset($keysvalue);
+    	foreach ($keysvalue as $k=>$v){
+    		$new_array[$k] = $arr[$k];
+    	}
+    	return $new_array;
+    }    
     public function addressselect(){
     	$upload_shop = M("item");
     	$color = $_GET["color"];
