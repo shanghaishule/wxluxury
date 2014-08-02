@@ -268,7 +268,7 @@
             
 			<ul id="BanCont">
 			  <volist name="imgarr" id="bolist" key="lidaid">			     
-			     <li class="imagesDetail" id="{$lidaid}"><a href="__PARENTURL__/Uploads/items/images/{$item['Uninum']}/{$bolist}.jpg"><img id="display_img" src="__PARENTURL__/Uploads/items/images/{$item['Uninum']}/{$bolist}.jpg" width="100%" alt="{$item.title}" /></a></li> 
+			     <li class="imagesDetail" id="{$lidaid}"><a href="{:U('Item/imgs_view',array('id'=>$item['id']))}"><img id="display_img" src="__PARENTURL__/Uploads/items/images/{$item['Uninum']}/{$bolist}.jpg" width="100%" alt="{$item.title}" /></a></li> 
 			  </volist>
 			</ul>
 			<div class="banner_link"><ul class="imgmiddle">
