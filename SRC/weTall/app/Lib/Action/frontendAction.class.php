@@ -72,16 +72,40 @@ class frontendAction extends baseAction {
     * 初始化访问者
     */
     private function _init_visitor() {
-        $this->visitor = new user_visitor();
+    	$this->visitor = new user_visitor();
         $this->assign('visitor', $this->visitor->info);
         
-        import('Think.ORG.Oauth2');
-        $config['appId'] = "wx3079f89b18863917";
-        $config['appSecret'] = "69289876b8d040b3f9a367c80f8754c8";
+        //dump($_SESSION);exit;
+        if(!isset($_SESSION['uid']) || empty($_SESSION['uid'])){
+        	$redirecturl = urlencode("http://www.kuyimap.com/".__SELF__);
+        	$url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=".$config['appId']."&redirect_uri=".$redirecturl."&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
+			header("Location: ".$url);
+			exit;
+        }
         
-        		$Oauth = new Oauth2();
-        		$userinfo=$Oauth->getUserinfo($_GET['code'],$config);
-        		dump($userinfo);exit;
+        if (isset($_GET['code'])){
+        	import('Think.ORG.Oauth2');
+        	$Oauth = new Oauth2();
+        	$config['appId'] = "wx3079f89b18863917";
+        	$config['appSecret'] = "69289876b8d040b3f9a367c80f8754c8";
+        	$userinfo=$Oauth->getUserinfo($_GET['code'],$config);
+			//dump($userinfo);exit;
+	    	$userinfo['last_login_time']=time(); 
+	    	$userinfo['last_login_ip']=get_client_ip();
+	    	$Userarr= M('user')->where(array('openid'=>$userinfo['openid']))->find();
+	    	if(!empty($Userarr) && $Userarr!=''){
+	    		$_SESSION['uid']=$Userarr['id'];
+	    		$_SESSION['name']=$Userarr['nickname'];
+	    		$_SESSION['headimgurl']=$Userarr['headimgurl'];
+	    		$_SESSION['openid']=$userinfo['openid'];
+	    	}else{
+	    		$_SESSION['uid']=M('user')->add($userinfo);
+	    		$_SESSION['name']=$userinfo['nickname'];
+	    		$_SESSION['headimgurl']=$Userarr['headimgurl'];
+	    		$_SESSION['openid']=$userinfo['openid'];
+	    	}
+    	   // dump($_SESSION['uid'].'-1-'.$_SESSION['name']);exit;		
+	    }
     }
 
     /**
