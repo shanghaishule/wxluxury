@@ -276,9 +276,10 @@
 			<li class="imgnav"><a href="javascript:void(0)" onclick="javascript:imgdetail({$liid})"><div class="imglittle" id="little{$liid}" ></div></a></li>
 			</volist></ul></div>
 			<div class="favi2">
-			<if condition="$favi_suc eq 'Y'"><img width="30px" height="30px" src="__STATIC__/weixin/images/favi2.png"></a><span style="color:red;">{$item.favi}</span><else/>
-			<a href="javascript:void(0)" onclick="favi_action({$item.id})"><img width="30px" height="30px" src="__STATIC__/weixin/images/favi.png"></a><!-- {$item.favi} --></div>
+			<if condition="$favi_suc eq 'Y'"><img width="30px" height="30px" src="__STATIC__/weixin/images/favi2.png"><span style="color:red;">{$item.favi}</span><else/>
+			<a href="javascript:void(0)" onclick="favi_action({$item.id})"><img width="30px" height="30px" src="__STATIC__/weixin/images/favi.png"></a><!-- {$item.favi} -->
 		    </if>
+		    </div>
 		    <div id="pagenavi">
                 <volist name="imgarr" id="img" key='k'>
                     <a href="javascript:void(0);" <if condition='$k eq 1'>class="active"</if>>{$k}</a>
