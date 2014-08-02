@@ -1091,19 +1091,15 @@ class indexAction extends frontendAction {
     	if($_POST['act']){
     		$act = $_POST['act'];
     		$item_id = $act;
-    		if ($_SESSION['user_info']) {
-	    		$userid = $_SESSION['user_info']['id'];
+    		if ($_SESSION['uid']) {
+	    		$userid = $_SESSION['uid'];
 	    		$shopfav_mod = M('shop_favi');
 	    		$insdata = array('userid'=>$userid, 'item_id'=>$item_id);
 	    		if ($shopfav_mod->where($insdata)->find()) {
 	    			//已经有记录的情况下
-	    			
-	    				$data = array('status'=>2);
-	    			
-	    			
+	    			$data = array('status'=>2);
 	    		}else{
-	    			
-	    				//收藏
+	    			//收藏
 		    			if ($shopfav_mod->add($insdata)) {
 		    				//成功
 		    				$data = array('status'=>1);
@@ -1113,7 +1109,7 @@ class indexAction extends frontendAction {
 		    				M("item")->where($item)->save($item_data_new);
 		    			}else{
 		    				//失败
-		    				$data = array('status'=>2);
+		    				$data = array('status'=>3);
 		    			}
 	    			
 	    		}

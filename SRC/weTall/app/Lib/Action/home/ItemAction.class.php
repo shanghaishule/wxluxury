@@ -78,9 +78,8 @@ class itemAction extends frontendAction {
         }
         
         //收藏
-        $favi['userid'] = $_SESSION['user_info']['id'];
+        $favi['userid'] = $_SESSION['uid'];
         $favi['item_id'] = $item['id'];
-        dump($_SESSION);exit;
         if (M("shop_favi")->where($favi)->find()) {
      	  $this->assign("favi_suc","Y");
         }
