@@ -137,7 +137,10 @@ class userAction extends userbaseAction {
         //取商家token值，取不到则默认为空
         $tokenTall = $this->getTokenTall();
         $this->assign('tokenTall',$tokenTall);
-        $this->success(L('logout_successe').$synlogout, U('user/index',array('tokenTall'=>$tokenTall)));
+		session(null);
+		session_destroy();
+		unset($_SESSION);
+        $this->success(L('logout_successe').$synlogout, U('index/brandshop'));
     }
 
     /**
@@ -243,7 +246,7 @@ class userAction extends userbaseAction {
     	import('Think.ORG.Oauth2');
     	$config['appId'] = "wx3079f89b18863917";
     	$config['appSecret'] = "69289876b8d040b3f9a367c80f8754c8";
-    	if(!isset($_SESSION['uid']) && empty($_SESSION['uid'])){
+    	if(!isset($_SESSION['uid']) || empty($_SESSION['uid']) || !isset($_SESSION['openid']) || empty($_SESSION['openid'])){
 
 	    	if (isset($_GET['code'])){
 	    		//echo $_GET['code'].'--';
@@ -270,7 +273,7 @@ class userAction extends userbaseAction {
 	    	}
     	   
    	 	}	
-   	 	//dump($_SESSION['uid'].'-2-'.$_SESSION['name']);exit;
+   	 	//dump($_SESSION);exit;
     	$tokenTall = $this->getTokenTall();
     	
         $item_order=M('item_order');
