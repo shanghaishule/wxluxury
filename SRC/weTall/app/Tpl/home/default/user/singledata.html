@@ -328,9 +328,9 @@ input,button,select,textarea{outline:none}
 					<div class="title_1">元素：</div>
 					<div class="seclist_b">
 						<ul>
-						 <foreach name="style_arr" item="vo">
+						 <foreach name="element_arr" item="vo">
 							<li><label><input data-role="none" type="checkbox"
-							<foreach name="hobby_style" item="val">
+							<foreach name="hobby_element" item="val">
 							<if condition="$val eq $vo">checked<else /></if>
 							 </foreach>name="hobby_element[]" value="{$vo}"> {$vo}</label></li>
 						 </foreach>
