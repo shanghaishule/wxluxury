@@ -12,9 +12,18 @@
 <link href="__STATIC__/css/productdetail.css" rel="stylesheet" type="text/css">
 <link type="text/css" rel="stylesheet" href="__STATIC__/weixin/css/shopnoright.css">
 <script src="__STATIC__/js/jquery/jquery10.js"></script>
- <script>
+<script>
 function gosearch(){
+	document.getElementById("method").value = "shop";
 	document.getElementById('searchForm').submit();
+}
+function shangpin(){
+	document.getElementById("method").value = "item";
+	document.getElementById('searchForm').submit();
+}
+function searchshop(id){
+	document.getElementById("txtHint").value=id;
+	document.getElementById('searchShop').submit();
 }
 </script>
 <script>
