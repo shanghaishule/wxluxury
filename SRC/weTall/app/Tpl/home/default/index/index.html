@@ -37,9 +37,9 @@ $(document).click(function(event) { $(".dis").removeClass("none"); });
 		<li class="r pos" id="n_0"><div class="home_page_logo"></div>
 		<div class="dis" id="dis">
 			 <ul>
-			      <li>
+			      <!-- -<li>
 				     <a href="{:U('home/index/search', array('search_all'=>'all'))}">所有商品</a>
-				  </li>
+				  </li>- -->
 				  <volist name="item_cate" id="cate">
 				  	<li>
 				     <a href="{:U('home/index/search', array('itemid'=>$cate['id'],'itemname'=>$cate['name'],'brandid'=>$weshopData['BelongBrand'],'tokenTall'=>$tokenTall))}">{$cate.name}</a>
