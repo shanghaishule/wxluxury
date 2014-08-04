@@ -99,10 +99,10 @@ $(document).click(function(event) { $(".dis").removeClass("none"); });
       </volist>
       <br>
       <label class="label2"><a href="{:U('Item/index',array('id'=>$product['id'],'tokenTall'=>$product['tokenTall']))}">{$product.title}</a></label>
-      <label class="label" style="color:rgb(198,198,198);">￥{$product.price}元<span class="tangletaobao" style="margin-left:20px;">{$product.item_model}款</span></label>
+      <label class="label" style="color:rgb(198,198,198);">￥{$product.price}元<span class="tangletaobao" style="margin-left:20px;"><if condition="$product.item_model neq ''">{$product.item_model}<else />2014</if>款</span></label>
       </div>   
     </div> 
-    </volist>    
+    </volist>
 </div>
 <div class="h40"></div>
   <div class="goto_top">
