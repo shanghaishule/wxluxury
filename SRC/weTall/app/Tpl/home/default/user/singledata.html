@@ -289,9 +289,12 @@ input,button,select,textarea{outline:none}
 					<div class="seclistd">
 						<ul>
 						 <foreach name="title_arr" item="vo">
-							<foreach name="hobby_title" item="val">
-<li><label><input data-role="none" type="checkbox" name="hobby_title[]" <if condition="$val eq $vo">checked<else /></if> value="{$vo}">{$vo}</label></li>							
-							</foreach>
+			
+			<li><label><input data-role="none" type="checkbox" name="hobby_title[]" 
+		<foreach name="hobby_title" item="val">
+			<if condition="$val eq $vo">checked<else /></if>
+		</foreach> value="{$vo}">{$vo}</label></li>							
+							
 						 </foreach>	
 						</ul>
 					</div>
