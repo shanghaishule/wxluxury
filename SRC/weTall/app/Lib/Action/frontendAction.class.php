@@ -74,7 +74,7 @@ class frontendAction extends baseAction {
     private function _init_visitor() {
     	$this->visitor = new user_visitor();
         $this->assign('visitor', $this->visitor->info);
-        
+        /*
         //dump($_SESSION);exit;
         if(!isset($_SESSION['uid']) || empty($_SESSION['uid'])){
         	$redirecturl = urlencode("http://www.kuyimap.com/".__SELF__);
@@ -106,6 +106,7 @@ class frontendAction extends baseAction {
 	    	}
     	   // dump($_SESSION['uid'].'-1-'.$_SESSION['name']);exit;		
 	    }
+	    */
     }
 
     /**
