@@ -1012,14 +1012,25 @@ class userAction extends userbaseAction {
     		$data['uid'] = session('uid');
     		if(!empty($data['uid'])){
     			$userinfo=M('user_info')->where($data)->find();
-    			//$title_arr=array("晚装","正装","休闲","运动","打底");//
+    			$title_arr=array("晚装","正装","休闲","运动","打底");//主题
+    			$color_arr=array("纯色","撞色","拼贴","其他");//颜色
+    			$style_arr=array("嬉皮","英伦风","日韩风","民族","田园风","运动风","百搭","其他");//风格
+    			$element_arr=array("印花","透视","花卉","图案","条纹","格子","波点","蕾丝","其他");//元素
     			if(empty($userinfo)){
     				$this->assign('flag','0');//新增
     			}else{
     				$this->assign('flag','1');//编辑
     				$this->assign("uInfo",$userinfo);
+    				$this->assign("title_arr",$title_arr);
+    				$this->assign("hobby_title",explode("|",$userinfo['hobby_title']));
+    				$this->assign("color_arr",$color_arr);
+    				$this->assign("hobby_color",explode("|",$userinfo['hobby_color']));
+    				$this->assign("style_arr",$style_arr);
+    				$this->assign("hobby_style",explode("|",$userinfo['hobby_style']));
+    				$this->assign("element_arr",$element_arr);
+    				$this->assign("hobby_element",explode("|",$userinfo['hobby_element']));
     			}
-    			//dump($userinfo);exit;
+    			//dump($userinfo['hobby_element']);exit;
     			$this->display();
     		}else{
     			$this->error("服务器繁忙！");

@@ -169,7 +169,7 @@ width:100%;
 #content #login_text b{ color:#0C3; font-size:16px;}
 #content #login_text i{ color:#C00; font-size:16px; font-weight:bold; font-style:normal;}
 /*购物车·空*/
-.null_shopping{ text-align: center; color: #ccc;}
+.null_shopping{ text-align: center; color:#ccc;}
 .null_shopping h4{ text-indent:10px; font-size: 18px; margin: 10px 0;}
 .null_shopping .cart_pic{background: url(../images/cart_pic.png) no-repeat center; height: 100px;}
 #content .null_shopping p a.enter{line-height:30px; width: auto;display: inline-block; background: none; color: #999; padding: 5px;background-color: #fafafa; font-size: 15px; height: 30px; }
