@@ -283,15 +283,20 @@ input,button,select,textarea{outline:none}
 			<div class="secall">
 				<div class="secall_1">
 					<p>我的偏好</p>
-					<foreach name="hobby_title" item="vo">
-					{$vo}
-					</foreach>
 				</div>
 				<div class="secall_2">
 					<div class="title1">主题：</div>
 					<div class="seclistd">
 						<ul>
-							<li><label><input data-role="none" type="checkbox" name="hobby_title[]" value="晚装"> 晚装</label></li>
+						 <foreach name="title_arr" item="vo">
+							<foreach name="hobby_title" item="val">
+							<if condition="$val eq $vo">
+							<li><label><input data-role="none" type="checkbox" name="hobby_title[]" checked value="{$vo}">{$vo}</label></li>
+							<else />
+							<li><label><input data-role="none" type="checkbox" name="hobby_title[]" value="{$vo}">{$vo}</label></li>							
+							</if>
+							</foreach>
+						 </foreach>	
 						</ul>
 					</div>
 				</div>
