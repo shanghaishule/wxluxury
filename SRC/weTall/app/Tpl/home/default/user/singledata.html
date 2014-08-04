@@ -321,6 +321,7 @@ input,button,select,textarea{outline:none}
 							<foreach name="hobby_style" item="val">
 							<if condition="$val eq $vo">checked<else /></if>
 							</foreach> name="hobby_style[]" value="{$vo}"> {$vo}</label></li>
+						</foreach>	
 						</ul>
 					</div>
 				</div>
@@ -332,7 +333,7 @@ input,button,select,textarea{outline:none}
 							<li><label><input data-role="none" type="checkbox"
 							<foreach name="hobby_element" item="val">
 							<if condition="$val eq $vo">checked<else /></if>
-							 </foreach>name="hobby_element[]" value="{$vo}"> {$vo}</label></li>
+							 </foreach> name="hobby_element[]" value="{$vo}"> {$vo}</label></li>
 						 </foreach>
 						</ul>
 					</div>
