@@ -4,7 +4,7 @@ class itemAction extends backendAction {
         parent::_initialize();
         $this->_mod = D('item');
         $this->_cate_mod = D('item_cate');
-        $brandlist= $this->_brand=M('brandlist')->where('status=1')->order('ordid asc,id asc')->select();
+        $brandlist= $this->_brand=M('brandlist')->where('status=1')->order('name asc')->select();//ordid asc,id asc
         $this->assign('brandlist',$brandlist);
     }
 
