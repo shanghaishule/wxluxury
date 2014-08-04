@@ -303,7 +303,12 @@ input,button,select,textarea{outline:none}
 					<div class="title_1">颜色：</div>
 					<div class="seclist_c">
 						<ul>
-							<li><label><input data-role="none" type="checkbox" name="hobby_color[]" value="纯色"> 纯色</label></li>
+						<foreach name="color_arr" item="vo">
+							<li><label><input data-role="none" type="checkbox" name="hobby_color[]"
+							<foreach name="hobby_color" item="val">
+								<if condition="$val eq $vo">checked<else /></if>
+							</foreach> value="{$vo}"> {$vo}</label></li>
+						</foreach>
 						</ul>
 					</div>
 				</div>
@@ -311,7 +316,11 @@ input,button,select,textarea{outline:none}
 					<div class="title_1">风格：</div>
 					<div class="seclist_a">
 						<ul>
-							<li><label><input data-role="none" type="checkbox" name="hobby_style[]" value="嬉皮"> 嬉皮</label></li>
+						<foreach name="style_arr" item="vo">
+							<li><label><input data-role="none" type="checkbox"
+							<foreach name="hobby_style" item="val">
+							<if condition="$val eq $vo">checked<else /></if>
+							</foreach> name="hobby_style[]" value="{$vo}"> {$vo}</label></li>
 						</ul>
 					</div>
 				</div>
@@ -319,7 +328,12 @@ input,button,select,textarea{outline:none}
 					<div class="title_1">元素：</div>
 					<div class="seclist_b">
 						<ul>
-							<li><label><input data-role="none" type="checkbox" name="hobby_element[]" value="印花"> 印花</label></li>
+						 <foreach name="style_arr" item="vo">
+							<li><label><input data-role="none" type="checkbox"
+							<foreach name="hobby_style" item="val">
+							<if condition="$val eq $vo">checked<else /></if>
+							 </foreach>name="hobby_element[]" value="{$vo}"> {$vo}</label></li>
+						 </foreach>
 						</ul>
 					</div>
 				</div>
