@@ -148,8 +148,10 @@ class indexAction extends frontendAction {
     			$this->assign("item",$reverse_goods);
     			$this->display();
     	}elseif($nowTime < $start_time){
+    	      header("Content-type:text/html;charset=utf-8");
     			echo "还未开始";die();
     	}else{
+    		header("Content-type:text/html;charset=utf-8");
     			echo "活动已经结束";die();
     	}
     	
