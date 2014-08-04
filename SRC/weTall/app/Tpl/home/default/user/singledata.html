@@ -290,11 +290,7 @@ input,button,select,textarea{outline:none}
 						<ul>
 						 <foreach name="title_arr" item="vo">
 							<foreach name="hobby_title" item="val">
-							<if condition="$val eq $vo">
-							<li><label><input data-role="none" type="checkbox" name="hobby_title[]" checked value="{$vo}">{$vo}</label></li>
-							<else />
-							<li><label><input data-role="none" type="checkbox" name="hobby_title[]" value="{$vo}">{$vo}</label></li>							
-							</if>
+<li><label><input data-role="none" type="checkbox" name="hobby_title[]" <if condition="$val eq $vo">checked<else /></if> value="{$vo}">{$vo}</label></li>							
 							</foreach>
 						 </foreach>	
 						</ul>
