@@ -76,6 +76,7 @@ a:visited{ color:white;}
 -moz-border-radius: 35px;      /* Gecko browsers */
     -webkit-border-radius: 35px;   /* Webkit browsers */
     border-radius:40px;  padding-top:10px;
+z-index:12;
 margin-top:8px;
 /*background:rgba(165,38,38,0.7);*/}
 /*
