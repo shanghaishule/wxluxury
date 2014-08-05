@@ -923,7 +923,23 @@ class itemAction extends backendAction {
         echo '1';
         exit;
     }
-
+    //总后台主图删除
+    function delete_album_tb() {
+    	$album_mod = M('item_taobao');
+    	$album_id = $this->_get('album_id','trim');
+    	$item_id = $this->_get('item_id','trim');//echo $item_id."hi";die();
+    	$where["id"] = $item_id;
+    
+    	$album_img = $album_mod->where($where)->find();
+    	if($album_img ){
+    		$data["images"] = preg_replace('/|'.$album_id.'/',"",$album_img["images"]);
+    		 
+    		$album_mod->where($where)->save($data);
+    	}
+    	echo '1';
+    	exit;
+    }
+    
     function yiyuan(){
     	$item = M("item");    	
     	$id = $this->_get("id","trim");
