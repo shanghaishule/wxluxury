@@ -219,9 +219,9 @@
             <ul class="addpic">
             
             <volist name="imagesarr" id="val">      
-            <li class="album_{$val}">
-            <if condition="$edit_m neq 'total' and $val neq ''"><a href="javascript:void(0)" onclick="del_album({$val});"><img src="__STATIC__/css/admin/bgimg/tv-collapsable.gif" /></a>
-            </if>
+            <li class="album_{$val}"><!-- if condition $edit_m neq 'total' and $val neq ''"  /if-->
+            <a href="javascript:void(0)" onclick="del_album({$val});"><img src="__STATIC__/css/admin/bgimg/tv-collapsable.gif" /></a>
+            
             <if condition="$val neq ''">
             <a><img src="__PARENTURL__/Uploads/items/images/{$info.Uninum}/{$val}.jpg" style="width:200px;height:200px; border:solid 1px #000; "/></a>
             </if>
@@ -229,7 +229,7 @@
             </volist>
             
             </ul>
-            <div class="cb"></div><if condition="$edit_m neq 'total'">
+            <div class="cb"></div><!-- if condition="$edit_m neq 'total'" -->
             <table width="100%" cellpadding="2" cellspacing="1" class="table_form" id="first_upload_file">
                 <tbody class="uplode_file">
                 <tr>
@@ -241,7 +241,7 @@
                     <td>(建议大小460*460px)</td>
                 </tr>                
                 </tbody>
-            </table></if>
+            </table><!-- if -->
         </div>
 		<div class="content_list pad_10 hidden">
 		<table width="100%" cellpadding="2" cellspacing="1" class="table_form">
