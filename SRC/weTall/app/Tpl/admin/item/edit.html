@@ -223,7 +223,9 @@
             <if condition="$edit_m neq 'total' and $val neq ''">
             	<a href="javascript:void(0)" onclick="del_album({$val});"><img src="__STATIC__/css/admin/bgimg/tv-collapsable.gif" /></a>
             <else />
+               <if condition="$val neq ''">
             	<a href="javascript:void(0)" onclick="del_album_tb({$val});"><img src="__STATIC__/css/admin/bgimg/tv-collapsable.gif" /></a>
+               </if>
             </if>
             <if condition="$val neq ''">
             <a><img src="__PARENTURL__/Uploads/items/images/{$info.Uninum}/{$val}.jpg" style="width:200px;height:200px; border:solid 1px #000; "/></a>
