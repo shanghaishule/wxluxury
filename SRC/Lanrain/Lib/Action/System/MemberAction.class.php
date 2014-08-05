@@ -17,11 +17,13 @@ class MemberAction extends BackAction
    public function detailInfo(){
    	   $where['uid'] = $this->_get('id','trim');
    	   $userInfo = M('user_info')->where($where)->find();
-   	   if(empty($userInfo)){
-   	   	   $this->error("该用户还未填详细信息");
-   	   }else{
-   	   	   $this->assign('userInfo',$userInfo);
-   	   	   $this->display();
+   	   $this->assign('open_validator', true);
+   	   $this->assign('userInfo',$userInfo);
+   	   if (IS_AJAX) {
+   	   	$response = $this->fetch();
+   	   	$this->ajaxReturn(1, '', $response);
+   	   } else {
+   	   	$this->display();
    	   }
    }
     
