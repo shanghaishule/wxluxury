@@ -15,13 +15,12 @@ class MemberAction extends BackAction
     }
     //会员详情
    public function detailInfo(){
-   	   $where['id'] = $this->_get('id','trim');
+   	   $where['uid'] = $this->_get('id','trim');
    	   $userInfo = M('user_info')->where($where)->find();
    	   if(empty($userInfo)){
    	   	   $this->error("该用户还未填详细信息");
    	   }else{
    	   	   $this->assign('userInfo',$userInfo);
-   	   	   dump($userInfo);die();
    	   	   $this->display();
    	   }
    }
