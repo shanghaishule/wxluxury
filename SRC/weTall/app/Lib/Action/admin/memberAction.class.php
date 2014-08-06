@@ -15,7 +15,7 @@ class memberAction extends backendAction{
 	}	
 	//会员详情
 	public function _before_edit(){
-		dump('123');exit;
+
 	}
 	//会员详情
 	public function _before_add(){
