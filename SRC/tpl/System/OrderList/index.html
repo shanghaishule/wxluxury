@@ -57,8 +57,8 @@
           		状态 :
 		        <select name="status" >
 		        <option value="">--所有--</option>
-                   <?php foreach($order_status as $key=>$item){Lanrain: ?>
-                   <option <?php if($search['status']==$key) echo "selected=''"; ?> value="<?php echo $key; ?>"><?php echo $item; ?></option>
+                   <?php foreach($order_status as $key=>$item){?>
+                   <option value="{Lanrain:$key}">{Lanrain:$item}</option>
                     <?php } ?>
 		        </select>
 		                      商家:
