@@ -24,12 +24,11 @@ class OrderListAction extends BackAction{
 		$nowPage = isset($_GET['p'])?$_GET['p']:1;
 		$show       = $Page->show();// 分页显示输出
 		$pageData = $item_order->where($where)->order('id ASC')->limit($Page->firstRow.','.$Page->listRows)->select();
-		$shopArr = array();
+		$shopArr = M('wecha_shop')->field("tokenTall,name")->select();
 		foreach($pageData as $key => $val){
 			$shopName = M('wecha_shop')->where(array("tokenTall"=>$val['tokenTall']))->find();
 			if(!empty($shopName)){
 				$pageData[$key]['shopName']=$shopName['name'];
-				$shopArr[]=$shopName;
 			}
 
 		}
