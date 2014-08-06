@@ -1,5 +1,9 @@
 <?php
 class OrderListAction extends BackAction{
+	public function _initialize(){
+		$order_status=array(1=>'待付款',2=>'待发货',3=>'待收货',4=>'完成',5=>'关闭');
+		$this->assign('order_status',$order_status);
+	}
 	public function index(){
 		$item_order = M('item_order');
 		$count = $item_order->count();
