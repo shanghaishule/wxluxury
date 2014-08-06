@@ -52,12 +52,11 @@
             	<input type="hidden" name="g" value="System" />
                 <input type="hidden" name="m" value="Statistics" />
                 <input type="hidden" name="a" value="index" />
-                <input type="hidden" name="menuid" value="{Lanrain:Lanrain:$menuid}" />
+                <input type="hidden" name="menuid" value="{Lanrain:$menuid}" />
             	
           		状态 :
 		        <select name="status" >
 		        <option value="">--所有--</option>
-                    <option value="">--所有--</option>
                    <?php foreach($order_status as $key=>$item){Lanrain: ?>
                    <option <?php if($search['status']==$key) echo "selected=''"; ?> value="<?php echo $key; ?>"><?php echo $item; ?></option>
                     <?php } ?>

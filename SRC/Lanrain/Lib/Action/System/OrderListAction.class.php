@@ -11,10 +11,16 @@ class OrderListAction extends BackAction{
 		$nowPage = isset($_GET['p'])?$_GET['p']:1;
 		$show       = $Page->show();// 分页显示输出
 		$pageData = $item_order->order('id ASC')->limit($Page->firstRow.','.$Page->listRows)->select();
+		$shopArr = array();
 		foreach($pageData as $key => $val){
 			$shopName = M('wecha_shop')->where(array("tokenTall"=>$val['tokenTall']))->find();
-			$pageData[$key]['shopName']=$shopName['name'];
+			if(!empty($shopName)){
+				$pageData[$key]['shopName']=$shopName['name'];
+				$shopArr[]=$shopName;
+			}
+
 		}
+		dump($shopArr);die();
 		$this->assign('list',$pageData);
 		$this->assign('page',$show);// 赋值分页输出
 		$this->display();
