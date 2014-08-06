@@ -35,7 +35,6 @@ class DatafromShopAction extends BackAction
     		$pageData = $uploadShop->order('id ASC')->limit($Page->firstRow.','.$Page->listRows)->select();
     	}else{
     		$pageData = $uploadShop->where($where)->order('id ASC')->limit($Page->firstRow.','.$Page->listRows)->select();
-    		
     	}
     	$this->assign('list',$pageData);
     	$this->assign('page',$show);// 赋值分页输出
