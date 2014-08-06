@@ -4,7 +4,7 @@
 <table width="100%" cellpadding="2" cellspacing="1" class="table_form">
     <tr>
       <th width="80">性别 :</th>
-      <td>{$userInfo['sex']}</td>
+      <td><if condition="$userInfo['sex'] eq 0">男<else />女</if></td>
     </tr>
     <tr>
       <th>生日 :</th>
@@ -13,13 +13,13 @@
     <tr>
       <th>身高</th>
       <td>
-      {$userInfo['height']}
+      {$userInfo['height']}cm
       </td>
     </tr>
     <tr>
       <th>体重:</th>
       <td>
-      {$userInfo['weight']}
+      {$userInfo['weight']}kg
       </td>
     </tr>
     <tr>
