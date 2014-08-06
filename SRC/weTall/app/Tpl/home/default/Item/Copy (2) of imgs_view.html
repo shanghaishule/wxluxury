@@ -1,0 +1,38 @@
+<!DOCTYPE>
+<html>
+<head>
+	<include file="public:headtop" />
+	<script src="__STATIC__/js/jquery/jquery10.js"></script>
+</head>
+<body>
+<!--幻灯片广告-->
+<link type="text/css" rel="stylesheet" href="__STATIC__/css/slide.css">
+<div class="container">
+<div id="slides">
+<volist name="imgarr" id="bolist">
+<a href="javascript:void(0);"><img src="__PARENTURL__/Uploads/items/images/{$item['Uninum']}/{$bolist}.jpg" height="100%" alt="{$item.title}" /></a>
+</volist>
+</div>
+</div> 
+<script src="__STATIC__/js/jquery.slides.min.js"></script>
+<script>
+$(function() {
+   $('#slides').slidesjs({
+		width: 640,
+		height: 960,
+       play: {
+          active: false,
+          auto: false,
+          interval: 4000,
+          swap: true
+       }
+    });
+});
+</script>
+<!--幻灯片广告 end-->
+
+
+</body>
+
+
+</html>
