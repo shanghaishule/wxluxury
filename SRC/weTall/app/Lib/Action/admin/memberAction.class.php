@@ -4,6 +4,15 @@ class memberAction extends backendAction{
 		parent::_initialize();
 		$this->_mod=D('user_info');
 	}
+	public function _before_index() {
+		$big_menu = array(
+				'title' => '详细资料',
+				'iframe' => U('member/edit'),
+				'id' => 'edit',
+				'width' => '400',
+				'height' => '130'
+		);
+	}	
 	public function edit(){
 		$where['uid'] = $this->_get('id','trim');
 		$userInfo = $this->_mod->where($where)->find();
