@@ -69,7 +69,7 @@ class backendAction extends baseAction
             }
             if (!empty($_SESSION["img_name2"])) {
             	$data["imgurl"] = "/weTall/data/upload/item/".date('ym/d/').$_SESSION["img_name2"];
-            }            
+            }     
             if( $mod->add($data) ){
                 if( method_exists($this, '_after_insert')){
                     $id = $mod->getLastInsID();
