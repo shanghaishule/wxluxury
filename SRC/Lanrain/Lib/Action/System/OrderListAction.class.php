@@ -5,12 +5,25 @@ class OrderListAction extends BackAction{
 		$this->assign('order_status',$order_status);
 	}
 	public function index(){
+		if(IS_GET){
+			$status = $this->_get('status','trim');
+			$shop = $this->_get('shop','trim');
+			if($status != ''){
+				$where['status']=$status;
+			}
+			if($shop != ''){
+				$where['tokenTall']=$shop;
+			}
+			
+		}else{
+			$where = '';
+		}
 		$item_order = M('item_order');
-		$count = $item_order->count();
+		$count = $item_order->where($where)->count();
 		$Page = new Page($count,10);
 		$nowPage = isset($_GET['p'])?$_GET['p']:1;
 		$show       = $Page->show();// 分页显示输出
-		$pageData = $item_order->order('id ASC')->limit($Page->firstRow.','.$Page->listRows)->select();
+		$pageData = $item_order->where($where)->order('id ASC')->limit($Page->firstRow.','.$Page->listRows)->select();
 		$shopArr = array();
 		foreach($pageData as $key => $val){
 			$shopName = M('wecha_shop')->where(array("tokenTall"=>$val['tokenTall']))->find();
