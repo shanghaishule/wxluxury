@@ -20,7 +20,7 @@ class OrderListAction extends BackAction{
 			}
 
 		}
-		dump($shopArr);die();
+		$this->assign('shopInfo',$shopArr);
 		$this->assign('list',$pageData);
 		$this->assign('page',$show);// 赋值分页输出
 		$this->display();

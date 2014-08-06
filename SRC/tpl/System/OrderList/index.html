@@ -64,8 +64,8 @@
 		                      商家:
 		        <select name="shop" >
 		        <option value="">--所有--</option>
-		        <volist name="shopname" id="val2" >
-		        <option value="{Lanrain:Lanrain:$val2.shop_id}" <if condition="$val2['shop_id'] eq shop_id">selected</if>>{Lanrain:Lanrain:$val2.name}</option>
+		        <volist name="shopArr" id="val2" >
+		        <option value="{Lanrain:$val2.tokenTall}" >{Lanrain:$val2.name}</option>
 		        </volist>
 		        </select>                
 				<input type="submit" name="search" class="btn" value="搜索" />
