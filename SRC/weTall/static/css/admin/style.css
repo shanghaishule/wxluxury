@@ -317,7 +317,7 @@ dd{ padding:0 0 0 4px;}
 .tooltip.bottom {background:url(bgimg/black_arrow_bottom.png);padding-top:40px;height:55px;}
 
 /*分页*/
-#pages {text-align:right; float:right; margin-right:20px;}
+#pages {text-align:center; float:center; margin-right:20px;}
 #pages a { display:inline-block; height:22px; line-height:22px; background:#4d81bb; border:1px solid #e3e3e3; text-align:center; color:#fff; margin-left:4px; padding:0 4px;}
 #pages a.current { display:inline-block; width:26px; height:22px; line-height:22px; background:#5a85b2; border:1px solid #5a85b2; color:#fff; text-align:center; }
 #pages a.page_prev,#pages a.page_first,#pages a.page_last,#pages a.page_next { background:#4d81bb  0 5px; width:50px;}
