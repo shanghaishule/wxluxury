@@ -14,7 +14,7 @@ class MemberAction extends BackAction
     	$this->display();
     }
     //会员详情
-   public function detailInfo(){
+   public function edit(){
    	   $where['uid'] = $this->_get('id','trim');
    	   $userInfo = M('user_info')->where($where)->find();
    	   $this->assign('open_validator', true);

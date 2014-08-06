@@ -70,8 +70,8 @@
                 <td align="left">{Lanrain:$val.province}{Lanrain:$val.city}</td>
                 <td align="center">{Lanrain:$val.last_login_time|date='Y-m-d H:i:s',###}</td>
                 <td align="center">
-                <a class="J_showdialog" href="javascript:void(0);" data-uri="/weTall/index.php?g=admin&m=member&a=edit&id={Lanrain:$val.id}"  data-title="详细资料" data-id="edit" data-acttype="ajax" data-width="520" data-height="360"><em>查看详细资料</em></a>
-                | <a href="/weTall/index.php?g=System&m=Member&a=delete&id={Lanrain:$val.id}">删除</a></td>
+                <a class="J_showdialog" href="javascript:void(0);" data-uri="/index.php?g=System&m=Member&a=edit&id={Lanrain:$val.id}"  data-title="详细资料" data-id="edit" data-acttype="ajax" data-width="520" data-height="360"><em>查看详细资料</em></a>
+                | <a href="/index.php?g=System&m=Member&a=delete&id={Lanrain:$val.id}">删除</a></td>
             </tr>
             </volist>
     	</tbody>
