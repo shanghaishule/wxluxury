@@ -1,5 +1,5 @@
 <?php
-class indexAction extends frontendAction {
+class indexAction extends Action {//frontend
 
     public function index() {
     	//取商家token值，取不到则默认为空
@@ -186,7 +186,7 @@ class indexAction extends frontendAction {
     	$config['appSecret'] = "69289876b8d040b3f9a367c80f8754c8";
     	if(!isset($_SESSION['uid']) && empty($_SESSION['uid'])){
     	
-    		if (isset($_GET['code'])){
+    	//	if (isset($_GET['code'])){
     			//echo $_GET['code'].'--';
     			$Oauth = new Oauth2();
     			$userinfo=$Oauth->getUserinfo($_GET['code'],$config);
@@ -206,9 +206,9 @@ class indexAction extends frontendAction {
     				$_SESSION['openid']=$userinfo['openid'];
     			}
     			// dump($_SESSION['uid'].'-1-'.$_SESSION['name']);exit;
-    		}else{
-    			$this->error('页面已过期',U("index/brandshop"));
-    		}
+    		//}else{
+    		//	$this->error('页面已过期',U("index/brandshop"));
+    		//}
     	
     	}
     	$m=M();
