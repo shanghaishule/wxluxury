@@ -30,7 +30,6 @@ class OrderListAction extends BackAction{
 			if(!empty($shopName)){
 				$pageData[$key]['shopName']=$shopName['name'];
 			}
-
 		}
 		$this->assign('shopArr',$shopArr);
 		$this->assign('list',$pageData);
