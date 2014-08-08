@@ -156,6 +156,11 @@ class StatisticsAction extends BackAction
     		$this->error('参数错误');
     	}
     }
-
+    //导出体现
+	public function export(){
+		$exportArr = $this->_search();
+		dump($exportArr);die();
+		exportexcel($exportArr,array('商户流水号','收款人email','收款人姓名','付款金额(元)','付款理由'),'商家账号');
+	}
 }
 ?>
