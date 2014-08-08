@@ -165,7 +165,7 @@ class StatisticsAction extends BackAction
 			$arr[$key]['account']=$val['account'];
 			$arr[$key]['payee']=$val['payee'];
 			$arr[$key]['yaoti']=$val['yaoti'];
-			$arr[$key]['name']=$val['nanme'].'提现';
+			$arr[$key]['name']=$val['name'].'提现';
 		}
 		exportexcel($arr,array('商户流水号','收款人email','收款人姓名','付款金额(元)','付款理由'),'商家账号');
 	}
