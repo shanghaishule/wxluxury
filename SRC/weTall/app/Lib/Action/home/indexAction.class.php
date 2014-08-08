@@ -783,7 +783,6 @@ class indexAction extends frontendAction {//frontend
     			$this->nextPage($_SESSION['method'],$_SESSION['keyword'],$sortBy);
     		}
     	}
-    	
     }
     public function nextPagetuan($token,$itemid,$sortBy){
     	$tokenTall = $token;
