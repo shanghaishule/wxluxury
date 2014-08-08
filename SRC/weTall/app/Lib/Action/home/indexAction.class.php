@@ -762,6 +762,7 @@ class indexAction extends frontendAction {//frontend
     		$brandid=$this->_get("brandid","trim");
     		$method2=$this->_get("method","trim");
     		if($method2 != "local" and $method2 != "weFig" and $method2 != "shop" and $method2 != ""){//类别搜索
+    			echo '1';die();
     			$this->assign("method",$method2);
     			$this->nextPagetuan($_SESSION['token'],$method2,$sortBy);
     		
@@ -778,7 +779,6 @@ class indexAction extends frontendAction {//frontend
     			$this->assign("method",$_SESSION['method']); 
     		    $this->nextPage($_SESSION['method'], $_SESSION['keyword'],$sortBy, $_SESSION['token']);
     		}else{//关键字搜索后的分页
-    			echo '1';die();
     			$this->assign("method",$_SESSION['method']);
     			$this->nextPage($_SESSION['method'],$_SESSION['keyword'],$sortBy);
     		}
