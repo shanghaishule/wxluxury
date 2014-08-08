@@ -375,7 +375,7 @@ class indexAction extends frontendAction {//frontend
     	$discount_shop = M("set_discount");
     	$brand = M("brandlist");
     	$set_discount=M("set_discount");
-    	$discount_data = $discount_shop->order("status desc,date asc,start_time asc")->select();
+    	$discount_data = $discount_shop->order("status desc")->select();
     	
     	$nowTime = time();
     	foreach ($discount_data as $key => $val_data){
@@ -384,13 +384,13 @@ class indexAction extends frontendAction {//frontend
     		$discount[id]=$val_data["id"];
 
     		if($nowTime > $start_time && $nowTime < $end_time){
-	    		$update_status3["status"] = "1";
+	    		$update_status3["status"] = "2";
 	    		$set_discount->where($discount)->save($update_status3);
     		}elseif($nowTime < $start_time){
-    			$update_status2["status"] = "0";
+    			$update_status2["status"] = "1";
     			$set_discount->where($discount)->save($update_status2);
     		}else{
-    			$update_status["status"] = "2";
+    			$update_status["status"] = "0";
     			$set_discount->where($discount)->save($update_status);
     		}
     	}
