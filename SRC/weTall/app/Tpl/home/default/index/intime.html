@@ -49,7 +49,7 @@
       <if condition="$product['status'] eq 2"><img style="margin-right:5px;" width="66px" height="25px" src="/weTall/static/weixin/images/luxury/images/Ontime/1_04.png"></if>
       <if condition="$product['status'] eq 0"><img style="margin-right:5px;" width="66px" height="25px" src="/weTall/static/weixin/images/luxury/images/Ontime/4_04.png"></if></div>
       <div class="intime_img">
-      <a href="{:U('home/index/saohuo', array('brand_id'=>$product['brand_id'],'id'=>$product['id']))}"><img src="{$product.img}" width="100%"></a></img>
+      <a href="{:U('home/index/saohuo', array('brand_id'=>$product['brand_id'],'id'=>$product['id']))}"><img src="{$product.img}" width="100%"></a>
       </div> 
       <div class="Intime_detail"><div style="margin:0 auto;">
       <volist name="brand" id="vo">

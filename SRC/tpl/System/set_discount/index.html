@@ -108,10 +108,10 @@ $(function(){
                 <td align="left"><span data-tdtype="edit" data-field="ordid" data-id="{Lanrain:$val.id}" class="tdedit">{Lanrain:$val.start_time}</span></td>
                 <td align="center"><span data-tdtype="edit" data-field="ordid" data-id="{Lanrain:$val.id}" class="tdedit">{Lanrain:$val.end_time}</span></td>
                 <td align="center"><span data-tdtype="edit" data-field="ordid" data-id="{Lanrain:$val.id}" class="tdedit">
-				<if condition="$val['status'] eq 0">活动未开始</if>
-				<if condition="$val['status'] eq 1">
-				活动进行中</if>
+				<if condition="$val['status'] eq 1">活动未开始</if>
 				<if condition="$val['status'] eq 2">
+				活动进行中</if>
+				<if condition="$val['status'] eq 0">
 				活动已经结束</if>
 				</span></td>
                 <td align="center">
