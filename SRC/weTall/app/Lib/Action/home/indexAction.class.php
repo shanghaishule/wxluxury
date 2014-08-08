@@ -778,6 +778,7 @@ class indexAction extends frontendAction {//frontend
     			$this->assign("method",$_SESSION['method']); 
     		    $this->nextPage($_SESSION['method'], $_SESSION['keyword'],$sortBy, $_SESSION['token']);
     		}else{//关键字搜索后的分页
+    			echo '1';die();
     			$this->assign("method",$_SESSION['method']);
     			$this->nextPage($_SESSION['method'],$_SESSION['keyword'],$sortBy);
     		}
@@ -960,7 +961,6 @@ class indexAction extends frontendAction {//frontend
 	    	$nowPage = isset($_GET['p'])?$_GET['p']:1;
 	    	$show       = $Page->show();// 分页显示输出
 	    	$carryrecord  = $item->where($condition)->order($sortBy)->limit($Page->firstRow.','.$Page->listRows)->select();
-	    	 dump($carryrecord);die();
 	    	$this->assign("item",$carryrecord);
 	    	if ($_SESSION["search_all"] != "Y") {
 	    		$this->assign("method",$method);
