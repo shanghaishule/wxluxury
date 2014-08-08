@@ -752,9 +752,9 @@ class indexAction extends frontendAction {//frontend
                 $_SESSION['keyword']=$keyword;
                 $_SESSION['method']=$method;
     		}else{//店铺内搜索微服客
-    			$this->nextPage($method, $keyword,$sortBy);
     			$_SESSION['keyword']=$keyword;
     			$_SESSION['method']=$method;
+    			$this->nextPage($method, $keyword,$sortBy);
     		}
     		
     	}else{
@@ -779,8 +779,8 @@ class indexAction extends frontendAction {//frontend
     		    $this->nextPage($_SESSION['method'], $_SESSION['keyword'],$sortBy, $_SESSION['token']);
     		}else{//关键字搜索后的分页
     			$this->assign("method",$_SESSION['method']);
-    			
-    			$this->nextPage($_SESSION['method'], $_SESSION['keyword'],$sortBy);
+    			header("Content-Type:text/html;charset=utf-8");
+    			$this->nextPage($_SESSION['method'],$_SESSION['keyword'],$sortBy);
     		}
     	}
     	
