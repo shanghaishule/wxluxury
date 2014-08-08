@@ -50,4 +50,5 @@ function exportexcel($data=array(),$title=array(),$filename='report'){
 		}
 		echo implode("\n",$data);
 		}
+}		
 ?>
