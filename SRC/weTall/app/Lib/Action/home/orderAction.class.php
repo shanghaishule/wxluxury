@@ -276,7 +276,7 @@ class orderAction extends userbaseAction {
 			$this->display();
 		}else
 		{
-			$this->redirect('shopcart/index', array('tokenTall'=>$tokenTall));
+			$this->redirect('index/brandshop', array('tokenTall'=>$tokenTall));
 		}
 	}
 	
