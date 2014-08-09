@@ -85,6 +85,18 @@ class DatafromShopAction extends BackAction
 		return $info3;
 	
 	}
+	public function curlGet($url){
+		$ch = curl_init();
+		$header = "Accept-Charset: utf-8";
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		$temp = curl_exec($ch);
+		curl_close($ch);
+		return $temp;
+	
+	}
 	
 	
 	
