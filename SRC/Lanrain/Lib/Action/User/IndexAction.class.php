@@ -106,10 +106,17 @@ class IndexAction extends UserAction{
 	public function upsave(){
 		$weChaShop = M("wecha_shop");
 		$data1["address"] = $_POST["address"];
+		/*
 		$longitude = $this->_POST("longitude","trim");
 		$longitudes = explode(",", $longitude);
 		$data1["latitude"] = preg_replace('/\(/',"",$longitudes[0]);
 		$data1["longitude"] = preg_replace('/\)/',"",$longitudes[1]);
+		*/
+		//更新地址
+		$result = $this->getlatlng($data1["address"]);
+		$data1["longitude"] = $result['long'];
+		$data1["latitude"] = $result['lat'];
+		
 		$data1["shop_city"] = $this->_post("province","trim");
 		$where_shop['weName']=$_POST["wxname"];
 		$weChaShop->where($where_shop)->save($data1);
