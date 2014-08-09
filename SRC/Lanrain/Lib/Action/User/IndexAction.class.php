@@ -48,10 +48,19 @@ class IndexAction extends UserAction{
 		
 		//品牌
         $application= M("application")->where($where)->find();
-        //dump($application);
+        //dump($application);exit;
         $this->assign('mybrand',$application);
 		$brand = M("brandlist")->select();
 		$this->assign("brand",$brand);		
+		
+		//地址
+		$addr_where['province'] = $application['province'];
+		$addr_where['city'] = $application['city'];
+		$addr_where['brand_name'] = $application['brand'];
+		$addr_where['shop_name'] = $application['addr'];
+		$addr = M('upload_shop')->where($addr_where)->find();
+		//dump($addr);exit;
+		$this->assign("myaddr",$addr);
 		
 		//地理信息
 		//if (C('baidu_map_api')){
@@ -147,6 +156,7 @@ class IndexAction extends UserAction{
 					
 					$data1["name"] = $select_shop["shop_name"];
 					$data1["phone"] = $select_shop["phone"];
+					/*
 					$longitude = $this->_POST("longitude","trim");
 					$longitudes = explode(",", $longitude);
 					$data1["longitude"] = preg_replace('/\)/',"",$longitudes[1]);
@@ -157,6 +167,13 @@ class IndexAction extends UserAction{
 					if ($data1["latitude"] == "") {
 						$data1["latitude"] = $select_shop["lat"];
 					}
+					*/
+					//更新地址
+					$result = $this->getlatlng($data1["address"]);
+					$data1["longitude"] = $result['long'];
+					$data1["latitude"] = $result['lat'];
+					
+					
 					$data1["HaveReal"] = 0;
 					$data1["credit"] = 0;
 					$data1["shop_city"] = $this->_post("province","trim");
@@ -187,6 +204,9 @@ class IndexAction extends UserAction{
 					
 					//将上传的店铺状态设为已领取
 					$update_upload["status"] = 1;
+					$update_upload["longitude"] = $result['long'];
+					$update_upload["lat"] = $result['lat'];
+						
 					M("upload_shop")->where($up_shop)->save($update_upload);
 					
 					if($flag){
@@ -202,6 +222,36 @@ class IndexAction extends UserAction{
 		}
 		
 	}
+	public function getlatlng($address){
+		$info3 = array();
+		$request = $this->curlGet('http://api.map.baidu.com/geocoder/v2/?address='.rtrim($address).'&output=json&ak=1a555421447b51e2fbe7317a2656bc92');
+		$requestArray = json_decode($request, true);
+		//dump($requestArray);exit;
+		if ($requestArray['status']==0) {
+			$info3['lat'] = $requestArray['result']['location']['lat'];
+			$info3['long'] = $requestArray['result']['location']['lng'];
+		}else{
+			$info3['lat'] = 0;
+			$info3['long'] = 0;
+		}
+		//dump($info3);exit;
+			
+		return $info3;
+	
+	}
+	public function curlGet($url){
+		$ch = curl_init();
+		$header = "Accept-Charset: utf-8";
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		$temp = curl_exec($ch);
+		curl_close($ch);
+		return $temp;
+	
+	}
+	
 	
 	//功能
 	public function autos(){
