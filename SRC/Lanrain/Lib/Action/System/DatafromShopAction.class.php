@@ -67,6 +67,27 @@ class DatafromShopAction extends BackAction
 
 	    return $_coords; 
 	}
+	
+	public function getlatlng($address){
+		$info3 = array();
+		$request = $this->curlGet('http://api.map.baidu.com/geocoder/v2/?address='.rtrim($address).'&output=json&ak=1a555421447b51e2fbe7317a2656bc92');
+		$requestArray = json_decode($request, true);
+		//dump($requestArray);exit;
+		if ($requestArray['status']==0) {
+			$info3['lat'] = $requestArray['result']['location']['lat'];
+			$info3['long'] = $requestArray['result']['location']['lng'];
+		}else{
+			$info3['lat'] = 0;
+			$info3['long'] = 0;
+		}
+		//dump($info3);exit;
+			
+		return $info3;
+	
+	}
+	
+	
+	
     
     public function uploadShop(){    	
 
@@ -128,7 +149,9 @@ class DatafromShopAction extends BackAction
     			$exist_num++;
     		}else{
     		    if ($add_num > 0) {   
-	    			$uploadShop_data = $this->getLatLong($val["lbs_addr"]);
+	    			//$uploadShop_data = $this->getLatLong($val["lbs_addr"]);
+    		    	$uploadShop_data = $this->getlatlng($val["lbs_addr"]);
+    		    	
 	    			$shop_data = $val;
 	    			$shop_data["lat"] = $uploadShop_data['lat'];
 	    			$shop_data["longtitude"] = $uploadShop_data['long'];
