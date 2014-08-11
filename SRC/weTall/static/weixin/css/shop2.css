@@ -451,7 +451,7 @@ right: 5px;}
  .s_bottom_search{background: url(../images/gallery_btn.png) repeat-x left top; height:93px; margin-top:-65px;float:none;}
 
 .shoplogo{width:320px;position: relative;z-index:1;}
-.shoplogourl{width:40%;float:left;}
+.shoplogourl{width:50%;float:left;}
 .shoplogourl img{margin-left:10%}
 .favi{width:45%;padding-left:5%;float:left;color:#FFF;}
 .favi #operdetail li{/*display:inline-block;width:30%;*/color:#ff0000;font-size:16px;}
