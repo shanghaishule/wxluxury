@@ -653,7 +653,7 @@ class userAction extends userbaseAction {
     	/*店铺信息*/
     	$model=new Model();//".$userid."
     	$weChaShop = $model->table('tp_shop_favi a, tp_item b')
-    	->where("a.item_id = b.id and a.userid='9'")
+    	->where("a.item_id = b.id and a.userid=9")
     	->field("b.*, '".$tokenTall."' url")
     	->select();
     	//dump($weChaShop);exit;
