@@ -7,6 +7,8 @@
 <script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/jquery.validate.js" ></script>
 <script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/mlselection.js" ></script>
 <link rel="stylesheet" type="text/css" href="__STATIC__/weixin/css/jquery.ui.css" />
+<link href="__STATIC__/weixin/css/shop2.css" rel="stylesheet"
+	type="text/css">
 	<style>
 		.showhavereal{
 			margin-left: 5px;
@@ -80,42 +82,24 @@ function searchshop(id){
      <input type="hidden" name="latitude" value="{$latitude}" id="latitude">
      <input type="hidden" name="brand_id" id="txtHint">   
    </form>
-<div id="nav">
-    <img src="/weTall/static/weixin/images/luxury/images/home/bg_02.png" width="100%"/>
+	<div id="nav">
+			<img src="/weTall/static/weixin/images/luxury/images/home/bg_02.png"
+				width="100%" />
 
-	<ul class="navlist">
-		 <li class="r pos" id="n_0"><div class="home_page_logo"></div>
-		<div class="dis" id="dis">
-			 <ul>
-				  <volist name="item_cate" id="cate">
-				  	<li>
-				     <a href="{:U('home/index/search', array('itemid'=>$cate['id'],'itemname'=>$cate['name'],'tokenTall'=>$tokenTall))}">{$cate.name}</a>
-				    </li>
-				  </volist>
-			 </ul> 
-		</div>
-		</li>
-    	<li class="r" id="n_4"> 
-    		<span >我的收藏</span>
-        </li>
-         <li class="r" id="n_1">
-        <if condition="$yemian eq 'Item'">
-        <a href="{:U('home/user/index', array('tokenTall'=>$tokenTall))}"><div class="find_04"></div></a>
-        <else/>
-        <if condition="$gohref neq ''">
-        <a href="{:U('home/user/index', array('tokenTall'=>$tokenTall))}"><div class="find_04"></div></a>
-        <elseif condition="$gosearch eq 'Y'"/>
-       <!--  <a href="javascript:void(0)" onclick="searchshop({$brandid})"> -->
-        <a href="{:U('home/user/index', array('tokenTall'=>$tokenTall))}">
-        <div class="find_03">{$City}</div></a>
-        <else/>
-       <a href="{:U('home/user/index', array('tokenTall'=>$tokenTall))}">
-        <div class="find_03">{$City}</div></a></if>
-        
-        </if>
-        </li>
-        
-    </ul>
+			<ul class="navlist">
+				<li class="r pos" id="n_0">
+
+					<div class="back_page_logo">
+						<a href="javascript:history.back(-1)"><img
+							src="/weTall/static/weixin/images/back_page_logo.png" width="20%" /></a>
+
+					</div>
+					<div class="dis" id="dis">
+					</div>
+				</li>
+				<li class="r" id="n_4"><span>我的收藏</span></li>
+			</ul>	
+     </div>
     <script type="text/javascript">
     	$(".navlist > li#n_0").click(function(){
 			$(this).toggleClass("active");
@@ -128,12 +112,6 @@ function searchshop(id){
 			}
         });
     </script>
-</div>
-
-
-
-
-
 
 <div id="content">
 <!-- <div class="eject_btn"><a class="enter" style="background: purple;" href="javascript:void(0)">我的收藏</a></div> -->
@@ -143,7 +121,7 @@ function searchshop(id){
 	<a href="/weTall/index.php?g=home&m=index&a=brandshop&id={$vo.id}&tokenTall={$vo.url}">
 	<div class="shoplogo">
 	   <div class="shoplogourl">	   
-	      <img width="40%" src="{$vo.img}"/>
+	      <img width="100%" src="{$vo.img}"/>
 	   </div>
 	   <div class="favi">
 	      <div id="shopname">
