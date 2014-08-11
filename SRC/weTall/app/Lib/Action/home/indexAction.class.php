@@ -505,7 +505,7 @@ class indexAction extends frontendAction {//frontend
     	}else{
     		$shop_data = M("wecha_shop")->where($shop_id)->find();
     	}
-    	
+    	$this->assign('token',$token);
     	$this->assign("dmodel",$display_mode);
     	$this->assign("shopinfo",$shop_data);
     	$this->assign("start_point_lat",$start_point_lat);
