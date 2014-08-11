@@ -651,9 +651,9 @@ class userAction extends userbaseAction {
     	//$favi_list = $favi_mod->where(array('userid'=>$_SESSION['uid']))->select();
     	$userid = $_SESSION['uid'];
     	/*店铺信息*/
-    	$model=new Model();//".$userid."
+    	$model=new Model();//
     	$weChaShop = $model->table('tp_shop_favi a, tp_item b')
-    	->where("a.item_id = b.id and a.userid='39'")
+    	->where("a.item_id = b.id and a.userid='".$userid."'")
     	->field("b.*, '".$tokenTall."' url")
     	->select();
     	//dump($weChaShop);exit;
