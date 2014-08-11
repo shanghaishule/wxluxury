@@ -645,17 +645,15 @@ class userAction extends userbaseAction {
     	//取商家token值，取不到则默认为空
     	$item_cate=M("item_cate")->select();
     	$this->assign('item_cate',$item_cate);
-    	
-    	
     	$tokenTall = $this->getTokenTall();
     	
     	//$favi_mod = M('shop_favi');
     	//$favi_list = $favi_mod->where(array('userid'=>$_SESSION['uid']))->select();
     	$userid = $_SESSION['uid'];
     	/*店铺信息*/
-    	$model=new Model();
+    	$model=new Model();//".$userid."
     	$weChaShop = $model->table('tp_shop_favi a, tp_item b')
-    	->where("a.item_id = b.id and a.userid='".$userid."'")
+    	->where("a.item_id = b.id and a.userid='9'")
     	->field("b.*, '".$tokenTall."' url")
     	->select();
     	//dump($weChaShop);exit;
