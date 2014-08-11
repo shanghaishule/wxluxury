@@ -136,15 +136,14 @@ function searchshop(id){
 
 
 <div id="content">
-<div class="eject_btn"><a class="enter" style="background: purple;" href="javascript:void(0)">我的收藏</a></div>
+<!-- <div class="eject_btn"><a class="enter" style="background: purple;" href="javascript:void(0)">我的收藏</a></div> -->
     <div class="order_form">
     <volist name="weshopData"  id="vo">
 	<!--<a href="/weTall/index.php?g=home&m=Item&a=index&id={$vo.id}&tokenTall={$vo.url}">-->
 	<a href="/weTall/index.php?g=home&m=index&a=brandshop&id={$vo.id}&tokenTall={$vo.url}">
 	<div class="shoplogo">
 	   <div class="shoplogourl">	   
-	      <img width="60" src="{$vo.img}"/>
-	    	    
+	      <img width="40%" src="{$vo.img}"/>
 	   </div>
 	   <div class="favi">
 	      <div id="shopname">
