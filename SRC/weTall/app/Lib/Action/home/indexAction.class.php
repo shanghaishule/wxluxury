@@ -537,7 +537,7 @@ class indexAction extends frontendAction {//frontend
     		$loty = "108.9471";
     		$city = "西安";
     	}
-    	if ($lotx != "") {
+    	if($lotx != "") {
     		$_SESSION["longtitude"] = $loty;
     		$_SESSION["latitude"] = $lotx;
     	} 

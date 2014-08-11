@@ -720,7 +720,6 @@ class userAction extends userbaseAction {
     	$this->assign("my_points",$array_mypoints);
     	$this->assign("title","我的积分");
     	$this->display("jifen");
-    	
     }
      /**
      *	追加评论

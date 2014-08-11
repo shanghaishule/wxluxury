@@ -10,6 +10,10 @@ class settingAction extends backendAction {
     public function index() {
     	$where["tokenTall"]=$_SESSION["tokenTall"];
         $wecha_shop = $this->_mod->where($where)->find();
+        foreach ($wecha_shop as $key => $val){
+        	$res = M('brandlist')->where(array(''=>$val['BelongBrand']))->find();
+        	$wecha_shop[$key]['brandN']=$res['name'];
+        }
         $this->assign("wecha_shop",$wecha_shop);
         $this->display();
     }
