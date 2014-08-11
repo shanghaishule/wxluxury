@@ -59,7 +59,7 @@ a:visited{ color:white;}
 .pro_title{color:white;font-size:12px;font-weight:500;}
 .pro_jifen{color:red;font-size:11px;}
 .purchase{width:95%;padding:3px 0px 0px 0;text-align:right;}
-#shopname{border-bottom:1px solid #d9d9d9;border-left:1px solid #d9d9d9;}
+#shopname{/*border-bottom:1px solid #d9d9d9;border-left:1px solid #d9d9d9;*/}
 .dail{
 	margin-left:50px;
 	padding:3px;
@@ -456,9 +456,9 @@ right: 5px;}
 
 .shoplogo{width:320px;position: relative;z-index:1;}
 .shoplogourl{width:20%;float:left;}
-.favi{width:80%;float:left;border-top: 1px solid #EAEAEA;color:#9F79EE;}
-.favi #operdetail li{display:inline-block;font-size:10px;width:30%;text-align:center;}
-.favi #operdetail #m_1,.favi #operdetail #m_2,.favi #operdetail #m_3{border-left: 1px solid #EAEAEA;}
+.favi{width:80%;float:left;color:#9F79EE;}
+.favi #operdetail li{/*display:inline-block;width:30%;*/font-size:10px;text-align:center;}
+.favi #operdetail #m_1,.favi #operdetail #m_2,.favi #operdetail #m_3{/*border-left: 1px solid #EAEAEA;*/}
 
 #nav .normal { display: block; font-size: 12px; font-weight: bold; color: #666; text-decoration: none; background: url(../images/normal.gif) no-repeat right top; }
 #nav .normal:hover { text-decoration: underline; }
