@@ -386,16 +386,19 @@ class indexAction extends frontendAction {//frontend
     		if($nowTime > $start_time && $nowTime < $end_time){
 	    		$update_status["status"] = "2";
 	    		$set_discount->where($discount)->save($update_status);
+	    		$discount_data[$key]['status']='2';
     		}elseif($nowTime < $start_time){
     			$update_status["status"] = "1";
     			$set_discount->where($discount)->save($update_status);
+    			$discount_data[$key]['status']='1';
     		}else{
     			$update_status["status"] = "0";
     			$set_discount->where($discount)->save($update_status);
+    			$discount_data[$key]['status']='0';
     		}
     	}
     	//var_dump($discount_data);die();
-    	$this->assign("huodongstatus",$update_status["status"]);
+    	//$this->assign("huodongstatus",$update_status["status"]);
     	$this->assign("brand",$brand->select());
     	$this->assign("ontime",$discount_data);
     	$this->display();
