@@ -384,11 +384,11 @@ class indexAction extends frontendAction {//frontend
     		$discount[id]=$val_data["id"];
 
     		if($nowTime > $start_time && $nowTime < $end_time){
-	    		$update_status3["status"] = "2";
-	    		$set_discount->where($discount)->save($update_status3);
+	    		$update_status["status"] = "2";
+	    		$set_discount->where($discount)->save($update_status);
     		}elseif($nowTime < $start_time){
-    			$update_status2["status"] = "1";
-    			$set_discount->where($discount)->save($update_status2);
+    			$update_status["status"] = "1";
+    			$set_discount->where($discount)->save($update_status);
     		}else{
     			$update_status["status"] = "0";
     			$set_discount->where($discount)->save($update_status);
