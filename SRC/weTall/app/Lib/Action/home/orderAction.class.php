@@ -73,7 +73,7 @@ class orderAction extends userbaseAction {
 				
 				//个人品牌积分
 				$user_jifen = M("user");
-				$user["id"]=$_SESSION['user_info']['id'];
+				$user["id"]=$_SESSION['uid'];
 				$userinfo=$user_jifen->where($user)->find();
 				$detail_user=explode(",", $userinfo["brand_jifen"]);
 				$flag = true;
@@ -99,7 +99,7 @@ class orderAction extends userbaseAction {
 					$return_jifen = $return_jifen.$item_data["brand"]."|".$brand_fenzhi1["jifen"].",";
 				}
 				$user_jifen_data["brand_jifen"]=$return_jifen;
-				$user["id"]=$_SESSION['user_info']['id'];
+				$user["id"]=$_SESSION['uid'];
 				$user_jifen->where($user)->save($user_jifen_data);
 				
 				$stock_data["detail_stock"]=$stock_detail;

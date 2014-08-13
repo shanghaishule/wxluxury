@@ -362,7 +362,6 @@ class itemAction extends backendAction {
     				if($success_num >= 1) {
     					break;
     				}
-    				
     				if($this->get_good_attr($good_url,$item["brand"]) == "H"){//已经存在
     					$have = $have + 1;
     				}elseif ($this->get_good_attr($good_url,$item["brand"])) { //成功导入
@@ -625,7 +624,7 @@ class itemAction extends backendAction {
 	 * @return array
 	 */
 	public function _filterUrl($web_content) {
-		$reg_tag_a = '/<[a|A].*?href=[\'\"]{0,1}([^>\'\"\ ]*[\?|&]id=.*).*?>/';
+		$reg_tag_a = '/<[a|A].*?href=[\'\"]{0,1}([^>\'\"\]*[\?|&]id=.*).*?>/';
 		$result = preg_match_all($reg_tag_a, $web_content, $match_result);
 		if ($result) {
 			return $match_result[1];

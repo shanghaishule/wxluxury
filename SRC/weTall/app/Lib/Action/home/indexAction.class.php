@@ -140,7 +140,7 @@ class indexAction extends frontendAction {//frontend
     				$where["Uninum"] = $var_item["Uninum"];
     				$item_tao = M("item_taobao")->where($where)->find();
     				$item_goods[$i]["zhekou"]=round($var_item["price"]*10/$item_tao["price"],1);
-    				$i++;
+    				$i+=30;
     				if ($num_now <= $i){break;}
     			}
     			
