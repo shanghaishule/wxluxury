@@ -42,7 +42,7 @@ class DatafromShopAction extends BackAction
     	$this->assign('shop_name',$shop_name);// 赋值分页输出
     	
     	$brandlist = M("brandlist");
-    	$this->assign('brandlist',$brandlist->field('name')->select());// 赋值分页输出
+    	$this->assign('brandlist',$brandlist->field('name')->order('name')->select());// 赋值分页输出
 		$this->display();
 		
     }

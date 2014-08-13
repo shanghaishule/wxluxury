@@ -36,7 +36,7 @@ class DatafromTbAction extends BackAction
 		$list = $UserDB->where($map)->order('id ASC')->limit($Page->firstRow.','.$Page->listRows)->select();
 		
 		$this->assign("im_message",M("message_check")->field("text")->find());
-		$this->assign("brandlist",$brandlist->select());
+		$this->assign("brandlist",$brandlist->order('name')->select());
 		$this->assign('list',$list);
 		$this->assign('page',$show);// 赋值分页输出
 		$this->display();
