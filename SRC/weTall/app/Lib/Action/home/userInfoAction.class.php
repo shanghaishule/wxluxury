@@ -19,7 +19,11 @@ class userInfoAction{
 				$Oauth = new Oauth2();
 				$userinfo=$Oauth->getUserinfo($_GET['code'],$config);
 				dump($userinfo);
+			}else{
+				echo 'no code';
 			}
+		}else{
+			echo '1';
 		}		
 	}
 }
