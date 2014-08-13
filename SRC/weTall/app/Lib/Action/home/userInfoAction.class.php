@@ -18,7 +18,7 @@ class userInfoAction{
 				//echo $_GET['code'].'--';
 				$Oauth = new Oauth2();
 				$userinfo=$Oauth->getUserinfo($_GET['code'],$config);
-				return $userinfo;
+				dump($userinfo);
 			}
 		}		
 	}
