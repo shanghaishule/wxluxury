@@ -2,7 +2,7 @@
 class userInfoAction{
 	//返回用户信息
 	public function index(){
-		$redirecturl = urlencode("http://www.kuyimap.com/weTall/index.php?g=home&m=userInfo&a=returnUserInfo");
+		$redirecturl = urlencode("http://www.wxyaoyiyao.com/Wall/vote/test_getInfo.php");
 		$url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx3079f89b18863917&redirect_uri=".$redirecturl."&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
 		//$url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx3079f89b18863917&redirect_uri=".$redirecturl."&response_type=code&scope=snsapi_userinfo&state=zcb#wechat_redirect";
 		header("Location: ".$url);		 
