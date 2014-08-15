@@ -36,7 +36,7 @@ class orderAction extends userbaseAction {
 		!$orderId && $this->_404();
 		$item_order=M('item_order');
 		$item=M('item');
-		$item_orders= $item_order->where("orderId='".$orderId."' and userId='".$this->visitor->info['id']."' and status=3")->find();
+		$item_orders= $item_order->where("orderId='".$orderId."' and userId='".session('uid')."' and status=3")->find();
 		if(!is_array($item_orders))
 		{
 			$this->error('该订单不存在!');
