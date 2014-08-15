@@ -72,7 +72,7 @@ class orderAction extends userbaseAction {
 				}
 				
 				//个人品牌积分
-				$user_jifen = M("user");
+				/*$user_jifen = M("user");
 				$user["id"]=$_SESSION['uid'];
 				$userinfo=$user_jifen->where($user)->find();
 				$detail_user=explode(",", $userinfo["brand_jifen"]);
@@ -101,6 +101,23 @@ class orderAction extends userbaseAction {
 				$user_jifen_data["brand_jifen"]=$return_jifen;
 				$user["id"]=$_SESSION['uid'];
 				$user_jifen->where($user)->save($user_jifen_data);
+				*/
+				//改版品牌积分start
+				$jifen = M("brandpoints");
+				$item_data = $item->where("id='".$val['itemId']."'")->find();
+				$con['uid']=session("uid");
+				$con['brandid']=$item_data['brand'];
+			    $brand_is = $jifen->where($con)->find();
+			    //获取品牌积分
+			    $points = M("brandlist")->where(array("id"=>$item_data['brand']))->find();
+			    $all_points = ($val['quantity'])*($points['jifen']);
+			    if($brand_is){//存在
+			    	$jifen->where($con)->setInc('points',$all_points);
+			    }else{//不存在
+			    	$con['points'] = $all_points;
+			    	$jifen->add($con);
+			    }
+			    //改版品牌积分end
 				
 				$stock_data["detail_stock"]=$stock_detail;
 				$item->where("id='".$val['itemId']."'")->save($stock_data);
