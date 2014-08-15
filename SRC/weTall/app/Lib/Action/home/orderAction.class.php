@@ -42,7 +42,7 @@ class orderAction extends userbaseAction {
 			$this->error('该订单不存在!');
 		}
 		$data['status']=4;//收到货
-		//if($item_order->where("orderId='".$orderId."' and userId='".$this->visitor->info['id']."'")->save($data))
+		if($item_order->where("orderId='".$orderId."' and userId='".session("uid")."'")->save($data))
 		{
 			$order_detail=M('order_detail');
 			$order_details = $order_detail->where("orderId='".$orderId."'")->select();
@@ -123,7 +123,7 @@ class orderAction extends userbaseAction {
 				$item->where("id='".$val['itemId']."'")->save($stock_data);
 			}
 			$this->redirect('user/index',array('status'=>$status,'tokenTall'=>$tokenTall));
-		//}else
+		}//else
 		//{
 		//	$this->error('确定收货失败');
 		}
