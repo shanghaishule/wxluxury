@@ -29,6 +29,23 @@ class item_orderAction extends backendAction {
 	    	foreach ($order_details as $val)
 	     	{
 	     	$item->where("id='".$val['itemId']."'")->setInc('buy_num',$val['quantity']);
+	     	//给用户增加积分
+	     	$jifen = M("brandpoints");
+	     	$item_data = $item->where("id='".$val['itemId']."'")->find();
+	     	$userInfo = $this->_mod->where("orderId='".$orderId."'")->find();
+	     	$con['uid']=$userInfo['userId'];
+	     	$con['brandid']=$item_data['brand'];
+	     	$brand_is = $jifen->where($con)->find();
+	     	//获取品牌积分
+	     	$points = M("brandlist")->where(array("id"=>$item_data['brand']))->find();
+	     	$all_points = ($val['quantity'])*($points['jifen']);
+	     	if($brand_is){//存在
+	     		$jifen->where($con)->setInc('points',$all_points);
+	     	}else{//不存在
+	     		$con['points'] = $all_points;
+	     		$jifen->add($con);
+	     	}	     	
+	     	
 	        }
 	        $dataTall["tokenTall"]=$this->_get("tokenTall","trim");//echo $dataTall["tokenTall"];die();
 	        $shopcredit=M("wecha_shop");
