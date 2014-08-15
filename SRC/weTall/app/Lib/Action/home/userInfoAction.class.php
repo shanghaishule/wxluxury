@@ -15,18 +15,16 @@ class userInfoAction{
 		if (isset($_GET['code'])){
 			//echo $_GET['code'].'--';
 			$Oauth = new Oauth2();
-			//$userinfo=$Oauth->getUserinfo($_GET['code'],$config);
-			$userinfo = array('0'=>"a",'1'=>'b','2'=>'c','3'=>'d');
+			$userinfo=$Oauth->getUserinfo($_GET['code'],$config);
 			//dump(json_encode($userinfo));
-			echo json_encode($userinfo);
+			return $userinfo;
 		}else{
 			echo 'no code';
 		}
 		
 	}
 	public function test(){
-		$userinfo = array('01'=>"a",'10'=>'b','11'=>'c','100'=>'d');
-		//dump(json_encode($userinfo));
+		$userinfo = $this->index();
 		echo json_encode($userinfo);		
 	}
 }
