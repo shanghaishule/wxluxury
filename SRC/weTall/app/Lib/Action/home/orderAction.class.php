@@ -30,7 +30,6 @@ class orderAction extends userbaseAction {
 		//取商家token值，取不到则默认为空
 		$tokenTall = $this->getTokenTall();
 		$this->assign('tokenTall',$tokenTall);
-	
 		$orderId=$_GET['orderId'];
 		$status=$_GET['status'];
 		!$orderId && $this->_404();
@@ -123,7 +122,7 @@ class orderAction extends userbaseAction {
 				$item->where("id='".$val['itemId']."'")->save($stock_data);
 			}
 			$this->redirect('user/index',array('status'=>$status,'tokenTall'=>$tokenTall));
-		}//else
+		 //}//else
 		//{
 		//	$this->error('确定收货失败');
 		}
