@@ -15,8 +15,9 @@ class userInfoAction{
 		if (isset($_GET['code'])){
 			//echo $_GET['code'].'--';
 			$Oauth = new Oauth2();
-			$userinfo=$Oauth->getUserinfo($_GET['code'],$config);
-			dump($userinfo);
+			//$userinfo=$Oauth->getUserinfo($_GET['code'],$config);
+			$userinfo = array('0'=>"a",'1'=>'b','2'=>'c','3'=>'d');
+			dump(json_encode($userinfo));
 			//return $userinfo;
 		}else{
 			echo 'no code';
