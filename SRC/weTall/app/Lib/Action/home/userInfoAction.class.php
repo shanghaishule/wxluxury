@@ -24,6 +24,11 @@ class userInfoAction{
 		}
 		
 	}
+	public function test(){
+		$userinfo = array('01'=>"a",'10'=>'b','11'=>'c','100'=>'d');
+		//dump(json_encode($userinfo));
+		echo json_encode($userinfo);		
+	}
 }
 
 ?>
