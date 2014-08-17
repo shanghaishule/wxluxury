@@ -74,6 +74,9 @@ class frontendAction extends baseAction {
     private function _init_visitor() {
     	$this->visitor = new user_visitor();
         $this->assign('visitor', $this->visitor->info);
+     if (isset($_GET['isshow'])) {
+     	
+     }else{
         $config['appId'] = "wx3079f89b18863917";
 		$config['appSecret'] = "69289876b8d040b3f9a367c80f8754c8";
         //dump($_SESSION);exit;
@@ -107,7 +110,7 @@ class frontendAction extends baseAction {
 			}
         }
         
-        
+     }  
 	    
     }
 
