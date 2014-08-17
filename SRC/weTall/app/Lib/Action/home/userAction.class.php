@@ -849,7 +849,7 @@ class userAction extends userbaseAction {
     	$Sel_sql = "SELECT i.title, i.img,s.item_id FROM tp_item i, tp_shop_favi s ";
     	$Where_sql = "WHERE i.id = s.item_id and s.userid = ".$uid;
     	$result=$m->query($Sel_sql.$Where_sql);
-    
+    //dump($result);exit;
     	//items 设定
     	//$math_data = M("match")->where($where)->find();
     	$math_data = $_SESSION['math_data'];
@@ -899,13 +899,13 @@ class userAction extends userbaseAction {
     		//
     		if($data['is_send'] == "0"){
     				$this->success('保存成功！');
-    	}else{
-    		$this->success('发稿成功！');
-    		}
+			}else{
+				$this->success('发稿成功！');
+			}
     
-    		}
+    	}
     
-    		$this->display();
+    	$this->display();
     }
  
     public function preMatch() {
