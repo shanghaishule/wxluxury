@@ -764,7 +764,7 @@ class userAction extends userbaseAction {
     public function mymatch() {
     	$uid = $_SESSION['uid'];
     	$m=M();
-    	$Sel_sql = "SELECT * from tp_match where is_send = 1 & uid = ".$uid;
+    	$Sel_sql = "SELECT * from tp_match where is_send = 1 and uid = ".$uid;
     	$result=$m->query($Sel_sql);
     	$item_favi_detail = M("item");
     	$match_table = array();
@@ -807,8 +807,9 @@ class userAction extends userbaseAction {
     public function mysave() {
     	$uid = $_SESSION['uid'];
     	$m=M();
-    	$Sel_sql = "SELECT * from tp_match where is_send = 2 & uid = ".$uid;
+    	$Sel_sql = "SELECT * from tp_match where is_send = 2 and uid = ".$uid;
     	$result=$m->query($Sel_sql);
+		//dump($result);exit;
     	$item_favi_detail = M("item");
     	$match_table = array();
     	$id=0;
@@ -919,7 +920,11 @@ class userAction extends userbaseAction {
     $result = $this->getUserFavi();
     //取得所选收藏
     $item_ids = $this->getSelFavi($result);
-    
+	if($item_ids === false){
+		$this->error('您没有选择收藏的商品');
+	}
+    //dump($result);exit;
+	
     $data['item_ids'] = $item_ids;
     $data['uid'] = $uid;
     $data['my_img'] = $_POST['img_name'];
