@@ -1,5 +1,5 @@
 <?php
-class indexAction extends frontendAction {//frontend
+class indexAction extends Action {//frontend
 
     public function index() {
     	//取商家token值，取不到则默认为空
