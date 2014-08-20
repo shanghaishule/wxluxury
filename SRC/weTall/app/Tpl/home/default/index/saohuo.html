@@ -74,15 +74,12 @@
     <a href="#top"><img src="__STATIC__/images/top3.png"></a>
  </div>
  <script>
- $(function(){
-	 $(".d1").css("display","block");
- });
-    var index = 2;
+    var index = 1;
+	window.setInterval("saohuo_block("+index+")",3000);	
 	function saohuo_block(n){
 		$(".d"+n).css("display","block");
 		index++;
 	}
-	setInterval(saohuo_block(index),3000);	
  </script>
 <include file="public:footer" />
 </body>
