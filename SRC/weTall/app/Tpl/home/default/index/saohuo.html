@@ -74,13 +74,14 @@
     <a href="#top"><img src="__STATIC__/images/top3.png"></a>
  </div>
  <script>
-    var indexz = $(".imgIntime2").length;
+    var indexz = $(".imgIntime2").length;//获取总的折扣商品
+    $(".d"+indexz).css("display","block");//默认页面加载显示一个
 	var clear = setInterval("saohuo_block()",30000);//每隔30秒显示一件商品
 	if(indexz <=0){
 		clearInterval(clear);
 	}
 	function saohuo_block(){
-		$(".d"+indexz).css("display","block");
+		$(".d"+(indexz-1)).css("display","block");
 		indexz--;
 	}
  </script>
