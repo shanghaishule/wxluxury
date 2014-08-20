@@ -12,7 +12,9 @@
 <link type="text/css" rel="stylesheet" href="__STATIC__/weixin/css/shop.css">
 <link type="text/css" rel="stylesheet" href="__STATIC__/weixin/css/shopother.css">
 <script type="text/javascript" src="__STATIC__/js/jquery_min.js"></script>
-
+<style>
+.imgIntime2{display:none}
+</style>
 </head>
 <body>
 <div style="background:none">
@@ -48,15 +50,18 @@
         			alert("活动已经结束，请参加别的活动");
         		}
         	  });
-			
 		}
+		var index = 2;
+		function saohuo_block(n){
+			$(".d"+n).css("display","block");
+			index++;
+		}
+		setInterval(saohuo_block(index),5000);
     </script>
-    
-	
 </div>
   
    <volist name="item" id="product" key="k">
-    <div  class="imgIntime2">
+    <div  class="imgIntime2 d{$k}">
       <div class="intime_img_detail">
       <a href="javascript:void(0)" onclick="saohuo({$product['id']})"><img src="{$product.img}" width="100%">
       </a></div>
@@ -76,6 +81,11 @@
  <div class="goto_top">
     <a href="#top"><img src="__STATIC__/images/top3.png"></a>
  </div>
+ <script>
+ $(function(){
+	 $(".d1").css("display","block");
+ });
+ </script>
 <include file="public:footer" />
 </body>
 </html>
