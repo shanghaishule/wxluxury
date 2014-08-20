@@ -74,11 +74,14 @@
     <a href="#top"><img src="__STATIC__/images/top3.png"></a>
  </div>
  <script>
-    var indexz = 1;
-	setInterval("saohuo_block()",3000);	
+    var indexz = $(".imgIntime2").length;
+	var clear = setInterval("saohuo_block()",3000);
+	if(indexz <=0){
+		clearInterval(clear);
+	}
 	function saohuo_block(){
 		$(".d"+indexz).css("display","block");
-		indexz++;
+		indexz--;
 	}
  </script>
 <include file="public:footer" />
