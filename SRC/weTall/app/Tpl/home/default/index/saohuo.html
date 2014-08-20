@@ -75,10 +75,10 @@
  </div>
  <script>
     var indexz = 1;
-	window.setInterval("saohuo_block("+indexz+")",3000);	
-	function saohuo_block(n){
+	setInterval("saohuo_block()",3000);	
+	function saohuo_block(){
+		$(".d"+indexz).css("display","block");
 		indexz++;
-		$(".d"+n).css("display","block");
 	}
  </script>
 <include file="public:footer" />
