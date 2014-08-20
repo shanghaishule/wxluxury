@@ -56,16 +56,16 @@
 	   </table>
    <div style="width:100%;margin-top:25px;">
         <div class="shark-review" style="width:25%;height:30px;border:1px;position:relative;float:left;margin-left:5%;">
-            <img src="/weTall/static/images/yulan.png" style="position:relative;z-index:1;marign-left:30%" width="30px" height="30px"/>
+            <img src="/weTall/static/images/uploadpic.png" style="position:relative;z-index:1;marign-left:30%" width="30px" height="30px"/>
 	        <input  name="my_img" id="my_img" onchange="valtext()" type="file" style="position:absolute;top:0px;left:0px;z-index:2;opacity: 0;"/><br/>
 	        <input type="text" name="img_name" id="img_name" style="background:transparent;border:1px solid white;color:grey;height:20px;font-size:7px;font-family:"宋体" 
-	        placeholder="输入图片名称" autofocus x-webkit-speech value="{$math_data.my_img}">
+	        placeholder="请先上传" autofocus x-webkit-speech value="{$math_data.my_img}">
         </div>
         <div class="head_two"style="float:left;width:70%;">
 		    <ul style="background:black;color:white;height:32px">
 	            <!-- <td class="head_t" style="width:57px"><img src="/weTall/static/images/yulan.png" /> </br>上传图片-->
 		        <!-- <td class="head_t" style="width:57px" ><img src="/weTall/static/images/heart.png"/></br>添加收藏</td> -->
-		        <li class="head_t" style="width:15%;float:left;"><img id="preview" src="/weTall/static/images/eye_24.png" "/><br/>预览</li>
+		        <li class="head_t" style="width:15%;float:left;"><img id="preview" src="/weTall/static/images/eye_25.png" "/><br/>预览</li>
 	         	<li class="keep" style="float:left;margin-left:6%"><input id="save" name="save" style="border-radius:0px;font-size:20px" value="保存" class="common_btn2" type="submit"></input></li>
 	         	<li class="keep" style="float:left;"><input id="send" name="send"  style="border-radius:0px;font-size:20px" value="发稿" class="common_btn2" type="submit" ></input></li>	
 		   </ul>	
@@ -106,7 +106,7 @@
 		      width="20" height="20" src="__STATIC__/weixin/images/favi.png" id ="{$vo.item_id}" />
 		      </a>--> 
 	         	 <div class="item" style="position: relative;width:100%">
-		              <img id ="{$vo.item_id} width="30px" height="30px" src="/weTall/static/weixin/images/favi.png" style=" position: absolute;right:0;top:0" />
+		              <img id ="{$vo.item_id}" width="30px" height="30px" src="/weTall/static/weixin/images/huigou.png" style=" position: absolute;right:0;top:0" />
 					  <a href="javascript:void(0)" onclick="match_action({$vo.item_id})">
 			          <img width="190px" height="190px" src="{$vo.img}"/>
 					  </a>
@@ -183,12 +183,12 @@ function match_action(item_id){
 	old_src = $(sel_id).attr("src");
 	old_file = old_src.match(/[^\/]*$/)[0];
 	old_path = old_src.replace(old_file,""); 	
-	if(old_file == "favi2.png"){
-		$(sel_id).attr("src",old_path + "favi.png"); 
-		$(txt_id).val("0"); 
-	}else{
-		$(sel_id).attr("src",old_path + "favi2.png");
+	if(old_file == "huigou.png"){
+		$(sel_id).attr("src",old_path + "honggou.png"); 
 		$(txt_id).val("1"); 
+	}else{
+		$(sel_id).attr("src",old_path + "huigou.png");
+		$(txt_id).val("0"); 
 	}
 };
 
