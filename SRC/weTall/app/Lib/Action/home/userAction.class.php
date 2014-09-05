@@ -1017,7 +1017,7 @@ class userAction extends userbaseAction {
     		$data['uid'] = session('uid');
     		if(!empty($data['uid'])){
     			$userinfo=M('user_info')->where($data)->find();
-    			$title_arr=array("晚装","正装","休闲","运动","打底");//主题
+    			$title_arr=array(0=>"晚装",1=>"正装",2=>"休闲",3=>"运动",4=>"打底");//主题
     			$color_arr=array("纯色","撞色","拼贴","其他");//颜色
     			$style_arr=array("嬉皮","英伦风","日韩风","民族","田园风","运动风","百搭","其他");//风格
     			$element_arr=array("印花","透视","花卉","图案","条纹","格子","波点","蕾丝","其他");//元素

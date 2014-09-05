@@ -285,17 +285,12 @@ input,button,select,textarea{outline:none}
 				<div class="secall_2">
 					<div class="title1">主题：</div>
 					<foreach name="title_arr" item="vo">
-						{$vo[0]}{$vo[1]}{$vo[2]}{$vo[3]}
+					{$vo}{$vo[0]}
 					</foreach>
 					<div class="seclistd">
 						<ul>
 						 <foreach name="title_arr" item="vo">
-			
-			<li><label><input data-role="none" type="checkbox" name="hobby_title[]" 
-		<foreach name="hobby_title" item="val">
-			<if condition="$val eq $vo">checked</if>
-		</foreach> value="{$vo}">{$vo}</label></li>							
-							
+			<li><label><input data-role="none" type="checkbox" name="hobby_title[]" <foreach name="hobby_title" item="val"><if condition="$val eq $vo">checked</if></foreach> value="{$vo}" />{$vo}</label></li>							
 						 </foreach>	
 						</ul>
 					</div>
