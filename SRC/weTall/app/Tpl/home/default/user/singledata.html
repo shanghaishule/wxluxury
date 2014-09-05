@@ -284,6 +284,7 @@ input,button,select,textarea{outline:none}
 				</div>
 				<div class="secall_2">
 					<div class="title1">主题：</div>
+					<input data-role="none" type="checkbox" value="{$vo}" />aaa
 					<div class="seclistd">
 						<ul>
 						 <foreach name="title_arr" item="vo">
@@ -301,7 +302,7 @@ input,button,select,textarea{outline:none}
 							<li><label><input data-role="none" type="checkbox" name="hobby_color[]"
 							<foreach name="hobby_color" item="val">
 								<if condition="$val eq $vo">checked</if>
-							</foreach> value="{$vo}"> {$vo}</label></li>
+							</foreach> value="{$vo}" /> {$vo}</label></li>
 						</foreach>
 						</ul>
 					</div>
@@ -315,7 +316,7 @@ input,button,select,textarea{outline:none}
 							<li><label><input data-role="none" type="checkbox"
 							<foreach name="hobby_style" item="val">
 							<if condition="$val eq $vo">checked</if>
-							</foreach> name="hobby_style[]" value="{$vo}"> {$vo}</label></li>
+							</foreach> name="hobby_style[]" value="{$vo}" /> {$vo}</label></li>
 						</foreach>	
 						</ul>
 					</div>
@@ -329,7 +330,7 @@ input,button,select,textarea{outline:none}
 							<li><label><input data-role="none" type="checkbox"
 							<foreach name="hobby_element" item="val">
 							<if condition="$val eq $vo">checked</if>
-							 </foreach> name="hobby_element[]" value="{$vo}"> {$vo}</label></li>
+							 </foreach> name="hobby_element[]" value="{$vo}" /> {$vo}</label></li>
 						 </foreach>
 						</ul>
 					</div>
