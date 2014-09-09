@@ -26,7 +26,7 @@ class userAction extends userbaseAction {
     
     }
 	
-    /**
+    /**w
      * 用户登陆
      */
     public function login() {
@@ -1023,6 +1023,10 @@ class userAction extends userbaseAction {
     			$element_arr=array("印花","透视","花卉","图案","条纹","格子","波点","蕾丝","其他");//元素
     			if(empty($userinfo)){
     				$this->assign('flag','0');//新增
+    				$this->assign("title_arr",$title_arr);
+    				$this->assign("color_arr",$color_arr);
+    				$this->assign("style_arr",$style_arr);
+    				$this->assign("element_arr",$element_arr);
     			}else{
     				$this->assign('flag','1');//编辑
     				$this->assign("uInfo",$userinfo);
