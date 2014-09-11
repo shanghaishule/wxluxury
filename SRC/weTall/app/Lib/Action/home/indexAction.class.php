@@ -290,7 +290,7 @@ class indexAction extends frontendAction {//frontend
     			}
     		}
     	}
-    	$match_table=$this->array_sort($match_table,'sum_c','desc');
+    	$match_table=$this->array_sort($match_table,'sum_l','desc');
     	//dump($match_table);die();
     	$this->assign("match_table",$match_table);
     	$this->assign("favi_table",$match_favi);
