@@ -1,6 +1,6 @@
 <?php
 
-class promotionAction extends backendAction {
+class matchAction extends backendAction {
 	
 	public function _initialize() {
 		parent::_initialize();
