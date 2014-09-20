@@ -27,7 +27,7 @@ class matchAction extends backendAction {
 		// 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
 		$nowPage = isset($_GET['p'])?$_GET['p']:1;
 		$show       = $Page->show();// 分页显示输出
-		$list2 = $this->_mod->where($map)->order('id ASC')->limit($Page->firstRow.','.$Page->listRows)->select();
+		$list2 = $this->_mod->where($map)->order('id DESC')->limit($Page->firstRow.','.$Page->listRows)->select();
 		foreach ($list2 as $content){
 			if(strlen($content["theme"]) > 60){
 				$content["theme"] = mb_substr($content["theme"], 0,30,"utf-8")."...";
