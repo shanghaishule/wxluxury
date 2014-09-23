@@ -30,7 +30,7 @@
             <th>店铺地址：</th>
             <td>{$wecha_shop.address}</td>
         </tr>
-        <tr>
+        <!--  <tr>
             <th>店铺logo :</th>
             <td>
   	               <input type="file" name="logo" />宽高比例建议:60 * 60     
@@ -43,7 +43,7 @@
             <input type="file" name="twodcode" /> 宽高比例建议:90 * 90       
             <img width="90" height="90" alt="店铺二维码" src="{$wecha_shop.twodcode}"/>
   			</td>
-        </tr>
+        </tr>-->
         <tr>
             <th>客服联系电话:</th>
             <td>
@@ -59,13 +59,13 @@
             <th>QQ号码 :</th>
             <td><input type="text" name="qq" maxlength="11" value="{$wecha_shop.qq}"/></td>
         </tr>
-    	<tr>
+    	<!-- <tr>
         	<th>{:L('site_status')} :</th>
         	<td>
             	<label><input type="radio" class="J_change_status" <if condition="$wecha_shop['status'] eq '1'">checked="checked"</if> value="1" name="setting[site_status]"> {:L('open')}</label> &nbsp;&nbsp;
                 <label><input type="radio" class="J_change_status" <if condition="$wecha_shop['status'] eq '0'">checked="checked"</if> value="0" name="setting[site_status]"> {:L('close')}</label>
             </td>
-    	</tr>
+    	</tr> -->
         <tr id="J_closed_reason" <if condition="C('pin_site_status') eq 1">class="hidden"</if>>
         	<th>{:L('closed_reason')} :</th>
         	<td><textarea rows="4" cols="50" name="closeReason" id="closed_reason">{$wecha_shop.closeReason}</textarea></td>
