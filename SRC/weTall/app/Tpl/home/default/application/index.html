@@ -305,7 +305,7 @@ function searchshop(id){
 		</div>
 		</li>
     	<li class="r" id="n_4"> 
-    		<span >店铺管理</span>
+    		<span >店铺认领</span>
         </li>
          <li class="r" id="n_1">
         <if condition="$yemian eq 'Item'">
@@ -400,7 +400,7 @@ function searchshop(id){
 										<td>
 										<input id="address_chooce" name="address" type="text" required="required" class="px" tabindex="1" style="top: 108px; width: 180px; POSITION: absolute" value="" placeholder="实体店详细地址" />										
 											<select id="ddlTest"	name="up_shop_id" onchange="select_addres(this.options[this.selectedIndex].text)" style="top: 108px; width: 199px; height: 41px; CLIP: rect(auto, auto, auto, 180px); POSITION: absolute">
-											<option value="">请选择实体店地址</option>
+											<option value="">例如：沈阳万象城店</option>
 										</select>
 										</td>	
 																			
@@ -413,16 +413,16 @@ function searchshop(id){
 									
 									<tr style="line-height: 28px;">
 										<td><label class="pxlabel" for="applicant">联系人：</label></td>
-										<td><input name="applicant" class="px" id="applicant" placeholder="请输入联系人" type="text"></td>
+										<td><input name="applicant" class="px" id="applicant" style=" width: 180px" placeholder="请输入联系人" type="text"></td>
 									</tr>
 									<tr style="line-height: 50px;">
 										<td><label class="pxlabel" for="phone">手机：</label></td>
-										<td><input name="phone" class="px" id="phone"
+										<td><input name="phone" class="px" id="phone" style=" width: 180px"
 											placeholder="请输入申请人电话" type="text"></td>
 									</tr>
 									<tr style="line-height: 28px;">
 										<td><label class="pxlabel" for="QQ">QQ：</label></td>
-										<td><input type="text" name="qq" class="px" id="qq"
+										<td><input type="text" name="qq" class="px" id="qq" style=" width: 180px"
 											placeholder="请输入QQ"></td>
 										<!--xxl end-->
 									</tr>
