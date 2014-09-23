@@ -3,21 +3,32 @@
 <div class="pad_lr_10">
 	<form id="info_form" action="{:u('setting/edit')}" method="post" enctype="multipart/form-data">
 	<table width="100%" class="table_form">
-        <tr>
+        <!-- <tr>
             <th width="150">{:L('site_name')} :</th>
             <td><input type="text" name="name" class="input-text" size="50" value="{$wecha_shop.name}"></td>
-        </tr>
+        </tr> -->
         <tr>
-            <th>{:L('seo_title')} :</th>
+            <!-- -<th>{:L('seo_title')} :</th>
             <td><input type="text" name="title" class="input-text" size="50" value="{$wecha_shop.title}"></td>
+            - -->
+            <th width="150">店铺名称：</th>
+            <td>{$wecha_shop.name}</td>
         </tr>
         <tr>
+            <!-- 
             <th>{:L('seo_keys')} :</th>
             <td><input type="text" name="keywords" class="input-text" size="50" value="{$wecha_shop.keywords}"></td>
+        	 -->
+        	<th>所属品牌：</th>
+            <td>{$wecha_shop.brandN}</td>
         </tr>
         <tr>
+            <!-- 
             <th>{:L('seo_desc')} :</th>
             <td><textarea rows="3" cols="50" name="descr">{$wecha_shop.descr}</textarea></td>
+             -->
+            <th>店铺地址：</th>
+            <td>{$wecha_shop.address}</td>
         </tr>
         <tr>
             <th>店铺logo :</th>

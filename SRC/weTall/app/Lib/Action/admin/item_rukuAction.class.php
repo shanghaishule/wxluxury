@@ -31,7 +31,6 @@ class item_rukuAction extends backendAction {
         $this->assign('search', array(
         	'brand' => $brand,
             'Huohao' => $Huohao,
-        	
         ));
         return $map;
     }
@@ -127,17 +126,18 @@ class item_rukuAction extends backendAction {
     		}
     		if ($get_num > 0) {
     			$message = "您本次成功领取".$get_num."个商品，有".$failed_num ++."个商品没有成功";
-    			$this->ajaxReturn(1,$message);
-    			//$this->success($message,true);
+    			//$this->ajaxReturn(1,$message);
+    			$this->success($message);
     		}else{
     			$message = "无法入库，你填写的货号不存在或者该商品已经存在您的库中！";
-    			$this->ajaxReturn(0,$message);
-    			//$this->error($message);
+    			//$this->ajaxReturn(0,$message);
+    			$this->error($message);
     		}
     
     
     	} else {
-    		$this->ajaxReturn(0,"没有选择任何商品！");
+    		//$this->ajaxReturn(0,"没有选择任何商品！");
+    		$this->error("没有选择任何商品！");
     	}
     }
     

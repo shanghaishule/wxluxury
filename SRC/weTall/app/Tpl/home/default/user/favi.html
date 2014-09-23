@@ -2,11 +2,15 @@
 <html>
 <head>
 <include file="public:headtop" />
+<meta content="width=device-width,minimum-scale=1.0,maximum-scale=1.0" name="viewport">
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 <script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/dialog.js" id="dialog_js"></script>
 <script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/jquery.ui.js" ></script>
 <script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/jquery.validate.js" ></script>
 <script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/mlselection.js" ></script>
 <link rel="stylesheet" type="text/css" href="__STATIC__/weixin/css/jquery.ui.css" />
+<link href="__STATIC__/weixin/css/shop2.css" rel="stylesheet"
+	type="text/css">
 	<style>
 		.showhavereal{
 			margin-left: 5px;
@@ -80,42 +84,24 @@ function searchshop(id){
      <input type="hidden" name="latitude" value="{$latitude}" id="latitude">
      <input type="hidden" name="brand_id" id="txtHint">   
    </form>
-<div id="nav">
-    <img src="/weTall/static/weixin/images/luxury/images/home/bg_02.png" width="100%"/>
+	<div id="nav">
+			<img src="/weTall/static/weixin/images/luxury/images/home/bg_02.png"
+				width="100%" />
 
-	<ul class="navlist">
-		 <li class="r pos" id="n_0"><div class="home_page_logo"></div>
-		<div class="dis" id="dis">
-			 <ul>
-				  <volist name="item_cate" id="cate">
-				  	<li>
-				     <a href="{:U('home/index/search', array('itemid'=>$cate['id'],'itemname'=>$cate['name'],'tokenTall'=>$tokenTall))}">{$cate.name}</a>
-				    </li>
-				  </volist>
-			 </ul> 
-		</div>
-		</li>
-    	<li class="r" id="n_4"> 
-    		<span >我的收藏</span>
-        </li>
-         <li class="r" id="n_1">
-        <if condition="$yemian eq 'Item'">
-        <a href="{:U('home/user/index', array('tokenTall'=>$tokenTall))}"><div class="find_04"></div></a>
-        <else/>
-        <if condition="$gohref neq ''">
-        <a href="{:U('home/user/index', array('tokenTall'=>$tokenTall))}"><div class="find_04"></div></a>
-        <elseif condition="$gosearch eq 'Y'"/>
-       <!--  <a href="javascript:void(0)" onclick="searchshop({$brandid})"> -->
-        <a href="{:U('home/user/index', array('tokenTall'=>$tokenTall))}">
-        <div class="find_03">{$City}</div></a>
-        <else/>
-       <a href="{:U('home/user/index', array('tokenTall'=>$tokenTall))}">
-        <div class="find_03">{$City}</div></a></if>
-        
-        </if>
-        </li>
-        
-    </ul>
+			<ul class="navlist">
+				<li class="r pos" id="n_0">
+
+					<div class="back_page_logo">
+						<a href="javascript:history.back(-1)"><img
+							src="/weTall/static/weixin/images/back_page_logo.png" width="20%" /></a>
+
+					</div>
+					<div class="dis" id="dis">
+					</div>
+				</li>
+				<li class="r" id="n_4"><span>我的收藏</span></li>
+			</ul>	
+     </div>
     <script type="text/javascript">
     	$(".navlist > li#n_0").click(function(){
 			$(this).toggleClass("active");
@@ -128,39 +114,34 @@ function searchshop(id){
 			}
         });
     </script>
-</div>
-
-
-
-
-
 
 <div id="content">
-<div class="eject_btn"><a class="enter" style="background: purple;" href="javascript:void(0)">我的收藏</a></div>
+<!-- <div class="eject_btn"><a class="enter" style="background: purple;" href="javascript:void(0)">我的收藏</a></div> -->
     <div class="order_form">
     <volist name="weshopData"  id="vo">
-	<!--<a href="/weTall/index.php?g=home&m=Item&a=index&id={$vo.id}&tokenTall={$vo.url}">-->
-	<a href="/weTall/index.php?g=home&m=index&a=brandshop&id={$vo.id}&tokenTall={$vo.url}">
+    <!--<a href="/weTall/index.php?g=home&m=index&a=brandshop&id={$vo.id}&tokenTall={$vo.url}">-->
+	<a href="/weTall/index.php?g=home&m=Item&a=index&id={$vo.id}&tokenTall={$vo.url}">
 	<div class="shoplogo">
 	   <div class="shoplogourl">	   
-	      <img width="60" src="{$vo.img}"/>
-	    	    
+	      <img width="85%" src="{$vo.img}"/>
 	   </div>
 	   <div class="favi">
 	      <div id="shopname">
-	         {$vo.title}<span class="showhavereal"><eq name="vo.HaveReal" value="1"><img src="__STATIC__/images/shiti3.png" width="20" height="20"/></eq></span>
+	         {$vo.title}<!-- <span class="showhavereal"><eq name="vo.HaveReal" value="1"><img src="__STATIC__/images/shiti3.png" width="20" height="20"/></eq></span> -->
 	      </div>
 	        <ul id="operdetail">
 	          <li id="m_1">
-	              	价格：{$vo.price}
+	              	￥{$vo.price}
 	          </li>
 	          <li id="m_3">
-	            	<img width="20" height="20" src="__STATIC__/weixin/images/favi2.png"/><br>已收藏
+	            	<img width="20" height="20" src="__STATIC__/weixin/images/favi2.png"/>已收藏
 	          </li>
 	        </ul>
 	   </div>
-	   <hr>
-	</div></a>
+	</div>
+	<div class="c_b"></div>
+	</a>
+	<div class="b1"></div> 
 	</volist>
     </div>
 </div>

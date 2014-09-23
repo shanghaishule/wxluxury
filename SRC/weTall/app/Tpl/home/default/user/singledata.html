@@ -174,7 +174,7 @@ input,button,select,textarea{outline:none}
                 <a href="#"><img src="/weTall/static/images/gouxuan.png" width="25%"/></a>
                
           </div>
-       <!--   <if condition="$yemian eq 'Item'">
+        <if condition="$yemian eq 'Item'">
         <a href="{:U('home/user/index', array('tokenTall'=>$tokenTall))}"><div class="find_04"></div></a>
         <else/>
         <if condition="$gohref neq ''">
@@ -191,19 +191,20 @@ input,button,select,textarea{outline:none}
 		<!-- 以上是headtop -->
 		<div class="kongge1"></div>
 		  <form name="form1" id="form1" data-ajax="false" action="{:U('home/user/saveinfo',array('tokenTall'=>$tokenTall))}" method="post">
+			<input type="hidden" name="flag" value="{$flag}" />
 			<div class="firstall">
 				<div class="mydata">我的资料</div>
 				<div class="boygirl">
 					<ul>
-						<li><label><input data-role="none" data-role="none" type="radio" name="sex" checked value="0" /> 男</label></li>
-						<li><label><input data-role="none" type="radio" name="sex" value="1" /> 女</label></li>
+						<li><label><input data-role="none" data-role="none" type="radio" name="sex" <if condition="($uInfo.sex eq 0) OR ($uInfo.sex eq '')">checked</if> value="0" /> 男</label></li>
+						<li><label><input data-role="none" type="radio" name="sex" <if condition="$uInfo.sex eq 1">checked</if> value="1" /> 女</label></li>
 					</ul>
 				</div>
 
 				<!-- <div class="konggea"></div> -->
 				<div class="borntime">
 					<ul>
-						<li>出生日期：<input data-role="none" name="birthday" id="birthday" type="text" style="width: 120px" readonly/>
+						<li>出生日期：<input data-role="none" name="birthday" id="birthday" value="{$uInfo.birthday}" type="text" style="width: 120px" readonly/>
 						</li>
 					</ul>
 				</div>
@@ -211,17 +212,17 @@ input,button,select,textarea{outline:none}
 				<div class="height">
 					<ul>
 						<li>身高：<input data-role="none" type="text"
-							style="width: 40px; background: black" id="height" name="height" />cm
+							style="width: 40px; background: black" value="{$uInfo.height}" id="height" name="height" />cm
 						</li>
 						<li>体重：<input data-role="none" type="text"
-							style="width: 40px" id="weight" name="weight"/>kg
+							style="width: 40px" id="weight" value="{$uInfo.weight}" name="weight"/>kg
 						</li>
 					</ul>
 				</div>
 				<div class="konggea"></div>
 				<div class="first1">
 					<p>
-						QQ&nbsp;&nbsp;邮箱: <input data-role="none" type="email" id="email" name="mail" />
+						QQ&nbsp;&nbsp;邮箱: <input data-role="none" type="email" id="email" name="mail" value="{$uInfo.mail}" />
 					</p>
 
 				</div>
@@ -237,43 +238,41 @@ input,button,select,textarea{outline:none}
 							<li>
 								<p>衣服</p>
 							<select name="yifu_size" data-role="none">
-									<option value="S">S</option>
-									<option value="M">M</option>
-									<option value="L" selected="selected">L</option>
-									<option value="XL">XL</option>
+									<option value="S" <if condition="$uInfo.yifu_size eq 'S'">selected</if>>S</option>
+									<option value="M" <if condition="$uInfo.yifu_size eq 'M'">selected</if>>M</option>
+									<option value="L" <if condition="($uInfo.yifu_size eq 'L') OR ($uInfo.yifu_size eq '')">selected</if>>L</option>
+									<option value="XL" <if condition="$uInfo.yifu_size eq 'XL'">selected</if>>XL</option>
 							</select>
 
 							</li>
 							<li>
 								<p>裤子</p> <select name="kuzi_size" data-role="none">
-									<option value="T28">28</option>
-									<option value="T29">29</option>
-									<option value="T30" selected="selected">30</option>
-									<option value="T31">31</option>
-									<option value="T32">32</option>
-									<option value="T33">33</option>
-									<option value="T34">34</option>
+									<option value="T28" <if condition="$uInfo.kuzi_size eq 'T28'">selected</if>>28</option>
+									<option value="T29" <if condition="$uInfo.kuzi_size eq 'T29'">selected</if>>29</option>
+									<option value="T30" <if condition="($uInfo.kuzi_size eq 'T30') OR ($uInfo.kuzi_size eq '')">selected</if>>30</option>
+									<option value="T31" <if condition="$uInfo.kuzi_size eq 'T31'">selected</if>>31</option>
+									<option value="T32" <if condition="$uInfo.kuzi_size eq 'T32'">selected</if>>32</option>
+									<option value="T33" <if condition="$uInfo.kuzi_size eq 'T33'">selected</if>>33</option>
+									<option value="T34" <if condition="$uInfo.kuzi_size eq 'T34'">selected</if>>34</option>
 							</select>
 
 							</li>
 							<li>
 								<p>鞋</p>
 							<select name="xie_size" data-role="none">
-									<option value="S36">36</option>
-									<option value="S37">37</option>
-									<option value="S38" selected="selected">38</option>
-									<option value="S39">39</option>
-									<option value="S41">41</option>
-									<option value="S42">42</option>
-									<option value="S43">43</option>
-									<option value="S44">44</option>
-									<option value="S45">45</option>
-									<option value="S46">46</option>
-									<option value="S47">47</option>
+									<option value="S36" <if condition="$uInfo.xie_size eq 'S36'">selected</if>>36</option>
+									<option value="S37" <if condition="$uInfo.xie_size eq 'S37'">selected</if>>37</option>
+									<option value="S38" <if condition="$uInfo.xie_size eq 'S38'">selected</if>>38</option>
+									<option value="S39" <if condition="$uInfo.xie_size eq 'S39'">selected</if>>39</option>
+									<option value="S40" <if condition="($uInfo.xie_size eq 'S40') OR ($uInfo.xie_size eq '')">selected</if>>41</option>
+									<option value="S41" <if condition="$uInfo.xie_size eq 'S41'">selected</if>>42</option>
+									<option value="S42" <if condition="$uInfo.xie_size eq 'S42'">selected</if>>43</option>
+									<option value="S43" <if condition="$uInfo.xie_size eq 'S43'">selected</if>>44</option>
+									<option value="S44" <if condition="$uInfo.xie_size eq 'S44'">selected</if>>45</option>
+									<option value="S45" <if condition="$uInfo.xie_size eq 'S45'">selected</if>>46</option>
+									<option value="S46" <if condition="$uInfo.xie_size eq 'S46'">selected</if>>47</option>
 							</select>
-
 							</li>
-
 						</ul>
 					</div>
 				</div>
@@ -282,73 +281,64 @@ input,button,select,textarea{outline:none}
 			<div class="secall">
 				<div class="secall_1">
 					<p>我的偏好</p>
-
 				</div>
 				<div class="secall_2">
 					<div class="title1">主题：</div>
 					<div class="seclistd">
 						<ul>
-							<li><label><input data-role="none" type="checkbox" name="hobby_title[]" value="晚装"> 晚装</label></li>
-							<li><label><input data-role="none" type="checkbox" name="hobby_title[]" value="正装"> 正装</label></li>
-							<li><label><input data-role="none" type="checkbox" name="hobby_title[]" value="休闲"> 休闲</label></li>
-							<li><label><input data-role="none" type="checkbox" name="hobby_title[]" value="运动"> 运动</label></li>
-							<li><label><input data-role="none" type="checkbox" name="hobby_title[]" value="打底"> 打底</label></li>
+						 <foreach name="title_arr" item="vo">
+			<li><label><input data-role="none" type="checkbox" name="hobby_title[]" <foreach name="hobby_title" item="val"><if condition="$val eq $vo">checked</if></foreach> value="{$vo}" />{$vo}</label></li>							
+						 </foreach>	
 						</ul>
 					</div>
-
 				</div>
+				
 				<div class="secall_3">
 					<div class="title_1">颜色：</div>
 					<div class="seclist_c">
 						<ul>
-							<li><label><input data-role="none" type="checkbox" name="hobby_color[]" value="纯色"> 纯色</label></li>
-							<li><label><input data-role="none" type="checkbox" name="hobby_color[]" value="撞色"> 撞色</label></li>
-							<li><label><input data-role="none" type="checkbox" name="hobby_color[]" value="拼贴"> 拼贴</label></li>
-							<li><label><input data-role="none" type="checkbox" name="hobby_color[]" value="其他"> 其他（可多选）</label></li>
-
+						<foreach name="color_arr" item="vo">
+							<li><label><input data-role="none" type="checkbox" name="hobby_color[]"
+							<foreach name="hobby_color" item="val">
+								<if condition="$val eq $vo">checked</if>
+							</foreach> value="{$vo}" /> {$vo}</label></li>
+						</foreach>
 						</ul>
 					</div>
 				</div>
+				
 				<div class="secall_4">
 					<div class="title_1">风格：</div>
 					<div class="seclist_a">
 						<ul>
-							<li><label><input data-role="none" type="checkbox" name="hobby_style[]" value="嬉皮"> 嬉皮</label></li>
-							<li><label><input data-role="none" type="checkbox" name="hobby_style[]" value="英伦风"> 英伦风</label></li>
-							<li><label><input data-role="none" type="checkbox" name="hobby_style[]" value="日韩风"> 日韩风</label></li>
-							<li><label><input data-role="none" type="checkbox" name="hobby_style[]" value="民族"> 民族</label></li>
-							<li><label><input data-role="none" type="checkbox" name="hobby_style[]" value="田园风"> 田园风</label></li>
-							<li><label><input data-role="none" type="checkbox" name="hobby_style[]" value="运动风"> 运动风</label></li>
-							<li><label><input data-role="none" type="checkbox" name="hobby_style[]" value="百搭"> 百搭</label></li>
-							<li><label><input data-role="none" type="checkbox" name="hobby_style[]" value="其他"> 其他（可多选）</label>
-							</li>
-
+						<foreach name="style_arr" item="vo">
+							<li><label><input data-role="none" type="checkbox"
+							<foreach name="hobby_style" item="val">
+							<if condition="$val eq $vo">checked</if>
+							</foreach> name="hobby_style[]" value="{$vo}" /> {$vo}</label></li>
+						</foreach>	
 						</ul>
 					</div>
 				</div>
+				
 				<div class="secall_5">
 					<div class="title_1">元素：</div>
 					<div class="seclist_b">
 						<ul>
-							<li><label><input data-role="none" type="checkbox" name="hobby_element[]" value="印花"> 印花</label></li>
-							<li><label><input data-role="none" type="checkbox" name="hobby_element[]" value="透视"> 透视</label></li>
-							<li><label><input data-role="none" type="checkbox" name="hobby_element[]" value="花卉"> 花卉</label></li>
-							<li><label><input data-role="none" type="checkbox" name="hobby_element[]" value="图案"> 图案</label></li>
-							<li><label><input data-role="none" type="checkbox" name="hobby_element[]" value="条纹"> 条纹</label></li>
-							<li><label><input data-role="none" type="checkbox" name="hobby_element[]" value="格子"> 格子</label></li>
-							<li><label><input data-role="none" type="checkbox" name="hobby_element[]" value="波点"> 波点</label></li>
-							<li><label><input data-role="none" type="checkbox" name="hobby_element[]" value="蕾丝"> 蕾丝</label></li>
-							<li><label><input data-role="none" type="checkbox" name="hobby_element[]" value="其他"> 其他（可多选）</label>
-
-							</li>
+						 <foreach name="element_arr" item="vo">
+							<li><label><input data-role="none" type="checkbox"
+							<foreach name="hobby_element" item="val">
+							<if condition="$val eq $vo">checked</if>
+							 </foreach> name="hobby_element[]" value="{$vo}" /> {$vo}</label></li>
+						 </foreach>
 						</ul>
 					</div>
 				</div>
 			</div>
+			
 			<div class="konggea"></div>
 			<div class="submit_a">
 				<input data-role="none" data-inline="true" id="submit" type="submit" value="提交" />
-
 			</div>
 		</form>
 		<div class="konggea"></div>

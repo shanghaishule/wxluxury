@@ -109,9 +109,8 @@ cursor:pointer;text-decoration:none;overflow:visible;text-align:center;zoom:1;wh
 .sort_desc{background:url(bgimg/desc.gif) no-repeat right; padding-right:12px;}
 .sort_asc{background:url(bgimg/asc.gif) no-repeat right; padding-right:12px;}
 
-.tdedit{background: url(bgimg/tdedit.gif) no-repeat right 2px; padding-right: 4px;width:300px;}
+.tdedit{background: url(bgimg/tdedit.gif) no-repeat right 2px; padding-right: 4px;width:102px;}
 .lt_input_text{height:14px; line-height:100%; padding:2px 4px;border: 1px solid #A8D0F4;font-family: Verdana, Geneva, sans-serif,"宋体";font-size:12px;}
-
 
 .input-text,.measure-input,textarea,input.date,input.endDate,.input-focus{border:1px solid #A7A6AA;height:18px;padding:2px 0 2px 5px;border: 1px solid #d0d0d0;background: #FFF url(bgimg/input.png) repeat-x; font-family: Verdana, Geneva, sans-serif,"宋体";font-size:12px;}
 .input-focus{background: #FFF url(bgimg/input_focus.png) repeat-x; border-color:#afcee6;font-size:12px;}
@@ -318,7 +317,7 @@ dd{ padding:0 0 0 4px;}
 .tooltip.bottom {background:url(bgimg/black_arrow_bottom.png);padding-top:40px;height:55px;}
 
 /*分页*/
-#pages {text-align:right; float:right; margin-right:20px;}
+#pages {text-align:center; float:center; margin-right:20px;}
 #pages a { display:inline-block; height:22px; line-height:22px; background:#4d81bb; border:1px solid #e3e3e3; text-align:center; color:#fff; margin-left:4px; padding:0 4px;}
 #pages a.current { display:inline-block; width:26px; height:22px; line-height:22px; background:#5a85b2; border:1px solid #5a85b2; color:#fff; text-align:center; }
 #pages a.page_prev,#pages a.page_first,#pages a.page_last,#pages a.page_next { background:#4d81bb  0 5px; width:50px;}

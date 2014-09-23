@@ -15,31 +15,30 @@
 
 <body>
 <include file="public:search_head" />
-
 <if condition="$method neq 'shop'">
 <div id="sort_bg">
 	<ul class="sortlist">
 		<li id="n_0">
-		     <a href="/weTall/index.php?m=index&a=search&method={$method}&sortid=add_time&sortmethod={$sortmethod}&brandid={$brandid}&itemid={$itemid}&search_all={$searchall}">最新
+		     <a href="/weTall/index.php?m=index&a=search&method={$method}&sortid=add_time&sortmethod={$sortmethod}&brandid={$brandid}&itemid={$itemid}&search_all={$searchall}">
 		     <if condition="$sortfield eq 'add_time'">
-		     <img width="9px" height="11px" src="__STATIC__/images/add_time_{$sortmethod}.png"><else/>
-		     <img width="9px" height="11px" src="__STATIC__/images/BottomKingTop.png"></if></a></li>
+		     <img width="100%" src="__STATIC__/images/news_{$sortmethod}.png"><else/>
+		     <img width="100%" src="__STATIC__/images/news_desc.png"></if></a></li>
 		<li id="n_1">
-		     <a href="/weTall/index.php?m=index&a=search&method={$method}&sortid=buy_num&sortmethod={$sortmethod}&brandid={$brandid}&itemid={$itemid}&search_all={$searchall}">销量
+		     <a href="/weTall/index.php?m=index&a=search&method={$method}&sortid=buy_num&sortmethod={$sortmethod}&brandid={$brandid}&itemid={$itemid}&search_all={$searchall}">
 		     <if condition="$sortfield eq 'buy_num'">
-		     <img width="9px" height="11px" src="__STATIC__/images/buy_num_{$sortmethod}.png"><else/>
-		     <img width="9px" height="11px" src="__STATIC__/images/BottomKingTop.png">
+		     <img width="100%" src="__STATIC__/images/sals_{$sortmethod}.png"><else/>
+		     <img width="100%" src="__STATIC__/images/sals_desc.png">
 		     </if></a></li>
 		<li id="n_3">
-		     <a href="/weTall/index.php?m=index&a=search&method={$method}&sortid=price&sortmethod={$sortmethod}&brandid={$brandid}&itemid={$itemid}&search_all={$searchall}">价格
+		     <a href="/weTall/index.php?m=index&a=search&method={$method}&sortid=price&sortmethod={$sortmethod}&brandid={$brandid}&itemid={$itemid}&search_all={$searchall}">
 		     <if condition="$sortfield eq 'price'">
-		     <img width="9px" height="11px" src="__STATIC__/images/price_{$sortmethod}.png"><else/>
-		     <img width="9px" height="11px" src="__STATIC__/images/BottomKingTop.png"></if></a></li>
+		     <img width="100%" src="__STATIC__/images/p_price_{$sortmethod}.png"><else/>
+		     <img width="100%" src="__STATIC__/images/p_price_desc.png"></if></a></li>
 		<li id="n_4">
-		     <a href="/weTall/index.php?m=index&a=search&method={$method}&sortid=ordid&sortmethod={$sortmethod}&brandid={$brandid}&itemid={$itemid}&search_all={$searchall}">综合
+		     <a href="/weTall/index.php?m=index&a=search&method={$method}&sortid=ordid&sortmethod={$sortmethod}&brandid={$brandid}&itemid={$itemid}&search_all={$searchall}">
 		     <if condition="$sortfield eq 'ordid'">
-		     <img width="9px" height="11px" src="__STATIC__/images/ordid_{$sortmethod}.png"><else/>
-		     <img width="9px" height="11px" src="__STATIC__/images/BottomKingTop.png"></if></a></li>      
+		     <img width="100%" src="__STATIC__/images/zhekou_{$sortmethod}.png"><else/>
+		     <img width="100%" src="__STATIC__/images/zhekou_desc.png"></if></a></li>      
     </ul>
 </div>
 </if>
@@ -66,7 +65,6 @@ var t2=new TouchSlider({id:'sliderlist', speed:600, timeout:6000, before:functio
 		as[active].className='active';
 	}});
 </script>
-
 
 <div id="content">
     <div class="module_special tbr">
@@ -145,7 +143,7 @@ var t2=new TouchSlider({id:'sliderlist', speed:600, timeout:6000, before:functio
     </div>
 </div>
 <div class="goto_top">
-       <a href="#top"><img src="__STATIC__/images/top.png"></a>
+       <a href="#top"><img src="__STATIC__/images/top3.png"></a>
     </div>
 <include file="public:footer" />
 

@@ -247,15 +247,16 @@
 				//收藏
 				$.post("{:U('index/favi')}", {act: act}, function(data){
 					//alert("Data Loaded: "+data.status);
-					//if(data.status == '0'){
-					//	alert("您还没有登录，请登录！")
-					//window.location.href=data.url;
-				//	}else 
-						if(data.status == '2'){
-						alert("该店铺您已收藏！")
-					}else{
+					if(data.status == '0'){
+						alert("您还没有登录，请登录！")
+						//window.location.href=data.url;
+					}else if(data.status == '2'){
+						alert("您已收藏！")
+					}else if(data.status == '1'){
 						alert("收藏成功！")
 						window.location.reload();
+					}else{
+						alert("收藏失败！")
 					}
 				},"json");
 
@@ -268,7 +269,7 @@
             
 			<ul id="BanCont">
 			  <volist name="imgarr" id="bolist" key="lidaid">			     
-			     <li class="imagesDetail" id="{$lidaid}"><a href="__PARENTURL__/Uploads/items/images/{$item['Uninum']}/{$bolist}.jpg"><img id="display_img" src="__PARENTURL__/Uploads/items/images/{$item['Uninum']}/{$bolist}.jpg" width="100%" alt="{$item.title}" /></a></li> 
+			     <li class="imagesDetail" id="{$lidaid}"><a href="{:U('Item/imgs_view',array('id'=>$item['id']))}"><img id="display_img" src="__PARENTURL__/Uploads/items/images/{$item['Uninum']}/{$bolist}.jpg" width="100%" alt="{$item.title}" /></a></li> 
 			  </volist>
 			</ul>
 			<div class="banner_link"><ul class="imgmiddle">
@@ -276,9 +277,10 @@
 			<li class="imgnav"><a href="javascript:void(0)" onclick="javascript:imgdetail({$liid})"><div class="imglittle" id="little{$liid}" ></div></a></li>
 			</volist></ul></div>
 			<div class="favi2">
-			<if condition="$favi_suc eq 'Y'"><img width="30px" height="30px" src="__STATIC__/weixin/images/favi2.png"></a><span style="color:red;">{$item.favi}</span><else/>
-			<a href="javascript:void(0)" onclick="favi_action({$item.id})"><img width="30px" height="30px" src="__STATIC__/weixin/images/favi.png"></a><!-- {$item.favi} --></div>
+			<if condition="$favi_suc eq 'Y'"><img width="30px" height="30px" src="__STATIC__/weixin/images/favi2.png"><span style="color:red;">{$item.favi}</span><else/>
+			<a href="javascript:void(0)" onclick="favi_action({$item.id})"><img width="30px" height="30px" src="__STATIC__/weixin/images/favi.png"></a><!-- {$item.favi} -->
 		    </if>
+		    </div>
 		    <div id="pagenavi">
                 <volist name="imgarr" id="img" key='k'>
                     <a href="javascript:void(0);" <if condition='$k eq 1'>class="active"</if>>{$k}</a>

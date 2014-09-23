@@ -68,7 +68,7 @@
                      </volist>
                      </div></td>
 			</tr>
-			 <if condition="$edit_m neq 'total' and $val neq ''">
+		<if condition="$edit_m neq 'total' and $val neq ''">
 			<tr>
 			    <th width="120">库存细则：</th>
 			    <td>
@@ -108,7 +108,6 @@
 				<th>商品库存 :</th>
 				<td><input id='J_goods_stock' onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" type="text" name="goods_stock" class="input-text" size="10" value="{$info.goods_stock}"> </td>
 			</tr>
-			
 			<tr>
                 <th>商品简介 :</th>
                 <td><textarea name="intro" cols="80" rows="2">{$info.intro}</textarea></td>
@@ -120,13 +119,19 @@
             </if>
              <tr>
 				<th>原价 :</th>
-				<td><input id='J_old_price' onkeyup="this.value=this.value.replace(/[^0-9.]/g,'')" onafterpaste="this.value=this.value.replace(/[^0-9.]/g,'')"  type="text" name="old_price" size="10" class="input-text" value="{$info.old_price}"> 元</td>
+				<td>
+				<if condition="$edit_m neq 'total' and $val neq ''">
+				<input id='J_old_price' onkeyup="this.value=this.value.replace(/[^0-9.]/g,'')" onafterpaste="this.value=this.value.replace(/[^0-9.]/g,'')"  type="text" name="old_price" size="10" class="input-text" value="{$info.old_price}"> 元
+				<else />
+				<input id='J_price' onkeyup="this.value=this.value.replace(/[^0-9.]/g,'')" onafterpaste="this.value=this.value.replace(/[^0-9.]/g,'')"  type="text" name="price" size="10" class="input-text" value="{$info.price}"> 元				
+				</if>
+				</td>
 			</tr>
             <tr>
 				<th>商品图片 :</th>
 				<td>
 					<notempty name="info['img']"><img src="{$info.img}" width="100" height="100"/><br /></notempty>
-					<input type="file" name="img" /><input type="hidden" name="edit_m" value="{$edit_m}">
+					<input type="file" name="img" /><input type="hidden" name="edit_m" value="{$edit_m}">(建议大小460*460px)
 				</td>
  			</tr>
  			<!-- <tr>
@@ -215,7 +220,12 @@
             
             <volist name="imagesarr" id="val">      
             <li class="album_{$val}">
-            <if condition="$edit_m neq 'total' and $val neq ''"><a href="javascript:void(0)" onclick="del_album({$val});"><img src="__STATIC__/css/admin/bgimg/tv-collapsable.gif" /></a>
+            <if condition="$edit_m neq 'total' and $val neq ''">
+            	<a href="javascript:void(0)" onclick="del_album({$val});"><img src="__STATIC__/css/admin/bgimg/tv-collapsable.gif" /></a>
+            <else />
+               <if condition="$val neq ''">
+            	<a href="javascript:void(0)" onclick="del_album_tb({$val});"><img src="__STATIC__/css/admin/bgimg/tv-collapsable.gif" /></a>
+               </if>
             </if>
             <if condition="$val neq ''">
             <a><img src="__PARENTURL__/Uploads/items/images/{$info.Uninum}/{$val}.jpg" style="width:200px;height:200px; border:solid 1px #000; "/></a>
@@ -224,15 +234,21 @@
             </volist>
             
             </ul>
-            <div class="cb"></div><if condition="$edit_m neq 'total'">
+            <div class="cb"></div>
+            <!-- if condition="$edit_m neq 'total'" -->
             <table width="100%" cellpadding="2" cellspacing="1" class="table_form" id="first_upload_file">
                 <tbody class="uplode_file">
                 <tr>
                     <th width="100" align="left"><a href="javascript:void(0);" class="blue" onclick="add_file();"><img src="__STATIC__/css/admin/bgimg/tv-expandable.gif" /></a>上传文件 :</th>
                     <td><input type="file" name="imgs[]"></td>
                 </tr>
+                <tr>
+                    <th width="100" align="left"></th>
+                    <td>(建议大小460*460px)</td>
+                </tr>                
                 </tbody>
-            </table></if>
+            </table>
+            <!-- if -->         
         </div>
 		<div class="content_list pad_10 hidden">
 		<table width="100%" cellpadding="2" cellspacing="1" class="table_form">
@@ -325,6 +341,15 @@ function del_file_box(obj)
 function del_album(id)
 {
 	var url = "{:U('item/delete_album')}";
+    $.get(url+"&album_id="+id+"&item_id="+$("#J_goods_id").val(), function(data){
+		if(data==1){
+		    $('.album_'+id).remove();
+		};
+    });
+}
+function del_album_tb(id)
+{
+	var url = "{:U('item/delete_album_tb')}";
     $.get(url+"&album_id="+id+"&item_id="+$("#J_goods_id").val(), function(data){
 		if(data==1){
 		    $('.album_'+id).remove();

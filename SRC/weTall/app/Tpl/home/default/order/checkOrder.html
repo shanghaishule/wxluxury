@@ -176,8 +176,6 @@ function searchshop(id){
                      </ul> 
                 </volist>   
 
-                
-                 
                  	 <if condition='$order.status neq 1' >
                      <ul class="order_detail_list">
                        <li>支付方式:<switch name="order.supportmetho" >
@@ -230,6 +228,16 @@ function searchshop(id){
                 <dd><if condition="$order.fahuo_time eq ''">-<else />{$order.fahuo_time|date='Y-m-d H:i:s',###}</if></dd>
 
             </dl>
+			<dl style="border:0;">
+				<dt class="til_font" style="font-size:20px;">卖家信息</dt>
+				<dt>发货店名</dt>
+				<dd>{$shopName['name']}</dd>
+                <dt>发货地址</dt>
+                <dd>{$sInfo['Province']}{$sInfo['City']}{$sInfo['Area']}{$sInfo['address']}</dd>
+                <dt>联系电话</dt>
+                <dd><a href="tel://{$sInfo['mobile']}">{$sInfo['mobile']}</a></dd>
+
+            </dl>            
         </div>
         <div class="clear"></div>
         

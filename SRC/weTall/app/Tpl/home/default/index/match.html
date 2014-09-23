@@ -26,6 +26,10 @@
         </li>
         <li class="r" id="n_1"><a href="{:U('home/user/index', array('tokenTall'=>$tokenTall))}"><div class="find_04"></div></a></li>       
     </ul>
+    <ul class="sort_news_hot">
+    	<li><a href="{:U('index/matchTime')}"><img src="__STATIC__/images/dapei_news.png" width="100%"/></a></li>
+    	<li><a href="{:U('index/matchHot')}"><img src="__STATIC__/images/dapei_hot.png" width="100%"/></a></li>
+    </ul>
     <script type="text/javascript">
     	$(".navlist > li#n_0").click(function(){
 			$(this).toggleClass("active");
@@ -45,7 +49,7 @@
     <volist name="match_table" id="match">
     <div class="dapei_block">
 	<div class="eject_btn">
-		<div class="user-img fl"><img <if condition="$match.userimgurl neq ''">src="{$match.userimgurl}"<else />src="__STATIC__/weixin/css/images/p1.gif"</if> /></div>
+		<div class="user-img fl"><img width="50px" height="50px" <if condition="$match.userimgurl neq ''">src="{$match.userimgurl}"<else />src="__STATIC__/weixin/css/images/p1.gif"</if> /></div>
 		<div class="user-name-time fl">
 			<div class="u-con">
 				<div class="u-name fl">{$match.uname}</div>
@@ -58,7 +62,7 @@
 	{// 分享的图片start }
 	<div class="shake-img">
 		<div class="shake-pic">
-			<img style="margin-right:0px;font-weight:700;" width="297" height="382" src="{$match.upd_path}" />
+			<img style="margin-right:0px;font-weight:700;" width="100%" onerror="javascript:this.src='__STATIC__/images/ajax_loading.gif'" height="382" src="{$match.upd_path}" />
 		</div>	
 		<div class="shake-comments">
 			<ul>
@@ -66,7 +70,6 @@
 					<img class="shang" src="__STATIC__/weixin/css/images/shang.png" />
 					<span class="sh-num">557</span>
 				</li>
-							
 				<li>
 					<img class="zan" src="__STATIC__/weixin/css/images/zan.png" />
 					<input type="hidden" id="matchid" value="{$match.id}"/>

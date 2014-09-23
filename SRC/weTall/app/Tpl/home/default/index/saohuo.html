@@ -10,20 +10,23 @@
 <meta charset="utf-8">
 <link href="__STATIC__/css/productdetail.css" rel="stylesheet" type="text/css">
 <link type="text/css" rel="stylesheet" href="__STATIC__/weixin/css/shop.css">
+<link type="text/css" rel="stylesheet" href="__STATIC__/weixin/css/shopother.css">
 <script type="text/javascript" src="__STATIC__/js/jquery_min.js"></script>
-
+<style>
+.imgIntime2{display:none}
+</style>
 </head>
 <body>
 <div style="background:none">
 <div style="height:45px;"></div>
 <div id="nav">
+<img src="__STATIC__/weixin/images/luxury/images/home/bg_02.png" width="100%">
 	<ul class="navlist">
-		<li class="r" id="n_0"><a href="{:U('home/index/index', array('tokenTall'=>$tokenTall))}"><div class="home_page_logo"></div></a></li>
+		<li class="r" id="n_0"><a href="{:U('home/index/brandshop', array('tokenTall'=>$tokenTall))}"><div class="home_page_logo"></div></a></li>
     	<li class="r" id="n_3">
     		<span >单品狂扫</span>
         </li>
         <li class="r" id="n_1"><a href="{:U('home/user/index', array('tokenTall'=>$tokenTall))}"><div class="find_04"></div></a></li>
-        
     </ul>
     <script type="text/javascript">
     	$(".navlist > li#n_0").click(function(){
@@ -46,15 +49,12 @@
         			alert("活动已经结束，请参加别的活动");
         		}
         	  });
-			
 		}
     </script>
-    
-	
 </div>
   
    <volist name="item" id="product" key="k">
-    <div  class="imgIntime2">
+    <div  class="imgIntime2 d{$k}">
       <div class="intime_img_detail">
       <a href="javascript:void(0)" onclick="saohuo({$product['id']})"><img src="{$product.img}" width="100%">
       </a></div>
@@ -68,9 +68,23 @@
       </div>
       </div>
       </div>
-      <br>
     </volist>
   </div>
+ <div class="goto_top">
+    <a href="#top"><img src="__STATIC__/images/top3.png"></a>
+ </div>
+ <script>
+    var indexz = $(".imgIntime2").length;//获取总的折扣商品
+    $(".d"+indexz).css("display","block");//默认页面加载显示一个
+	var clear = setInterval("saohuo_block()",30000);//每隔30秒显示一件商品
+	if(indexz <=0){
+		clearInterval(clear);
+	}
+	function saohuo_block(){
+		$(".d"+(indexz-1)).css("display","block");
+		indexz--;
+	}
+ </script>
 <include file="public:footer" />
 </body>
 </html>

@@ -8,6 +8,7 @@
 <meta name="format-detection" content="telephone=no" />
 <title>驾车导航</title>
 <link type="text/css" rel="stylesheet" href="__STATIC__/weixin/css/shop.css">
+<link type="text/css" rel="stylesheet" href="__STATIC__/weixin/css/shopnoright.css">
 <script src="http://api.map.baidu.com/api?v=1.2"></script>
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <style>
@@ -55,7 +56,7 @@ function go_nav(){
 function go_detail(){
 	var shop_ext = $("#shop_exist").val();
 	if(shop_ext == ""){
-		alert("网上店铺还未开通，请点带我去去实体店直接购买");
+		alert("网上店铺还未开通，请点击\"带我去\"去实体店直接购买");
 		return;
 	}else{
 		$("#na_1").css("background","gray");
@@ -74,16 +75,20 @@ function go_detail(){
 
 <div id="shop_detail" <if condition="$dmodel eq 'N'">style="display:none;margin-top:23px;" </if>>
 <div id="nav">
+<img src="__STATIC__/weixin/images/luxury/images/home/bg_02.png" width="100%">
 	<ul class="navlist">
 		<li class="r pos" id="n_9">
 		{$shopinfo.name}
-		</li></ul></div><br><div style="height:7px;width:100%;"></div>
-		<div style="height:500px;background:rgba(25,25,25,0.6);width:94%;margin:0 auto;color:white;">
+		</li>
+	</ul>
+</div><br>
+<div style="height:7px;width:100%;"></div>
+<div style="height:500px;background:rgba(25,25,25,0.6);width:94%;margin:0 auto;color:white;">
 <table>
   <tr> 
     <td><img src="__STATIC__/weixin/images/luxury/images/purchase/ic1_03.png" width="20px" class="img_start" height="20px"/></td>
     <td>逛店： 逛店赢积分</td>
-    <td><a href="">
+    <td><a href="{:U('index/index',array('tokenTall'=>$token))}">
     <img src="__STATIC__/weixin/images/luxury/images/Card/1_04.png" width="20px" class="img_start" height="20px"/>
     </a></td>
   </tr>

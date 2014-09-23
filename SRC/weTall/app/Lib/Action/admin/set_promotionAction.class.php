@@ -49,13 +49,14 @@ class set_promotionAction extends backendAction {
 		$brand = M("brandlist");
 		$this->assign("brand",$brand->select());
 		if (IS_POST) {
-			if (strtotime($_POST['start_date']) < strtotime($_POST['end_date'])) {
+			if (strtotime($_POST['start_date']) > strtotime($_POST['end_date'])) {
 				IS_AJAX && $this->ajaxReturn(0, '开始时间不能晚于结束时间');
 				$this->error('开始时间不能晚于结束时间');
 			}
 		//上传图片
 			if (empty($_FILES['img']['name'])) {
 				$_SESSION["img_name"] = "";
+				IS_AJAX && $this->ajaxReturn(0, '请上传商品图片');
 				$this->error('请上传商品图片');
 			}
 			else{
@@ -69,6 +70,7 @@ class set_promotionAction extends backendAction {
 	            ));
 	            $_SESSION["im_name"] = $result['info'][0]['savename'];
 	            if ($result['error']) {
+	            	IS_AJAX && $this->ajaxReturn(0, $result['info']);
 	                $this->error($result['info']);
 	            } else {
 	            	$_SESSION["img_name"] = $result['info'][0]['savename'];
@@ -81,7 +83,7 @@ class set_promotionAction extends backendAction {
 		$brand = M("brandlist");
 		$this->assign("brand",$brand->select());
 		if (IS_POST) {
-			if (strtotime($_POST['start_date']) < strtotime($_POST['end_date'])) {
+			if (strtotime($_POST['start_date']) > strtotime($_POST['end_date'])) {
 				IS_AJAX && $this->ajaxReturn(0, '开始时间不能晚于结束时间');
 				$this->error('开始时间不能晚于结束时间');
 			}
@@ -97,6 +99,7 @@ class set_promotionAction extends backendAction {
 				));
 				$_SESSION["img_edit_name"] = $result['info'][0]['savename'];
 				if ($result['error']) {
+					IS_AJAX && $this->ajaxReturn(0, $result['info']);
 					$this->error($result['info']);
 				} else {
 					$_SESSION["img_edit_name"] = $result['info'][0]['savename'];

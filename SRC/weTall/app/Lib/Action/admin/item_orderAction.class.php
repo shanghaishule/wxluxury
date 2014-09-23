@@ -29,6 +29,23 @@ class item_orderAction extends backendAction {
 	    	foreach ($order_details as $val)
 	     	{
 	     	$item->where("id='".$val['itemId']."'")->setInc('buy_num',$val['quantity']);
+	     	//给用户增加积分
+	     	$jifen = M("brandpoints");
+	     	$item_data = $item->where("id='".$val['itemId']."'")->find();
+	     	$userInfo = $this->_mod->where("orderId='".$orderId."'")->find();
+	     	$con['uid']=$userInfo['userId'];
+	     	$con['brandid']=$item_data['brand'];
+	     	$brand_is = $jifen->where($con)->find();
+	     	//获取品牌积分
+	     	$points = M("brandlist")->where(array("id"=>$item_data['brand']))->find();
+	     	$all_points = ($val['quantity'])*($points['jifen']);
+	     	if($brand_is){//存在
+	     		$jifen->where($con)->setInc('points',$all_points);
+	     	}else{//不存在
+	     		$con['points'] = $all_points;
+	     		$jifen->add($con);
+	     	}	     	
+	     	
 	        }
 	        $dataTall["tokenTall"]=$this->_get("tokenTall","trim");//echo $dataTall["tokenTall"];die();
 	        $shopcredit=M("wecha_shop");
@@ -410,7 +427,22 @@ class item_orderAction extends backendAction {
     		}
     		$date['fahuo_time']=time();
     		$date['status']=3;
-    		if($this->orderWxDeliver($data['orderId'])){
+    		
+    		/*如果是微信支付，则要求微信发货*/
+    		$supportmetho_result = false;
+    		$supportmetho = $mod->where("orderId='".$data['orderId']."'")->find();
+    		if ($supportmetho['supportmetho'] == 4) {
+    			if($this->orderWxDeliver($data['orderId'])){
+    				$supportmetho_result = true;
+    			} else {
+    				IS_AJAX && $this->ajaxReturn(0, '微信发货通知失败');
+    				$this->error('微信发货通知失败');
+    			}
+    		}else{
+    			$supportmetho_result = true;
+    		}
+    		
+    		if($supportmetho_result){
     			$updresult = $mod->where("orderId='".$data['orderId']."'")->data($date)->save();
     			if($updresult !== false){
     				IS_AJAX && $this->ajaxReturn(1, L('operation_success'), '', 'add');
@@ -420,8 +452,8 @@ class item_orderAction extends backendAction {
     				$this->error(L('operation_failure'));
     			}
     		} else {
-    			IS_AJAX && $this->ajaxReturn(0, '微信发货通知失败');
-    			$this->error('微信发货通知失败');
+    			IS_AJAX && $this->ajaxReturn(0, L('operation_failure'));
+    			$this->error(L('operation_failure'));
     		}
     	} else {
     		$this->assign('open_validator', true);

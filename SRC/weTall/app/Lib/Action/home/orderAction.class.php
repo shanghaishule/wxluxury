@@ -30,19 +30,18 @@ class orderAction extends userbaseAction {
 		//取商家token值，取不到则默认为空
 		$tokenTall = $this->getTokenTall();
 		$this->assign('tokenTall',$tokenTall);
-	
 		$orderId=$_GET['orderId'];
 		$status=$_GET['status'];
 		!$orderId && $this->_404();
 		$item_order=M('item_order');
 		$item=M('item');
-		$item_orders= $item_order->where("orderId='".$orderId."' and userId='".$this->visitor->info['id']."' and status=3")->find();
+		$item_orders= $item_order->where("orderId='".$orderId."' and userId='".session('uid')."' and status=3")->find();
 		if(!is_array($item_orders))
 		{
 			$this->error('该订单不存在!');
 		}
 		$data['status']=4;//收到货
-		//if($item_order->where("orderId='".$orderId."' and userId='".$this->visitor->info['id']."'")->save($data))
+		if($item_order->where("orderId='".$orderId."' and userId='".session("uid")."'")->save($data))
 		{
 			$order_detail=M('order_detail');
 			$order_details = $order_detail->where("orderId='".$orderId."'")->select();
@@ -72,8 +71,8 @@ class orderAction extends userbaseAction {
 				}
 				
 				//个人品牌积分
-				$user_jifen = M("user");
-				$user["id"]=$_SESSION['user_info']['id'];
+				/*$user_jifen = M("user");
+				$user["id"]=$_SESSION['uid'];
 				$userinfo=$user_jifen->where($user)->find();
 				$detail_user=explode(",", $userinfo["brand_jifen"]);
 				$flag = true;
@@ -99,14 +98,31 @@ class orderAction extends userbaseAction {
 					$return_jifen = $return_jifen.$item_data["brand"]."|".$brand_fenzhi1["jifen"].",";
 				}
 				$user_jifen_data["brand_jifen"]=$return_jifen;
-				$user["id"]=$_SESSION['user_info']['id'];
+				$user["id"]=$_SESSION['uid'];
 				$user_jifen->where($user)->save($user_jifen_data);
+				*/
+				//改版品牌积分start
+				$jifen = M("brandpoints");
+				$item_data = $item->where("id='".$val['itemId']."'")->find();
+				$con['uid']=session("uid");
+				$con['brandid']=$item_data['brand'];
+			    $brand_is = $jifen->where($con)->find();
+			    //获取品牌积分
+			    $points = M("brandlist")->where(array("id"=>$item_data['brand']))->find();
+			    $all_points = ($val['quantity'])*($points['jifen']);
+			    if($brand_is){//存在
+			    	$jifen->where($con)->setInc('points',$all_points);
+			    }else{//不存在
+			    	$con['points'] = $all_points;
+			    	$jifen->add($con);
+			    }
+			    //改版品牌积分end
 				
 				$stock_data["detail_stock"]=$stock_detail;
 				$item->where("id='".$val['itemId']."'")->save($stock_data);
 			}
 			$this->redirect('user/index',array('status'=>$status,'tokenTall'=>$tokenTall));
-		//}else
+		 //}//else
 		//{
 		//	$this->error('确定收货失败');
 		}
@@ -153,10 +169,10 @@ class orderAction extends userbaseAction {
 	public  function checkOrder()//查看订单
 	{
 		//取商家token值，取不到则默认为空
+		$tokenTall = $this->getTokenTall();
 		$item_cate=M("item_cate")->select();
 		$this->assign('item_cate',$item_cate);
-		
-	
+
 		$orderId=$_GET['orderId'];
 		!$orderId && $this->_404();
 		$status=$_GET['status'];
@@ -178,10 +194,15 @@ class orderAction extends userbaseAction {
 				$item_detail[]=$items;
 			}
 		}
-	
+		//获取卖家信息
+		$salsInfo = M("address")->where(array("tokenTall"=>$order['tokenTall']))->find();
+		//获取卖家店名
+		$shopName = M("wecha_shop")->field("name")->where(array("tokenTall"=>$order['tokenTall']))->find();
+		
 		$this->assign('item_detail',$item_detail);
 		$this->assign('order',$order);
-	
+	    $this->assign('sInfo',$salsInfo);
+	    $this->assign('shopName',$shopName);
 		$this->_config_seo();
 		$this->display();
 	}
@@ -211,11 +232,15 @@ class orderAction extends userbaseAction {
 				$userinfo['last_login_ip']=get_client_ip();
 				$Userarr= M('user')->where(array('openid'=>$userinfo['openid']))->find();
 				if(!empty($Userarr) && $Userarr!=''){
-					$_SESSION['uid']=$Userarr['id'];
-					$_SESSION['name']=$Userarr['nickname'];
+    				$_SESSION['uid']=$Userarr['id'];
+    				$_SESSION['name']=$Userarr['nickname'];
+    				$_SESSION['headimgurl']=$Userarr['headimgurl'];
+    				$_SESSION['openid']=$userinfo['openid'];
 				}else{ 
-					$_SESSION['uid']=M('user')->add($userinfo);
-					$_SESSION['name']=$userinfo['nickname'];
+    				$_SESSION['uid']=M('user')->add($userinfo);
+    				$_SESSION['name']=$userinfo['nickname'];
+    				$_SESSION['headimgurl']=$Userarr['headimgurl'];
+    				$_SESSION['openid']=$userinfo['openid'];
 				}
 				// dump($_SESSION['uid'].'-1-'.$_SESSION['name']);exit;
 			//}else{
@@ -267,7 +292,7 @@ class orderAction extends userbaseAction {
 			$this->display();
 		}else
 		{
-			$this->redirect('shopcart/index', array('tokenTall'=>$tokenTall));
+			$this->redirect('index/brandshop', array('tokenTall'=>$tokenTall));
 		}
 	}
 	

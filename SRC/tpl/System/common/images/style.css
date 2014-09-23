@@ -73,4 +73,7 @@ body.hidemenu #frmTitle{display:none;}
 .mbox ul {margin:10px auto;width:154px;height:100%;overflow:hidden}
 .mbox ul li {float:left;width:154px;height:32px;line-height:32px;overflow:hidden;text-align:center;font-weight:bold;}
 .mbox ul li a,.mbox ul li a:visited {color:#4A4A4A;display:block}
-.mbox ul li a:hover {background:url(mboxh.jpg) no-repeat; text-decoration:none;}
+.mbox ul li a:hover {/*background:url(mboxh.jpg) no-repeat;*/background:#ccc; text-decoration:none;}
+
+.mbox .current{background:#ccc;};
+

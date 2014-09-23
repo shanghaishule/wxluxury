@@ -55,8 +55,8 @@
 				<td align='center'>{lanrain:$vo.id}</td>
 				<td >{lanrain:$vo.username}</td>
 				<td >{lanrain:$group[$vo['gid']]}</td>
-				
-				
+				<td>{lanrain:$vo.shopname}</td>
+				<td>{lanrain:$vo.brandname}</td>
 				<td align='center'>{lanrain:$vo.lastip}</td>
 				<td align='center'><php>echo date('Y-m-d H:i:s', $vo['lasttime'])</php></td>
 				<td align='center'><eq name="vo.status" value="1"><font color="red">√</font><else/><font color="blue">×</font></eq> 

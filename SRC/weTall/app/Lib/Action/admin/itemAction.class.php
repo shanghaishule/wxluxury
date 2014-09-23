@@ -4,7 +4,7 @@ class itemAction extends backendAction {
         parent::_initialize();
         $this->_mod = D('item');
         $this->_cate_mod = D('item_cate');
-        $brandlist= $this->_brand=M('brandlist')->where('status=1')->order('ordid asc,id asc')->select();
+        $brandlist= $this->_brand=M('brandlist')->where('status=1')->order('name asc')->select();//ordid asc,id asc
         $this->assign('brandlist',$brandlist);
     }
 
@@ -362,7 +362,6 @@ class itemAction extends backendAction {
     				if($success_num >= 1) {
     					break;
     				}
-    				
     				if($this->get_good_attr($good_url,$item["brand"]) == "H"){//已经存在
     					$have = $have + 1;
     				}elseif ($this->get_good_attr($good_url,$item["brand"])) { //成功导入
@@ -625,7 +624,7 @@ class itemAction extends backendAction {
 	 * @return array
 	 */
 	public function _filterUrl($web_content) {
-		$reg_tag_a = '/<[a|A].*?href=[\'\"]{0,1}([^>\'\"\ ]*[\?|&]id=.*).*?>/';
+		$reg_tag_a = '/<[a|A].*?href=[\'\"]{0,1}([^>\'\"\]*[\?|&]id=.*).*?>/';
 		$result = preg_match_all($reg_tag_a, $web_content, $match_result);
 		if ($result) {
 			return $match_result[1];
@@ -767,7 +766,7 @@ class itemAction extends backendAction {
             $data["Huohao"]=$_POST["Huohao"];
             //echo $_POST["Huohao"];die();
             $data["item_model"]=$this->_post("item_model","trim");
-            
+
             //上传图片
             $Uninum = $_POST["Uninum"];
     		if (!empty($_FILES["img"])){
@@ -776,11 +775,12 @@ class itemAction extends backendAction {
 	    		if(!is_dir($filepath)){
 	    			mkdir($filepath,0777, true);
 	    		}
-	    		$filename = $Uninum.'.jpg'; //生成文件名，
+	    		$filename = $Uninum."/".time().rand(100, 999).'.jpg'; //生成文件名，
 	    		move_uploaded_file($_FILES["img"]["tmp_name"],$filepath.$filename);
 	    	
 	    		$data['img'] = '/Uploads/items/images/'.$filename;
     		}
+    		//dump($data['img']);exit;
             //上传相册
     		$file_imgs = array();
     		$filepath_imgs=$filepath.$Uninum."/";
@@ -824,7 +824,7 @@ class itemAction extends backendAction {
                     $data['tag_cache'] = serialize($tag_cache);
                 }
             }
-
+			//dump($data);die();
             //更新商品
             $this->_mod->where(array('id'=>$item_id))->save($data);
             //更新图片和相册
@@ -894,7 +894,7 @@ class itemAction extends backendAction {
             $imagesstr = $item["images"];
             $imagesarr = explode("|",$imagesstr);
             $this->assign("imagesarr",$imagesarr);
-            
+            //dump($item);exit;
             $this->assign('info', $item);
             $this->assign("edit_m",$edit_m);
            
@@ -922,7 +922,23 @@ class itemAction extends backendAction {
         echo '1';
         exit;
     }
-
+    //总后台主图删除
+    function delete_album_tb() {
+    	$album_mod = M('item_taobao');
+    	$album_id = $this->_get('album_id','trim');
+    	$item_id = $this->_get('item_id','trim');//echo $item_id."hi";die();
+    	$where["id"] = $item_id;
+    
+    	$album_img = $album_mod->where($where)->find();
+    	if($album_img ){
+    		$data["images"] = preg_replace('/|'.$album_id.'/',"",$album_img["images"]);
+    		 
+    		$album_mod->where($where)->save($data);
+    	}
+    	echo '1';
+    	exit;
+    }
+    
     function yiyuan(){
     	$item = M("item");    	
     	$id = $this->_get("id","trim");

@@ -58,7 +58,13 @@
                                                        货号：
                 <input type="text" name="huohao" class="text" id="huohao"> &nbsp;
                                                        品牌：
-                <input type="text" name="brand" class="text" id="brand"> &nbsp; 
+                <input type="text" name="brand" class="text" id="brand" value="{Lanrain:$brand}"> &nbsp;			                
+				<select id ="brandlist"  class="text" onchange="document.getElementById('brand').value=this.options[this.selectedIndex].text" 
+						style="width:150px;height:19px;CLIP: rect(auto auto auto 131px); POSITION: absolute ;margin-left:-140px;margin-top:3px;">															
+		            <volist name="brandlist" id="val" >
+						<option>{Lanrain:$val.name}</option>
+		            </volist>																 
+				<select> &nbsp; &nbsp;&nbsp;&nbsp;
             	导入时间 :
                 <input type="text" name="time_start" id="J_time_start" class="date" size="12" value="{Lanrain:$search.time_start}">
                 -

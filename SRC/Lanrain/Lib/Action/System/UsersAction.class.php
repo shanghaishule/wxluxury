@@ -8,7 +8,15 @@ class UsersAction extends BackAction{
 		$Page= new Page($count,25);
 		$show= $Page->show();
 		$list = $db->order('id desc')->limit($Page->firstRow.','.$Page->listRows)->where($this->belong_where)->select();
-		foreach($group as $key=>$val){
+		$arr=array();
+		foreach($list as $key =>$val){
+			$token = M("wxuser")->field("token")->where(array('uid'=>$val['id']))->find();
+			$shopname = M("wecha_shop")->where(array("tokenTall"=>$token['token']))->find();//商家名称
+			$brandname = M("brandlist")->field("name")->where(array("id"=>$shopname['BelongBrand']))->find();//所属品牌
+			$list[$key]['shopname']=$shopname['name'];
+			$list[$key]['brandname']=$brandname['name'];
+		}
+		foreach($group as $key =>$val){
 			$g[$val['id']]=$val['name'];
 		}
 		unset($group);

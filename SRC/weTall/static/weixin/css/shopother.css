@@ -406,9 +406,9 @@ border-top: 2px solid #ff0000;}
  * ******************** module.css ***********************
  * -------------------------------------------------------
  */
-
-#nav {width:100%; min-width:200px;max-width:640px;left:0px;position:fixed; top:0px; z-index: 999; margin: 0 auto;display:block;}
-#nav ul.navlist { position: absolute;top:0px;left:0px; z-index:9999; height:45px; width:100%;margin:0 ;  }
+.kongge{height:100px}
+#nav {width:100%; min-width:200px;max-width:640px;left:0px;position:fixed; top:0px; z-index: 999999; margin: 0 auto;display:block;}
+#nav ul.navlist { position: absolute;top:0px;left:0px; z-index:999999; height:45px; width:100%;margin:0 ;  }
 #nav .navlist li { float: left;height:45px;  position:relative;width:22%;margin:auto}
 #nav .navlist li#n_3 i{ position:absolute; height:14px; width:14px;background:#C00; color:#fff; left:55%; top:10px; border-radius:50%; font-style:normal; text-align:center; font-size:12px; display:none;}
 #nav .navlist li span{ display:inline-block; width:100%; height:45px; cursor:pointer; color:white ;margin-top:10px;text-align:center}
@@ -1183,10 +1183,10 @@ padding:10px 0 10px 0;
 .head_two tr .head_t{color:white;font-size:12px;width:16%;}
 .head_two tr .head_t{rowspan;width:25%;}
 #send{margin-left:5%;}
-.tb_foot{width:100%}
+.tb_foot{width:80%}
 .tb_foot tr{width:50%}
 .tb_foot tr td{width:50%}
-#myshare,#mysave{font-size:25px;height:45px;padding-top:5px;border:none}
+#myshare,#mysave{font-size:20px;height:30px;padding-top:0px;border:none}
 .dpfx{background-color:balck;}
 .head_two .keep{width:38%;}
 .c_b{clear:both;}

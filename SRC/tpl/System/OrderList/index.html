@@ -1,0 +1,138 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<script src="/weTall/static/js/jquery/jquery.js"></script>
+	<script src="/weTall/static/js/jquery/plugins/jquery.tools.min.js"></script>
+	<script src="/weTall/static/js/jquery/plugins/formvalidator.js"></script>
+	<script src="/weTall/static/js/pinphp.js"></script>
+	<script src="/weTall/static/js/admin.js"></script>
+	<link rel="stylesheet" type="text/css" href="/weTall/static/css/admin/style.css" />
+	<link href="/weTall/static/css/admin/style.css" rel="stylesheet"/>
+	<link rel="stylesheet" type="text/css" href="/weTall/static/js/calendar/calendar-blue.css"/>
+	<script type="text/javascript" src="/weTall/static/js/calendar/calendar.js"></script>	
+	<title>管理中心</title>
+	<script>
+	var URL = '/weTall/index.php/admin-ad';
+	var SELF = '/weTall/index.php?g=admin&m=adforhome&a=index';
+	var ROOT_PATH = '/weTall';
+	var APP	 =	 '/weTall/index.php';
+	//语言项目
+	var lang = new Object();
+	lang.connecting_please_wait = "请稍后...";lang.confirm_title = "提示消息";lang.move = "移动";lang.dialog_title = "消息";lang.dialog_ok = "确定";lang.dialog_cancel = "取消";lang.please_input = "请输入";lang.please_select = "请选择";lang.not_select = "不选择";lang.all = "所有";lang.input_right = "输入正确";lang.plsease_select_rows = "请选择要操作的项目！";lang.upload = "上传";lang.uploading = "上传中";lang.upload_type_error = "不允许上传的文件类型！";lang.upload_size_error = "文件大小不能超过{Lanrain:sizeLimit}！";lang.upload_minsize_error = "文件大小不能小于{Lanrain:minSizeLimit}！";lang.upload_empty_error = "文件为空，请重新选择！";lang.upload_nofile_error = "没有选择要上传的文件！";lang.upload_onLeave = "正在上传文件，离开此页将取消上传！";	
+
+	(function (d) {Lanrain:
+	    d['okValue'] = lang.dialog_ok;
+	    d['cancelValue'] = lang.dialog_cancel;
+	    d['title'] = lang.dialog_title;
+	})($.dialog.defaults);
+	</script>
+	<script src="/weTall/static/js/jquery/plugins/listTable.js"></script>
+	<script>
+	$(function(){Lanrain:
+		$('.J_tablelist').listTable();
+	});
+	</script>
+</head>
+
+<body><!-- 
+<div class="subnav">
+    <div class="content_menu ib_a blue line_x">
+    	<a class="add fb J_showdialog" href="javascript:void(0);" data-uri="/weTall/index.php?g=admin&m=account&a=genbill" data-title="生成账单" data-id="genbill" data-width="520" data-height="100"><em>生成账单</em></a>
+    </div>
+</div> -->
+<div class="pad_lr_10">
+    <form name="searchform" method="get" >
+    <table width="100%" cellspacing="0" class="search_form">
+        <tbody>
+            <tr>
+            <td>
+            <div class="explain_col">
+            	<input type="hidden" name="g" value="System" />
+                <input type="hidden" name="m" value="OrderList" />
+                <input type="hidden" name="a" value="index" />
+                <input type="hidden" name="menuid" value="{Lanrain:$menuid}" />
+            	
+          		状态 :
+		        <select name="status" >
+		        <option value="">--所有--</option>
+                   <?php foreach($order_status as $key=>$item){?>
+                   <option value="{Lanrain:$key}">{Lanrain:$item}</option>
+                    <?php } ?>
+		        </select>
+		                      商家:
+		        <select name="shop" >
+		        <option value="">--所有--</option>
+		        <volist name="shopArr" id="val2" >
+		        <option value="{Lanrain:$val2.tokenTall}" >{Lanrain:$val2.name}</option>
+		        </volist>
+		        </select>                
+				<input type="submit" name="search" class="btn" value="搜索" />
+        	</div>
+            </td>
+            </tr>
+        </tbody>
+    </table>
+    </form>
+    
+    <div class="J_tablelist table_list">
+    <table width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <!--th><span data-tdtype="order_by" data-field="id">ID</span></th-->
+                <th><span data-tdtype="order_by" data-field="shop">商家</span></th>
+                <th><span data-tdtype="order_by" data-field="billnum">订单号&状态</span></th>
+                <th><span data-tdtype="order_by" data-field="status">订单金额</span></th>
+                <th><span data-tdtype="order_by" data-field="gen_time">收货人&电话</span></th>
+                <th><span data-tdtype="order_by" data-field="start_time">支付&配送</span></th>
+                <th><span data-tdtype="order_by" data-field="start_time">下单&付款时间</span></th>
+            </tr>
+        </thead>
+    	<tbody>
+            <volist name="list" id="val" >
+            <tr>
+                <!--td align="center">{Lanrain:$val.id}</td-->
+                <td align="center">{Lanrain:$val.shopName}</td>
+                <td align="center">
+                    <switch name="val.status" >
+                         <case value="1">待付款</case>
+                         <case value="2">待发货</case>
+                         <case value="3">待收货</case>
+                         <case value="4">完成</case>
+                        <default />关闭
+                 	</switch>
+                </td>
+                <td align="center">¥{Lanrain:$val.order_sumPrice}
+                </td>
+                <td align="center">{Lanrain:$val.address_name}({Lanrain:$val.userName})<br>{Lanrain:$val.mobile}</td>
+                <td align="center">
+	                 <switch name="val.supportmetho" >
+	                         <case value="1">支付宝支付</case>
+	                         <case value="2">货到付款</case>
+	                         <case value="3">银联支付</case>
+	                         <case value="4">微信支付</case>      
+	                 </switch>
+	                 <br>
+	                  <switch name="val.freetype" >
+	                         <case value="1">平邮</case>
+	                         <case value="2">快递</case>  
+	                         <case value="3">ems</case>  
+	                          <case value="0">卖家包邮</case>  
+	                 </switch>
+                </td>
+                <td align="center">
+                {Lanrain:$val.add_time|date='Y-m-d H:i:s',###}--<br><if condition="$val.support_time neq '' ">{Lanrain:$val.support_time|date='Y-m-d H:i:s',###}</if>
+                </td>
+            </tr>
+            </volist>
+    	</tbody>
+    </table>
+    </div>
+    <div class="btn_wrap_fixed">
+    	<div id="pages">{Lanrain:$page}</div>
+    </div>
+</div>
+
+</body>
+</html>

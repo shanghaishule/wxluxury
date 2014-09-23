@@ -78,11 +78,11 @@ class itemAction extends frontendAction {
         }
         
         //收藏
-       // $favi['userid'] = $_SESSION['user_info']['id'];
-       // $favi['item_id'] = $item['id'];
-       // if (M("shop_favi")->where($favi)->find()) {
-       // 	$this->assign("favi_suc","Y");
-      //  }
+        $favi['userid'] = $_SESSION['uid'];
+        $favi['item_id'] = $item['id'];
+        if (M("shop_favi")->where($favi)->find()) {
+     	  $this->assign("favi_suc","Y");
+        }
 
         $this->assign('countSize', $countSize);
         $this->assign('countColor', $countColor);
@@ -340,6 +340,24 @@ class itemAction extends frontendAction {
                 $this->ajaxReturn(0, L('del_item_failed'));
             }
         }
+    }
+    
+    
+    public function imgs_view(){    	 
+    	$id = $this->_get('id', 'intval');
+    	!$id && $this->_404();
+    	$tokenTall = $this->getTokenTall();
+    	$item_mod = M('item');
+    	$item = $item_mod->field('id,title,Uninum,favi,old_price,goods_stock,intro,price,info,comments,add_time,buy_num,brand,size,color,images,promotion_id,item_model')->where(array('id' => $id, 'status' => 1))->find();
+    	!$item && $this->_404();
+    	//图片
+    	$imgarr = substr(trim($item['images']),0,1) == '|' ? explode('|', substr(trim($item['images']),1)) : explode('|', $item['images']);
+
+    	$this->assign('item', $item);
+    	$this->assign('tokenTall', $tokenTall);
+    	$this->assign("imgarr",$imgarr);
+    
+    	$this->display();
     }
 
 }

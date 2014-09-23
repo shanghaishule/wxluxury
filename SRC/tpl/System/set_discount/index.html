@@ -23,7 +23,7 @@
 <script src="/weTall/static/js/jquery/plugins/formvalidator.js"></script>
 <script src="/weTall/static/js/pinphp.js"></script>
 <script src="/weTall/static/js/admin.js"></script>
-<script>
+<!-- -<script>
 //初始化弹窗
 (function (d) {
     d['okValue'] = lang.dialog_ok;
@@ -31,7 +31,7 @@
     d['title'] = lang.dialog_title;
 })($.dialog.defaults);
 </script>
-
+--->
 <script src="/weTall/static/js/jquery/plugins/listTable.js"></script>
 <script>
 $(function(){
@@ -108,10 +108,10 @@ $(function(){
                 <td align="left"><span data-tdtype="edit" data-field="ordid" data-id="{Lanrain:$val.id}" class="tdedit">{Lanrain:$val.start_time}</span></td>
                 <td align="center"><span data-tdtype="edit" data-field="ordid" data-id="{Lanrain:$val.id}" class="tdedit">{Lanrain:$val.end_time}</span></td>
                 <td align="center"><span data-tdtype="edit" data-field="ordid" data-id="{Lanrain:$val.id}" class="tdedit">
-				<if condition="$val['status'] eq 0">活动未开始</if>
-				<if condition="$val['status'] eq 1">
-				活动进行中</if>
+				<if condition="$val['status'] eq 1">活动未开始</if>
 				<if condition="$val['status'] eq 2">
+				活动进行中</if>
+				<if condition="$val['status'] eq 0">
 				活动已经结束</if>
 				</span></td>
                 <td align="center">

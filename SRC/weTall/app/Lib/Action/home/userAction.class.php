@@ -26,7 +26,7 @@ class userAction extends userbaseAction {
     
     }
 	
-    /**
+    /**w
      * 用户登陆
      */
     public function login() {
@@ -137,7 +137,10 @@ class userAction extends userbaseAction {
         //取商家token值，取不到则默认为空
         $tokenTall = $this->getTokenTall();
         $this->assign('tokenTall',$tokenTall);
-        $this->success(L('logout_successe').$synlogout, U('user/index',array('tokenTall'=>$tokenTall)));
+		session(null);
+		session_destroy();
+		unset($_SESSION);
+        $this->success(L('logout_successe').$synlogout, U('index/brandshop'));
     }
 
     /**
@@ -243,7 +246,7 @@ class userAction extends userbaseAction {
     	import('Think.ORG.Oauth2');
     	$config['appId'] = "wx3079f89b18863917";
     	$config['appSecret'] = "69289876b8d040b3f9a367c80f8754c8";
-    	if(!isset($_SESSION['uid']) && empty($_SESSION['uid'])){
+    	if(!isset($_SESSION['uid']) || empty($_SESSION['uid']) || !isset($_SESSION['openid']) || empty($_SESSION['openid'])){
 
 	    	if (isset($_GET['code'])){
 	    		//echo $_GET['code'].'--';
@@ -270,7 +273,7 @@ class userAction extends userbaseAction {
 	    	}
     	   
    	 	}	
-   	 	//dump($_SESSION['uid'].'-2-'.$_SESSION['name']);exit;
+   	 	//dump($_SESSION);exit;
     	$tokenTall = $this->getTokenTall();
     	
         $item_order=M('item_order');
@@ -642,15 +645,13 @@ class userAction extends userbaseAction {
     	//取商家token值，取不到则默认为空
     	$item_cate=M("item_cate")->select();
     	$this->assign('item_cate',$item_cate);
-    	
-    	
     	$tokenTall = $this->getTokenTall();
     	
     	//$favi_mod = M('shop_favi');
     	//$favi_list = $favi_mod->where(array('userid'=>$_SESSION['uid']))->select();
     	$userid = $_SESSION['uid'];
     	/*店铺信息*/
-    	$model=new Model();
+    	$model=new Model();//
     	$weChaShop = $model->table('tp_shop_favi a, tp_item b')
     	->where("a.item_id = b.id and a.userid='".$userid."'")
     	->field("b.*, '".$tokenTall."' url")
@@ -717,7 +718,6 @@ class userAction extends userbaseAction {
     	$this->assign("my_points",$array_mypoints);
     	$this->assign("title","我的积分");
     	$this->display("jifen");
-    	
     }
      /**
      *	追加评论
@@ -764,7 +764,7 @@ class userAction extends userbaseAction {
     public function mymatch() {
     	$uid = $_SESSION['uid'];
     	$m=M();
-    	$Sel_sql = "SELECT * from tp_match where is_send = 1 & uid = ".$uid;
+    	$Sel_sql = "SELECT * from tp_match where is_send = 1 and uid = ".$uid;
     	$result=$m->query($Sel_sql);
     	$item_favi_detail = M("item");
     	$match_table = array();
@@ -807,8 +807,9 @@ class userAction extends userbaseAction {
     public function mysave() {
     	$uid = $_SESSION['uid'];
     	$m=M();
-    	$Sel_sql = "SELECT * from tp_match where is_send = 2 & uid = ".$uid;
+    	$Sel_sql = "SELECT * from tp_match where is_send = 2 and uid = ".$uid;
     	$result=$m->query($Sel_sql);
+		//dump($result);exit;
     	$item_favi_detail = M("item");
     	$match_table = array();
     	$id=0;
@@ -849,7 +850,7 @@ class userAction extends userbaseAction {
     	$Sel_sql = "SELECT i.title, i.img,s.item_id FROM tp_item i, tp_shop_favi s ";
     	$Where_sql = "WHERE i.id = s.item_id and s.userid = ".$uid;
     	$result=$m->query($Sel_sql.$Where_sql);
-    
+    //dump($result);exit;
     	//items 设定
     	//$math_data = M("match")->where($where)->find();
     	$math_data = $_SESSION['math_data'];
@@ -899,13 +900,13 @@ class userAction extends userbaseAction {
     		//
     		if($data['is_send'] == "0"){
     				$this->success('保存成功！');
-    	}else{
-    		$this->success('发稿成功！');
-    		}
+			}else{
+				$this->success('发稿成功！');
+			}
     
-    		}
+    	}
     
-    		$this->display();
+    	$this->display();
     }
  
     public function preMatch() {
@@ -919,7 +920,11 @@ class userAction extends userbaseAction {
     $result = $this->getUserFavi();
     //取得所选收藏
     $item_ids = $this->getSelFavi($result);
-    
+	if($item_ids === false){
+		$this->error('您没有选择收藏的商品');
+	}
+    //dump($result);exit;
+	
     $data['item_ids'] = $item_ids;
     $data['uid'] = $uid;
     $data['my_img'] = $_POST['img_name'];
@@ -958,7 +963,7 @@ class userAction extends userbaseAction {
 	    $filepath = $_SERVER['DOCUMENT_ROOT']."/Uploads/items/images/";//图片保存的路径目录
     	    if(!is_dir($filepath)){
     	    mkdir($filepath,0777, true);
-    }
+    	}
      
     	$file_type = explode(".",$_POST['img_name']);
     	$filename = $Uninum.'.'.$file_type[1]; //生成文件名
@@ -1009,12 +1014,42 @@ class userAction extends userbaseAction {
     	public function  singledata(){
     		$tokenTall = $this->getTokenTall();
     		$this->assign('tokenTall',$tokenTall);
-    		$this->display();
-    		
+    		$data['uid'] = session('uid');
+    		if(!empty($data['uid'])){
+    			$userinfo=M('user_info')->where($data)->find();
+    			$title_arr=array("晚装","正装","休闲","运动","打底");//主题
+    			$color_arr=array("纯色","撞色","拼贴","其他");//颜色
+    			$style_arr=array("嬉皮","英伦风","日韩风","民族","田园风","运动风","百搭","其他");//风格
+    			$element_arr=array("印花","透视","花卉","图案","条纹","格子","波点","蕾丝","其他");//元素
+    			if(empty($userinfo)){
+    				$this->assign('flag','0');//新增
+    				$this->assign("title_arr",$title_arr);
+    				$this->assign("color_arr",$color_arr);
+    				$this->assign("style_arr",$style_arr);
+    				$this->assign("element_arr",$element_arr);
+    			}else{
+    				$this->assign('flag','1');//编辑
+    				$this->assign("uInfo",$userinfo);
+    				$this->assign("title_arr",$title_arr);
+    				$this->assign("hobby_title",explode("|",$userinfo['hobby_title']));
+    				$this->assign("color_arr",$color_arr);
+    				$this->assign("hobby_color",explode("|",$userinfo['hobby_color']));
+    				$this->assign("style_arr",$style_arr);
+    				$this->assign("hobby_style",explode("|",$userinfo['hobby_style']));
+    				$this->assign("element_arr",$element_arr);
+    				$this->assign("hobby_element",explode("|",$userinfo['hobby_element']));
+    			}
+    			//dump($userinfo['hobby_element']);exit;
+    			$this->display();
+    		}else{
+    			$this->error("服务器繁忙！");
+    		}
     	}
+    	
     	public function saveinfo(){
     		header("Content-type: text/html; charset=utf-8"); 
     		$data['uid'] = session('uid');
+    		$flag=$this->_post('flag','trim');
     		if(!empty($data['uid'])){
 	    		$data['sex'] = $this->_post("sex");
 	    		$data['birthday']=$this->_post("birthday");
@@ -1036,11 +1071,21 @@ class userAction extends userbaseAction {
 	    		
 	    		$hobby_element_arr = $this->_post("hobby_element");
 	    		$data['hobby_element'] = implode("|", $hobby_element_arr);
-	    		if(M('user_info')->add($data)){
-	    			$this->success("保存成功",U("user/logintest"));
-	    		}else{
-	    			$this->error("保存失败");
+	    		if($flag=='0'){//新增
+	    			if(M('user_info')->add($data)){
+	    				$this->success("保存成功",U("user/logintest"));
+	    			}else{
+	    				$this->error("保存失败");
+	    			}
 	    		}
+	    		if($flag=='1'){//编辑
+	    			if(M('user_info')->where(array('uid'=>$data['uid']))->save($data)){
+	    				$this->success("保存成功",U("user/logintest"));
+	    			}else{
+	    				$this->error("保存失败");
+	    			}
+	    		}
+
     		}else{
     			$this->error("服务器繁忙！");
     		}	

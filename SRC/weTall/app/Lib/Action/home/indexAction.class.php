@@ -1,10 +1,11 @@
 <?php
-class indexAction extends frontendAction {
+class indexAction extends frontendAction {//frontend
 
     public function index() {
     	//取商家token值，取不到则默认为空
     	$tokenTall = $this->getTokenTall();
     	$_SESSION["tokenTall"]=$tokenTall;
+    
     	//判断是微信的环境
     	$systemBrowse="X";
     	$agent = $_SERVER['HTTP_USER_AGENT'];
@@ -147,8 +148,10 @@ class indexAction extends frontendAction {
     			$this->assign("item",$reverse_goods);
     			$this->display();
     	}elseif($nowTime < $start_time){
+    	      header("Content-type:text/html;charset=utf-8");
     			echo "还未开始";die();
     	}else{
+    		header("Content-type:text/html;charset=utf-8");
     			echo "活动已经结束";die();
     	}
     	
@@ -248,6 +251,97 @@ class indexAction extends frontendAction {
     	$this->assign("favi_table",$match_favi);
     	$this->display();
     }
+    
+
+    //搭配按热度
+    public function matchHot(){
+    	$m=M();
+    	$Sel_sql = "SELECT * from tp_match where is_send = 1 order by create_time desc" ;
+    	$result=$m->query($Sel_sql);
+    	$item_favi_detail = M("item");
+    	$match_table = array();
+    	$id=0;
+    	
+    	$match_favi = array();
+    	foreach ($result as $match_result){
+    		$match_table[] = $match_result;
+    		$match_table[$id]['create_time']=fdate($match_result['create_time']);
+    		$username = M("user")->where("id=".$match_result["uid"])->find();
+    		//总评数
+    		$sum_com=M("match_comments")->where("match_id=".$match_result["id"])->count();
+    		//总赞数
+    		$sum_love=M("match_love")->where("matchid=".$match_result["id"])->count();
+    	
+    		$match_table[$id]["uname"] = $username["nickname"];
+    		$match_table[$id]["userimgurl"] = $username["headimgurl"];
+    		$match_table[$id]['sum_c']=$sum_com;
+    		$match_table[$id]['sum_l']=$sum_love;
+    		$id ++;
+    		if ($match_result != "" or $match_result != null) {
+    			$item_favi = explode(",", $match_result["item_ids"]);
+    			foreach ($item_favi as $val){
+    				$match_favi_sequence["id"] = $match_result["id"];
+    				$item = $item_favi_detail->where("id=".$val)->find();
+    				$match_favi_sequence["favi_name"] = $item["title"];
+    				$match_favi_sequence["favi_img"] = $item["img"];
+    				$match_favi_sequence["favi_price"] = $item["price"];
+    				$match_favi_sequence["item_id"]=$val;
+    				$match_favi[] = $match_favi_sequence;
+    			}
+    		}
+    	}
+    	$match_table=$this->array_sort($match_table,'sum_l','desc');
+    	//dump($match_table);die();
+    	$this->assign("match_table",$match_table);
+    	$this->assign("favi_table",$match_favi);
+    	$this->display('match');
+    }
+    
+    //搭配按时间
+    public function matchTime(){
+    	$m=M();
+    	$Sel_sql = "SELECT * from tp_match where is_send = 1 order by create_time desc" ;
+    	$result=$m->query($Sel_sql);
+    	$item_favi_detail = M("item");
+    	$match_table = array();
+    	$id=0;
+    	
+    	$match_favi = array();
+    	foreach ($result as $match_result){
+    		$match_table[] = $match_result;
+    		$match_table[$id]['create_time']=fdate($match_result['create_time']);
+    		$match_table[$id]['add_time']=$match_result['create_time'];
+    		$username = M("user")->where("id=".$match_result["uid"])->find();
+    		//总评数
+    		$sum_com=M("match_comments")->where("match_id=".$match_result["id"])->count();
+    		//总赞数
+    		$sum_love=M("match_love")->where("matchid=".$match_result["id"])->count();
+    	
+    		$match_table[$id]["uname"] = $username["nickname"];
+    		$match_table[$id]["userimgurl"] = $username["headimgurl"];
+    		$match_table[$id]['sum_c']=$sum_com;
+    		$match_table[$id]['sum_l']=$sum_love;
+    		$id ++;
+    		if ($match_result != "" or $match_result != null) {
+    			$item_favi = explode(",", $match_result["item_ids"]);
+    			foreach ($item_favi as $val){
+    				$match_favi_sequence["id"] = $match_result["id"];
+    				$item = $item_favi_detail->where("id=".$val)->find();
+    				$match_favi_sequence["favi_name"] = $item["title"];
+    				$match_favi_sequence["favi_img"] = $item["img"];
+    				$match_favi_sequence["favi_price"] = $item["price"];
+    				$match_favi_sequence["item_id"]=$val;
+    				$match_favi[] = $match_favi_sequence;
+    			}
+    		}
+    	}
+    	$match_table=$this->array_sort($match_table,'create_time','desc');
+    	//dump($match_table);die();
+    	$this->assign("match_table",$match_table);
+    	$this->assign("favi_table",$match_favi);
+    	$this->display('match');
+    }
+        
     public function addressselect(){
     	$upload_shop = M("item");
     	$color = $_GET["color"];
@@ -281,27 +375,28 @@ class indexAction extends frontendAction {
     	$discount_shop = M("set_discount");
     	$brand = M("brandlist");
     	$set_discount=M("set_discount");
-    	$discount_data = $discount_shop->order("status desc,date asc,start_time asc")->select();
+    	$discount_data = $discount_shop->order("status desc")->select();
     	
     	$nowTime = time();
-    	foreach ($discount_data as $val_data){
+    	foreach ($discount_data as $key => $val_data){
     		$start_time=strtotime($val_data["date"]. $val_data["start_time"]);
     		$end_time=strtotime($val_data["date"]. $val_data["end_time"]);
     		$discount[id]=$val_data["id"];
 
-    		if($nowTime < $start_time){
-	    		$update_status3["status"] = "1";
-	    		$set_discount->where($discount)->save($update_status3);
-    		}elseif($nowTime > $end_time){
-    			$update_status2["status"] = "0";
-    			$set_discount->where($discount)->save($update_status2);
+    		if($nowTime > $start_time && $nowTime < $end_time){
+	    		$update_status["status"] = "2";
+	    		$set_discount->where($discount)->save($update_status);
+    		}elseif($nowTime < $start_time){
+    			$update_status["status"] = "1";
+    			$set_discount->where($discount)->save($update_status);
     		}else{
-    			$update_status["status"] = "2";
+    			$update_status["status"] = "0";
     			$set_discount->where($discount)->save($update_status);
     		}
     	}
+    	$discount_data = $discount_shop->order("status desc")->select();
     	//var_dump($discount_data);die();
-    	$this->assign("huodongstatus",$update_status["status"]);
+    	//$this->assign("huodongstatus",$update_status["status"]);
     	$this->assign("brand",$brand->select());
     	$this->assign("ontime",$discount_data);
     	$this->display();
@@ -411,7 +506,7 @@ class indexAction extends frontendAction {
     	}else{
     		$shop_data = M("wecha_shop")->where($shop_id)->find();
     	}
-    	
+    	$this->assign('token',$token);
     	$this->assign("dmodel",$display_mode);
     	$this->assign("shopinfo",$shop_data);
     	$this->assign("start_point_lat",$start_point_lat);
@@ -443,7 +538,7 @@ class indexAction extends frontendAction {
     		$loty = "108.9471";
     		$city = "西安";
     	}
-    	if ($lotx != "") {
+    	if($lotx != "") {
     		$_SESSION["longtitude"] = $loty;
     		$_SESSION["latitude"] = $lotx;
     	} 
@@ -506,6 +601,7 @@ class indexAction extends frontendAction {
     		$this->assign("start_point_lng",$start_point_lng);
     		$this->assign("searchNear","Y");
     		$this->assign("nearShop",$new_nearShop); 
+    		//dump($new_nearShop);exit;
     	}
     	$url = "http://api.map.baidu.com/geocoder?location=".$latitude.",".$longitude."&output=xml&key=28bcdd84fae25699606ffad27f8da77b";
     	//$url = "http://api.map.baidu.com/geocoder?location=31.256748,121.595578&output=xml&key=28bcdd84fae25699606ffad27f8da77b";
@@ -657,9 +753,9 @@ class indexAction extends frontendAction {
                 $_SESSION['keyword']=$keyword;
                 $_SESSION['method']=$method;
     		}else{//店铺内搜索微服客
-    			$this->nextPage($method, $keyword,$sortBy);
     			$_SESSION['keyword']=$keyword;
     			$_SESSION['method']=$method;
+    			$this->nextPage($method, $keyword,$sortBy);
     		}
     		
     	}else{
@@ -684,11 +780,9 @@ class indexAction extends frontendAction {
     		    $this->nextPage($_SESSION['method'], $_SESSION['keyword'],$sortBy, $_SESSION['token']);
     		}else{//关键字搜索后的分页
     			$this->assign("method",$_SESSION['method']);
-    			
-    			$this->nextPage($_SESSION['method'], $_SESSION['keyword'],$sortBy);
+    			$this->nextPage($_SESSION['method'],$_SESSION['keyword'],$sortBy);
     		}
     	}
-    	
     }
     public function nextPagetuan($token,$itemid,$sortBy){
     	$tokenTall = $token;
@@ -867,7 +961,6 @@ class indexAction extends frontendAction {
 	    	$nowPage = isset($_GET['p'])?$_GET['p']:1;
 	    	$show       = $Page->show();// 分页显示输出
 	    	$carryrecord  = $item->where($condition)->order($sortBy)->limit($Page->firstRow.','.$Page->listRows)->select();
-	    	 
 	    	$this->assign("item",$carryrecord);
 	    	if ($_SESSION["search_all"] != "Y") {
 	    		$this->assign("method",$method);
@@ -998,19 +1091,15 @@ class indexAction extends frontendAction {
     	if($_POST['act']){
     		$act = $_POST['act'];
     		$item_id = $act;
-    		if ($_SESSION['user_info']) {
-	    		$userid = $_SESSION['user_info']['id'];
+    		if ($_SESSION['uid']) {
+	    		$userid = $_SESSION['uid'];
 	    		$shopfav_mod = M('shop_favi');
 	    		$insdata = array('userid'=>$userid, 'item_id'=>$item_id);
 	    		if ($shopfav_mod->where($insdata)->find()) {
 	    			//已经有记录的情况下
-	    			
-	    				$data = array('status'=>2);
-	    			
-	    			
+	    			$data = array('status'=>2);
 	    		}else{
-	    			
-	    				//收藏
+	    			//收藏
 		    			if ($shopfav_mod->add($insdata)) {
 		    				//成功
 		    				$data = array('status'=>1);
@@ -1020,7 +1109,7 @@ class indexAction extends frontendAction {
 		    				M("item")->where($item)->save($item_data_new);
 		    			}else{
 		    				//失败
-		    				$data = array('status'=>2);
+		    				$data = array('status'=>3);
 		    			}
 	    			
 	    		}
@@ -1102,6 +1191,9 @@ class indexAction extends frontendAction {
     }    
     	 
     public function promotion(){
+    	//获取地理位置
+    	$this->get_loaction();
+    	
     	$item_cate=M("item_cate")->select();
     	$this->assign('item_cate',$item_cate);
     	
@@ -1124,12 +1216,20 @@ class indexAction extends frontendAction {
     	}
     	
     	$Model = new Model();
-    	$volumn = $Model->query("select b.name, a.img, a.theme, a.discount_rate from tp_set_promotion a, tp_brandlist b where a.brand_id=b.id and a.status=1 LIMIT 300;");
+    	$volumn = $Model->query("select b.name, a.img, a.theme, a.discount_rate, a.tokenTall from tp_set_promotion a, tp_brandlist b where a.brand_id=b.id and a.status=1;");
     	$brand_name = "";
     	foreach ($volumn as $val){
     		$brand_name .= $val['name'].',';
     	}
     	$where["brand_name"] = array('in',$brand_name);
+    	
+    	$volumn2 = $Model->query("select b.name, a.img, a.theme, a.discount_rate, a.tokenTall from tp_set_promotion a, tp_wecha_shop b where a.tokenTall=b.tokenTall and a.status=1;");
+    	$shop_name = "";
+    	foreach ($volumn2 as $val2){
+    		$shop_name .= $val2['name'].',';
+    	}
+    	$where["shop_name"] = array('in',$shop_name);
+    	 
     	$endPoint = $wecha_shop->where($where)->select();
     	$nearShop=array();
     	if ($longitude != "" and $latitude != "") {
