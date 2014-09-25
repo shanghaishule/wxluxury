@@ -22,7 +22,7 @@ class UsersAction extends BackAction{
 		unset($group);
 		$belong=M('User')->field('id, username')->order('id desc')->select();
 		foreach($belong as $key=>$val){
-			$be[$val['id']]=$val['username'];
+			$be[$val['id']] = $val['username'];
 		}
 		unset($belong);
 		//dump($list);exit;
