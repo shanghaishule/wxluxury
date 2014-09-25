@@ -66,6 +66,11 @@ function go_detail(){
 	}
 }
 </script>
+<script>
+$(function(){
+	$('#nav').css({left:($(window).width()-$('#nav').width())/2});
+})
+</script>
 </head>
 <body>
 <div id="navigate" <if condition="$dmodel eq 'D'">style="display:none;" </if>>

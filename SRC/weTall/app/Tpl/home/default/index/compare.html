@@ -56,6 +56,7 @@ $(".pos").click(function(event){
 	});
 $(document).click(function(event) { $(".dis").removeClass("none"); });
 //单击弹出层则自身隐藏
+$('#nav').css({left:($(window).width()-$('#nav').width())/2});
 });	
 function searchshop(id){
 	document.getElementById("txtHint").value=id;
