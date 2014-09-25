@@ -12,6 +12,12 @@
 <link type="text/css" rel="stylesheet" href="__STATIC__/weixin/css/shopother.css">
 <link type="text/css" rel="stylesheet" href="__STATIC__/weixin/css/match.css">
 <script type="text/javascript" src="__STATIC__/js/jquery/jquery.js"></script>
+<script>
+$(function(){
+	//导航条居中
+	$('#nav').css({left:($(window).width()-640)/2});		
+});
+</script>
 </head>
 <body>
 <div class="wrap3">
@@ -58,7 +64,7 @@
 	{// 分享的图片start}
 	<div class="shake-img">
 		<div class="shake-pic">
-			<img style="margin-right:0px;font-weight:700;" width="297" height="382" src="{$match.upd_path}" />
+			<img style="margin-right:0px;font-weight:700;" width="100%" src="{$match.upd_path}" />
 		</div>	
 
 	</div>
