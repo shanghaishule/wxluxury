@@ -45,19 +45,25 @@
             <div class="mbar" style="background:#E5E5E5;margin-top:0px;">
              <h4>{$weshopData.name} 基本信息：<!-- span>(<a href="{:U('setting/realShop')}">申请实体店认证</a>)</span --></h4>
                <!-- font size="2px" color="red">基本汇率: {$currentTax.shoptax}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;优惠券汇率：{$currentTax.coupontax}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;积分汇率：{$currentTax.giftpointtax}</font -->       
-               <div style="float:left;width:70%">
+               <div style="float:left;width:20%">
                   <table border="0">
-                     <tr><td rowspan="4" style="padding:2px;width:108px;">
+                     <tr>
+                     <!--  
+                     <td rowspan="4" style="padding:2px;width:108px;">
                      <a href="{:U('index/edithead',array('tokenTall'=>$tokenTall))}" >
                      <img width="104px" height="104px" src="{$weshopData.headurl}" alt="更改头像" /></a>
                     <a href="{:U('index/edithead',array('tokenTall'=>$tokenTall))}" >  点击更改头像</a>
                      </td><td rowspan="3" style="padding:2px;" width="220">
                      <img height="90" width="90" id="imgWxQRCode" src="{$weshopData.twodcode}">                    
-                    </td><td height="45" width="120">
+                    </td>
+                    -->
+                    <td height="45" width="168">
                     &nbsp;&nbsp;&nbsp;&nbsp;店铺名称：
                      </td><td>{$weshopData.name}</td>
                      
-                     </tr><tr><td height="45" width="120">
+                     </tr>
+                     <!-- 
+                     <tr><td height="45" width="120">
                      &nbsp;&nbsp;&nbsp;&nbsp;信誉：
                      </td><td>
                         <if condition="$weshopData['credit'] lt 4"><img width="40" height="40" src="__STATIC__/images/Level/1_0.png"/>
@@ -75,7 +81,8 @@
                         <elseif condition="$weshopData['credit'] lt 100000" /><img width="40" height="40" src="__STATIC__/images/Level/3_2.png"/>
                         <elseif condition="$weshopData['credit'] lt 200000" /><img width="40" height="40" src="__STATIC__/images/Level/3_3.png"/>
                         <else/><img width="40" height="40" src="__STATIC__/images/Level/3_4.png"/>
-                        </if></td></tr>
+                        </if></td></tr> 
+                        -->
                      <!-- -<tr><td colspan="2" height="35" width="80">
                      <a href="{:U('setting/discount')}">设置打折信息</a> 
                      </td></tr> -->
@@ -89,7 +96,7 @@
                   </table>
                    
                </div>
-               <div style="float:left;width:30%;padding-top:20px">
+               <div style="float:left;width:30%;padding-top:10px">
                  	 店铺状态: <span style="color:red;"><if condition="$weshopData.HaveReal eq 0">冻结<br></br>                	 
                  	 <a href="{:U('setting/realShop')}">申请解冻</a>
                  	 </if>

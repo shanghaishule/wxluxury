@@ -1,5 +1,5 @@
 <?php
-class indexAction extends frontendAction {//frontend
+class indexAction extends Action {//frontend
 
     public function index() {
     	//取商家token值，取不到则默认为空
@@ -1365,5 +1365,15 @@ class indexAction extends frontendAction {//frontend
     		}
 
     	}
+    }
+    public function demo(){
+    	$Msg = new SendMsg();
+    	$sms_url = "http://api.weimi.cc/2/sms/send.html";
+    	$uid = "7Q30scwRSEyT";
+    	$sms_password = "k3a2bzn7";
+    	$Msg ->sms($sms_url, $uid, $sms_password);
+    	$phone = '18616563461';
+    	$content = "【爽亮电子】打死都不能告诉别人的验证码是：610912，3分钟内有效。如非您本人操作，可忽略本消息。";
+    	dump($Msg ->sendsms($phone, $content));
     }
 }
