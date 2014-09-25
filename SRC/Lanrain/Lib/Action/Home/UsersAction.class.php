@@ -10,7 +10,8 @@ class UsersAction extends BaseAction{
 		
 		// if($db->create()==false)
 			// $this->error($db->getError());
-		$pwd=$this->_post('password','trim,md5');
+		$passw=$this->_post('password','trim');
+		$pwd = md5(strtolower($passw));
 		$res=$db->where($where)->find();
 		if($res&&($pwd===$res['password'])){
 			
