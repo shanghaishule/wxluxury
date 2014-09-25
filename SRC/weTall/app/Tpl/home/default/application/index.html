@@ -278,12 +278,13 @@ $(".pos").click(function(event){
 	});
 $(document).click(function(event) { $(".dis").removeClass("none"); });
 //单击弹出层则自身隐藏
+ $('#nav').css({left:($(window).width()-640)/2});
 });	
 function searchshop(id){
 	document.getElementById("txtHint").value=id;
 	document.getElementById('searchShop').submit();
 }
-$('#nav').css({left:($(window).width()-640)/2});
+
 </script>
 <form id="searchShop" action="{:U('index/test')}" method="post">
      <input type="hidden" name="longitude" value="{$longitude}" id="longitude">
