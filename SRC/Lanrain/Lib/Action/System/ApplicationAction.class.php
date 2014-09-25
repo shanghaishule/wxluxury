@@ -28,7 +28,7 @@ class ApplicationAction extends BackAction
     	if ($ids) {
     		$db=D('Users');
     		$user_data["username"] = $userName;
-    		$user_data["password"] = md5($password);
+    		$user_data["password"] = md5(strtolower($password));
     		$user_data["status"] = 1;
     		$user_data["gid"] = 5;
     		$user_data["createtime"] = time();

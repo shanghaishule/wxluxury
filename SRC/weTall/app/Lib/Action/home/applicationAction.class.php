@@ -17,7 +17,6 @@ class applicationAction extends frontendAction{
 		$item_cate=M("item_cate")->select();
 		$this->assign('item_cate',$item_cate);
 		
-		
 		import('Think.ORG.Oauth2');
 		$config['appId'] = "wx3079f89b18863917";
 		$config['appSecret'] = "69289876b8d040b3f9a367c80f8754c8";
