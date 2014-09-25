@@ -283,6 +283,7 @@ function searchshop(id){
 	document.getElementById("txtHint").value=id;
 	document.getElementById('searchShop').submit();
 }
+$('#nav').css({left:($(window).width()-640)/2});
 </script>
 <form id="searchShop" action="{:U('index/test')}" method="post">
      <input type="hidden" name="longitude" value="{$longitude}" id="longitude">

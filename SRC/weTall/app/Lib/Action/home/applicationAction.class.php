@@ -91,7 +91,7 @@ class applicationAction extends frontendAction{
 		}
 		//品牌
 		
-		$brand = M("brandlist")->select();
+		$brand = M("brandlist")->order('name ASC')->select();
 		$this->assign("brand",$brand);
 		$this->assign("title","实体店入驻");
 		//dump($_SESSION);exit;
