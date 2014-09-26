@@ -170,6 +170,7 @@ class UsersAction extends BackAction{
 			M('member')->where($where)->delete();
 			M('indent')->where($where)->delete();
 			M('areply')->where($where)->delete();
+			M('application')->where($where)->delete();
 			$this->success('删除成功！');            
         }else{
             $this->error('删除失败!');

@@ -21,6 +21,7 @@
 					</div>
 					<ul>
 						<volist name="val['sub']" id="sval" >
+					       <if condition="($sval.name neq '商品分类') AND ($sval.name neq '品牌管理')">	
 					    	<li class="sub_menu">
 					    	<if condition="$shop_status eq 0">
 					    	<a href="javascript:;" onclick="frezze()">{$sval.name}</a>
@@ -32,6 +33,7 @@
 					    	<a href="javascript:;" data-uri="{:U($sval['module_name'].'/'.$sval['action_name'], array('menuid'=>$sval['id'],'tokenTall'=>$tokenTall))}{$sval.data}" data-id="{$sval.id}" hidefocus="true">{$sval.name}</a>
 					    	</if>
 					    	</li>
+					       </if>	
 						</volist>
 					</ul>
 					
