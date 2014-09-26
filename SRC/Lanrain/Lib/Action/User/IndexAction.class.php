@@ -61,8 +61,11 @@ class IndexAction extends UserAction{
 		$addr = M('upload_shop')->where($addr_where)->find();
 		//dump($addr);exit;
 		$this->assign("myaddr",$addr);
+		//公众号名称
 		$this->assign('weixinName',$this->weixinName(15).rand(0,10000));
+		//公众号
 		$this->assign('weixinhao',$this->weixinNum(8).rand(0,100));
+		//公众号原始id
 		$this->assign('yid',$this->weixinNum(10).rand(0,1000));
 		//地理信息
 		//if (C('baidu_map_api')){

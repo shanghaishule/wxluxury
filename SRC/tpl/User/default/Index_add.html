@@ -84,6 +84,7 @@
           <div class="cLineB"><h4>添加微信公众号</h4></div>
           <form method="post" action="{lanrain::U('User/Index/insert')}" enctype="multipart/form-data">
           <div class="msgWrap">
+          <div style="width:600px;color:#ff0000;font-size:12px;">如有公众号请按照后台信息填写对应的参数</div>
             <table class="userinfoArea" border="0" cellspacing="0" cellpadding="0" width="100%">
               <thead>
                 <tr>
@@ -180,7 +181,7 @@
                   <th><span class="red">*</span>地区</th>
                   <td>
                   <input type="text" class="px" id="province" value="{lanrain:$mybrand['provice']}" name="province" tabindex="1" size="20"> 省  <input id="city" value="{lanrain:$mybrand['city']}" type="text" name="city" class="px" tabindex="1" size="20"> 市
-               （此处关联公交等本地化查询）
+               
                   </td>
                 </tr>
                 <tr style="display:none">
