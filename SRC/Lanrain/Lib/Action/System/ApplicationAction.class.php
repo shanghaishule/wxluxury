@@ -51,7 +51,7 @@ class ApplicationAction extends BackAction
 	    			//
 	    			IS_AJAX && $this->ajaxReturn(1, L('operation_success').$returnMsg['msg']);
 
-	    			$this->success(L('operation_success'));
+	    			$this->success(L('operation_success').$returnMsg['msg']);
 	    		} else {
 	    			IS_AJAX && $this->ajaxReturn(0, L('operation_failure'));
 	    			$this->error(L('operation_failure'));
