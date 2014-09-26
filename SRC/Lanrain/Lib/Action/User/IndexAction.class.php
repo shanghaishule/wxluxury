@@ -61,7 +61,9 @@ class IndexAction extends UserAction{
 		$addr = M('upload_shop')->where($addr_where)->find();
 		//dump($addr);exit;
 		$this->assign("myaddr",$addr);
-		
+		$this->assign('weixinName',$this->weixinName(15).rand(0,10000));
+		$this->assign('weixinhao',$this->weixinNum(8).rand(0,100));
+		$this->assign('yid',$this->weixinNum(10).rand(0,1000));
 		//地理信息
 		//if (C('baidu_map_api')){
 			//$locationInfo=json_decode(file_get_contents('http://api.map.baidu.com/location/ip?ip='.$_SERVER['REMOTE_ADDR'].'&coor=bd09ll&ak='.C('baidu_map_api')),1);
@@ -73,6 +75,27 @@ class IndexAction extends UserAction{
 		
 		$this->display();
 	}
+	public function weixinNum($length){
+		$str = null;
+	   $strPol = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz";
+	   $max = strlen($strPol)-1;
+	
+	   for($i=0;$i<$length;$i++){
+	    $str.=$strPol[rand(0,$max)];//rand($min,$max)生成介于min和max两个数之间的一个随机整数
+	   }
+	
+	   return $str;
+	}
+	public function weixinName($length){
+		$str = null;
+		$strPol = "ABC-DEF_GHI_JKLMN_OPQRS_TUVWXY_Z01234-5678_9abc-defgh_ijk-lmn_opqrst-uvw-xyz";
+		$max = strlen($strPol)-1;
+	
+		for($i=0;$i<$length;$i++){
+			$str.=$strPol[rand(0,$max)];//rand($min,$max)生成介于min和max两个数之间的一个随机整数
+		}
+		return $str;
+	}	
 	public function edit(){
 		$id=$this->_get('id','intval');
 		$where['uid']=session('uid');
