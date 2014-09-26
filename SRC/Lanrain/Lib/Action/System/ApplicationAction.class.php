@@ -39,7 +39,6 @@ class ApplicationAction extends BackAction
     		$userIn = $mod->where($where)->find();
     		if ($id) {	   		
 	    		if (false !== $mod->where($where)->save($user_info)) {
-	    			IS_AJAX && $this->ajaxReturn(1, L('operation_success'));
 	    			//发送短信
 	    			$Msg = new SendMsg();
 	    			$sms_url = "http://api.weimi.cc/2/sms/send.html";
@@ -50,7 +49,9 @@ class ApplicationAction extends BackAction
 	    			$phone = '18616563461';
 	    			$returnMsg = $Msg ->sendAshop($userIn['phone'], $userName,$password);
 	    			//
-	    			$this->success(L('operation_success').$returnMsg['msg']);
+	    			IS_AJAX && $this->ajaxReturn(1, L('operation_success').$returnMsg['msg']);
+
+	    			$this->success(L('operation_success'));
 	    		} else {
 	    			IS_AJAX && $this->ajaxReturn(0, L('operation_failure'));
 	    			$this->error(L('operation_failure'));
