@@ -1363,16 +1363,14 @@ class indexAction extends frontendAction {//frontend
     		}else{
     			echo '4';//已赞
     		}
-
     	}
     }
     public function demo(){
-    	$Msg = new SendMsg();
     	$sms_url = "http://api.weimi.cc/2/sms/send.html";
     	$uid = "7Q30scwRSEyT";
     	$sms_password = "k3a2bzn7";//密码
     	$cid = 'D4M6SG46AX2y';//模板id
-    	$Msg ->sms($sms_url, $uid, $sms_password,$cid);
+    	$Msg = new SendMsg($sms_url, $uid, $sms_password,$cid);
     	$phone = '18616563461';
     	$content = "455858";
     	$returnMsg = $Msg ->sendsms($phone, $content);

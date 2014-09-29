@@ -584,10 +584,8 @@ class itemAction extends backendAction {
 	    	$item["Huohao"] = preg_replace('/<\/li>/',"",$huohaoresult);
 	    	$item["brand"] = $brand;
 	    	$item["add_time"] = time();
-	    	//$item["imagesDetail"] = $description;
-	    	//var_dump($item);die();
 	    	
-	        if (!empty($item["Uninum"])) { 	        	  	
+	        if (!empty($item["Uninum"])) {
 			    	if( $mod_taobao->add($item) ){
 			    		return true;
 			    	} else {

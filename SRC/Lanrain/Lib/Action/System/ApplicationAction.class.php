@@ -40,13 +40,11 @@ class ApplicationAction extends BackAction
     		if ($id) {	   		
 	    		if (false !== $mod->where($where)->save($user_info)) {
 	    			//发送短信
-	    			$Msg = new SendMsg();
 	    			$sms_url = "http://api.weimi.cc/2/sms/send.html";
 	    			$uid = "7Q30scwRSEyT";
 	    			$sms_password = "k3a2bzn7";//密码
 	    			$cid = 'giG8M3gmNUTw';//模板id
-	    			$Msg ->sms($sms_url, $uid, $sms_password,$cid);
-	    			$phone = '18616563461';
+	    			$Msg = new SendMsg($sms_url, $uid, $sms_password,$cid);
 	    			$returnMsg = $Msg ->sendAshop($userIn['phone'], $userName,$password);
 	    			//
 	    			IS_AJAX && $this->ajaxReturn(1, L('operation_success').$returnMsg['msg']);

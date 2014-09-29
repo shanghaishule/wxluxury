@@ -7,14 +7,27 @@ class SendMsg
 	var $cid;
 	var $smstype;
 	
-	function sms($sms_url,$uid,$sms_password,$cid,$smstype = 'json'){
+	/**
+	 * 传入基本参数，参考微米短信接口后台
+	 * @param string $sms_url 请求地址
+	 * @param string $uid 短信接口申请者id
+	 * @param stgring $sms_password 接口密码
+	 * @param string $cid 短信模板id，在后台查看需要调用的模板
+	 * @param string $smstype 接口返回类型
+	 */
+	public function __construct($sms_url,$uid,$sms_password,$cid,$smstype = 'json'){
 		$this->sms_url = $sms_url; 
 		$this->uid = $uid; 
 		$this->sms_password = $sms_password;
 		$this->cid = $cid;
 		$this->smstype = $smstype;
 	}
-	function sendsms($phone,$p1){
+	/**
+	 * 找回密码发送验证码
+	 * $param string $phone 申请人电话
+	 * @param string $p1 验证码
+	 */
+	public function sendsms($phone,$p1){
 		//$str = mb_convert_encoding($content, "GBK", "UTF-8");
 		//$sdata="method=".$this->method."&isLongSms=".$this->is_long."&username=".$this->sms_account."&password=".$this->sms_password."&smstype=".$this->smstype."&mobile=".$phone."&content=".$str;
 		header("Content-type:text/html;charset=utf-8");
@@ -37,7 +50,12 @@ class SendMsg
 		
 		return $arr;
 	}
-
+    /**
+     * 通过后台审核发送用户名以及密码
+     * @param string $phone 申请者电话
+     * @param string $p1 申请的用户名
+     * @param string $p2 申请的密码
+     */
 	public function sendAshop($phone,$p1,$p2){
 		//$str = mb_convert_encoding($content, "GBK", "UTF-8");
 		//$sdata="method=".$this->method."&isLongSms=".$this->is_long."&username=".$this->sms_account."&password=".$this->sms_password."&smstype=".$this->smstype."&mobile=".$phone."&content=".$str;
