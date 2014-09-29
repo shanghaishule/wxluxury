@@ -968,7 +968,7 @@ right: 5px;}
  * ******************** search sort **********************
  * -------------------------------------------------------
  */
-#sort_bg {width:100%; font-size:12px; left:0px;position:fixed; top:50px; z-index:100; margin: -3px auto;display:block;
+#sort_bg {width:100%;max-width:640px;min-width:320px; font-size:12px; left:0px;position:fixed; top:50px; z-index:100; margin: -3px auto;display:block;
 		/*background: -webkit-gradient(linear, 50% 50%, 50% 50%, from(#fff), to(#999d9c));   
         background: -webkit-linear-gradient(bottom, #fff, #999d9c);     
         background: -o-linear-gradient(bottom, #fff, #999d9c);  */ 
