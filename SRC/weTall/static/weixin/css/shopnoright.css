@@ -981,7 +981,7 @@ right: 5px;}
         border-bottom:1px solid #ccc;box-shadow:0 2px 4px #d9d9d9;
         */
         }
-#sort_bg .sortlist li { float: left; width:25%;height:35px;  position:relative;text-align:center;/*border-left:1px solid white;*/}
+#sort_bg .sortlist li { float: left; width:25%;height:35px;line-height:35px;position:relative;text-align:center;/*border-left:1px solid white;*/}
 #sort_bg .sortlist li a{ display:block;/* margin-top:10px;*/height:35px;color:#778899;font-weight:700;}
 #sort_bg .sortlist li img{ margin-top:0px;vertical-align:middle;}
 
