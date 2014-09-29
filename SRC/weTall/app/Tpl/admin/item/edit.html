@@ -105,7 +105,7 @@
 			    </td>			
 			</tr>         
 		    <tr>
-				<th>商品库存 :</th>
+				<th style="color:red">商品库存 :</th>
 				<td><input id='J_goods_stock' onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" type="text" name="goods_stock" class="input-text" size="10" value="{$info.goods_stock}"> </td>
 			</tr>
 			<tr>
@@ -113,7 +113,7 @@
                 <td><textarea name="intro" cols="80" rows="2">{$info.intro}</textarea></td>
             </tr>
             <tr>
-				<th>打折价格 :</th>
+				<th style="color:red">打折价格 :</th>
 				<td><input id='J_price' onkeyup="this.value=this.value.replace(/[^0-9.]/g,'')" onafterpaste="this.value=this.value.replace(/[^0-9.]/g,'')"  type="text" name="price" size="10" class="input-text" value="{$info.price}"> 元</td>
 			</tr>
             </if>
