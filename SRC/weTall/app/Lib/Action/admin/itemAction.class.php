@@ -973,7 +973,15 @@ class itemAction extends backendAction {
         echo '1';
         exit;
     }
-
+  //删除商品
+  public function delete(){
+  	$Item = M('item_taobao');
+  	$id = $this->_get('id','intval');
+  	if($Item->delete($id)){
+  		echo '1';
+  	}
+  }
+    
     /**
      * 商品审核
      */
