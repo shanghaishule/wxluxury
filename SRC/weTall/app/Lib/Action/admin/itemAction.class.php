@@ -764,7 +764,7 @@ class itemAction extends backendAction {
             $data["Huohao"]=$_POST["Huohao"];
             //echo $_POST["Huohao"];die();
             $data["item_model"]=$this->_post("item_model","trim");
-
+            dump($_FILES["img"]);exit;
             //上传图片
             $Uninum = $_POST["Uninum"];
     		if (!empty($_FILES["img"])){
@@ -778,7 +778,7 @@ class itemAction extends backendAction {
 	    	
 	    		$data['img'] = '/Uploads/items/images/'.$filename;
     		}
-    		dump($data['img']);exit;
+    		//dump($data['img']);exit;
             //上传相册
     		$file_imgs = array();
     		$filepath_imgs=$filepath.$Uninum."/";
