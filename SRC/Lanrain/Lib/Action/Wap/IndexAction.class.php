@@ -119,19 +119,33 @@ class IndexAction extends BaseAction{
 		if($page > $count){$page=$pagecount;}
 		if($page >=1){$p=($page-1)*$pageSize;}
 		if($p==false){$p=0;}
-		$res=$db->where($where)->order('createtime DESC')->limit("{$p},".$pageSize)->select();
-		$res=$this->convertLinks($res);
+		//$res=$db->where($where)->order('statdate DESC,id DESC')->limit("{$p},".$pageSize."")->select();
+		//$res=$this->convertLinks($res);
+		//dump($res);exit;
+		$list = $db->field('statdate')->where($where)->group('statdate')->select();
+		$array = array();
+		$index= 0;
+		foreach($list as $key => $val){
+		   $condition['classid'] = $where['classid'];
+		   $condition['statdate'] = $val['statdate'];
+		   $res=$db->where($condition)->order('statdate DESC,id DESC')->limit("{$p},".$pageSize."")->select();
+		   $res=$this->convertLinks($res);
+		   $array[$index]['lists'] = $res;
+		   $index++;
+		}
+		//dump($array);exit;
 		$this->assign('page',$pagecount);
 		$this->assign('p',$page);
 		$this->assign('info',$this->info);
 		$this->assign('tpl',$this->tpl);
-		$this->assign('res',$res);
+		$this->assign('res',$array);//$res
 		$this->assign('copyright',$this->copyright);
 		if ($count==1){
 			$this->content($res[0]['id']);
 			exit();
 		}
-		$this->display($this->tpl['tpllistname']);
+		//$this->display($this->tpl['tpllistname']);
+		$this->display('yl_list');
 	}
 	
 	public function content($contentid=0){
