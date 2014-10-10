@@ -764,10 +764,10 @@ class itemAction extends backendAction {
             $data["Huohao"]=$_POST["Huohao"];
             //echo $_POST["Huohao"];die();
             $data["item_model"]=$this->_post("item_model","trim");
-            dump($_FILES["img"]);exit;
+            //dump($_FILES["img"]);exit;
             //上传图片
             $Uninum = $_POST["Uninum"];
-    		if (!empty($_FILES["img"])){
+    		if (!empty($_FILES["img"]['tmp_name'])){
 	    		$item_imgs = array(); //相册
 	    		$filepath = $_SERVER['DOCUMENT_ROOT']."/Uploads/items/images/";//图片保存的路径目录
 	    		if(!is_dir($filepath)){
@@ -777,8 +777,10 @@ class itemAction extends backendAction {
 	    		move_uploaded_file($_FILES["img"]["tmp_name"],$filepath.$filename);
 	    	
 	    		$data['img'] = '/Uploads/items/images/'.$filename;
+    		}else{
+				$data['img'] = $this->_post('c-img');    			
     		}
-    		//dump($data['img']);exit;
+    		dump($data['img']);exit;
             //上传相册
     		$file_imgs = array();
     		$filepath_imgs=$filepath.$Uninum."/";
