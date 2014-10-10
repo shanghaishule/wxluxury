@@ -780,7 +780,7 @@ class itemAction extends backendAction {
     		}else{
 				$data['img'] = $this->_post('c-img');    			
     		}
-    		dump($data['img']);exit;
+    		//dump($data['img']);exit;
             //上传相册
     		$file_imgs = array();
     		$filepath_imgs=$filepath.$Uninum."/";
