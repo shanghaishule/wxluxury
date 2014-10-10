@@ -122,13 +122,13 @@ class IndexAction extends BaseAction{
 		//$res=$db->where($where)->order('statdate DESC,id DESC')->limit("{$p},".$pageSize."")->select();
 		//$res=$this->convertLinks($res);
 		//dump($res);exit;
-		$list = $db->field('statdate')->where($where)->group('statdate')->select();
+		$list = $db->field('uptatetime')->where($where)->group('uptatetime')->select();
 		$array = array();
 		$index= 0;
 		foreach($list as $key => $val){
 		   $condition['classid'] = $where['classid'];
-		   $condition['statdate'] = $val['statdate'];
-		   $res=$db->where($condition)->order('statdate DESC,id DESC')->limit("{$p},".$pageSize."")->select();
+		   $condition['uptatetime'] = $val['uptatetime'];
+		   $res=$db->where($condition)->order('uptatetime DESC,id DESC')->limit("{$p},".$pageSize."")->select();
 		   $res=$this->convertLinks($res);
 		   $array[$index]['lists'] = $res;
 		   $index++;
