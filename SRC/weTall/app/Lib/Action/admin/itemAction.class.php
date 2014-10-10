@@ -778,7 +778,7 @@ class itemAction extends backendAction {
 	    	
 	    		$data['img'] = '/Uploads/items/images/'.$filename;
     		}
-    		//dump($data['img']);exit;
+    		dump($data['img']);exit;
             //上传相册
     		$file_imgs = array();
     		$filepath_imgs=$filepath.$Uninum."/";
