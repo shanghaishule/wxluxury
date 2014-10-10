@@ -969,7 +969,17 @@ class itemAction extends backendAction {
     function delete_attr() {
         $attr_mod = M('item_attr');
         $attr_id = $this->_get('attr_id','intval');
-        if (false !==$attr_mod->delete($attr_id)){
+        $attr_mod->delete($attr_id);
+        echo '1';
+        exit;
+    }
+    
+	  //删除商品
+	  public function delete(){
+	  	$Item = M('item_taobao');
+	  	$id = $this->_get('id','intval');
+	  	
+	    if (false !== $Item->where(array('id'=>$id))->delete()){
         	
 	        IS_AJAX && $this->ajaxReturn(1, L('operation_success'));
 	    	$this->success(L('operation_success'));
@@ -978,15 +988,6 @@ class itemAction extends backendAction {
         	IS_AJAX && $this->ajaxReturn(0, L('operation_failure'));
         	$this->error(L('operation_failure'));
         }
-    }
-    
-	  //删除商品
-	  public function delete(){
-	  	$Item = M('item_taobao');
-	  	$id = $this->_get('id','intval');
-	  	$Item->where(array('id'=>$id))->delete();
-	  		echo '1';
-	  		exit;
 	  }
     
     /**
