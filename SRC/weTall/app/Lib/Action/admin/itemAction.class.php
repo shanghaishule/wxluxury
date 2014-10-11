@@ -1047,7 +1047,7 @@ class itemAction extends backendAction {
     /**
      * 审核操作
      */
-    public function do_check() {
+    public function do_check(){
         $mod = D($this->_name);
         $pk = $mod->getPk();
         $ids = trim($this->_request($pk), ',');
