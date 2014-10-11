@@ -135,7 +135,7 @@ class IndexAction extends BaseAction{
 		   $array[$index]['lists'] = $res;
 		   $index++;
 		}
-		//dump($array);exit;
+		dump($array);exit;
 		$this->assign('page',$pagecount);
 		$this->assign('p',$page);
 		$this->assign('info',$this->info);
