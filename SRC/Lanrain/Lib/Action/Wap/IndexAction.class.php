@@ -123,7 +123,7 @@ class IndexAction extends BaseAction{
 		//$res=$this->convertLinks($res);
 		//dump($res);exit;
 		//$list = $db->field('uptatetime')->where($where)->group('uptatetime')->select();
-		$list = $db->query("select FROM_UNIXTIME(uptatetime,'%Y-%m-%d') as time from tp_img order by uptatetime desc group by (FROM_UNIXTIME(uptatetime,'%Y-%m-%d'))");
+		$list = $db->query("select FROM_UNIXTIME(uptatetime,'%Y-%m-%d') as time from tp_img order by uptatetime desc group by time)");
 		$array = array();
 		$index= 0;
 		foreach($list as $key => $val){
