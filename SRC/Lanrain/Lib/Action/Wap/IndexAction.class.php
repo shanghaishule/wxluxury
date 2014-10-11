@@ -130,7 +130,7 @@ class IndexAction extends BaseAction{
 		  // $condition['classid'] = $where['classid'];
 		  // $condition['uptatetime'] = $val['time'];
 		  // $res=$db->where($condition)->order('uptatetime DESC,id DESC')->limit("{$p},".$pageSize."")->select();
-		   $res = $db->query("select * from tp_img where classid = '".$where['classid']."' and FROM_UNIXTIME(uptatetime,'%Y-%m-%d') = '".$val['time']."' limit '".$p."','".$pageSize."'");
+		   $res = $db->query("select * from tp_img where classid = '".$where['classid']."' and FROM_UNIXTIME(uptatetime,'%Y-%m-%d') as time = '".$val['time']."' limit '".$p."','".$pageSize."'");
 		   $res=$this->convertLinks($res);
 		   $array[$index]['lists'] = $res;
 		   $index++;
