@@ -123,14 +123,14 @@ class IndexAction extends BaseAction{
 		//$res=$this->convertLinks($res);
 		//dump($res);exit;
 		//$list = $db->field('uptatetime')->where($where)->group('uptatetime')->select();
-		$list = $db->query("select FROM_UNIXTIME(uptatetime,'%Y-%m-%d') as time from tp_img order by uptatetime desc group by time)");
+		$list = $db->query("select FROM_UNIXTIME(uptatetime,'%Y-%m-%d') as time from tp_img group by time order by time desc )");
 		$array = array();
 		$index= 0;
 		foreach($list as $key => $val){
 		  // $condition['classid'] = $where['classid'];
 		  // $condition['uptatetime'] = $val['time'];
 		  // $res=$db->where($condition)->order('uptatetime DESC,id DESC')->limit("{$p},".$pageSize."")->select();
-		   $res = $db->query("select * from tp_img where classid = '".$where['classid']."' and FROM_UNIXTIME(uptatetime,'%Y-%m-%d') = '".$val['time']."' order by uptatetime limit '".$p."','".$pageSize."'");
+		   $res = $db->query("select * from tp_img where classid = '".$where['classid']."' and FROM_UNIXTIME(uptatetime,'%Y-%m-%d') = '".$val['time']."' limit '".$p."','".$pageSize."'");
 		   $res=$this->convertLinks($res);
 		   $array[$index]['lists'] = $res;
 		   $index++;
