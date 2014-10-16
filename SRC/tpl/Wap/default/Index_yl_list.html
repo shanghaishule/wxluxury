@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>{lanrain:$tpl.wxname}</title>
+<title>酷衣地图</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -50,7 +50,7 @@ oWin.style.display = "none"
 <volist name="val['lists']" id="so" key="k">  
 <if condition="$k eq 1"> 
 
-<if condition="$so['url']">
+		<if condition="$so['url']">
 		<a href="{lanrain:$so.url}">
 		<else />
 		<a href="{lanrain::U('Index/content',array('id'=>$so['id'],'token'=>$so['token']))}">
@@ -66,10 +66,9 @@ oWin.style.display = "none"
 					<h1 style="color: white;margin: 5px 3px">
 					{lanrain:$so.title}</h1>
 				</div>
-			</div></if>
+			</div>
+			</if>
 			<div class="border"></div>
-		
-
 			<div class="commentNum"></div>
 			
 			</li>
@@ -86,7 +85,7 @@ oWin.style.display = "none"
 				
 				<if condition="$so.pic neq ''">
 				<div class="space"></div>
-				<div class="img"><eq name="so.showpic" value="1"><img src="{lanrain:$so.pic}"style=";margin-right: 5%"></eq></div></if>
+				<div class="img"><eq name="so.showpic" value="1"><img src="{lanrain:$so.pic}" style=";margin-right: 5%"></eq></div></if>
 				<h2 style="font-weight:bold">{lanrain:$so.title}</h2>
 				<div class="border"></div>
 				<div class="commentNum"></div>

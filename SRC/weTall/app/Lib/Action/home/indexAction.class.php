@@ -1280,7 +1280,7 @@ class indexAction extends frontendAction {//frontend
     	$this->assign("weTallboard",$weTallboard);
     	//dump($weTallboard);exit;
     	//广告生效和读取  end
-    	
+    		
     	$url = "http://api.map.baidu.com/geocoder?location=".$latitude.",".$longitude."&output=xml&key=28bcdd84fae25699606ffad27f8da77b";
     	//$url = "http://api.map.baidu.com/geocoder?location=31.256748,121.595578&output=xml&key=28bcdd84fae25699606ffad27f8da77b";
     	$city_data = file_get_contents($url);
