@@ -18,8 +18,9 @@ class DatafromShopAction extends BackAction
     		}
     		$_SESSION['is_reload']= FALSE;
     		$where['shop_name']= $shop_name;
+    		dump($shop_name);die();
        } 
-    	dump($shop_name);die();
+    	
     	$uploadShop=M('upload_shop');
     	if($where['shop_name'] == ""){
     		$count = $uploadShop->count();
