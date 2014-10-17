@@ -44,7 +44,7 @@ class DatafromShopAction extends BackAction
     	}
     	$this->assign('list',$pageData);
     	$this->assign('page',$show);// 赋值分页输出
-    	$this->assign('brand',$_SESSION['brand']);// 赋值分页输出
+    	$this->assign('brand',$brandname);// 赋值分页输出
     	$this->assign('shop_name',$shop_name);// 赋值分页输出
     	
     	$brandlist = M("brandlist");
