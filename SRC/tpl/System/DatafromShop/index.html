@@ -29,7 +29,7 @@
      function shopSearch(){
     	 var shop_name = $('#shop_name').val();
     	 if(shop_name != ''){
-    		 location.href="{lanrain::U('DatafromShop/index',array('shop_name'=>"+shop_name+"))}";
+    		 location.href="/index.php?g=System&m=DatafromShop&a=index&shop_name="+shop_name;
     	 }
      } 
     </script>
