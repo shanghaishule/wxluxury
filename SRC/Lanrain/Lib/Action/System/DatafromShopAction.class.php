@@ -98,8 +98,10 @@ class DatafromShopAction extends BackAction
 	
 	}
 	
-	
-	
+	//店名搜索
+	public function shopsearch($param) {
+		;
+	}
     
     public function uploadShop(){    	
 

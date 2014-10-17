@@ -25,6 +25,14 @@
 		text-overflow: ellipsis;
 	}
     </style>
+    <script type="text/javascript">
+     function shopSearch(){
+    	 var shop_name = $('#shop_name').val();
+    	 if(shop_name != ''){
+    		 location.href="{lanrain::U('DatafromShop/index',array('shop_name'=>"+shop_name+"))}";
+    	 }
+     } 
+    </script>
 </head>
 
 <body>
