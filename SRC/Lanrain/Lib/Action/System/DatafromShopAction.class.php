@@ -21,6 +21,7 @@ class DatafromShopAction extends BackAction
        } 
     	
     	$uploadShop=M('upload_shop');
+    	
     	if($where['shop_name'] == ""){
     		$count = $uploadShop->count();
     	}else{
