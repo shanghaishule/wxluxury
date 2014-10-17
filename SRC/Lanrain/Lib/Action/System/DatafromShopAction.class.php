@@ -21,9 +21,8 @@ class DatafromShopAction extends BackAction
        } 
     	if($shop_name != ''){
     		echo $shop_name;die();
-    	}else{
-    		echo $shop_name;die();
     	}
+    	
     	$uploadShop=M('upload_shop');
     	
     	if($where['shop_name'] == ""){
