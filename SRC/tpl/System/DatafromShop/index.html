@@ -79,6 +79,7 @@ $(function(){
     <table  width="100%" cellspacing="0" style="table-layout:fixed;border-collapse:collapse;font-size:12px;">
         <thead>
             <tr>
+              <th width="10"><input type="checkbox" name="checkall" class="J_checkall"></th>
                <th width=60px align="left"><span data-tdtype="order_by" data-field="id" >省份</span></th>
                <th width=60px align="left"><span data-tdtype="order_by" data-field="id" >城市</span></th>
                 <th width=60px align="left"><span data-tdtype="order_by" data-field="id" >品牌</span></th>
@@ -92,6 +93,7 @@ $(function(){
     	<tbody>
             <volist name="list" id="val" >
             <tr>
+              <td align="left"><input type="checkbox" class="J_checkitem" value="{Lanrain:$val.id}"></td>
                <td align="left">{Lanrain:$val.provice}</td>
                <td align="left">{Lanrain:$val.city}</td>
                 <td align="left">{Lanrain:$val.brand_name}</td>
@@ -121,7 +123,9 @@ $(function(){
                             </div>
                             
     <div class="btn_wrap_fixed">
-    	<div id="pages">{Lanrain:$page}</div>
+     	<label><input type="checkbox" name="checkall" class="J_checkall">全选/取消</label>
+    	<input type="button" class="btn" data-tdtype="batch_action" data-acttype="ajax" data-uri="/index.php?g=System&m=DatafromShop&a=delete" data-name="id" data-msg="确定删除吗？" value="删除" />
+		<div id="pages">{Lanrain:$page}</div>
     </div>
 </div>
 <script src="/weTall/static/js/jquery/jquery.js"></script>

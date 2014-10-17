@@ -237,5 +237,20 @@ class DatafromShopAction extends BackAction
     	return $data;    	
     }
     
+    //实体店删除
+    public function delete(){
+    	$mod =M('upload_shop');
+    	$ids = trim($this->_request('id'), ',');
+    	if($ids){
+    		if (false !== $mod->delete($ids)) {
+    			$this->success("删除成功");
+    		}else{
+    			$this->error("删除失败");
+    		}
+    	}else{
+    		$this->error("该实体店不存在！");
+    	}
+    
+    }  
 }
 ?>
