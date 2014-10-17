@@ -30,6 +30,7 @@
      function shopSearch(){
     	 var shop_name = $('#shop_name').val();
     	 var brandname = $('#brandname').val();
+    	 alert(brandname);return false;
     	 if(shop_name != '' || brandname != ''){
     		 location.href="/index.php?g=System&m=DatafromShop&a=index&shop_name="+shop_name+"&brandname="+brandname;
     	 }
@@ -72,7 +73,7 @@ $(function(){
 			                <input type="text" name="shop_name" class="text" id="shop_name" value="{Lanrain:$shop_name}" > &nbsp;							
 							品牌：
 			                <input type="text" name="brandname" class="text" id="brandname" value="{Lanrain:$brand}" style="width:100px;" /> &nbsp;			                
-							<select id ="brandlist"  class="text" onChange="alert(this.options[this.selectedIndex].text)" 
+							<select id ="brandlist"  class="text" onChange="document.getElementById('brandname').value=this.options[this.selectedIndex].text;" 
 									style="width:122px;height:19px;CLIP: rect(auto auto auto 106px); POSITION: absolute ;margin-left:-115px;margin-top:3px;">															
 					            <volist name="brandlist" id="val" >
 									<option value="{Lanrain:$val.name}">{Lanrain:$val.name}</option>
