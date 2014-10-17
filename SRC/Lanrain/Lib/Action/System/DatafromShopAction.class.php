@@ -15,12 +15,12 @@ class DatafromShopAction extends BackAction
     	}else{
     		if($_SESSION['is_reload'] == FALSE){
     			$shop_name = $this->_get('shop_name', 'trim');
-    			$brandname = $this->_get('brandname','trim');
+    			$brandname = $this->_get('brandname');
     		}
     		$_SESSION['is_reload']= FALSE;
     		$where['shop_name']= array("like","%".$shop_name."%");
     		if($brandname != ''){
-    			$where['brand'] = $brandname;
+    			$where['brand_name'] = $brandname;
     		}
     		
        } 

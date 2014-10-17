@@ -30,7 +30,6 @@
      function shopSearch(){
     	 var shop_name = $('#shop_name').val();
     	 var brandname = $('#brandname').val();
-    	 alert(brandname);return false;
     	 if(shop_name != '' || brandname != ''){
     		 location.href="/index.php?g=System&m=DatafromShop&a=index&shop_name="+shop_name+"&brandname="+brandname;
     	 }
