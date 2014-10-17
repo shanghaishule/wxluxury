@@ -15,14 +15,19 @@ class DatafromShopAction extends BackAction
     	}else{
     		if($_SESSION['is_reload'] == FALSE){
     			$shop_name = $this->_get('shop_name', 'trim');
+    			$brandname = $this->_get('brandname','trim');
     		}
     		$_SESSION['is_reload']= FALSE;
     		$where['shop_name']= array("like","%".$shop_name."%");
+    		if($brandname != ''){
+    			$where['brand'] = $brandname;
+    		}
+    		
        } 
 
     	$uploadShop=M('upload_shop');
     	
-    	if($where['shop_name'] == ""){
+    	if($where['shop_name'] == "" && $brandname == ""){
     		$count = $uploadShop->count();
     	}else{
     		$count = $uploadShop->where($where)->count();
@@ -32,7 +37,7 @@ class DatafromShopAction extends BackAction
     	$nowPage = isset($_GET['p'])?$_GET['p']:1;
     	$show       = $Page->show();// 分页显示输出
     	
-    	if($where['shop_name'] == ""){
+    	if($where['shop_name'] == "" && $brandname == ""){
     		$pageData = $uploadShop->order('id ASC')->limit($Page->firstRow.','.$Page->listRows)->select();
     	}else{
     		$pageData = $uploadShop->where($where)->order('id ASC')->limit($Page->firstRow.','.$Page->listRows)->select();
