@@ -61,7 +61,7 @@ $(function(){
 					            <volist name="brandlist" id="val" >
 									<option>{Lanrain:$val.name}</option>
 					            </volist>																 
-							<select>			                
+							</select>			                
 			                &nbsp;&nbsp;&nbsp;&nbsp;
 							<input type="file" name="upd_shop" id="upd_shop" > 		                    
 							<input type="submit" name="search" class="btn" value="添加实体店" />
@@ -70,13 +70,13 @@ $(function(){
 			                                                       店名：
 			                <input type="text" name="shop_name" class="text" id="shop_name" value="{Lanrain:$shop_name}" "> &nbsp;							
 							品牌：
-			                <input type="text" name="brandname" class="text" id="brandname" value="{Lanrain:$brand}" style="width:100px;> &nbsp;			                
+			                <input type="text" name="brandname" class="text" id="brandname" value="{Lanrain:$brand}" style="width:100px;""> &nbsp;			                
 							<select id ="brandlist"  class="text" onchange="document.getElementById('brandname').value=this.options[this.selectedIndex].text" 
 									style="width:122px;height:19px;CLIP: rect(auto auto auto 106px); POSITION: absolute ;margin-left:-115px;margin-top:3px;">															
 					            <volist name="brandlist" id="val" >
 									<option>{Lanrain:$val.name}</option>
 					            </volist>																 
-							<select>&nbsp;&nbsp;
+							</select>&nbsp;&nbsp;
 							<a class="btn" style="height:18px; padding-top:1px" href="javascript:void(0)" onClick="shopSearch();" >检索</a>	
 							
     							<div class="content_menu ib_a blue line_x" style="margin-left:90%;margin-top:-20px;">
