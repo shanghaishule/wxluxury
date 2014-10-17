@@ -17,7 +17,7 @@ class DatafromShopAction extends BackAction
     			$shop_name = $this->_get('shop_name', 'trim');
     		}
     		$_SESSION['is_reload']= FALSE;
-    		$where['shop_name']= array('like'=>'%'.$shop_name.'%');
+    		$where['shop_name']= array("like","%".$shop_name."%");
        } 
 
     	$uploadShop=M('upload_shop');
