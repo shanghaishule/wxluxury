@@ -87,24 +87,34 @@ class DiymenAction extends UserAction{
 			
 			$data0 = $_POST;
 			$data0['token']=$_SESSION['token'];
-			if($data0['menutype'] == 'keyword')
+			if($data0['menutype'] == 'keyword'){
 				$data0['keyword'] = $data0['menutypeval'];
-			else
+				$data0['url'] = '';
+			}else{
+				$data0['keyword'] = '';
 				$data0['url'] = $data0['menutypeval'];
+			}
 				
-			
+			//dump($data0);exit;
 			$db = M('Diymen_class');
 			if ($db->create($data0) === false) {
 				$this->error('创建数据对象失败！');
 			} else {
-				$id = $db->save();//dump($db->getLastSql());exit;
-				if ($id) {
+				$id = $db->save();
+				if ($id !== false) {
 					if ($data0['menutype'] == 'keyword') {
-						$data['pid']     = $id;
+						$data['pid']     = $data0['id'];
 						$data['module']  = 'diymen';
 						$data['token']   = $data0['token'];
 						$da['keyword'] = $data0['menutypeval'];
 						M('Keyword')->where($data)->save($da);
+					}
+					if ($data0['menutype'] == 'url') {
+						$data['pid']     = $data0['id'];
+						$data['module']  = 'diymen';
+						$data['token']   = $data0['token'];
+						
+						M('Keyword')->where($data)->delete();
 					}
 					$this->success('操作成功');
 				} else {
@@ -149,7 +159,11 @@ class DiymenAction extends UserAction{
 				if($c!=false){
 					$data.='"sub_button":[';
 				}else{
-					$data.='"type":"click","key":"'.$vo['title'].'"';
+					if($vo['url']){
+						$data.='"type":"view","url":"'.$vo['url'].'"';
+					}else{
+						$data.='"type":"click","key":"'.$vo['title'].'"';
+					}
 				}
 				$i=1;
 				foreach($c as $voo){
