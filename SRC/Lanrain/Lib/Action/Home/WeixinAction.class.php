@@ -26,13 +26,13 @@ class WeixinAction extends Action
 			$follow_data['follow_to_id']=$data['ToUserName'];
 			$follow_data['follow_time']=$data['CreateTime'];
 			$foloow_lists = M('Follow')->add($follow_data);
-			$data_user['sessid'] = $_COOKIE['PHPSESSID'];
+			/*$data_user['sessid'] = $_COOKIE['PHPSESSID'];
 			$data_user['wecha_id'] = $data['FromUserName'];
 				
 			$user_phone['wecha_id'] = $data['FromUserName'];
 			if (empty(M("Auser_phone")->where($user_phone)->find())) {
 				M("auser_phone")->add($data_user);
-			}
+			}*/
             $this->requestdata('follownum');
             $data = M('Areply')->field('home,keyword,content')->where(array('token' => $this->token))->find();
             if ($data['keyword'] == '首页' || $data['keyword'] == 'home') {
