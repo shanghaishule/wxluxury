@@ -35,17 +35,13 @@ class WeixinAction extends Action
 			}
 			
             $this->requestdata('follownum');
-            $data = M('Areply')->field('home,keyword,content')->where(array(
-                'token' => $this->token
-            ))->find();
+            $data = M('areply')->field('home,keyword,content')->where(array(
+                'token' => $this->token))->find();
             if ($data['keyword'] == '首页' || $data['keyword'] == 'home') {
                 return $this->shouye();
             }
             if ($data['home'] == 1) {
-                $like['keyword'] = array(
-                    'like',
-                    '%' . $data['keyword'] . '%'
-                );
+                $like['keyword'] = array('like','%'.$data['keyword'].'%');
                 $like['token']   = $this->token;
                 $back = M('Img')->field('id,text,pic,url,title')->limit(9)->order('id desc')->where($like)->select();
                 foreach ($back as $keya => $infot) {
@@ -57,22 +53,11 @@ class WeixinAction extends Action
                             'id' => $infot['id']
                         ));
                     }
-                    $return[] = array(
-                        $infot['title'].'1',
-                        $infot['text'].'2',
-                        $infot['pic'].'3',
-                        $url
-                    );
+                    $return[] = array($infot['title'].'1',$infot['text'].'2',$infot['pic'].'3', $url );
                 }
-                return array(
-                    $return,
-                    'news'
-                );
+                return array( $return, 'news');
             } else {
-                return array(
-                    $data['content'],
-                    'text'
-                );
+                return array($data['content'], 'text' );
             }
         }elseif ('unsubscribe' == $data['Event']) {
 			$follow_data['follow_form_id']=$data['FromUserName'];
