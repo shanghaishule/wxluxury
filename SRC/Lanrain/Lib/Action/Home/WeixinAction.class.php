@@ -35,8 +35,7 @@ class WeixinAction extends Action
 			}
 			
             $this->requestdata('follownum');
-            $data = M('areply')->field('home,keyword,content')->where(array(
-                'token' => $this->token))->find();
+            $data = M('areply')->field('home,keyword,content')->where(array( 'token' => $this->token))->find();
             if ($data['keyword'] == '首页' || $data['keyword'] == 'home') {
                 return $this->shouye();
             }
@@ -53,7 +52,7 @@ class WeixinAction extends Action
                             'id' => $infot['id']
                         ));
                     }
-                    $return[] = array($infot['title'].'1',$infot['text'].'2',$infot['pic'].'3', $url );
+                    $return[] = array($infot['title'],$infot['text'],$infot['pic'], $url );
                 }
                 return array( $return, 'news');
             } else {
