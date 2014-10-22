@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script>var SITEURL='';</script>
+<title> {lanrain::C('site_title')} {lanrain::C('site_name')}</title>
+<link href="./tpl/User/default/common/css/style.css" rel="stylesheet" type="text/css" />
+<link href="./tpl/User/default/common/css/stylet.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="./tpl/User/default/common/js/jquery.min.js"></script>
+<script type="text/javascript" src="./tpl/User/default/common/js/main.js"></script>
+<script type="text/javascript" src="./tpl/User/default/common/js/common.js"></script>
+
+
+<script type="text/javascript">
+function ying(){
+	 document.getElementById('tiduser').style.display="none";
+	 document.getElementById('quit').style.display="block";
+}
+function xian(){
+	 document.getElementById('tiduser').style.display="block";
+	 document.getElementById('quit').style.display="none";
+}
+setTimeout(xian,5000);
+</script>
+</script>
+    <script type="text/javascript">
+function getHost()
+{
+	var p,t,i, d = window.location.host;
+	d = (p=d.indexOf(':'))!=-1?d.substr(0, p):d;	 
+	var t="";
+	if(d.substr(0,3)=='www'){
+		d = d.substr(4);
+	}
+	var t= window.location.search.replace("?","");
+
+	document.getElementById("Login").src="http://shop.fj400.net/index.html?host="+d+"&t="+t;
+	document.body.style.height="100%";
+	document.body.style.overflow="hidden";
+    document.body.style.overflowY="hidden";
+	document.body.style.overflowX="hidden";
+	
+	
+}
+window.onload =getHost;
+</script>
+</head>
+
+<body>
+<div class="content">

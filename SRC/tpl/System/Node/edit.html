@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>权限管理</title>
-<link href="./tpl/User/default/common/images/main.css" type="text/css" rel="stylesheet">
+<link href="{lanrain::RES}/images/main.css" type="text/css" rel="stylesheet">
 <script src="{lanrain::STATICS}/jquery-1.4.2.min.js" type="text/javascript"></script>
 <meta http-equiv="x-ua-compatible" content="ie=7" />
 <script type="text/javascript">
@@ -12,7 +12,7 @@
 			var forms=$('#form').serialize();
 			$.ajax({
 				type:'POST',
-				url:'{lanrain::U("User/Node/edit")}',
+				url:'{lanrain::U("Node/edit")}',
 				data:forms,
 				success:function(msg){
 					msg=eval('('+msg+')');
@@ -73,7 +73,7 @@
       <td height="48"><input type="text" name="sort" size="45" value="0" class="ipt" /><span>注释：按照升序，值越大越往后。</span></td>
     </tr>
     <tr> 
-      <td height="48" colspan="2"><div id="addkey"></div><div class="fabu"><img src="./tpl/User/default/common/images/main/addwz.gif" id="submit" /> <img src="./tpl/User/default/common/images/main/addqx.gif" /></div></td>
+      <td height="48" colspan="2"><div id="addkey"></div><div class="fabu"><img src="{lanrain::RES}/images/main/addwz.gif" id="submit" /> <img src="{lanrain::RES}/images/main/addqx.gif" /></div></td>
     </tr>
 </table>
 </form>
