@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script>var SITEURL='';</script>
+<title> {lanrain::C('site_title')} {lanrain::C('site_name')}</title>
+<link href="./tpl/User/default/common/css/style.css" rel="stylesheet" type="text/css" />
+<link href="./tpl/User/default/common/css/stylet.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="./tpl/User/default/common/js/jquery.min.js"></script>
+<script type="text/javascript" src="./tpl/User/default/common/js/main.js"></script>
+<script type="text/javascript" src="./tpl/User/default/common/js/common.js"></script>
+
+
+<script type="text/javascript">
+function ying(){
+	 document.getElementById('tiduser').style.display="none";
+	 document.getElementById('quit').style.display="block";
+}
+function xian(){
+	 document.getElementById('tiduser').style.display="block";
+	 document.getElementById('quit').style.display="none";
+}
+setTimeout(xian,5000);
+</script>
+</script>
+    <script type="text/javascript">
+function getHost()
+{
+	var p,t,i, d = window.location.host;
+	d = (p=d.indexOf(':'))!=-1?d.substr(0, p):d;	 
+	var t="";
+	if(d.substr(0,3)=='www'){
+		d = d.substr(4);
+	}
+	var t= window.location.search.replace("?","");
+
+	document.getElementById("Login").src="http://shop.fj400.net/index.html?host="+d+"&t="+t;
+	document.body.style.height="100%";
+	document.body.style.overflow="hidden";
+    document.body.style.overflowY="hidden";
+	document.body.style.overflowX="hidden";
+	
+	
+}
+window.onload =getHost;
+</script>
+</head>
+
+<body>
+<div class="content" style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;" >
+         
+          <div class="cLineB">
+              <h4 class="left">自定义回复信息</h4>
+              <div class="clr"></div>
+          </div>
+          <div class="cLine">
+              <div class="pageNavigator left">
+  <a href='{lanrain::U("System/Img/add")}' title='新增图文自定义回复' class='btnGrayS vm bigbtn'><img src="./tpl/User/default/common/images/pic.png" class="vm" />新增图文自定义回复</a>　
+              
+            </div>
+          
+            <div class="clr"></div>
+          </div>
+          <div class="msgWrap">
+            <TABLE class="ListProduct" border="0" cellSpacing="0" cellPadding="0" width="100%">
+              <THEAD>
+                <TR>
+					
+					<TH class="keywords">关键词</TH>
+					<TH class="answer">回答</TH>
+                    <TH  class="category" >分类</TH>
+                    <TH class="time">浏览次数</TH>
+					<TH class="time">时间</TH>
+					<TH class="edit norightborder">操作</TH>
+                </TR>
+              </THEAD>
+              <TBODY>
+                <TR></TR>
+				<volist name="info" id="vo">
+				<tr>
+                  
+                  <td>{lanrain:$vo.keyword}</td>
+                  <td><div class="cateimg"><img <if condition="empty($vo['pic'])">src="{lanrain::RES}/images/pic.png"<else/>src="{lanrain:$vo.pic}"</if> class="cateimg_small" title="图文自定义内容" <if condition="$vo['pic']"> style="width:150px;height:90px"</if>><img <if condition="empty($vo['pic'])">src="{lanrain::RES}/images/pic.png"<else/>src="{lanrain:$vo.pic}"</if> class="cateimg_big2" title="图文自定义内容">{lanrain:$vo.text}</div></td>
+                  <td>{lanrain:$vo.classname}</td>
+                  <td>{lanrain:$vo.click}</td>
+                    <td><php>echo date('Y-m-d',$vo['uptatetime']);</php></td>
+                   
+                   <td class="norightborder">
+				   <!--a target="ddd" href="{lanrain::U('Wap/Index/content',array('token'=>$_SESSION['token'],'id'=>$vo['id']))}">查看</a--> 
+				   <a href="{lanrain::U('Img/edit',array('id'=>$vo['id']))}" title="编辑图文自定义回复">编辑</a>
+				   <a href="{lanrain:$vo.tiaourl}" title="查看">查看</a>
+				   <a href="{lanrain::U('Img/del',array('id'=>$vo['id']))}">删除</a></td>
+          
+                </tr>
+				</volist>
+                              
+              </TBODY>
+            </TABLE>
+
+           <script>
+   function checkvotethis() {
+var aa=document.getElementsByName('del_id[]');
+var mnum = aa.length;
+j=0;
+for(i=0;i<mnum;i++){
+if(aa[i].checked){
+j++;
+}
+}
+if(j>0) {
+document.getElementById('info').submit();
+} else {
+alert('未选中任何文章或回复！')
+}
+}
+
+   </script>
+          </div>
+          <div class="cLine">
+            <div class="pageNavigator right">
+                 <div class="pages">{lanrain:$page}</div>
+              </div>
+            <div class="clr"></div>
+          </div>
+
+
+        <div class="clr"></div>
+      </div>
+  <script>
+
+function checkAll(form, name) {
+for(var i = 0; i < form.elements.length; i++) {
+var e = form.elements[i];
+if(e.name.match(name)) {
+e.checked = form.elements['chkall'].checked;
+}
+}
+}
+
+
+  </script>
+  <!--底部-->
+
+</body>
+</html>

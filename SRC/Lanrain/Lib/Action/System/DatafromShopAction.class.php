@@ -186,7 +186,6 @@ class DatafromShopAction extends BackAction
     	$add_n = $add_num - 1;
     	$message = "添加成功：".$add_n."条\r\n";
     	$message = $message."失败：".$exist_num."条";
-
     	$return_data['list'] = $success_data;
     	$return_data['message'] = $message;
     	$return_data['num'] = $add_num;
@@ -204,7 +203,7 @@ class DatafromShopAction extends BackAction
     	$rename = "./temp.xls";
     	//文件读取
     	require_once './Extend/PHPExcel_1.7.9/Classes/PHPExcel/IOFactory.php';
-    	if ( !file_exists($rename) )
+    	if ( !file_exists($rename))
     	{
     		move_uploaded_file($filetmp,$rename);
     	}	    	
@@ -222,7 +221,7 @@ class DatafromShopAction extends BackAction
     		   	    $temp_data = $currentSheet->getCellByColumnAndRow($val,$currentRow)->getValue();
     		   	        		   	    
     		   	    if($temp_data instanceof PHPExcel_RichText)     //富文本转换字符串
-    		   	    	$temp_data = $temp_data->__toString();    		       		   	        		   	     		   	  
+    		   	    	$temp_data = $temp_data->__toString();
     		   	    
     		   	    if($temp_data != ""){
     		   	    	$data[$data_num][$key] = $temp_data;

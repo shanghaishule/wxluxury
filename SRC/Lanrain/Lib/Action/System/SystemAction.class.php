@@ -54,6 +54,7 @@ class SystemAction extends BackAction{
 					}
 				}
 			}
+			//dump($navNode);die;
 			$this->assign('nav',$navNode);
 		}
 		$this->display();
