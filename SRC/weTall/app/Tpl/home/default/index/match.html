@@ -107,17 +107,17 @@ $(function(){
     
 </div>
 <div class="fix-share" style="display:none"><img width="100%" height="100%" src="__STATIC__/images/share.png" /></div> 
-<div id="content">
+<div id="content" style="padding-top:50px">
     <volist name="match_table" id="match">
     <div class="dapei_block">
 	<div class="eject_btn">
 		<div class="user-img fl"><img width="50px" height="50px" <if condition="$match.userimgurl neq ''">src="{$match.userimgurl}"<else />src="__STATIC__/weixin/css/images/p1.gif"</if> /></div>
 		<div class="user-name-time fl">
 			<div class="u-con">
-				<div class="u-name fl">{$match.uname}</div>
+				<div class="u-name fl">{$match.title}</div>
 			    <div class="comment-time fr c_white" style="background:none;">{$match.create_time}</div>
 	    	</div>
-	    	<div class="u-time u-time-16 cl">{$match.title}</div>
+	    	<div class="u-time u-time-16 cl">{$match.uname}</div>
 		</div>
 	</div>
 	<div class="cl"></div>
@@ -129,22 +129,27 @@ $(function(){
 		<div class="shake-comments">
 			<ul>
 				<li>
-					<img class="shang" src="__STATIC__/weixin/css/images/shang.png" />
-					<span class="sh-num">557</span>
-				</li>
-				<li>
 					<img class="zan" src="__STATIC__/weixin/css/images/zan.png" />
 					<input type="hidden" id="matchid" value="{$match.id}"/>
 					<span class="z-num" id="z-num-{$match.id}"><if condition="$match.sum_l eq ''">0<else />{$match.sum_l}</if></span>
+					<span>点赞</span>
+				</li>
+							
+				<li>
+					<img class="shang" src="__STATIC__/weixin/css/images/shang.png" />
+					<span class="sh-num">557</span>
+					<span></span>
 				</li>
 				
 				<li>
 					<img class="share" src="__STATIC__/weixin/css/images/share.png" />
+					<span>分享</span>
 				</li>
 				
 				<li>
 					<a href="{:U('home/index/comments', array('tokenTall'=>$tokenTall,'id'=>$match['id']))}"><img class="pinglun" src="__STATIC__/weixin/css/images/pinglun.png" /></a>
 					<span class="p-num"><if condition="$match.sum_c eq ''">0<else />{$match.sum_c}</if></span>
+					<span>评论</span>
 				</li>
 								
 			</ul>
@@ -152,7 +157,7 @@ $(function(){
 		</div>
 	</div>
 	{// 分享的图片end }
-	<div class="b30 c_white">单品购买链接<span class="more">展开</span></div>
+	<div class="b30 c_white"><!-- 单品购买链接 --><span class="more"></span></div>
 	<div class="share-open">
 		<volist name='favi_table' id='vo' key="key" >
 		    <if condition="$match['id'] eq $vo['id']">	

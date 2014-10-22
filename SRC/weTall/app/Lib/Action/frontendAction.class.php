@@ -98,13 +98,13 @@ class frontendAction extends baseAction {
 					$_SESSION['openid']=$userinfo['openid'];
 				}
 			   // dump($_SESSION['uid'].'-1-'.$_SESSION['name']);exit;		
-			}/*else{
+			}else{
 				$myurl = "http://www.kuyimap.com".__SELF__;
 				$redirecturl = urlencode($myurl);
 				$url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=".$config['appId']."&redirect_uri=".$redirecturl."&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
 				//dump($myurl);exit;
 				header("Location: ".$url);
-			}*/
+			}
         }
         
     }
