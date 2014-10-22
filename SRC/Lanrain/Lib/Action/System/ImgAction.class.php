@@ -36,7 +36,7 @@ class ImgAction extends UserAction{
 	}
 	public function del(){
 		$where['id']=$this->_get('id','intval');
-		$where['uid']=session('uid');
+		//$where['uid']=session('uid');
 		if(D(MODULE_NAME)->where($where)->delete()){
 			M('Keyword')->where(array('pid'=>$this->_get('id','intval'),'token'=>session('token'),'module'=>'Img'))->delete();
 			$this->success('操作成功',U(MODULE_NAME.'/index'));
