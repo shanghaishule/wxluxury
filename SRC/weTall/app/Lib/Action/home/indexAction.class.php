@@ -208,9 +208,9 @@ class indexAction extends frontendAction {//frontend
     			// dump($_SESSION['uid'].'-1-'.$_SESSION['name']);exit;
     		}else{
     			$this->error('页面已过期',U("index/brandshop"));
-    		}
-    	
+    		}	
     	}
+    	
     	$m=M();
     	$Sel_sql = "SELECT * from tp_match where is_send = 1 order by create_time desc" ;
     	$result=$m->query($Sel_sql);
