@@ -49,6 +49,9 @@ class ImgAction extends UserAction{
 		$_POST['info'] = preg_replace($pat,"",$_POST['info']);
 		//$_POST['info']=strip_tags($this->_post('info'),'<a> <p> <br>');  
 		//dump($_POST['info']);
+		$_SESSION['uid'] = session('userid');
+		$_SESSION['uname'] = session('username');
+		$_SESSION['token'] = 'crmafv1398049081';
 		$this->all_insert();
 	}
 	public function upsave(){
