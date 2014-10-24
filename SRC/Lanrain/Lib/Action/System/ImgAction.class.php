@@ -28,7 +28,7 @@ class ImgAction extends UserAction{
 		$where['token']='crmafv1398049081';
 		$info=$db->where($where)->select();
 		$where['id']=$this->_get('id','intval');
-		$where['uid']=session('uid');
+		//$where['uid']=session('userid');
 		$res=D('Img')->where($where)->find();
 		$this->assign('info',$res);
 		$this->assign('res',$info);
