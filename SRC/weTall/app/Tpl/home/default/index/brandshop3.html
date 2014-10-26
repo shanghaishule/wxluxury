@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>首页</title>
+<link type="text/css" rel="stylesheet" href="__STATIC__/weixin/css/shopbrand.css">
+<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="format-detection" content="telephone=no">
+<meta charset="utf-8">
+<link href="__STATIC__/css/productdetail.css" rel="stylesheet" type="text/css">
+<script src="http://api.map.baidu.com/api?v=1.3" type="text/javascript"></script>
+<script src="__STATIC__/js/jquery/jquery10.js"></script>
+<script>
+function gosearch(){
+	document.getElementById("method").value = "shop";
+	document.getElementById('searchForm').submit();
+}
+function shangpin(){
+	//document.getElementById("method").value = "item";
+	document.getElementById('searchForm').submit();
+}
+function searchshop(id){
+	document.getElementById("txtHint").value=id;
+	document.getElementById('searchShop').submit();
+}
+</script>
+<script>
+$(function(){
+	$("#n_8").click(function(event){
+		event.stopPropagation();
+		$("#search_area").css("display","");
+		});
+	$(document).click(function(event) { $("#search_area").css("display","none"); });
+	//单击弹出层则自身隐藏
+	});
+ 
+</script>
+<script>
+$(function(){
+$(".pos").click(function(event){
+	event.stopPropagation();
+	$(".dis").css("z-index","300000000");
+	$(".dis").toggleClass("none");
+	});
+$(document).click(function(event) { $(".dis").removeClass("none"); });
+//单击弹出层则自身隐藏
+  $('#nav').css({left:($(window).width()-$('#nav').width())/2});
+});	
+</script>
+<script>
+        var imgUrl = "http://www.kuyimap.com/weTall/static/images/logo.png";
+        var lineLink ="{C('site_url')}/weTall/index.php?g=home&m=index&a=brandshop";
+        var descContent = '关注酷衣地图，逛街扫货轻松搞定';
+        var shareTitle = '酷衣地图';
+        var appid = '';
+         
+        function shareFriend() {
+            WeixinJSBridge.invoke('sendAppMessage',{
+                "appid": appid,
+                "img_url": imgUrl,
+                "img_width": "200",
+                "img_height": "200",
+                "link": lineLink,
+                "desc": descContent,
+                "title": shareTitle
+            }, function(res) {
+                //_report('send_msg', res.err_msg);
+            })
+        }
+        function shareTimeline() {
+            WeixinJSBridge.invoke('shareTimeline',{
+                "img_url": imgUrl,
+                "img_width": "200",
+                "img_height": "200",
+                "link": lineLink,
+                "desc": descContent,
+                "title": shareTitle
+            }, function(res) {
+                   //_report('timeline', res.err_msg);
+            });
+        }
+        function shareWeibo() {
+            WeixinJSBridge.invoke('shareWeibo',{
+                "content": descContent,
+                "url": lineLink,
+            }, function(res) {
+                //_report('weibo', res.err_msg);
+            });
+        }
+        // 当微信内置浏览器完成内部初始化后会触发WeixinJSBridgeReady事件。
+        document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+            // 发送给好友
+            WeixinJSBridge.on('menu:share:appmessage', function(argv){
+                shareFriend();
+            });
+            // 分享到朋友圈
+            WeixinJSBridge.on('menu:share:timeline', function(argv){
+                shareTimeline();
+            });
+            // 分享到微博
+            WeixinJSBridge.on('menu:share:weibo', function(argv){
+                shareWeibo();
+            });
+        }, false);
+</script>
+<script src="__STATIC__/LazyLoad/js/jquery.lazyload.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" charset="utf-8">
+	$(function() {
+		$("img").lazyload({
+			effect : "fadeIn"
+		});
+	});
+</script>
+</head>
+<body>
+<div class="wrap body-conent">
+  <div id="nav">
+  <img src="/weTall/static/weixin/images/luxury/images/home/bg_02.png" width="100%" height="50px"/>
+  
+    <form id="searchForm" action="/weTall/index.php?g=home&m=index&a=search" method="post">
+	<ul class="navlist">
+		<li class="r pos" id="n_0"><div class="home_page_logo"></div>
+		<div class="dis" id="dis">
+			 <ul>
+			      <li>
+				     <a href="{:U('home/index/search', array('search_all'=>'all'))}">所有商品</a>
+				    
+				  </li>
+				  <volist name="item_cate" id="cate">
+				  	<li>
+				     <a href="{:U('home/index/search', array('itemid'=>$cate['id'],'itemname'=>$cate['name'],'tokenTall'=>$tokenTall))}">{$cate.name}</a>
+				    </li>
+				  </volist>
+			 </ul> 
+		</div>
+		</li>
+    	<li class="r" id="n_5">
+    		<span style="margin-top:4px;"><input style="height:35px;width:100%;" type="search" name="txtkeyword" id="keyword"  placeholder="请输入关键字或者货号" autofocus x-webkit-speech> </span>
+            <input type="hidden" name="method" id="method">
+        </li>
+        <li class="r" id="n_8"><a href='javascript:void(0)' onclick='shangpin();'>找商品</a>
+        </li>
+        
+    </ul>
+    </form>
+    <script type="text/javascript">   
+        $(function(){
+        	var panelWidth = $(".img").width() + 50;
+        	$(".img").css("height",panelWidth);
+        	
+        });        
+    	$(".navlist > li#n_0").click(function(){
+			$(this).toggleClass("active");
+		});
+		$(".navlist > li.r a").each(function() {
+            href="index.php-app=member&act=login&ret_url=-index.php-app=member.htm"+$(this).attr("href");
+			whref=window.location.href;
+			if(whref.indexOf(href)!='-1'){
+				$(this).parent("li").addClass("active");
+			}
+        });
+    </script>
+</div>
+<div class="clear_kongge"></div>
+<div class="naviga">
+   <div class="shechipin">
+	   <a href="{:U('index/brandshop',array('order'=>'volume'))}"><img width="30%" height="40" src="__STATIC__/weixin/images/luxury/images/home/hot.png"></a>
+	   <a href="{:U('index/brandshop',array('order'=>'name'))}"><img width="30%" height="40" src="__STATIC__/weixin/images/luxury/images/home/zimu.png"></a>
+	   <a href="{:U('index/brandshop',array('order'=>'jifen'))}"><img width="30%" height="40" src="__STATIC__/weixin/images/luxury/images/home/mine.png"></a>
+   </div>
+</div> 
+   <volist name="brand" id="product" >
+    <div class="img">
+      <if condition="$gowhere eq 'item'">
+	      <div id="shop_name" class="img_detail">
+	      <a href="javascript:void(0)" onclick="searchshop({$product['id']});" ><img data-original="{$product.img}" src="__STATIC__/LazyLoad/js/grey.gif" width="100%"></img></a>
+	      </div>
+      <else/>    
+	      <div id="item_name" class="img_detail">
+	      <a href="javascript:void(0)" onclick="searchshop({$product['id']});" ><img data-original="{$product.img}" src="__STATIC__/LazyLoad/js/grey.gif" width="100%"></img></a>
+	      </div>
+      </if>
+      <div class="pro_detail2">
+      <if condition="$gowhere eq 'item'">
+      	<label id="item_sea" class="label" style="font-size:16px;font-weight:700;opacity:0.8"><a href="javascript:void(0)" onclick="searchshop({$product['id']});" > {$product.name}</a></label>
+      <else/>
+      	<label id="shop_sea" class="label" style="font-size:16px;font-weight:700;opacity:0.8"><a href="javascript:void(0)" onclick="searchshop({$product['id']});" > {$product.name}</a></label>
+      </if>
+      </div>   
+    </div> 
+    </volist>
+    
+  </div>
+  
+  <form id="searchShop" action="{:U('index/search',array('brandid'=>$product['id']))}" method="post">
+     <input type="hidden" name="longitude" value="" id="longitude">
+     <input type="hidden" name="latitude" value="" id="latitude">
+     <input type="hidden" name="brand_id" id="txtHint">   
+   </form>
+   <script type="text/javascript">
+  
+   (function() { // 闭包
+	    function load_script(xyUrl, callback) {
+	        var head = document.getElementsByTagName('head')[0];
+	        var script = document.createElement('script');
+	        script.type = 'text/javascript';
+	        script.src = xyUrl;
+	        // 借鉴了jQuery的script跨域方法
+	        script.onload = script.onreadystatechange = function() {
+	            if ((!this.readyState || this.readyState === "loaded" || this.readyState === "complete")) {
+	                callback && callback();
+	                // Handle memory leak in IE
+	                script.onload = script.onreadystatechange = null;
+	                if (head && script.parentNode) {
+	                    head.removeChild(script);
+	                }
+	            }
+	        };
+	        // Use insertBefore instead of appendChild to circumvent an IE6 bug.
+	        head.insertBefore(script, head.firstChild);
+	    }
+	    function translate(point, type, callback) {
+	        var callbackName = 'cbk_' + Math.round(Math.random() * 10000); // 随机函数名
+	        var xyUrl = "http://api.map.baidu.com/ag/coord/convert?from=" + type
+	                + "&to=4&x=" + point.lng + "&y=" + point.lat
+	                + "&callback=BMap.Convertor." + callbackName;
+	        // 动态创建script标签
+	        load_script(xyUrl);
+	        BMap.Convertor[callbackName] = function(xyResult) {
+	            delete BMap.Convertor[callbackName]; // 调用完需要删除改函数
+	            var point = new BMap.Point(xyResult.x, xyResult.y);
+	            callback && callback(point);
+	        }
+	    }
+
+	    window.BMap = window.BMap || {};
+	    BMap.Convertor = {};
+	    BMap.Convertor.translate = translate;
+	})();
+        if (window.navigator.geolocation) {
+            var options = {
+                enableHighAccuracy: true,
+            };
+            window.navigator.geolocation.getCurrentPosition(handleSuccess, handleError, options);
+        } else {
+            alert("浏览器不支持html5来获取地理位置信息");
+        }
+        
+        function handleSuccess(position){
+            // 获取到当前位置经纬度  本例中是chrome浏览器取到的是google地图中的经纬度
+            var lng = position.coords.longitude;
+            var lat = position.coords.latitude;
+            
+            document.getElementById("longitude").value=lng;
+            document.getElementById("latitude").value=lat;
+            
+           
+        }
+        
+        function handleError(error){
+        
+        }
+ 
+       
+    </script>
+    <include file="public:footer" />
+</body>
+</html>

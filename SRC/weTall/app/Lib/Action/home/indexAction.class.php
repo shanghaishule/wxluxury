@@ -1451,4 +1451,40 @@ class indexAction extends frontendAction {//frontend
     	echo $str;
     	 
     }
+    
+    public function brandshop3(){
+    	/***商品分类**/
+    	$item_cate=M("item_cate")->select();
+    	$this->assign('item_cate',$item_cate);
+    
+    	 
+    	$filter = $this->_get("order","trim");
+    	if ($filter == "") {
+    		$filter = 'volume';
+    		$order = $filter." desc";
+    	}elseif ($filter == "name"){
+    		$order = $filter." asc";
+    	}elseif($filter == "volume"){
+    		$order = $filter." desc";
+    	}
+    
+    	if (IS_POST) {
+    		$brandname = $this->_post("txtkeyword","trim");
+    		$method = $this->_post("method","trim");
+    		$_SESSION["paixu_place"] = $method;
+    		$where["name"] = array("like","%".$brandname."%");
+    	}
+    	 
+    	if ($_SESSION["paixu_place"] == "") {
+    		$method = "item";
+    	}else{
+    		$method = $_SESSION["paixu_place"];
+    	}
+    	 
+    	$this->assign("gowhere",$method);
+    	 
+    	$brand = M("brandlist")->where($where)->order($order)->select();
+    	$this->assign("brand",$brand);
+    	$this->display();
+    }
 }
