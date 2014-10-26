@@ -1376,4 +1376,79 @@ class indexAction extends frontendAction {//frontend
     	$returnMsg = $Msg ->sendsms($phone, $content);
     	dump($returnMsg['code']);
     }
+    
+    public function brandshop2(){
+    	/***商品分类**/
+    	$item_cate=M("item_cate")->select();
+    	$this->assign('item_cate',$item_cate);
+    
+    	 
+    	$filter = $this->_get("order","trim");
+    	if ($filter == "") {
+    		$filter = 'volume';
+    		$order = $filter." desc";
+    	}elseif ($filter == "name"){
+    		$order = $filter." asc";
+    	}elseif($filter == "volume"){
+    		$order = $filter." desc";
+    	}
+    
+    	if (IS_POST) {
+    		$brandname = $this->_post("txtkeyword","trim");
+    		$method = $this->_post("method","trim");
+    		$_SESSION["paixu_place"] = $method;
+    		$where["name"] = array("like","%".$brandname."%");
+    	}
+    	 
+    	if ($_SESSION["paixu_place"] == "") {
+    		$method = "item";
+    	}else{
+    		$method = $_SESSION["paixu_place"];
+    	}
+    	 
+    	$this->assign("gowhere",$method);
+    	 
+    	$brand = M("brandlist")->where($where)->order($order)->page('0,6')->select();
+    	$this->assign("brand",$brand); // 赋值数据集
+    	$this->display();
+    
+    }
+    
+    public function ajax_page_navi(){
+    	if($_GET['page'])
+    		$page = $_GET['page'];
+    	else
+    		$page = '0';
+    
+    	if (IS_POST) {
+    		$brandname = $this->_post("txtkeyword","trim");
+    		$method = $this->_post("method","trim");
+    		$_SESSION["paixu_place"] = $method;
+    		$where["name"] = array("like","%".$brandname."%");
+    	}
+    	$brand = M("brandlist")->where($where)->order($order)->page($page.',6')->select();
+    
+    	$str = '';
+    	foreach($brand as $product){
+    		$str .= '<div class="img">';
+    		if ($_SESSION["paixu_place"] == "") {
+    			$method = "item";
+    			$str .= '<div id="shop_name" class="img_detail"><a href="javascript:void(0)" onclick="searchshop('.$product['id'].');" ><img src="'.$product['img'].'" width="100%"></img></a></div>';
+    		}else{
+    			$method = $_SESSION["paixu_place"];
+    			$str .= '<div id="item_name" class="img_detail"><a href="javascript:void(0)" onclick="searchshop('.$product['id'].');" ><img src="'.$product['img'].'" width="100%"></img></a></div>';
+    		}
+    		$str .= '<div class="pro_detail2">';
+    		if ($_SESSION["paixu_place"] == "") {
+    			$method = "item";
+    			$str .= '<label id="item_sea" class="label" style="font-size:16px;font-weight:700;opacity:0.8"><a href="javascript:void(0)" onclick="searchshop('.$product['id'].');" > '.$product['name'].'</a></label>';;
+    		}else{
+    			$method = $_SESSION["paixu_place"];
+    			$str .= '<label id="shop_sea" class="label" style="font-size:16px;font-weight:700;opacity:0.8"><a href="javascript:void(0)" onclick="searchshop('.$product['id'].');" > '.$product['name'].'</a></label>';
+    		}
+    		$str .= '</div></div>';
+    	}
+    	echo $str;
+    	 
+    }
 }
