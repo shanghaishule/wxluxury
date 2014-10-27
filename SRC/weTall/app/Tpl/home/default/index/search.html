@@ -66,11 +66,13 @@
                 shareWeibo();
             });
         }, false);
-</script>	
+</script>
+<!-- //先载入jquery -->
+<script type="text/javascript" src="jquery.min.js"></script>	
 <script src="__STATIC__/LazyLoad/js/jquery.lazyload.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" charset="utf-8">
 	$(function() {
-		$("img").lazyload({
+		$(".img img").lazyload({
 			placeholder :"__STATIC__/LazyLoad/js/grey.gif",
 			effect : "fadeIn"
 		});
