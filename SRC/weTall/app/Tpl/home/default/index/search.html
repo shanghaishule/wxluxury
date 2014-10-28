@@ -68,12 +68,12 @@
         }, false);
 </script>
 <!-- //先载入jquery -->
-<script type="text/javascript" src="jquery.min.js"></script>	
+<!-- script type="text/javascript" src="jquery.min.js"></script -->	
+<script src="__STATIC__/js/jquery/jquery10.js"></script>
 <script src="__STATIC__/LazyLoad/js/jquery.lazyload.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" charset="utf-8">
 	$(function() {
-		$(".img img").lazyload({
-			placeholder :"__STATIC__/LazyLoad/js/grey.gif",
+		$("img").lazyload({
 			effect : "fadeIn"
 		});
 	});
@@ -186,7 +186,7 @@ var t2=new TouchSlider({id:'sliderlist', speed:600, timeout:6000, before:functio
         <volist name="item" id="product" >
     <div class="img">
       <div class="img_detail"><if condition="$compare eq 'Y'"> <a href="{:U('index/compare',array('id'=>$product['id'],'Huohao'=>$product['Huohao']))}"><else/>
-      <a href="{:U('Item/index',array('id'=>$product['id'],'tokenTall'=>$product['tokenTall']))}"></if><img src="{$product.img}" width="100%" ></img></a>
+      <a href="{:U('Item/index',array('id'=>$product['id'],'tokenTall'=>$product['tokenTall']))}"></if><img data-original="{$product.img}" src="__STATIC__/LazyLoad/js/grey.gif" width="100%" ></img></a>
       </div><br>
       <div class="pro_detail"><!-- 
        <volist name="brand" id="brandname">
