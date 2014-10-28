@@ -69,15 +69,7 @@
 </script>
 <!-- //先载入jquery -->
 <!-- script type="text/javascript" src="jquery.min.js"></script -->	
-<script src="__STATIC__/js/jquery/jquery10.js"></script>
-<script src="__STATIC__/LazyLoad/js/jquery.lazyload.js" type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript" charset="utf-8">
-	$(function() {
-		$("img").lazyload({
-			effect : "fadeIn"
-		});
-	});
-</script>
+
 </head>
 
 <body>
@@ -205,7 +197,15 @@ var t2=new TouchSlider({id:'sliderlist', speed:600, timeout:6000, before:functio
     </volist> <!-- <div id="pages">{$page}</div> -->
         </if>
     </div>
-    
+    <script src="__STATIC__/js/jquery/jquery10.js"></script>
+<script src="__STATIC__/LazyLoad/js/jquery.lazyload.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" charset="utf-8">
+	$(function() {
+		$("img").lazyload({
+			effect : "fadeIn"
+		});
+	});
+</script>
     <div class="clear">
     </div>
 </div>
