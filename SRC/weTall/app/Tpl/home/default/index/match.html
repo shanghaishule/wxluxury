@@ -124,7 +124,7 @@ $(function(){
 	{// 分享的图片start }
 	<div class="shake-img">
 		<div class="shake-pic">
-			<img style="margin-right:0px;font-weight:700;" width="100%" onerror="javascript:this.src='__STATIC__/images/ajax_loading.gif'" src="{$match.upd_path}" />
+			<img style="margin-right:0px;font-weight:700;" width="100%" onerror="javascript:this.src='__STATIC__/images/ajax_loading.gif'" data-original="{$match.upd_path}" src="__STATIC__/LazyLoad/js/grey.gif" />
 		</div>	
 		<div class="shake-comments">
 			<ul>
@@ -179,6 +179,14 @@ $(function(){
  </volist>		  
 </div>
 <include file="public:footer" />
+<script src="__STATIC__/LazyLoad/js/jquery.lazyload.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" charset="utf-8">
+	$(function() {
+		$("img").lazyload({
+			effect : "fadeIn"
+		});
+	});
+</script>
 <script>
 $(function(){
 $(".share-open .matchItem:last-child").css('border-bottom','0');
