@@ -217,7 +217,7 @@ class indexAction extends frontendAction {//frontend
     	$item_favi_detail = M("item");
     	$match_table = array();
     	$id=0;
-    
+        
     	$match_favi = array();
     	foreach ($result as $match_result){
     		$match_table[] = $match_result;
@@ -246,6 +246,9 @@ class indexAction extends frontendAction {//frontend
     			}
     		}
     	}
+    	//分享的第一个图片地址
+    	$first_img = M('match')->field("upd_path")->where(array('is_send'=>1))->order('create_time DESC')->find();
+    	$this->assign("first_img",$first_img);
     	//var_dump($match_table);die();
     	$this->assign("match_table",$match_table);
     	$this->assign("favi_table",$match_favi);
