@@ -21,7 +21,7 @@ $(function(){
 </script>
 <script>
        var imgUrl = "{:C('site_url')}{$first_img['upd_path']}";
-        var lineLink ="{:C('site_url')}/weTall/index.php?g=home&m=index&a=matchtest";
+        var lineLink ="http://www.kuyimap.com/weTall/index.php?g=home&m=index&a=matchtest";
         var descContent = '我刚刚搭配的衣服大家看看哦';
         var shareTitle = '我刚刚搭配的衣服大家看看哦';
         var appid = '';
@@ -29,7 +29,7 @@ $(function(){
         function shareFriend() {
             WeixinJSBridge.invoke('sendAppMessage',{
                 "appid": appid,
-                "img_url": "{:C('site_url')}{$first_img['upd_path']}",
+                "img_url": "http://www.kuyimap.com{$first_img['upd_path']}",
                 "img_width": "200",
                 "img_height": "200",
                 "link": lineLink,
@@ -85,7 +85,7 @@ $(function(){
 	<ul class="navlist">
 		<li class="r" id="n_0"><a href="{:U('home/index/brandshop', array('tokenTall'=>$tokenTall))}"><div class="home_page_logo"></div></a></li>
     	<li class="r" id="n_3">
-    		<span >搭配分享"{:C('site_url')}{$first_img['upd_path']}"</span>
+    		<span >搭配分享</span>
         </li>
         <li class="r" id="n_1"><a href="{:U('user/addMatch', array('tokenTall'=>$tokenTall))}"><div class="find_08"></div></a></li>       
     </ul>
