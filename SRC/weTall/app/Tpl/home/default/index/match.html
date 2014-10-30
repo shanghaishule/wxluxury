@@ -20,7 +20,7 @@ $(function(){
 });
 </script>
 <script>
-       var imgUrl = "{:C('site_url')}{$first_img['upd_path']}";
+       var imgUrl = "http://www.kuyimap.com{$first_img['upd_path']}";
         var lineLink ="http://www.kuyimap.com/weTall/index.php?g=home&m=index&a=matchtest";
         var descContent = '我刚刚搭配的衣服大家看看哦';
         var shareTitle = '我刚刚搭配的衣服大家看看哦';
@@ -29,7 +29,7 @@ $(function(){
         function shareFriend() {
             WeixinJSBridge.invoke('sendAppMessage',{
                 "appid": appid,
-                "img_url": "http://www.kuyimap.com{$first_img['upd_path']}",
+                "img_url": imgUrl,
                 "img_width": "200",
                 "img_height": "200",
                 "link": lineLink,
