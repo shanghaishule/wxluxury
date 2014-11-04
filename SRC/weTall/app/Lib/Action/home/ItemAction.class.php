@@ -1,6 +1,6 @@
 <?php
 
-class itemAction extends frontendAction {
+class itemAction extends Action {
 
     public function _initialize() {
         parent::_initialize();
