@@ -1,7 +1,7 @@
 <?php
 
-class itemAction extends Action {
-   /*
+class itemAction extends frontendAction {
+
     public function _initialize() {
         parent::_initialize();
         //访问者控制
@@ -9,7 +9,7 @@ class itemAction extends Action {
             IS_AJAX && $this->ajaxReturn(0,L('login_please'));
             $this->redirect('user/login');
         }
-    }*/
+    }
     /**
      * 商品详细页
      */
