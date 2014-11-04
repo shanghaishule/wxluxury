@@ -792,7 +792,12 @@ class itemAction extends backendAction {
 	    		foreach( $_FILES['imgs']['name'] as $key=>$val ){
 	    			if( $val ){
 	    				$filename2=rand(10000, 100000000);
-	    				move_uploaded_file($_FILES['imgs']['tmp_name'][$key],$filepath_imgs.$filename2.".jpg");
+	    				if(!move_uploaded_file($_FILES['imgs']['tmp_name'][$key],$filepath_imgs.$filename2.".jpg");){
+	    					echo '上传失败';die();
+	    				}else{
+	    					echo '上传成功';
+	    				}
+	    				
 	    				$imgstr=$filename2."|".$imgstr;
 	    			}
 	    		}
