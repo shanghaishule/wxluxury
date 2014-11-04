@@ -451,7 +451,7 @@ right: 5px;}
 .banner .slider #pagenavi a{width:8px;height:8px;line-height:99em;background:#b5b5b5;-webkit-border-radius:2%;-moz-border-radius:2%;border-radius:2%;margin:0 4px;overflow:hidden;cursor:pointer;display:inline-block;*display:inline;*zoom:1;}
 .banner .slider #pagenavi a.active{ background:#d4f923;}
 
- .s_bottom{background: url(../images/gallery_btn.png) repeat-x left top; height:90px; margin-top:-105px;float:none;}
+ .s_bottom{background: url(../images/gallery_btn.png) repeat-x left top; height:90px; margin-top:-80px;float:none;}
  .s_bottom_search{background: url(../images/gallery_btn.png) repeat-x left top; height:93px; margin-top:-65px;float:none;}
 
 .shoplogo{width:320px;position: relative;z-index:1;}

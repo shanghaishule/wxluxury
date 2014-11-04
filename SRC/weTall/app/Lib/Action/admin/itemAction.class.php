@@ -915,7 +915,7 @@ class itemAction extends backendAction {
         
         $album_img = $album_mod->where($where)->find();
         if($album_img ){
-           $data["images"] = preg_replace('/|'.$album_id.'/',"",$album_img["images"]);
+           $data["images"] = preg_replace('/\|'.$album_id.'/',"",$album_img["images"]);
            
            $album_mod->where($where)->save($data);
         }
