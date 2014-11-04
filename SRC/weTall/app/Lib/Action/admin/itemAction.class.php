@@ -922,6 +922,7 @@ class itemAction extends backendAction {
         echo '1';
         exit;
     }
+    
     //总后台主图删除
     function delete_album_tb() {
     	$album_mod = M('item_taobao');
