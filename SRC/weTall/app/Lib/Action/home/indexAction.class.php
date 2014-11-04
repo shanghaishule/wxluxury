@@ -1,5 +1,5 @@
 <?php
-class indexAction extends Action {//frontend
+class indexAction extends frontendAction {//frontend
 
     public function index() {
     	//取商家token值，取不到则默认为空
@@ -206,9 +206,9 @@ class indexAction extends Action {//frontend
     				$_SESSION['openid']=$userinfo['openid'];
     			}
     			// dump($_SESSION['uid'].'-1-'.$_SESSION['name']);exit;
-    		}//else{
-    		 //	$this->error('页面已过期',U("index/brandshop"));
-    		//}	
+    		}else{
+    			$this->error('页面已过期',U("index/brandshop"));
+    		}	
     	}
     	
     	$m=M();
