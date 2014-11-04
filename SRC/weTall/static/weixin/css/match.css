@@ -75,7 +75,7 @@ width:100%;margin:0 auto;color:#4F4F4F;font-weight:700;font-size:0.9em;
 .z-num,.s-num,.p-num,.sh-num{position:relative;top:-5px}
 .match_comments{background:#000000;}
 .b10{height:1px;border-bottom:1px dashed #ffffff;}
-.comment-time{font-size:15px;}
+.comment-time{font-size:13px;}
 .match_comments .eject-con{margin:0;padding:5px 0;}
 /*.u-con{margin-right:10px;}*/
 .p-input{width:100%;position:fixed;bottom:0;left:0;height:30px;border-top:1px solid #5A5858;background:#8d0000}
