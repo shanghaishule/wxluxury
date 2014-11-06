@@ -1,102 +1,106 @@
 <!DOCTYPE html>
 <html><head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>酷衣地图一元抢购名牌女士手表</title>
-<meta  content="IE=edge,chrome=1"  http-equiv="X-UA-Compatible">
-<meta  name="viewport"  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-<meta name="apple-mobile-web-app-capable" content="yes" />
-<meta  name="apple-mobile-web-app-status-bar-style"  content="black">
-<meta  name="format-detection"  content="telephone=no">
-<meta  name="GENERATOR"  content="MSHTML 8.00.7600.16385">
-<link  rel="stylesheet"  href="./css/css.css"  type="text/css">
-<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
-</head>
-<body >
-    <div data-role="page" id="pageone">
-		<div style="font-size:1.5em;color:#fff;font-weight:bold;text-align:center;font-family:微软雅黑;">
-		<p>酷衣地图一元抢购活动</p>
-		</div>
-		<img  src="./images/watch.png"  width="50%" style="margin-left:20%">
-		<div style="font-size:0.8em;color:#fff;text-align:center;font-family:微软雅黑;">
-		<p>游戏规则：将Lvei’s手表分成399份，每份对应一个酷码，每个酷码中奖概率为1/399。酷码总数量399个，全部酷码抢完后开始抽奖。全部酷码购买结束后3日内公布幸运者名单，并按注册的邮寄地址将奖品寄给获奖者。请完善个人资料后再购买酷码参与抽奖。
-花1元钱就能抢到你心仪的宝贝，购买越多，中奖概率越多，快快分享给你的小伙伴一起来抢吧。</p>
-		</div>
-		<div id="meau_hl">
-			<ul>
-				<li> <a href="http://www.kuyimap.com/weTall/index.php?m=Item&a=index&id=2311&tokenTall=jadlrt1408776785"><img src="./images/share_2.png" /></a></li>
-				<li> <a href="#"><img src="./images/share_1.png" class="share"/></a></li>
-			</ul>
-		</div>
-		<div style="font-size:0.9em;color:#fff;text-align:center;font-family:微软雅黑;">
-		<p>“酷衣地图”保留对本次活动的解释权。</p>
-		</div>
-	</div>
-    <div class="fix-share" style="display:none"><img width="100%" height="100%" src="./images/fix-share.png" /></div>
-<script>
-$(function(){
-	$(".share").click(function(){
-		$(".fix-share").show();
-	});
-	$(".fix-share").click(function(){
-		$(this).hide();
-	});
-});
-</script>
-<script>
-        var imgUrl = "http://www.kuyimap.com/watch/images/watch.png";
-        var lineLink = "http://www.kuyimap.com/watch";
-        var descContent = '一元抢购施华洛世奇石英水钻女防水手表';
-        var shareTitle = '一元抢购施华洛世奇石英水钻女防水手表';
-        var appid = 'wx3079f89b18863917';
-         
-        function shareFriend() {
-            WeixinJSBridge.invoke('sendAppMessage',{
-                "appid": appid,
-                "img_url": imgUrl,
-                "img_width": "200",
-                "img_height": "200",
-                "link": lineLink,
-                "desc": descContent,
-                "title": shareTitle
-            }, function(res) {
-                //_report('send_msg', res.err_msg);
-            })
-        }
-        function shareTimeline() {
-            WeixinJSBridge.invoke('shareTimeline',{
-                "img_url": imgUrl,
-                "img_width": "200",
-                "img_height": "200",
-                "link": lineLink,
-                "desc": descContent,
-                "title": shareTitle
-            }, function(res) {
-                   //_report('timeline', res.err_msg);
-            });
-        }
-        function shareWeibo() {
-            WeixinJSBridge.invoke('shareWeibo',{
-                "content": descContent,
-                "url": lineLink,
-            }, function(res) {
-                //_report('weibo', res.err_msg);
-            });
-        }
-        // 当微信内置浏览器完成内部初始化后会触发WeixinJSBridgeReady事件。
-        document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
-            // 发送给好友
-            WeixinJSBridge.on('menu:share:appmessage', function(argv){
-                shareFriend();
-            });
-            // 分享到朋友圈
-            WeixinJSBridge.on('menu:share:timeline', function(argv){
-                shareTimeline();
-            });
-            // 分享到微博
-            WeixinJSBridge.on('menu:share:weibo', function(argv){
-                shareWeibo();
-            });
-        }, false);
-</script>		
+        	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        	<title>酷衣地图一元抢购名牌女士手表</title>
+        	<meta  content="IE=edge,chrome=1"  http-equiv="X-UA-Compatible">
+        	<meta  name="viewport"  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+        	<meta name="apple-mobile-web-app-capable" content="yes" />
+        	<meta  name="apple-mobile-web-app-status-bar-style"  content="black">
+        	<meta  name="format-detection"  content="telephone=no">
+        	<meta  name="GENERATOR"  content="MSHTML 8.00.7600.16385">
+        	<link  rel="stylesheet"  href="./css/css.css"  type="text/css">
+        	<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+        	</head>
+        	<body >
+        	    <div data-role="page" id="pageone">
+        			<div style="font-size:1.5em;color:#fff;font-weight:bold;text-align:center;font-family:微软雅黑;">
+        			<p>酷衣地图一元抢购活动</p>
+        			</div>
+        			<img  src="./images/watch.png"  width="50%" style="margin-left:20%">
+        			<div style="font-size:0.8em;color:#fff;text-align:left;font-family:微软雅黑;">
+        			<h1 style="font-size:1em">游戏规则：</h1>
+        			<p style="margin:0.1em">1、将Lvei's手表按照原价分成399份。</p>
+        			<p style="margin:0.1em">2、每支付一元对应一次抽奖机会，购买愈多中奖概率越大。</p>
+        			<p style="margin:0.1em">3、全部399个机会购买结束后开始抽奖，3个工作日后公布抽奖结果。</p>
+        			<p style="margin:0.1em">4、抽奖将会以用户购买时填写的电话为主，请用户认真填写手机号码和收获地址。</p>
+        			<p style="margin:0.1em">5、快快分享给你的小伙伴一起来抢吧。</p>
+        			</div>
+        			<div id="meau_hl">
+        				<ul>
+        					<li> <a href="http://www.kuyimap.com/weTall/index.php?m=Item&a=index&id=2311&tokenTall=jadlrt1408776785"><img src="./images/share_2.png" /></a></li>
+        					<li> <a href="#"><img src="./images/share_1.png" class="share"/></a></li>
+        				</ul>
+        			</div>
+        			<div style="font-size:0.9em;color:#fff;text-align:center;font-family:微软雅黑;">
+        			<p>“酷衣地图”保留对本次活动的解释权。</p>
+        			</div>
+        		</div>
+        	    <div class="fix-share" style="display:none"><img width="100%" height="100%" src="./images/fix-share.png" /></div>
+        	<script>
+        	$(function(){
+        		$(".share").click(function(){
+        			$(".fix-share").show();
+        		});
+        		$(".fix-share").click(function(){
+        			$(this).hide();
+        		});
+        	});
+        	</script>
+        	<script>
+        	        var imgUrl = "http://www.kuyimap.com/watch/images/watch.png";
+        	        var lineLink = "http://www.kuyimap.com/watch";
+        	        var descContent = '一元抢购施华洛世奇石英水钻女防水手表';
+        	        var shareTitle = '一元抢购施华洛世奇石英水钻女防水手表';
+        	        var appid = 'wx3079f89b18863917';
+        	         
+        	        function shareFriend() {
+        	            WeixinJSBridge.invoke('sendAppMessage',{
+        	                "appid": appid,
+        	                "img_url": imgUrl,
+        	                "img_width": "200",
+        	                "img_height": "200",
+        	                "link": lineLink,
+        	                "desc": descContent,
+        	                "title": shareTitle
+        	            }, function(res) {
+        	                //_report('send_msg', res.err_msg);
+        	            })
+        	        }
+        	        function shareTimeline() {
+        	            WeixinJSBridge.invoke('shareTimeline',{
+        	                "img_url": imgUrl,
+        	                "img_width": "200",
+        	                "img_height": "200",
+        	                "link": lineLink,
+        	                "desc": descContent,
+        	                "title": shareTitle
+        	            }, function(res) {
+        	                   //_report('timeline', res.err_msg);
+        	            });
+        	        }
+        	        function shareWeibo() {
+        	            WeixinJSBridge.invoke('shareWeibo',{
+        	                "content": descContent,
+        	                "url": lineLink,
+        	            }, function(res) {
+        	                //_report('weibo', res.err_msg);
+        	            });
+        	        }
+        	        // 当微信内置浏览器完成内部初始化后会触发WeixinJSBridgeReady事件。
+        	        document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+        	            // 发送给好友
+        	            WeixinJSBridge.on('menu:share:appmessage', function(argv){
+        	                shareFriend();
+        	            });
+        	            // 分享到朋友圈
+        	            WeixinJSBridge.on('menu:share:timeline', function(argv){
+        	                shareTimeline();
+        	            });
+        	            // 分享到微博
+        	            WeixinJSBridge.on('menu:share:weibo', function(argv){
+        	                shareWeibo();
+        	            });
+        	        }, false);
+        	</script>		
 </body>
 </html>
