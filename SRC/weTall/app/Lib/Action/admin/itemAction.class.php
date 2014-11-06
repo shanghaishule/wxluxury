@@ -991,7 +991,7 @@ class itemAction extends backendAction {
     
 	  //删除商品
 	  public function delete(){
-	  	$Item = M('item_taobao');
+	  	$Item = M('item');
 	  	$id = $this->_get('id','intval');
 	    if (false !== $Item->where(array('id'=>$id))->delete()){
         	
