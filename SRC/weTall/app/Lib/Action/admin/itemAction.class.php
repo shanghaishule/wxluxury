@@ -993,7 +993,7 @@ class itemAction extends backendAction {
 	  public function delete(){
 	  	$Item = M('item_taobao');
 	  	$id = $this->_get('id','intval');
-	  	
+	  	dump($id);die();
 	    if (false !== $Item->where(array('id'=>$id))->delete()){
         	
 	        IS_AJAX && $this->ajaxReturn(1, L('operation_success'));
