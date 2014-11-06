@@ -79,7 +79,9 @@ $(".pos").click(function(event){
 	});
 $(document).click(function(event) { $(".dis").removeClass("none"); });
 //单击弹出层则自身隐藏
-});	
+//导航条居中
+$('#nav').css({left:($(window).width()-$('#nav').width())/2});
+});
 function searchshop(id){
 	document.getElementById("txtHint").value=id;
 	document.getElementById('searchShop').submit();
@@ -91,7 +93,7 @@ function searchshop(id){
      <input type="hidden" name="brand_id" id="txtHint">   
    </form>
 <div id="nav">
-    <img src="/weTall/static/weixin/images/luxury/images/home/bg_02.png" width="100%"/>
+    <img src="/weTall/static/weixin/images/luxury/images/home/bg_02.png" width="100%" height="50px"/>
 
 	<ul class="navlist">
 		 <li class="r pos" id="n_0"><div class="home_page_logo"></div>

@@ -684,6 +684,7 @@ class itemAction extends backendAction {
     public function edit() {
     	//echo $_SESSION["yema"];die();
         if (IS_POST) {
+			//dump($_POST);exit;
         	$edit_m = $this->_post("edit_m","trim");
         	if ($edit_m == "total") {
         		$this->_mod = M("item_taobao");
@@ -764,12 +765,13 @@ class itemAction extends backendAction {
             $data["Huohao"]=$_POST["Huohao"];
             //echo $_POST["Huohao"];die();
             $data["item_model"]=$this->_post("item_model","trim");
-            //dump($_FILES["img"]);exit;
+            //dump($_FILES);exit;
             //上传图片
             $Uninum = $_POST["Uninum"];
-    		if (!empty($_FILES["img"]['tmp_name'])){
+			$filepath = $_SERVER['DOCUMENT_ROOT']."/Uploads/items/images/";//图片保存的路径目录
+    		if (!empty($_FILES["img"]["tmp_name"])){
 	    		$item_imgs = array(); //相册
-	    		$filepath = $_SERVER['DOCUMENT_ROOT']."/Uploads/items/images/";//图片保存的路径目录
+	    		
 	    		if(!is_dir($filepath)){
 	    			mkdir($filepath,0777, true);
 	    		}
@@ -784,6 +786,7 @@ class itemAction extends backendAction {
             //上传相册
     		$file_imgs = array();
     		$filepath_imgs=$filepath.$Uninum."/";
+			//dump($filepath_imgs);exit;
     		if(!is_dir($filepath_imgs)){
     			mkdir($filepath_imgs,0777, true);
     		}
@@ -792,12 +795,21 @@ class itemAction extends backendAction {
 	    		foreach( $_FILES['imgs']['name'] as $key=>$val ){
 	    			if( $val ){
 	    				$filename2=rand(10000, 100000000);
-	    				move_uploaded_file($_FILES['imgs']['tmp_name'][$key],$filepath_imgs.$filename2.".jpg");
+	    				if(!move_uploaded_file($_FILES['imgs']['tmp_name'][$key],$filepath_imgs.$filename2.".jpg")){
+	    					echo '上传失败';
+	    				}else{
+	    					echo '上传成功';
+							//dump($_FILES['imgs']['tmp_name'][$key]);
+							//dump($filepath_imgs.$filename2.".jpg");
+							//exit;
+	    				}
+	    				
 	    				$imgstr=$filename2."|".$imgstr;
 	    			}
 	    		}
 	    		
 	    		$data['images'] = $imgstr.$_POST["images"];
+				//dump($data);exit;
     		}
             //标签
             $tags = $this->_post('tags', 'trim');
@@ -847,6 +859,7 @@ class itemAction extends backendAction {
             $this->success(L('operation_success'));
         } else {
         	$id = $this->_get('id','intval');
+			//dump($id);exit;
         	if($_SESSION["item_edit_id"] != $id){
         		$_SESSION["yema"] = 1;
         	}elseif ($this->_get("edit_m","trim") == "total" && $_SESSION["m"] == "") {
@@ -894,7 +907,7 @@ class itemAction extends backendAction {
             $imagesstr = $item["images"];
             $imagesarr = explode("|",$imagesstr);
             $this->assign("imagesarr",$imagesarr);
-            //dump($item);exit;
+            //dump($imagesarr);exit;
             $this->assign('info', $item);
             $this->assign("edit_m",$edit_m);
            
@@ -920,6 +933,7 @@ class itemAction extends backendAction {
            $album_mod->where($where)->save($data);
         }
         echo '1';
+		//echo $data["images"];
         exit;
     }
     
@@ -977,9 +991,8 @@ class itemAction extends backendAction {
     
 	  //删除商品
 	  public function delete(){
-	  	$Item = M('item_taobao');
+	  	$Item = M('item');
 	  	$id = $this->_get('id','intval');
-	  	
 	    if (false !== $Item->where(array('id'=>$id))->delete()){
         	
 	        IS_AJAX && $this->ajaxReturn(1, L('operation_success'));
