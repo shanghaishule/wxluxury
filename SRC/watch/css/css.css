@@ -1,0 +1,78 @@
+body{
+background:#000000;
+margin:0;
+padding: 0;
+min-width: 320px;
+}
+.meau_top{
+width:100%;
+}
+.meau_top ul{
+  margin:0;padding:0;
+  width:320px;
+margin:0 auto;
+}
+.meau_top ul li{
+float:left;
+text-align: center;
+width:80px
+}
+
+#meau_hl{
+bottom:-50%;
+width:100%;
+}
+#meau_hl ul{
+width:100%;
+margin:0;padding:0;
+}
+#meau_hl ul li{
+float:left;
+width:50%;
+text-align:center;
+}
+.c_b{clear:both}
+
+#meau_hl ul li a{
+color:rgb(196, 130, 14);
+font-size:15px;
+}
+.last_page {
+position:relative;
+bottom:0px;
+left:0px;
+}
+#content{width:320px;margin:0 auto;}
+.biao-pan{text-align:center;position: relative;width:100%;margin:0 auto;height:420px;}
+.w-pan{position: absolute;
+top: 110px;
+width: 48%;
+left: 79px;}
+.w-dai{position:absolute;left:0;top:10px;width:100%}
+.w-k{position: absolute;
+top: 70px;
+left: 44px;
+width: 71%;}
+#pageone{margin: 0 auto;width:320px;}
+#w-left,#w-right{position:absolute;top:164px;width:25px}
+#w-left{left:0;}
+#w-right{right:0;}
+.next{text-align:center;}
+.left-right{
+font-size: 18px;
+color: #ffffff;
+text-align: center;
+}
+.ui-loader{display:none;}
+.final{text-align:center;}
+.fix-share{
+background:rgba(0,0,0,0.6);opacity:1.0;
+width:100%;
+top:0;left:0;
+height:100%;
+position:fixed;
+z-index:1111111;
+}
+.buying{text-align:center;}
+
+
