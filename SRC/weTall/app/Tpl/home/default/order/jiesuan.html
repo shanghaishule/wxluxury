@@ -70,7 +70,7 @@ function searchshop(id){
      <input type="hidden" name="latitude" value="{$latitude}" id="latitude">
      <input type="hidden" name="brand_id" id="txtHint">   
    </form>
-<div id="nav">
+<!--<div id="nav">
     <img src="/weTall/static/weixin/images/luxury/images/home/bg_02.png" width="100%" height="50px"/>
 
 	<ul class="navlist">
@@ -95,7 +95,6 @@ function searchshop(id){
         <if condition="$gohref neq ''">
         <a href="{:U('home/user/index', array('tokenTall'=>$tokenTall))}"><div class="find_04"></div></a>
         <elseif condition="$gosearch eq 'Y'"/>
-       <!--  <a href="javascript:void(0)" onclick="searchshop({$brandid})"> -->
         <a href="{:U('home/user/index', array('tokenTall'=>$tokenTall))}">
         <div class="find_03">{$City}</div></a>
         <else/>
@@ -119,7 +118,7 @@ function searchshop(id){
         });
     </script>
 </div>
-    
+  -->  
 
 
 
