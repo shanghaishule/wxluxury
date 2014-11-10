@@ -7,7 +7,7 @@
 class userbaseAction extends Action {
 
     public function _initialize(){
-        parent::_initialize();
+       // parent::_initialize();
         //访问者控制
       /*  if (!$this->visitor->is_login && !in_array(ACTION_NAME, array('login', 'register', 'binding', 'ajax_check'))) {
             IS_AJAX && $this->ajaxReturn(0, L('login_please'));
