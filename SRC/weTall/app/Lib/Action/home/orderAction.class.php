@@ -141,7 +141,7 @@ class orderAction extends userbaseAction {
 		$item_order=M('item_order');
 		$item=M('item');
 		$order_detail=M('order_detail');
-		$order=$item_order->where("orderId='".$orderId."' and userId='".$this->visitor->info['id']."'")->find();
+		$order=$item_order->where("orderId='".$orderId."' and userId='".$_SESSION['uid']."'")->find();
 	
 		if(!is_array($order))
 		{
@@ -692,7 +692,7 @@ class orderAction extends userbaseAction {
 				//支付宝
 				foreach ($all_order_arr as $dingdanhao){
 					$data['supportmetho']=1;
-					if(M('item_order')->where("userId='".$this->visitor->info['id']."' and orderId='".$dingdanhao['orderid']."'")->data($data)->save())
+					if(M('item_order')->where("userId='".$_SESSION['uid']."' and orderId='".$dingdanhao['orderid']."'")->data($data)->save())
 					{
 						//成功就继续
 					}else

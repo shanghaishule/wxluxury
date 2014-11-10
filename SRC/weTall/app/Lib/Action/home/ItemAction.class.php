@@ -160,8 +160,8 @@ class itemAction extends frontendAction {
                 break;
         }
         $data['info'] = $check_result['content'];
-        $data['uid'] = $this->visitor->info['id'];
-        $data['uname'] = $this->visitor->info['username'];
+        $data['uid'] = $_SESSION['uid'];
+        $data['uname'] = $_SESSION['name'];
 
         //验证商品
         $item_mod = M('item');
@@ -217,7 +217,7 @@ class itemAction extends frontendAction {
             $this->assign('aid', $aid);
         } else {
             //用户的专辑
-            $album_list = M('album')->field('id,title')->where(array('uid' => $this->visitor->info['id']))->select();
+            $album_list = M('album')->field('id,title')->where(array('uid' => $_SESSION['uid']))->select();
             //专辑分类
             if (false === $album_cate_list = F('album_cate_list')) {
                 $album_cate_list = D('album_cate')->cate_cache();
@@ -239,7 +239,7 @@ class itemAction extends frontendAction {
         $ac_id = $this->_post('ac_id', 'intval', 0);
         $item['intro'] = $this->_post('intro', 'trim');
         $item['info'] = Input::deleteHtmlTags($item['info']);
-        $item['uid'] = $this->visitor->info['id'];
+        $item['uid'] = $_SESSION['uid'];
         $item['uname'] = $this->visitor->info['username'];
         $item['status'] = C('pin_item_check') ? 0 : 1;
         //添加商品
@@ -266,7 +266,7 @@ class itemAction extends frontendAction {
         $item_mod = M('item');
         $item = $item_mod->field('id,uid,uname')->where(array('id' => $id, 'status' => '1'))->find();
         !$item && $this->ajaxReturn(0, L('invalid_item'));
-        $uid = $this->visitor->info['id'];
+        $uid = $_SESSION['uid'];
         $uname = $this->visitor->info['username'];
         $item['uid'] == $uid && $this->ajaxReturn(0, L('like_own')); //自己的商品
         $like_mod = M('item_like');
@@ -295,7 +295,7 @@ class itemAction extends frontendAction {
     public function unlike() {
         $id = $this->_get('id', 'intval');
         !$id && $this->ajaxReturn(0, L('invalid_item'));
-        $uid = $this->visitor->info['id'];
+        $uid = $_SESSION['uid'];
         $like_mod = M('item_like');
         if ($like_mod->where(array('uid' => $uid, 'item_id' => $id))->delete()) {
             //喜欢数不减少~
@@ -312,7 +312,7 @@ class itemAction extends frontendAction {
         $id = $this->_get('id', 'intval');
         $album_id = $this->_get('album_id', 'intval');
         !$id && $this->ajaxReturn(0, L('invalid_item'));
-        $uid = $this->visitor->info['id'];
+        $uid = $_SESSION['uid'];
         $uname = $this->visitor->info['username'];
         if ($album_id) {
             //删除专辑里面的商品
