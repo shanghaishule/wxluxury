@@ -158,7 +158,7 @@ class orderAction extends userbaseAction {
 				{
 					$item->where("id='".$val['itemId']."'")->setInc('goods_stock',$val['quantity']);
 				}
-				$this->redirect('user/index',array('tokenTall'=>$tokenTall));
+				$this->redirect('user/index',array('tokenTall'=>$tokenTall),5,'订单已关闭');
 			}else{
 				$this->error('关闭订单失败!');
 			}
