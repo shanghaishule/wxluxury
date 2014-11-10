@@ -4,7 +4,7 @@
  *
  * @author andery
  */
-class userbaseAction extends frontendAction {
+class userbaseAction extends Action {
 
     public function _initialize(){
         parent::_initialize();
