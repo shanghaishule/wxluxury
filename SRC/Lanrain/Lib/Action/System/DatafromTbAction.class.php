@@ -56,11 +56,11 @@ class DatafromTbAction extends BackAction
     	
     	$ids = trim($this->_request(id), ',');
     	if (false !== $Item->delete($ids)){
-    		IS_AJAX && $this->ajaxReturn(1, L('operation_success'));
+    		//IS_AJAX && $this->ajaxReturn(1, L('operation_success'));
     		$this->success(L('operation_success'));
     	}else{
     		 
-    		IS_AJAX && $this->ajaxReturn(0, L('operation_failure'));
+    		//IS_AJAX && $this->ajaxReturn(0, L('operation_failure'));
     		$this->error(L('operation_failure'));
     	}
     }
