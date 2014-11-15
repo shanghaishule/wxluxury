@@ -118,7 +118,7 @@
                 
                 <td align="center">
                 <a href="/weTall/index.php?g=admin&m=item&a=edit&id={Lanrain:$val.id}&tokenTall={Lanrain:$val.tokenTall}&edit_m=total">编辑</a>
-                | <a href="javascript:void(0);" class="J_confirmurl" data-uri="/weTall/index.php?g=admin&m=item&a=delete&id={Lanrain:$val.id}&tokenTall={Lanrain:$val.tokenTall}"
+                | <a href="javascript:void(0);" class="J_confirmurl" data-uri="/weTall/index.php?g=admin&m=item&a=delete&id={Lanrain:$val.id}"
                  data-acttype="ajax" data-msg="'删除'{Lanrain:$val.title}吗">删除</a>
                 <if condition = "$val['status'] eq '0' ">
                     <a href="javascript:void(0);" class="J_confirmurl" data-uri="{Lanrain::U('Statistics/delete', array('id'=>$val['id']))}" data-msg="确认删除该账单吗？">删除</a>
