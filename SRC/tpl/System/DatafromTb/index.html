@@ -56,9 +56,9 @@
                 <input type="hidden" name="a" value="index" />
                 <input type="hidden" name="menuid" value="{Lanrain:$menuid}" />
                                                        货号：
-                <input type="text" name="huohao" class="text" id="huohao"> &nbsp;
+                <input type="text" name="huohao" class="text" id="huohao" value="{Lanrain:$search.huohao}"> &nbsp;
                                                        品牌：
-                <input type="text" name="brand" class="text" id="brand" value="{Lanrain:$brand}"> &nbsp;			                
+                <input type="text" name="brand" class="text" id="brand" value="{Lanrain:$search.brand}"> &nbsp;			                
 				<select id ="brandlist"  class="text" onchange="document.getElementById('brand').value=this.options[this.selectedIndex].text" 
 						style="width:150px;height:19px;CLIP: rect(auto auto auto 131px); POSITION: absolute ;margin-left:-140px;margin-top:3px;">															
 		            <volist name="brandlist" id="val" >
@@ -79,7 +79,7 @@
     </table>
     </form>
     
-    <div class="J_tablelist table_list" data-acturi="{:U('item/ajax_edit')}">
+    <div class="J_tablelist table_list" data-acturi="{:U('item_tabao/ajax_edit')}">
     <style>
 	.attributes {
 	    height : 60px;
@@ -90,6 +90,7 @@
     <table  width="100%" cellspacing="0" style="table-layout:fixed;border-collapse:collapse;font-size:12px;">
         <thead>
             <tr>
+            	<th width="30"><input type="checkbox" name="checkall" class="J_checkall"></th>
                 <th width=100px><span data-tdtype="order_by" data-field="id">商品品牌</span></th>
                 <th width=80px><span data-tdtype="order_by" data-field="status">商品图片</span></th>
                 <th width=200px><span data-tdtype="order_by" data-field="shop">商品名称</span></th>
@@ -118,11 +119,9 @@
                 
                 <td align="center">
                 <a href="/weTall/index.php?g=admin&m=item&a=edit&id={Lanrain:$val.id}&tokenTall={Lanrain:$val.tokenTall}&edit_m=total">编辑</a>
-                | <a href="javascript:void(0);" class="J_confirmurl" data-uri="/weTall/index.php?g=admin&m=item&a=delete&id={Lanrain:$val.id}"
+                | <a href="javascript:void(0);" class="J_confirmurl" data-uri="{lanrain::U('DatafromTb/delete',array('id'=>$val.id))"
                  data-acttype="ajax" data-msg="'删除'{Lanrain:$val.title}吗">删除</a>
-                <if condition = "$val['status'] eq '0' ">
-                    <a href="javascript:void(0);" class="J_confirmurl" data-uri="{Lanrain::U('Statistics/delete', array('id'=>$val['id']))}" data-msg="确认删除该账单吗？">删除</a>
-                </if>
+                
                 </td>
             </tr>
             </volist>
@@ -140,6 +139,9 @@
                             </div>
                             
     <div class="btn_wrap_fixed">
+    	<label class="select_all mr10"><input type="checkbox" name="checkall" class="J_checkall">全选/取消全选</label>
+        <input type="button" class="btn" data-tdtype="batch_action" data-acttype="ajax" data-uri="{lanrain::U('DatafromTb/delete')" data-name="id" data-msg="批量删除" value="批量删除" />
+        
     	<div id="pages">{Lanrain:$page}</div>
     </div>
 </div>
