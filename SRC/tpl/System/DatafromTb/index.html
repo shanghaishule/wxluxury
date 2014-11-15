@@ -121,7 +121,7 @@
                 <td align="center">
                 <a href="/weTall/index.php?g=admin&m=item&a=edit&id={Lanrain:$val.id}&tokenTall={Lanrain:$val.tokenTall}&edit_m=total">编辑</a>
                 | <a href="javascript:void(0);" class="J_confirmurl" data-uri="{lanrain::U('DatafromTb/delete',array('id'=>$val['id']))}"
-                 data-acttype="ajax" data-msg="'删除'{Lanrain:$val.title}吗">删除</a>
+                 data-acttype="ajax" data-msg="确定删除   {Lanrain:$val.title} 吗？">删除</a>
                 
                 </td>
             </tr>
@@ -141,7 +141,7 @@
                             
     <div class="btn_wrap_fixed">
     	<label class="select_all mr10"><input type="checkbox" name="checkall" class="J_checkall">全选/取消全选</label>
-        <input type="button" class="btn" data-tdtype="batch_action" data-acttype="ajax" data-uri="{lanrain::U('DatafromTb/delete')}" data-name="id" data-msg="批量删除" value="批量删除" />
+        <input type="button" class="btn" data-tdtype="batch_action" data-acttype="ajax" data-uri="{lanrain::U('DatafromTb/delete')}" data-name="id" data-msg="确定批量删除这些数据吗？" value="批量删除" />
         
     	<div id="pages">{Lanrain:$page}</div>
     </div>
