@@ -33,7 +33,7 @@ class DatafromTbAction extends BackAction
 		// 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
 		$nowPage = isset($_GET['p'])?$_GET['p']:1;
 		$show       = $Page->show();// 分页显示输出
-		$list = $UserDB->where($map)->order('id ASC')->limit($Page->firstRow.','.$Page->listRows)->select();
+		$list = $UserDB->where($map)->order('huohao ASC')->limit($Page->firstRow.','.$Page->listRows)->select();
 		
 		$this->assign("im_message",M("message_check")->field("text")->find());
 		$this->assign("brandlist",$brandlist->order('name')->select());
