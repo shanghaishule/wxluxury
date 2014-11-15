@@ -105,6 +105,7 @@
     	<tbody>
             <volist name="list" id="val" >
             <tr>
+            	<td align='center'><input type='checkbox' value='{Lanrain:$val.id}' class='J_checkitem'></td>
                 <td align="center">
                     <volist name="brandlist" id="brand" >
 	                    <if condition="$brand['id'] eq $val['brand']">{Lanrain:$brand.name}
