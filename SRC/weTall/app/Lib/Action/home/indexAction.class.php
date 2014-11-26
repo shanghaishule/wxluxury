@@ -1256,12 +1256,10 @@ class indexAction extends frontendAction {//frontend
     	$promotion_theme = array();
 		$promotion_discount = array();
     	foreach ($volumn as $val){
-    		$promotion_theme[$val['name']] = $val['theme'];
-    		$promotion_discount[$val['name']] = $val['discount_rate'];
+    		$promotion_theme[$val['tokenTall']] = $val['theme'];
+    		$promotion_discount[$val['tokenTall']] = $val['discount_rate'];
     	}
     	header("Content-type: text/html; charset=utf-8");
-    	dump($new_nearShop);
-    	dump($promotion_theme);die;
     	$this->assign("promotion_theme",$promotion_theme);
 		$this->assign("promotion_discount",$promotion_discount);
     	
