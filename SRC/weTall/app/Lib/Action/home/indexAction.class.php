@@ -1219,7 +1219,7 @@ class indexAction extends frontendAction {//frontend
     	}
     	
     	$Model = new Model();
-    	$volumn = $Model->query("select b.name, a.img, a.theme, a.discount_rate, a.tokenTall from tp_set_promotion a, tp_brandlist b where a.brand_id=b.id and a.status=1;");
+    	$volumn = $Model->query("select b.name, a.img, a.theme, a.discount_rate, a.tokenTall from tp_set_promotion a, tp_brandlist b where a.tokenTall=b.tokenTall and a.brand_id=b.id and a.status=1;");
     	$brand_name = "";
     	foreach ($volumn as $val){
     		$brand_name .= $val['name'].',';
@@ -1258,7 +1258,7 @@ class indexAction extends frontendAction {//frontend
     		$promotion_theme[$val['name']] = $val['theme'];
     		$promotion_discount[$val['name']] = $val['discount_rate'];
     	}
-    	dump($promotion_theme);die;
+    	
     	$this->assign("promotion_theme",$promotion_theme);
 		$this->assign("promotion_discount",$promotion_discount);
     	
