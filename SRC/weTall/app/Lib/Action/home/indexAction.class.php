@@ -1226,7 +1226,7 @@ class indexAction extends frontendAction {//frontend
     	}
     	$where["brand_name"] = array('in',$brand_name);
     	
-    	$volumn2 = $Model->query("select b.name, a.img, a.theme, a.discount_rate, a.tokenTall from tp_set_promotion a, tp_wecha_shop b where a.tokenTall=b.tokenTall and a.status=1;");
+    	$volumn2 = $Model->query("select b.name, a.img, a.theme, a.discount_rate, a.tokenTall from tp_set_promotion a, tp_wecha_shop b where a.tokenTall=b.tokenTall and a.status=1 and a.tokenTall={$this->getTokenTall()};");
     	$shop_name = "";
     	foreach ($volumn2 as $val2){
     		$shop_name .= $val2['name'].',';
@@ -1291,9 +1291,7 @@ class indexAction extends frontendAction {//frontend
     	//$city_info = iconv('GBK', 'UTF-8',$total_page[0]);echo $city_info;die();
     	$currentcity = preg_replace('/市/',"",$total_page[0]);
     	$this->assign("City",$currentcity);
-    	 
     	$this->display();
-    		
     }
     
     public function addMatch() {
