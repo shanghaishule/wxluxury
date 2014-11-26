@@ -1219,14 +1219,14 @@ class indexAction extends frontendAction {//frontend
     	}
     	
     	$Model = new Model();
-    	$volumn = $Model->query("select b.name, a.img, a.theme, a.discount_rate, a.tokenTall from tp_set_promotion a, tp_brandlist b where a.brand_id=b.id and a.status=1 and a.tokenTall ='".$this->getTokenTall()."';");
+    	$volumn = $Model->query("select b.name, a.img, a.theme, a.discount_rate, a.tokenTall from tp_set_promotion a, tp_brandlist b where a.brand_id=b.id and a.status=1;");
     	$brand_name = "";
     	foreach ($volumn as $val){
     		$brand_name .= $val['name'].',';
     	}
     	$where["brand_name"] = array('in',$brand_name);
     	
-    	$volumn2 = $Model->query("select b.name, a.img, a.theme, a.discount_rate, a.tokenTall from tp_set_promotion a, tp_wecha_shop b where a.tokenTall=b.tokenTall and a.status=1 and a.tokenTall='".$this->getTokenTall()."';");
+    	$volumn2 = $Model->query("select b.name, a.img, a.theme, a.discount_rate, a.tokenTall from tp_set_promotion a, tp_wecha_shop b where a.tokenTall=b.tokenTall and a.status=1;");
     	$shop_name = "";
     	foreach ($volumn2 as $val2){
     		$shop_name .= $val2['name'].',';
@@ -1258,6 +1258,7 @@ class indexAction extends frontendAction {//frontend
     		$promotion_theme[$val['name']] = $val['theme'];
     		$promotion_discount[$val['name']] = $val['discount_rate'];
     	}
+    	dump($promotion_theme);die;
     	$this->assign("promotion_theme",$promotion_theme);
 		$this->assign("promotion_discount",$promotion_discount);
     	
