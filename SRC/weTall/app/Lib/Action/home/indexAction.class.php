@@ -1244,7 +1244,6 @@ class indexAction extends frontendAction {//frontend
     			}
     		}
     	}
-    	
     	$start_point_lat = $latitude;
     	$start_point_lng = $longitude;
     	
