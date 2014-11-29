@@ -5,6 +5,11 @@ class matchAction extends backendAction {
 	public function _initialize() {
 		parent::_initialize();
 		$this->_mod = D('match');
+		
+		if($_SESSION["uname"] <> 'shule'){
+			$this->show('只有管理员用户(shule)才能使用该模块!');
+			exit;
+		}
 	}
 	
 	
