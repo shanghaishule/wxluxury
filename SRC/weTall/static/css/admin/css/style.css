@@ -155,6 +155,7 @@ textarea.size1 { height:180px; }
 
 /*** CSS3 ***/
 .box { -moz-border-radius:5px; -webkit-border-radius:5px; -moz-box-shadow: 0 0 6px #978f6c; -webkit-box-shadow: 0 0 6px #978f6c;}
+.right_main #J_rframe{height:622px;}
 .box-head { -moz-border-radius-topleft:5px; -moz-border-radius-topright:5px; -webkit-border-top-left-radius:5px; -webkit-border-top-right-radius:5px; }
 .J_rframe{min-height:600px;}
 .field, .button { -moz-border-radius:4px; -webkit-border-radius:4px; }
