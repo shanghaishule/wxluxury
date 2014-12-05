@@ -17,7 +17,6 @@ textarea { overflow:hidden; }
 .button { background:#eee url(images/button.gif) repeat-x 0 0; border:solid 1px #b1a874; color:#7f7f7f; font-size:11px; padding:2px 6px 2px 6px; cursor:pointer; line-height:14px !important; }
 .button:hover { color:#333; border-color:#857b42; }
 
-
 .field:focus { color:#000; border-color:#857b42;}
 
 a img { border:0; }
