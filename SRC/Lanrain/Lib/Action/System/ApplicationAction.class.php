@@ -75,6 +75,7 @@ class ApplicationAction extends BackAction
     
     	return $password;
     }
+    
     public function delete()
     {
     	$mod = $this->_mod_application;
@@ -92,8 +93,18 @@ class ApplicationAction extends BackAction
     		IS_AJAX && $this->ajaxReturn(0, L('illegal_parameters'));
     		$this->error(L('illegal_parameters'));
     	}
+       }   	
+    	//导出信息
+    	public function export(){
+    		$mod = $this->_mod_application;
+    		$res = $mod ->field("applicant,phone,brand,provice,city,addr,QQ,createtime")->select();
+    		foreach ($res as $key => $val){
+    			 $res[$key]['createtime'] = date("Y-m-d H:i:s",$val['createtime']);
+    		}
+    		exportexcel($res,array('申请人姓名','申请人电话','品牌','省份','城市','店铺名称','QQ','申请时间'),'申请开店信息');
+    	}
     	
-    }
+
 
 }
 ?>

@@ -1,9 +1,8 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	
 	<link href="__ROOT__/weTall/static/css/admin/style.css" rel="stylesheet"/>
 	<title>后台管理</title>
 	<script>
@@ -44,7 +43,6 @@
 	    $(".J_preview").preview();
 	});        
 	</script> 
-
 	<link rel="stylesheet" type="text/css" href="/weTall/static/css/admin/style.css" />
 </head>
 
@@ -81,6 +79,7 @@
     <div class="btn_wrap_fixed">
     	<label><input type="checkbox" name="checkall" class="J_checkall">全选/取消</label>
     	<input type="button" class="btn" data-tdtype="batch_action" data-acttype="ajax" data-uri="/index.php?g=System&m=Member&a=delete" data-name="id" data-msg="确定删除吗？" value="删除" />
+    	<a href="/index.php?g=System&m=Member&a=export" style="padding: 5px 10px;border: 1px solid #ccc;text-decoration:none;color:#000;">导出</a>
     	<div id="pages">{Lanrain:$page}</div>
     </div>
 </div>

@@ -3,6 +3,10 @@
 <div class="dialog_content">
 <table width="100%" cellpadding="2" cellspacing="1" class="table_form">
     <tr>
+      <th >会员名称 :</th>
+      <td>{$userB['nickname']}</td>
+    </tr>
+    <tr>
       <th width="80">性别 :</th>
       <td><if condition="$userInfo['sex'] eq 0">男<else />女</if></td>
     </tr>
@@ -16,6 +20,12 @@
       {$userInfo['height']}cm
       </td>
     </tr>
+    <tr>
+      <th>地址</th>
+      <td>
+      {$userB['city']}
+      </td>
+    </tr>    
     <tr>
       <th>体重:</th>
       <td>
