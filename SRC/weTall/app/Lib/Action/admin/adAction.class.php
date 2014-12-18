@@ -151,4 +151,5 @@ class adAction extends backendAction {
             $this->ajaxReturn(0, L('illegal_parameters'));
         }
     }
+    
 }
