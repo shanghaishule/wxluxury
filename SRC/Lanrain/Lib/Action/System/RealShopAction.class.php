@@ -18,9 +18,11 @@ class RealShopAction extends BackAction
 	    	$mod = $this->_mod_application->order('id ASC')->limit($Page->firstRow.','.$Page->listRows)->select();
 		}else{
 			if ($status == "") {
-				$status = "2";
+				//$status = "2";
+				$where = "1 = 1";
+			}else{
+				$where["HaveReal"]=$status;
 			}
-			$where["HaveReal"]=$status;
 			$count = $this->_mod_application->where($where)->count();
 			$Page       = new Page($count,15);// 实例化分页类 传入总记录数
 			// 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
@@ -88,6 +90,23 @@ class RealShopAction extends BackAction
     	}
     	
     }
-
+    
+   //认证通过的资料导出
+   public function export(){
+   	    $mod = $this->_mod_application->field("name,owner,phone,IDno,email,HaveReal,licence,address")->where(array('status'=>1))->order('id ASC')->select();
+   	    foreach ($mod as $key => $val){
+   	    	 if($val['HaveReal'] == 0){
+   	    	 	  $mod[$key]['HaveReal'] = "无实体店";
+   	    	 }elseif ($val['HaveReal']== 2){
+   	    	 	  $mod[$key]['HaveReal'] = "认证中";
+   	    	 }elseif($val['HaveReal'] == 3){
+   	    	 	  $mod[$key]['HaveReal'] = "审核不通过";
+   	    	 }else{
+   	    	 	  $mod[$key]['HaveReal'] ="已认证";
+   	    	 }
+   	    }
+     	exportexcel($mod,array('店铺名称','店主姓名','联系电话','身份证','邮箱','状态','营业执照','实体店地址'),'实体店认证资料');
+   }
+   
 }
 ?>

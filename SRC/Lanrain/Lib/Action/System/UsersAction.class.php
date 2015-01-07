@@ -15,6 +15,7 @@ class UsersAction extends BackAction{
 			$brandname = M("brandlist")->field("name")->where(array("id"=>$shopname['BelongBrand']))->find();//所属品牌
 			$list[$key]['shopname']=$shopname['name'];
 			$list[$key]['brandname']=$brandname['name'];
+			$list[$key]['managerPhone']=$shopname['managerPhone'];
 		}
 		foreach($group as $key =>$val){
 			$g[$val['id']]=$val['name'];
@@ -25,7 +26,7 @@ class UsersAction extends BackAction{
 			$be[$val['id']] = $val['username'];
 		}
 		unset($belong);
-		//dump($list);exit;
+	//	dump($list);exit;
 		$this->assign('info',$list);
 		$this->assign('page',$show);
 		$this->assign('group',$g);

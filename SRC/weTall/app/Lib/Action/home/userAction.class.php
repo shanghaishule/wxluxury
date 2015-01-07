@@ -257,6 +257,7 @@ class userAction extends userbaseAction {
 	    	$userinfo['last_login_ip']=get_client_ip();
 	    	$Userarr= M('user')->where(array('openid'=>$userinfo['openid']))->find();
 	    	if(!empty($Userarr) && $Userarr!=''){
+	    		M('user')->where(array('id'=>$Userarr['id']))->save($userinfo);
 	    		$_SESSION['uid']=$Userarr['id'];
 	    		$_SESSION['name']=$Userarr['nickname'];
 	    		$_SESSION['headimgurl']=$Userarr['headimgurl'];

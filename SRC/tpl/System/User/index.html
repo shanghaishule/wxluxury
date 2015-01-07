@@ -11,7 +11,7 @@
 		<td width="150">用户名称</td>
 		<td width="150">角色名称</td>
 		<td >用户描述</td>
-		<td width="100">最后登录IP</td>
+		<td width="100">店长电话</td>
 		<td width="150">最后登录位置</td>
 		<td width="150">最后登录时间</td>
 		<td width="70">状态</td>
@@ -23,7 +23,7 @@
 				<td >{lanrain:$vo.username}</td>
 				<td >{lanrain:$role[$vo['role']]}</td>
 				<td >{lanrain:$vo.remark}</td>
-				<td align='center'>{lanrain:$vo.last_login_ip}</td>
+				<td align='center'>{lanrain:$vo.managerPhone}</td>
 				<td align='center'>{lanrain:$vo.last_location}</td>
 				<td align='center'><php>echo date('Y-m-d H:i:s', $vo['last_login_time'])</php></td>
 				<td align='center'><eq name="vo.status" value="1"><font color="red">√</font><else/><font color="blue">×</font></eq> 
@@ -39,7 +39,5 @@
     </tr>
    
 </table>
-
-
 </body>
 </html>

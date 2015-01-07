@@ -45,9 +45,15 @@
   			</td>
         </tr>-->
         <tr>
+            <th>店长电话:</th>
+            <td>
+            <input type="tel" required onkeypress="intOnly()" onblur="if(/\d{11}/gi.test(this.value)?true:false){return ture;}else{alert('请输入正确的手机号');}" name="managerPhone" maxlength="11" value="{$wecha_shop.managerPhone}"/> 
+  			</td>
+        </tr>        
+        <tr>
             <th>客服联系电话:</th>
             <td>
-            <input type="text" name="phone" maxlength="11" value="{$wecha_shop.phone}"/> 
+            <input type="tel" required onkeypress="intOnly()" onblur="if(/\d{11}/gi.test(this.value)?true:false){return ture;}else{alert('请输入正确的手机号');}"  name="phone" maxlength="11" value="{$wecha_shop.phone}"/> 
   			</td>
         </tr>
         	
@@ -88,6 +94,17 @@ $(function(){
         }
     });
 });
+</script>
+<script type="text/javascript">
+//只允许输入数字,左右移动键,删除键,回车键
+function intOnly(){
+var codeNum=event.keyCode;
+if(codeNum==8||codeNum==37||codeNum==39||(codeNum>=48&&codeNum<=57)){
+  event.returnValue=codeNum;
+}else{
+  event.returnValue=false;
+}
+}
 </script>
 </body>
 </html>

@@ -98,7 +98,7 @@
 
     <div class="btn_wrap_fixed">
     	<label><input type="checkbox" name="checkall" class="J_checkall">全选/取消</label>
-    	<input type="button" class="btn" data-tdtype="batch_action" data-acttype="ajax" data-uri="/index.php?g=System&m=RealShop&a=delete" data-name="id" data-msg="确定删除吗？" value="删除" />
+    	<input type="button" class="btn" data-tdtype="batch_action" data-acttype="ajax" data-uri="/index.php?g=System&m=RealShop&a=delete" data-name="id" data-msg="确定删除吗？" value="删除" />　|　<a href="{Lanrain::U('RealShop/export')}">导出已认证店铺资料</a> 　
     	筛选：<a href="/index.php?g=System&m=RealShop&a=index&status=4">全部</a> | <a href="/index.php?g=System&m=RealShop&a=index&status=1">已认证</a>
     	 | <a href="/index.php?g=System&m=RealShop&a=index&status=2">认证中</a> | <a href="/index.php?g=System&m=RealShop&a=index&status=0">无实体店</a> | <a href="/index.php?g=System&m=RealShop&a=index&status=3">审核不通过</a>
     <div id="pages">{Lanrain:$page}</div>
