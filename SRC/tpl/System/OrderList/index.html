@@ -82,9 +82,12 @@
             <tr>
                 <!--th><span data-tdtype="order_by" data-field="id">ID</span></th-->
                 <th><span data-tdtype="order_by" data-field="shop">商家</span></th>
-                <th><span data-tdtype="order_by" data-field="billnum">订单号&状态</span></th>
+                <th><span data-tdtype="order_by" data-field="shop">品牌</span></th>
+                <th><span data-tdtype="order_by" data-field="order_num">订单号</span></th>
+                <th><span data-tdtype="order_by" data-field="billnum">状态</span></th>
                 <th><span data-tdtype="order_by" data-field="status">订单金额</span></th>
                 <th><span data-tdtype="order_by" data-field="gen_time">收货人&电话</span></th>
+                <th><span data-tdtype="order_by" data-field="address">收货地址</span></th>
                 <th><span data-tdtype="order_by" data-field="start_time">支付&配送</span></th>
                 <th><span data-tdtype="order_by" data-field="start_time">下单&付款时间</span></th>
             </tr>
@@ -94,6 +97,8 @@
             <tr>
                 <!--td align="center">{Lanrain:$val.id}</td-->
                 <td align="center">{Lanrain:$val.shopName}</td>
+                <td align="center">{Lanrain:$val.name}</td>
+                <td align="center">{Lanrain:$val.orderId}</td>
                 <td align="center">
                     <switch name="val.status" >
                          <case value="1">待付款</case>
@@ -106,6 +111,7 @@
                 <td align="center">¥{Lanrain:$val.order_sumPrice}
                 </td>
                 <td align="center">{Lanrain:$val.address_name}({Lanrain:$val.userName})<br>{Lanrain:$val.mobile}</td>
+                <td align="center">{Lanrain:$val.address}</td>
                 <td align="center">
 	                 <switch name="val.supportmetho" >
 	                         <case value="1">支付宝支付</case>

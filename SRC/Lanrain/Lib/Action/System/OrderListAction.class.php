@@ -27,8 +27,10 @@ class OrderListAction extends BackAction{
 		$shopArr = M('wecha_shop')->field("tokenTall,name")->select();
 		foreach($pageData as $key => $val){
 			$shopName = M('wecha_shop')->where(array("tokenTall"=>$val['tokenTall']))->find();
+			$brand = M('brandlist')->where(array('id'=>$shopName['BelongBrand']))->getField('name');
 			if(!empty($shopName)){
 				$pageData[$key]['shopName']=$shopName['name'];
+				$pageData[$key]['brand'] = $brand;
 			}
 		}
 		$this->assign('shopArr',$shopArr);
