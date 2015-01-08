@@ -23,7 +23,7 @@ class spxssjglAction extends BackAction
     		 $res = M('brandlist')->where(array('id'=>$val['BelongBrand']))->getField('name');
     		 $List[$key]['brand'] = $res;
     	}
-    	//dump($List);exit;
+    	dump($List);exit;
 		$this->assign('list',$List);
 		
 		$sumqty = 0.00;
