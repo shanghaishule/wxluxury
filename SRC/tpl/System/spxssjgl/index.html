@@ -76,7 +76,6 @@
 		        	</div>
 		        	    </form>
 	            </td>
-	            <td><a href="{Lanrain::U('spxssjgl/export')}" class="btn">导出销售数据</a></td>
             </tr>
         </tbody>
     </table>
@@ -88,7 +87,6 @@
                 <th align="left"><span data-tdtype="order_by" data-field="shop">品牌</span></th>
                 <th align="left"><span data-tdtype="order_by" data-field="shop">店铺</span></th>
                 <th align="left"><span data-tdtype="order_by" data-field="Huohao">商品货号</span></th>
-                <th align="left"><span data-tdtype="order_by" data-field="img">商品</span></th>
                 <th width="400" align="left"><span data-tdtype="order_by" data-field="title">名称</span></th>
                 <th align="center"><span data-tdtype="order_by" data-field="qty">销售数量</span></th>
                 <th align="left"><span data-tdtype="order_by" data-field="total">销售金额</span></th>
@@ -100,7 +98,6 @@
                 <td align="left"><span data-tdtype="view" data-field="shop" data-id="" class="tdview">{Lanrain:$val.brand}</span></td>
                 <td align="left"><span data-tdtype="view" data-field="shop" data-id="" class="tdview">{Lanrain:$val.shop}</span></td>
                 <td align="left"><span data-tdtype="view" data-field="Huohao" data-id="" class="tdview">{Lanrain:$val.Huohao}</span></td>
-                <td align="left"><span data-tdtype="view" data-field="img" data-id="" class="tdview"><img width="33" height="30" src="{Lanrain:$val.img}"></span></td>
                 <td align="left"><span data-tdtype="view" data-field="title" data-id="" class="tdview">{Lanrain:$val.title}</span></td>
                 <td align="center"><span data-tdtype="view" data-field="qty" data-id="" class="tdview">{Lanrain:$val.qty}</span></td> 
                 <td align="left"><span data-tdtype="view" data-field="total" data-id="" class="tdview">{Lanrain:$val.total}</span></td>
@@ -119,7 +116,7 @@
     </div>
 
     <div class="btn_wrap_fixed">
-    	<div id="pages">{Lanrain:$page}</div>
+    	<div id="pages"><a href="{Lanrain::U('spxssjgl/export')}" class="btn" style="position:absolute;top:5px;left:20px;">导出销售数据</a>{Lanrain:$page}</div>
     </div>
 </div>
 <script src="/weTall/static/js/jquery/jquery.js"></script>
