@@ -38,5 +38,51 @@ class OrderListAction extends BackAction{
 		$this->assign('page',$show);// 赋值分页输出
 		$this->display();
 	}
+	
+	//订单导出
+	public function export(){
+		$item_order = M('item_order');
+		$pageData = $item_order->field("orderId,status,order_sumPrice,address_name,userName,mobile,address,supportmetho,freetype,add_time,support_time")->order('add_time DESC')->select();
+		foreach($pageData as $key => $val){
+			$shopName = M('wecha_shop')->where(array("tokenTall"=>$val['tokenTall']))->find();
+			$brand = M('brandlist')->where(array('id'=>$shopName['BelongBrand']))->getField('name');
+			 if($val['status'] == 1){
+			 	$pageData[$key]['status'] ="待付款";
+			 }elseif ($val['status'] == 2){
+			 	$pageData[$key]['status'] ="待发货";
+			 }elseif($val['status'] ==3){
+			 	$pageData[$key]['status'] ="待收货";
+			 }else{
+			 	$pageData[$key]['status'] ="完成";
+			 }
+			 
+			 if($val['supportmetho'] == 1){
+			 	 $pageData[$key]['supportmetho'] = "支付宝支付";
+			 }elseif($val['supportmetho'] ==2 || $val['supportmetho'] == ''){
+			 	 $pageData[$key]['supportmetho'] = "货到付款";
+			 }elseif($val['supportmetho'] == 3){
+			 	$pageData[$key]['supportmetho'] = "银联支付";
+			 }else{
+			 	$pageData[$key]['supportmetho'] = "微信支付";
+			 }
+			 
+			 if($val['freetype'] == 0){
+			 	 $pageData[$key]['freetype'] ="卖家包邮";
+			 }elseif($val['freetype'] == 1){
+			 	 $pageData[$key]['freetype'] ="平邮";
+			 }elseif($val['freetype'] == 2){
+			 	 $pageData[$key]['freetype'] ="快递";
+			 }else{
+			 	$pageData[$key]['freetype'] ="ems";
+			 }
+			 $pageData[$key]['add_time'] = date_format($val['add_time'], "Y-m-d H:i:s");
+			 $pageData[$key]['support_time'] = date_format($val['support_time'], "Y-m-d H:i:s");
+			if(!empty($shopName)){
+				$pageData[$key]['shopName']=$shopName['name'];
+				$pageData[$key]['brand'] = $brand;
+			}
+		}	
+		exportexcel($pageData,array('订单号','状态','订单金额','收货人','用户昵称','联系电话','收货地址','支付方式','配送','下单时间','支付时间'),'商品订单');
+	}
 }
 ?>
