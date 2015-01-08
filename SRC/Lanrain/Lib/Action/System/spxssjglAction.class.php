@@ -3,26 +3,7 @@
 class spxssjglAction extends BackAction
 {	
 	public function index() {
-    	$map = $this->_search();
-    	//dump($map);exit;
-    	$where = "";
-    	$map['start_time'] && $where .= ' and a.add_time >= '.$map['start_time'];
-    	$map['end_time'] && $where .= ' and a.add_time <= '.$map['end_time'];
-    	$map['shop'] && $where .= ' and c.name like "%'.$map['shop'].'%"';
-    	$map['Huohao'] && $where .= ' and d.Huohao like "%'.$map['Huohao'].'%"';
-    	$map['title'] && $where .= ' and b.title like "%'.$map['title'].'%"';
-    	
-    	$Model = new Model();
-    	$sql = 'SELECT c.name shop,c.BelongBrand, d.Huohao, b.title, b.img, sum(b.quantity) qty, sum(b.quantity * b.price) total '
-		.' FROM `tp_item_order` a, `tp_order_detail` b, `tp_wecha_shop` c, `tp_item` d '
-		.' WHERE a.orderId = b.orderId and a.tokenTall = c.tokenTall and b.itemId = d.id and a.status = 4 '.$where
-		.' GROUP BY c.name, b.itemId, b.title, b.img '
-		.' ORDER BY a.add_time; ';
-    	$List = $Model->query($sql);
-    	foreach($List as $key => $val){
-    		 $res = M('brandlist')->where(array('id'=>$val['BelongBrand']))->getField('name');
-    		 $List[$key]['brand'] = $res;
-    	}
+    	$List = $this->getList();
     	//dump($List);exit;
 		$this->assign('list',$List);
 		
@@ -60,6 +41,36 @@ class spxssjglAction extends BackAction
         
         
         return $map;
+    }
+
+    //导出销售数据
+    public function export(){
+        $res = $this->getList();
+    	dump($res);die;
+    	exportexcel($res,array('品牌','店铺','商品货号','商品名称','销售数量','销售金额'),'销售数据');
+    }
+    
+    public function getList(){
+    	$map = $this->_search();
+    	$where = "";
+    	$map['start_time'] && $where .= ' and a.add_time >= '.$map['start_time'];
+    	$map['end_time'] && $where .= ' and a.add_time <= '.$map['end_time'];
+    	$map['shop'] && $where .= ' and c.name like "%'.$map['shop'].'%"';
+    	$map['Huohao'] && $where .= ' and d.Huohao like "%'.$map['Huohao'].'%"';
+    	$map['title'] && $where .= ' and b.title like "%'.$map['title'].'%"';
+    	
+    	$Model = new Model();
+    	$sql = 'SELECT c.name shop,c.BelongBrand, d.Huohao, b.title, b.img, sum(b.quantity) qty, sum(b.quantity * b.price) total '
+    			.' FROM `tp_item_order` a, `tp_order_detail` b, `tp_wecha_shop` c, `tp_item` d '
+    			.' WHERE a.orderId = b.orderId and a.tokenTall = c.tokenTall and b.itemId = d.id and a.status = 4 '.$where
+    			.' GROUP BY c.name, b.itemId, b.title, b.img '
+    					.' ORDER BY a.add_time; ';
+    	$List = $Model->query($sql);
+    	foreach($List as $key => $val){
+    		$res = M('brandlist')->where(array('id'=>$val['BelongBrand']))->getField('name');
+    		$List[$key]['brand'] = $res;
+    	}    
+    	return $List;	
     }
     
 }

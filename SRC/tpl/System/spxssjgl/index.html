@@ -51,11 +51,12 @@
 <div id="J_ajax_loading" class="ajax_loading">提交请求中，请稍候...</div>
 <!--标签-->
 <div class="pad_lr_10" >
-	<form name="searchform" method="get" action="{Lanrain::U('System/spxssjgl/index')}">
+
     <table width="100%" cellspacing="0" class="search_form">
         <tbody>
             <tr>
 	            <td>
+	            	<form name="searchform" method="get" action="{Lanrain::U('System/spxssjgl/index')}">
 		            <div class="explain_col">
 		            	<input type="hidden" name="g" value="System" />
 		                <input type="hidden" name="m" value="spxssjgl" />
@@ -73,11 +74,13 @@
 		                <input name="title" type="text" class="input-text" size="15" value="{Lanrain:$search.title}" />
 		                <input type="submit" name="search" class="btn" value="查询" />
 		        	</div>
+		        	    </form>
 	            </td>
+	            <td><a href="{Lanrain::U('spxssjgl/export')}" class="btn">导出销售数据</a></td>
             </tr>
         </tbody>
     </table>
-    </form>
+
     <div class="J_tablelist table_list" data-acturi="">
     <table width="100%" cellspacing="0">
         <thead>
