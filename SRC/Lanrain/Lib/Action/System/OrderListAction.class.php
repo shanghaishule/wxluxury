@@ -75,7 +75,7 @@ class OrderListAction extends BackAction{
 			 }else{
 			 	$pageData[$key]['freetype'] ="ems";
 			 }
-			 $pageData[$key]['add_time'] = date_format($val['add_time'], "Y-m-d H:i:s");
+			 $pageData[$key]['add_time'] = date( "Y-m-d H:i:s",$val['add_time']);
 			 $pageData[$key]['support_time'] = date_format($val['support_time'], "Y-m-d H:i:s");
 			if(!empty($shopName)){
 				$pageData[$key]['shopName']=$shopName['name'];
