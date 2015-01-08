@@ -13,7 +13,7 @@ class spxssjglAction extends BackAction
     	$map['title'] && $where .= ' and b.title like "%'.$map['title'].'%"';
     	
     	$Model = new Model();
-    	$sql = 'SELECT c.name shop, d.Huohao, b.title, b.img, sum(b.quantity) qty, sum(b.quantity * b.price) total '
+    	$sql = 'SELECT c.name shop,c.BelongBrand, d.Huohao, b.title, b.img, sum(b.quantity) qty, sum(b.quantity * b.price) total '
 		.' FROM `tp_item_order` a, `tp_order_detail` b, `tp_wecha_shop` c, `tp_item` d '
 		.' WHERE a.orderId = b.orderId and a.tokenTall = c.tokenTall and b.itemId = d.id and a.status = 4 '.$where
 		.' GROUP BY c.name, b.itemId, b.title, b.img '
@@ -23,7 +23,7 @@ class spxssjglAction extends BackAction
     		 $res = M('brandlist')->where(array('id'=>$val['BelongBrand']))->getField('name');
     		 $List[$key]['brand'] = $res;
     	}
-    	dump($List);exit;
+    	//dump($List);exit;
 		$this->assign('list',$List);
 		
 		$sumqty = 0.00;
