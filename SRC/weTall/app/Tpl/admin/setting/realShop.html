@@ -20,15 +20,15 @@
             <td><input type="text" <if condition="$wecha_shop['HaveReal'] eq '1'">disabled<elseif condition="$wecha_shop['HaveReal'] eq '2'"/>disabled</if> name="IDno" class="input-text" size="50" value="{$wecha_shop.IDno}"></td>
         </tr>
         <tr>
-            <th>联系电话:</th>
+            <th>店主电话:</th>
             <td><input type="phone" <if condition="$wecha_shop['HaveReal'] eq '1'">disabled<elseif condition="$wecha_shop['HaveReal'] eq '2'"/>disabled</if> name="phone" class="input-text" size="50" value="{$wecha_shop.phone}"></td>
         </tr>
         <tr>
-            <th>邮箱:</th>
+            <th>店主邮箱:</th>
             <td><input type="email" <if condition="$wecha_shop['HaveReal'] eq '1'">disabled<elseif condition="$wecha_shop['HaveReal'] eq '2'"/>disabled</if> name="email" class="input-text" size="50" value="{$wecha_shop.email}"></td>
         </tr>
         <tr>
-            <th>上传资质文件 :</th>
+            <th>上传营业执照:</th>
             <td><input type="file" <if condition="$wecha_shop['HaveReal'] eq '1'">disabled<elseif condition="$wecha_shop['HaveReal'] eq '2'"/>disabled</if> name="licence_img" class="input-text" size="50" >
             <if condition="$wecha_shop['HaveReal'] neq '1'">
             <img width="60" src="{$wecha_shop.licence_img}">
@@ -36,7 +36,7 @@
             </td>
         </tr>
         <tr>
-            <th>公司地址：</th>
+            <th>店铺地址：</th>
             <td><input type="text" <if condition="$wecha_shop['HaveReal'] eq '1'">disabled<elseif condition="$wecha_shop['HaveReal'] eq '2'"/>disabled</if> name="address" class="input-text" size="50" value="{$wecha_shop.address}"></td>
         </tr>
         

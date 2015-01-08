@@ -19,6 +19,10 @@ class spxssjglAction extends BackAction
 		.' GROUP BY c.name, b.itemId, b.title, b.img '
 		.' ORDER BY a.add_time; ';
     	$List = $Model->query($sql);
+    	foreach($List as $key => $val){
+    		 $res = M('brandlist')->where(array('id'=>$val['BelongBrand']))->getField('name');
+    		 $List[$key]['brand'] = $res;
+    	}
     	//dump($List);exit;
 		$this->assign('list',$List);
 		

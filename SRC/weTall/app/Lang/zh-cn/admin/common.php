@@ -206,7 +206,7 @@ return array(
     //网站设置
     'site_base_config' => '站点信息设置',
     'site_status_config' => '站点状态设置',
-    'site_name' => '网站名称',
+    'site_name' => '店铺名称',
     'site_domain' => '网站域名',
     'site_icp' => 'ICP证书号',
     'statistics_code' => '统计代码',

@@ -82,6 +82,7 @@
     <table width="100%" cellspacing="0">
         <thead>
             <tr>
+                <th align="left"><span data-tdtype="order_by" data-field="shop">品牌</span></th>
                 <th align="left"><span data-tdtype="order_by" data-field="shop">店铺</span></th>
                 <th align="left"><span data-tdtype="order_by" data-field="Huohao">商品货号</span></th>
                 <th align="left"><span data-tdtype="order_by" data-field="img">商品</span></th>
@@ -93,6 +94,7 @@
     	<tbody>
             <volist name="list" id="val">
             <tr>
+                <td align="left"><span data-tdtype="view" data-field="shop" data-id="" class="tdview">{Lanrain:$val.brand}</span></td>
                 <td align="left"><span data-tdtype="view" data-field="shop" data-id="" class="tdview">{Lanrain:$val.shop}</span></td>
                 <td align="left"><span data-tdtype="view" data-field="Huohao" data-id="" class="tdview">{Lanrain:$val.Huohao}</span></td>
                 <td align="left"><span data-tdtype="view" data-field="img" data-id="" class="tdview"><img width="33" height="30" src="{Lanrain:$val.img}"></span></td>
