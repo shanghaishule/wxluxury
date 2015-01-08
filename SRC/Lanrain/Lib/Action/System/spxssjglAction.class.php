@@ -46,8 +46,16 @@ class spxssjglAction extends BackAction
     //导出销售数据
     public function export(){
         $res = $this->getList();
-    	dump($res);die;
-    	exportexcel($res,array('品牌','店铺','商品货号','商品名称','销售数量','销售金额'),'销售数据');
+        $List = array();
+    	foreach($res as $key => $val){
+    		$List[]['brand'] = $val['brand'];
+    		$List[]['shop'] = $val['shop'];
+    		$List[]['Huohao'] = $val['Huohao'];
+    		$List[]['title'] = $val['title'];
+    		$List[]['qty'] = $val['qty'];
+    		$List[]['total'] = $val['total'];
+    	}
+    	exportexcel($List,array('品牌','店铺','商品货号','商品名称','销售数量','销售金额'),'销售数据');
     }
     
     public function getList(){
