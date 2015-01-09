@@ -8,7 +8,7 @@ class OrderListAction extends BackAction{
 		if(IS_GET){
 			$status = $this->_get('status','trim');
 			$shop = $this->_get('shop','trim');
-			$keywords = $this->get('keywords','trim');
+			$keywords = $this->_get('keywords','trim');
 			if($status != ''){
 				$where['status']=$status;
 			}
