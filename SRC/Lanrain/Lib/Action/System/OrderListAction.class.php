@@ -8,13 +8,13 @@ class OrderListAction extends BackAction{
 		if(IS_GET){
 			$status = $this->_get('status','trim');
 			$shop = $this->_get('shop','trim');
+			$keywords = $this->get('keywords','trim');
 			if($status != ''){
 				$where['status']=$status;
 			}
 			if($shop != ''){
 				$where['tokenTall']=$shop;
 			}
-			
 		}else{
 			$where = '';
 		}
@@ -22,7 +22,7 @@ class OrderListAction extends BackAction{
 		$count = $item_order->where($where)->count();
 		$Page = new Page($count,10);
 		$nowPage = isset($_GET['p'])?$_GET['p']:1;
-		$show       = $Page->show();// 分页显示输出
+		$show       = $Page->show();//分页显示输出
 		$pageData = $item_order->where($where)->order('add_time DESC')->limit($Page->firstRow.','.$Page->listRows)->select();
 		$shopArr = M('wecha_shop')->field("tokenTall,name")->select();
 		foreach($pageData as $key => $val){
@@ -32,6 +32,16 @@ class OrderListAction extends BackAction{
 				$pageData[$key]['shopName']=$shopName['name'];
 				$pageData[$key]['brand'] = $brand;
 			}
+		}
+		if($keywords != ''){
+			$arr = array();
+			 foreach($pageData as $keys=> $vals){
+			 	  $count1 = explode($keywords,$val['shopName']);
+			 	  $count2 = explode($keywords, $val['brand']);
+			 	  if(count($count1) >= 1 || count($count2) >= 1){
+			 	  	  unset($pageData[$keys]);
+			 	  }
+			 }
 		}
 		$this->assign('shopArr',$shopArr);
 		$this->assign('list',$pageData);
@@ -81,8 +91,9 @@ class OrderListAction extends BackAction{
 				$pageData[$key]['shopName']=$shopName['name'];
 				$pageData[$key]['brand'] = $brand;
 			}
-		}	
+		}
 		exportexcel($pageData,array('订单号','状态','订单金额','收货人','用户昵称','联系电话','收货地址','支付方式','配送','下单时间','支付时间'),'商品订单');
 	}
+	
 }
 ?>

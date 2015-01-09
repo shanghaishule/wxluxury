@@ -53,7 +53,6 @@
                 <input type="hidden" name="m" value="OrderList" />
                 <input type="hidden" name="a" value="index" />
                 <input type="hidden" name="menuid" value="{Lanrain:$menuid}" />
-            	
           		状态 :
 		        <select name="status" >
 		        <option value="">--所有--</option>
@@ -67,7 +66,8 @@
 		        <volist name="shopArr" id="val2" >
 		        <option value="{Lanrain:$val2.tokenTall}" >{Lanrain:$val2.name}</option>
 		        </volist>
-		        </select>                
+		        </select>
+		        <input type="text" placeholder="请输入品牌、商家名称……" name="keywords" />         
 				<input type="submit" name="search" class="btn" value="搜索" />
         	</div>
             </td>
