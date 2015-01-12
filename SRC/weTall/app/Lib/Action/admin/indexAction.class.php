@@ -41,7 +41,8 @@ class indexAction extends backendAction {
         $weshopData["tokenTall"] = $tokenTall;
         $weChaShopDetail = $weshop->where($weshopData)->find();//商城基本信息var_dump($weChaShopDetail);die();
         //dump($weChaShopDetail);exit;
-        $this->assign("weshopData",$weChaShopDetail);
+        $this->assign("weshopData",$weChaShopDetail);			
+        
         $this->display(); 
     }
 
@@ -217,7 +218,10 @@ class indexAction extends backendAction {
          		'yijie_amt'=>$success_sum,
          	)
          );
-
+        //公告
+         $info_notice = M('info_notice')->where(array('status'=>1))->select();
+         $this->assign('info_notice', $info_notice);         
+         
         $this->display();
     }
 

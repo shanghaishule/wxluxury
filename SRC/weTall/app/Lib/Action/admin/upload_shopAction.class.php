@@ -74,7 +74,15 @@ class upload_shopAction extends backendAction
     			}
     		}
     	}*/
+    	$shopName = M('brandlist')->order('name ASC')->select();
+        $this->assign("shopName",$shopName);
     }
+    
+    public function _before_edit(){
+    	$shopName = M('brandlist')->order('name ASC')->select();
+    	$this->assign("shopName",$shopName);    	
+    }
+    
     public function _before_update($data){
     	//$this->ajaxReturn(0, $data['show_addr']);
     	$result = $this->getlatlng($data['show_addr']);

@@ -7,6 +7,7 @@
 <link href="__STATIC__/css/admin/pancl02.css" type="text/css" rel="stylesheet" />
 <link href="__STATIC__/css/admin/notice.css" type="text/css" rel="stylesheet" />
 <link href="__STATIC__/weixin/colorbox.css" type="text/css" rel="stylesheet" />
+<link href="/tpl/User/default/common/css/style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="__STATIC__/js/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="__STATIC__/js/all.js"></script>
 <script type="text/javascript" src="__STATIC__/weixin/js/colorbox.js"></script>
@@ -195,7 +196,30 @@
                           
             </div>            
 
-       </div><!-- 
+			<div style="border:2px solid #ddd; background:#fff; border-radius:10px; padding:10px; overflow:hidden; margin:10px 0px;width:97%;">
+			<table class="ListProduct content" border="0" cellspacing="0" cellpadding="0" width="100%">
+			<thead>
+			<tr>
+			<th colspan="4">商城公告</th>
+			</tr>
+			</thead>
+			<tbody><tr>
+			<th>标题</th>
+			<th>内容</th>
+			<th>发布时间</th>
+			</tr>
+				<volist name="info_notice" id="val">
+					<tr>
+						<td align="center">{$val.title}</td>
+						<td align="center" style="width:500px">{$val.content}</td>
+						<td align="center">{$val.ptime|date='Y-m-d H:i:s',###}</td>
+					</tr>
+				</volist>
+			</tbody>
+			</table>
+			</div>
+  </div>       
+       <!-- 
        <div class="mright">
             <!-- <div style="background:#E5E5E5;margin-top:11px;">
               

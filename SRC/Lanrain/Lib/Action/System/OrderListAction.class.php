@@ -5,50 +5,74 @@ class OrderListAction extends BackAction{
 		$this->assign('order_status',$order_status);
 	}
 	public function index(){
-		if(IS_GET){
-			$status = $this->_get('status','trim');
-			$shop = $this->_get('shop','trim');
-			$keywords = $this->_get('keywords','trim');
+		if(IS_POST){//搜索
+			$status = $this->_post('status','trim');
+			$shop = $this->_post('shop','trim');
+			$keywords = $this->_post('keywords','trim');
+			//$where = array();
 			if($status != ''){
 				$where['status']=$status;
 			}
 			if($shop != ''){
 				$where['tokenTall']=$shop;
 			}
-		}else{
-			$where = '';
-		}
-		$item_order = M('item_order');
-		$count = $item_order->where($where)->count();
-		$Page = new Page($count,10);
-		$nowPage = isset($_GET['p'])?$_GET['p']:1;
-		$show       = $Page->show();//分页显示输出
-		$pageData = $item_order->where($where)->order('add_time DESC')->limit($Page->firstRow.','.$Page->listRows)->select();
-		$shopArr = M('wecha_shop')->field("tokenTall,name")->select();
-		foreach($pageData as $key => $val){
-			$shopName = M('wecha_shop')->where(array("tokenTall"=>$val['tokenTall']))->find();
-			$brand = M('brandlist')->where(array('id'=>$shopName['BelongBrand']))->getField('name');
-			if(!empty($shopName)){
-				$pageData[$key]['shopName']=$shopName['name'];
-				$pageData[$key]['brand'] = $brand;
+			
+			$item_order = M('item_order');
+			$count = $item_order->count();
+			$Page = new Page($count,10);
+			$nowPage = isset($_GET['p'])?$_GET['p']:1;
+			$show       = $Page->show();//分页显示输出
+			$pageData = $item_order->where($where)->order('add_time DESC')->select();
+			$shopArr = M('wecha_shop')->field("tokenTall,name")->select();
+			foreach($pageData as $key => $val){
+				$shopName = M('wecha_shop')->where(array("tokenTall"=>$val['tokenTall']))->find();
+				$brand = M('brandlist')->where(array('id'=>$shopName['BelongBrand']))->getField('name');
+				if(!empty($shopName)){
+					$pageData[$key]['shopName']=$shopName['name'];
+					$pageData[$key]['brand'] = $brand;
+				}
 			}
+
+			if($keywords != ''){
+				$arra=array();
+				$index= 0;
+				foreach($pageData as $keys=> $vals){
+					$count1 = explode($keywords,$vals['shopName']);
+					$count2 = explode($keywords, $vals['brand']);
+					//dump(count($count1).'<br />'.count($count2));die;
+					if(count($count1) > 1 || count($count2) > 1){
+						$arra[$index] = $pageData[$keys];
+					}
+					$index++;
+				}
+				$pageData = $arra;
+			}
+						
+		}else{//非搜索
+ 
+			$item_order = M('item_order');
+			$count = $item_order->where($where)->count();
+			$Page = new Page($count,10);
+			$nowPage = isset($_GET['p'])?$_GET['p']:1;
+			$show       = $Page->show();//分页显示输出
+			$pageData = $item_order->where($where)->order('add_time DESC')->limit($Page->firstRow.','.$Page->listRows)->select();
+			$shopArr = M('wecha_shop')->field("tokenTall,name")->select();
+			foreach($pageData as $key => $val){
+				$shopName = M('wecha_shop')->where(array("tokenTall"=>$val['tokenTall']))->find();
+				$brand = M('brandlist')->where(array('id'=>$shopName['BelongBrand']))->getField('name');
+				if(!empty($shopName)){
+					$pageData[$key]['shopName']=$shopName['name'];
+					$pageData[$key]['brand'] = $brand;
+				}
+			}
+			$this->assign('page',$show);// 赋值分页输出
 		}
-		if($keywords != ''){
-			$arr = array();
-			 foreach($pageData as $keys=> $vals){
-			 	  $count1 = explode($keywords,$val['shopName']);
-			 	  $count2 = explode($keywords, $val['brand']);
-			 	  if(count($count1) >= 1 || count($count2) >= 1){
-			 	  	  unset($pageData[$keys]);
-			 	  }
-			 }
-		}
+				
 		$this->assign('shopArr',$shopArr);
 		$this->assign('list',$pageData);
-		$this->assign('page',$show);// 赋值分页输出
 		$this->display();
 	}
-	
+
 	//订单导出
 	public function export(){
 		$item_order = M('item_order');
@@ -94,6 +118,6 @@ class OrderListAction extends BackAction{
 		}
 		exportexcel($pageData,array('订单号','状态','订单金额','收货人','用户昵称','联系电话','收货地址','支付方式','配送','下单时间','支付时间'),'商品订单');
 	}
-	
+
 }
 ?>
