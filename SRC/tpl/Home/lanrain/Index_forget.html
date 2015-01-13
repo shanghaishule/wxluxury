@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<title>酷衣地图后台管理系统</title>
+<include file="Public:header2"/>
+    <script type="text/javascript">
+/*-------------------------------------------*/
+        var InterValObj; //timer变量，控制时间
+		var count = 119; //间隔函数，1秒执行
+		var curCount;//当前剩余秒数
+		var code = ""; //验证码
+		var codeLength = 6;//验证码长度
+		function sendMessage() {
+             var flag = getCookie('code');
+             if(flag){
+            	 alert('120秒内仅能获取一次');
+            	 return false;
+             }
+			curCount = count;
+            var username = $("#username").val();
+            if(username == ''){
+            	 return false;
+            }
+            //设置button效果，开始计时
+                $("#btnSendCode").attr("disabled", "true");
+                $("#btnSendCode").val("剩余" + curCount + "秒");
+                InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+//向后台发送处理数据
+               addCookie('code','true');
+                $.ajax({
+                    type: "POST", //用POST方式传输
+                    dataType: "json", //数据格式:JSON
+                    data:{username:username},
+                    url: "/index.php?m=Index&a=sendCode", //目标地址
+                    error: function (XMLHttpRequest, textStatus, errorThrown) { },
+                    success: function (msg){
+                    	if(msg == 0){
+                    		alert('用户名不存在');	
+                    	}
+                    }
+                });
+            }
+        //timer处理函数
+		function SetRemainTime() {
+            if (curCount == 0) {                
+                window.clearInterval(InterValObj);//停止计时器
+                $("#btnSendCode").removeAttr("disabled");//启用按钮
+                $("#btnSendCode").val("重新发送");
+                code = ""; //清除验证码。如果不清除，过时间后，输入收到的验证码依然有效    
+            }
+            else {
+                curCount--;
+                $("#btnSendCode").val("剩余" + curCount + "秒");
+            }
+        }
+        
+		function getCookie(objName){//获取指定名称的cookie的值
+			 
+		    var arrStr = document.cookie.split("; ");
+		 
+		    for(var i = 0;i < arrStr.length;i ++){
+		 
+		        var temp = arrStr[i].split("=");
+		 
+		        if(temp[0] == objName) return unescape(temp[1]);
+		 
+		   } 
+		 
+		} 
+		
+		function addCookie(objName,objValue){      //添加cookie
+			 
+		    var str = objName + "=" + escape(objValue);
+		        var date = new Date();
+		        var ms = 119*1000;
+		        date.setTime(date.getTime() + ms);
+		        str += "; expires=" + date.toGMTString();
+		        document.cookie = str;
+		 
+		} 
+		
+		function checkForm(){
+			 $username = $('#username').val();
+			 $code = $('#code').val();
+			 if($username == '' || $code == ''){
+				 return false;
+			 }
+			 return true;
+		}
+    </script>
+
+<style>
+
+.contaier{ zoom: 1; }
+.contaier:after{ content : '.'; display: block; width: 0; height: 0; visibility: hidden; line-height: 0; font-size: 0; clear: both; }
+/*基础*/
+body{ font-size:16px; font-family: Century Gothic, \5FAE\8F6F\96C5\9ED1,\5E7C\5706, Arial, Verdana; color: #323232;}
+select,input,textarea{ outline: none; font-family: Century Gothic, \5FAE\8F6F\96C5\9ED1,\5E7C\5706, Arial, Verdana; font-size: 16px;color:#323232 }
+textarea{ resize: none; overflow: auto;}
+a{ text-decoration: none; color: #007DDB; }
+a:hover{ text-decoration: underline; }
+/*布局*/
+.header{ width: 100%; height: 54px; background-color: #323232; line-height: 54px; color: #fff; position: fixed!important; position: absolute; top: 0; left: 0; z-index: 5;border-bottom:1px solid silver }
+.wp{ max-width: 980px!important; width: auto!important; width: 980px; padding: 0 12px; margin: 0 auto; position:relative;}
+.contaier{ padding-bottom: 18px; padding-top: 24px; background: #fff; height: auto!important; min-height: 500px; height: 500px; }
+
+.header{ width: 100%; height: 54px; background-color: #323232; line-height: 54px; color: #fff; position: fixed!important; position: absolute; top: 0; left: 0; z-index: 5;border-bottom:1px solid silver }
+.think-login,.think-register{ padding-right: 60px; border-right: 1px solid #ddd; }
+.think-login,.think-register,.login-other{ margin-top: 36px; min-width: 320px; }
+.think-login .head,.think-register .head,.login-other .head{ height: 36px; line-height: 36px; }
+.think-login .head strong,.think-register .head strong{ font-weight: normal; font-size: 30px; vertical-align: bottom; }
+.think-login .head span,.think-register .head span{ margin-left: 24px; color: #999; }
+.think-login .head a,.think-register .head a{ color: #007DDB; margin-left: 6px; text-decoration: underline; }
+.think-login .body,.think-register .body{ padding-top: 12px; }
+.think-login,.think-register{ float: left; }
+.think-form{ padding-bottom: 0px; }
+.think-form .must{ font-style: normal; color: #c00; margin-right: 3px; }
+.think-form th,.think-form td{ padding: 6px 0; }
+.think-form th{ font-weight: normal; vertical-align: top; line-height: 32px; padding-right: 9px; text-align: left; }
+.think-form .text{ height: 24px; width: 350px; line-height: 24px; padding: 3px; border: 1px solid #ccc; }
+.think-form .text:focus{ box-shadow: 0 0 5px rgba(52,143,212,.6); border-color: #348FD4; }
+.think-form .checkbox{ margin-right: 6px; }
+.think-form .submit{ background: #348FD4; color: #fff; font-size: 16px; height: 30px; line-height: 21px; padding: 0 24px; vertical-align: middle; border: 0; cursor: pointer; }
+.think-form .submit:hover{ background-color: #2F81BF; }
+.think-form select{ height: 32px; padding: 3px; border: 1px solid #ccc; }
+.think-form .login .text { height: 24px; width: 250px; line-height: 24px; padding: 3px; border: 1px solid #ccc; }
+.think-form .login .verify { height: 24px; width: 150px; line-height: 24px; padding: 3px; border: 1px solid #ccc; }
+.login-other{ float: left; padding-left: 60px; margin-left: -1px; display: inline; border-left: 1px solid #ddd; }
+.login-other .head strong{ font-weight: normal; color: #999; }
+.think-form td a{color:#fff}
+#code{width:70px}
+#sub{padding:2px 10px;border:1px solid #ccc;}
+</style>
+<div class="abody">
+<div id="company_name">酷衣地图后台管理系统</div>
+      
+     <div class="body think-form">       
+<form action="{lanrain::U('Index/forget')}" method="post" class="login" id="tform">
+	<table width="200" border="0" align="center">
+	<tr><td>
+            <strong style="font-weight: normal;font-size: 30px;vertical-align: bottom;color: white;">用户登录</strong>
+		　</td></tr>
+	<tr>
+		<td>
+			<span class="usedata">用户名：<input id="username" type="text" name="username"></input></span>
+		</td>
+	</tr>
+	
+	<tr>
+		<td align="center">
+		    <input type="text" name="code" id="code" placeholder="验证码"/>&nbsp;&nbsp;<input id="btnSendCode" type="button" value="发送验证码" onclick="sendMessage()" />
+		</td>
+	</tr>
+	
+	<tr>
+		<td align="center">
+		    <input type="submit" onClick="return checkForm()" name="sub" id="sub" value="提交"/>
+		</td>
+	</tr>	
+	</table>
+</form>
+
+            
+    </div>
+</div>
+<script type="text/javascript">try{Dd('webpage_6').className='left_menu_on';}catch(e){}</script>
+ <div style="text-align: center;margin-top:350px;"><a href="http://www.miitbeian.gov.cn">沪ICP备14005868号-1</a> Copyright @2014 酷衣地图</div>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
