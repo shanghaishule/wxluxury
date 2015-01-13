@@ -16,8 +16,10 @@ class memberAction extends backendAction{
 	public function edit(){
 		$where['uid'] = $this->_get('id','trim',0);
 		$userInfo = $this->_mod->where($where)->find();
+		$userB = M('user')->where($where)->find();
 		$this->assign('open_validator', true);
 		$this->assign('userInfo',$userInfo);
+		$this->assign('userB',$userB);
 		if (IS_AJAX) {
 			$response = $this->fetch();
 			$this->ajaxReturn(1, '', $response);
