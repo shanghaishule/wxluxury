@@ -26,8 +26,9 @@ class accountAction extends backendAction
     }
     //发送验证码
     public function sendCode(){
+    	
     	$flag = M('application')->where(array('uname'=>$_SESSION['uname']))->find();
-    	if(false == $flag || $flag==''){
+    	if(false == $flag || empty($flag)){
     		echo '0';
     	}else{
     		$code = '';
@@ -40,7 +41,7 @@ class accountAction extends backendAction
     		$sms_password = "k3a2bzn7";//密码
     		$cid = 'D4M6SG46AX2y';//模板id
     		$Msg = new SendMsg($sms_url, $uid, $sms_password,$cid);
-    		$Msg->sendsms('18616563461',$code);
+    		$Msg->sendsms($flag['phone'],$code);
     		echo '1';
     	}
     	//$returnMsg = $Msg ->sendAshop($userIn['phone'], $userName,$password);
