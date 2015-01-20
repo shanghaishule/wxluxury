@@ -24,7 +24,28 @@ class accountAction extends backendAction
         }
         $this->assign('account_shop',$account_shop);
     }
-    
+    //发送验证码
+    public function sendCode(){
+    	$flag = M('application')->where(array('uname'=>$_SESSION['uname']))->find();
+    	if(false == $flag || $flag==''){
+    		echo '0';
+    	}else{
+    		$code = '';
+    		for($i=1;$i<=6;$i++){
+    			$code.= strval(rand(0, 9));
+    		}
+    		$_SESSION['code'];
+    		$sms_url = "http://api.weimi.cc/2/sms/send.html";
+    		$uid = "7Q30scwRSEyT";
+    		$sms_password = "k3a2bzn7";//密码
+    		$cid = 'D4M6SG46AX2y';//模板id
+    		$Msg = new SendMsg($sms_url, $uid, $sms_password,$cid);
+    		$Msg->sendsms('18616563461',$code);
+    		echo '1';
+    	}
+    	//$returnMsg = $Msg ->sendAshop($userIn['phone'], $userName,$password);
+    }
+      
     public function index() {
     	$map = $this->_search();
     	//dump($map);exit;
@@ -89,7 +110,7 @@ class accountAction extends backendAction
     		$account=trim($_POST['account']);
     		$payee=trim($_POST['payee']);
     		$mobile=trim($_POST['mobile']);
-    		
+    		$code = trim($_POST['checkCode']);
     		$data['bankname']=$bankname;
     		$data['account']=$account;
     		$data['payee']=$payee;
@@ -98,7 +119,7 @@ class accountAction extends backendAction
     		
     		if(empty($_POST['id']))
     		{
-    			if($this->_mod_setting->data($data)->add()!==false)
+    			if($code == $_SESSION['code'] && $this->_mod_setting->data($data)->add()!==false)
     			{
     				$this->success('新增成功!');exit;
     			}else
@@ -108,7 +129,7 @@ class accountAction extends backendAction
     		}
     		else
     		{
-	    		if($this->_mod_setting->data($data)->where('id='.$_POST['id'])->save()!==false)
+	    		if($code == $_SESSION['code'] && $this->_mod_setting->data($data)->where('id='.$_POST['id'])->save()!==false )
 	    		{
 	    			$this->success('修改成功!');exit;
 	    		}else 
